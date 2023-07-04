@@ -16,6 +16,21 @@ import {
 const LCP_BLOCKS = []; // add your LCP blocks to the list
 
 /**
+ * Sets the language of the document and redirects nav/footer to the preferred country and language.
+ * @param {String} pathname The pathname of the document
+ */
+export function setLanguage(pathname) {
+  const [, languageCountry] = pathname.split('/');
+  const [language, country] = languageCountry.split('-');
+  const languageCountryPath = `/${country}/${language}/`;
+
+  document.documentElement.lang = language;
+
+  createMetadata('nav', `${languageCountryPath}nav`);
+  createMetadata('footer', `${languageCountryPath}footer`);
+}
+
+/**
  * Builds hero block and prepends to main in a new section.
  * @param {Element} main The container element
  */
@@ -62,7 +77,7 @@ export function decorateMain(main) {
  * @param {Element} doc The container element
  */
 async function loadEager(doc) {
-  document.documentElement.lang = 'en';
+  setLanguage(window.location.pathname);
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
