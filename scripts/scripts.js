@@ -21,13 +21,23 @@ const LCP_BLOCKS = []; // add your LCP blocks to the list
  */
 export function setLanguage(pathname) {
   const [, languageCountry] = pathname.split('/');
-  const [language, country] = languageCountry.split('-');
-  const languageCountryPath = `/${country}/${language}/`;
+  const [language] = languageCountry.split('-');
 
   document.documentElement.lang = language;
+  createMetadata('nav', `/${languageCountry}/nav`);
+  createMetadata('footer', `/${languageCountry}/footer`);
+}
 
-  createMetadata('nav', `${languageCountryPath}nav`);
-  createMetadata('footer', `${languageCountryPath}footer`);
+/**
+ * Creates a meta tag with the given name and value and appends it to the head.
+ * @param {String} name The name of the meta tag
+ * @param {String} value The value of the meta tag
+ */
+export function createMetadata(name, value) {
+  const meta = document.createElement('meta');
+  meta.setAttribute('name', name);
+  meta.setAttribute('content', value);
+  document.head.append(meta);
 }
 
 /**
