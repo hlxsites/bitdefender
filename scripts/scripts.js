@@ -16,6 +16,31 @@ import {
 const LCP_BLOCKS = []; // add your LCP blocks to the list
 
 /**
+ * Creates a meta tag with the given name and value and appends it to the head.
+ * @param {String} name The name of the meta tag
+ * @param {String} value The value of the meta tag
+ */
+export function createMetadata(name, value) {
+  const meta = document.createElement('meta');
+  meta.setAttribute('name', name);
+  meta.setAttribute('content', value);
+  document.head.append(meta);
+}
+
+/**
+ * Sets the language of the document and redirects nav/footer to the preferred country and language.
+ * @param {String} pathname The pathname of the document
+ */
+export function setLanguage(pathname) {
+  const [, languageCountry] = pathname.split('/');
+  const [language] = languageCountry.split('-');
+
+  document.documentElement.lang = language;
+  createMetadata('nav', `/${languageCountry}/nav`);
+  createMetadata('footer', `/${languageCountry}/footer`);
+}
+
+/**
  * Builds hero block and prepends to main in a new section.
  * @param {Element} main The container element
  */
@@ -62,7 +87,7 @@ export function decorateMain(main) {
  * @param {Element} doc The container element
  */
 async function loadEager(doc) {
-  document.documentElement.lang = 'en';
+  setLanguage(window.location.pathname);
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
