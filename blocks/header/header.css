@@ -72,3 +72,73 @@
   margin-right: 15px;
   margin-top: 7.5px;
 }
+
+.login-modal {
+  position: fixed;
+  margin-left: 1110px;
+  margin-top: -280px;
+  width: 375px;
+  height: 275px;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.your-account {
+  position: relative;
+  color: var(--text-color);
+  top: 7.5px;
+  left: 15px;
+  font-size: 1.25rem;
+}
+
+.divider {
+  position: relative;
+  top: 10px;
+  width: 100%;
+  height: 1px;
+  background-color: gray;
+}
+
+.login-buttons {
+  position: relative;
+  top: 20px;
+  left: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-buttons a {
+  text-decoration: none;
+  color: var(--color-highlight-blue);
+  width: 300px;
+  height: 35px;
+  border-radius: 9px;
+  border: 2px solid var(--color-highlight-blue);
+  margin: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: center;
+  padding-top: 9px;
+}
+
+.login-buttons a:hover {
+  background-color: var(--color-highlight-blue);
+  color: white;
+}
+
+.triangle {
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: -13px;
+  left: 320px;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 20px solid white;
+}
+
+
+
+body {
+  background-color: gray;
+}

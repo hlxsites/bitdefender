@@ -41,6 +41,17 @@ export default async function decorate(block) {
         const divider = document.createElement('div');
         divider.className = 'nav-divider';
         navSections.insertBefore(divider, navParagraph);
+
+        // Update "Login" nav section to match HTML structure
+        if (navParagraph.textContent.trim() === 'Login') {
+          const loginLink = document.createElement('a');
+          loginLink.href = '';
+          loginLink.textContent = 'Login';
+          navParagraph.innerHTML = '';
+          navParagraph.appendChild(loginLink);
+          loginLink.addEventListener('click', handleLoginClick);
+          loginLink.addEventListener('click', (e) => e.preventDefault());
+        }
       });
     }
 
@@ -49,5 +60,48 @@ export default async function decorate(block) {
     navWrapper.className = 'nav-wrapper';
     navWrapper.append(nav);
     block.append(navWrapper);
+  }
+}
+
+function handleLoginClick() {
+  const loginModal = document.querySelector('.login-modal');
+  if (loginModal) {
+    document.body.removeChild(loginModal);
+  } else {
+    const loginModal = document.createElement('div');
+    loginModal.className = 'login-modal';
+    document.body.appendChild(loginModal);
+
+    const triangle = document.createElement('div');
+    triangle.className = 'triangle';
+    loginModal.appendChild(triangle);
+
+    const yourAccount = document.createElement('span');
+    yourAccount.className = 'your-account';
+    yourAccount.textContent = 'Your Account';
+    loginModal.appendChild(yourAccount);
+
+    const divider = document.createElement('div');
+    divider.className = 'divider';
+    loginModal.appendChild(divider);
+
+    const loginButtons = document.createElement('div');
+    loginButtons.className = 'login-buttons';
+    loginModal.appendChild(loginButtons);
+
+    const bitdefenderCentral = document.createElement('a');
+    bitdefenderCentral.innerHTML = 'Bitdefender Central';
+    bitdefenderCentral.href = 'https://login.bitdefender.com/central/login.html';
+    loginButtons.appendChild(bitdefenderCentral);
+
+    const gravityZoneCloudControlCenter = document.createElement('a');
+    gravityZoneCloudControlCenter.innerHTML = 'GravityZone Cloud Control Center';
+    gravityZoneCloudControlCenter.href = 'https://gravityzone.bitdefender.com';
+    loginButtons.appendChild(gravityZoneCloudControlCenter);
+
+    const MDRPortal = document.createElement('a');
+    MDRPortal.innerHTML = 'MDR Portal';
+    MDRPortal.href = 'https://auth.mdr.bitdefender.com/';
+    loginButtons.appendChild(MDRPortal);
   }
 }
