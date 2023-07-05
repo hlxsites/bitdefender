@@ -109,31 +109,15 @@ export default async function decorate(block) {
     });
 
     const navSections = nav.querySelector('.nav-sections');
+
     if (navSections) {
-      navSections.querySelectorAll(':scope > ul > li').forEach((navSection) => {
-        if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
-        navSection.addEventListener('click', () => {
-          if (isDesktop.matches) {
-            const expanded = navSection.getAttribute('aria-expanded') === 'true';
-            toggleAllNavSections(navSections);
-            navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-          }
-        });
+      const navParagraphs = navSections.querySelectorAll('p');
+      navParagraphs.forEach((navParagraph) => {
+        const divider = document.createElement('div');
+        divider.className = 'nav-divider';
+        navSections.insertBefore(divider, navParagraph);
       });
     }
-
-    // hamburger for mobile
-    const hamburger = document.createElement('div');
-    hamburger.classList.add('nav-hamburger');
-    hamburger.innerHTML = `<button type="button" aria-controls="nav" aria-label="Open navigation">
-        <span class="nav-hamburger-icon"></span>
-      </button>`;
-    hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
-    nav.prepend(hamburger);
-    nav.setAttribute('aria-expanded', 'false');
-    // prevent mobile nav behavior on window resize
-    toggleMenu(nav, navSections, isDesktop.matches);
-    isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
 
     decorateIcons(nav);
     const navWrapper = document.createElement('div');
@@ -142,3 +126,4 @@ export default async function decorate(block) {
     block.append(navWrapper);
   }
 }
+
