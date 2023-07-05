@@ -64,10 +64,17 @@ export default async function decorate(block) {
 }
 
 function handleLoginClick() {
+  const loginParagraph = document.querySelector('.nav-sections p:last-child');
+  const bottomBorder = document.querySelector('.login-button-border');
   const loginModal = document.querySelector('.login-modal');
   if (loginModal) {
     document.body.removeChild(loginModal);
+    loginParagraph.removeChild(bottomBorder);
   } else {
+    const bottomBorder = document.createElement('div');
+    bottomBorder.className = 'login-button-border';
+    loginParagraph.appendChild(bottomBorder);
+
     const loginModal = document.createElement('div');
     loginModal.className = 'login-modal';
     document.body.appendChild(loginModal);

@@ -65,6 +65,15 @@
   letter-spacing: 0.96px;
 }
 
+.login-button-border {
+  position: absolute;
+  left: 1424px;
+  bottom: 4px;
+  width: 54px;
+  height: 3px;
+  background-color: var(--color-highlight-blue);
+}
+
 .nav-divider {
   width: 2px;
   background-color: gray;
