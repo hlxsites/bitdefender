@@ -73,6 +73,22 @@ export default async function decorate(block) {
   }
 }
 
+function createLoginButton(text, href) {
+  const aTag = document.createElement('a');
+  aTag.href = href;
+
+  const pTag = document.createElement('p');
+  pTag.textContent = text;
+  aTag.appendChild(pTag);
+
+  const imgTag = document.createElement('img');
+  imgTag.src = '../../icons/arrow-right.svg';
+  imgTag.alt = 'Arrow Right';
+  aTag.appendChild(imgTag);
+
+  return aTag;
+}
+
 function handleLoginClick() {
   const loginParagraph = document.querySelector('.nav-sections p:last-child');
   const bottomBorder = document.querySelector('.login-button-border');
@@ -111,19 +127,22 @@ function handleLoginClick() {
     loginButtons.className = 'login-buttons';
     loginModal.appendChild(loginButtons);
 
-    const bitdefenderCentral = document.createElement('a');
-    bitdefenderCentral.innerHTML = 'Bitdefender Central';
-    bitdefenderCentral.href = 'https://login.bitdefender.com/central/login.html';
+    const bitdefenderCentral = createLoginButton(
+      'Bitdefender Central', 
+      'https://login.bitdefender.com/central/login.html', 
+    );
     loginButtons.appendChild(bitdefenderCentral);
 
-    const gravityZoneCloudControlCenter = document.createElement('a');
-    gravityZoneCloudControlCenter.innerHTML = 'GravityZone Cloud Control Center';
-    gravityZoneCloudControlCenter.href = 'https://gravityzone.bitdefender.com';
+    const gravityZoneCloudControlCenter = createLoginButton(
+      'GravityZone CLOUD Control Center', 
+      'https://gravityzone.bitdefender.com', 
+    );
     loginButtons.appendChild(gravityZoneCloudControlCenter);
 
-    const MDRPortal = document.createElement('a');
-    MDRPortal.innerHTML = 'MDR Portal';
-    MDRPortal.href = 'https://auth.mdr.bitdefender.com/';
+    const MDRPortal = createLoginButton(
+      'MDR Portal',
+      'https://auth.mdr.bitdefender.com/', 
+    );
     loginButtons.appendChild(MDRPortal);
   }
 }
