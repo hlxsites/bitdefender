@@ -14,7 +14,8 @@ import { getMetadata, decorateIcons } from '../../scripts/lib-franklin.js';
  * decorates the header, mainly the nav
  * @param {Element} block The header block element
  */
-export default async function decorate(block) {
+
+async function renderDesktopHeader(block) {
   // fetch nav content
   const navPath = getMetadata('nav') || '/nav';
   const resp = await fetch(`${navPath}.plain.html`);
@@ -144,5 +145,46 @@ function handleLoginClick() {
       'https://auth.mdr.bitdefender.com/', 
     );
     loginButtons.appendChild(MDRPortal);
+  }
+}
+
+function handleMenuClick() {
+  this.classList.toggle('change');
+
+  const headerWrapper = document.querySelector('.header-wrapper');
+  headerWrapper.classList.toggle('expanded');
+}
+
+function renderMobileHeader() {
+  const bitdefenderLogo = document.createElement('img');
+  bitdefenderLogo.src = 'https://www.bitdefender.com/content/dam/bitdefender/splitter-homepage/black_company_logo.svg';
+  bitdefenderLogo.alt = 'Bitdefender Logo';
+
+  const logoLink = document.createElement('a');
+  logoLink.href = 'https://www.bitdefender.com/';
+  logoLink.appendChild(bitdefenderLogo);
+
+  const headerBlock = document.querySelector('.header.block');
+  headerBlock.appendChild(logoLink);
+
+  const wrapperDiv = document.createElement('div');
+  wrapperDiv.classList.add('menu-wrapper');
+  wrapperDiv.addEventListener('click', handleMenuClick);
+
+  // Create three span elements (bars)
+  for (let i = 0; i < 3; i++) {
+    const barSpan = document.createElement('span');
+    barSpan.classList.add('menu-bar');
+    wrapperDiv.appendChild(barSpan);
+  }
+  headerBlock.appendChild(wrapperDiv);
+}
+
+export default async function decorate(block) {
+  const mediaQuery = window.matchMedia('(max-width: 1000px)');
+  if (mediaQuery.matches) {
+    renderMobileHeader();
+  } else {
+    renderDesktopHeader(block);
   }
 }
