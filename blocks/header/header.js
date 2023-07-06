@@ -34,6 +34,7 @@ export default async function decorate(block) {
     });
 
     const navSections = nav.querySelector('.nav-sections');
+    const navBrandLinks = nav.querySelectorAll('.nav-brand a');
 
     if (navSections) {
       const navParagraphs = navSections.querySelectorAll('p');
@@ -53,6 +54,15 @@ export default async function decorate(block) {
           loginLink.addEventListener('click', (e) => e.preventDefault());
         }
       });
+    }
+
+    if (navBrandLinks && navBrandLinks.length > 0) {
+      const forHomeLink = Array.from(navBrandLinks).find((link) => link.innerHTML === 'For Home');
+      if (forHomeLink) {
+        const homeButtonBorder = document.createElement('div');
+        homeButtonBorder.className = 'home-button-border';
+        forHomeLink.parentNode.appendChild(homeButtonBorder);
+      }
     }
 
     decorateIcons(nav);
