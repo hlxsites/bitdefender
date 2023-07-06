@@ -77,9 +77,13 @@ function handleLoginClick() {
   const loginParagraph = document.querySelector('.nav-sections p:last-child');
   const bottomBorder = document.querySelector('.login-button-border');
   const loginModal = document.querySelector('.login-modal');
+
   if (loginModal) {
-    document.body.removeChild(loginModal);
-    loginParagraph.removeChild(bottomBorder);
+    loginModal.classList.remove('show');
+    setTimeout(() => {
+      document.body.removeChild(loginModal);
+      loginParagraph.removeChild(bottomBorder);
+    }, 300);
   } else {
     const bottomBorder = document.createElement('div');
     bottomBorder.className = 'login-button-border';
@@ -88,6 +92,7 @@ function handleLoginClick() {
     const loginModal = document.createElement('div');
     loginModal.className = 'login-modal';
     document.body.appendChild(loginModal);
+    setTimeout(() => loginModal.classList.add('show'), 0);
 
     const triangle = document.createElement('div');
     triangle.className = 'triangle';
