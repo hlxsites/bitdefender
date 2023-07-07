@@ -145,7 +145,7 @@
 .login-buttons {
   position: relative;
   top: 60px;
-  right: 10px;
+  right: 7px;
   display: flex;
   flex-direction: column;
 }
@@ -166,7 +166,7 @@
   font-size: 1rem;
   font-weight: 500;
   margin-top: 5px;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s ease-in-out;
   height: 100%;
 }
 
@@ -176,7 +176,7 @@
 
 .login-buttons a img {
   opacity: 0;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s ease-in-out;
   position: relative;
   left: 220px;
   bottom: 52px;
@@ -221,8 +221,62 @@
   border-bottom: 20px solid white;
 }
 
-
-
 body {
   background-color: gray;
+}
+
+/* MOBILE HEADER */
+
+@media (max-width: 1000px) {
+.header-wrapper {
+  background-color: white;
+  transition: all 0.3s ease-in-out;
+}
+}
+
+.header.block img {
+  position: relative;
+  top: 15px;
+  left: 15px;
+  width: 20%;
+  height: 20%;
+  object-fit: contain;
+}
+
+.menu-bar {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: black;
+  transition: all 0.3s ease;
+}
+
+.menu-wrapper {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.menu-wrapper.change .menu-bar:first-child {
+  transform: rotate(-45deg) translate(-7.5px, 7.5px);
+}
+
+.menu-wrapper.change .menu-bar:nth-child(2) {
+  opacity: 0; /* Hide the middle bar */
+}
+
+.menu-wrapper.change .menu-bar:last-child {
+  transform: rotate(45deg) translate(-5px, -5px); /* Bottom right to top left */
+}
+
+.header-wrapper.expanded {
+  height: 100vh;
+  width: 100vw;
+  z-index: 100;
 }
