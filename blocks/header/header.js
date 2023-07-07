@@ -1,3 +1,7 @@
+/* eslint-disable no-plusplus */
+/* eslint-disable no-use-before-define */
+/* eslint-disable prefer-const */
+/* eslint-disable no-shadow */
 import { getMetadata, decorateIcons } from '../../scripts/lib-franklin.js';
 /**
  * Toggles all nav sections
@@ -14,65 +18,6 @@ import { getMetadata, decorateIcons } from '../../scripts/lib-franklin.js';
  * decorates the header, mainly the nav
  * @param {Element} block The header block element
  */
-
-async function renderDesktopHeader(block) {
-  // fetch nav content
-  const navPath = getMetadata('nav') || '/nav';
-  const resp = await fetch(`${navPath}.plain.html`);
-
-  if (resp.ok) {
-    const html = await resp.text();
-
-    // decorate nav DOM
-    const nav = document.createElement('nav');
-    nav.id = 'nav';
-    nav.innerHTML = html;
-
-    const classes = ['brand', 'sections', 'tools'];
-    classes.forEach((c, i) => {
-      const section = nav.children[i];
-      if (section) section.classList.add(`nav-${c}`);
-    });
-
-    const navSections = nav.querySelector('.nav-sections');
-    const navBrandLinks = nav.querySelectorAll('.nav-brand a');
-
-    if (navSections) {
-      const navParagraphs = navSections.querySelectorAll('p');
-      navParagraphs.forEach((navParagraph) => {
-        const divider = document.createElement('div');
-        divider.className = 'nav-divider';
-        navSections.insertBefore(divider, navParagraph);
-
-        // Update "Login" nav section to match HTML structure
-        if (navParagraph.textContent.trim() === 'Login') {
-          const loginLink = document.createElement('a');
-          loginLink.href = '';
-          loginLink.textContent = 'Login';
-          navParagraph.innerHTML = '';
-          navParagraph.appendChild(loginLink);
-          loginLink.addEventListener('click', handleLoginClick);
-          loginLink.addEventListener('click', (e) => e.preventDefault());
-        }
-      });
-    }
-
-    if (navBrandLinks && navBrandLinks.length > 0) {
-      const forHomeLink = Array.from(navBrandLinks).find((link) => link.innerHTML === 'For Home');
-      if (forHomeLink) {
-        const homeButtonBorder = document.createElement('div');
-        homeButtonBorder.className = 'home-button-border';
-        forHomeLink.parentNode.appendChild(homeButtonBorder);
-      }
-    }
-
-    decorateIcons(nav);
-    const navWrapper = document.createElement('div');
-    navWrapper.className = 'nav-wrapper';
-    navWrapper.append(nav);
-    block.append(navWrapper);
-  }
-}
 
 function createLoginButton(text, href) {
   const aTag = document.createElement('a');
@@ -145,6 +90,65 @@ function handleLoginClick() {
       'https://auth.mdr.bitdefender.com/',
     );
     loginButtons.appendChild(MDRPortal);
+  }
+}
+
+async function renderDesktopHeader(block) {
+  // fetch nav content
+  const navPath = getMetadata('nav') || '/nav';
+  const resp = await fetch(`${navPath}.plain.html`);
+
+  if (resp.ok) {
+    const html = await resp.text();
+
+    // decorate nav DOM
+    const nav = document.createElement('nav');
+    nav.id = 'nav';
+    nav.innerHTML = html;
+
+    const classes = ['brand', 'sections', 'tools'];
+    classes.forEach((c, i) => {
+      const section = nav.children[i];
+      if (section) section.classList.add(`nav-${c}`);
+    });
+
+    const navSections = nav.querySelector('.nav-sections');
+    const navBrandLinks = nav.querySelectorAll('.nav-brand a');
+
+    if (navSections) {
+      const navParagraphs = navSections.querySelectorAll('p');
+      navParagraphs.forEach((navParagraph) => {
+        const divider = document.createElement('div');
+        divider.className = 'nav-divider';
+        navSections.insertBefore(divider, navParagraph);
+
+        // Update "Login" nav section to match HTML structure
+        if (navParagraph.textContent.trim() === 'Login') {
+          const loginLink = document.createElement('a');
+          loginLink.href = '';
+          loginLink.textContent = 'Login';
+          navParagraph.innerHTML = '';
+          navParagraph.appendChild(loginLink);
+          loginLink.addEventListener('click', handleLoginClick);
+          loginLink.addEventListener('click', (e) => e.preventDefault());
+        }
+      });
+    }
+
+    if (navBrandLinks && navBrandLinks.length > 0) {
+      const forHomeLink = Array.from(navBrandLinks).find((link) => link.innerHTML === 'For Home');
+      if (forHomeLink) {
+        const homeButtonBorder = document.createElement('div');
+        homeButtonBorder.className = 'home-button-border';
+        forHomeLink.parentNode.appendChild(homeButtonBorder);
+      }
+    }
+
+    decorateIcons(nav);
+    const navWrapper = document.createElement('div');
+    navWrapper.className = 'nav-wrapper';
+    navWrapper.append(nav);
+    block.append(navWrapper);
   }
 }
 
@@ -224,11 +228,6 @@ function handleMenuClick() {
 
   optionsWrapper.innerHTML = menuOptionsHTML;
 
-  function handleSubMenuTitleClick() {
-    optionsWrapper.innerHTML = originalMenuHTML;
-    attachMenuOptionClickEvents();
-  }
-
   function handleMenuOptionClick() {
     const optionTitle = this.dataset.option;
     const selectedOption = menuOptions.find((opt) => opt.title === optionTitle);
@@ -244,6 +243,11 @@ function handleMenuClick() {
     document.querySelectorAll('.menu-option').forEach((menuOption) => {
       menuOption.addEventListener('click', handleMenuOptionClick);
     });
+  }
+
+  function handleSubMenuTitleClick() {
+    optionsWrapper.innerHTML = originalMenuHTML;
+    attachMenuOptionClickEvents();
   }
 
   attachMenuOptionClickEvents();

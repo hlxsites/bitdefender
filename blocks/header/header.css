@@ -38,13 +38,23 @@
   display: inline-block;
 }
 
+.login-buttons a p {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: 5px;
+  transition: all 0.3s ease-in-out;
+  height: 100%;
+}
+
 .nav-brand p:hover,
 .nav-sections p:hover {
   position: relative;
 }
 
-.nav-brand p:not(:first-child):hover::after,
-.nav-sections p:hover::after {
+.nav-sections p:hover::after,
+.nav-brand p:not(:first-child):hover::after
+ {
   content: "";
   position: absolute;
   left: 0;
@@ -53,14 +63,15 @@
   height: 3px;
   background-color: var(--color-highlight-blue);
   transition: all 0.2s ease-in-out;
-  animation: animateBottomBorder 0.3s linear forwards;
+  animation: animate-bottom-border 0.3s linear forwards;
 }
 
-@keyframes animateBottomBorder {
+@keyframes animate-bottom-border {
   0% {
     transform: scaleX(0);
     transform-origin: left;
   }
+
   100% {
     transform: scaleX(1);
     transform-origin: left;
@@ -161,15 +172,6 @@
   padding: 5px;
 }
 
-.login-buttons a p {
-  text-align: center;
-  font-size: 1rem;
-  font-weight: 500;
-  margin-top: 5px;
-  transition: all 0.3s ease-in-out;
-  height: 100%;
-}
-
 .login-buttons a:hover p {
   margin-right: 50px;
 }
@@ -184,6 +186,15 @@
   filter: invert(100%);
 }
 
+.header.block img {
+  position: relative;
+  top: 15px;
+  left: 15px;
+  width: 20%;
+  height: 20%;
+  object-fit: contain;
+}
+
 .login-buttons a:hover img {
   opacity: 1;
   left: 230px;
@@ -193,12 +204,12 @@
   left: 280px;
 }
 
-.login-buttons a:nth-of-type(2):hover img {
-  left: 290px;
-}
-
 .login-buttons a:nth-of-type(3) img {
   left: 190px;
+}
+
+.login-buttons a:nth-of-type(2):hover img {
+  left: 290px;
 }
 
 .login-buttons a:nth-of-type(3):hover img {
@@ -232,15 +243,6 @@ body {
   background-color: white;
   transition: all 0.3s ease-in-out;
 }
-}
-
-.header.block img {
-  position: relative;
-  top: 15px;
-  left: 15px;
-  width: 20%;
-  height: 20%;
-  object-fit: contain;
 }
 
 .menu-bar {
@@ -285,16 +287,16 @@ body {
   position: relative;
   top: 35px;
   width: 100vw;
-  height: 0vh;
+  height: 0;
   visibility: hidden;
 }
 
 .options-wrapper.show{
   width: 100vw;
   height: 55vh;
-  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 10px #0003;
   z-index: 3;
-  border-top: 1px solid rgb(206, 204, 204);
+  border-top: 1px solid #cecccc;
   visibility: visible;
 }
 
@@ -334,13 +336,14 @@ body {
   font-size: medium;
   margin-top: 10px;
   text-decoration: none;
-  animation: slideIn 0.2s 0.075s forwards;
+  animation: slide-in 0.2s 0.075s forwards;
 }
 
-@keyframes slideIn {
+@keyframes slide-in {
   from {
     transform: translateX(100%);
   }
+
   to {
     transform: translateX(0);
   }
