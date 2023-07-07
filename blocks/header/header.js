@@ -155,8 +155,8 @@ function handleMenuClick() {
   headerWrapper.classList.toggle('expanded');
 
   const optionsWrapper = document.querySelector('.options-wrapper');
-  setTimeout(function () {
-    optionsWrapper.classList.toggle('show')
+  setTimeout(() => {
+    optionsWrapper.classList.toggle('show');
   }, 100);
 
   const menuOptions = [
@@ -194,7 +194,8 @@ function handleMenuClick() {
         { name: 'Identity Theft Protection', url: 'https://www.bitdefender.com/solutions/identity-theft-protection.html' },
       ],
     },
-    { title: 'Try Bitdefender',
+    {
+      title: 'Try Bitdefender',
       subMenu: [
         { name: 'Antivirus Free', url: 'https://www.bitdefender.com/solutions/free.html' },
         { name: 'Antivirus Free for Android', url: 'https://www.bitdefender.com/solutions/antivirus-free-for-android.html' },
@@ -213,15 +214,11 @@ function handleMenuClick() {
   let originalMenuHTML;
 
   function generateSubMenu(option) {
-    return `<div class='sub-menu-title' data-option='${option.title}'>${option.title}</div>` +
-      option.subMenu.map(subMenuItem => {
-        return `<a href='${subMenuItem.url}'>${subMenuItem.name}</a>`;
-      }).join('');
+    return `<div class='sub-menu-title' data-option='${option.title}'>${option.title}</div>${
+      option.subMenu.map((subMenuItem) => `<a href='${subMenuItem.url}'>${subMenuItem.name}</a>`).join('')}`;
   }
 
-  const menuOptionsHTML = menuOptions.map(function (option) {
-    return `<div class='menu-option' data-option='${option.title}'>${option.title}</div>`;
-  }).join('');
+  const menuOptionsHTML = menuOptions.map((option) => `<div class='menu-option' data-option='${option.title}'>${option.title}</div>`).join('');
 
   originalMenuHTML = menuOptionsHTML;
 
@@ -234,7 +231,7 @@ function handleMenuClick() {
 
   function handleMenuOptionClick() {
     const optionTitle = this.dataset.option;
-    const selectedOption = menuOptions.find(opt => opt.title === optionTitle);
+    const selectedOption = menuOptions.find((opt) => opt.title === optionTitle);
     optionsWrapper.innerHTML = generateSubMenu(selectedOption);
 
     const subMenuTitle = document.querySelector('.sub-menu-title');
@@ -244,7 +241,7 @@ function handleMenuClick() {
   }
 
   function attachMenuOptionClickEvents() {
-    document.querySelectorAll('.menu-option').forEach(menuOption => {
+    document.querySelectorAll('.menu-option').forEach((menuOption) => {
       menuOption.addEventListener('click', handleMenuOptionClick);
     });
   }
