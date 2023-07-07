@@ -153,6 +153,26 @@ function handleMenuClick() {
 
   const headerWrapper = document.querySelector('.header-wrapper');
   headerWrapper.classList.toggle('expanded');
+
+  const optionsWrapper = document.querySelector('.options-wrapper');
+  setTimeout(function () {
+    optionsWrapper.classList.toggle('show')
+  }, 100);
+
+  const menuOptions = [
+    'All-In-One Plan',
+    'Device Security',
+    'Privacy',
+    'Identity protection',
+    'Try Bitdefender',
+    'Existing customers'
+  ];
+
+  const menuOptionsHTML = menuOptions.map(function (optionText) {
+    return '<div>' + optionText + '</div>';
+  }).join('');
+
+  optionsWrapper.innerHTML = menuOptionsHTML;
 }
 
 function renderMobileHeader() {
@@ -178,6 +198,10 @@ function renderMobileHeader() {
     wrapperDiv.appendChild(barSpan);
   }
   headerBlock.appendChild(wrapperDiv);
+
+  const optionsWrapper = document.createElement('div');
+  optionsWrapper.className = 'options-wrapper';
+  headerBlock.appendChild(optionsWrapper);
 }
 
 export default async function decorate(block) {
