@@ -327,6 +327,21 @@ body {
   background-size: 35px;
 }
 
-a {
+.options-wrapper.show a {
   display: block;
+  margin-left: 40px;
+  color: var(--text-color);
+  font-size: medium;
+  margin-top: 10px;
+  text-decoration: none;
+  animation: slideIn 0.2s 0.075s forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }

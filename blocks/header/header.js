@@ -162,22 +162,60 @@ function handleMenuClick() {
   const menuOptions = [
     {
       title: 'All-In-One Plan',
-      subMenu: ['Ultimate Security', 'Premium Security'],
+      subMenu: [
+        { name: 'Ultimate Security', url: 'https://www.bitdefender.com/solutions/ultimate-security.html' },
+        { name: 'Premium Security', url: 'https://www.bitdefender.com/solutions/premium-security.html' },
+      ],
     },
-    { title: 'Device Security', subMenu: ['Total Securiy', 'Internet Security', 'Antivirus Plus', 'Antivirus for Mac', 'Mobile Security for Android', 'Mobile Security for iOS', 'Family Pack', 'Small office Securiy'] },
-    { title: 'Privacy', subMenu: ['Premium VPN', 'Password Manager'] },
-    { title: 'Identity protection', subMenu: ['Digital Identity Protection', 'Identity Theft Protection'] },
-    { title: 'Try Bitdefender', subMenu: ['Antivirus Free', 'Antivirus Free for Android'] },
-    { title: 'Existing customers', subMenu: ['Renew, Support'] },
+    {
+      title: 'Device Security',
+      subMenu: [
+        { name: 'Total Securiy', url: 'https://www.bitdefender.com/solutions/total-security.html' },
+        { name: 'Internet Security', url: 'https://www.bitdefender.com/solutions/internet-security.html' },
+        { name: 'Antivirus Plus', url: 'https://www.bitdefender.com/solutions/antivirus.html' },
+        { name: 'Antivirus for Mac', url: 'https://www.bitdefender.com/solutions/antivirus-for-mac.html' },
+        { name: 'Mobile Security for Android', url: 'https://www.bitdefender.com/solutions/mobile-security-android.html' },
+        { name: 'Mobile Security for iOS', url: 'https://www.bitdefender.com/solutions/mobile-security-ios.html' },
+        { name: 'Family Pack', url: 'https://www.bitdefender.com/solutions/family-pack.html' },
+        { name: 'Small office Securiy', url: 'https://www.bitdefender.com/solutions/small-office-security.html' },
+      ],
+    },
+    {
+      title: 'Privacy',
+      subMenu: [
+        { name: 'Premium VPN', url: 'https://www.bitdefender.com/solutions/vpn.html' },
+        { name: 'Password Manager', url: 'https://www.bitdefender.com/solutions/password-manager.html' },
+      ],
+    },
+    {
+      title: 'Identity protection',
+      subMenu: [
+        { name: 'Digital Identity Protection', url: 'https://www.bitdefender.com/solutions/digital-identity-protection.html' },
+        { name: 'Identity Theft Protection', url: 'https://www.bitdefender.com/solutions/identity-theft-protection.html' },
+      ],
+    },
+    { title: 'Try Bitdefender',
+      subMenu: [
+        { name: 'Antivirus Free', url: 'https://www.bitdefender.com/solutions/free.html' },
+        { name: 'Antivirus Free for Android', url: 'https://www.bitdefender.com/solutions/antivirus-free-for-android.html' },
+      ],
+    },
+    {
+      title: 'Existing customers',
+      subMenu:
+      [
+        { name: 'Renew,', url: 'https://www.bitdefender.com/renewal/' },
+        { name: 'Support', url: 'https://www.bitdefender.com/consumer/support/' },
+      ],
+    },
   ];
 
   let originalMenuHTML;
 
-
   function generateSubMenu(option) {
     return `<div class='sub-menu-title' data-option='${option.title}'>${option.title}</div>` +
       option.subMenu.map(subMenuItem => {
-        return `<a href='#'>${subMenuItem}</a>`;
+        return `<a href='${subMenuItem.url}'>${subMenuItem.name}</a>`;
       }).join('');
   }
 
