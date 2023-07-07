@@ -129,20 +129,20 @@ function handleLoginClick() {
     loginModal.appendChild(loginButtons);
 
     const bitdefenderCentral = createLoginButton(
-      'Bitdefender Central', 
-      'https://login.bitdefender.com/central/login.html', 
+      'Bitdefender Central',
+      'https://login.bitdefender.com/central/login.html',
     );
     loginButtons.appendChild(bitdefenderCentral);
 
     const gravityZoneCloudControlCenter = createLoginButton(
-      'GravityZone CLOUD Control Center', 
-      'https://gravityzone.bitdefender.com', 
+      'GravityZone CLOUD Control Center',
+      'https://gravityzone.bitdefender.com',
     );
     loginButtons.appendChild(gravityZoneCloudControlCenter);
 
     const MDRPortal = createLoginButton(
       'MDR Portal',
-      'https://auth.mdr.bitdefender.com/', 
+      'https://auth.mdr.bitdefender.com/',
     );
     loginButtons.appendChild(MDRPortal);
   }
@@ -160,19 +160,58 @@ function handleMenuClick() {
   }, 100);
 
   const menuOptions = [
-    'All-In-One Plan',
-    'Device Security',
-    'Privacy',
-    'Identity protection',
-    'Try Bitdefender',
-    'Existing customers'
+    {
+      title: 'All-In-One Plan',
+      subMenu: ['Ultimate Security', 'Premium Security'],
+    },
+    { title: 'Device Security', subMenu: ['Total Securiy', 'Internet Security', 'Antivirus Plus', 'Antivirus for Mac', 'Mobile Security for Android', 'Mobile Security for iOS', 'Family Pack', 'Small office Securiy'] },
+    { title: 'Privacy', subMenu: ['Premium VPN', 'Password Manager'] },
+    { title: 'Identity protection', subMenu: ['Digital Identity Protection', 'Identity Theft Protection'] },
+    { title: 'Try Bitdefender', subMenu: ['Antivirus Free', 'Antivirus Free for Android'] },
+    { title: 'Existing customers', subMenu: ['Renew, Support'] },
   ];
 
-  const menuOptionsHTML = menuOptions.map(function (optionText) {
-    return '<div>' + optionText + '</div>';
+  let originalMenuHTML;
+
+
+  function generateSubMenu(option) {
+    return `<div class='sub-menu-title' data-option='${option.title}'>${option.title}</div>` +
+      option.subMenu.map(subMenuItem => {
+        return `<a href='#'>${subMenuItem}</a>`;
+      }).join('');
+  }
+
+  const menuOptionsHTML = menuOptions.map(function (option) {
+    return `<div class='menu-option' data-option='${option.title}'>${option.title}</div>`;
   }).join('');
 
+  originalMenuHTML = menuOptionsHTML;
+
   optionsWrapper.innerHTML = menuOptionsHTML;
+
+  function handleSubMenuTitleClick() {
+    optionsWrapper.innerHTML = originalMenuHTML;
+    attachMenuOptionClickEvents();
+  }
+
+  function handleMenuOptionClick() {
+    const optionTitle = this.dataset.option;
+    const selectedOption = menuOptions.find(opt => opt.title === optionTitle);
+    optionsWrapper.innerHTML = generateSubMenu(selectedOption);
+
+    const subMenuTitle = document.querySelector('.sub-menu-title');
+    if (subMenuTitle) {
+      subMenuTitle.addEventListener('click', handleSubMenuTitleClick);
+    }
+  }
+
+  function attachMenuOptionClickEvents() {
+    document.querySelectorAll('.menu-option').forEach(menuOption => {
+      menuOption.addEventListener('click', handleMenuOptionClick);
+    });
+  }
+
+  attachMenuOptionClickEvents();
 }
 
 function renderMobileHeader() {
