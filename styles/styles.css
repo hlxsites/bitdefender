@@ -12,9 +12,10 @@
 
  :root {
   /* colors */
-  --link-color: #035fe6;
-  --link-hover-color: #136ff6;
-  --background-color: #fff;
+  --link-color: #005ed9;
+  --link-hover-color: #00439c;
+  --button-link-color: #fff;
+  --button-background-color: #eb0000;
   --overlay-background-color: #eee;
   --highlight-background-color: #ccc;
   --text-color: #000;
@@ -24,11 +25,20 @@
   --heading-font-family: var(--body-font-family);
   --fixed-font-family: 'Roboto Mono', menlo, consolas, 'Liberation Mono', monospace;
 
+  /* font weights */
+  --font-weight-thin: 300;
+  --font-weight-regular: 400;
+  --font-weight-bold: 500;
+  --font-weight-bolder: 600;
+  --font-weight-boldest: 700;
+  --font-weight-heavy: 900;
+
   /* body sizes */
   --body-font-size-m: 22px;
   --body-font-size-s: 18px;
   --body-font-size-xs: 16px;
 
+ 
   /* heading sizes */
   --heading-font-size-xxl: 48px;
   --heading-font-size-xl: 40px;
@@ -54,7 +64,7 @@
 }
 
 body {
-  font-size: var(--body-font-size-m);
+  font-size: var(--body-font-size-xs);
   margin: 0;
   font-family: var(--body-font-family);
   line-height: 1.6;
@@ -74,7 +84,7 @@ header {
 h1, h2, h3,
 h4, h5, h6 {
   font-family: var(--heading-font-family);
-  font-weight: 600;
+  font-weight: var(-font-weight-bolder);
   line-height: 1.25;
   margin-top: 1em;
   margin-bottom: .5em;
@@ -137,19 +147,20 @@ a.button:any-link, button {
   display: inline-block;
   box-sizing: border-box;
   text-decoration: none;
-  border: 2px solid transparent;
-  padding: 5px 30px;
+  padding: 10px 26px 8px 28px;
   text-align: center;
   font-style: normal;
-  font-weight: 600;
+  font-weight: var(-font-weight-bolder);
   cursor: pointer;
-  color: var(--background-color);
-  background-color: var(--link-color);
+  color: var(--button-link-color);
+  background-color: var(--button-background-color);
+  border: 2px solid #eb0000;
   margin: 16px 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  border-radius: 30px;
+  border-radius: 8x;
+  height: fit-content;
 }
 
 a.button:hover, a.button:focus, button:hover, button:focus  {
