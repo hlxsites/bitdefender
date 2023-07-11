@@ -292,8 +292,12 @@
   background-color: #f3f7fe;
   background-image: url('../../icons/arrow-right-blue.svg');
   background-repeat: no-repeat;
-  background-position: 160px 5px;
+  background-position: 190px 5px;
   background-size: 25px;
+}
+
+.mega-menu > div:first-child p:last-child:hover {
+  background-position: 215px 5px;
 }
 
 .mega-menu > div:first-child p:hover a {
@@ -421,6 +425,7 @@
   background-color: var(--color-highlight-blue);
   padding: 2px;
   border-radius: 3px;
+  margin-left: 5px;
 }
 
 

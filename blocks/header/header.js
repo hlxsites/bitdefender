@@ -119,18 +119,18 @@ function createTags() {
 
   links.forEach(link => {
     if (link.textContent.includes('(new)')) {
+      link.textContent = link.textContent.replace('(new)', '');
       let span = document.createElement('span');
       span.textContent = 'NEW';
-      link.parentElement.appendChild(span);
-      link.textContent = link.textContent.replace('(new)', '');
+      link.appendChild(span); // Append span after text is replaced
     }
 
     else if (link.textContent.includes('(evolved)')) {
+      link.textContent = link.textContent.replace('(evolved)', '');
       let span = document.createElement('span');
       span.textContent = 'EVOLVED';
       span.style.backgroundColor = '#14b0a7';
-      link.parentElement.appendChild(span);
-      link.textContent = link.textContent.replace('(evolved)', '');
+      link.appendChild(span); // Append span after text is replaced
     }
   });
 }
