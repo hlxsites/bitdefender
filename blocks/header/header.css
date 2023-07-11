@@ -113,7 +113,7 @@
   justify-content: flex-end;
   position: absolute;
   right: min(220px, calc(100vw - 900px));
-  margin-top: -270px;
+  margin-top: -935px;
   width: 375px;
   height: 275px;
   background-color: white;
@@ -124,7 +124,7 @@
 
 .login-modal.show {
   opacity: 1;
-  margin-top: -280px;
+  margin-top: -950px;
 }
 
 .login-button-border {
@@ -236,7 +236,7 @@
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 150px;
+  top: 140px;
   left: 25%;
   width: 50%;
   height: 500px;
@@ -290,6 +290,10 @@
 
 .mega-menu > div:first-child p:hover {
   background-color: #f3f7fe;
+  background-image: url('../../icons/arrow-right-blue.svg');
+  background-repeat: no-repeat;
+  background-position: 160px 5px;
+  background-size: 25px;
 }
 
 .mega-menu > div:first-child p:hover a {
@@ -329,6 +333,21 @@
 
 .other-options > div > p {
   margin-left: 25px;
+}
+
+.other-options > div > p a {
+  text-decoration: none;
+  padding: 5px;
+  padding-right: 20px;
+}
+
+.other-options > div > p:hover a {
+  background-color: #f3f7fe;
+  color: var(--color-highlight-blue) !important;
+  background-image: url('../../icons/arrow-right-blue.svg');
+  background-repeat: no-repeat;
+  background-size: 20px;
+  background-position: right 5px;
 }
 
 .other-options > div:nth-child(1) {

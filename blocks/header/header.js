@@ -226,26 +226,26 @@ async function renderDesktopHeader(block) {
   let hideTimeout = null;
 
   homeSolutionsLink.addEventListener('mouseenter', () => {
-    clearTimeout(hideTimeout); // clear any existing timeout
-    console.log('mouseenter');
+    clearTimeout(hideTimeout);
     megaMenu.style.opacity = '1';
+    homeSolutionsLink.style.color = '#FFF';
   });
 
   homeSolutionsLink.addEventListener('mouseleave', () => {
-    hideTimeout = setTimeout(() => { // set a timeout to hide the mega menu
+    hideTimeout = setTimeout(() => {
       megaMenu.style.opacity = '0';
-    }, 500); // 500 milliseconds delay
+      homeSolutionsLink.style.color = '#dedede';
+    }, 500);
   });
 
-  // Add the same pair of event listeners to the mega menu
   megaMenu.addEventListener('mouseenter', () => {
     clearTimeout(hideTimeout);
   });
 
   megaMenu.addEventListener('mouseleave', () => {
     megaMenu.style.opacity = '0';
+    homeSolutionsLink.style.color = '#dedede';
   });
-
 }
 
 function handleMenuClick() {
