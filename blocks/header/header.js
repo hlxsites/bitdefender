@@ -212,6 +212,40 @@ async function renderDesktopHeader(block) {
     block.append(navWrapper);
   }
   buildMegaMenu();
+
+  // Create the p and a elements as you did before.
+  const homeSolutions = document.createElement('p');
+  const homeSolutionsLink = document.createElement('a');
+  homeSolutionsLink.href = '';
+  homeSolutionsLink.textContent = 'Home Solutions';
+  homeSolutions.appendChild(homeSolutionsLink);
+  const headerWrapper = document.querySelector('.header-wrapper');
+  headerWrapper.appendChild(homeSolutions);
+
+  const megaMenu = document.querySelector('.mega-menu');
+  let hideTimeout = null;
+
+  homeSolutionsLink.addEventListener('mouseenter', () => {
+    clearTimeout(hideTimeout); // clear any existing timeout
+    console.log('mouseenter');
+    megaMenu.style.opacity = '1';
+  });
+
+  homeSolutionsLink.addEventListener('mouseleave', () => {
+    hideTimeout = setTimeout(() => { // set a timeout to hide the mega menu
+      megaMenu.style.opacity = '0';
+    }, 500); // 500 milliseconds delay
+  });
+
+  // Add the same pair of event listeners to the mega menu
+  megaMenu.addEventListener('mouseenter', () => {
+    clearTimeout(hideTimeout);
+  });
+
+  megaMenu.addEventListener('mouseleave', () => {
+    megaMenu.style.opacity = '0';
+  });
+
 }
 
 function handleMenuClick() {
@@ -316,14 +350,6 @@ function handleMenuClick() {
 }
 
 function renderMobileHeader() {
-  const bitdefenderLogo = document.createElement('img');
-  bitdefenderLogo.src = 'https://www.bitdefender.com/content/dam/bitdefender/splitter-homepage/black_company_logo.svg';
-  bitdefenderLogo.alt = 'Bitdefender Logo';
-
-  const logoLink = document.createElement('a');
-  logoLink.href = 'https://www.bitdefender.com/';
-  logoLink.appendChild(bitdefenderLogo);
-
   const headerBlock = document.querySelector('.header.block');
   headerBlock.appendChild(logoLink);
 
@@ -345,6 +371,17 @@ function renderMobileHeader() {
 }
 
 export default async function decorate(block) {
+  const bitdefenderLogo = document.createElement('img');
+  bitdefenderLogo.src = 'https://www.bitdefender.com/content/dam/bitdefender/splitter-homepage/black_company_logo.svg';
+  bitdefenderLogo.alt = 'Bitdefender Logo';
+
+  const logoLink = document.createElement('a');
+  logoLink.href = 'https://www.bitdefender.com/';
+  logoLink.appendChild(bitdefenderLogo);
+
+  const headerWrapper = document.querySelector('.header-wrapper');
+  headerWrapper.appendChild(logoLink);
+
   const mediaQuery = window.matchMedia('(max-width: 1000px)');
   if (mediaQuery.matches) {
     renderMobileHeader();

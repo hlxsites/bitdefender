@@ -236,12 +236,12 @@
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 100px;
+  top: 150px;
   left: 25%;
   width: 50%;
   height: 500px;
   background-color: white;
-  opacity: 1;
+  opacity: 0;
   transition: all 0.2s ease-in-out;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
@@ -351,6 +351,26 @@
   grid-area: 2 / 3 / 3 / 4;
 }
 
+.header-wrapper > a img {
+  position: relative;
+  top: 95px;
+  margin-left: 200px;
+  filter: invert(100%);
+}
+
+.header-wrapper > p a{
+  position: relative;
+  top: 35px;
+  margin-left: 435px;
+  font-size: medium;
+  color: var(--text-color-header);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.header-wrapper > p a:hover{
+  color: white;
+}
 
 
 body {
