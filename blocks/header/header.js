@@ -94,33 +94,21 @@ function handleLoginClick() {
 }
 
 function appendUlToP() {
-  // Find all divs in the mega menu
   let divs = document.querySelectorAll('.mega-menu > div');
 
-  // Iterate over all divs
   divs.forEach(div => {
-    // Find all uls in the current div
     let uls = div.querySelectorAll('ul');
-
-    // Iterate over all uls
     uls.forEach(ul => {
-      // Find the preceding p element
       let p = ul.previousElementSibling;
-      let a = p.querySelector('a');
 
-      // Create a new span to hold the ul text
       let span = document.createElement('div');
 
-      // Iterate over all li children of ul
       Array.from(ul.children).forEach(li => {
-        // Append the li text to the span
         span.textContent += ' ' + li.textContent;
       });
 
-      // Append the span to the p element, making it a sibling of the a tag
       p.appendChild(span);
 
-      // remove the ul
       ul.remove();
     });
   });
