@@ -413,6 +413,16 @@
   color: white;
 }
 
+.mega-menu span {
+  position: relative;
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: white;
+  background-color: var(--color-highlight-blue);
+  padding: 2px;
+  border-radius: 3px;
+}
+
 
 body {
   background-color: gray;

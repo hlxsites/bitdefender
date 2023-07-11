@@ -114,6 +114,27 @@ function appendUlToP() {
   });
 }
 
+function createTags() {
+  let links = document.querySelectorAll('p > a');
+
+  links.forEach(link => {
+    if (link.textContent.includes('(new)')) {
+      let span = document.createElement('span');
+      span.textContent = 'NEW';
+      link.parentElement.appendChild(span);
+      link.textContent = link.textContent.replace('(new)', '');
+    }
+
+    else if (link.textContent.includes('(evolved)')) {
+      let span = document.createElement('span');
+      span.textContent = 'EVOLVED';
+      span.style.backgroundColor = '#14b0a7';
+      link.parentElement.appendChild(span);
+      link.textContent = link.textContent.replace('(evolved)', '');
+    }
+  });
+}
+
 function wrapDivsInMegaMenu() {
   console.log('wrapDivsInMegaMenu');
   const nav = document.getElementById('nav');
@@ -149,6 +170,7 @@ function wrapDivsInMegaMenu() {
 function buildMegaMenu() {
   wrapDivsInMegaMenu();
   appendUlToP();
+  createTags();
 }
 
 async function renderDesktopHeader(block) {
