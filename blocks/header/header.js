@@ -93,6 +93,67 @@ function handleLoginClick() {
   }
 }
 
+function appendUlToP() {
+  // Find all divs in the mega menu
+  let divs = document.querySelectorAll('.mega-menu > div');
+
+  // Iterate over all divs
+  divs.forEach(div => {
+    // Find all uls in the current div
+    let uls = div.querySelectorAll('ul');
+
+    // Iterate over all uls
+    uls.forEach(ul => {
+      // Find the preceding p element
+      let p = ul.previousElementSibling;
+      let a = p.querySelector('a');
+
+      // Create a new span to hold the ul text
+      let span = document.createElement('div');
+
+      // Iterate over all li children of ul
+      Array.from(ul.children).forEach(li => {
+        // Append the li text to the span
+        span.textContent += ' ' + li.textContent;
+      });
+
+      // Append the span to the p element, making it a sibling of the a tag
+      p.appendChild(span);
+
+      // remove the ul
+      ul.remove();
+    });
+  });
+}
+
+function wrapDivsInMegaMenu() {
+  console.log('wrapDivsInMegaMenu');
+  const nav = document.getElementById('nav');
+  const divs = Array.from(nav.children).filter(node => node.tagName.toLowerCase() === 'div');
+  const navSectionsIndex = divs.findIndex(div => div.classList.contains('nav-sections'));
+  const megaMenuDiv = document.createElement('div');
+  megaMenuDiv.className = 'mega-menu';
+
+  const otherOptionsDiv = document.createElement('div');
+  otherOptionsDiv.className = 'other-options';
+
+  megaMenuDiv.appendChild(divs[navSectionsIndex + 1].cloneNode(true));
+  nav.removeChild(divs[navSectionsIndex + 1]);
+
+  for (let i = navSectionsIndex + 2; i < divs.length; i++) {
+    otherOptionsDiv.appendChild(divs[i].cloneNode(true));
+    nav.removeChild(divs[i]);
+  }
+
+  nav.appendChild(megaMenuDiv);
+  megaMenuDiv.appendChild(otherOptionsDiv);
+}
+
+function buildMegaMenu() {
+  wrapDivsInMegaMenu();
+  appendUlToP();
+}
+
 async function renderDesktopHeader(block) {
   // fetch nav content
   const navPath = getMetadata('nav') || '/nav';
@@ -106,7 +167,7 @@ async function renderDesktopHeader(block) {
     nav.id = 'nav';
     nav.innerHTML = html;
 
-    const classes = ['brand', 'sections', 'tools'];
+    const classes = ['brand', 'sections'];
     classes.forEach((c, i) => {
       const section = nav.children[i];
       if (section) section.classList.add(`nav-${c}`);
@@ -150,6 +211,7 @@ async function renderDesktopHeader(block) {
     navWrapper.append(nav);
     block.append(navWrapper);
   }
+  buildMegaMenu();
 }
 
 function handleMenuClick() {
