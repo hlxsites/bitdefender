@@ -137,16 +137,25 @@ function wrapDivsInMegaMenu() {
   const otherOptionsDiv = document.createElement('div');
   otherOptionsDiv.className = 'other-options';
 
+  const bottomLinks = document.createElement('div');
+  bottomLinks.className = 'bottom-links';
+
   megaMenuDiv.appendChild(divs[navSectionsIndex + 1].cloneNode(true));
   nav.removeChild(divs[navSectionsIndex + 1]);
 
-  for (let i = navSectionsIndex + 2; i < divs.length; i++) {
+  for (let i = navSectionsIndex + 2; i < 8; i++) {
     otherOptionsDiv.appendChild(divs[i].cloneNode(true));
+    nav.removeChild(divs[i]);
+  }
+
+  for (let i = 8; i < divs.length; i++) {
+    bottomLinks.appendChild(divs[i].cloneNode(true));
     nav.removeChild(divs[i]);
   }
 
   nav.appendChild(megaMenuDiv);
   megaMenuDiv.appendChild(otherOptionsDiv);
+  megaMenuDiv.appendChild(bottomLinks);
 }
 
 function buildMegaMenu() {
@@ -233,7 +242,7 @@ async function renderDesktopHeader(block) {
 
   homeSolutionsLink.addEventListener('mouseleave', () => {
     hideTimeout = setTimeout(() => {
-      megaMenu.style.opacity = '0';
+      // megaMenu.style.opacity = '0'; // remeber to uncomment this
       homeSolutionsLink.style.color = '#dedede';
     }, 500);
   });
@@ -243,7 +252,7 @@ async function renderDesktopHeader(block) {
   });
 
   megaMenu.addEventListener('mouseleave', () => {
-    megaMenu.style.opacity = '0';
+    // megaMenu.style.opacity = '0'; // remeber to uncomment this
     homeSolutionsLink.style.color = '#dedede';
   });
 }

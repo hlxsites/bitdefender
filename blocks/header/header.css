@@ -241,7 +241,7 @@
   width: 50%;
   height: 500px;
   background-color: white;
-  opacity: 0;
+  opacity: 1; /* remeber to set this to 0 */
   transition: all 0.2s ease-in-out;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
@@ -368,6 +368,28 @@
 
 .other-options > div:nth-child(5) {
   grid-area: 2 / 3 / 3 / 4;
+}
+
+.bottom-links div, .bottom-links p{
+  display: inline-block;
+}
+
+.bottom-links > div {
+  margin-top: -25px;
+}
+
+.bottom-links div:nth-child(2) {
+  margin-left: 120px;
+}
+
+.bottom-links p > a {
+  text-decoration: none;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+}
+
+.bottom-links p:hover > a {
+  color: var(--color-highlight-blue) !important;
 }
 
 .header-wrapper > a img {
