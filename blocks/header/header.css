@@ -1,6 +1,6 @@
 /* header and nav layout */
 .nav-wrapper {
-  position: fixed;
+  position: absolute;
   width: 100%;
   height: 40px;
   background-color: var(--text-color);
@@ -89,7 +89,7 @@
 }
 
 .home-button-border {
-  position: fixed;
+  position: absolute;
   margin-top: 2.5px;
   width: 70px;
   height: 3px;
@@ -437,7 +437,7 @@ body {
 
 @media (max-width: 1000px) {
 .header-wrapper {
-  position: absolute;
+  position: fixed;
   background-color: white;
   transition: all 0.3s ease-in-out;
 }
@@ -447,7 +447,6 @@ body {
   top: 15px;
   filter: none;
 }
-
 nav {
   display: none;
 }
