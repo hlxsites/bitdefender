@@ -96,15 +96,15 @@ function handleLoginClick() {
 function appendUlToP() {
   let divs = document.querySelectorAll('.mega-menu > div');
 
-  divs.forEach(div => {
+  divs.forEach((div) => {
     let uls = div.querySelectorAll('ul');
-    uls.forEach(ul => {
+    uls.forEach((ul) => {
       let p = ul.previousElementSibling;
 
       let span = document.createElement('div');
 
-      Array.from(ul.children).forEach(li => {
-        span.textContent += ' ' + li.textContent;
+      Array.from(ul.children).forEach((li) => {
+        span.textContent += ` ${li.textContent}`;
       });
 
       p.appendChild(span);
@@ -117,15 +117,13 @@ function appendUlToP() {
 function createTags() {
   let links = document.querySelectorAll('p > a');
 
-  links.forEach(link => {
+  links.forEach((link) => {
     if (link.textContent.includes('(new)')) {
       link.textContent = link.textContent.replace('(new)', '');
       let span = document.createElement('span');
       span.textContent = 'NEW';
       link.appendChild(span);
-    }
-
-    else if (link.textContent.includes('(evolved)')) {
+    } else if (link.textContent.includes('(evolved)')) {
       link.textContent = link.textContent.replace('(evolved)', '');
       let span = document.createElement('span');
       span.textContent = 'EVOLVED';
@@ -138,8 +136,8 @@ function createTags() {
 function wrapDivsInMegaMenu() {
   console.log('wrapDivsInMegaMenu');
   const nav = document.getElementById('nav');
-  const divs = Array.from(nav.children).filter(node => node.tagName.toLowerCase() === 'div');
-  const navSectionsIndex = divs.findIndex(div => div.classList.contains('nav-sections'));
+  const divs = Array.from(nav.children).filter((node) => node.tagName.toLowerCase() === 'div');
+  const navSectionsIndex = divs.findIndex((div) => div.classList.contains('nav-sections'));
   const megaMenuDiv = document.createElement('div');
   megaMenuDiv.className = 'mega-menu';
 
@@ -296,7 +294,7 @@ function handleMenuClick() {
       if (links.length > 0) {
         menuOption.subMenu = [];
 
-        links.forEach(link => {
+        links.forEach((link) => {
           let submenuItem = {};
 
           // Clone the link element
