@@ -414,9 +414,6 @@ async function renderMobileHeader() {
     headerBlock.appendChild(nav);
     headerBlock.appendChild(wrapperDiv);
     headerBlock.appendChild(optionsWrapper);
-
-    nav.removeChild(nav.children[0]);
-    nav.removeChild(nav.children[0]);
   }
 }
 

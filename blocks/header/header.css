@@ -447,6 +447,10 @@ body {
   top: 15px;
   filter: none;
 }
+
+nav {
+  display: none;
+}
 }
 
 .menu-bar {
@@ -543,11 +547,6 @@ body {
   animation: slide-in 0.2s 0.075s forwards;
 }
 
-
-
-nav {
-  display: none;
-}
 
 @keyframes slide-in {
   from {
