@@ -122,7 +122,7 @@ function createTags() {
       link.textContent = link.textContent.replace('(new)', '');
       let span = document.createElement('span');
       span.textContent = 'NEW';
-      link.appendChild(span); // Append span after text is replaced
+      link.appendChild(span);
     }
 
     else if (link.textContent.includes('(evolved)')) {
@@ -130,7 +130,7 @@ function createTags() {
       let span = document.createElement('span');
       span.textContent = 'EVOLVED';
       span.style.backgroundColor = '#14b0a7';
-      link.appendChild(span); // Append span after text is replaced
+      link.appendChild(span);
     }
   });
 }
@@ -181,7 +181,6 @@ async function renderDesktopHeader(block) {
   if (resp.ok) {
     const html = await resp.text();
 
-    // decorate nav DOM
     const nav = document.createElement('nav');
     nav.id = 'nav';
     nav.innerHTML = html;
@@ -202,7 +201,6 @@ async function renderDesktopHeader(block) {
         divider.className = 'nav-divider';
         navSections.insertBefore(divider, navParagraph);
 
-        // Update "Login" nav section to match HTML structure
         if (navParagraph.textContent.trim() === 'Login') {
           const loginLink = document.createElement('a');
           loginLink.href = '';
@@ -232,7 +230,6 @@ async function renderDesktopHeader(block) {
   }
   buildMegaMenu();
 
-  // Create the p and a elements as you did before.
   const homeSolutions = document.createElement('p');
   const homeSolutionsLink = document.createElement('a');
   homeSolutionsLink.href = '';
@@ -252,7 +249,7 @@ async function renderDesktopHeader(block) {
 
   homeSolutionsLink.addEventListener('mouseleave', () => {
     hideTimeout = setTimeout(() => {
-      // megaMenu.style.opacity = '0'; // remeber to uncomment this
+      megaMenu.style.opacity = '0';
       homeSolutionsLink.style.color = '#dedede';
     }, 500);
   });
@@ -262,10 +259,12 @@ async function renderDesktopHeader(block) {
   });
 
   megaMenu.addEventListener('mouseleave', () => {
-    // megaMenu.style.opacity = '0'; // remeber to uncomment this
+    megaMenu.style.opacity = '0';
     homeSolutionsLink.style.color = '#dedede';
   });
 }
+
+// MOBILE HEADER //
 
 function handleMenuClick() {
   this.classList.toggle('change');
@@ -277,58 +276,6 @@ function handleMenuClick() {
   setTimeout(() => {
     optionsWrapper.classList.toggle('show');
   }, 100);
-
-  const menuOptions = [
-    {
-      title: 'All-In-One Plan',
-      subMenu: [
-        { name: 'Ultimate Security', url: 'https://www.bitdefender.com/solutions/ultimate-security.html' },
-        { name: 'Premium Security', url: 'https://www.bitdefender.com/solutions/premium-security.html' },
-      ],
-    },
-    {
-      title: 'Device Security',
-      subMenu: [
-        { name: 'Total Securiy', url: 'https://www.bitdefender.com/solutions/total-security.html' },
-        { name: 'Internet Security', url: 'https://www.bitdefender.com/solutions/internet-security.html' },
-        { name: 'Antivirus Plus', url: 'https://www.bitdefender.com/solutions/antivirus.html' },
-        { name: 'Antivirus for Mac', url: 'https://www.bitdefender.com/solutions/antivirus-for-mac.html' },
-        { name: 'Mobile Security for Android', url: 'https://www.bitdefender.com/solutions/mobile-security-android.html' },
-        { name: 'Mobile Security for iOS', url: 'https://www.bitdefender.com/solutions/mobile-security-ios.html' },
-        { name: 'Family Pack', url: 'https://www.bitdefender.com/solutions/family-pack.html' },
-        { name: 'Small office Securiy', url: 'https://www.bitdefender.com/solutions/small-office-security.html' },
-      ],
-    },
-    {
-      title: 'Privacy',
-      subMenu: [
-        { name: 'Premium VPN', url: 'https://www.bitdefender.com/solutions/vpn.html' },
-        { name: 'Password Manager', url: 'https://www.bitdefender.com/solutions/password-manager.html' },
-      ],
-    },
-    {
-      title: 'Identity protection',
-      subMenu: [
-        { name: 'Digital Identity Protection', url: 'https://www.bitdefender.com/solutions/digital-identity-protection.html' },
-        { name: 'Identity Theft Protection', url: 'https://www.bitdefender.com/solutions/identity-theft-protection.html' },
-      ],
-    },
-    {
-      title: 'Try Bitdefender',
-      subMenu: [
-        { name: 'Antivirus Free', url: 'https://www.bitdefender.com/solutions/free.html' },
-        { name: 'Antivirus Free for Android', url: 'https://www.bitdefender.com/solutions/antivirus-free-for-android.html' },
-      ],
-    },
-    {
-      title: 'Existing customers',
-      subMenu:
-      [
-        { name: 'Renew,', url: 'https://www.bitdefender.com/renewal/' },
-        { name: 'Support', url: 'https://www.bitdefender.com/consumer/support/' },
-      ],
-    },
-  ];
 
   let originalMenuHTML;
 
@@ -368,25 +315,58 @@ function handleMenuClick() {
   attachMenuOptionClickEvents();
 }
 
-function renderMobileHeader() {
+async function renderMobileHeader() {
   const headerBlock = document.querySelector('.header.block');
-  headerBlock.appendChild(logoLink);
 
-  const wrapperDiv = document.createElement('div');
-  wrapperDiv.classList.add('menu-wrapper');
-  wrapperDiv.addEventListener('click', handleMenuClick);
+  // fetch nav content
+  const navPath = getMetadata('nav') || '/nav';
+  const resp = await fetch(`${navPath}.plain.html`);
 
-  // Create three span elements (bars)
-  for (let i = 0; i < 3; i++) {
-    const barSpan = document.createElement('span');
-    barSpan.classList.add('menu-bar');
-    wrapperDiv.appendChild(barSpan);
+  if (resp.ok) {
+    const html = await resp.text();
+
+    const nav = document.createElement('nav');
+    nav.id = 'nav';
+    nav.innerHTML = html;
+
+    const classes = ['brand', 'sections'];
+    classes.forEach((c, i) => {
+      const section = nav.children[i];
+      if (section) section.classList.add(`nav-${c}`);
+    });
+
+    // decorate the navigation with the appropriate icons
+    decorateIcons(nav);
+
+    const navWrapper = document.createElement('div');
+    navWrapper.className = 'nav-wrapper';
+    navWrapper.append(nav);
+
+    const wrapperDiv = document.createElement('div');
+    wrapperDiv.classList.add('menu-wrapper');
+    wrapperDiv.addEventListener('click', handleMenuClick);
+
+    // Create three span elements (bars)
+    for (let i = 0; i < 3; i++) {
+      const barSpan = document.createElement('span');
+      barSpan.classList.add('menu-bar');
+      wrapperDiv.appendChild(barSpan);
+    }
+
+    const optionsWrapper = document.createElement('div');
+    optionsWrapper.className = 'options-wrapper';
+    
+    // Move last 8 divs to options-wrapper
+    Array.from(nav.children).slice(2).forEach(child => {
+      optionsWrapper.appendChild(child);
+    });
+
+    // Append nav (with the remaining first two divs) and optionsWrapper to headerBlock
+    headerBlock.appendChild(wrapperDiv);
+    headerBlock.appendChild(optionsWrapper);
+
+    navWrapper.remove();
   }
-  headerBlock.appendChild(wrapperDiv);
-
-  const optionsWrapper = document.createElement('div');
-  optionsWrapper.className = 'options-wrapper';
-  headerBlock.appendChild(optionsWrapper);
 }
 
 export default async function decorate(block) {
