@@ -295,14 +295,35 @@ function handleMenuClick() {
       let links = div.querySelectorAll('a');
       if (links.length > 0) {
         menuOption.subMenu = [];
+
         links.forEach(link => {
-          menuOption.subMenu.push({
-            name: link.innerHTML,
-            url: link.href,
-          });
+          let submenuItem = {};
+
+          // Clone the link element
+          let cloneLink = link.cloneNode(true);
+          submenuItem.name = cloneLink.textContent;
+          submenuItem.url = cloneLink.href;
+
+          if (submenuItem.name.includes('(new)')) {
+            submenuItem.name = submenuItem.name.replace('(new)', '');
+            let span = document.createElement('span');
+            span.textContent = 'NEW';
+            cloneLink.textContent = submenuItem.name;
+            cloneLink.appendChild(span);
+          } else if (submenuItem.name.includes('(evolved)')) {
+            submenuItem.name = submenuItem.name.replace('(evolved)', '');
+            let span = document.createElement('span');
+            span.textContent = 'EVOLVED';
+            span.style.backgroundColor = '#14b0a7';
+            cloneLink.textContent = submenuItem.name;
+            cloneLink.appendChild(span);
+          }
+
+          submenuItem.updatedLinkHTML = cloneLink.innerHTML;
+
+          menuOption.subMenu.push(submenuItem);
         });
       }
-      // Push the menuOption object to the menuOptions array
       menuOptions.push(menuOption);
     } else {
       // If there is no h2 in the div, remove the div from the DOM
@@ -314,7 +335,7 @@ function handleMenuClick() {
 
   function generateSubMenu(option) {
     return `<div class='sub-menu-title' data-option='${option.title}'>${option.title}</div>${
-      option.subMenu.map((subMenuItem) => `<a href='${subMenuItem.url}'>${subMenuItem.name}</a>`).join('')}`;
+      option.subMenu.map((subMenuItem) => `<a href='${subMenuItem.url}'>${subMenuItem.updatedLinkHTML}</a>`).join('')}`;
   }
 
   const menuOptionsHTML = menuOptions.map((option) => `<div class='menu-option' data-option='${option.title}'>${option.title}</div>`).join('');

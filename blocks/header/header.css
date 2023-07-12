@@ -417,7 +417,7 @@
   color: white;
 }
 
-.mega-menu span {
+.mega-menu span, .options-wrapper.show a span {
   position: relative;
   font-size: 0.6rem;
   font-weight: 600;
@@ -542,6 +542,8 @@ body {
   text-decoration: none;
   animation: slide-in 0.2s 0.075s forwards;
 }
+
+
 
 nav {
   display: none;
