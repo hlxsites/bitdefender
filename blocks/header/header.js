@@ -277,6 +277,39 @@ function handleMenuClick() {
     optionsWrapper.classList.toggle('show');
   }, 100);
 
+  // Find all the direct div children of the nav element
+  const navDivs = document.querySelectorAll('#nav > div');
+  let menuOptions = [];
+
+  // Iterate over each div
+  for (let i = 0; i < navDivs.length; i++) {
+    let menuOption = {};
+    let div = navDivs[i];
+
+    // Find the h2 within this div and assign its innerHTML to the title of menuOption
+    let h2 = div.querySelector('h2');
+    if (h2) {
+      menuOption.title = h2.innerHTML;
+
+      // Find all a tags within this div
+      let links = div.querySelectorAll('a');
+      if (links.length > 0) {
+        menuOption.subMenu = [];
+        links.forEach(link => {
+          menuOption.subMenu.push({
+            name: link.innerHTML,
+            url: link.href,
+          });
+        });
+      }
+      // Push the menuOption object to the menuOptions array
+      menuOptions.push(menuOption);
+    } else {
+      // If there is no h2 in the div, remove the div from the DOM
+      div.parentNode.removeChild(div);
+    }
+  }
+
   let originalMenuHTML;
 
   function generateSubMenu(option) {
@@ -355,17 +388,14 @@ async function renderMobileHeader() {
 
     const optionsWrapper = document.createElement('div');
     optionsWrapper.className = 'options-wrapper';
-    
-    // Move last 8 divs to options-wrapper
-    Array.from(nav.children).slice(2).forEach(child => {
-      optionsWrapper.appendChild(child);
-    });
 
     // Append nav (with the remaining first two divs) and optionsWrapper to headerBlock
+    headerBlock.appendChild(nav);
     headerBlock.appendChild(wrapperDiv);
     headerBlock.appendChild(optionsWrapper);
 
-    navWrapper.remove();
+    nav.removeChild(nav.children[0]);
+    nav.removeChild(nav.children[0]);
   }
 }
 

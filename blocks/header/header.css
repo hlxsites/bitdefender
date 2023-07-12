@@ -543,6 +543,10 @@ body {
   animation: slide-in 0.2s 0.075s forwards;
 }
 
+nav {
+  display: none;
+}
+
 @keyframes slide-in {
   from {
     transform: translateX(100%);
