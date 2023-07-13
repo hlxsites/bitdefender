@@ -19,6 +19,7 @@ export default async function decorate(block) {
     const footer = document.createElement('div');
     footer.classList.add('footer-container');
     footer.innerHTML = html;
+
     const footerHeader = footer.querySelector('div');
     footerHeader.classList.add('footer-header');
     wrapImgsInLinks(footerHeader);
@@ -26,15 +27,27 @@ export default async function decorate(block) {
     const footerHeaderLinks = footerHeader.querySelectorAll('a');
     footerHeaderLinks.forEach(link => link.classList.add('footer-header-link'));
 
-    const quickLinksSection = footerHeader.nextElementSibling;
-    quickLinksSection.classList.add('quick-list-section-container');
-    wrapParagraphAndULInDiv(quickLinksSection);
+    const followAndQuickLinksSection = footerHeader.nextElementSibling;
+    followAndQuickLinksSection.classList.add('quick-list-section-container');
+    followAndQuickLinksSection.querySelectorAll('p').forEach(paragraph => paragraph.classList.add('section-title'));
+    wrapParagraphAndULInDiv(followAndQuickLinksSection);
+    const followAndQuickLinksSectionChildrens = followAndQuickLinksSection.querySelectorAll('div');
+    const followBitdefender = followAndQuickLinksSectionChildrens[0];
+    const quickLinksSection = followAndQuickLinksSectionChildrens[1];
+    const quickLinksMovileView = createMobileViewFor(quickLinksSection, followAndQuickLinksSection, true);
+    const mobileViewTitle = quickLinksMovileView.querySelector('p');
+    mobileViewTitle.classList.add('section-title');
+    mobileViewTitle.classList.add('mobile-view-title');
 
 
-    const chooseYourCountrySection = quickLinksSection.nextElementSibling;
+    const chooseYourCountrySection = quickLinksMovileView.nextElementSibling;
     chooseYourCountrySection.classList.add('choose-your-country-language-section');
+    chooseYourCountrySection.querySelector('p').classList.add('section-title');
+    const chooseYourCountrySectionMobileView = createMobileViewFor(chooseYourCountrySection, undefined, true);
+    const followBitdefenerMobileView = createMobileViewFor(followBitdefender, chooseYourCountrySectionMobileView);
+    followBitdefenerMobileView.querySelector('.mobile-container').classList.add('follow-bitdefender-mobile-section');
 
-    const trustedSection = chooseYourCountrySection.nextElementSibling;
+    const trustedSection = followBitdefenerMobileView.nextElementSibling;
     trustedSection.classList.add('trusted-section');
 
     const copyrightSection = trustedSection.nextElementSibling;
@@ -45,6 +58,39 @@ export default async function decorate(block) {
     decorateIcons(footer);
     block.append(footer);
   }
+}
+
+function createMobileViewFor(container, nextTo, expandable) {
+  const mobileViewDiv = document.createElement('div');
+  mobileViewDiv.classList.add('mobile-device-view');
+  mobileViewDiv.innerHTML = container.outerHTML;
+  const mobileContainer = mobileViewDiv.querySelector('div');
+  mobileContainer.classList = ['mobile-container'];
+  if (nextTo) {
+    nextTo.after(mobileViewDiv);
+  } else {
+    container.after(mobileViewDiv);
+  }
+  const title = mobileViewDiv.querySelector('.section-title');
+  title.classList.add('mobile-view-section-title');
+
+  if (expandable) {
+    title.classList.add('selection-arrow');
+    title.classList.add('no-padding');
+
+    title.addEventListener('click', () => {
+      if (mobileViewDiv.classList.contains('active')) {
+        mobileViewDiv.classList.remove('active');
+      } else {
+        mobileViewDiv.classList.add('active');
+      }
+    });
+  } else {
+    mobileViewDiv.classList.add('active');
+    mobileContainer.classList.add('no-border');
+  }
+  
+  return nextTo ? nextTo.nextElementSibling : container.nextElementSibling;
 }
 
 function wrapImgsInLinks(container) {
