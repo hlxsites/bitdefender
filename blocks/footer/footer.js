@@ -1,6 +1,5 @@
 import { decorateIcons, getMetadata } from '../../scripts/lib-franklin.js';
 
-
 function createMobileViewFor(container, nextTo, expandable) {
   const mobileViewDiv = document.createElement('div');
   mobileViewDiv.classList.add('mobile-device-view');
@@ -30,7 +29,7 @@ function createMobileViewFor(container, nextTo, expandable) {
     mobileViewDiv.classList.add('active');
     mobileContainer.classList.add('no-border');
   }
-  
+
   return nextTo ? nextTo.nextElementSibling : container.nextElementSibling;
 }
 
@@ -47,7 +46,7 @@ function wrapImgsInLinks(container) {
 
 function wrapUnorderedListInDiv(container, divClassName) {
   const unorderedLists = container.querySelectorAll('ul');
-  unorderedLists.forEach(ul => {
+  unorderedLists.forEach((ul) => {
     const div = document.createElement('div');
     div.innerHTML = ul.outerHTML;
     div.classList.add(divClassName);
@@ -57,7 +56,7 @@ function wrapUnorderedListInDiv(container, divClassName) {
 
 function wrapParagraphAndULInDiv(container) {
   const paragraphs = container.querySelectorAll('p');
-  paragraphs.forEach(p => {
+  paragraphs.forEach((p) => {
     const unorderedList = p.nextElementSibling;
     const div = document.createElement('div');
     div.innerHTML = `${p.outerHTML}${unorderedList.outerHTML}`;
@@ -73,7 +72,6 @@ function wrapParagraphInADiv(container, divClassName) {
   div.classList.add(divClassName);
   paragraph.replaceWith(div);
 }
-
 
 /**
  * loads and decorates the footer
@@ -103,12 +101,14 @@ export default async function decorate(block) {
 
     const followAndQuickLinksSection = footerHeader.nextElementSibling;
     followAndQuickLinksSection.classList.add('quick-list-section-container');
-    followAndQuickLinksSection.querySelectorAll('p').forEach(paragraph => paragraph.classList.add('section-title'));
+    followAndQuickLinksSection.querySelectorAll('p')
+      .forEach((paragraph) => paragraph.classList.add('section-title'));
     wrapParagraphAndULInDiv(followAndQuickLinksSection);
     const followAndQuickLinksSectionChildrens = followAndQuickLinksSection.querySelectorAll('div');
     const followBitdefender = followAndQuickLinksSectionChildrens[0];
     const quickLinksSection = followAndQuickLinksSectionChildrens[1];
-    const quickLinksMovileView = createMobileViewFor(quickLinksSection, followAndQuickLinksSection, true);
+    const quickLinksMovileView =
+      createMobileViewFor(quickLinksSection, followAndQuickLinksSection, true);
     const mobileViewTitle = quickLinksMovileView.querySelector('p');
     mobileViewTitle.classList.add('section-title');
     mobileViewTitle.classList.add('mobile-view-title');
@@ -116,9 +116,12 @@ export default async function decorate(block) {
     const chooseYourCountrySection = quickLinksMovileView.nextElementSibling;
     chooseYourCountrySection.classList.add('choose-your-country-language-section');
     chooseYourCountrySection.querySelector('p').classList.add('section-title');
-    const chooseYourCountrySectionMobileView = createMobileViewFor(chooseYourCountrySection, undefined, true);
-    const followBitdefenerMobileView = createMobileViewFor(followBitdefender, chooseYourCountrySectionMobileView);
-    followBitdefenerMobileView.querySelector('.mobile-container').classList.add('follow-bitdefender-mobile-section');
+    const chooseYourCountrySectionMobileView =
+      createMobileViewFor(chooseYourCountrySection, undefined, true);
+    const followBitdefenerMobileView =
+      createMobileViewFor(followBitdefender, chooseYourCountrySectionMobileView);
+    followBitdefenerMobileView.querySelector('.mobile-container')
+      .classList.add('follow-bitdefender-mobile-section');
 
     const trustedSection = followBitdefenerMobileView.nextElementSibling;
     trustedSection.classList.add('trusted-section');
