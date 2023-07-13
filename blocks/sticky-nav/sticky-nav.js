@@ -6,17 +6,17 @@ export default function decorate(block) {
    // const links = block.querySelectorAll('a');
    // setActiveLink(links, 'active');
 
-   /* change to ul, li */
-   const div1 = document.createElement('div');
-   div1.className = 'sticky-navigation-container';
+   /* change to ul, li and divs to match original css */
+   const wc_div = document.createElement('div');
+   wc_div.className = 'we-container';
 
-   const div2 = document.createElement('div');
-   div2.className = 'outer';
-   div1.append(div2)
+   const outer_div = document.createElement('div');
+   outer_div.className = 'outer';
+   wc_div.append(outer_div)
 
-   const div3 = document.createElement('div');
-   div3.className = 'inner-wrapper';
-   div2.append(div3)
+   const innder_div = document.createElement('div');
+   innder_div.className = 'inner-wrapper';
+   outer_div.append(innder_div)
 
    const ul = document.createElement('ul');
    [...block.children[0].children].forEach((row) => {
@@ -34,11 +34,11 @@ export default function decorate(block) {
      ul.append(li);
    });
    // ul.querySelectorAll('img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
-   div3.append(ul);
+   innder_div.append(ul);
 
    block.textContent = '';
    block.classList.add('moreItems');
-   block.append(div1);
+   block.append(wc_div);
 
    document.addEventListener('scroll', () => {
       const wrapper_top = block.parentElement.offsetTop - 10;

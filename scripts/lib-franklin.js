@@ -564,7 +564,7 @@ export function decorateButtons(element) {
   );
   element.querySelectorAll('a').forEach((a) => {
     // Suppress a-to-button decoration when in excludedParentClasses
-    const excludedParentClasses = ['.sticky-navigation'];
+    const excludedParentClasses = ['.sticky-nav'];
     const isClosest = (el) => a.closest(el);
     if (!excludedParentClasses.some(isClosest)) {
       a.title = a.title || a.textContent;
