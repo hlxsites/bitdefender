@@ -1,10 +1,6 @@
-// import { setActiveLink } from '../../scripts/lib-franklin.js';
+
 
 export default function decorate(block) {
-
-   /* set active section */
-   // const links = block.querySelectorAll('a');
-   // setActiveLink(links, 'active');
 
    /* change to ul, li and divs to match original css */
    const wc_div = document.createElement('div');
@@ -19,6 +15,7 @@ export default function decorate(block) {
    outer_div.append(innder_div)
 
    const ul = document.createElement('ul');
+   
    [...block.children[0].children].forEach((row) => {
      const li = document.createElement('li');
      const a = row.querySelector('a');
@@ -27,19 +24,16 @@ export default function decorate(block) {
      a.innerHTML = '';
      a.append(span);
      li.append(a);
-   //   [...li.children].forEach((div) => {
-   //     if (div.children.length === 1 && div.querySelector('picture')) div.className = 'cards-card-image';
-   //     else div.className = 'cards-card-body';
-   //   });
+
      ul.append(li);
    });
-   // ul.querySelectorAll('img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
    innder_div.append(ul);
 
    block.textContent = '';
    block.classList.add('moreItems');
    block.append(wc_div);
 
+   /* listen to scroll event to stick the nav on the top when necessary */
    document.addEventListener('scroll', () => {
       const wrapper_top = block.parentElement.offsetTop - 10;
       if(window.scrollY >= wrapper_top) {
@@ -47,18 +41,42 @@ export default function decorate(block) {
       } else {
          block.classList.remove('fixed-nav')
       }
+   });
 
-    });
+   
+   /* listen to click event to visually select the menu item in the nav */
+   const menuEntries = ul.querySelectorAll('ul > li');
+   menuEntries.forEach( (li) =>
+      li.addEventListener('click', (event) => selectActiveMenu(event, li, menuEntries))
+   );
 
-   // e("section.sticky-nav").offset().top - 10;
-
-//    e(window).scroll((function() {
-//       e(window).scrollTop() >= r ? (e("section.sticky-nav").addClass("fixed-nav"),
-//       e(".main-header").addClass("scrolling_down")) : (e("section.sticky-nav").removeClass("fixed-nav"),
-//       e(this).scrollTop() > 1 && e(".main-header").addClass("scrolling_up"))
-//   }
-//   )),
 }
+
+function selectActiveMenu(event, activeItem, menuItems) {
+
+   // remove current active menu
+   menuItems.forEach((menuItem) => {
+      menuItem.classList.remove('active');
+   });
+
+   activeItem.classList.add('active');
+}
+
+         //            e(".sticky-nav ul li a").on("click", (function(t) {
+         //                t.preventDefault(),
+         //                e(".sticky-nav ul li").removeClass("active"),
+         //                e(this).parent().addClass("active"),
+         //                e(".sticky-nav .outer").removeClass("open"),
+         //                e(".mobile-option").empty(),
+         //                e(this).parent().clone().appendTo(".mobile-option"),
+         //                e(".sticky-nav ul li").removeClass("selected"),
+         //                e(this).parent().addClass("selected");
+         //                var r = e(this).attr("href");
+         //                -1 == r.indexOf("#") && window.open(r, "_blank")
+         //            }
+
+    
+
 
 
 // function Ut() {
@@ -101,6 +119,7 @@ export default function decorate(block) {
 //        ))
 //    }
 //    e(document).ready((function() {
+   ////// BEG
 //        if (e("section.sticky-nav").length > 0) {
 //            e(".sticky-nav ul li a").on("click", (function(t) {
 //                t.preventDefault(),
@@ -114,14 +133,17 @@ export default function decorate(block) {
 //                var r = e(this).attr("href");
 //                -1 == r.indexOf("#") && window.open(r, "_blank")
 //            }
+    ////// END
 //            ));
 //            var r = e("section.sticky-nav").offset().top - 10;
 //            e("section.sticky-nav").find(".btn-wrap").length <= 0 && e("section.sticky-nav").addClass("no-btn"),
+   ////// BEG
 //            e(window).scroll((function() {
 //                e(window).scrollTop() >= r ? (e("section.sticky-nav").addClass("fixed-nav"),
 //                e(".main-header").addClass("scrolling_down")) : (e("section.sticky-nav").removeClass("fixed-nav"),
 //                e(this).scrollTop() > 1 && e(".main-header").addClass("scrolling_up"))
 //            }
+    ////// END
 //            )),
 //            t(),
 //            e(".sticky-nav ul li").first().addClass("selected").siblings().removeClass("selected"),
