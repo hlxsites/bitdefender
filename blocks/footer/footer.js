@@ -1,64 +1,5 @@
-import { readBlockConfig, decorateIcons, getMetadata } from '../../scripts/lib-franklin.js';
+import { decorateIcons, getMetadata } from '../../scripts/lib-franklin.js';
 
-/**
- * loads and decorates the footer
- * @param {Element} block The footer block element
- */
-export default async function decorate(block) {
-  const cfg = readBlockConfig(block);
-  block.textContent = '';
-
-  // fetch footer content
-  const footerPath = getMetadata('footer') || '/footer';
-  const resp = await fetch(`${footerPath}.plain.html`, window.location.pathname.endsWith('/footer') ? { cache: 'reload' } : {});
-
-  if (resp.ok) {
-    const html = await resp.text();
-
-    // decorate footer DOM
-    const footer = document.createElement('div');
-    footer.classList.add('footer-container');
-    footer.innerHTML = html;
-
-    const footerHeader = footer.querySelector('div');
-    footerHeader.classList.add('footer-header');
-    wrapImgsInLinks(footerHeader);
-    wrapUnorderedListInDiv(footerHeader, 'ul-wrapper');
-    const footerHeaderLinks = footerHeader.querySelectorAll('a');
-    footerHeaderLinks.forEach(link => link.classList.add('footer-header-link'));
-
-    const followAndQuickLinksSection = footerHeader.nextElementSibling;
-    followAndQuickLinksSection.classList.add('quick-list-section-container');
-    followAndQuickLinksSection.querySelectorAll('p').forEach(paragraph => paragraph.classList.add('section-title'));
-    wrapParagraphAndULInDiv(followAndQuickLinksSection);
-    const followAndQuickLinksSectionChildrens = followAndQuickLinksSection.querySelectorAll('div');
-    const followBitdefender = followAndQuickLinksSectionChildrens[0];
-    const quickLinksSection = followAndQuickLinksSectionChildrens[1];
-    const quickLinksMovileView = createMobileViewFor(quickLinksSection, followAndQuickLinksSection, true);
-    const mobileViewTitle = quickLinksMovileView.querySelector('p');
-    mobileViewTitle.classList.add('section-title');
-    mobileViewTitle.classList.add('mobile-view-title');
-
-
-    const chooseYourCountrySection = quickLinksMovileView.nextElementSibling;
-    chooseYourCountrySection.classList.add('choose-your-country-language-section');
-    chooseYourCountrySection.querySelector('p').classList.add('section-title');
-    const chooseYourCountrySectionMobileView = createMobileViewFor(chooseYourCountrySection, undefined, true);
-    const followBitdefenerMobileView = createMobileViewFor(followBitdefender, chooseYourCountrySectionMobileView);
-    followBitdefenerMobileView.querySelector('.mobile-container').classList.add('follow-bitdefender-mobile-section');
-
-    const trustedSection = followBitdefenerMobileView.nextElementSibling;
-    trustedSection.classList.add('trusted-section');
-
-    const copyrightSection = trustedSection.nextElementSibling;
-    copyrightSection.classList.add('copyright-section');
-    wrapUnorderedListInDiv(copyrightSection, 'copyright-ul-wrapper');
-    wrapParagraphInADiv(copyrightSection, 'copyright-section-p-wrapper');
-
-    decorateIcons(footer);
-    block.append(footer);
-  }
-}
 
 function createMobileViewFor(container, nextTo, expandable) {
   const mobileViewDiv = document.createElement('div');
@@ -131,4 +72,63 @@ function wrapParagraphInADiv(container, divClassName) {
   div.innerHTML = paragraph.outerHTML;
   div.classList.add(divClassName);
   paragraph.replaceWith(div);
+}
+
+
+/**
+ * loads and decorates the footer
+ * @param {Element} block The footer block element
+ */
+export default async function decorate(block) {
+  block.textContent = '';
+
+  // fetch footer content
+  const footerPath = getMetadata('footer') || '/footer';
+  const resp = await fetch(`${footerPath}.plain.html`, window.location.pathname.endsWith('/footer') ? { cache: 'reload' } : {});
+
+  if (resp.ok) {
+    const html = await resp.text();
+
+    // decorate footer DOM
+    const footer = document.createElement('div');
+    footer.classList.add('footer-container');
+    footer.innerHTML = html;
+
+    const footerHeader = footer.querySelector('div');
+    footerHeader.classList.add('footer-header');
+    wrapImgsInLinks(footerHeader);
+    wrapUnorderedListInDiv(footerHeader, 'ul-wrapper');
+    const footerHeaderLinks = footerHeader.querySelectorAll('a');
+    footerHeaderLinks.forEach(link => link.classList.add('footer-header-link'));
+
+    const followAndQuickLinksSection = footerHeader.nextElementSibling;
+    followAndQuickLinksSection.classList.add('quick-list-section-container');
+    followAndQuickLinksSection.querySelectorAll('p').forEach(paragraph => paragraph.classList.add('section-title'));
+    wrapParagraphAndULInDiv(followAndQuickLinksSection);
+    const followAndQuickLinksSectionChildrens = followAndQuickLinksSection.querySelectorAll('div');
+    const followBitdefender = followAndQuickLinksSectionChildrens[0];
+    const quickLinksSection = followAndQuickLinksSectionChildrens[1];
+    const quickLinksMovileView = createMobileViewFor(quickLinksSection, followAndQuickLinksSection, true);
+    const mobileViewTitle = quickLinksMovileView.querySelector('p');
+    mobileViewTitle.classList.add('section-title');
+    mobileViewTitle.classList.add('mobile-view-title');
+
+    const chooseYourCountrySection = quickLinksMovileView.nextElementSibling;
+    chooseYourCountrySection.classList.add('choose-your-country-language-section');
+    chooseYourCountrySection.querySelector('p').classList.add('section-title');
+    const chooseYourCountrySectionMobileView = createMobileViewFor(chooseYourCountrySection, undefined, true);
+    const followBitdefenerMobileView = createMobileViewFor(followBitdefender, chooseYourCountrySectionMobileView);
+    followBitdefenerMobileView.querySelector('.mobile-container').classList.add('follow-bitdefender-mobile-section');
+
+    const trustedSection = followBitdefenerMobileView.nextElementSibling;
+    trustedSection.classList.add('trusted-section');
+
+    const copyrightSection = trustedSection.nextElementSibling;
+    copyrightSection.classList.add('copyright-section');
+    wrapUnorderedListInDiv(copyrightSection, 'copyright-ul-wrapper');
+    wrapParagraphInADiv(copyrightSection, 'copyright-section-p-wrapper');
+
+    decorateIcons(footer);
+    block.append(footer);
+  }
 }
