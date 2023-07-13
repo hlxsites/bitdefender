@@ -110,7 +110,8 @@ export default async function decorate(block) {
     const quickLinksMovileView = createMobileViewFor(
       quickLinksSection,
       followAndQuickLinksSection,
-      true);
+      true
+    );
     const mobileViewTitle = quickLinksMovileView.querySelector('p');
     mobileViewTitle.classList.add('section-title');
     mobileViewTitle.classList.add('mobile-view-title');
@@ -121,10 +122,12 @@ export default async function decorate(block) {
     const chooseYourCountrySectionMobileView = createMobileViewFor(
       chooseYourCountrySection,
       undefined,
-      true);
+      true
+    );
     const followBitdefenerMobileView = createMobileViewFor(
       followBitdefender,
-      chooseYourCountrySectionMobileView);
+      chooseYourCountrySectionMobileView
+    );
     followBitdefenerMobileView.querySelector('.mobile-container')
       .classList.add('follow-bitdefender-mobile-section');
 
