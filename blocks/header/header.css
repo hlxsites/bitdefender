@@ -44,8 +44,8 @@
 
 .login-buttons a p {
   text-align: center;
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: var(--body-font-size-xs);
+  font-weight: 500; 
   margin-top: 5px;
   transition: all 0.3s ease-in-out;
   height: 100%;
@@ -96,7 +96,7 @@
   color: var(--text-color-header);
   text-decoration: none;
   text-transform: uppercase;
-  font-size: 0.75rem;
+  font-size: var(--body-font-size-xxs);
   margin-right: 30px;
   letter-spacing: 0.96px;
 }
@@ -115,7 +115,7 @@
   justify-content: flex-end; 
   min-width: 2px;
   width: 2px;
-  background-color: gray;
+  background-color: var(--color-dark-gray);
   height: 20px;
   margin-right: 15px;
   margin-top: 7.5px;
@@ -129,7 +129,7 @@
   margin-top: -935px;
   width: 375px;
   height: 275px;
-  background-color: white;
+  background-color: var(--background-color);
   border-radius: 5px;
   opacity: 0; 
   transition: all 0.2s ease-in-out; 
@@ -155,7 +155,7 @@
   color: var(--text-color);
   top: 7.5px;
   left: 120px;
-  font-size: 1.25rem;
+  font-size: var(--body-font-size-s);
 }
 
 .divider {
@@ -163,7 +163,7 @@
   margin-top: 45px;
   width: 100%;
   height: 1px;
-  background-color: gray;
+  background-color: var(--color-dark-gray);
 }
 
 .login-buttons {
@@ -189,7 +189,7 @@
   position: relative;
   top: 35px;
   margin-left: 435px;
-  font-size: medium;
+  font-size: var(--body-font-size-s);
   color: var(--text-color-header);
   text-decoration: none;
   cursor: pointer;
@@ -197,13 +197,14 @@
 
 .bottom-links p > a {
   text-decoration: none;
-  font-size: 12px !important;
+  font-size: var(--body-font-size-xxs) !important;
   font-weight: 500 !important;
+  bottom: 10px;
 }
 
 .mega-menu div p a{
   position: relative;
-  font-size: 0.85rem;
+  font-size: var(--body-font-size-xs);
   font-weight: 400;
   color: var(--text-color) !important;
 }
@@ -267,7 +268,7 @@
 
 .login-buttons a:hover {
   background-color: var(--color-highlight-blue);
-  color: white;
+  color: var(--background-color);
 }
 
 .triangle {
@@ -285,11 +286,11 @@
   display: flex;
   flex-direction: column;
   position: absolute;
+  margin-left: 435px;
   top: 140px;
-  left: 25%;
-  width: 50%;
+  width: 900px;
   height: 500px;
-  background-color: white;
+  background-color: var(--background-color);
   opacity: 0; 
   transition: all 0.2s ease-in-out;
   border-bottom-left-radius: 8px;
@@ -298,9 +299,17 @@
   border-bottom: 35px solid #f5f6f7;
 }
 
+@media (max-width: 1390px) {
+  .mega-menu {
+    left: 50%;
+    transform: translateX(-50%);
+    margin-left: 0;
+  }
+} 
+
 .mega-menu div h2 {
   position: relative;
-  font-size: 1rem;
+  font-size: var(--body-font-size-s);
   font-weight: 600;
   margin-left: 25px;
 }
@@ -330,7 +339,7 @@
 }
 
 .mega-menu > div:first-child p:hover {
-  background-color: #f3f7fe;
+  background-color: var(--highlight-light-blue);
   background-image: url('../../icons/arrow-right-blue.svg');
   background-repeat: no-repeat;
   background-position: 190px 5px;
@@ -353,7 +362,7 @@
   display: block;
   margin-left: 40px;
   color: var(--text-color);
-  font-size: medium;
+  font-size: var(--body-font-size-xs);
   margin-top: 10px;
   text-decoration: none;
   animation: slide-in 0.2s 0.075s forwards;
@@ -364,11 +373,11 @@
 }
 
 .header-wrapper > p a:hover{
-  color: white;
+  color: var(--background-color);
 }
 
 .other-options > div > p:hover a {
-  background-color: #f3f7fe;
+  background-color: var(--highlight-light-blue);
   color: var(--color-highlight-blue) !important;
   background-image: url('../../icons/arrow-right-blue.svg');
   background-repeat: no-repeat;
@@ -379,7 +388,7 @@
 .mega-menu > div:first-child p a {
   color: var(--text-color) !important;
   text-decoration: none;
-  font-size: 1.1rem;
+  font-size: var(--body-font-size-s);
   font-weight: 600;
 }
 
@@ -389,7 +398,7 @@
 
 .options-wrapper.show div {
   font-weight: bold;
-  font-size: medium;
+  font-size: var(--body-font-size-s);
   margin: 15px;
   background-image: url('../../icons/right.svg');
   background-repeat: no-repeat;
@@ -424,9 +433,9 @@
 .mega-menu > div:first-child p div {
   margin-top: 10px;
   line-height: 1 !important;
-  font-size: 0.85rem;
+  font-size: var(--body-font-size-xxs);
   font-weight: 400;
-  color: gray;
+  color: var(--color-dark-gray);
 }
 
 .other-options {
@@ -438,9 +447,9 @@
 
 .mega-menu span, .options-wrapper.show a span {
   position: relative;
-  font-size: 0.6rem;
+  font-size: var(--body-font-size-xxs);
   font-weight: 600;
-  color: white;
+  color: var(--background-color);
   background-color: var(--color-highlight-blue);
   padding: 2px;
   border-radius: 3px;
@@ -448,13 +457,13 @@
 }
 
 body {
-  background-color: gray;
+  background-color: var(--color-dark-gray);
 }
 
 @media (max-width: 1000px) {
 .header-wrapper {
   position: fixed;
-  background-color: white;
+  background-color: var(--background-color);
   transition: all 0.3s ease-in-out;
 }
 
@@ -474,7 +483,7 @@ nav {
   display: block;
   width: 100%;
   height: 3px;
-  background-color: black;
+  background-color:  var(--text-color);
   transition: all 0.3s ease;
 }
 
@@ -534,7 +543,7 @@ nav {
 }
 
 .options-wrapper.show .sub-menu-title {
-  font-size: 15px;
+  font-size: var(--body-font-size-xs);
   font-weight: bold;
   margin-left: 20px;
   padding-left: 20px;
