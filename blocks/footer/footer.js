@@ -97,7 +97,7 @@ export default async function decorate(block) {
     wrapImgsInLinks(footerHeader);
     wrapUnorderedListInDiv(footerHeader, 'ul-wrapper');
     const footerHeaderLinks = footerHeader.querySelectorAll('a');
-    footerHeaderLinks.forEach(link => link.classList.add('footer-header-link'));
+    footerHeaderLinks.forEach((link) => link.classList.add('footer-header-link'));
 
     const followAndQuickLinksSection = footerHeader.nextElementSibling;
     followAndQuickLinksSection.classList.add('quick-list-section-container');
@@ -107,8 +107,10 @@ export default async function decorate(block) {
     const followAndQuickLinksSectionChildrens = followAndQuickLinksSection.querySelectorAll('div');
     const followBitdefender = followAndQuickLinksSectionChildrens[0];
     const quickLinksSection = followAndQuickLinksSectionChildrens[1];
-    const quickLinksMovileView =
-      createMobileViewFor(quickLinksSection, followAndQuickLinksSection, true);
+    const quickLinksMovileView = createMobileViewFor(
+      quickLinksSection,
+      followAndQuickLinksSection,
+      true);
     const mobileViewTitle = quickLinksMovileView.querySelector('p');
     mobileViewTitle.classList.add('section-title');
     mobileViewTitle.classList.add('mobile-view-title');
@@ -116,10 +118,13 @@ export default async function decorate(block) {
     const chooseYourCountrySection = quickLinksMovileView.nextElementSibling;
     chooseYourCountrySection.classList.add('choose-your-country-language-section');
     chooseYourCountrySection.querySelector('p').classList.add('section-title');
-    const chooseYourCountrySectionMobileView =
-      createMobileViewFor(chooseYourCountrySection, undefined, true);
-    const followBitdefenerMobileView =
-      createMobileViewFor(followBitdefender, chooseYourCountrySectionMobileView);
+    const chooseYourCountrySectionMobileView = createMobileViewFor(
+      chooseYourCountrySection,
+      undefined,
+      true);
+    const followBitdefenerMobileView = createMobileViewFor(
+      followBitdefender,
+      chooseYourCountrySectionMobileView);
     followBitdefenerMobileView.querySelector('.mobile-container')
       .classList.add('follow-bitdefender-mobile-section');
 
