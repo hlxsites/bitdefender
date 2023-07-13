@@ -1,4 +1,3 @@
-/* stylelint-disable font-family-no-missing-generic-family-keyword */
 .footer {
   font-size: var(--body-font-size-s);
   background: #000;
@@ -14,7 +13,7 @@ ul {
   list-style: none;
   padding: 0;
   margin: 0;
-  font-family: roboto, sans-serif;
+  font-family: var(--body-font-family), sans-serif;
 }
 
 .footer-container {
@@ -58,7 +57,7 @@ ul {
 
 .footer-header-link {
   text-align: left;
-  font: normal normal 700 13px/30px Roboto;
+  font: normal normal 700 13px/30px var(--body-font-family);
   letter-spacing: .78pt;
   color: #fff !important;
   text-transform: uppercase;
@@ -85,7 +84,7 @@ ul {
   display: grid;
   grid-template-columns: 1fr;
   margin: 0;
-  font-family: roboto,sans-serif;
+  font-family: var(--body-font-family),sans-serif;
 }
 
 .ul-wrapper > ul > li {
@@ -100,7 +99,7 @@ ul {
 
 .quick-list-section-container a {
   text-align: left;
-  font: normal normal 500 13px/30px Roboto;
+  font: normal normal 500 13px/30px var(--body-font-family);
   letter-spacing: 0;
   color: #fff;
   opacity: 1;
@@ -111,7 +110,7 @@ ul {
 
 .footer ul li a {
   text-align: left;
-  font: normal normal 500 13px/30px Roboto;
+  font: normal normal 500 13px/30px var(--body-font-family);
   letter-spacing: 0;
   color: #fff;
   opacity: 1;
@@ -120,7 +119,7 @@ ul {
 }
 
 .copyright-ul-wrapper > ul li a {
-  font: normal normal normal 13px/18px Roboto;
+  font: normal normal normal 13px/18px var(--body-font-family);
   color: #fff;
   position: relative;
   margin-right: 10px;
@@ -140,7 +139,7 @@ ul {
 
 .section-title {
   text-align: left;
-  font: normal normal 700 13px/24px Roboto;
+  font: normal normal 700 13px/24px var(--body-font-family);
   letter-spacing: 0;
   color: #9098a3;
   opacity: 1;
@@ -170,7 +169,7 @@ ul {
 .copyright-ul-wrapper > ul {
   list-style: none;
   margin: 0;
-  font-family: roboto,sans-serif;
+  font-family: var(--body-font-family),sans-serif;
   padding: 0;
 }
 
@@ -184,7 +183,7 @@ ul {
   font-weight: 400;
   line-height: 1.14;
   color: #fff;
-  font-family: roboto,sans-serif;
+  font-family: var(--body-font-family),sans-serif;
 }
 
 .quick-list-section-container > :nth-child(1) {
@@ -279,7 +278,7 @@ ul {
 
 .copyright-section-p-wrapper > p {
   text-align: left!important;
-  font: normal normal normal 13px/18px Roboto;
+  font: normal normal normal 13px/18px var(--body-font-family);
   letter-spacing: 0;
   color: #9098a3;
   opacity: 1;
@@ -358,7 +357,7 @@ ul {
   }
 
   .footer-header .footer-header-link {
-    font: normal normal 700 9pt/30px Roboto;
+    font: normal normal 700 9pt/30px var(--body-font-family);
   }
 
   .follow-bitdefender-mobile-section {
@@ -432,7 +431,7 @@ ul {
   .copyright-ul-wrapper > ul li {
     display: block;
     margin-bottom: 10px;
-    font: normal normal 500 9pt/30px Roboto;
+    font: normal normal 500 9pt/30px var(--body-font-family);
   }
 
   .copyright-ul-wrapper > ul li a {
@@ -454,18 +453,18 @@ ul {
     max-width: 100%;
     margin-top: 1pc !important;
     position: relative;
-    font: normal normal normal 9pt/13px Roboto;
+    font: normal normal normal 9pt/13px var(--body-font-family);
     bottom: 0;
   }
 }
 
 @media(max-width: 767px) {
   .footer-header .footer-header-link {
-    font: normal normal 700 11px/30px Roboto;
+    font: normal normal 700 11px/30px var(--body-font-family);
   }
 
   .copyright-ul-wrapper > ul li {
-    font: normal normal 500 11px/30px Roboto;
+    font: normal normal 500 11px/30px var(--body-font-family);
     width: 100%;
     line-height: 1;
   }
@@ -478,22 +477,22 @@ ul {
   }
 
   .copyright-section-p-wrapper p {
-    font: normal normal normal 11px/13px Roboto;
+    font: normal normal normal 11px/13px var(--body-font-family);
     right: 0;
   }
 }
 
 @media(max-width: 480px) {
   .footer-header .footer-header-link {
-    font: normal normal 700 10px/30px Roboto;
+    font: normal normal 700 10px/30px var(--body-font-family);
   }
 
   .copyright-ul-wrapper > ul li {
-    font: normal normal 500 10px/30px Roboto;
+    font: normal normal 500 10px/30px var(--body-font-family);
   }
 
   .copyright-section-p-wrapper p {
-    font: normal normal normal 10px/13px Roboto;
+    font: normal normal normal 10px/13px var(--body-font-family);
   }
 }
 
