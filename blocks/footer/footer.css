@@ -343,6 +343,8 @@ ul {
     transition: all .5s;
     list-style-type: none;
     padding: 0;
+    display: block;
+    column-count: 2;
   }
 
   .copyright-ul-wrapper ul {
@@ -372,10 +374,6 @@ ul {
   }
 
   .mobile-device-view.active ul {
-    display: block;
-    column-count: 2;
-    list-style-type: none;
-    padding: 0;
     max-height: 999px;
   }
 

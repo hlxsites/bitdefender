@@ -21,11 +21,7 @@ function createMobileViewFor(container, nextTo, expandable) {
     title.classList.add('no-padding');
 
     title.addEventListener('click', () => {
-      if (mobileViewDiv.classList.contains('active')) {
-        mobileViewDiv.classList.remove('active');
-      } else {
-        mobileViewDiv.classList.add('active');
-      }
+      mobileViewDiv.classList.toggle('active');
     });
   } else {
     mobileViewDiv.classList.add('active');
