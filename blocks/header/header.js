@@ -428,19 +428,16 @@ export default async function decorate(block) {
   headerWrapper.appendChild(logoLink);
 
   const mediaQuery = window.matchMedia('(max-width: 1000px)');
-  let lastMatch = mediaQuery.matches;
 
   function checkMediaQuery() {
-    if (mediaQuery.matches !== lastMatch) {
+    if (mediaQuery.matches) {
       // eslint-disable-next-line no-restricted-globals
       location.reload();
     }
-    lastMatch = mediaQuery.matches;
   }
 
   mediaQuery.addEventListener('change', checkMediaQuery);
 
-  // Initial rendering based on media query
   if (mediaQuery.matches) {
     renderMobileHeader();
   } else {
