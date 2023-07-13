@@ -19,6 +19,8 @@
   --overlay-background-color: #eee;
   --highlight-background-color: #ccc;
   --text-color: #000;
+  --horizontal-separator-color: #dedede;
+  --modal-background-color: rgb(0 0 0 / 50%);
 
   /* fonts */
   --body-font-family: 'helvetica neue', helvetica, ubuntu, roboto, noto, sans-serif;
@@ -36,7 +38,7 @@
   /* body sizes */
   --body-font-size-m: 22px;
   --body-font-size-s: 18px;
-  --body-font-size-xs: 16px;
+  --body-font-size-xs: 14px;
 
  
   /* heading sizes */
@@ -57,7 +59,7 @@
     --heading-font-size-xxl: 60px;
     --heading-font-size-xl: 48px;
     --heading-font-size-l: 36px;
-    --heading-font-size-m: 30px;
+    --heading-font-size-m: 32px;
     --heading-font-size-s: 24px;
     --heading-font-size-xs: 22px;
   }
@@ -84,7 +86,7 @@ header {
 h1, h2, h3,
 h4, h5, h6 {
   font-family: var(--heading-font-family);
-  font-weight: var(-font-weight-bolder);
+  font-weight: var(--font-weight-bolder);
   line-height: 1.25;
   margin-top: 1em;
   margin-bottom: .5em;
@@ -107,7 +109,7 @@ hr {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
   border: 0;
-  border-bottom: 1px solid var(--overlay-background-color);
+  border-bottom: 1px solid var(--horizontal-separator-color);
 }
 
 code, pre, samp {
@@ -150,7 +152,7 @@ a.button:any-link, button {
   padding: 10px 26px 8px 28px;
   text-align: center;
   font-style: normal;
-  font-weight: var(-font-weight-bolder);
+  font-weight: var(--font-weight-bolder);
   cursor: pointer;
   color: var(--button-link-color);
   background-color: var(--button-background-color);
@@ -159,7 +161,7 @@ a.button:any-link, button {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  border-radius: 8x;
+  border-radius: 8px;
   height: fit-content;
 }
 

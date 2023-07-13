@@ -1,11 +1,9 @@
-.button.download a {
+.button-container .button a {
   font-size: var(--body-font-size-xs);
   color: var(--link-color);
-
   text-align: left;
   font-style: normal;
   font-weight: var(--font-weight-bold);
-  color: var(--link-color);
   background-color: transparent;
   border: none;
   margin: 0;
@@ -17,12 +15,12 @@
   height: fit-content;
 }
 
-.button.download a:hover {
+.button-container .button a:hover {
   color: var(--link-hover-color);
   text-decoration: none;
 }
 
-.button.download span.icon {
+.button-container .button span.icon {
   display: inline-block;
   width: 15px;
   height: 10px;
@@ -33,6 +31,6 @@
   transform: translateX(0);
 }
 
-.button.download a:hover span.icon {
+.button-container .button a:hover span.icon {
   transform: translateX(5px);
-}
+} 

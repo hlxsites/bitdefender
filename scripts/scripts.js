@@ -83,6 +83,50 @@ export function decorateMain(main) {
 }
 
 /**
+ *
+ * @param {String} path The path to the modal
+ * @param {String} template The template to use for the modal styling
+ * @returns {Promise<Element>}
+ * @example
+ * const modalContainer = await createModal(modalPath, modalTemplate);
+ * document.body.append(modalContainer);
+ */
+export async function createModal(path, template) {
+  const modalContainer = document.createElement('div');
+  modalContainer.classList.add('modal-container');
+
+  const closeModal = () => modalContainer.remove();
+  modalContainer.addEventListener('click', closeModal);
+
+  const modalContent = document.createElement('div');
+  modalContent.classList.add('modal-content');
+
+  // fetch modal content
+  const resp = await fetch(`${path}.plain.html`);
+
+  if (!resp.ok) {
+    // eslint-disable-next-line no-console
+    console.error(`modal url cannot be loaded: ${path}`);
+    return modalContainer;
+  }
+
+  const html = await resp.text();
+  modalContent.innerHTML = html;
+  decorateMain(modalContent);
+  await loadBlocks(modalContent);
+  modalContainer.append(modalContent);
+
+  // add class to modal container for opportunity to add custom modal styling
+  if (template) modalContainer.classList.add(template);
+
+  const close = document.createElement('div');
+  close.classList.add('modal-close');
+  close.addEventListener('click', closeModal);
+  modalContent.append(close);
+  return modalContainer;
+}
+
+/**
  * Loads everything needed to get to LCP.
  * @param {Element} doc The container element
  */
