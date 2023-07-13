@@ -19,26 +19,31 @@ import { getMetadata, decorateIcons } from '../../scripts/lib-franklin.js';
  * @param {Element} block The header block element
  */
 
-function createLoginButton(text, href) {
-  const aTag = document.createElement('a');
-  aTag.href = href;
+function createLoginModal() {
+  const loginModal = document.querySelector('nav > div:nth-child(4)');
+  loginModal.classList.add('login-modal');
 
-  const pTag = document.createElement('p');
-  pTag.textContent = text;
-  aTag.appendChild(pTag);
+  const triangle = document.createElement('div');
+  triangle.className = 'triangle';
+  loginModal.appendChild(triangle);
 
-  const imgTag = document.createElement('img');
-  imgTag.src = '../../icons/arrow-right.svg';
-  imgTag.alt = 'Arrow Right';
-  aTag.appendChild(imgTag);
+  const divider = document.createElement('div');
+  divider.className = 'divider';
+  loginModal.appendChild(divider);
 
-  return aTag;
+  const loginButtons = loginModal.querySelectorAll('p');
+  loginButtons.forEach(button => button.classList.add('login-buttons'));
 }
 
 function handleLoginClick() {
+  const loginModal = document.querySelector('nav > div:nth-child(4)');
+  loginModal.classList.toggle('show');
+}
+
+function handleLoginClickOld() {
   const loginParagraph = document.querySelector('.nav-sections p:last-child');
   const bottomBorder = document.querySelector('.login-button-border');
-  const loginModal = document.querySelector('.login-modal');
+  const loginModal = document.querySelector('.mega-menu > div:nth-child(4)');
 
   if (loginModal) {
     loginModal.classList.remove('show');
@@ -134,7 +139,6 @@ function createTags() {
 }
 
 function wrapDivsInMegaMenu() {
-  console.log('wrapDivsInMegaMenu');
   const nav = document.getElementById('nav');
   const divs = Array.from(nav.children).filter((node) => node.tagName.toLowerCase() === 'div');
   const navSectionsIndex = divs.findIndex((div) => div.classList.contains('nav-sections'));
@@ -163,6 +167,14 @@ function wrapDivsInMegaMenu() {
   nav.appendChild(megaMenuDiv);
   megaMenuDiv.appendChild(otherOptionsDiv);
   megaMenuDiv.appendChild(bottomLinks);
+
+  // Move first child of otherOptionsDiv to megaMenuDiv
+  if (otherOptionsDiv.firstElementChild) {
+    megaMenuDiv.insertBefore(otherOptionsDiv.firstElementChild, otherOptionsDiv);
+  }
+
+  const loginModal = document.querySelector('.mega-menu > div:first-child');
+  nav.appendChild(loginModal);
 }
 
 function buildMegaMenu() {
@@ -260,6 +272,8 @@ async function renderDesktopHeader(block) {
     megaMenu.style.opacity = '0';
     homeSolutionsLink.style.color = '#dedede';
   });
+
+  createLoginModal();
 }
 
 // MOBILE HEADER //
@@ -332,8 +346,7 @@ function handleMenuClick() {
   let originalMenuHTML;
 
   function generateSubMenu(option) {
-    return `<div class='sub-menu-title' data-option='${option.title}'>${option.title}</div>${
-      option.subMenu.map((subMenuItem) => `<a href='${subMenuItem.url}'>${subMenuItem.updatedLinkHTML}</a>`).join('')}`;
+    return `<div class='sub-menu-title' data-option='${option.title}'>${option.title}</div>${option.subMenu.map((subMenuItem) => `<a href='${subMenuItem.url}'>${subMenuItem.updatedLinkHTML}</a>`).join('')}`;
   }
 
   const menuOptionsHTML = menuOptions.map((option) => `<div class='menu-option' data-option='${option.title}'>${option.title}</div>`).join('');
