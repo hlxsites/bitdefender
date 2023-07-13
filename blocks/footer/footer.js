@@ -6,11 +6,13 @@ function createMobileViewFor(container, nextTo, expandable) {
   mobileViewDiv.innerHTML = container.outerHTML;
   const mobileContainer = mobileViewDiv.querySelector('div');
   mobileContainer.classList = ['mobile-container'];
+
   if (nextTo) {
     nextTo.after(mobileViewDiv);
   } else {
     container.after(mobileViewDiv);
   }
+
   const title = mobileViewDiv.querySelector('.section-title');
   title.classList.add('mobile-view-section-title');
 
