@@ -1,749 +1,671 @@
-/* reset default max-width, sticky nav should expand to the full width */
-/* .sticky-nav-wrapper {
-    margin: 0 !important;
-    max-width: 100% !important;
-} */
-
-/* .we-container {
-    width: 100%;
-    margin: 0 auto;
-    padding: 0 20px;
-    max-width: 999pt;
-    position: relative;
-} */
-
-/* body {
-    position: relative;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+.heading-1, .small-font, span {
+  font-family: roboto, sans-serif;
 }
 
-*, *::before, *::after {
-    -webkit-box-sizing: inherit;
-    box-sizing: inherit;
-} */
-.heading-1,
-.small-font,
-span {
-    font-family: roboto, sans-serif;
-}
-html {
-    scroll-behavior: smooth;
-
-}
 @media(max-width:991px) {
-    .sticky-nav {
-        height: 65px
-    }
+  .sticky-nav {
+    height: 65px
+  }
 }
 
 @media screen and (min-width:1200px)and (max-height:660px) {
-    .sticky-nav {
-        height: 72px
-    }
+  .sticky-nav {
+    height: 72px
+  }
 }
 
 div.sticky-nav {
-    z-index: 11;
-    background-color: #fff;
-    position: relative;
-    padding: 0;
-    opacity: 1;
+  z-index: 11;
+  background-color: #fff;
+  position: relative;
+  padding: 0;
+  opacity: 1;
 }
 
-div.sticky-nav.dark,
-div.sticky-nav.dark .inner-wrapper {
-    background-color: #000
+
+div.sticky-nav.dark.border {
+  border-color: #3c3c3c
 }
 
-div.sticky-nav.dark .mobile-option:after {
-    background-image: url(../../../content/dam/bitdefender/sticky-nav-white-arrow.svg)
+@media(max-width:991px) {
+  div.sticky-nav {
+    z-index: 12
+  }
+}
+
+div.sticky-nav::after {
+  content: "";
+  display: block;
+  position: absolute;
+  transform: translateX(-50%);
+  width: 100vw;
+  bottom: 0;
+  height: 1px;
+  background-color: #dedede
+}
+
+@media(max-width:991px) {
+  div.sticky-nav::after {
+    display: none
+  }
+
+  div.sticky-nav {
+    overflow: visible
+  }
+}
+
+div.sticky-nav.top-border::before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 1px;
+  width: 100%;
+  background-color: #dedede
+}
+
+@media(max-width:991px) {
+  div.sticky-nav.top-border::before {
+    display: none
+  }
+}
+
+div.sticky-nav.fixed-nav {
+  position: fixed;
+  top: 0;
+  background-color: #fff;
+  width: 100%;
+  max-width: 20in
+}
+
+@media(min-width:768px)and (max-width:991px) {
+  div.sticky-nav.fixed-nav .mobile-option::before {
+    bottom: 4px
+  }
+}
+
+div.sticky-nav.header-show {
+  transition: top .3s ease-in-out
+}
+
+div.sticky-nav .we-container {
+  height: 100%
+}
+
+div.sticky-nav .outer {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  padding: 10px 0 14px;
+  position: relative;
+  height: 100%;
+  align-items: center
+}
+
+div.sticky-nav.no-btn .outer {
+  padding: 27px 0
+}
+
+@media(max-width:991px) {
+  div.sticky-nav.no-btn .outer {
+    padding: 0
+  }
+}
+
+@media(max-width:991px) {
+  div.sticky-nav .outer {
+    padding: 0
+  }
+}
+
+div.sticky-nav .btn-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  position: relative;
+  visibility: visible !important;
+  margin-top: 30px
+}
+
+@media(max-width:991px) {
+  div.sticky-nav .btn-wrap {
+    width: auto;
+    left: 20px
+  }
+}
+
+
+div.sticky-nav .btn-wrap.hide {
+  display: none
+}
+
+div.sticky-nav ul {
+  font-size: 0;
+  text-align: left;
+  padding: initial;
+  background: #fff;
+  position: relative;
+  display: flex;
+  flex-grow: 1;
+  margin: 30px 0 4px
+}
+
+
+@media(max-width:991px) {
+  div.sticky-nav ul {
+    flex-direction: column;
+    width: 100%;
+    padding: 0 20px
+  }
 }
 
 div.sticky-nav.dark.fixed-nav,
 div.sticky-nav.dark ul {
-    background-color: #000
-}
-
-div.sticky-nav.dark li a span {
-    color: #c5c5c5
-}
-
-div.sticky-nav.dark li a span:hover {
-    color: #fff
-}
-
-div.sticky-nav.dark.border {
-    border-color: #3c3c3c
-}
-
-@media(max-width:991px) {
-    div.sticky-nav {
-        z-index: 12
-    }
-}
-
-div.sticky-nav:after {
-    content: "";
-    display: block;
-    position: absolute;
-    /* left: 0; */
-    /* top: 0; */
-    
-    transform: translateX(-50%);
-    width: 100vw;
-    /* height: 100%; */
-
-    bottom: 0;
-    height: 1px;
-    /* width: 100%; */
-    background-color: #dedede
-}
-
-@media(max-width:991px) {
-    div.sticky-nav:after {
-        display: none
-    }
-
-    div.sticky-nav {
-        overflow: visible
-    }
-}
-
-div.sticky-nav.top-border:before {
-    content: "";
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 1px;
-    width: 100%;
-    background-color: #dedede
-}
-
-@media(max-width:991px) {
-    div.sticky-nav.top-border:before {
-        display: none
-    }
-}
-
-div.sticky-nav.fixed-nav {
-    position: fixed;
-    top: 0;
-    background-color: #fff;
-    width: 100%;
-    max-width: 20in
-}
-
-/* @media(min-width:1601px) {
-    div.sticky-nav.fixed-nav {
-        left: 50%;
-        -webkit-transform: translate(-50%);
-        transform: translate(-50%)
-    }
-} */
-
-div.sticky-nav.fixed-nav .inner-wrapper {
-    top: 65px
-}
-
-@media(max-width:991px) {
-    div.sticky-nav.fixed-nav .inner-wrapper {
-        top: 63px;
-        max-height: calc(100vh - 63px)
-    }
-
-    div.sticky-nav.fixed-nav .mobile-option:before {
-        bottom: -1px
-    }
-}
-
-@media(min-width:768px)and (max-width:991px) {
-    div.sticky-nav.fixed-nav .mobile-option:before {
-        bottom: 4px
-    }
-}
-
-div.sticky-nav.header-show {
-    -webkit-transition: top .3s ease-in-out;
-    transition: top .3s ease-in-out
-}
-
-div.sticky-nav.no-btn .outer {
-    padding: 27px 0
-}
-
-@media(max-width:991px) {
-    div.sticky-nav.no-btn .outer {
-        padding: 0
-    }
-}
-
-div.sticky-nav.no-btn li span:after {
-    bottom: -27px
-}
-
-div.sticky-nav .we-container {
-    height: 100%
-}
-
-div.sticky-nav .outer {
-    box-sizing: border-box;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    -webkit-box-pack: left;
-    -ms-flex-pack: left;
-    justify-content: left;
-    padding: 10px 0 14px;
-    position: relative;
-    height: 100%;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center
-}
-
-@media(max-width:991px) {
-    div.sticky-nav .outer {
-        padding: 0
-    }
-}
-
-div.sticky-nav .outer.open .inner-wrapper {
-    overflow: scroll;
-    display: block
-}
-
-div.sticky-nav .outer.open .mobile-option:after {
-    -webkit-transform: rotate(180deg);
-    transform: rotate(180deg)
-}
-
-div.sticky-nav .btn-wrap {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    position: relative;
-    visibility: visible !important;
-    margin-top: 30px
-}
-
-@media(max-width:991px) {
-    div.sticky-nav .btn-wrap {
-        width: auto;
-        left: 20px
-    }
-}
-
-div.sticky-nav .btn-wrap a {
-    margin: 0 1pc 0 0
-}
-
-@media(max-width:1270px) {
-    div.sticky-nav .btn-wrap a {
-        font-size: 14px;
-        height: auto
-    }
-}
-
-@media(max-width:991px) {
-    div.sticky-nav .btn-wrap a {
-        margin-top: 15px
-    }
-}
-
-div.sticky-nav .btn-wrap a:last-of-type {
-    margin: 0
-}
-
-@media(max-width:991px) {
-    div.sticky-nav .btn-wrap a:last-of-type {
-        margin-top: 15px
-    }
-}
-
-@media(max-width:480px) {
-    div.sticky-nav .btn-wrap a:last-of-type {
-        margin-right: 19px
-    }
-}
-
-div.sticky-nav .btn-wrap.hide {
-    display: none
-}
-
-div.sticky-nav ul {
-    font-size: 0;
-    text-align: left;
-    padding: initial;
-    background: #fff;
-    position: relative;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-flex: 1;
-    -ms-flex-positive: 1;
-    flex-grow: 1;
-    margin: 30px 0 4px
-}
-
-@media(max-width:991px) {
-    div.sticky-nav ul {
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-        flex-direction: column;
-        width: 100%;
-        padding: 0 20px
-    }
+  background-color: #000
 }
 
 div.sticky-nav li {
-    display: inline-block;
-    margin: initial;
-    margin-right: 40px;
-    font-weight: 400;
-    list-style-type: none;
-    padding: initial;
-    font-size: medium;
-    line-height: normal;
-    vertical-align: middle
+  display: inline-block;
+  margin: initial;
+  margin-right: 40px;
+  font-weight: 400;
+  list-style-type: none;
+  padding: initial;
+  font-size: medium;
+  line-height: normal;
+  vertical-align: middle
 }
 
-div.sticky-nav li:after {
-    content: "";
-    position: absolute;
-    background-color: #dedede
+div.sticky-nav li::after {
+  content: "";
+  position: absolute;
+  background-color: #dedede
 }
 
 @media(max-width:991px) {
-    div.sticky-nav li:after {
-        width: 100%;
-        height: 1px;
-        bottom: -2px;
-        right: 0
-    }
+  div.sticky-nav li::after {
+    width: 100%;
+    height: 1px;
+    bottom: -2px;
+    right: 0
+  }
 }
 
 @media(max-width:1270px) {
-    div.sticky-nav li {
-        margin-right: 3%
-    }
+  div.sticky-nav li {
+    margin-right: 3%
+  }
 }
 
 @media(min-width:992px)and (max-width:1199px) {
-    div.sticky-nav li {
-        margin-right: 2%
-    }
+  div.sticky-nav li {
+    margin-right: 2%
+  }
 }
 
 @media(max-width:991px) {
-    div.sticky-nav li {
-        width: 100%;
-        cursor: pointer;
-        position: relative
-    }
+  div.sticky-nav li {
+    width: 100%;
+    cursor: pointer;
+    position: relative
+  }
 }
 
 div.sticky-nav li:last-child {
-    margin-right: 0 !important
+  margin-right: 0 !important
 }
 
 div.sticky-nav li a {
-    width: -webkit-max-content;
-    width: -moz-max-content;
-    width: max-content
+  width: max-content
 }
 
 @media(max-width:991px) {
-    div.sticky-nav li a {
-        width: 100%;
-        display: block;
-        padding: 22px 0
-    }
+  div.sticky-nav li a {
+    width: 100%;
+    display: block;
+    padding: 22px 0
+  }
 }
 
 @media(min-width:768px)and (max-width:991px) {
-    div.sticky-nav li a {
-        padding: 24px 0
-    }
+  div.sticky-nav li a {
+    padding: 24px 0
+  }
 }
 
 div.sticky-nav li a span {
-    color: #3c3c3c;
-    font-size: 1pc;
-    font-weight: 500;
-    -webkit-transition: color .3s ease-in-out;
-    transition: color .3s ease-in-out;
-    position: relative
+  color: #3c3c3c;
+  font-size: 1pc;
+  font-weight: 500;
+  transition: color .3s ease-in-out;
+  position: relative
 }
 
 @media(min-width:1400px)and (max-width:1599px) {
-    div.sticky-nav li a span {
-        font-size: 15px
-    }
+  div.sticky-nav li a span {
+    font-size: 15px
+  }
 }
 
 @media(max-width:1270px) {
-    div.sticky-nav li a span {
-        font-size: 14px
-    }
+  div.sticky-nav li a span {
+    font-size: 14px
+  }
 }
 
-div.sticky-nav li a span:hover {
-    color: #000
+div.sticky-nav li a span::after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: -28px;
+  height: 4px;
+  width: 0;
+  background-color: #006eff;
+  transition: width .3s ease-in-out
 }
 
-div.sticky-nav li a span:after {
-    content: "";
-    display: block;
-    position: absolute;
-    left: 0;
-    bottom: -28px;
-    height: 4px;
-    width: 0;
-    background-color: #006eff;
-    -webkit-transition: width .3s ease-in-out;
-    transition: width .3s ease-in-out
+div.sticky-nav.no-btn li span::after {
+  bottom: -27px
 }
 
 @media(max-width:991px) {
-    div.sticky-nav li a span:after {
-        display: none
-    }
+  div.sticky-nav li a span::after {
+    display: none
+  }
+}
+
+
+@media(max-width:1270px) {
+  div.sticky-nav .btn-wrap a {
+    font-size: 14px;
+    height: auto
+  }
+}
+
+@media(max-width:991px) {
+  div.sticky-nav .btn-wrap a {
+    margin-top: 15px
+  }
 }
 
 div.sticky-nav li.active span {
-    color: #000
+  color: #000
 }
 
 @media(max-width:991px) {
-    div.sticky-nav li.active span {
-        color: #3c3c3c
-    }
+  div.sticky-nav li.active span {
+    color: #3c3c3c
+  }
 }
 
-div.sticky-nav li.active span:after {
-    width: 100%
+div.sticky-nav li.active span::after {
+  width: 100%
 }
 
 @media(max-width:767px) {
-    div.sticky-nav li.active span:after {
-        display: none
-    }
+  div.sticky-nav li.active span::after {
+    display: none
+  }
 }
 
 @media(max-width:991px) {
-    div.sticky-nav li:hover span {
-        color: #3c3c3c
-    }
+  div.sticky-nav li:hover span {
+    color: #3c3c3c
+  }
 
-    div.sticky-nav li.selected:after {
-        background-color: #006eff;
-        height: 4px
-    }
+  div.sticky-nav li.selected::after {
+    background-color: #006eff;
+    height: 4px
+  }
 
-    div.sticky-nav li.selected span {
-        color: #000
-    }
+  div.sticky-nav li.selected span {
+    color: #000
+  }
 }
 
 div.sticky-nav .mobile-option {
-    width: 100%;
-    position: relative;
-    top: 0;
-    display: none;
-    cursor: pointer
+  width: 100%;
+  position: relative;
+  top: 0;
+  display: none;
+  cursor: pointer
 }
 
 @media(max-width:991px) {
-    div.sticky-nav .mobile-option {
-        display: block;
-        padding: 0 40px 0 0
-    }
+  div.sticky-nav .mobile-option {
+    display: block;
+    padding: 0 40px 0 0
+  }
 }
 
-div.sticky-nav .mobile-option:after {
-    content: "";
-    position: absolute;
-    right: 0;
-    top: 27px;
-    left: auto;
-    width: 20px;
-    height: 11px;
-    margin: 0;
-    background-image: url(../../../content/dam/bitdefender/sticky-nav-arrow.svg);
-    background-repeat: no-repeat;
-    background-position: 100%;
-    -webkit-transition: -webkit-transform .5s ease-in-out;
-    transition: -webkit-transform .5s ease-in-out;
-    transition: transform .5s ease-in-out;
-    transition: transform .5s ease-in-out, -webkit-transform .5s ease-in-out;
-    background-color: transparent;
-    display: block
+div.sticky-nav .mobile-option::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 27px;
+  left: auto;
+  width: 20px;
+  height: 11px;
+  margin: 0;
+  background-image: url('../../../content/dam/bitdefender/sticky-nav-arrow.svg');
+  background-repeat: no-repeat;
+  background-position: 100%;
+  transition: transform .5s ease-in-out;
+  background-color: transparent;
+  display: block
+}
+
+div.sticky-nav.dark .mobile-option::after {
+  background-image: url('../../../content/dam/bitdefender/sticky-nav-white-arrow.svg')
 }
 
 @media(min-width:768px)and (max-width:991px) {
-    div.sticky-nav .mobile-option:after {
-        top: 31px
-    }
+  div.sticky-nav .mobile-option::after {
+    top: 31px
+  }
 }
 
-div.sticky-nav .mobile-option:before {
-    content: "";
-    position: absolute;
-    background-color: #dedede
+div.sticky-nav .outer.open .mobile-option::after {
+  transform: rotate(180deg)
 }
+
+div.sticky-nav .mobile-option::before {
+  content: "";
+  position: absolute;
+  background-color: #dedede
+} 
 
 @media(max-width:991px) {
-    div.sticky-nav .mobile-option:before {
-        width: calc(100% + 40px);
-        height: 1px;
-        bottom: 1px;
-        right: -20px;
-        z-index: 2
-    }
+  div.sticky-nav .mobile-option::before {
+    width: calc(100% + 40px);
+    height: 1px;
+    bottom: 1px;
+    right: -20px;
+    z-index: 2
+  }
 }
 
 @media(min-width:768px)and (max-width:991px) {
-    div.sticky-nav .mobile-option:before {
-        bottom: 5px
-    }
+  div.sticky-nav .mobile-option::before {
+    bottom: 5px
+  }
 }
 
 div.sticky-nav .mobile-option li {
-    pointer-events: none
+  pointer-events: none
 }
 
-div.sticky-nav .mobile-option li:after {
-    display: none
+div.sticky-nav .mobile-option li::after {
+  display: none
 }
 
 div.sticky-nav .mobile-option a {
-    pointer-events: none
+  pointer-events: none
 }
+
+
 
 div.sticky-nav .mobile-option a span {
-    color: #000
+  color: #000
 }
 
+ 
 div.sticky-nav .inner-wrapper {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    width: 100%;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    margin-top: -30px
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: -30px
+}
+
+div.sticky-nav.fixed-nav .inner-wrapper {
+  top: 65px
 }
 
 @media(max-width:991px) {
-    div.sticky-nav .inner-wrapper {
-        position: absolute;
-        top: 4pc;
-        left: -20px;
-        background-color: #fff;
-        width: calc(100% + 40px);
-        padding: 0 0 15px;
-        display: none;
-        -webkit-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, .08);
-        box-shadow: 0 3px 6px 0 rgba(0, 0, 0, .08)
-    }
+  div.sticky-nav.fixed-nav .inner-wrapper {
+    top: 63px;
+    max-height: calc(100vh - 63px)
+  }
+
+  div.sticky-nav.fixed-nav .mobile-option::before {
+    bottom: -1px
+  }
+}
+
+
+div.sticky-nav.dark,
+div.sticky-nav.dark .inner-wrapper {
+  background-color: #000
+}
+
+div.sticky-nav .outer.open .inner-wrapper {
+  overflow: scroll;
+  display: block
+}
+
+div.sticky-nav.dark li a span {
+  color: #c5c5c5
+}
+
+div.sticky-nav li a span:hover {
+  color: #000
+}
+
+div.sticky-nav.dark li a span:hover {
+  color: #fff
+}
+
+@media(max-width:991px) {
+  div.sticky-nav .inner-wrapper {
+    position: absolute;
+    top: 4pc;
+    left: -20px;
+    background-color: #fff;
+    width: calc(100% + 40px);
+    padding: 0 0 15px;
+    display: none;
+    box-shadow: 0 3px 6px 0 rgba(0 0 0 8%)
+  }
 }
 
 div.sticky-nav.border {
-    border: 1px solid #dedede;
-    border-left: 0;
-    border-right: 0
+  border: 1px solid #dedede;
+  border-left: 0;
+  border-right: 0
 }
 
 @media(min-width:992px) {
-    div.sticky-nav.border {
-        height: 5pc
-    }
+  div.sticky-nav.border {
+    height: 5pc
+  }
 }
 
-div.sticky-nav.border:after {
-    height: 0
+div.sticky-nav.border::after {
+  height: 0
 }
 
 div.sticky-nav.border ul {
-    width: 70%
+  width: 70%
 }
 
 @media(min-width:992px)and (max-width:1199px) {
-    div.sticky-nav.border ul {
-        width: 65%
-    }
+  div.sticky-nav.border ul {
+    width: 65%
+  }
 }
 
 @media(max-width:991px) {
-    div.sticky-nav.border ul {
-        width: 100%
-    }
+  div.sticky-nav.border ul {
+    width: 100%
+  }
 }
 
 div.sticky-nav.border .btn-wrap {
-    width: 30%
+  width: 30%
 }
 
 @media(min-width:992px)and (max-width:1199px) {
-    div.sticky-nav.border .btn-wrap {
-        width: 35%
-    }
+  div.sticky-nav.border .btn-wrap {
+    width: 35%
+  }
 }
 
 @media(max-width:991px) {
-    div.sticky-nav.border .btn-wrap {
-        width: 100%
-    }
+  div.sticky-nav.border .btn-wrap {
+    width: 100%
+  }
 }
 
 @media(min-width:992px) {
-    div.sticky-nav.border.fixed-nav {
-        height: 77px
-    }
+  div.sticky-nav.border.fixed-nav {
+    height: 77px
+  }
 }
 
-div.sticky-nav.moreItems li span:after {
-    bottom: -27px
+div.sticky-nav.more-items li span::after {
+  bottom: -27px
 }
 
 @media(min-width:992px) {
-    div.sticky-nav.moreItems.full-width ul {
-        width: 100%
-    }
+  div.sticky-nav.more-items.full-width ul {
+    width: 100%
+  }
 }
 
-div.sticky-nav.moreItems.full-width .btn-wrap {
-    display: none
-}
-
-div.sticky-nav.moreBtn li a span:after {
-    z-index: 1;
-    bottom: -27px
+div.sticky-nav.more-btn li a span::after {
+  z-index: 1;
+  bottom: -27px
 }
 
 @media(min-width:768px)and (max-width:991px) {
-    div.sticky-nav.moreBtn .mobile-option>ul {
-        padding-left: 0
-    }
+  div.sticky-nav.more-btn .mobile-option>ul {
+    padding-left: 0
+  }
 }
 
 @media(max-width:991px) {
-    div.sticky-nav.moreBtn ul {
-        width: 100% !important
-    }
+  div.sticky-nav.more-btn ul {
+    width: 100% !important
+  }
 }
 
 @media(max-width:480px) {
-    div.sticky-nav.moreBtn .inner-wrapper {
-        width: 100vw
-    }
+  div.sticky-nav.more-btn .inner-wrapper {
+    width: 100vw
+  }
 }
 
-div.sticky-nav.moreBtn .btn-wrap {
-    width: -webkit-fit-content;
-    width: -moz-fit-content;
-    width: fit-content
+div.sticky-nav.more-btn .btn-wrap {
+  width: fit-content
 }
+
 
 @media(max-width:480px) {
-    div.sticky-nav.moreBtn .btn-wrap {
-        width: 100%
-    }
+  div.sticky-nav.more-btn .btn-wrap {
+    width: 100%
+  }
 }
 
 @media(min-width:768px)and (max-width:991px) {
-    div.sticky-nav.moreBtnItems .mobile-option>ul {
-        padding-left: 0
-    }
+  div.sticky-nav.more-btn-items .mobile-option>ul {
+    padding-left: 0
+  }
 }
 
 @media(max-width:991px) {
-    div.sticky-nav.moreBtnItems ul {
-        width: 100% !important
-    }
+  div.sticky-nav.more-btn-items ul {
+    width: 100% !important
+  }
 }
 
-div.sticky-nav.moreBtnItems li {
-    margin-right: 20px
+div.sticky-nav.more-btn-items li {
+  margin-right: 20px
 }
 
 @media(min-width:992px)and (max-width:1024px) {
-    div.sticky-nav.moreBtnItems li span:after {
-        bottom: -27px !important
-    }
+  div.sticky-nav.more-btn-items li span::after {
+    bottom: -27px !important
+  }
 }
 
 @media(min-width:992px)and (max-width:1200px) {
-    div.sticky-nav.noBtns {
-        height: 5pc !important
-    }
+  div.sticky-nav.no-btns {
+    height: 5pc !important
+  }
 }
 
-div.sticky-nav.noBtns ul {
-    width: 100% !important
+div.sticky-nav.no-btns ul {
+  width: 100% !important
 }
 
 @media(min-width:992px)and (max-width:1200px) {
-    div.sticky-nav.noBtns ul li {
-        margin-bottom: 0 !important
-    }
+  div.sticky-nav.no-btns ul li {
+    margin-bottom: 0 !important
+  }
 
-    div.sticky-nav.noBtns ul span:after {
-        bottom: -28px !important
-    }
+  div.sticky-nav.no-btns ul span::after {
+    bottom: -28px !important
+  }
 }
 
-div.sticky-nav.noBtns .btn-wrap {
-    display: none
+div.sticky-nav.no-btns .btn-wrap {
+  display: none
+}
+
+
+div.sticky-nav.more-items.full-width .btn-wrap {
+  display: none
 }
 
 @media(max-width:480px) {
-    div.sticky-nav .btn-wrap {
-        width: 100%
-    }
+  div.sticky-nav .btn-wrap {
+    width: 100%
+  }
 }
 
 div.sticky-nav .btn-wrap a {
-    padding: 8px 15px;
-    min-width: 117px
+  padding: 8px 15px;
+  min-width: 117px;
+  margin: 0 1pc 0 0;
+}
+
+div.sticky-nav .btn-wrap a:last-of-type {
+  margin: 0
+}
+
+@media(max-width:991px) {
+  div.sticky-nav .btn-wrap a:last-of-type {
+    margin-top: 15px
+  }
+}
+
+@media(max-width:480px) {
+  div.sticky-nav .btn-wrap a:last-of-type {
+    margin-right: 19px
+  }
 }
 
 @media(min-width:992px)and (max-width:1200px) {
-    div.sticky-nav .btn-wrap a {
-        padding: 8px 15px
-    }
+  div.sticky-nav .btn-wrap a {
+    padding: 8px 15px
+  }
 }
 
 @media(max-width:767px) {
-    div.sticky-nav .btn-wrap a {
-        padding: 5px 15px 8px
-    }
+  div.sticky-nav .btn-wrap a {
+    padding: 5px 15px 8px
+  }
 }
 
 .ua-ie .sticky-nav.no-btn .outer {
-    padding: 10px 0 27px
+  padding: 10px 0 27px
 }
 
-.ua-ie .sticky-nav.no-btn li span:after {
-    bottom: -29px
+.ua-ie .sticky-nav.no-btn li span::after {
+  bottom: -29px
 }
