@@ -71,6 +71,17 @@ function wrapParagraphInADiv(container, divClassName) {
   paragraph.replaceWith(div);
 }
 
+function disableSelectedCountry(container) {
+  const listOfCountries = container.querySelectorAll('li');
+  listOfCountries.forEach((countryLanguage) => {
+    if (countryLanguage.innerHTML.includes('selected')) {
+      countryLanguage.classList.add('deactivated');
+      countryLanguage.innerHTML = countryLanguage.innerHTML.replace('(selected)', '');
+      console.log(countryLanguage);
+    }
+  });
+}
+
 /**
  * loads and decorates the footer
  * @param {Element} block The footer block element
@@ -122,6 +133,7 @@ export default async function decorate(block) {
       undefined,
       true,
     );
+    disableSelectedCountry(chooseYourCountrySection);
     const followBitdefenerMobileView = createMobileViewFor(
       followBitdefender,
       chooseYourCountrySectionMobileView,

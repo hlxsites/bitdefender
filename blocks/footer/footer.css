@@ -16,6 +16,24 @@ ul {
   font-family: var(--body-font-family), sans-serif;
 }
 
+.deactivated::before {
+  content: "•";
+  color: #999;
+  font-weight: 700;
+  display: inline-block;
+  width: 1rem;
+  position: absolute;
+  top: 2px;
+  left: -13px;
+  z-index: 1;
+}
+
+.deactivated a {
+  color: #999 !important;
+  cursor: auto;
+  pointer-events: none;
+}
+
 .footer-container {
   width: 100%;
   margin: 0 auto;
@@ -28,8 +46,6 @@ ul {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
   justify-content: center;
 }
 
@@ -37,6 +53,7 @@ ul {
   display: inline-block;
   vertical-align: top;
   width: 25%;
+  margin: 0;
 }
 
 .footer-header > p > picture {
@@ -132,7 +149,6 @@ ul {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  -webkit-box-pack: center;
   justify-content: center;
   margin: 65px 0;
 }
@@ -208,7 +224,7 @@ ul {
   padding: 0;
 }
 
-.quick-list-section-container > :nth-child(2) > ul li {
+.quick-list-section-container ul li {
   margin-bottom: 0.5rem;
   width: 100%;
   padding: 0;
@@ -216,8 +232,6 @@ ul {
 
 .choose-your-country-language-section {
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
   flex-direction: column;
   background-color: #000;
 }
@@ -228,10 +242,7 @@ ul {
 
 .trusted-section {
   border-bottom-width: 1px;
-
-  --tw-border-opacity: 1;
-
-  border-color: rgb(144 152 163/var(--tw-border-opacity));
+  border-color: rgb(144 152 163);
   padding-left: 1.25rem;
   padding-right: 1.25rem;
   padding-bottom: 1.5rem;
@@ -243,14 +254,10 @@ ul {
   font-weight: 700;
   line-height: 1.5rem;
   letter-spacing: 0;
-
-  --tw-text-opacity: 1;
-
-  color: rgb(255 255 255/var(--tw-text-opacity));
+  color: rgb(255 255 255);
 }
 
 .copyright-section {
-  -webkit-box-pack: justify;
   justify-content: space-between;
   display: flex!important;
   flex-direction: column;
@@ -261,9 +268,7 @@ ul {
 
 .copyright-ul-wrapper {
   display: flex!important;
-  -webkit-box-orient: vertical!important;
   flex-direction: column!important;
-  -webkit-box-direction: normal!important;
 }
 
 .copyright-ul-wrapper > ul li a:hover {
@@ -304,7 +309,6 @@ ul {
 
 @media(max-width: 991px) {
   .footer {
-    background-position: 96% 170px!important;
     background-attachment: inherit;
     padding: 40px 0 24px;
     background-size: 8in 300px;
@@ -316,8 +320,6 @@ ul {
   }
 
   .footer-header {
-    -webkit-box-pack: start;
-    -ms-flex-pack: start;
     justify-content: flex-start;
   }
 
@@ -418,12 +420,8 @@ ul {
 
   .copyright-ul-wrapper {
     border-top: none;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
     flex-direction: column;
-    -webkit-box-pack: start;
     justify-content: start;
-    -webkit-box-align: start;
     align-items: start;
     margin-top: 0;
   }
