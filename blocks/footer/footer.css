@@ -255,6 +255,7 @@ ul {
   line-height: 1.5rem;
   letter-spacing: 0;
   color: rgb(255 255 255);
+  margin: 0;
 }
 
 .copyright-section {

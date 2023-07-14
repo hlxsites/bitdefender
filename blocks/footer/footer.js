@@ -133,6 +133,7 @@ export default async function decorate(block) {
       true,
     );
     disableSelectedCountry(chooseYourCountrySection);
+    disableSelectedCountry(chooseYourCountrySectionMobileView);
     const followBitdefenerMobileView = createMobileViewFor(
       followBitdefender,
       chooseYourCountrySectionMobileView,
