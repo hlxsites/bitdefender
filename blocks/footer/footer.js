@@ -77,7 +77,6 @@ function disableSelectedCountry(container) {
     if (countryLanguage.innerHTML.includes('selected')) {
       countryLanguage.classList.add('deactivated');
       countryLanguage.innerHTML = countryLanguage.innerHTML.replace('(selected)', '');
-      console.log(countryLanguage);
     }
   });
 }
