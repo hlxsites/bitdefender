@@ -10,8 +10,9 @@
  * governing permissions and limitations under the License.
  */
 
- :root {
+:root {
   /* colors */
+  --background-color: #fff;
   --link-color: #005ed9;
   --link-hover-color: #00439c;
   --button-link-color: #fff;
@@ -23,9 +24,9 @@
   --modal-background-color: rgb(0 0 0 / 50%);
 
   /* fonts */
-  --body-font-family: 'helvetica neue', helvetica, ubuntu, roboto, noto, sans-serif;
+  --body-font-family: 'Roboto', helvetica, ubuntu, roboto, noto, sans-serif;
   --heading-font-family: var(--body-font-family);
-  --fixed-font-family: 'Roboto Mono', menlo, consolas, 'Liberation Mono', monospace;
+  --fixed-font-family: var(--body-font-family);
 
   /* font weights */
   --font-weight-thin: 300;
@@ -40,7 +41,7 @@
   --body-font-size-s: 18px;
   --body-font-size-xs: 14px;
 
- 
+
   /* heading sizes */
   --heading-font-size-xxl: 48px;
   --heading-font-size-xl: 40px;
@@ -51,7 +52,53 @@
 
   /* nav height */
   --nav-height: 64px;
+}
 
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 @media (min-width: 900px) {
@@ -65,13 +112,18 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-size: var(--body-font-size-xs);
-  margin: 0;
+  width: 100%;
+  height: 100%;
   font-family: var(--body-font-family);
-  line-height: 1.6;
   color: var(--text-color);
   background-color: var(--background-color);
+  line-height: 1;
   display: none;
 }
 
@@ -234,20 +286,8 @@ main img {
 }
 
 main .section {
-  padding: 64px 16px;
-}
-
-@media (min-width: 600px) {
-  main .section {
-    padding: 64px 32px;
-  }
-}
-
-@media (min-width: 900px) {
-  .section > div {
-    max-width: 1200px;
-    margin: auto;
-  }
+  padding: 0;
+  margin: 0;
 }
 
 /* section metadata */
