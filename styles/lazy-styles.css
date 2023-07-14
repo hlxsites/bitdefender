@@ -29,124 +29,124 @@
 
 /* modal */
 .modal-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--modal-background-color);
-    z-index: 999;
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--modal-background-color);
+  z-index: 999;
+}
 
+.modal-container .modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px 30px 30px;
+  border-radius: 8px;
+  box-shadow: 0 3px 8px 0 rgb(0 0 0 / 10%);
+  border: 1px solid #707070;
+  width: 75%;
+  overflow: auto;
+  opacity: 1;
+  animation: fade-in 0.5s ease-in-out forwards;
+}
+
+.modal-container .modal-content .section:first-child {
+  border-bottom: 1px solid var(--horizontal-separator-color);
+  padding-bottom: 15px;
+}
+
+.modal-container .modal-content .modal-close {
+  background: black;
+  padding: 5px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+@media (min-width: 900px) {
   .modal-container .modal-content {
+    padding: 52px 62px 54px 55px;
+    max-width: 660px;
+  }
+}
+
+/* animations */
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* thank-you-for-downloading modal */
+
+.modal-container.thank-you-for-downloading .modal-content h1 {
+  font-size: var(--heading-font-size-m);
+  font-weight: var(--font-weight-bold);
+  text-align: center;
+  margin: 0;
+}
+
+.modal-container.thank-you-for-downloading .modal-content h2 {
+  font-size: var(--heading-font-size-m);
+  font-weight: var(--font-weight-bolder);
+  text-align: center;
+  margin: 0;
+}
+
+.modal-container.thank-you-for-downloading .modal-content h3 {
+  font-size: var(--heading-font-size-s);
+  font-weight: var(--font-weight-bold);
+  text-align: center;
+  margin: 0;
+  padding: 30px 0 24px;
+}
+
+.modal-container.thank-you-for-downloading .modal-content img {
+  width: 164px;
+  height: 164px;
+}
+
+.modal-container.thank-you-for-downloading .modal-content .columns p {
+  text-align: center;
+}
+
+@media (min-width: 900px) {
+  .modal-container.thank-you-for-downloading .modal-content h1 {
+    text-align: left;
+  }
+
+  .modal-container.thank-you-for-downloading .modal-content h2 {
+    text-align: left;
+  }
+
+  .modal-container.thank-you-for-downloading .modal-content h3 {
+    text-align: left;
+  }
+
+  .modal-container.thank-you-for-downloading .modal-content .columns p {
+    text-align: left;
+  }
+
+  .modal-container.thank-you-for-downloading .modal-content .columns > div {
+    position: relative;
+    align-items: start;
+  }
+
+  .modal-container.thank-you-for-downloading .modal-content .columns > div::after {
+    content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    padding: 20px 30px 30px;
-    border-radius: 8px;
-    box-shadow: 0 3px 8px 0 rgb(0 0 0 / 10%);
-    border: 1px solid #707070;
-    width: 75%;
-    overflow: auto;
-    opacity: 1;
-    animation: fade-in 0.5s ease-in-out forwards;
+    left: 30px;
+    right: 30px;
+    top: 97px;
+    margin: 0 auto;
+    border-top: 1px dashed #006eff;
+    z-index: -1;
   }
-
-  .modal-container .modal-content .section:first-child {
-    border-bottom: 1px solid var(--horizontal-separator-color);
-    padding-bottom: 15px;
-  }
-
-  .modal-container .modal-content .modal-close {
-    background: black;
-    padding: 5px;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-  }
-
-  @media (min-width: 900px) {
-    .modal-container .modal-content {
-      padding: 52px 62px 54px 55px;
-      max-width: 660px;
-    }
-  }
-
-  /* animations */
-
-  @keyframes fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  /* downloadantivirus modal */
-
-  .modal-container.downloadantivirus .modal-content h1 {
-    font-size: var(--heading-font-size-m);
-    font-weight: var(--font-weight-bold);
-    text-align: center;
-    margin: 0;
-  }
-
-  .modal-container.downloadantivirus .modal-content h2 {
-    font-size: var(--heading-font-size-m);
-    font-weight: var(--font-weight-bolder);
-    text-align: center;
-    margin: 0;
-  }
-
-  .modal-container.downloadantivirus .modal-content h3 {
-    font-size: var(--heading-font-size-s);
-    font-weight: var(--font-weight-bold);
-    text-align: center;
-    margin: 0;
-    padding: 30px 0 24px;
-  }
-
-  .modal-container.downloadantivirus .modal-content img {
-    width: 164px;
-    height: 164px;
-  }
-
-  .modal-container.downloadantivirus .modal-content .columns p {
-    text-align: center;
-  }
-
-  @media (min-width: 900px) {
-    .modal-container.downloadantivirus .modal-content h1 {
-      text-align: left;
-    }
-
-    .modal-container.downloadantivirus .modal-content h2 {
-      text-align: left;
-    }
-
-    .modal-container.downloadantivirus .modal-content h3 {
-      text-align: left;
-    }
-
-    .modal-container.downloadantivirus .modal-content .columns p {
-      text-align: left;
-    }
-
-    .modal-container.downloadantivirus .modal-content .columns > div {
-      position: relative;
-      align-items: start;
-    }
-
-    .modal-container.downloadantivirus .modal-content .columns > div::after {
-      content: '';
-      position: absolute;
-      left: 30px;
-      right: 30px;
-      top: 97px;
-      margin: 0 auto;
-      border-top: 1px dashed #006eff;
-      z-index: -1;
-    }
-  }
+}

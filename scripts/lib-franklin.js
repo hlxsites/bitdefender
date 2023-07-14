@@ -568,15 +568,24 @@ export function decorateButtons(element) {
           a.className = 'button primary'; // default
           up.classList.add('button-container');
         }
+        // Example: <p><em><a href="example.com">Text</a></em></p>
         if (up.childNodes.length === 1 && up.tagName === 'STRONG'
-          && twoup.childNodes.length === 1 && twoup.tagName === 'P') {
-          a.className = 'button primary';
-          twoup.classList.add('button-container');
-        }
-        if (up.childNodes.length === 1 && up.tagName === 'EM'
           && twoup.childNodes.length === 1 && twoup.tagName === 'P') {
           a.className = 'button secondary';
           twoup.classList.add('button-container');
+        }
+        // Example: <p><strong><a href="example.com">Text</strong></p>
+        if (up.childNodes.length === 1 && up.tagName === 'EM'
+          && twoup.childNodes.length === 1 && twoup.tagName === 'P') {
+          a.className = 'button tertiary';
+          twoup.classList.add('button-container');
+        }
+        // Example: <p><a href="example.com">Text</a> (example.com)</p>
+        if (up.childNodes.length === 2 && up.tagName === 'P' && a.nextSibling?.textContent.trim().startsWith('(')) {
+          a.className = 'button modal';
+          up.classList.add('button-container');
+          a.dataset.modal = a.nextSibling.textContent.trim().slice(1, -1);
+          a.nextSibling.remove();
         }
       }
     }
