@@ -40,64 +40,6 @@ function handleLoginClick() {
   loginModal.classList.toggle('show');
 }
 
-function handleLoginClickOld() {
-  const loginParagraph = document.querySelector('.nav-sections p:last-child');
-  const bottomBorder = document.querySelector('.login-button-border');
-  const loginModal = document.querySelector('.mega-menu > div:nth-child(4)');
-
-  if (loginModal) {
-    loginModal.classList.remove('show');
-    setTimeout(() => {
-      document.body.removeChild(loginModal);
-      loginParagraph.removeChild(bottomBorder);
-    }, 300);
-  } else {
-    const bottomBorder = document.createElement('div');
-    bottomBorder.className = 'login-button-border';
-    loginParagraph.appendChild(bottomBorder);
-
-    const loginModal = document.createElement('div');
-    loginModal.className = 'login-modal';
-    document.body.appendChild(loginModal);
-    setTimeout(() => loginModal.classList.add('show'), 0);
-
-    const triangle = document.createElement('div');
-    triangle.className = 'triangle';
-    loginModal.appendChild(triangle);
-
-    const yourAccount = document.createElement('span');
-    yourAccount.className = 'your-account';
-    yourAccount.textContent = 'Your Account';
-    loginModal.appendChild(yourAccount);
-
-    const divider = document.createElement('div');
-    divider.className = 'divider';
-    loginModal.appendChild(divider);
-
-    const loginButtons = document.createElement('div');
-    loginButtons.className = 'login-buttons';
-    loginModal.appendChild(loginButtons);
-
-    const bitdefenderCentral = createLoginButton(
-      'Bitdefender Central',
-      'https://login.bitdefender.com/central/login.html',
-    );
-    loginButtons.appendChild(bitdefenderCentral);
-
-    const gravityZoneCloudControlCenter = createLoginButton(
-      'GravityZone CLOUD Control Center',
-      'https://gravityzone.bitdefender.com',
-    );
-    loginButtons.appendChild(gravityZoneCloudControlCenter);
-
-    const MDRPortal = createLoginButton(
-      'MDR Portal',
-      'https://auth.mdr.bitdefender.com/',
-    );
-    loginButtons.appendChild(MDRPortal);
-  }
-}
-
 function appendUlToP() {
   let divs = document.querySelectorAll('.mega-menu > div');
 
@@ -173,8 +115,19 @@ function wrapDivsInMegaMenu() {
     megaMenuDiv.insertBefore(otherOptionsDiv.firstElementChild, otherOptionsDiv);
   }
 
+  // Move first child of bottomLinks to otherOptionsDiv
+  if (bottomLinks.firstElementChild) {
+    otherOptionsDiv.appendChild(bottomLinks.firstElementChild);
+  }
+
   const loginModal = document.querySelector('.mega-menu > div:first-child');
   nav.appendChild(loginModal);
+
+  // apend an empty p tag to the first child of megaMenuDiv
+  const firstChild = megaMenuDiv.firstElementChild;
+  const emptyPTag = document.createElement('span');
+  emptyPTag.className = 'empty-span-tag';
+  firstChild.appendChild(emptyPTag);
 }
 
 function buildMegaMenu() {
