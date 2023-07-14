@@ -142,7 +142,7 @@
 .login-modal.show {
   opacity: 1;
   top: 70px;
-  z-index: 2;
+  z-index: 5;
 }
 
 .login-button-border {
@@ -280,7 +280,7 @@
   padding-right: 20px;
 }
 
-.login-buttons a:hover {
+.login-buttons a:hover{
   background-color: var(--color-highlight-blue);
   color: var(--background-color);
 }
@@ -312,12 +312,6 @@
   border-bottom-right-radius: 8px;
   box-shadow: 0 10px 10px #0003;
   border-bottom: 35px solid #f5f6f7;
-}
-
-.empty-span-tag {
-  width: 200px;
-  height: 100%;
-  background-color: transparent !important;
 }
 
 @media (max-width: 1390px) {
@@ -361,10 +355,6 @@
 
 .mega-menu > div:first-child p:hover {
   background-color: var(--highlight-light-blue);
-  background-image: url('../../icons/arrow-right-blue.svg');
-  background-repeat: no-repeat;
-  background-position: 190px 5px;
-  background-size: 25px;
 }
 
 .mega-menu > div:first-child p:first-child {
@@ -375,9 +365,6 @@
   grid-column: 2; 
 }
 
-.mega-menu > div:first-child p:last-child:hover {
-  background-position: 215px 5px;
-}
 
 .options-wrapper.show a {
   display: block;
@@ -400,10 +387,6 @@
 .other-options > div > p:hover a {
   background-color: var(--highlight-light-blue);
   color: var(--color-highlight-blue) !important;
-  background-image: url('../../icons/arrow-right-blue.svg');
-  background-repeat: no-repeat;
-  background-size: 20px;
-  background-position: right 5px;
 }
 
 .mega-menu > div:first-child p a {
@@ -421,10 +404,14 @@
   font-weight: bold;
   font-size: var(--body-font-size-s);
   margin: 15px;
-  background-image: url('../../icons/right.svg');
-  background-repeat: no-repeat;
-  background-position: right;
-  background-size: 25px;
+}
+
+.icon.icon-arrow-right {
+  background-color: transparent;
+  width: 24px;
+  height: 24px;
+  margin-left: 5px;
+  z-index: 5;
 }
 
 .bottom-links div:nth-child(2) {

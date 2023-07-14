@@ -122,12 +122,6 @@ function wrapDivsInMegaMenu() {
 
   const loginModal = document.querySelector('.mega-menu > div:first-child');
   nav.appendChild(loginModal);
-
-  // apend an empty p tag to the first child of megaMenuDiv
-  const firstChild = megaMenuDiv.firstElementChild;
-  const emptyPTag = document.createElement('span');
-  emptyPTag.className = 'empty-span-tag';
-  firstChild.appendChild(emptyPTag);
 }
 
 function buildMegaMenu() {
@@ -153,6 +147,8 @@ async function renderDesktopHeader(block) {
       const section = nav.children[i];
       if (section) section.classList.add(`nav-${c}`);
     });
+
+    decorateIcons(nav);
 
     const navSections = nav.querySelector('.nav-sections');
     const navBrandLinks = nav.querySelectorAll('.nav-brand a');
@@ -185,7 +181,6 @@ async function renderDesktopHeader(block) {
       }
     }
 
-    decorateIcons(nav);
     const navWrapper = document.createElement('div');
     navWrapper.className = 'nav-wrapper';
     navWrapper.append(nav);
@@ -195,7 +190,6 @@ async function renderDesktopHeader(block) {
 
   const homeSolutions = document.createElement('p');
   const homeSolutionsLink = document.createElement('a');
-  homeSolutionsLink.href = '';
   homeSolutionsLink.textContent = 'Home Solutions';
   homeSolutions.appendChild(homeSolutionsLink);
   const headerWrapper = document.querySelector('.header-wrapper');
@@ -328,9 +322,11 @@ function handleMenuClick() {
   function handleSubMenuTitleClick() {
     optionsWrapper.innerHTML = originalMenuHTML;
     attachMenuOptionClickEvents();
+    optionsWrapper.removeChild(optionsWrapper.firstElementChild);
   }
 
   attachMenuOptionClickEvents();
+  optionsWrapper.removeChild(optionsWrapper.firstElementChild);
 }
 
 async function renderMobileHeader() {
