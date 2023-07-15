@@ -558,27 +558,38 @@ export function decorateTemplateAndTheme() {
  * @param {Element} element container element
  */
 export function decorateButtons(element) {
+  const wrapButtonText = (a) => `<span class="button-text">${a.textContent}</span>${a.querySelector('span.icon').outerHTML}`;
   element.querySelectorAll('a').forEach((a) => {
     a.title = a.title || a.textContent;
     if (a.href !== a.textContent) {
       const up = a.parentElement;
       const twoup = a.parentElement.parentElement;
       if (!a.querySelector('img')) {
-        if (up.childNodes.length === 1 && (up.tagName === 'P' || up.tagName === 'DIV')) {
-          a.className = 'button primary'; // default
-          up.classList.add('button-container');
+        // Example: <p><strong><a href="example.com">Text</a></strong></p>
+        if (up.childNodes.length === 1 && up.tagName === 'STRONG'
+          && twoup.childNodes.length === 1 && twoup.tagName === 'P') {
+          a.className = 'button primary';
+          twoup.classList.add('button-container');
+          up.replaceWith(a);
+          if (a.querySelector('span.icon')) a.innerHTML = wrapButtonText(a);
+          return;
         }
         // Example: <p><em><a href="example.com">Text</a></em></p>
-        if (up.childNodes.length === 1 && up.tagName === 'STRONG'
+        if (up.childNodes.length === 1 && up.tagName === 'EM'
           && twoup.childNodes.length === 1 && twoup.tagName === 'P') {
           a.className = 'button secondary';
           twoup.classList.add('button-container');
+          up.replaceWith(a);
+          return;
         }
-        // Example: <p><strong><a href="example.com">Text</strong></p>
-        if (up.childNodes.length === 1 && up.tagName === 'EM'
-          && twoup.childNodes.length === 1 && twoup.tagName === 'P') {
-          a.className = 'button tertiary';
-          twoup.classList.add('button-container');
+        // Example: <p><a href="example.com"><em>Text</em></a></p>
+        if (up.childNodes.length === 1 && up.tagName === 'P'
+          && a.childNodes.length === 1 && a.firstChild.tagName === 'EM') {
+          a.className = 'button secondary';
+          up.classList.add('button-container');
+          a.firstChild.after(...a.firstChild.childNodes);
+          a.firstChild.remove();
+          return;
         }
         // Example: <p><a href="example.com">Text</a> (example.com)</p>
         if (up.childNodes.length === 2 && up.tagName === 'P' && a.nextSibling?.textContent.trim().startsWith('(')) {
@@ -586,6 +597,13 @@ export function decorateButtons(element) {
           up.classList.add('button-container');
           a.dataset.modal = a.nextSibling.textContent.trim().slice(1, -1);
           a.nextSibling.remove();
+          return;
+        }
+        // Example: <p><a href="example.com">Text</a></p>
+        if (up.childNodes.length === 1 && (up.tagName === 'P' || up.tagName === 'DIV')) {
+          a.className = 'button'; // default
+          up.classList.add('button-container');
+          if (a.querySelector('span.icon')) a.innerHTML = wrapButtonText(a);
         }
       }
     }
