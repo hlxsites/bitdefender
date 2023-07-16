@@ -558,7 +558,10 @@ export function decorateTemplateAndTheme() {
  * @param {Element} element container element
  */
 export function decorateButtons(element) {
-  const wrapButtonText = (a) => `<span class="button-text">${a.textContent}</span>${a.querySelector('span.icon').outerHTML}`;
+  const wrapButtonText = (a) => ((a.innerHTML.startsWith('<'))
+    ? `${a.querySelector('span.icon')?.outerHTML || ''}<span class="button-text">${a.textContent}</span>`
+    : `<span class="button-text">${a.textContent}</span>${a.querySelector('span.icon')?.outerHTML || ''}`
+  );
   element.querySelectorAll('a').forEach((a) => {
     a.title = a.title || a.textContent;
     if (a.href !== a.textContent) {
@@ -571,24 +574,7 @@ export function decorateButtons(element) {
           a.className = 'button primary';
           twoup.classList.add('button-container');
           up.replaceWith(a);
-          if (a.querySelector('span.icon')) a.innerHTML = wrapButtonText(a);
-          return;
-        }
-        // Example: <p><em><a href="example.com">Text</a></em></p>
-        if (up.childNodes.length === 1 && up.tagName === 'EM'
-          && twoup.childNodes.length === 1 && twoup.tagName === 'P') {
-          a.className = 'button secondary';
-          twoup.classList.add('button-container');
-          up.replaceWith(a);
-          return;
-        }
-        // Example: <p><a href="example.com"><em>Text</em></a></p>
-        if (up.childNodes.length === 1 && up.tagName === 'P'
-          && a.childNodes.length === 1 && a.firstChild.tagName === 'EM') {
-          a.className = 'button secondary';
-          up.classList.add('button-container');
-          a.firstChild.after(...a.firstChild.childNodes);
-          a.firstChild.remove();
+          a.innerHTML = wrapButtonText(a);
           return;
         }
         // Example: <p><a href="example.com">Text</a> (example.com)</p>
@@ -603,7 +589,7 @@ export function decorateButtons(element) {
         if (up.childNodes.length === 1 && (up.tagName === 'P' || up.tagName === 'DIV')) {
           a.className = 'button'; // default
           up.classList.add('button-container');
-          if (a.querySelector('span.icon')) a.innerHTML = wrapButtonText(a);
+          a.innerHTML = wrapButtonText(a);
         }
       }
     }
