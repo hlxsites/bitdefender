@@ -56,8 +56,11 @@
 }
 
 .other-options > div > p {
+  position: relative;
+  top: 10px;
   margin-left: 25px;
-  margin-top: 0px;
+  margin-top: -9px !important; 
+  border-radius: 4px !important;
 }
 
 .nav-brand p:hover,
@@ -172,31 +175,32 @@
   background-color: var(--color-dark-gray);
 }
 
-.login-buttons {
+.login-modal > p {
   position: relative;
   width: 100%; 
   display: block;
   text-align: center; 
-  margin-top: 15px;
+  margin-top: 35px !important;
 }
 
-.login-buttons a {
+.login-modal a {
   text-decoration: none;
-  color: var(--color-highlight-blue);
+  color: var(--color-highlight-blue) !important;
   width: 330px;
   height: 35px;
   border-radius: 9px;
-  border: 2px solid var(--color-highlight-blue);
-  margin: -70px; 
+  border: 2px solid var(--color-highlight-blue) !important;
+  background-color: transparent !important;
+  margin: -70px;
   padding: 5px;
   display: inline-block; 
   font-size: var(--body-font-size-xs);
   font-weight: 500;
 }
 
-.login-buttons a span {
-  position: relative;
-  z-index: 1000;
+.login-modal a:hover {
+  background-color: var(--color-highlight-blue) !important;
+  color: var(--background-color) !important;
 }
 
 .header-wrapper > p a{
@@ -223,24 +227,10 @@
   color: var(--text-color) !important;
 }
 
-.login-buttons a:hover p {
-  margin-right: 50px;
-}
-
 .header-wrapper > a img {
   position: relative;
   top: 95px;
   margin-left: 200px;
-  filter: invert(100%);
-}
-
-.login-buttons a img {
-  opacity: 0;
-  transition: all 0.3s ease-in-out;
-  position: relative;
-  left: 220px;
-  bottom: 52px;
-  width: 30px;
   filter: invert(100%);
 }
 
@@ -253,35 +243,37 @@
   object-fit: contain;
 }
 
-.login-buttons a:hover img {
-  opacity: 1;
-  left: 230px;
-}
-
-.login-buttons a:nth-of-type(2) img {
-  left: 280px;
-}
-
-.login-buttons a:nth-of-type(3) img {
-  left: 190px;
-}
-
-.login-buttons a:nth-of-type(2):hover img {
-  left: 290px;
-}
-
-.login-buttons a:nth-of-type(3):hover img {
-  left: 200px;
-}
-
 .other-options > div > p a {
   text-decoration: none;
   line-height: 15px;
   padding-top: 5px;
   padding-right: 20px;
+  background-color: transparent !important;
+  height: 20px !important;
+  border: none !important;
 }
 
-.login-buttons a:hover{
+.other-options > div > p:hover {
+  background-color: var(--highlight-light-blue);
+  transition: none !important;
+  transform: none !important;
+}
+
+.other-options > div > p:hover a:after {
+  background-color: var(--color-highlight-blue);
+  transition: none !important;
+  transform: none !important;
+}
+
+
+.other-options > div > p a > span:not(#new,#evolved) {
+  position: relative;
+  font-size: var(--body-font-size-xs);
+  font-weight: 400;
+  color: var(--text-color) !important;
+}
+
+.login-modal.show.button-container a:hover{
   background-color: var(--color-highlight-blue);
   color: var(--background-color);
 }
@@ -416,8 +408,6 @@
   }
 }
 
-
-
 .icon.icon-arrow-right {
   position: absolute;
   width: 10px;
@@ -465,7 +455,9 @@
   grid-gap: 0;
 }
 
-.mega-menu span, .options-wrapper.show a span {
+
+
+#new, #evolved {
   position: relative;
   font-size: var(--body-font-size-xxs);
   font-weight: 600;
@@ -493,6 +485,7 @@
 
 nav {
   display: none;
+  
 }
 }
 
@@ -532,6 +525,10 @@ nav {
   height: 100vh;
   width: 100vw;
   z-index: 2;
+}
+
+.header-wrapper a{
+  z-index: 999;
 }
 
 .options-wrapper {

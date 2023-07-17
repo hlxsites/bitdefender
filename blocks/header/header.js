@@ -2,7 +2,7 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable prefer-const */
 /* eslint-disable no-shadow */
-import { getMetadata, decorateIcons } from '../../scripts/lib-franklin.js';
+import { getMetadata, decorateIcons, decorateButtons } from '../../scripts/lib-franklin.js';
 /**
  * Toggles all nav sections
  * @param {Element} sections The container element
@@ -31,8 +31,10 @@ function createLoginModal() {
   divider.className = 'divider';
   loginModal.appendChild(divider);
 
-  const loginButtons = loginModal.querySelectorAll('p');
-  loginButtons.forEach(button => button.classList.add('login-buttons'));
+  decorateButtons(nav);
+
+  //const loginButtons = loginModal.querySelectorAll('p');
+  //loginButtons.forEach(button => button.classList.add('login-buttons'));
 }
 
 function handleLoginClick() {
@@ -67,13 +69,15 @@ function createTags(links) {
       link.textContent = link.textContent.replace('[new]', '');
       let span = document.createElement('span');
       span.textContent = 'NEW';
-      link.appendChild(span);
+      span.id = 'new';
+      link.parentNode.insertBefore(span, link.nextSibling);
     } else if (link.textContent.includes('[evolved]')) {
       link.textContent = link.textContent.replace('[evolved]', '');
       let span = document.createElement('span');
       span.textContent = 'EVOLVED';
+      span.id = 'evolved';
       span.style.backgroundColor = '#14b0a7';
-      link.appendChild(span);
+      link.parentNode.insertBefore(span, link.nextSibling);
     }
   });
 }
@@ -200,6 +204,7 @@ async function renderDesktopHeader(block, nav) {
     homeSolutionsLink.style.color = '#dedede';
   });
   createLoginModal();
+  removeButtonContainerClass();
 }
 
 // MOBILE HEADER //
@@ -243,9 +248,11 @@ function handleMenuClick() {
           let cloneLink = link.cloneNode(true);
           submenuItem.name = cloneLink.textContent;
           submenuItem.url = cloneLink.href;
+
           createTags([cloneLink]);
 
-          submenuItem.updatedLinkHTML = cloneLink.innerHTML;
+          submenuItem.updatedLinkHTML = cloneLink.outerHTML;
+
           menuOption.subMenu.push(submenuItem);
         });
       }
@@ -340,6 +347,7 @@ export default async function decorate(block) {
 
     // decorate the navigation with the appropriate icons
     decorateIcons(nav);
+    // decorateButtons(nav);
 
     const bitdefenderLogo = document.createElement('img');
     bitdefenderLogo.src = 'https://www.bitdefender.com/content/dam/bitdefender/splitter-homepage/black_company_logo.svg';

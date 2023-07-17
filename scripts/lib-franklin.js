@@ -563,6 +563,10 @@ export function decorateButtons(element) {
     : `<span class="button-text">${a.textContent}</span>${a.querySelector('span.icon')?.outerHTML || ''}`
   );
   element.querySelectorAll('a').forEach((a) => {
+    if (a.closest('.nav-brand') || a.closest('.nav-sections') || a.closest('.bottom-links')) {
+      return;
+    }
+
     a.title = a.title || a.textContent;
     if (a.href !== a.textContent) {
       const up = a.parentElement;
