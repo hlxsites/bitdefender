@@ -126,6 +126,17 @@ export async function createModal(path, template) {
   return modalContainer;
 }
 
+export async function detectModalButtons(main) {
+  main.querySelectorAll('a.button.modal').forEach((link) => {
+    link.addEventListener('click', async () => {
+      const modalPath = link.dataset.modal;
+      const modalTemplate = modalPath.split('/').pop();
+      const modalContainer = await createModal(modalPath, modalTemplate);
+      document.body.append(modalContainer);
+    });
+  });
+}
+
 /**
  * Loads everything needed to get to LCP.
  * @param {Element} doc The container element
@@ -136,6 +147,7 @@ async function loadEager(doc) {
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
+    detectModalButtons(main);
     document.body.classList.add('appear');
     await waitForLCP(LCP_BLOCKS);
   }
