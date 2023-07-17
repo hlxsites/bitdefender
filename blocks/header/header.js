@@ -61,17 +61,15 @@ function appendUlToP() {
   });
 }
 
-function createTags() {
-  let links = document.querySelectorAll('p > a');
-
+function createTags(links) {
   links.forEach((link) => {
-    if (link.textContent.includes('(new)')) {
-      link.textContent = link.textContent.replace('(new)', '');
+    if (link.textContent.includes('[new]')) {
+      link.textContent = link.textContent.replace('[new]', '');
       let span = document.createElement('span');
       span.textContent = 'NEW';
       link.appendChild(span);
-    } else if (link.textContent.includes('(evolved)')) {
-      link.textContent = link.textContent.replace('(evolved)', '');
+    } else if (link.textContent.includes('[evolved]')) {
+      link.textContent = link.textContent.replace('[evolved]', '');
       let span = document.createElement('span');
       span.textContent = 'EVOLVED';
       span.style.backgroundColor = '#14b0a7';
@@ -127,7 +125,8 @@ function wrapDivsInMegaMenu() {
 function buildMegaMenu() {
   wrapDivsInMegaMenu();
   appendUlToP();
-  createTags();
+  let links = document.querySelectorAll('p > a');
+  createTags(links);
 }
 
 async function renderDesktopHeader(block, nav) {
@@ -166,7 +165,6 @@ async function renderDesktopHeader(block, nav) {
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);
   block.append(navWrapper);
-
 
   buildMegaMenu();
 
@@ -241,29 +239,13 @@ function handleMenuClick() {
 
         links.forEach((link) => {
           let submenuItem = {};
-
           // Clone the link element
           let cloneLink = link.cloneNode(true);
           submenuItem.name = cloneLink.textContent;
           submenuItem.url = cloneLink.href;
-
-          if (submenuItem.name.includes('(new)')) {
-            submenuItem.name = submenuItem.name.replace('(new)', '');
-            let span = document.createElement('span');
-            span.textContent = 'NEW';
-            cloneLink.textContent = submenuItem.name;
-            cloneLink.appendChild(span);
-          } else if (submenuItem.name.includes('(evolved)')) {
-            submenuItem.name = submenuItem.name.replace('(evolved)', '');
-            let span = document.createElement('span');
-            span.textContent = 'EVOLVED';
-            span.style.backgroundColor = '#14b0a7';
-            cloneLink.textContent = submenuItem.name;
-            cloneLink.appendChild(span);
-          }
+          createTags([cloneLink]);
 
           submenuItem.updatedLinkHTML = cloneLink.innerHTML;
-
           menuOption.subMenu.push(submenuItem);
         });
       }
