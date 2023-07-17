@@ -58,6 +58,7 @@
 
 .other-options > div > p {
   margin-left: 25px;
+  margin-top: 0px;
 }
 
 .nav-brand p:hover,
@@ -213,7 +214,6 @@
   text-decoration: none;
   font-size: var(--body-font-size-xxs) !important;
   font-weight: 500 !important;
-  bottom: 10px;
 }
 
 .mega-menu div p a{
@@ -276,7 +276,7 @@
 
 .other-options > div > p a {
   text-decoration: none;
-  padding: 5px;
+  padding-top: 5px;
   padding-right: 20px;
 }
 
@@ -406,11 +406,22 @@
   margin: 15px;
 }
 
+@media (max-width: 1000px) {
+  .nav-wrapper {
+    display: none;
+  }
+  .header-wrapper p a {
+    display: none;
+  }
+}
+
+
+
 .icon.icon-arrow-right {
-  background-color: transparent;
-  width: 24px;
-  height: 24px;
-  margin-left: 5px;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  margin-left: 1px;
   z-index: 5;
 }
 

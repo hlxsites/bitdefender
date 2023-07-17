@@ -130,62 +130,44 @@ function buildMegaMenu() {
   createTags();
 }
 
-async function renderDesktopHeader(block) {
-  // fetch nav content
-  const navPath = getMetadata('nav') || '/nav';
-  const resp = await fetch(`${navPath}.plain.html`);
+async function renderDesktopHeader(block, nav) {
+  const navSections = nav.querySelector('.nav-sections');
+  const navBrandLinks = nav.querySelectorAll('.nav-brand a');
 
-  if (resp.ok) {
-    const html = await resp.text();
+  if (navSections) {
+    const navParagraphs = navSections.querySelectorAll('p');
+    navParagraphs.forEach((navParagraph) => {
+      const divider = document.createElement('div');
+      divider.className = 'nav-divider';
+      navSections.insertBefore(divider, navParagraph);
 
-    const nav = document.createElement('nav');
-    nav.id = 'nav';
-    nav.innerHTML = html;
-
-    const classes = ['brand', 'sections'];
-    classes.forEach((c, i) => {
-      const section = nav.children[i];
-      if (section) section.classList.add(`nav-${c}`);
-    });
-
-    decorateIcons(nav);
-
-    const navSections = nav.querySelector('.nav-sections');
-    const navBrandLinks = nav.querySelectorAll('.nav-brand a');
-
-    if (navSections) {
-      const navParagraphs = navSections.querySelectorAll('p');
-      navParagraphs.forEach((navParagraph) => {
-        const divider = document.createElement('div');
-        divider.className = 'nav-divider';
-        navSections.insertBefore(divider, navParagraph);
-
-        if (navParagraph.textContent.trim() === 'Login') {
-          const loginLink = document.createElement('a');
-          loginLink.href = '';
-          loginLink.textContent = 'Login';
-          navParagraph.innerHTML = '';
-          navParagraph.appendChild(loginLink);
-          loginLink.addEventListener('click', handleLoginClick);
-          loginLink.addEventListener('click', (e) => e.preventDefault());
-        }
-      });
-    }
-
-    if (navBrandLinks && navBrandLinks.length > 0) {
-      const forHomeLink = Array.from(navBrandLinks).find((link) => link.innerHTML === 'For Home');
-      if (forHomeLink) {
-        const homeButtonBorder = document.createElement('div');
-        homeButtonBorder.className = 'home-button-border';
-        forHomeLink.parentNode.appendChild(homeButtonBorder);
+      if (navParagraph.textContent.trim() === 'Login') {
+        const loginLink = document.createElement('a');
+        loginLink.href = '';
+        loginLink.textContent = 'Login';
+        navParagraph.innerHTML = '';
+        navParagraph.appendChild(loginLink);
+        loginLink.addEventListener('click', handleLoginClick);
+        loginLink.addEventListener('click', (e) => e.preventDefault());
       }
-    }
-
-    const navWrapper = document.createElement('div');
-    navWrapper.className = 'nav-wrapper';
-    navWrapper.append(nav);
-    block.append(navWrapper);
+    });
   }
+
+  if (navBrandLinks && navBrandLinks.length > 0) {
+    const forHomeLink = Array.from(navBrandLinks).find((link) => link.innerHTML === 'For Home');
+    if (forHomeLink) {
+      const homeButtonBorder = document.createElement('div');
+      homeButtonBorder.className = 'home-button-border';
+      forHomeLink.parentNode.appendChild(homeButtonBorder);
+    }
+  }
+
+  const navWrapper = document.createElement('div');
+  navWrapper.className = 'nav-wrapper';
+  navWrapper.append(nav);
+  block.append(navWrapper);
+
+
   buildMegaMenu();
 
   const homeSolutions = document.createElement('p');
@@ -219,7 +201,6 @@ async function renderDesktopHeader(block) {
     megaMenu.style.opacity = '0';
     homeSolutionsLink.style.color = '#dedede';
   });
-
   createLoginModal();
 }
 
@@ -236,8 +217,10 @@ function handleMenuClick() {
     optionsWrapper.classList.toggle('show');
   }, 100);
 
-  // Find all the direct div children of the nav element
-  const navDivs = document.querySelectorAll('#nav > div');
+  // Select the first child of mega-menu and all div children of other-options
+  const megaMenuFirstChild = document.querySelector('.mega-menu').firstElementChild;
+  const otherOptionsChildren = Array.from(document.querySelector('.other-options').children);
+  const navDivs = [megaMenuFirstChild].concat(otherOptionsChildren);
   let menuOptions = [];
 
   // Iterate over each div
@@ -329,9 +312,34 @@ function handleMenuClick() {
   optionsWrapper.removeChild(optionsWrapper.firstElementChild);
 }
 
-async function renderMobileHeader() {
+async function renderMobileHeader(nav) {
   const headerBlock = document.querySelector('.header.block');
 
+  const navWrapper = document.createElement('div');
+  navWrapper.className = 'nav-wrapper';
+  navWrapper.append(nav);
+
+  const wrapperDiv = document.createElement('div');
+  wrapperDiv.classList.add('menu-wrapper');
+  wrapperDiv.addEventListener('click', handleMenuClick);
+
+  // Create three span elements (bars)
+  for (let i = 0; i < 3; i++) {
+    const barSpan = document.createElement('span');
+    barSpan.classList.add('menu-bar');
+    wrapperDiv.appendChild(barSpan);
+  }
+
+  const optionsWrapper = document.createElement('div');
+  optionsWrapper.className = 'options-wrapper';
+
+  // Append nav (with the remaining first two divs) and optionsWrapper to headerBlock
+  headerBlock.appendChild(nav);
+  headerBlock.appendChild(wrapperDiv);
+  headerBlock.appendChild(optionsWrapper);
+}
+
+export default async function decorate(block) {
   // fetch nav content
   const navPath = getMetadata('nav') || '/nav';
   const resp = await fetch(`${navPath}.plain.html`);
@@ -352,57 +360,18 @@ async function renderMobileHeader() {
     // decorate the navigation with the appropriate icons
     decorateIcons(nav);
 
-    const navWrapper = document.createElement('div');
-    navWrapper.className = 'nav-wrapper';
-    navWrapper.append(nav);
+    const bitdefenderLogo = document.createElement('img');
+    bitdefenderLogo.src = 'https://www.bitdefender.com/content/dam/bitdefender/splitter-homepage/black_company_logo.svg';
+    bitdefenderLogo.alt = 'Bitdefender Logo';
 
-    const wrapperDiv = document.createElement('div');
-    wrapperDiv.classList.add('menu-wrapper');
-    wrapperDiv.addEventListener('click', handleMenuClick);
+    const logoLink = document.createElement('a');
+    logoLink.href = 'https://www.bitdefender.com/';
+    logoLink.appendChild(bitdefenderLogo);
 
-    // Create three span elements (bars)
-    for (let i = 0; i < 3; i++) {
-      const barSpan = document.createElement('span');
-      barSpan.classList.add('menu-bar');
-      wrapperDiv.appendChild(barSpan);
-    }
+    const headerWrapper = document.querySelector('.header-wrapper');
+    headerWrapper.appendChild(logoLink);
 
-    const optionsWrapper = document.createElement('div');
-    optionsWrapper.className = 'options-wrapper';
-
-    // Append nav (with the remaining first two divs) and optionsWrapper to headerBlock
-    headerBlock.appendChild(nav);
-    headerBlock.appendChild(wrapperDiv);
-    headerBlock.appendChild(optionsWrapper);
-  }
-}
-
-export default async function decorate(block) {
-  const bitdefenderLogo = document.createElement('img');
-  bitdefenderLogo.src = 'https://www.bitdefender.com/content/dam/bitdefender/splitter-homepage/black_company_logo.svg';
-  bitdefenderLogo.alt = 'Bitdefender Logo';
-
-  const logoLink = document.createElement('a');
-  logoLink.href = 'https://www.bitdefender.com/';
-  logoLink.appendChild(bitdefenderLogo);
-
-  const headerWrapper = document.querySelector('.header-wrapper');
-  headerWrapper.appendChild(logoLink);
-
-  const mediaQuery = window.matchMedia('(max-width: 1000px)');
-
-  function checkMediaQuery() {
-    if (mediaQuery.matches) {
-      // eslint-disable-next-line no-restricted-globals
-      location.reload();
-    }
-  }
-
-  mediaQuery.addEventListener('change', checkMediaQuery);
-
-  if (mediaQuery.matches) {
-    renderMobileHeader();
-  } else {
-    renderDesktopHeader(block);
+    renderMobileHeader(nav);
+    renderDesktopHeader(block, nav);
   }
 }
