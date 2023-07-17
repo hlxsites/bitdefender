@@ -219,6 +219,7 @@ function handleMenuClick() {
 
   // Select the first child of mega-menu and all div children of other-options
   const megaMenuFirstChild = document.querySelector('.mega-menu').firstElementChild;
+
   const otherOptionsChildren = Array.from(document.querySelector('.other-options').children);
   const navDivs = [megaMenuFirstChild].concat(otherOptionsChildren);
   let menuOptions = [];
@@ -305,11 +306,9 @@ function handleMenuClick() {
   function handleSubMenuTitleClick() {
     optionsWrapper.innerHTML = originalMenuHTML;
     attachMenuOptionClickEvents();
-    optionsWrapper.removeChild(optionsWrapper.firstElementChild);
   }
 
   attachMenuOptionClickEvents();
-  optionsWrapper.removeChild(optionsWrapper.firstElementChild);
 }
 
 async function renderMobileHeader(nav) {
