@@ -13,8 +13,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  height: 100%;
-  margin-top: -22.5px;
+  margin-top: -5px;
 }
 
 .nav-brand {
@@ -29,8 +28,8 @@
   flex-wrap: nowrap;
   justify-content: flex-end; 
   right: min(200px, calc(100vw - 900px));
-  margin-top: -59.5px;
   width: 400px;
+  margin-top: -45px;
 }
 
 .nav-brand p,
@@ -72,7 +71,7 @@
   content: "";
   position: absolute;
   left: 0;
-  top: 37.5px;
+  top: 25px;  
   width: 75%;
   height: 3px;
   background-color: var(--color-highlight-blue);
@@ -94,7 +93,7 @@
 
 .nav-brand a,
 .nav-sections a {
-  color: var(--text-color-header);
+  color: var(--horizontal-separator-color);
   text-decoration: none;
   text-transform: uppercase;
   font-size: var(--body-font-size-xxs);
@@ -104,7 +103,7 @@
 
 .home-button-border {
   position: absolute;
-  margin-top: 2.5px;
+  margin-top: 10px;
   width: 70px;
   height: 3px;
   background-color: var(--color-highlight-blue);
@@ -205,7 +204,7 @@
   top: 35px;
   margin-left: 435px;
   font-size: var(--body-font-size-s);
-  color: var(--text-color-header);
+  color: var(--horizontal-separator-color);
   text-decoration: none;
   cursor: pointer;
 }
@@ -214,6 +213,7 @@
   text-decoration: none;
   font-size: var(--body-font-size-xxs) !important;
   font-weight: 500 !important;
+  top: 40px;
 }
 
 .mega-menu div p a{
@@ -276,6 +276,7 @@
 
 .other-options > div > p a {
   text-decoration: none;
+  line-height: 15px;
   padding-top: 5px;
   padding-right: 20px;
 }
@@ -403,7 +404,7 @@
 .options-wrapper.show div {
   font-weight: bold;
   font-size: var(--body-font-size-s);
-  margin: 15px;
+  margin: 25px;
 }
 
 @media (max-width: 1000px) {
@@ -477,6 +478,7 @@
 
 @media (max-width: 1000px) {
 .header-wrapper {
+  margin-top: -50px;
   position: fixed;
   background-color: var(--background-color);
   transition: all 0.3s ease-in-out;
