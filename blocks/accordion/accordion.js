@@ -14,7 +14,6 @@ export default function decorate(block) {
         const transitionEndCallback = () => {
           content.removeEventListener('transitionend', transitionEndCallback);
           content.style.height = 'auto';
-          console.log('transitionend');
         };
         content.addEventListener('transitionend', transitionEndCallback);
         item.classList.add('expanded');
