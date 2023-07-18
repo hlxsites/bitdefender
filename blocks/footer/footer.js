@@ -1,4 +1,4 @@
-import { readBlockConfig, decorateIcons, getMetadata } from '../../scripts/lib-franklin.js';
+import { decorateIcons, getMetadata } from '../../scripts/lib-franklin.js';
 
 function wrapImgsInLinks(container) {
   const pictures = container.querySelectorAll('picture');
