@@ -15,11 +15,11 @@ ul {
 li {
   font-size: 1pc;
   line-height: 1.63;
-  font-family: roboto,sans-serif;
+  font-family: var(--body-font-family),sans-serif;
 }
 
 li a {
-  font: normal normal 700 10px/30px Roboto;
+  font: normal normal 700 10px/30px var(--body-font-family);
 }
 
 footer .footer p {
@@ -27,21 +27,21 @@ footer .footer p {
   padding: 0 20px;
 }
 
-footer .footer a {
-  color: #fff;
-  cursor: pointer;
-  outline: 0;
-  font-family: roboto,sans-serif;
-}
-
-footer .footer a:hover {  
-  text-decoration: underline;
-}
-
 .deactivated a {
   color: #999 !important;
   cursor: auto;
   pointer-events: none;
+}
+
+footer .footer a {
+  color: #fff;
+  cursor: pointer;
+  outline: 0;
+  font-family: var(--body-font-family),sans-serif;
+}
+
+footer .footer a:hover {  
+  text-decoration: underline;
 }
 
 .deactivated::before {
@@ -51,6 +51,7 @@ footer .footer a:hover {
 .footer > div {
   display: grid;
   margin: 0 auto;
+  max-width: 975pt;
 }
 
 .footer > div div {
@@ -59,7 +60,20 @@ footer .footer a:hover {
   border-bottom: 1px solid #9098a3;
 }
 
-.footer > div > :nth-child(1) > p{
+.footer > div p {
+  text-align: left;
+  font: normal normal 700 13px/24px var(--body-font-family);
+  letter-spacing: 0;
+  color: #9098a3;
+  opacity: 1;
+  position: relative;
+  margin: 0;
+  transition: all .5s ease-in-out;
+  cursor: pointer;
+  padding: 10px 20px;
+}
+
+.footer > div > :nth-child(1) > p {
   width: 100%;
   margin-bottom: 30px;
   display: flex;
@@ -101,7 +115,7 @@ footer .footer a:hover {
   text-align: left;
   letter-spacing: .78pt;
   text-transform: uppercase;
-  font: normal normal 700 11px/30px Roboto;
+  font: normal normal 700 11px/30px var(--body-font-family);
 }
 
 .footer > div > :nth-child(2) {
@@ -123,31 +137,16 @@ footer .footer a:hover {
 
 .footer > div > :nth-child(5) {
   order: 5;
-  border-style: none;
   padding: 0;
   border-bottom-width: 1px;
   border-style: solid;
-  --tw-border-opacity: 1;
-  border-color: rgb(144 152 163/var(--tw-border-opacity));
+  border-color: rgb(144 152 163);
   margin-bottom: 1.5rem;
 }
 
 .footer > div > :nth-child(6) {
   order: 6;
   border: none;
-}
-
-.footer > div p {
-  text-align: left;
-  font: normal normal 700 13px/24px Roboto;
-  letter-spacing: 0;
-  color: #9098a3;
-  opacity: 1;
-  position: relative;
-  margin: 0;
-  transition: all .5s ease-in-out;
-  cursor: pointer;
-  padding: 10px 20px;
 }
 
 .footer > div > :nth-child(3) > p::before,
@@ -182,9 +181,15 @@ footer .footer a:hover {
 
 .footer > div > :nth-child(3) > ul li > a,
 .footer > div > :nth-child(4) > ul li > a {
-  font: normal normal 500 10px/30px Roboto;
+  font: normal normal 500 10px/30px var(--body-font-family);
   letter-spacing: 0;
   opacity: 1;
+}
+
+.footer > div > :nth-child(2) > ul {
+  column-count: 2;
+  padding: 0 20px 6px;
+  margin-top: 11px;
 }
 
 .footer > div > :nth-child(3) > p + ul {
@@ -200,6 +205,7 @@ footer .footer a:hover {
 .footer > div > :nth-child(4) > p.active {
   padding-bottom: 10px;
 }
+
 .footer > div > :nth-child(4) > p + ul {
   display: none;
 }
@@ -212,6 +218,7 @@ footer .footer a:hover {
 .footer > div > :nth-child(4) > p.active + ul {
   column-count: 2;
 }
+
 .footer > div > :nth-child(3) > p.active::before,
 .footer > div > :nth-child(4) > p.active::before {
   transform: rotate(180deg);
@@ -222,15 +229,9 @@ footer .footer a:hover {
   margin-bottom: 1pc;
 }
 
-.footer > div > :nth-child(2) > ul {
-  column-count: 2;
-  padding: 0 20px 6px;
-  margin-top: 11px;
-}
-
 .footer > div > :nth-child(5) > p {
   font-size: 1.25rem;
-  padding: 0 20px 24px 20px;
+  padding: 0 20px 24px;
   color: rgb(255 255 255);
   letter-spacing: 0;
   line-height: 1.5rem;
@@ -239,7 +240,7 @@ footer .footer a:hover {
 }
 
 .footer > div > :nth-child(6) > p {
-  font: normal normal normal 10px/13px Roboto;
+  font: normal normal normal 10px/13px var(--body-font-family);
   width: 100%;
   max-width: 100%;
   margin-top: 1pc;
@@ -256,7 +257,7 @@ footer .footer a:hover {
 .footer > div > :nth-child(6) > ul li {
   display: block;
   margin-bottom: 10px;
-  font: normal normal 500 10px/30px Roboto;
+  font: normal normal 500 10px/30px var(--body-font-family);
   width: 100%;
   line-height: 1;
   font-size: 14px;
@@ -265,17 +266,17 @@ footer .footer a:hover {
 
 .footer > div > :nth-child(6) > ul li > a {
   display: inline-block;
-  font: normal normal 500 10px/30px Roboto;
+  font: normal normal 500 10px/30px var(--body-font-family);
   color: #fff;
 }
 
 @media(min-width: 480px) {
   .footer > div > :nth-child(6) > ul li > a {
-    font: normal normal 500 11px/30px Roboto;
+    font: normal normal 500 11px/30px var(--body-font-family);
   }
 
   .footer > div > :nth-child(6) > p {
-    font: normal normal normal 11px/13px Roboto;
+    font: normal normal normal 11px/13px var(--body-font-family);
   }
 }
 
@@ -287,15 +288,15 @@ footer .footer a:hover {
   }
 
   .footer > div > :nth-child(1) > ul li > a {
-    font: normal normal 700 9pt/30px Roboto;
+    font: normal normal 700 9pt/30px var(--body-font-family);
   }
 
   .footer > div > :nth-child(6) > ul li > a {
-    font: normal normal 500 9pt/30px Roboto;
+    font: normal normal 500 9pt/30px var(--body-font-family);
   }
 
   .footer > div > :nth-child(6) > p {
-    font: normal normal normal 9pt/13px Roboto;
+    font: normal normal normal 9pt/13px var(--body-font-family);
   }
 }
 
@@ -324,12 +325,15 @@ footer .footer a:hover {
     border: none;
   }
 
+  .footer > div p {
+    pointer-events: none;
+  }
+
   .footer > div > :nth-child(1) {
     order: 1;
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    flex-direction: row;
+    flex-flow: row wrap;
     padding: 0 50px;
     margin-bottom: 65px;
     border: none;
@@ -358,7 +362,7 @@ footer .footer a:hover {
   }
 
   .footer > div > :nth-child(1) > ul li > a {
-    font: normal normal 700 13px/30px Roboto;
+    font: normal normal 700 13px/30px var(--body-font-family);
   }
 
   .footer > div > :nth-child(2) {
@@ -373,7 +377,7 @@ footer .footer a:hover {
   .footer > div > :nth-child(3) > p,
   .footer > div > :nth-child(4) > p {
     padding: 0;
-    font: normal normal 700 13px/24px Roboto;
+    font: normal normal 700 13px/24px var(--body-font-family);
     letter-spacing: 0;
     color: #9098a3;
     opacity: 1;
@@ -403,7 +407,7 @@ footer .footer a:hover {
   .footer > div > :nth-child(2) > ul li > a,
   .footer > div > :nth-child(3) > ul li > a,
   .footer > div > :nth-child(4) > ul li > a {
-    font: normal normal 500 13px/30px Roboto;
+    font: normal normal 500 13px/30px var(--body-font-family);
     display: inline-block;
     position: relative;
   }
@@ -421,10 +425,6 @@ footer .footer a:hover {
     grid-template-columns: 1fr;
     margin-top: 15px;
     list-style: none;
-  }
-
-  .footer > div p {
-    pointer-events: none;
   }
 
   .footer > div > :nth-child(3) > p::before,
@@ -477,7 +477,7 @@ footer .footer a:hover {
 
   .footer > div > :nth-child(6) > ul {
     border-top: 1px solid #3a4350;
-    padding: 16px 0 0 0;
+    padding: 16px 0 0;
     display: flex;
   }
 
@@ -494,7 +494,7 @@ footer .footer a:hover {
   }
 
   .footer > div > :nth-child(6) > ul li > a {
-    font: normal normal normal 13px/18px Roboto;
+    font: normal normal normal 13px/18px var(--body-font-family);
     margin-right: 10px;
     padding-right: 20px;
     position: relative;
@@ -512,7 +512,7 @@ footer .footer a:hover {
 
   .footer > div > :nth-child(6) > p {
     padding: 0;
-    font: normal normal normal 13px/18px Roboto;
+    font: normal normal normal 13px/18px var(--body-font-family);
     margin-top: 14px;
     margin-bottom: 0;
   }
