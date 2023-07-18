@@ -126,11 +126,31 @@ function wrapDivsInMegaMenu() {
   nav.appendChild(loginModal);
 }
 
+function removeButtonClasses() {
+  const bottomLinks = document.querySelector('.bottom-links');
+  const bottomLinksParagraphs = bottomLinks.querySelectorAll('p');
+  const bottomLinksSpans = bottomLinks.querySelectorAll('span');
+  const bottomLinksLinks = bottomLinks.querySelectorAll('a');
+
+  bottomLinksParagraphs.forEach((paragraph) => {
+    paragraph.classList.remove('button-container');
+  });
+
+  bottomLinksSpans.forEach((span) => {
+    span.classList.remove('button-text');
+  });
+
+  bottomLinksLinks.forEach((link) => {
+    link.classList.remove('button');
+  });
+}
+
 function buildMegaMenu() {
   wrapDivsInMegaMenu();
   appendUlToP();
   // let links = document.querySelectorAll('p > a');
   // createTags(links);
+  removeButtonClasses();
 }
 
 async function renderDesktopHeader(block, nav) {

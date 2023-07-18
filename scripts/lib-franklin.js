@@ -563,7 +563,7 @@ export function decorateButtons(element) {
     : `<span class="button-text">${a.textContent}</span>${a.querySelector('span.icon')?.outerHTML || ''}`
   );
   element.querySelectorAll('a').forEach((a) => {
-    if (a.closest('.nav-brand') || a.closest('.nav-sections') || a.closest('.bottom-links')) {
+    if (a.closest('.nav-brand') || a.closest('.nav-sections')) {
       return;
     }
 
