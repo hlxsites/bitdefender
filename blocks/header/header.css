@@ -45,6 +45,14 @@ header {
   display: inline-block;
 }
 
+.login-modal > p {
+  position: relative;
+  width: 100%; 
+  display: block;
+  text-align: center; 
+  margin-top: 35px !important;
+}
+
 .login-buttons a p {
   text-align: center;
   font-size: var(--body-font-size-xs);
@@ -90,11 +98,6 @@ header {
  border-bottom: 3px solid var(--color-highlight-blue);
 }
 
-.nav-sections p:last-child:hover::after {
-  width: 50px;
-}
-
-
 .nav-sections p:hover::after,
 .nav-brand p:not(:first-child):hover::after {
   content: "";
@@ -106,6 +109,10 @@ header {
   background-color: var(--color-highlight-blue);
   transition: all 0.2s ease-in-out;
   animation: animate-bottom-border 0.3s linear forwards;
+}
+
+.nav-sections p:last-child:hover::after {
+  width: 50px;
 }
 
 @keyframes animate-bottom-border {
@@ -192,14 +199,6 @@ header {
   background-color: var(--color-dark-gray);
 }
 
-.login-modal > p {
-  position: relative;
-  width: 100%; 
-  display: block;
-  text-align: center; 
-  margin-top: 35px !important;
-}
-
 .login-modal a {
   text-decoration: none;
   color: var(--color-highlight-blue) !important;
@@ -215,9 +214,17 @@ header {
   font-weight: 500;
 }
 
+header a.button:any-link {
+  padding: 0;
+}
+
 .login-modal a.button:any-link {
   height: 50px;
   padding-right: 15px;
+}
+
+.mega-menu > div:first-child p a span {
+  font-weight: 600;
 }
 
 .login-modal a.button:any-link span {
@@ -225,13 +232,9 @@ header {
   font-weight: 500;
 }
 
-
-.login-modal a:hover {
-  background-color: var(--color-highlight-blue) !important;
-  color: var(--background-color) !important;
+.header-wrapper a{
+  z-index: 999;
 }
-
-
 
 .header-wrapper > p a{
   position: relative;
@@ -250,17 +253,32 @@ header {
   top: 70px;
 }
 
-a.button span.button-text {
-  display: flex;
-  font-size: var(--body-font-size-xs);
-  font-weight: 400;
-}
-
 .mega-menu div p a{
   position: relative;
   font-size: var(--body-font-size-xs);
   font-weight: 400;
   color: var(--text-color) !important;
+}
+
+.other-options > div > p a {
+  text-decoration: none;
+  line-height: 15px;
+  padding-top: 5px;
+  padding-right: 20px;
+  background-color: transparent !important;
+  height: 20px !important;
+  border: none !important;
+}
+
+.login-modal a:hover {
+  background-color: var(--color-highlight-blue) !important;
+  color: var(--background-color) !important;
+}
+
+a.button span.button-text {
+  display: flex;
+  font-size: var(--body-font-size-xs);
+  font-weight: 400;
 }
 
 .header-wrapper > a img {
@@ -280,23 +298,13 @@ a.button span.button-text {
   object-fit: contain;
 }
 
-.other-options > div > p a {
-  text-decoration: none;
-  line-height: 15px;
-  padding-top: 5px;
-  padding-right: 20px;
-  background-color: transparent !important;
-  height: 20px !important;
-  border: none !important;
-}
-
 .other-options > div > p:hover {
   background-color: var(--highlight-light-blue);
   transition: none !important;
   transform: none !important;
 }
 
-.other-options > div > p:hover a:after {
+.other-options > div > p:hover a::after {
   background-color: var(--color-highlight-blue);
 }
 
@@ -305,11 +313,7 @@ header a.button:hover span.button-text {
 }
 
 header a.button::after {
-  margin-left: 0px;
-}
-
-header a.button:any-link {
-  padding: 0px;
+  margin-left: 0;
 }
 
 .other-options > div > p a > span:not(#new,#evolved) {
@@ -317,6 +321,47 @@ header a.button:any-link {
   font-size: var(--body-font-size-xs);
   font-weight: 400;
   color: var(--text-color) !important;
+}
+
+.options-wrapper.show a {
+  display: block;
+  margin-left: 40px;
+  color: var(--text-color);
+  font-size: var(--body-font-size-xs);
+  margin-top: 10px;
+  text-decoration: none;
+  animation: slide-in 0.2s 0.075s forwards;
+  background-color: transparent !important;
+  border: transparent !important;
+}
+
+.bottom-links p:hover > a {
+  color: var(--color-highlight-blue) !important;
+}
+
+.header-wrapper > p a:hover{
+  color: var(--background-color);
+}
+
+.mega-menu > div:first-child p a {
+  color: var(--text-color) !important;
+  text-decoration: none;
+  font-size: var(--body-font-size-s);
+  background-color: transparent;
+  border: none;
+}
+
+.other-options > div > p:hover a {
+  background-color: var(--highlight-light-blue);
+  color: var(--color-highlight-blue) !important;
+}
+
+.options-wrapper.show > a:first-child {
+  margin-top: 40px;
+}
+
+.mega-menu > div:first-child p:hover a {
+  color: var(--color-highlight-blue) !important;
 }
 
 .login-modal.show.button-container a:hover{
@@ -405,54 +450,8 @@ header a.button:any-link {
   grid-column: 2; 
 }
 
-
-.options-wrapper.show a {
-  display: block;
-  margin-left: 40px;
-  color: var(--text-color);
-  font-size: var(--body-font-size-xs);
-  margin-top: 10px;
-  text-decoration: none;
-  animation: slide-in 0.2s 0.075s forwards;
-  background-color: transparent !important;
-  border: transparent !important;
-}
-
-.options-wrapper.show > a:first-child {
-  margin-top: 40px;
-}
-
-.bottom-links p:hover > a {
-  color: var(--color-highlight-blue) !important;
-}
-
-.header-wrapper > p a:hover{
-  color: var(--background-color);
-}
-
-.other-options > div > p:hover a {
-  background-color: var(--highlight-light-blue);
-  color: var(--color-highlight-blue) !important;
-}
-
-.mega-menu > div:first-child p a {
-  color: var(--text-color) !important;
-  text-decoration: none;
-  font-size: var(--body-font-size-s);
-  background-color: transparent;
-  border: none;
-}
-
-.mega-menu > div:first-child p a span {
-  font-weight: 600;
-}
-
-.mega-menu > div:first-child p a:after {
+.mega-menu > div:first-child p a::after {
   background-color: var(--color-highlight-blue);
-}
-
-.mega-menu > div:first-child p:hover a {
-  color: var(--color-highlight-blue) !important;
 }
 
 .options-wrapper.show div {
@@ -470,6 +469,7 @@ header a.button:any-link {
   .nav-wrapper {
     display: none;
   }
+
   .header-wrapper p a {
     display: none;
   }
@@ -522,8 +522,6 @@ header a.button:any-link {
   grid-gap: 0;
 }
 
-
-
 #new, #evolved {
   position: relative;
   font-size: var(--body-font-size-xxs);
@@ -558,6 +556,7 @@ nav {
   .options-wrapper {
     display: none;
   }
+
   header {
     height: 40px;
   }
@@ -600,10 +599,6 @@ nav {
   height: 100vh;
   width: 100vw;
   z-index: 2;
-}
-
-.header-wrapper a{
-  z-index: 999;
 }
 
 .options-wrapper {
@@ -651,4 +646,3 @@ nav {
     transform: translateX(0);
   }
 }
-

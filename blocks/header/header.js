@@ -38,7 +38,6 @@ function handleLoginClick() {
 
   const loginButton = document.querySelector('.nav-sections p:last-child');
   loginButton.classList.toggle('clicked');
-
 }
 
 function appendUlToP() {
