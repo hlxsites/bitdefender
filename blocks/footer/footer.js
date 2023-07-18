@@ -30,7 +30,6 @@ function disableSelectedCountry(container) {
  * @param {Element} block The footer block element
  */
 export default async function decorate(block) {
-  const cfg = readBlockConfig(block);
   block.textContent = '';
 
   // fetch footer content
@@ -45,7 +44,7 @@ export default async function decorate(block) {
     footer.innerHTML = html;
 
     wrapImgsInLinks(footer);
-    
+
     const sectionHeaders = footer.querySelectorAll('div > div > p');
     sectionHeaders[2].addEventListener('click', onFooterElementClick);
     sectionHeaders[3].addEventListener('click', onFooterElementClick);
