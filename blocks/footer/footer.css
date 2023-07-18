@@ -2,6 +2,7 @@ footer {
   padding: 40px 0 24px;
   background-color: #000;
   font-size: var(--body-font-size-s);
+  max-width: 20in;
 }
 
 ul {
@@ -43,14 +44,14 @@ footer .footer a:hover {
   pointer-events: none;
 }
 
-.footer > div {
-  display: grid;
+.deactivated::before {
+  display: none;
 }
 
-/* .footer > div > :nth-child(1) {
-  order: 1;
-  border-bottom: 1px solid #9098a3;
-} */
+.footer > div {
+  display: grid;
+  margin: 0 auto;
+}
 
 .footer > div div {
   margin: 0;
@@ -62,7 +63,6 @@ footer .footer a:hover {
   width: 100%;
   margin-bottom: 30px;
   display: flex;
-  height: 31px;
   overflow: hidden;
   border: none;
 }
@@ -101,6 +101,7 @@ footer .footer a:hover {
   text-align: left;
   letter-spacing: .78pt;
   text-transform: uppercase;
+  font: normal normal 700 11px/30px Roboto;
 }
 
 .footer > div > :nth-child(2) {
@@ -262,18 +263,267 @@ footer .footer a:hover {
   font-weight: 400;
 }
 
-.footer > div > :nth-child(6) > ul li a {
+.footer > div > :nth-child(6) > ul li > a {
   display: inline-block;
   font: normal normal 500 10px/30px Roboto;
   color: #fff;
 }
 
-/* .footer > div > :nth-child(6) > ul li::after {
-  content: "";
-  position: absolute;
-  top: 2px;
-  right: 3px;
-  width: 2px;
-  height: 1pc;
-  background-color: #fff;
-} */
+@media(min-width: 480px) {
+  .footer > div > :nth-child(6) > ul li > a {
+    font: normal normal 500 11px/30px Roboto;
+  }
+
+  .footer > div > :nth-child(6) > p {
+    font: normal normal normal 11px/13px Roboto;
+  }
+}
+
+@media(min-width: 767px) { /* tablet */
+  footer {
+    padding: 58px 0 43px;
+    margin: 40px auto 0;
+    max-width: 20in;
+  }
+
+  .footer > div > :nth-child(1) > ul li > a {
+    font: normal normal 700 9pt/30px Roboto;
+  }
+
+  .footer > div > :nth-child(6) > ul li > a {
+    font: normal normal 500 9pt/30px Roboto;
+  }
+
+  .footer > div > :nth-child(6) > p {
+    font: normal normal normal 9pt/13px Roboto;
+  }
+}
+
+@media(min-width: 990px) { /* desktop */
+  .deactivated {
+    position: relative;
+  }
+
+  .deactivated::before {
+    content: "•";
+    color: #999;
+    font-weight: 700;
+    display: inline-block;
+    width: 1rem;
+    position: absolute;
+    top: 2px;
+    left: -13px;
+    z-index: 1;
+  }
+
+  .footer > div {
+    grid-template-columns: [first-col] 25% [second-col] 75%;
+  }
+
+  .footer > div div {
+    border: none;
+  }
+
+  .footer > div > :nth-child(1) {
+    order: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: row;
+    padding: 0 50px;
+    margin-bottom: 65px;
+    border: none;
+    grid-column: first-col / span 2;
+  }
+
+  .footer > div > :nth-child(1) > p {
+    max-width: 25%;
+    padding: 0;
+    pointer-events: visible;
+  }
+
+  .footer > div > :nth-child(1) > p a img {
+    height: 1.75rem;
+  }
+
+  .footer > div > :nth-child(1) > ul {
+    width: 66%;
+    margin-left: 9%;
+    display: inline-block;
+    vertical-align: top;
+    border-bottom: none;
+    column-count: 1;
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .footer > div > :nth-child(1) > ul li > a {
+    font: normal normal 700 13px/30px Roboto;
+  }
+
+  .footer > div > :nth-child(2) {
+    order: 2;
+    margin-top: 0;
+    grid-column: first-col / span 1;
+    padding-left: 50px;
+    margin-bottom: 0;
+  }
+
+  .footer > div > :nth-child(2) > p,
+  .footer > div > :nth-child(3) > p,
+  .footer > div > :nth-child(4) > p {
+    padding: 0;
+    font: normal normal 700 13px/24px Roboto;
+    letter-spacing: 0;
+    color: #9098a3;
+    opacity: 1;
+    border-bottom: 1px solid #3a4350;
+    padding-bottom: 15px;
+    text-transform: none;
+    width: 100%;
+    margin-bottom: 0;
+  }
+
+  .footer > div > :nth-child(2) > ul {
+    padding: 0;
+    column-count: 1;
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-top: 15px;
+    list-style: none;
+  }
+
+  .footer > div > :nth-child(2) > ul li,
+  .footer > div > :nth-child(4) > ul li {
+    margin-bottom: 0.5rem;
+    width: 100%;
+    padding: 0;
+  }
+
+  .footer > div > :nth-child(2) > ul li > a,
+  .footer > div > :nth-child(3) > ul li > a,
+  .footer > div > :nth-child(4) > ul li > a {
+    font: normal normal 500 13px/30px Roboto;
+    display: inline-block;
+    position: relative;
+  }
+
+  .footer > div > :nth-child(3) {
+    order: 3;
+    grid-column: second-col / span 1;
+    margin-left: 14%;
+    padding-bottom: 0;
+  }
+
+  .footer > div > :nth-child(3) > ul {
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-top: 15px;
+    list-style: none;
+  }
+
+  .footer > div p {
+    pointer-events: none;
+  }
+
+  .footer > div > :nth-child(3) > p::before,
+  .footer > div > :nth-child(4) > p::before {
+    display: none;
+  }
+
+  .footer > div > :nth-child(3) ul,
+  .footer > div > :nth-child(4) ul  {
+    display: block !important;
+    margin-bottom: 0;
+  }
+  
+  .footer > div > :nth-child(3) ul {
+    column-count: 2;
+  }
+
+  .footer > div > :nth-child(4) ul {
+    column-count: 3;
+    padding: 0;
+    margin-top: 15px;
+  }
+
+  .footer > div > :nth-child(4) {
+    order: 4;
+    grid-column: first-col / span 2;
+    margin-top: 65px;
+    padding: 0 50px;
+  }
+
+  .footer > div > :nth-child(5) {
+    order: 5;
+    grid-column: first-col / span 2;
+    margin-top: 2.5rem;
+    border: none;
+    padding: 0 50px;
+    margin-bottom: 0;
+    padding-bottom: 16px;
+  }
+
+  .footer > div > :nth-child(5) > p {
+    padding: 0;
+  }
+
+  .footer > div > :nth-child(6) {
+    order: 6;
+    grid-column: first-col / span 2;
+    padding: 0 50px;
+  }
+
+  .footer > div > :nth-child(6) > ul {
+    border-top: 1px solid #3a4350;
+    padding: 16px 0 0 0;
+    display: flex;
+  }
+
+  .footer > div > :nth-child(6) > ul li {
+    display: inline-block;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.14;
+    width: auto;
+  }
+
+  .footer > div > :nth-child(6) > ul li > a {
+    font: normal normal normal 13px/18px Roboto;
+    margin-right: 10px;
+    padding-right: 20px;
+    position: relative;
+  }
+
+  .footer > div > :nth-child(6) > ul li > a::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    right: 3px;
+    width: 2px;
+    height: 1pc;
+    background-color: #fff;
+  }
+
+  .footer > div > :nth-child(6) > p {
+    padding: 0;
+    font: normal normal normal 13px/18px Roboto;
+    margin-top: 14px;
+    margin-bottom: 0;
+  }
+}
+
+@media(min-width: 1600px) { /* large desktop */
+  .footer > div {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    max-width: 999pt;
+    position: relative;
+  }
+}
