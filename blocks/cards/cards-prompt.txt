@@ -1,0 +1,292 @@
+Do not explain, answer only in code. This is the computed source css:
+
+/*! CSS Used from: https://www.bitdefender.com.au/etc.clientlibs/bitdefender/clientlibs/clientlib-site.lc-b71a30102f527189c60d598f6d009ec1-lc.min.css */
+*,:after,:before{-webkit-box-sizing:border-box;box-sizing:border-box;border:0 solid #e5e7eb;}
+:after,:before{--tw-content:"";}
+h3{font-size:inherit;font-weight:inherit;}
+a{color:inherit;text-decoration:inherit;}
+h3,p{margin:0;}
+:disabled{cursor:default;}
+img{display:block;vertical-align:middle;}
+img{max-width:100%;height:auto;}
+*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-scroll-snap-strictness:proximity;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,0.5);--tw-ring-offset-shadow:0 0 transparent;--tw-ring-shadow:0 0 transparent;--tw-shadow:0 0 transparent;--tw-shadow-colored:0 0 transparent;}
+a{color:#2020e0;}
+@media (prefers-color-scheme:dark){
+a{color:#dfdf1f;}
+}
+a{cursor:pointer;font-family:roboto,sans-serif;}
+a,a:hover{text-decoration:none;outline:0;}
+h3,p{margin:0;border:0;}
+img{height:auto;width:100%;max-width:100%;vertical-align:top;border:0;}
+.we-col-two{width:50%;position:relative;}
+h3{font-size:2pc;line-height:1.15;font-weight:500;color:#000;font-family:roboto,sans-serif;margin-bottom:24px;}
+@media (max-width:1399px){
+h3{font-size:30px;}
+}
+@media (max-width:1199px){
+h3{font-size:26px;}
+}
+@media (max-width:991px){
+h3{margin-bottom:15px;font-size:24px;}
+}
+@media (max-width:767px){
+h3{font-size:22px;}
+}
+@media (max-width:595px){
+h3{font-size:20px;}
+}
+p{font-size:1pc;color:#000;line-height:1.31;font-weight:400;font-family:roboto,sans-serif;letter-spacing:.006em;}
+@media (max-width:1399px){
+p{font-size:14px;}
+}
+p a{color:#006eff;}
+span{font-family:roboto,sans-serif;}
+.h4{font-size:24px;line-height:1.25;font-weight:500;color:#000;font-family:roboto,sans-serif;}
+@media (max-width:1399px){
+.h4{font-size:22px;}
+}
+@media (max-width:1199px){
+.h4{font-size:22px;}
+}
+@media (max-width:991px){
+.h4{font-size:20px;}
+}
+@media (max-width:767px){
+.h4{font-size:18px;}
+}
+@media (max-width:595px){
+.h4{font-size:18px;}
+}
+*{margin:0;padding:0;-webkit-box-sizing:border-box;box-sizing:border-box;-webkit-tap-highlight-color:rgba(0,0,0,0);}
+.compare-progress-bar .we-col-two:first-child .content-wrap .button:first-child span{background-position:0 100%;color:#fff;}
+.compare-progress-bar .we-col-two{padding:40px;border-radius:8px;-webkit-box-shadow:0 3px 8px 0 rgba(0,0,0,.1);box-shadow:0 3px 8px 0 rgba(0,0,0,.1);width:calc(50% - 30px);margin:0 15px;background-color:#fff;}
+@media (min-width:1200px)and (max-width:1599px){
+.compare-progress-bar .we-col-two{padding:2pc;}
+}
+@media (min-width:992px)and (max-width:1199px){
+.compare-progress-bar .we-col-two{padding:2pc;}
+}
+@media (min-width:768px)and (max-width:991px){
+.compare-progress-bar .we-col-two{padding:2pc;}
+}
+@media (max-width:767px){
+.compare-progress-bar .we-col-two{width:100%;margin:0 0 20px;padding:30px 20px;}
+}
+.compare-progress-bar .we-col-two:first-child .button:first-child span .compare-fill{background:#006eff;-webkit-transition:all 1.2s ease-out;transition:all 1.2s ease-out;}
+.compare-progress-bar .icon{width:46px;max-height:46px;display:inline-block;vertical-align:top;}
+.compare-progress-bar .icon img{height:100%;-o-object-fit:contain;object-fit:contain;}
+.compare-progress-bar .content-wrap{width:calc(100% - 60px);display:inline-block;vertical-align:top;padding-left:20px;margin-top:-2px;}
+@media (max-width:480px){
+.compare-progress-bar .content-wrap{width:100%;padding-left:0;margin-top:25px;}
+}
+.compare-progress-bar .content-wrap .h4{margin-bottom:7px;}
+.compare-progress-bar .content-wrap p{font-size:14px;color:#3c3c3c;}
+.compare-progress-bar .content-wrap .date{font-size:9pt;color:#616161;}
+.compare-progress-bar .progress-bar{margin:34px 0 23px;}
+@media (min-width:1200px)and (max-width:1599px){
+.compare-progress-bar .progress-bar{margin:25px 0 15px;}
+}
+@media (min-width:992px)and (max-width:1199px){
+.compare-progress-bar .progress-bar{margin:25px 0 15px;}
+}
+@media (max-width:991px){
+.compare-progress-bar .progress-bar{margin:25px 0 15px;}
+}
+.compare-progress-bar .progress-bar .button{margin-bottom:8px;position:relative;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:center;-ms-flex-align:center;align-items:center;z-index:1;}
+.compare-progress-bar .progress-bar .button p{width:30px;color:#000;font-size:14px;display:inline-block;margin-left:3px;}
+.compare-progress-bar .progress-bar span{border-radius:4px;width:calc(100% - 40px);height:40px;text-align:left;font-size:14px;line-height:1.5;color:#000;display:inline-block;padding:9px 1pc;font-weight:500;position:relative;}
+.compare-progress-bar .progress-bar span .compare-fill{max-width:100%;display:inline-block;width:0;height:100%;background-color:#dedede;position:absolute;left:0;top:0;z-index:-1;padding:0;}
+@media screen and (min-width:1200px)and (max-height:660px){
+h3{font-size:26px;}
+}
+/*! CSS Used from: Embedded */
+*,*::before,*::after{-webkit-box-sizing:inherit;box-sizing:inherit;}
+/*! CSS Used fontfaces */
+@font-face{font-family:"roboto";src:url("https://www.bitdefender.com.au/content/dam/bitdefender/font/roboto/roboto-300.woff2") format("woff2"), url("https://www.bitdefender.com.au/content/dam/bitdefender/font/roboto/roboto-300.woff") format("woff"), url("https://www.bitdefender.com.au/content/dam/bitdefender/font/roboto/roboto-300.otf") format("opentype");font-display:swap;font-style:normal;font-weight:300;font-stretch:normal;}
+@font-face{font-family:"roboto";src:url("https://www.bitdefender.com.au/content/dam/bitdefender/font/roboto/roboto-500.woff2") format("woff2"), url("https://www.bitdefender.com.au/content/dam/bitdefender/font/roboto/roboto-500.woff") format("woff"), url("https://www.bitdefender.com.au/content/dam/bitdefender/font/roboto/roboto-500.otf") format("opentype");font-display:swap;font-style:normal;font-weight:500;font-stretch:normal;}
+@font-face{font-family:"roboto";src:url("https://www.bitdefender.com.au/content/dam/bitdefender/font/roboto/roboto-400.woff2") format("woff2"), url("https://www.bitdefender.com.au/content/dam/bitdefender/font/roboto/roboto-400.woff") format("woff"), url("https://www.bitdefender.com.au/content/dam/bitdefender/font/roboto/roboto-400.otf") format("opentype");font-display:swap;font-style:normal;font-weight:400;font-stretch:normal;}
+
+The computed CSS is used for this source html fragment. The source html fragment is missing parent nodes, which are needed for the computed CSS to make sense. Those missing parent nodes must be taken into account. Consider the parent nodes to be divs with respective css classes which are missing in this fragment.
+
+ <div class="column-wrapper we-row we-flex-wrap">
+
+ <div class="we-col-two wow fadeInUp">
+
+ <div class="icon">
+ <img class=" lazyloaded"
+ data-src="/content/dam/bitdefender/business/products/professional-services/bestav_icon.svg"
+ alt="Icon"
+ src="/content/dam/bitdefender/business/products/professional-services/bestav_icon.svg">
+ </div>
+
+ <div class="content-wrap wow">
+
+ <h3 class="h4">Best Protection</h3>
+
+
+ <p>Best Protection against e-Threats
+ (On a scale of 0 to 6, with 6 as the highest level of protection)
+ </p>
+
+
+ <div class="progress-bar">
+
+ <div class="button">
+ <span>
+ Bitdefender
+ <span class="compare-fill" data-value="5.94" style="width: 99%;"></span>
+ </span>
+ <p>5.94</p>
+ </div>
+
+ <div class="button">
+ <span>
+ Norton
+ <span class="compare-fill" data-value="5.87" style="width: 97.8333%;"></span>
+ </span>
+ <p>5.87</p>
+ </div>
+
+ <div class="button">
+ <span>
+ McAfee
+ <span class="compare-fill" data-value="5.35" style="width: 89.1667%;"></span>
+ </span>
+ <p>5.35</p>
+ </div>
+
+ </div>
+
+ <p class="date"></p>
+ <p>Overall Score. March 2011 - February 2023. Source&nbsp;<a
+ href="https://www.av-test.org/en/antivirus/home-users/">AV TEST.</a>org</p>
+ <p></p>
+
+ </div>
+ </div>
+
+ <div class="we-col-two wow fadeInUp">
+
+ <div class="icon">
+ <img class=" lazyloaded"
+ data-src="/content/dam/bitdefender/business/products/professional-services/performance_icon.svg"
+ alt="Icon"
+ src="/content/dam/bitdefender/business/products/professional-services/performance_icon.svg">
+ </div>
+
+ <div class="content-wrap wow">
+
+ <h3 class="h4">Best Performance</h3>
+
+
+ <p>Lighest Impact on Performance
+ (On a scale of 0 to 6, with 6 as the lightest level of impact)
+ </p>
+
+
+ <div class="progress-bar">
+
+ <div class="button">
+ <span>
+ Bitdefender
+ <span class="compare-fill" data-value="5.84" style="width: 97.3333%;"></span>
+ </span>
+ <p>5.84</p>
+ </div>
+
+ <div class="button">
+ <span>
+ Norton
+ <span class="compare-fill" data-value="5.57" style="width: 92.8333%;"></span>
+ </span>
+ <p>5.57</p>
+ </div>
+
+ <div class="button">
+ <span>
+ McAfee
+ <span class="compare-fill" data-value="5.44" style="width: 90.6667%;"></span>
+ </span>
+ <p>5.44</p>
+ </div>
+
+ </div>
+
+ <p class="date"></p>
+ <p>Overall Score. March 2011 - February 2023. Source&nbsp;<a
+ href="https://www.av-test.org/en/antivirus/home-users/">AV TEST.</a>org</p>
+ <p></p>
+
+ </div>
+ </div>
+
+Here is a new HTML fragment with the same content as the source HTML fragment. This HTML is nicer and semantically correct.
+
+<div class="cards barchart">
+ <div>
+ <div>
+ <picture>
+ <source type="image/webp" srcset="./media_13d5b64c412321f5695f88191120e2824f5ac598e.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+ <source type="image/webp" srcset="./media_13d5b64c412321f5695f88191120e2824f5ac598e.png?width=750&amp;format=webply&amp;optimize=medium">
+ <source type="image/png" srcset="./media_13d5b64c412321f5695f88191120e2824f5ac598e.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+ <img loading="lazy" alt="" src="./media_13d5b64c412321f5695f88191120e2824f5ac598e.png?width=750&amp;format=png&amp;optimize=medium" width="34" height="45">
+ </picture>
+ </div>
+ <div>
+ <h3 id="best-protection">Best Protection</h3>
+ <p>Best Protection against e-Threats (On a scale of 0 to 6, with 6 as the highest level of protection)</p>
+ <ul>
+ <li>Bitdefender
+ <ul>
+ <li>5.94</li>
+ </ul>
+ </li>
+ <li>Norton
+ <ul>
+ <li>5.87</li>
+ </ul>
+ </li>
+ <li>McAfee
+ <ul>
+ <li>5.35</li>
+ </ul>
+ </li>
+ </ul>
+ <p>Overall Score. March 2011 - February 2023. Source <a href="https://www.av-test.org/en/antivirus/home-users/">AV TEST.org</a></p>
+ </div>
+ </div>
+ <div>
+ <div>
+ <picture>
+ <source type="image/webp" srcset="./media_1723f12da7deb2daea8fe696b17b2c256add81f93.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+ <source type="image/webp" srcset="./media_1723f12da7deb2daea8fe696b17b2c256add81f93.png?width=750&amp;format=webply&amp;optimize=medium">
+ <source type="image/png" srcset="./media_1723f12da7deb2daea8fe696b17b2c256add81f93.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+ <img loading="lazy" alt="" src="./media_1723f12da7deb2daea8fe696b17b2c256add81f93.png?width=750&amp;format=png&amp;optimize=medium" width="45" height="45">
+ </picture>
+ </div>
+ <div>
+ <h3 id="best-performance">Best Performance</h3>
+ <p>Lighest Impact on Performance (On a scale of 0 to 6, with 6 as the lightest level of impact)</p>
+ <ul>
+ <li>Bitdefender
+ <ul>
+ <li>5.84</li>
+ </ul>
+ </li>
+ <li>Norton
+ <ul>
+ <li>5.57</li>
+ </ul>
+ </li>
+ <li>McAfee
+ <ul>
+ <li>5.44</li>
+ </ul>
+ </li>
+ </ul>
+ <p>Overall Score. March 2011 - February 2023. Source <a href="https://www.av-test.org/en/antivirus/home-users/">AV TEST.org</a></p>
+ </div>
+ </div>
+ </div>.
+
+Create the CSS for a file "cards.css", that provides all styles in order to style the new HTML fragment. The fragment contains a container with the css class "cards". The children are one or many cards components. A card component has usually a box shadow and is aligned horizontally in resp. to its siblings on desktop and vertically on mobile. Additional infos to the appearance of the card component: The logo is on the left and the text is on the right. The list in the card component shall look like a bar chart.
