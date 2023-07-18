@@ -35,6 +35,10 @@ function createLoginModal() {
 function handleLoginClick() {
   const loginModal = document.querySelector('nav > div:nth-child(4)');
   loginModal.classList.toggle('show');
+
+  const loginButton = document.querySelector('.nav-sections p:last-child');
+  loginButton.classList.toggle('clicked');
+
 }
 
 function appendUlToP() {

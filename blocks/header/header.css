@@ -72,9 +72,31 @@ header {
   position: relative;
 }
 
+.nav-sections p:not(:last-child) {
+  margin-top: 3px;
+}
+
+.nav-sections div {
+  margin-top: -10px;
+}
+
+.nav-sections p:last-child {
+  width: 50px;
+  border-bottom: 3px solid transparent; /* Add this line */
+  padding-bottom: 10px;
+}
+
+.nav-sections p:last-child.clicked {
+ border-bottom: 3px solid var(--color-highlight-blue);
+}
+
+.nav-sections p:last-child:hover::after {
+  width: 50px;
+}
+
+
 .nav-sections p:hover::after,
-.nav-brand p:not(:first-child):hover::after
- {
+.nav-brand p:not(:first-child):hover::after {
   content: "";
   position: absolute;
   left: 0;
@@ -150,15 +172,6 @@ header {
   opacity: 1;
   top: 70px;
   z-index: 5;
-}
-
-.login-button-border {
-  position: relative;
-  right: min(0px, calc(100vw - 900px));
-  bottom: -2px;
-  width: 54px;
-  height: 3px;
-  background-color: var(--color-highlight-blue);
 }
 
 .login-modal h2 {
