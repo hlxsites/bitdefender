@@ -83,10 +83,6 @@ footer, header, hgroup, menu, nav, section {
   display: block;
 }
 
-ol, ul {
-  list-style: none;
-}
-
 blockquote, q {
   quotes: none;
 }
@@ -207,7 +203,7 @@ a.button:any-link, button {
   font-weight: var(--font-weight-bold);
   -webkit-font-smoothing: antialiased;
   display: inline-flex;
-  align-items: center;  
+  align-items: center;
   box-sizing: border-box;
   text-decoration: none;
   padding: 10px 26px 10px 28px;
@@ -321,7 +317,7 @@ a.button.modal:hover {
 a.button.modal:hover::after {
   transform: translateX(3px);
   background-color: var(--link-hover-color);
-} 
+}
 
 main input {
   font-size: 1.25rem;
@@ -382,3 +378,4 @@ main .section {
 main .section.highlight {
   background-color: var(--highlight-background-color);
 }
+
