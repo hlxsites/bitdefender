@@ -64,7 +64,7 @@ a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
 b, u, i, center,
-dl, dt, dd, ol, ul, li,
+dl, dt, dd, ol,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed,
@@ -81,10 +81,6 @@ time, mark, audio, video {
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
-}
-
-ol, ul {
-  list-style: none;
 }
 
 blockquote, q {
@@ -207,7 +203,7 @@ a.button:any-link, button {
   font-weight: var(--font-weight-bold);
   -webkit-font-smoothing: antialiased;
   display: inline-flex;
-  align-items: center;  
+  align-items: center;
   box-sizing: border-box;
   text-decoration: none;
   padding: 10px 26px 10px 28px;
@@ -321,7 +317,7 @@ a.button.modal:hover {
 a.button.modal:hover::after {
   transform: translateX(3px);
   background-color: var(--link-hover-color);
-} 
+}
 
 main input {
   font-size: 1.25rem;
@@ -382,3 +378,4 @@ main .section {
 main .section.highlight {
   background-color: var(--highlight-background-color);
 }
+

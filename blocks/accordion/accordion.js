@@ -4,7 +4,12 @@ export default function decorate(block) {
     const [header, content] = item.children;
     header.classList.add('accordion-item-header');
     header.addEventListener('click', () => {
-      item.classList.toggle('accordion-item-open');
+      if (!item.classList.contains('expanded')) {
+        content.style.height = `${content.scrollHeight}px`;
+      } else {
+        content.style.height = 0;
+      }
+      item.classList.toggle('expanded');
     });
     content.classList.add('accordion-item-content');
   });
