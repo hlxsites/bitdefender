@@ -1,31 +1,105 @@
-.cards > ul {
-  list-style: none;
-  margin: 0;
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.cards > div {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  padding: 40px;
+  width: calc(50% - 15px);
+}
+
+@media (max-width: 767px) {
+  .cards > div {
+    width: 100%;
+    margin: 0;
+    padding: 30px 20px;
+  }
+}
+
+.cards > div > div:first-child {
+  display: inline-block;
+  margin-right: 20px;
+  vertical-align: top;
+}
+
+.cards > div > div:first-child img {
+  height: 100%;
+  object-fit: contain;
+}
+
+.cards > div > div:last-child {
+  display: inline-block;
+  vertical-align: top;
+  width: calc(100% - 70px);
+}
+
+.cards > div > div:last-child h3 {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.25;
+  margin-bottom: 7px;
+}
+
+.cards > div > div:last-child p {
+  font-size: 14px;
+  color: #3c3c3c;
+  margin-bottom: 0;
+}
+
+.cards > div > div:last-child ul {
+  margin-top: 15px;
   padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  grid-gap: 16px;
 }
 
-.cards > ul > li {
-  border: 1px solid var(--highlight-background-color);
-  background-color: var(--background-color)
+.cards > div > div:last-child ul li {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
 
-.cards .cards-card-body {
-  margin: 16px;
+.cards > div > div:last-child ul li span {
+  background-color: #dedede;
+  border-radius: 4px;
+  display: block;
+  height: 40px;
+  line-height: 1.5;
+  padding: 9px 10px;
+  position: relative;
+  width: calc(100% - 40px);
 }
 
-.cards .cards-card-image {
-  line-height: 0;
+.cards > div > div:last-child ul li span .compare-fill {
+  background-color: #006eff;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transition: all 1.2s ease-out;
+  width: 0;
 }
 
-.cards .cards-card-body > *:first-child {
-  margin-top: 0;
+.cards > div > div:last-child ul li span .compare-fill:before {
+  content: attr(data-value);
+  display: block;
+  font-size: 14px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-.cards > ul > li img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
+.cards > div > div:last-child p:last-of-type {
+  color: #616161;
+  font-size: 9pt;
+  margin-bottom: 0;
+}
+
+.cards > div > div:last-child p:last-of-type a {
+  color: #006eff;
+  text-decoration: none;
 }
