@@ -1,0 +1,40 @@
+header {
+    /* remember to delete this line */
+    display: none;
+}
+
+.features {
+    display: flex;
+    flex-direction: column;
+    width: 70vw;
+    margin: 0 auto;
+}
+
+.features > div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.features > div > div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    text-align: left;
+    padding: 1em;
+}
+
+.features h1 {
+    font-size: var(--heading-font-size-m);
+    font-weight: var(--font-weight-regular);
+}
+
+.features img {
+    margin-left: 10px;
+    width: 50px;
+}
+
+.features p {
+    font-size: var(--body-font-size-s);
+}
