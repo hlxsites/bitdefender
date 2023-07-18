@@ -30,11 +30,6 @@ function createLoginModal() {
   const divider = document.createElement('div');
   divider.className = 'divider';
   loginModal.appendChild(divider);
-
-  decorateButtons(nav);
-
-  //const loginButtons = loginModal.querySelectorAll('p');
-  //loginButtons.forEach(button => button.classList.add('login-buttons'));
 }
 
 function handleLoginClick() {
@@ -63,6 +58,7 @@ function appendUlToP() {
   });
 }
 
+/*
 function createTags(links) {
   links.forEach((link) => {
     if (link.textContent.includes('[new]')) {
@@ -81,6 +77,7 @@ function createTags(links) {
     }
   });
 }
+*/
 
 function wrapDivsInMegaMenu() {
   const nav = document.getElementById('nav');
@@ -129,8 +126,8 @@ function wrapDivsInMegaMenu() {
 function buildMegaMenu() {
   wrapDivsInMegaMenu();
   appendUlToP();
-  let links = document.querySelectorAll('p > a');
-  createTags(links);
+  // let links = document.querySelectorAll('p > a');
+  // createTags(links);
 }
 
 async function renderDesktopHeader(block, nav) {
@@ -204,7 +201,6 @@ async function renderDesktopHeader(block, nav) {
     homeSolutionsLink.style.color = '#dedede';
   });
   createLoginModal();
-  removeButtonContainerClass();
 }
 
 // MOBILE HEADER //
@@ -214,6 +210,19 @@ function handleMenuClick() {
 
   const headerWrapper = document.querySelector('.header-wrapper');
   headerWrapper.classList.toggle('expanded');
+
+  let hasToggled = false;
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 1000 && !hasToggled && headerWrapper.classList.contains('expanded')) {
+      headerWrapper.classList.toggle('expanded');
+      this.classList.toggle('change');
+      optionsWrapper.classList.toggle('show');
+      hasToggled = true;
+    } else if (window.innerWidth <= 1000) {
+      hasToggled = false;
+    }
+  });
 
   const optionsWrapper = document.querySelector('.options-wrapper');
   setTimeout(() => {
@@ -249,7 +258,7 @@ function handleMenuClick() {
           submenuItem.name = cloneLink.textContent;
           submenuItem.url = cloneLink.href;
 
-          createTags([cloneLink]);
+          // createTags([cloneLink]); // Tags need to be implemented later
 
           submenuItem.updatedLinkHTML = cloneLink.outerHTML;
 
@@ -284,12 +293,16 @@ function handleMenuClick() {
     if (subMenuTitle) {
       subMenuTitle.addEventListener('click', handleSubMenuTitleClick);
     }
+    const optionWrapperShow = document.querySelector('.options-wrapper.show');
+    optionWrapperShow.style.height = '100vh';
   }
 
   function attachMenuOptionClickEvents() {
     document.querySelectorAll('.menu-option').forEach((menuOption) => {
       menuOption.addEventListener('click', handleMenuOptionClick);
     });
+    const optionWrapperShow = document.querySelector('.options-wrapper.show');
+    optionWrapperShow.style.height = '65vh';
   }
 
   function handleSubMenuTitleClick() {
@@ -321,7 +334,6 @@ async function renderMobileHeader(nav) {
   const optionsWrapper = document.createElement('div');
   optionsWrapper.className = 'options-wrapper';
 
-  // Append nav (with the remaining first two divs) and optionsWrapper to headerBlock
   headerBlock.appendChild(nav);
   headerBlock.appendChild(wrapperDiv);
   headerBlock.appendChild(optionsWrapper);
@@ -345,10 +357,6 @@ export default async function decorate(block) {
       if (section) section.classList.add(`nav-${c}`);
     });
 
-    // decorate the navigation with the appropriate icons
-    decorateIcons(nav);
-    // decorateButtons(nav);
-
     const bitdefenderLogo = document.createElement('img');
     bitdefenderLogo.src = 'https://www.bitdefender.com/content/dam/bitdefender/splitter-homepage/black_company_logo.svg';
     bitdefenderLogo.alt = 'Bitdefender Logo';
@@ -359,6 +367,9 @@ export default async function decorate(block) {
 
     const headerWrapper = document.querySelector('.header-wrapper');
     headerWrapper.appendChild(logoLink);
+
+    decorateIcons(nav);
+    decorateButtons(nav);
 
     renderMobileHeader(nav);
     renderDesktopHeader(block, nav);

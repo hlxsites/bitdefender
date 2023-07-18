@@ -1,4 +1,8 @@
 /* header and nav layout */
+header {
+  z-index: 100;
+}
+
 .nav-wrapper {
   position: absolute;
   width: 100%;
@@ -187,7 +191,7 @@
   text-decoration: none;
   color: var(--color-highlight-blue) !important;
   width: 330px;
-  height: 35px;
+  height: 55px;
   border-radius: 9px;
   border: 2px solid var(--color-highlight-blue) !important;
   background-color: transparent !important;
@@ -198,10 +202,23 @@
   font-weight: 500;
 }
 
+.login-modal a.button:any-link {
+  height: 50px;
+  padding-right: 15px;
+}
+
+.login-modal a.button:any-link span {
+  margin: 0 auto; 
+  font-weight: 500;
+}
+
+
 .login-modal a:hover {
   background-color: var(--color-highlight-blue) !important;
   color: var(--background-color) !important;
 }
+
+
 
 .header-wrapper > p a{
   position: relative;
@@ -217,7 +234,13 @@
   text-decoration: none;
   font-size: var(--body-font-size-xxs) !important;
   font-weight: 500 !important;
-  top: 40px;
+  top: 70px;
+}
+
+a.button span.button-text {
+  display: flex;
+  font-size: var(--body-font-size-xs);
+  font-weight: 400;
 }
 
 .mega-menu div p a{
@@ -233,6 +256,7 @@
   margin-left: 200px;
   filter: invert(100%);
 }
+
 
 .header.block img {
   position: relative;
@@ -261,10 +285,19 @@
 
 .other-options > div > p:hover a:after {
   background-color: var(--color-highlight-blue);
-  transition: none !important;
-  transform: none !important;
 }
 
+header a.button:hover span.button-text {
+  transform: none;
+}
+
+header a.button::after {
+  margin-left: 0px;
+}
+
+header a.button:any-link {
+  padding: 0px;
+}
 
 .other-options > div > p a > span:not(#new,#evolved) {
   position: relative;
@@ -277,6 +310,7 @@
   background-color: var(--color-highlight-blue);
   color: var(--background-color);
 }
+
 
 .triangle {
   position: absolute;
@@ -367,6 +401,12 @@
   margin-top: 10px;
   text-decoration: none;
   animation: slide-in 0.2s 0.075s forwards;
+  background-color: transparent !important;
+  border: transparent !important;
+}
+
+.options-wrapper.show > a:first-child {
+  margin-top: 40px;
 }
 
 .bottom-links p:hover > a {
@@ -386,7 +426,16 @@
   color: var(--text-color) !important;
   text-decoration: none;
   font-size: var(--body-font-size-s);
+  background-color: transparent;
+  border: none;
+}
+
+.mega-menu > div:first-child p a span {
   font-weight: 600;
+}
+
+.mega-menu > div:first-child p a:after {
+  background-color: var(--color-highlight-blue);
 }
 
 .mega-menu > div:first-child p:hover a {
@@ -470,7 +519,6 @@
 
 @media (max-width: 1000px) {
 .header-wrapper {
-  margin-top: -50px;
   position: fixed;
   background-color: var(--background-color);
   transition: all 0.3s ease-in-out;
@@ -485,8 +533,16 @@
 
 nav {
   display: none;
-  
 }
+}
+
+@media(min-width: 1000px) {
+  .options-wrapper {
+    display: none;
+  }
+  header {
+    height: 40px;
+  }
 }
 
 .menu-bar {
@@ -507,6 +563,7 @@ nav {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  z-index: 100;
 }
 
 .menu-wrapper.change .menu-bar:first-child {
@@ -541,7 +598,7 @@ nav {
 
 .options-wrapper.show{
   width: 100vw;
-  height: 55vh;
+  height: 65vh;
   box-shadow: 0 10px 10px #0003;
   z-index: 3;
   border-top: 1px solid #cecccc;

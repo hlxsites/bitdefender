@@ -138,7 +138,7 @@ body.appear {
   display: unset;
 }
 
-header {
+header { 
   height: var(--nav-height);
 }
 
