@@ -8,36 +8,27 @@ function selectActiveMenu(event, activeItem, menuItems) {
 }
 
 export default function decorate(block) {
-  /* change to ul, li and divs to match original css */
-  const wcDiv = document.createElement('div');
-  wcDiv.className = 'we-container';
+  /* add css classes */
+  const weContainerDiv = block.children[0];
+  weContainerDiv.classList.add('we-container');
 
-  const outerDiv = document.createElement('div');
-  outerDiv.className = 'outer';
-  wcDiv.append(outerDiv);
+  const outerDiv = weContainerDiv.children[0];
+  outerDiv.classList.add('outer');
 
-  const innderDiv = document.createElement('div');
-  innderDiv.className = 'inner-wrapper';
-  outerDiv.append(innderDiv);
+  const ul = outerDiv.querySelector('ul');
 
-  const ul = document.createElement('ul');
+  const innerWrapperDiv = document.createElement('div');
+  innerWrapperDiv.className = 'inner-wrapper';
+  innerWrapperDiv.appendChild(ul);
+  outerDiv.appendChild(innerWrapperDiv);
 
-  [...block.children[0].children].forEach((row) => {
-    const li = document.createElement('li');
-    const a = row.querySelector('a');
+  [...ul.children].forEach((li) => {
     const span = document.createElement('span');
+    const a = li.querySelector('a');
     span.innerHTML = a.innerHTML;
     a.innerHTML = '';
-    a.append(span);
-    li.append(a);
-
-    ul.append(li);
+    a.appendChild(span);
   });
-  innderDiv.append(ul);
-
-  block.textContent = '';
-  block.classList.add('more-items');
-  block.append(wcDiv);
 
   /* listen to scroll event to stick the nav on the top when necessary */
   document.addEventListener('scroll', () => {
