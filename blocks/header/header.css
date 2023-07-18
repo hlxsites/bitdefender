@@ -252,7 +252,7 @@ a.button span.button-text {
 
 .header-wrapper > a img {
   position: relative;
-  top: 95px;
+  top: 70px;
   margin-left: 200px;
   filter: invert(100%);
 }
@@ -446,6 +446,11 @@ header a.button:any-link {
   font-weight: bold;
   font-size: var(--body-font-size-s);
   margin: 25px;
+  background-image: url('../../icons/right.svg');
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 25px;
+  padding-right: 25px;
 }
 
 @media (max-width: 1000px) {
