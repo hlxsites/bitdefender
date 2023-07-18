@@ -32,7 +32,7 @@ export default function decorate(block) {
 
   /* listen to scroll event to stick the nav on the top when necessary */
   document.addEventListener('scroll', () => {
-    const wrapperTop = block.parentElement.offsetTop - 10;
+    const wrapperTop = block.parentElement.offsetTop;
     if (window.scrollY >= wrapperTop) {
       block.classList.add('fixed-nav');
     } else {
