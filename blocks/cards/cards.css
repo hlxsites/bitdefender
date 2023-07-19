@@ -33,7 +33,7 @@
 
 .cards-card-body p {
   line-height: 1.25;
-  color: rgb(60, 60, 60);
+  color:  --text-color;
   font-size: 14px;
   font-weight: 400;
 }
@@ -41,7 +41,6 @@
 .cards-card-body > ul > li > ul > li {
   display: none;
 }
-
 
 .bar {
   display: flex;
@@ -65,7 +64,7 @@
 
 .first-bar  .bar-label {
   color: #fff;
-  background-color: rgba(0, 110, 255);
+  background-color: --bar-label-color;
 }
 
 .value-label {
