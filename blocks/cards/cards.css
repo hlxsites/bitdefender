@@ -82,7 +82,10 @@
   display: inline-block;
   margin-block-start: 1em;
   margin-block-end: 1em;
+}
 
+main .section .cards-wrapper {
+  padding: 0 20px;
 }
 
 @media (min-width:481px) {
@@ -91,18 +94,19 @@
   }
 }
 
-main .section .default-content-wrapper {
-  padding: 0 20px;
-}
-
 @media (min-width: 990px) { /* desktop */
   .cards > ul{
     grid-template-columns: repeat(2, minmax(300px, 1fr));
   }
+  
+  main .section .cards-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
 }
 
 @media (min-width: 1600px) { /* large desktop */
-  main .section .default-content-wrapper {
+  main .section .cards-wrapper {
     max-width: 1292px;
     margin: 0 auto;
   }

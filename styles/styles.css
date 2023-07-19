@@ -295,22 +295,3 @@ main .section {
 main .section.highlight {
   background-color: var(--highlight-background-color);
 }
-
-/* mobile section content */
-main .section .default-content-wrapper, main .section .cards-wrapper {
-  padding: 0 20px;
-}
-
-@media (min-width: 990px) { /* desktop */
-  main .section .default-content-wrapper, main .section .cards-wrapper {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-}
-
-@media (min-width: 1600px) { /* large desktop */
-  main .section .default-content-wrapper, main .section .cards-wrapper {
-    max-width: 1292px;
-    margin: 0 auto;
-  }
-}
