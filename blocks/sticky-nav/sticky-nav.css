@@ -10,8 +10,6 @@ div.sticky-nav ul li a {
   height: 68px;
 }
 
- 
-
 div.sticky-nav ul.mobile-menu li a {
   color: #000;
 }
@@ -71,4 +69,40 @@ div.sticky-nav.fixed-nav {
   max-width: 20in
 }
 
+@media (min-width: 990px) { /* desktop */
+  div.sticky-nav ul {
+    display: flex;
+    flex-direction: row;
+    padding: 0 50px;
+    border-bottom: 1px solid #dedede;
+    height: 65px;
+  }
 
+  div.sticky-nav ul li {
+    border: none;
+    margin-right: 20px;
+  }
+
+  div.sticky-nav ul li.active {
+    border-bottom: 2px solid #006eff;
+    transition: width .3s ease-in-out
+  }
+  
+  div.sticky-nav ul.mobile-menu {
+    display: none;
+  }
+}
+
+@media (min-width: 1600px) {
+  div.sticky-nav ul {
+    height: 72px;
+  }
+
+  div.sticky-nav ul li a {
+    font-size: 16px;
+  }
+
+  div.sticky-nav ul li.active {
+    border-bottom: 4px solid #006eff;
+  }
+}

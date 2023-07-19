@@ -1,12 +1,3 @@
-// function selectActiveMenu(event, activeItem, menuItems) {
-//   // remove current active menu
-//   menuItems.forEach((menuItem) => {
-//     menuItem.classList.remove('active');
-//   });
-
-//   activeItem.classList.add('active');
-// }
-
 export default function decorate(block) {
   const menu = block.querySelector('ul');
   menu.classList.add('menu');
