@@ -37,8 +37,7 @@ div.sticky-nav ul.mobile-menu li {
   border: none;
 }
 
-
-div.sticky-nav ul.mobile-menu:after {
+div.sticky-nav ul.mobile-menu::after {
   content: "";
   position: absolute;
   right: 0;
@@ -55,7 +54,7 @@ div.sticky-nav ul.mobile-menu:after {
   transition: transform 0.3s ease-in-out;
 }
 
-div.sticky-nav ul.mobile-menu.opened:after {
+div.sticky-nav ul.mobile-menu.opened::after {
   transform: rotate(180deg);
   transition: transform 0.3s ease-in-out;
 }
