@@ -5,6 +5,13 @@ footer {
   max-width: 120rem;
 }
 
+footer .footer a {
+  color: #fff;
+  cursor: pointer;
+  outline: 0;
+  font-family: var(--body-font-family),sans-serif;
+}
+
 .footer ul {
   list-style: none;
   padding: 0 1.25rem;
@@ -31,13 +38,6 @@ footer .footer p {
   color: #999 !important;
   cursor: auto;
   pointer-events: none;
-}
-
-footer .footer a {
-  color: #fff;
-  cursor: pointer;
-  outline: 0;
-  font-family: var(--body-font-family),sans-serif;
 }
 
 footer .footer a:hover {  
