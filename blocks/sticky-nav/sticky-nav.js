@@ -1,33 +1,40 @@
-function selectActiveMenu(event, activeItem, menuItems) {
-  // remove current active menu
-  menuItems.forEach((menuItem) => {
-    menuItem.classList.remove('active');
-  });
+// function selectActiveMenu(event, activeItem, menuItems) {
+//   // remove current active menu
+//   menuItems.forEach((menuItem) => {
+//     menuItem.classList.remove('active');
+//   });
 
-  activeItem.classList.add('active');
-}
+//   activeItem.classList.add('active');
+// }
 
 export default function decorate(block) {
-  /* add css classes */
-  const weContainerDiv = block.children[0];
-  weContainerDiv.classList.add('we-container');
+  const menu = block.querySelector('ul');
+  menu.classList.add('menu');
 
-  const outerDiv = weContainerDiv.children[0];
-  outerDiv.classList.add('outer');
+  // remove intermediary divs
+  block.replaceChildren(menu);
 
-  const ul = outerDiv.querySelector('ul');
+  const menuEntries = block.querySelectorAll('ul > li');
 
-  const innerWrapperDiv = document.createElement('div');
-  innerWrapperDiv.className = 'inner-wrapper';
-  innerWrapperDiv.appendChild(ul);
-  outerDiv.appendChild(innerWrapperDiv);
+  const mobileMenu = document.createElement('ul');
+  mobileMenu.className = 'mobile-menu';
+  mobileMenu.appendChild(menuEntries[0].cloneNode(true));
+  block.prepend(mobileMenu);
 
-  [...ul.children].forEach((li) => {
-    const span = document.createElement('span');
-    const a = li.querySelector('a');
-    span.innerHTML = a.innerHTML;
-    a.innerHTML = '';
-    a.appendChild(span);
+  /* listen to click event to visually select the menu item in the nav */
+  menuEntries.forEach((li) => li.addEventListener('click', () => {
+    menuEntries.forEach((menuItem) => {
+      menuItem.classList.remove('active');
+    });
+    li.classList.add('active');
+    mobileMenu.replaceChildren(li.cloneNode(true));
+    mobileMenu.classList.remove('opened');
+  }));
+
+  /* listen to click event to open or close the menu on mobile */
+  mobileMenu.addEventListener('click', (e) => {
+    e.preventDefault();
+    mobileMenu.classList.toggle('opened');
   });
 
   /* listen to scroll event to stick the nav on the top when necessary */
@@ -39,8 +46,4 @@ export default function decorate(block) {
       block.classList.remove('fixed-nav');
     }
   });
-
-  /* listen to click event to visually select the menu item in the nav */
-  const menuEntries = ul.querySelectorAll('ul > li');
-  menuEntries.forEach((li) => li.addEventListener('click', (event) => selectActiveMenu(event, li, menuEntries)));
 }
