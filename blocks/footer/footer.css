@@ -13,13 +13,13 @@ footer {
 }
 
 .footer ul li {
-  font-size: 1rem;
+  font-size: var(--body-font-size-s);
   line-height: 1.63;
   font-family: var(--body-font-family),sans-serif;
 }
 
 .footer ul li a {
-  font: normal normal 700 10px/30px var(--body-font-family);
+  font: normal normal var(--font-weight-boldest) 10px/30px var(--body-font-family);
 }
 
 footer .footer p {
@@ -62,7 +62,7 @@ footer .footer a:hover {
 
 .footer > div p {
   text-align: left;
-  font: normal normal 700 13px/24px var(--body-font-family);
+  font: normal normal var(--font-weight-boldest) 13px/24px var(--body-font-family);
   letter-spacing: 0;
   color: #9098a3;
   opacity: 1;
@@ -115,7 +115,7 @@ footer .footer a:hover {
   text-align: left;
   letter-spacing: .78pt;
   text-transform: uppercase;
-  font: normal normal 700 11px/30px var(--body-font-family);
+  font: normal normal var(--font-weight-boldest) 11px/30px var(--body-font-family);
 }
 
 .footer > div > :nth-child(2) {
@@ -181,7 +181,7 @@ footer .footer a:hover {
 
 .footer > div > :nth-child(3) > ul li > a,
 .footer > div > :nth-child(4) > ul li > a {
-  font: normal normal 500 10px/30px var(--body-font-family);
+  font: normal normal var(--font-weight-bold) 10px/30px var(--body-font-family);
   letter-spacing: 0;
   opacity: 1;
 }
@@ -230,12 +230,12 @@ footer .footer a:hover {
 }
 
 .footer > div > :nth-child(5) > p {
-  font-size: 1.25rem;
-  padding: 0 1.25rem 1.5rem;
+  font-size: var(--body-font-size-m);
+  padding: 0 1.375rem 1.5rem;
   color: rgb(255 255 255);
   letter-spacing: 0;
   line-height: 1.5rem;
-  font-weight: 700;
+  font-weight: var(--font-weight-boldest);
   font-family: "IBM Plex Sans" ,sans-serif;
 }
 
@@ -257,21 +257,20 @@ footer .footer a:hover {
 .footer > div > :nth-child(6) > ul li {
   display: block;
   margin-bottom: 0.625rem;
-  font: normal normal 500 10px/30px var(--body-font-family);
+  font: normal normal var(--font-weight-regular) 10px/30px var(--body-font-family);
   width: 100%;
   line-height: 1;
-  font-size: 14px;
-  font-weight: 400;
+  font-size: var(--body-font-size-xs);
 }
 
 .footer > div > :nth-child(6) > ul li > a {
   display: inline-block;
-  font: normal normal 500 10px/30px var(--body-font-family);
+  font: normal normal var(--font-weight-bold) 10px/30px var(--body-font-family);
 }
 
 @media(min-width: 480px) {
   .footer > div > :nth-child(6) > ul li > a {
-    font: normal normal 500 11px/30px var(--body-font-family);
+    font: normal normal var(--font-weight-bold) 11px/30px var(--body-font-family);
   }
 
   .footer > div > :nth-child(6) > p {
@@ -287,11 +286,11 @@ footer .footer a:hover {
   }
 
   .footer > div > :nth-child(1) > ul li > a {
-    font: normal normal 700 9pt/30px var(--body-font-family);
+    font: normal normal var(--font-weight-boldest) 9pt/30px var(--body-font-family);
   }
 
   .footer > div > :nth-child(6) > ul li > a {
-    font: normal normal 500 9pt/30px var(--body-font-family);
+    font: normal normal var(--font-weight-bold) 9pt/30px var(--body-font-family);
   }
 
   .footer > div > :nth-child(6) > p {
@@ -307,7 +306,7 @@ footer .footer a:hover {
   .footer .deactivated::before {
     content: "•";
     color: #999;
-    font-weight: 700;
+    font-weight: var(--font-weight-boldest);
     display: inline-block;
     width: 1rem;
     position: absolute;
@@ -360,7 +359,7 @@ footer .footer a:hover {
   }
 
   .footer > div > :nth-child(1) > ul li > a {
-    font: normal normal 700 13px/30px var(--body-font-family);
+    font: normal normal var(--font-weight-boldest) 13px/30px var(--body-font-family);
   }
 
   .footer > div > :nth-child(2) {
@@ -375,7 +374,7 @@ footer .footer a:hover {
   .footer > div > :nth-child(3) > p,
   .footer > div > :nth-child(4) > p {
     padding: 0;
-    font: normal normal 700 13px/24px var(--body-font-family);
+    font: normal normal var(--font-weight-boldest) 13px/24px var(--body-font-family);
     letter-spacing: 0;
     color: #9098a3;
     opacity: 1;
@@ -405,7 +404,7 @@ footer .footer a:hover {
   .footer > div > :nth-child(2) > ul li > a,
   .footer > div > :nth-child(3) > ul li > a,
   .footer > div > :nth-child(4) > ul li > a {
-    font: normal normal 500 13px/30px var(--body-font-family);
+    font: normal normal var(--font-weight-bold) 13px/30px var(--body-font-family);
     display: inline-block;
     position: relative;
   }
@@ -485,8 +484,8 @@ footer .footer a:hover {
     padding: 0;
     margin: 0;
     position: relative;
-    font-size: 0.875rem;
-    font-weight: 400;
+    font-size: var(--body-font-size-xs);
+    font-weight: var(--font-weight-regular);
     line-height: 1.14;
     width: auto;
   }
