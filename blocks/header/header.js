@@ -1,7 +1,3 @@
-/* eslint-disable no-plusplus */
-/* eslint-disable no-use-before-define */
-/* eslint-disable prefer-const */
-/* eslint-disable no-shadow */
 import { getMetadata, decorateIcons, decorateButtons } from '../../scripts/lib-franklin.js';
 /**
  * Toggles all nav sections
@@ -41,14 +37,14 @@ function handleLoginClick() {
 }
 
 function appendUlToP() {
-  let divs = document.querySelectorAll('.mega-menu > div');
+  const divs = document.querySelectorAll('.mega-menu > div');
 
   divs.forEach((div) => {
-    let uls = div.querySelectorAll('ul');
+    const uls = div.querySelectorAll('ul');
     uls.forEach((ul) => {
-      let p = ul.previousElementSibling;
+      const p = ul.previousElementSibling;
 
-      let span = document.createElement('div');
+      const span = document.createElement('div');
 
       Array.from(ul.children).forEach((li) => {
         span.textContent += ` ${li.textContent}`;
@@ -60,27 +56,6 @@ function appendUlToP() {
     });
   });
 }
-
-/*
-function createTags(links) {
-  links.forEach((link) => {
-    if (link.textContent.includes('[new]')) {
-      link.textContent = link.textContent.replace('[new]', '');
-      let span = document.createElement('span');
-      span.textContent = 'NEW';
-      span.id = 'new';
-      link.parentNode.insertBefore(span, link.nextSibling);
-    } else if (link.textContent.includes('[evolved]')) {
-      link.textContent = link.textContent.replace('[evolved]', '');
-      let span = document.createElement('span');
-      span.textContent = 'EVOLVED';
-      span.id = 'evolved';
-      span.style.backgroundColor = '#14b0a7';
-      link.parentNode.insertBefore(span, link.nextSibling);
-    }
-  });
-}
-*/
 
 function wrapDivsInMegaMenu() {
   const nav = document.getElementById('nav');
@@ -98,12 +73,12 @@ function wrapDivsInMegaMenu() {
   megaMenuDiv.appendChild(divs[navSectionsIndex + 1].cloneNode(true));
   nav.removeChild(divs[navSectionsIndex + 1]);
 
-  for (let i = navSectionsIndex + 2; i < 8; i++) {
+  for (let i = navSectionsIndex + 2; i < 8; i += 1) {
     otherOptionsDiv.appendChild(divs[i].cloneNode(true));
     nav.removeChild(divs[i]);
   }
 
-  for (let i = 8; i < divs.length; i++) {
+  for (let i = 8; i < divs.length; i += 1) {
     bottomLinks.appendChild(divs[i].cloneNode(true));
     nav.removeChild(divs[i]);
   }
@@ -148,8 +123,6 @@ function removeButtonClasses() {
 function buildMegaMenu() {
   wrapDivsInMegaMenu();
   appendUlToP();
-  // let links = document.querySelectorAll('p > a');
-  // createTags(links);
   removeButtonClasses();
 }
 
@@ -177,8 +150,8 @@ async function renderDesktopHeader(block, nav) {
   }
 
   if (navBrandLinks && navBrandLinks.length > 0) {
-    const forHomeLink = Array.from(navBrandLinks).find((link) => link.innerHTML === 'For Home');
-    if (forHomeLink) {
+    const forHomeLink = Array.from(navBrandLinks)[0];
+    if (forHomeLink && forHomeLink.innerHTML === 'For Home') {
       const homeButtonBorder = document.createElement('div');
       homeButtonBorder.className = 'home-button-border';
       forHomeLink.parentNode.appendChild(homeButtonBorder);
@@ -204,14 +177,16 @@ async function renderDesktopHeader(block, nav) {
 
   homeSolutionsLink.addEventListener('mouseenter', () => {
     clearTimeout(hideTimeout);
-    megaMenu.style.opacity = '1';
-    homeSolutionsLink.style.color = '#FFF';
+    megaMenu.classList.add('mega-menu-show');
+    homeSolutionsLink.classList.remove('home-solutions-link-default');
+    homeSolutionsLink.classList.add('home-solutions-link-hover');
   });
 
   homeSolutionsLink.addEventListener('mouseleave', () => {
     hideTimeout = setTimeout(() => {
-      megaMenu.style.opacity = '0';
-      homeSolutionsLink.style.color = '#dedede';
+      megaMenu.classList.remove('mega-menu-show');
+      homeSolutionsLink.classList.remove('home-solutions-link-hover');
+      homeSolutionsLink.classList.add('home-solutions-link-default');
     }, 500);
   });
 
@@ -220,9 +195,11 @@ async function renderDesktopHeader(block, nav) {
   });
 
   megaMenu.addEventListener('mouseleave', () => {
-    megaMenu.style.opacity = '0';
-    homeSolutionsLink.style.color = '#dedede';
+    megaMenu.classList.remove('mega-menu-show');
+    homeSolutionsLink.classList.remove('home-solutions-link-hover');
+    homeSolutionsLink.classList.add('home-solutions-link-default');
   });
+
   createLoginModal();
 }
 
@@ -236,6 +213,11 @@ function handleMenuClick() {
 
   let hasToggled = false;
 
+  const optionsWrapper = document.querySelector('.options-wrapper');
+  setTimeout(() => {
+    optionsWrapper.classList.toggle('show');
+  }, 100);
+
   window.addEventListener('resize', () => {
     if (window.innerWidth > 1000 && !hasToggled && headerWrapper.classList.contains('expanded')) {
       headerWrapper.classList.toggle('expanded');
@@ -247,41 +229,34 @@ function handleMenuClick() {
     }
   });
 
-  const optionsWrapper = document.querySelector('.options-wrapper');
-  setTimeout(() => {
-    optionsWrapper.classList.toggle('show');
-  }, 100);
-
   // Select the first child of mega-menu and all div children of other-options
   const megaMenuFirstChild = document.querySelector('.mega-menu').firstElementChild;
 
   const otherOptionsChildren = Array.from(document.querySelector('.other-options').children);
   const navDivs = [megaMenuFirstChild].concat(otherOptionsChildren);
-  let menuOptions = [];
+  const menuOptions = [];
 
   // Iterate over each div
-  for (let i = 0; i < navDivs.length; i++) {
-    let menuOption = {};
-    let div = navDivs[i];
+  for (let i = 0; i < navDivs.length; i += 1) {
+    const menuOption = {};
+    const div = navDivs[i];
 
     // Find the h2 within this div and assign its innerHTML to the title of menuOption
-    let h2 = div.querySelector('h2');
+    const h2 = div.querySelector('h2');
     if (h2) {
       menuOption.title = h2.innerHTML;
 
       // Find all a tags within this div
-      let links = div.querySelectorAll('a');
+      const links = div.querySelectorAll('a');
       if (links.length > 0) {
         menuOption.subMenu = [];
 
         links.forEach((link) => {
-          let submenuItem = {};
+          const submenuItem = {};
           // Clone the link element
-          let cloneLink = link.cloneNode(true);
+          const cloneLink = link.cloneNode(true);
           submenuItem.name = cloneLink.textContent;
           submenuItem.url = cloneLink.href;
-
-          // createTags([cloneLink]); // Tags need to be implemented later
 
           submenuItem.updatedLinkHTML = cloneLink.outerHTML;
 
@@ -303,6 +278,7 @@ function handleMenuClick() {
 
   const menuOptionsHTML = menuOptions.map((option) => `<div class='menu-option' data-option='${option.title}'>${option.title}</div>`).join('');
 
+  // eslint-disable-next-line prefer-const
   originalMenuHTML = menuOptionsHTML;
 
   optionsWrapper.innerHTML = menuOptionsHTML;
@@ -314,6 +290,7 @@ function handleMenuClick() {
 
     const subMenuTitle = document.querySelector('.sub-menu-title');
     if (subMenuTitle) {
+      // eslint-disable-next-line no-use-before-define
       subMenuTitle.addEventListener('click', handleSubMenuTitleClick);
     }
     const optionWrapperShow = document.querySelector('.options-wrapper.show');
@@ -325,7 +302,9 @@ function handleMenuClick() {
       menuOption.addEventListener('click', handleMenuOptionClick);
     });
     const optionWrapperShow = document.querySelector('.options-wrapper.show');
-    optionWrapperShow.style.height = '65vh';
+    if (optionWrapperShow) {
+      optionWrapperShow.style.height = '65vh';
+    }
   }
 
   function handleSubMenuTitleClick() {
@@ -348,7 +327,7 @@ async function renderMobileHeader(nav) {
   wrapperDiv.addEventListener('click', handleMenuClick);
 
   // Create three span elements (bars)
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 3; i += 1) {
     const barSpan = document.createElement('span');
     barSpan.classList.add('menu-bar');
     wrapperDiv.appendChild(barSpan);
@@ -380,21 +359,20 @@ export default async function decorate(block) {
       if (section) section.classList.add(`nav-${c}`);
     });
 
-    const bitdefenderLogo = document.createElement('img');
-    bitdefenderLogo.src = 'https://www.bitdefender.com/content/dam/bitdefender/splitter-homepage/black_company_logo.svg';
-    bitdefenderLogo.alt = 'Bitdefender Logo';
-
-    const logoLink = document.createElement('a');
-    logoLink.href = 'https://www.bitdefender.com/';
-    logoLink.appendChild(bitdefenderLogo);
-
-    const headerWrapper = document.querySelector('.header-wrapper');
-    headerWrapper.appendChild(logoLink);
-
-    decorateIcons(nav);
     decorateButtons(nav);
 
     renderMobileHeader(nav);
     renderDesktopHeader(block, nav);
+
+    decorateIcons(nav);
+
+    // Select the parent elements
+    const bottomLinks = document.querySelector('.bottom-links');
+    const header = document.querySelector('header');
+
+    const thirdChild = bottomLinks.children[2];
+
+    bottomLinks.removeChild(thirdChild);
+    header.appendChild(thirdChild);
   }
 }

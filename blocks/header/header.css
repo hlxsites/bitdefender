@@ -163,10 +163,10 @@ header {
   align-items: flex-start;
   justify-content: flex-start;
   position: absolute;
-  right: min(220px, calc(100vw - 900px));
+  right: min(190px, calc(100vw - 880px));
   width: 375px;
   height: 275px;
-  top: 80px;
+  top: 70px;
   background-color: var(--background-color);
   border-radius: 5px;
   opacity: 0; 
@@ -177,7 +177,7 @@ header {
 
 .login-modal.show {
   opacity: 1;
-  top: 70px;
+  top: 60px;
   z-index: 5;
 }
 
@@ -223,27 +223,78 @@ header a.button:any-link {
   padding-right: 15px;
 }
 
+header a.button::after {
+  margin-left: 0;
+}
+
+.login-modal a.button::after {
+  position: relative;
+  margin-left: 220px;
+}
+
 .mega-menu > div:first-child p a span {
   font-weight: 600;
 }
 
 .login-modal a.button:any-link span {
-  margin: 0 auto; 
+  margin-left: 25%;
+  position: absolute;
   font-weight: 500;
 }
 
+.login-modal.show p.button-container:nth-child(3) span {
+  margin-left: 13%;
+}
+
+.login-modal.show p.button-container:nth-child(3) a.button::after {
+  margin-left: 280px;
+}
+
+.login-modal.show p.button-container:nth-child(4) span {
+  margin-left: 33%;
+}
+
+.login-modal.show p.button-container:nth-child(4) a.button::after {
+  margin-left: 200px;
+}
+
+
+/* CSS class for showing the mega menu */
+.mega-menu-show {
+  opacity: 1 !important;
+}
+
+/* CSS class for changing the link color */
+.home-solutions-link-hover {
+  color: #FFF !important;
+}
+
+/* CSS class for default link color */
+.home-solutions-link-default {
+  color: #dedede !important;
+}
+
 .header-wrapper a{
+  position: relative;
   z-index: 999;
 }
 
 .header-wrapper > p a{
   position: relative;
-  top: 35px;
+  top: 85px;
   margin-left: 435px;
   font-size: var(--body-font-size-s);
   color: var(--horizontal-separator-color);
   text-decoration: none;
   cursor: pointer;
+}
+
+header .icon {
+  margin-top: -20px;
+  margin-left: 200px;
+  z-index: 1000;
+  filter: invert(100);
+  width: 175px;
 }
 
 .bottom-links p > a {
@@ -310,10 +361,6 @@ a.button span.button-text {
 
 header a.button:hover span.button-text {
   transform: none;
-}
-
-header a.button::after {
-  margin-left: 0;
 }
 
 .other-options > div > p a > span:not(#new,#evolved) {
@@ -558,9 +605,11 @@ nav {
   }
 
   header {
+    margin-top: -15px;
     height: 40px;
   }
 }
+
 
 .menu-bar {
   display: block;
