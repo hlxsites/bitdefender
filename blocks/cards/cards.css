@@ -71,7 +71,7 @@
 
 .first-bar  .bar-label {
   color: #fff;
-  background-color: var(--bar-label-color);
+  background-color: #006EFF;;
 }
 
 .value-label {
