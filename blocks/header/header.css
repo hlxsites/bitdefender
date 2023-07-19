@@ -441,7 +441,7 @@ header a.button:hover span.button-text {
   background-color: var(--background-color);
   opacity: 0; 
   z-index: 3;
-  transition: all 0.2s ease-in-out;
+  transition: opacity 0.2s ease-in-out;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
   box-shadow: 0 10px 10px #0003;
@@ -519,8 +519,16 @@ header a.button:hover span.button-text {
     display: none;
   }
 
-  .header-wrapper p a {
+  .header-wrapper > p{
     display: none;
+  }
+
+  header .icon {
+    position: absolute;
+    top: -22px;
+    margin-left: 25px;
+    width: 200px;
+    filter: none;
   }
 }
 
@@ -609,6 +617,10 @@ nav {
   header {
     margin-top: -18px;
     height: 40px;
+  }
+
+  .menu-wrapper {
+    display: none !important;
   }
 }
 

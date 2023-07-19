@@ -132,12 +132,13 @@ async function renderDesktopHeader(block, nav) {
 
   if (navSections) {
     const navParagraphs = navSections.querySelectorAll('p');
+    const lastNavParagraph = navParagraphs[navParagraphs.length - 1];  // Get the last 'p' element
     navParagraphs.forEach((navParagraph) => {
       const divider = document.createElement('div');
       divider.className = 'nav-divider';
       navSections.insertBefore(divider, navParagraph);
 
-      if (navParagraph.textContent.trim() === 'Login') {
+      if (navParagraph === lastNavParagraph) {  // Check if this is the last 'p' element
         const loginLink = document.createElement('a');
         loginLink.textContent = 'Login';
         loginLink.href = 'https://bitdefender.com';
