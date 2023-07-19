@@ -140,7 +140,7 @@ async function renderDesktopHeader(block, nav) {
       if (navParagraph.textContent.trim() === 'Login') {
         const loginLink = document.createElement('a');
         loginLink.textContent = 'Login';
-        loginLink.href = '';
+        loginLink.href = 'https://bitdefender.com';
         navParagraph.innerHTML = '';
         navParagraph.appendChild(loginLink);
         loginLink.addEventListener('click', handleLoginClick);
