@@ -15,7 +15,7 @@
 
 .cards > ul > li {
   border: 0 solid #e5e7eb;
-  background-color: #fff;
+  background-color: var(--background-color);
   border-radius: 8px;
   box-shadow: 0 3px 8px 0 rgb(0 0 0 / 10%);
   font-family: roboto, sans-serif;
@@ -25,7 +25,7 @@
 
 .cards h3 {
   line-height: 1.25;
-  color: #000;
+  color: var(--text-color);
   font-size: 22px;
   font-weight: 500;
   margin-bottom: 7px;
@@ -33,7 +33,7 @@
 
 .cards-card-body p {
   line-height: 1.25;
-  color:  --text-color;
+  color:  var(--text-color);
   font-size: 14px;
   font-weight: 400;
 }
@@ -64,7 +64,7 @@
 
 .first-bar  .bar-label {
   color: #fff;
-  background-color: --bar-label-color;
+  background-color: var(--bar-label-color);
 }
 
 .value-label {
