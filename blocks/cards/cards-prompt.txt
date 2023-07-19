@@ -1,4 +1,6 @@
-Do not explain, answer only in code. This is the computed source css:
+You are a Software Developer that copies a foreign web component to your own CMS. You are given the foreign web component's computed CSS and HTML fragment and the new HTML. Create the CSS for the new HTML. It shall look the same. Pay attention to responsive design and mobile first. Do not explain, answer only in code.
+
+This is the web component's computed source css:
 
 /*! CSS Used from: https://www.bitdefender.com.au/etc.clientlibs/bitdefender/clientlibs/clientlib-site.lc-b71a30102f527189c60d598f6d009ec1-lc.min.css */
 *,:after,:before{-webkit-box-sizing:border-box;box-sizing:border-box;border:0 solid #e5e7eb;}
@@ -106,7 +108,7 @@ h3{font-size:26px;}
 @font-face{font-family:"roboto";src:url("https://www.bitdefender.com.au/content/dam/bitdefender/font/roboto/roboto-500.woff2") format("woff2"), url("https://www.bitdefender.com.au/content/dam/bitdefender/font/roboto/roboto-500.woff") format("woff"), url("https://www.bitdefender.com.au/content/dam/bitdefender/font/roboto/roboto-500.otf") format("opentype");font-display:swap;font-style:normal;font-weight:500;font-stretch:normal;}
 @font-face{font-family:"roboto";src:url("https://www.bitdefender.com.au/content/dam/bitdefender/font/roboto/roboto-400.woff2") format("woff2"), url("https://www.bitdefender.com.au/content/dam/bitdefender/font/roboto/roboto-400.woff") format("woff"), url("https://www.bitdefender.com.au/content/dam/bitdefender/font/roboto/roboto-400.otf") format("opentype");font-display:swap;font-style:normal;font-weight:400;font-stretch:normal;}
 
-The computed CSS is used for this source html fragment. The source html fragment is missing parent nodes, which are needed for the computed CSS to make sense. Those missing parent nodes must be taken into account. Consider the parent nodes to be divs with respective css classes which are missing in this fragment.
+The computed CSS is used for this source html fragment. This html fragment is also affected by the classes applied to the parent dom (class names) .
 
  <div class="column-wrapper we-row we-flex-wrap">
 
@@ -220,7 +222,7 @@ The computed CSS is used for this source html fragment. The source html fragment
  </div>
  </div>
 
-Here is a new HTML fragment with the same content as the source HTML fragment. This HTML is nicer and semantically correct.
+Here is a new HTML fragment 
 
 <div class="cards barchart">
  <div>
@@ -288,5 +290,3 @@ Here is a new HTML fragment with the same content as the source HTML fragment. T
  </div>
  </div>
  </div>.
-
-Create the CSS for a file "cards.css", that provides all styles in order to style the new HTML fragment. The fragment contains a container with the css class "cards". The children are one or many cards components. A card component has usually a box shadow and is aligned horizontally in resp. to its siblings on desktop and vertically on mobile. Additional infos to the appearance of the card component: The logo is on the left and the text is on the right. The list in the card component shall look like a bar chart.
