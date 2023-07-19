@@ -139,7 +139,6 @@ async function renderDesktopHeader(block, nav) {
 
       if (navParagraph.textContent.trim() === 'Login') {
         const loginLink = document.createElement('a');
-        loginLink.href = '';
         loginLink.textContent = 'Login';
         navParagraph.innerHTML = '';
         navParagraph.appendChild(loginLink);
@@ -166,27 +165,25 @@ async function renderDesktopHeader(block, nav) {
   buildMegaMenu();
 
   const homeSolutions = document.createElement('p');
-  const homeSolutionsLink = document.createElement('a');
-  homeSolutionsLink.textContent = 'Home Solutions';
-  homeSolutions.appendChild(homeSolutionsLink);
+  homeSolutions.textContent = 'Home Solutions';
   const headerWrapper = document.querySelector('.header-wrapper');
   headerWrapper.appendChild(homeSolutions);
 
   const megaMenu = document.querySelector('.mega-menu');
   let hideTimeout = null;
 
-  homeSolutionsLink.addEventListener('mouseenter', () => {
+  homeSolutions.addEventListener('mouseenter', () => {
     clearTimeout(hideTimeout);
     megaMenu.classList.add('mega-menu-show');
-    homeSolutionsLink.classList.remove('home-solutions-link-default');
-    homeSolutionsLink.classList.add('home-solutions-link-hover');
+    homeSolutions.classList.remove('home-solutions-link-default');
+    homeSolutions.classList.add('home-solutions-link-hover');
   });
 
-  homeSolutionsLink.addEventListener('mouseleave', () => {
+  homeSolutions.addEventListener('mouseleave', () => {
     hideTimeout = setTimeout(() => {
       megaMenu.classList.remove('mega-menu-show');
-      homeSolutionsLink.classList.remove('home-solutions-link-hover');
-      homeSolutionsLink.classList.add('home-solutions-link-default');
+      homeSolutions.classList.remove('home-solutions-link-hover');
+      homeSolutions.classList.add('home-solutions-link-default');
     }, 500);
   });
 
@@ -196,8 +193,8 @@ async function renderDesktopHeader(block, nav) {
 
   megaMenu.addEventListener('mouseleave', () => {
     megaMenu.classList.remove('mega-menu-show');
-    homeSolutionsLink.classList.remove('home-solutions-link-hover');
-    homeSolutionsLink.classList.add('home-solutions-link-default');
+    homeSolutions.classList.remove('home-solutions-link-hover');
+    homeSolutions.classList.add('home-solutions-link-default');
   });
 
   createLoginModal();

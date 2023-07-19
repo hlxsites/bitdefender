@@ -135,6 +135,7 @@ header {
   font-size: var(--body-font-size-xxs);
   margin-right: 30px;
   letter-spacing: 0.96px;
+  cursor: pointer;
 }
 
 .home-button-border {
@@ -274,12 +275,12 @@ header a.button::after {
   color: #dedede !important;
 }
 
-.header-wrapper a{
+.header-wrapper {
   position: relative;
   z-index: 999;
 }
 
-.header-wrapper > p a{
+.header-wrapper > p {
   position: relative;
   top: 85px;
   margin-left: 435px;
@@ -287,6 +288,7 @@ header a.button::after {
   color: var(--horizontal-separator-color);
   text-decoration: none;
   cursor: pointer;
+  width: fit-content;
 }
 
 header .icon {
@@ -605,7 +607,7 @@ nav {
   }
 
   header {
-    margin-top: -15px;
+    margin-top: -18px;
     height: 40px;
   }
 }
