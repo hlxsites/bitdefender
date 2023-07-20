@@ -1,4 +1,4 @@
-div.sticky-nav ul li a {
+.sticky-nav ul li a {
   display: block;
   font-family: roboto,sans-serif;
   font-size: 14px;
@@ -10,15 +10,24 @@ div.sticky-nav ul li a {
   height: 68px;
 }
 
-div.sticky-nav ul.mobile-menu li a {
-  color: #000;
-}
-
-div.sticky-nav ul li {
+.sticky-nav ul li {
   border-bottom: 1px solid #dedede;
 }
 
-div.sticky-nav ul {
+.sticky-nav ul li.active::after {
+  width: 100%;
+}
+
+.sticky-nav ul li::after {
+  content: "";
+  display: block;
+  height: 4px;
+  width: 0;
+  background-color: #006eff;
+  transition: width .3s ease-in-out;
+}
+
+.sticky-nav ul {
   display: none;
   flex-direction: column;
   width: 100%;
@@ -26,23 +35,27 @@ div.sticky-nav ul {
   margin:0;
 }
 
-div.sticky-nav ul.mobile-menu {
+.sticky-nav .mobile-dropdown {
+  font-family: roboto,sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  height: 68px;
+  padding: 24px 20px;
+  color: #000;
   display: flex;
   border-bottom: 1px solid #dedede;
 }
 
-div.sticky-nav ul.mobile-menu li {
-  border: none;
-}
 
-div.sticky-nav ul.mobile-menu::after {
+
+.sticky-nav .mobile-dropdown::after {
   content: "";
   position: absolute;
   right: 0;
   width: 20px;
   height: 11px;
   margin-right: 20px;
-  margin-top: 28px;
+  margin-top: 6px;
   background-image: url('/icons/sticky-nav-arrow.svg');
   background-repeat: no-repeat;
   background-position: 100%;
@@ -52,16 +65,16 @@ div.sticky-nav ul.mobile-menu::after {
   transition: transform 0.3s ease-in-out;
 }
 
-div.sticky-nav ul.mobile-menu.opened::after {
+.sticky-nav .mobile-dropdown.opened::after {
   transform: rotate(180deg);
   transition: transform 0.3s ease-in-out;
 }
 
-ul.mobile-menu.opened +  ul.menu {
+.mobile-dropdown.opened + ul.menu {
   display: flex
 }
 
-div.sticky-nav.fixed-nav {
+.sticky-nav.fixed-nav {
   position: fixed;
   top: 0;
   background-color: #fff;
@@ -70,7 +83,7 @@ div.sticky-nav.fixed-nav {
 }
 
 @media (min-width: 990px) { /* desktop */
-  div.sticky-nav ul {
+  .sticky-nav ul {
     display: flex;
     flex-direction: row;
     padding: 0 50px;
@@ -78,31 +91,23 @@ div.sticky-nav.fixed-nav {
     height: 65px;
   }
 
-  div.sticky-nav ul li {
+  .sticky-nav ul li {
     border: none;
     margin-right: 20px;
   }
 
-  div.sticky-nav ul li.active {
-    border-bottom: 2px solid #006eff;
-    transition: width .3s ease-in-out
-  }
-  
-  div.sticky-nav ul.mobile-menu {
+  .sticky-nav .mobile-dropdown {
     display: none;
   }
 }
 
 @media (min-width: 1600px) {
-  div.sticky-nav ul {
+  .sticky-nav ul {
     height: 72px;
   }
 
-  div.sticky-nav ul li a {
+  .sticky-nav ul li a {
     font-size: 16px;
   }
 
-  div.sticky-nav ul li.active {
-    border-bottom: 4px solid #006eff;
-  }
 }
