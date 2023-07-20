@@ -362,4 +362,9 @@ export default async function decorate(block) {
     bottomLinks.removeChild(thirdChild);
     header.appendChild(thirdChild);
   }
+
+  const secondSpan = document.querySelector('.header-wrapper > div > p span:nth-child(2)');
+  if (secondSpan) {
+    secondSpan.parentNode.removeChild(secondSpan);
+  }
 }
