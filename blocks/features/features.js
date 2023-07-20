@@ -5,20 +5,22 @@ function movePictureOverH1() {
     Array.from(parentDiv.children).forEach((childDiv) => {
       const h1 = childDiv.querySelector('h1');
       const picture = childDiv.querySelector('picture');
-      const pWithPicture = picture.parentNode;
       const pWithText = childDiv.querySelector('p:last-of-type');
 
-      pWithPicture.removeChild(picture);
-
-      childDiv.innerHTML = '';
-
-      childDiv.appendChild(picture);
-      childDiv.appendChild(h1);
-      childDiv.appendChild(pWithText);
+      if (h1 && picture && pWithText) {
+        const pWithPicture = picture.parentNode;
+        pWithPicture.removeChild(picture);
+        childDiv.innerHTML = '';
+        childDiv.appendChild(picture);
+        childDiv.appendChild(h1);
+        childDiv.appendChild(pWithText);
+      }
     });
   });
 }
 
-export default function decorate() {
-  movePictureOverH1();
+export default function decorate(block) {
+  if (block.classList.contains('with-h1')) {
+    movePictureOverH1();
+  }
 }
