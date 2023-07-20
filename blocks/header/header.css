@@ -53,6 +53,18 @@ header {
   margin-top: 35px !important;
 }
 
+.header-wrapper > p {
+  margin-top: 0;
+  position: relative;
+  top: 75px;
+  margin-left: 435px;
+  font-size: var(--body-font-size-s);
+  color: var(--horizontal-separator-color);
+  text-decoration: none;
+  cursor: pointer;
+  width: fit-content;
+}
+
 .login-buttons a p {
   text-align: center;
   font-size: var(--body-font-size-xs);
@@ -280,18 +292,6 @@ header a.button::after {
   z-index: 999;
 }
 
-.header-wrapper > p {
-  margin-top: 0;
-  position: relative;
-  top: 75px;
-  margin-left: 435px;
-  font-size: var(--body-font-size-s);
-  color: var(--horizontal-separator-color);
-  text-decoration: none;
-  cursor: pointer;
-  width: fit-content;
-}
-
 header .icon {
   margin-top: -30px;
   margin-left: 200px;
@@ -513,7 +513,7 @@ header a.button:hover span.button-text {
     margin-left: 25px;
     width: 200px;
     filter: none;
-  }
+  } 
 }
 
 .icon.icon-arrow-right {
