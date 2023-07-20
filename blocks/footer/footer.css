@@ -151,19 +151,19 @@ footer .footer a:hover {
 
 .footer > div > :nth-child(3) > p::before,
 .footer > div > :nth-child(4) > p::before {
+  transform: rotate(45deg);
+  border-color: #fff;
+  border-style: solid;
+  border-width: 0 2px 2px 0;
   content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  display: inline-block;
   position: absolute;
-  right: 0.75rem;
-  top: 1.0625rem;
+  right: 1.25rem;
+  top: 0.75rem;
   left: auto;
-  width: 1.0625rem;
-  height: 0.75rem;
-  margin: 0;
-  background-image: url("../../icons/black_down_arrow.svg");
   transition: all .5s ease-in-out;
-  filter: invert(100%);
-  background-repeat: no-repeat;
-  background-position: 100%;
 }
 
 .footer > div > :nth-child(3) > ul,
@@ -221,7 +221,8 @@ footer .footer a:hover {
 
 .footer > div > :nth-child(3) > p.active::before,
 .footer > div > :nth-child(4) > p.active::before {
-  transform: rotate(180deg);
+  transform: rotate(225deg);
+  top: 1.0625rem;
 }
 
 .footer > div > :nth-child(2) > p {
