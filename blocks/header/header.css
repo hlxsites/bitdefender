@@ -281,8 +281,9 @@ header a.button::after {
 }
 
 .header-wrapper > p {
+  margin-top: 0;
   position: relative;
-  top: 85px;
+  top: 75px;
   margin-left: 435px;
   font-size: var(--body-font-size-s);
   color: var(--horizontal-separator-color);
@@ -292,7 +293,7 @@ header a.button::after {
 }
 
 header .icon {
-  margin-top: -20px;
+  margin-top: -30px;
   margin-left: 200px;
   z-index: 1000;
   filter: invert(100);
@@ -332,23 +333,6 @@ a.button span.button-text {
   display: flex;
   font-size: var(--body-font-size-xs);
   font-weight: 400;
-}
-
-.header-wrapper > a img {
-  position: relative;
-  top: 70px;
-  margin-left: 200px;
-  filter: invert(100%);
-}
-
-
-.header.block img {
-  position: relative;
-  top: 15px;
-  left: 15px;
-  width: 20%;
-  height: 20%;
-  object-fit: contain;
 }
 
 .other-options > div > p:hover {
@@ -435,7 +419,7 @@ header a.button:hover span.button-text {
   flex-direction: column;
   position: absolute;
   margin-left: 435px;
-  top: 140px;
+  top: 120px;
   width: 900px;
   height: 500px;
   background-color: var(--background-color);
@@ -525,7 +509,7 @@ header a.button:hover span.button-text {
 
   header .icon {
     position: absolute;
-    top: -22px;
+    top: -12px;
     margin-left: 25px;
     width: 200px;
     filter: none;
@@ -597,13 +581,6 @@ header a.button:hover span.button-text {
   transition: all 0.3s ease-in-out;
 }
 
-.header-wrapper > a img {
-  position: absolute;
-  margin-left: 25px;
-  top: 15px;
-  filter: none;
-}
-
 nav {
   display: none;
 }
@@ -612,11 +589,6 @@ nav {
 @media(min-width: 1000px) {
   .options-wrapper {
     display: none;
-  }
-
-  header {
-    margin-top: -18px;
-    height: 40px;
   }
 
   .menu-wrapper {

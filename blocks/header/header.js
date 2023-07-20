@@ -1,19 +1,4 @@
 import { getMetadata, decorateIcons, decorateButtons } from '../../scripts/lib-franklin.js';
-/**
- * Toggles all nav sections
- * @param {Element} sections The container element
- * @param {Boolean} expanded Whether the element should be expanded or collapsed
- */
-/**
- * Toggles the entire nav
- * @param {Element} nav The container element
- * @param {Element} navSections The nav sections within the container element
- * @param {*} forceExpanded Optional param to force nav expand behavior when not null
- */
-/**
- * decorates the header, mainly the nav
- * @param {Element} block The header block element
- */
 
 function createLoginModal() {
   const loginModal = document.querySelector('nav > div:nth-child(4)');
@@ -132,13 +117,13 @@ async function renderDesktopHeader(block, nav) {
 
   if (navSections) {
     const navParagraphs = navSections.querySelectorAll('p');
-    const lastNavParagraph = navParagraphs[navParagraphs.length - 1];  // Get the last 'p' element
+    const lastNavParagraph = navParagraphs[navParagraphs.length - 1];
     navParagraphs.forEach((navParagraph) => {
       const divider = document.createElement('div');
       divider.className = 'nav-divider';
       navSections.insertBefore(divider, navParagraph);
 
-      if (navParagraph === lastNavParagraph) {  // Check if this is the last 'p' element
+      if (navParagraph === lastNavParagraph) {
         const loginLink = document.createElement('a');
         loginLink.textContent = 'Login';
         loginLink.href = 'https://bitdefender.com';
@@ -341,6 +326,9 @@ async function renderMobileHeader(nav) {
 }
 
 export default async function decorate(block) {
+  const headerBlock = document.querySelector('.header.block');
+  headerBlock.removeChild(headerBlock.firstElementChild);
+
   // fetch nav content
   const navPath = getMetadata('nav') || '/nav';
   const resp = await fetch(`${navPath}.plain.html`);

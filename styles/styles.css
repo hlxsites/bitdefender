@@ -59,6 +59,7 @@
 
   /* nav height */
   --nav-height: 64px;
+  --nav-height-desktop: 40px;
 }
 
 html, body, div, span, applet, object, iframe,
@@ -140,6 +141,12 @@ body.appear {
 
 header { 
   height: var(--nav-height);
+}
+
+@media (min-width: 1000px) {
+  header {
+    height: var(--nav-height-desktop);
+  } 
 }
 
 h1, h2, h3,
