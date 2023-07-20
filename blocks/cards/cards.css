@@ -19,7 +19,6 @@
   background-color: var(--background-color);
   border-radius: 8px;
   box-shadow: 0 3px 8px 0 rgb(0 0 0 / 10%);
-  font-family: roboto, sans-serif;
   color: transparent;
   font-size: 1px;
   display: flex;
@@ -29,7 +28,7 @@
 
 }
 
-.cards h3 {
+.cards.barchart.block h3 {
   line-height: 1.25;
   color: var(--text-color);
   font-size: 22px;
@@ -65,11 +64,11 @@
   padding: 9px 16px;
 }
 
-.bar .bar-label {
+.cards.barchart.block .bar-label {
   background-color: #dedede;
 }
 
-.first-bar  .bar-label {
+.cards.barchart.block .first-bar .bar-label {
   color: #fff;
   background-color: #006EFF;;
 }

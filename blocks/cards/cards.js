@@ -16,7 +16,7 @@ export default function decorate(block) {
   block.textContent = '';
   block.append(ul);
 
-  const containers = document.querySelectorAll('.cards-card-body');
+  const containers = document.querySelectorAll('.cards.barchart.block .cards-card-body');
   containers.forEach((container) => {
     const progressBars = container.querySelectorAll('li > ul');
     progressBars.forEach((progressBar, index) => {
