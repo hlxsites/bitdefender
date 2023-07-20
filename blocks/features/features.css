@@ -6,13 +6,8 @@ header {
 .features {
     display: flex;
     flex-direction: column;
-    width: 70vw;
+    width: 99vw;
     margin: 0 auto;
-}
-
-.features > div {
-    display: flex;
-    justify-content: space-between;
 }
 
 .features > div > div {
@@ -27,14 +22,46 @@ header {
 
 .features h1 {
     font-size: var(--heading-font-size-m);
-    font-weight: var(--font-weight-regular);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.25;
 }
 
 .features img {
     margin-left: 10px;
-    width: 50px;
+    height: 56px;
+    max-width: 81;
+    object-fit: contain;
 }
 
 .features p {
     font-size: var(--body-font-size-s);
+    line-height: 1.5;
+    letter-spacing: .006em;
+    margin-top: -5px;
 }
+
+.features > div:nth-child(2) > div > p{
+    margin-top: -30px;
+}
+
+@media screen and (min-width: 767px) {
+    .features {
+        max-width: 90vw;
+        padding: 0 50px;
+    }
+
+    .features > div {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+    }
+
+    .features > div > div {
+        padding-right: 4vw;
+    }
+
+    .features img {
+        margin-left: 10px;
+    }
+}
+
