@@ -431,6 +431,11 @@ header a.button:hover span.button-text {
   border-bottom: 35px solid #f5f6f7;
 }
 
+.mega-menu .button-container:hover a.button::after {
+    transform: none;
+    opacity: 1;
+}
+
 @media (max-width: 1390px) {
   .mega-menu {
     left: 50%;

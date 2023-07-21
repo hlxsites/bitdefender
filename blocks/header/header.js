@@ -111,7 +111,7 @@ function buildMegaMenu() {
   removeButtonClasses();
 }
 
-async function renderDesktopHeader(block, nav) {
+function renderDesktopHeader(block, nav) {
   const navSections = nav.querySelector('.nav-sections');
   const navBrandLinks = nav.querySelectorAll('.nav-brand a');
 
@@ -303,7 +303,7 @@ function handleMenuClick() {
   attachMenuOptionClickEvents();
 }
 
-async function renderMobileHeader(nav) {
+function renderMobileHeader(nav) {
   const headerBlock = document.querySelector('.header.block');
 
   const navWrapper = document.createElement('div');
