@@ -492,7 +492,6 @@ header a.button:hover span.button-text {
 }
 
 .options-wrapper.show div::before {
-  transform: rotate(-45deg);
   border-color: black; 
   border-style: solid;
   border-width: 0 2px 2px 0;
@@ -583,7 +582,7 @@ header a.button:hover span.button-text {
   margin-left: 5px;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 990px) {
 .header-wrapper {
   position: fixed;
   background-color: var(--background-color);
@@ -675,14 +674,6 @@ nav {
   font-weight: bold;
   margin-left: 30px;
   padding-left: 20px; 
-  position: relative;
-}
-
-.options-wrapper.show .sub-menu-title {
-  font-size: var(--body-font-size-xs);
-  font-weight: bold;
-  margin-left: 30px;
-  padding-left: 20px;
   position: relative;
 }
 

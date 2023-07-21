@@ -125,7 +125,7 @@ async function renderDesktopHeader(block, nav) {
 
       if (navParagraph === lastNavParagraph) {
         const loginLink = document.createElement('a');
-        loginLink.textContent = 'Login';
+        loginLink.textContent = lastNavParagraph.textContent;
         loginLink.href = 'https://bitdefender.com';
         navParagraph.innerHTML = '';
         navParagraph.appendChild(loginLink);
@@ -137,7 +137,7 @@ async function renderDesktopHeader(block, nav) {
 
   if (navBrandLinks && navBrandLinks.length > 0) {
     const forHomeLink = Array.from(navBrandLinks)[0];
-    if (forHomeLink && forHomeLink.innerHTML === 'For Home') {
+    if (forHomeLink) {
       const homeButtonBorder = document.createElement('div');
       homeButtonBorder.className = 'home-button-border';
       forHomeLink.parentNode.appendChild(homeButtonBorder);
@@ -152,9 +152,13 @@ async function renderDesktopHeader(block, nav) {
   buildMegaMenu();
 
   const homeSolutions = document.createElement('p');
-  homeSolutions.textContent = 'Home Solutions';
+  const homeSolutionText = document.querySelector('.bottom-links > div:last-child > p');
+  homeSolutions.innerHTML = homeSolutionText.innerHTML;
   const headerWrapper = document.querySelector('.header-wrapper');
   headerWrapper.appendChild(homeSolutions);
+
+  const bottomLinks = document.querySelector('.bottom-links');
+  bottomLinks.removeChild(bottomLinks.lastElementChild);
 
   const megaMenu = document.querySelector('.mega-menu');
   let hideTimeout = null;
