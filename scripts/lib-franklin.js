@@ -348,6 +348,8 @@ export function decorateSections(main) {
         if (key === 'style') {
           const styles = meta.style.split(',').map((style) => toClassName(style.trim()));
           styles.forEach((style) => section.classList.add(style));
+        } else if (key === 'sticky-navigation-item') {
+          toClassName(section.id = toCamelCase(meta[key]));
         } else {
           section.dataset[toCamelCase(key)] = meta[key];
         }

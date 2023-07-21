@@ -1,4 +1,4 @@
-.sticky-nav .inner-div {
+.sticky-navigation .menu-with-button {
   display: none;
   flex-direction: column;
   justify-content: center;
@@ -6,7 +6,7 @@
   box-shadow: 0 3px 6px 0 rgb(0 0 0 / 8%);
 }
 
-.sticky-nav ul li a {
+.sticky-navigation ul li a {
   display: block;
   font-family: roboto,sans-serif;
   font-size: 14px;
@@ -17,15 +17,15 @@
   padding: 24px 0;
 }
 
-.sticky-nav ul li {
+.sticky-navigation ul li {
   border-bottom: 1px solid #dedede;
 }
 
-.sticky-nav ul li.active::after {
+.sticky-navigation ul li.active::after {
   width: 100%;
 }
 
-.sticky-nav ul li::after {
+.sticky-navigation ul li::after {
   content: "";
   display: block;
   height: 4px;
@@ -34,14 +34,14 @@
   transition: width .3s ease-in-out;
 }
 
-.sticky-nav ul {
+.sticky-navigation ul {
   flex-direction: column;
   width: 100%;
   padding: 0 20px;
   margin:0;
 }
 
-.sticky-nav .mobile-dropdown {
+.sticky-navigation .mobile-dropdown {
   font-family: roboto,sans-serif;
   font-size: 14px;
   font-weight: 500;
@@ -51,7 +51,7 @@
   border-bottom: 1px solid #dedede;
 }
 
-.sticky-nav .mobile-dropdown::after {
+.sticky-navigation .mobile-dropdown::after {
   content: "";
   position: absolute;
   right: 0;
@@ -68,16 +68,16 @@
   transition: transform 0.3s ease-in-out;
 }
 
-.sticky-nav .mobile-dropdown.opened::after {
+.sticky-navigation .mobile-dropdown.opened::after {
   transform: rotate(180deg);
   transition: transform 0.3s ease-in-out;
 }
 
-.mobile-dropdown.opened + .inner-div {
+.mobile-dropdown.opened + .menu-with-button {
   display: flex
 }
 
-.sticky-nav.fixed-nav {
+.sticky-navigation.fixed-nav {
   position: fixed;
   top: 0;
   background-color: #fff;
@@ -85,12 +85,12 @@
   max-width: 20in
 }
 
-.sticky-nav .button-container {
+.sticky-navigation .button-container {
   margin:0;
   padding: 40px 0px 20px 20px;  
 }
 
-.sticky-nav .button-container a {
+.sticky-navigation .button-container a {
   font-size: 14px;
   vertical-align: middle;
   padding: 6px 15px;
@@ -98,33 +98,33 @@
 
 @media (min-width: 990px) { /* desktop */
 
-  .sticky-nav {
+  .sticky-navigation {
     border-bottom: 1px solid #dedede;
   }
 
-  .sticky-nav .inner-div {
+  .sticky-navigation .menu-with-button {
     display: flex;
     flex-direction: row;
     box-shadow: none;
     padding: 0 50px;
   }
 
-  .sticky-nav ul {
+  .sticky-navigation ul {
     display: flex;
     flex-direction: row;
     padding: 0;
   }
 
-  .sticky-nav ul li {
+  .sticky-navigation ul li {
     border: none;
     margin-right: 20px;
   }
 
-  .sticky-nav .mobile-dropdown {
+  .sticky-navigation .mobile-dropdown {
     display: none;
   }
 
-  .sticky-nav .button-container {
+  .sticky-navigation .button-container {
     vertical-align: middle;
     padding: 0;  
   }
@@ -132,11 +132,11 @@
 
 @media (min-width: 1600px) {
   
-  .sticky-nav ul li a {
+  .sticky-navigation ul li a {
     font-size: 16px;
   }
 
-  .sticky-nav .button-container a {
+  .sticky-navigation .button-container a {
     font-size: 16px;
     padding: 8px 15px;
   }
