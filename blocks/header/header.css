@@ -262,6 +262,11 @@ header a.button::after {
   margin-left: 13%;
 }
 
+.mega-menu .button-container:hover a.button::after {
+  transform: none;
+  opacity: 1;
+}
+
 .login-modal.show p.button-container:nth-child(3) a.button::after {
   margin-left: 280px;
 }
@@ -429,11 +434,6 @@ header a.button:hover span.button-text {
   border-bottom-right-radius: 8px;
   box-shadow: 0 10px 10px #0003;
   border-bottom: 35px solid #f5f6f7;
-}
-
-.mega-menu .button-container:hover a.button::after {
-    transform: none;
-    opacity: 1;
 }
 
 @media (max-width: 1390px) {
