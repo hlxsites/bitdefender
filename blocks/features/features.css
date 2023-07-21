@@ -20,7 +20,7 @@ header {
     padding: 1em;
 }
 
-.features h1 {
+.features .heading {
     font-size: var(--heading-font-size-m);
     font-weight: var(--font-weight-bold);
     line-height: 1.25;
@@ -31,6 +31,7 @@ header {
     height: 56px;
     max-width: 81px;
     object-fit: contain;
+    margin-bottom: 20px;
 }
 
 .features p {

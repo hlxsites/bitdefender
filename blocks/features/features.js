@@ -8,11 +8,17 @@ function movePictureOverH1() {
       const pWithText = childDiv.querySelector('p:last-of-type');
 
       if (h1 && picture && pWithText) {
+        const newP = document.createElement('p');
+        newP.innerHTML = h1.innerHTML;
+
+        newP.classList.add('heading');
+
         const pWithPicture = picture.parentNode;
         pWithPicture.removeChild(picture);
         childDiv.innerHTML = '';
         childDiv.appendChild(picture);
-        childDiv.appendChild(h1);
+        // Append newP instead of h1
+        childDiv.appendChild(newP);
         childDiv.appendChild(pWithText);
       }
     });
