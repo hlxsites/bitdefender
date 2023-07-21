@@ -102,7 +102,7 @@ header {
 
 .nav-sections p:last-child {
   width: 50px;
-  border-bottom: 3px solid transparent; /* Add this line */
+  border-bottom: 3px solid transparent; 
   padding-bottom: 10px;
 }
 
@@ -271,18 +271,14 @@ header a.button::after {
   margin-left: 200px;
 }
 
-
-/* CSS class for showing the mega menu */
 .mega-menu-show {
   opacity: 1 !important;
 }
 
-/* CSS class for changing the link color */
 .home-solutions-link-hover {
   color: #FFF !important;
 }
 
-/* CSS class for default link color */
 .home-solutions-link-default {
   color: #dedede !important;
 }
@@ -509,9 +505,10 @@ header a.button:hover span.button-text {
 
   header .icon {
     position: absolute;
-    top: -12px;
+    top: 10px;
     margin-left: 25px;
     width: 200px;
+    height: 100px;
     filter: none;
   } 
 }
@@ -664,12 +661,24 @@ nav {
 .options-wrapper.show .sub-menu-title {
   font-size: var(--body-font-size-xs);
   font-weight: bold;
-  margin-left: 20px;
-  padding-left: 20px;
-  background-image: url('../../icons/left.svg');
+  margin-left: 30px;
+  padding-left: 10px; 
+  position: relative;
+  background-image: none;
+}
+
+.options-wrapper.show .sub-menu-title::before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: -10px;  
+  top: 50%; 
+  transform: translateY(-50%) rotate(180deg);  
+  width: 20px;
+  height: 20px;
+  background-image: url('../../icons/right.svg');
   background-repeat: no-repeat;
-  background-position: -15px;
-  background-size: 35px;
+  background-size: contain;  
 }
 
 @keyframes slide-in {
