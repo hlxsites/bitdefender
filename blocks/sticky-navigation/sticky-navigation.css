@@ -89,7 +89,7 @@
 
 .sticky-navigation .button-container {
   margin:0;
-  padding: 40px 0px 20px 20px;  
+  padding: 40px 0 20px 20px;  
 }
 
 .sticky-navigation .button-container a {
@@ -133,7 +133,6 @@
 }
 
 @media (min-width: 1600px) {
-  
   .sticky-navigation ul li a {
     font-size: var(--sticky-nav-font-size-s);
   }
