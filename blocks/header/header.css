@@ -55,14 +55,17 @@ header {
 
 .header-wrapper > p {
   margin-top: 0;
+  padding: 15px;
   position: relative;
-  top: 75px;
+  top: 60px;
+  text-align: center;
   margin-left: 435px;
   font-size: var(--body-font-size-s);
   color: var(--horizontal-separator-color);
   text-decoration: none;
   cursor: pointer;
-  width: fit-content;
+  width: 175px;
+  height: 50px;
 }
 
 .login-buttons a p {
@@ -276,11 +279,11 @@ header a.button::after {
 }
 
 .home-solutions-link-hover {
-  color: #FFF !important;
+  color: #FFF;
 }
 
 .home-solutions-link-default {
-  color: #dedede !important;
+  color: #dedede;
 }
 
 .header-wrapper {
@@ -289,7 +292,7 @@ header a.button::after {
 }
 
 header .icon {
-  margin-top: -30px;
+  margin-top: -60px;
   margin-left: 200px;
   z-index: 1000;
   filter: invert(100);
@@ -516,7 +519,7 @@ header a.button:hover span.button-text {
 
   header .icon {
     position: absolute;
-    top: 10px;
+    top: 40px;
     margin-left: 25px;
     width: 200px;
     height: 100px;
