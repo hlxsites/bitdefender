@@ -1,10 +1,15 @@
 /* eslint-disable max-len */
 export default function decorate(block) {
+  const button = block.querySelector('.button-container');
   const menu = block.querySelector('ul');
   menu.classList.add('menu');
 
-  // remove intermediary divs
-  block.replaceChildren(menu);
+  const innerDiv = document.createElement('div');
+  innerDiv.classList.add('inner-div');
+  innerDiv.appendChild(menu);
+  innerDiv.appendChild(button);
+
+  block.replaceChildren(innerDiv);
 
   const menuEntries = block.querySelectorAll('ul > li');
 

@@ -1,3 +1,11 @@
+.sticky-nav .inner-div {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: baseline;
+  box-shadow: 0 3px 6px 0 rgb(0 0 0 / 8%);
+}
+
 .sticky-nav ul li a {
   display: block;
   font-family: roboto,sans-serif;
@@ -7,7 +15,6 @@
   transition: color .3s ease-in-out;
   text-decoration:none;  
   padding: 24px 0;
-  height: 68px;
 }
 
 .sticky-nav ul li {
@@ -28,7 +35,6 @@
 }
 
 .sticky-nav ul {
-  display: none;
   flex-direction: column;
   width: 100%;
   padding: 0 20px;
@@ -39,14 +45,11 @@
   font-family: roboto,sans-serif;
   font-size: 14px;
   font-weight: 500;
-  height: 68px;
   padding: 24px 20px;
   color: #000;
   display: flex;
   border-bottom: 1px solid #dedede;
 }
-
-
 
 .sticky-nav .mobile-dropdown::after {
   content: "";
@@ -70,7 +73,7 @@
   transition: transform 0.3s ease-in-out;
 }
 
-.mobile-dropdown.opened + ul.menu {
+.mobile-dropdown.opened + .inner-div {
   display: flex
 }
 
@@ -82,13 +85,34 @@
   max-width: 20in
 }
 
+.sticky-nav .button-container {
+  margin:0;
+  padding: 40px 0px 20px 20px;  
+}
+
+.sticky-nav .button-container a {
+  font-size: 14px;
+  vertical-align: middle;
+  padding: 6px 15px;
+}
+
 @media (min-width: 990px) { /* desktop */
+
+  .sticky-nav {
+    border-bottom: 1px solid #dedede;
+  }
+
+  .sticky-nav .inner-div {
+    display: flex;
+    flex-direction: row;
+    box-shadow: none;
+    padding: 0 50px;
+  }
+
   .sticky-nav ul {
     display: flex;
     flex-direction: row;
-    padding: 0 50px;
-    border-bottom: 1px solid #dedede;
-    height: 65px;
+    padding: 0;
   }
 
   .sticky-nav ul li {
@@ -99,15 +123,22 @@
   .sticky-nav .mobile-dropdown {
     display: none;
   }
+
+  .sticky-nav .button-container {
+    vertical-align: middle;
+    padding: 0;  
+  }
 }
 
 @media (min-width: 1600px) {
-  .sticky-nav ul {
-    height: 72px;
-  }
-
+  
   .sticky-nav ul li a {
     font-size: 16px;
+  }
+
+  .sticky-nav .button-container a {
+    font-size: 16px;
+    padding: 8px 15px;
   }
 
 }
