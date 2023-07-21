@@ -1,3 +1,8 @@
+.sticky-navigation {
+  --sticky-nav-font-size-s: 16px;
+  --sticky-nav-font-size-xs: 14px;
+}
+
 .sticky-navigation .menu-with-button {
   display: none;
   flex-direction: column;
@@ -8,9 +13,7 @@
 
 .sticky-navigation ul li a {
   display: block;
-  font-family: roboto,sans-serif;
-  font-size: 14px;
-  font-weight: 500;
+  font-weight: var(--font-weight-bold);
   color: #3c3c3c;
   transition: color .3s ease-in-out;
   text-decoration:none;  
@@ -43,9 +46,7 @@
 }
 
 .sticky-navigation .mobile-dropdown {
-  font-family: roboto,sans-serif;
-  font-size: 14px;
-  font-weight: 500;
+  font-weight: var(--font-weight-bold);
   padding: 24px 20px;
   color: #000;
   display: flex;
@@ -92,7 +93,7 @@
 }
 
 .sticky-navigation .button-container a {
-  font-size: 14px;
+  font-size: var(--sticky-nav-font-size-xs);
   vertical-align: middle;
   padding: 6px 15px;
 }
@@ -134,11 +135,11 @@
 @media (min-width: 1600px) {
   
   .sticky-navigation ul li a {
-    font-size: 16px;
+    font-size: var(--sticky-nav-font-size-s);
   }
 
   .sticky-navigation .button-container a {
-    font-size: 16px;
+    font-size: var(--sticky-nav-font-size-s);
     padding: 8px 15px;
   }
 
