@@ -33,6 +33,7 @@ function appendUlToP() {
 
       Array.from(ul.children).forEach((li) => {
         span.textContent += ` ${li.textContent}`;
+        span.textContent = span.textContent.slice(1);
       });
 
       p.appendChild(span);
@@ -86,6 +87,15 @@ function wrapDivsInMegaMenu() {
   nav.appendChild(loginModal);
 }
 
+function addDescriptionToHref() {
+  const descriptions = document.querySelectorAll('.button-container > div');
+
+  descriptions.forEach((description) => {
+    const a = description.parentNode.querySelector('a');
+    a.appendChild(description);
+  }, this);
+}
+
 function removeButtonClasses() {
   const bottomLinks = document.querySelector('.bottom-links');
   const bottomLinksParagraphs = bottomLinks.querySelectorAll('p');
@@ -109,6 +119,7 @@ function buildMegaMenu() {
   wrapDivsInMegaMenu();
   appendUlToP();
   removeButtonClasses();
+  addDescriptionToHref();
 }
 
 function renderDesktopHeader(block, nav) {

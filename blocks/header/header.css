@@ -248,7 +248,7 @@ header a.button::after {
   margin-left: 220px;
 }
 
-.mega-menu > div:first-child p a span {
+.mega-menu > div:first-child p a span:first-child {
   font-weight: 600;
 }
 
@@ -308,7 +308,11 @@ header .icon {
   text-decoration: none;
   font-size: var(--body-font-size-xxs) !important;
   font-weight: 500 !important;
-  top: 70px;
+}
+
+.bottom-links p {
+  height: fit-content;
+  margin-top: 75px;
 }
 
 .mega-menu div p a{
@@ -381,6 +385,8 @@ header a.button:hover span.button-text {
 }
 
 .mega-menu > div:first-child p a {
+  padding: 5px;
+  display: block;
   color: var(--text-color) !important;
   text-decoration: none;
   font-size: var(--body-font-size-s);
@@ -427,7 +433,7 @@ header a.button:hover span.button-text {
   width: 900px;
   height: 500px;
   background-color: var(--background-color);
-  opacity: 0; 
+  opacity: 1; 
   z-index: 3;
   transition: opacity 0.2s ease-in-out;
   border-bottom-left-radius: 8px;
@@ -451,16 +457,11 @@ header a.button:hover span.button-text {
   margin-left: 25px;
 }
 
-.bottom-links > div {
-  margin-top: -25px;
-}
-
 .mega-menu > div:first-child {
   display: grid;
   grid-template-rows: auto auto;
   grid-template-columns: 1fr 1fr 1fr; 
   align-items: start;
-  flex-basis: 25%;
   border-bottom: 2px solid #f5f6f7;
 }
 
@@ -469,26 +470,39 @@ header a.button:hover span.button-text {
 }
 
 .mega-menu > div:first-child p {
+  width: 250px;
   margin-top: 5px;
   height: 75px;
   border-radius: 5px;
   padding: 10px;
 }
 
+
 .mega-menu > div:first-child p:hover {
   background-color: var(--highlight-light-blue);
 }
 
-.mega-menu > div:first-child p:first-child {
+.mega-menu > div:first-child > p:first-child {
   grid-column: 1;
 }
 
-.mega-menu > div:first-child p:last-child {
+.mega-menu > div:first-child > p:last-child {
   grid-column: 2; 
 }
 
 .mega-menu > div:first-child p a::after {
+  margin-left: 36px;
+  position: relative;
+  bottom: 60px;
   background-color: var(--color-highlight-blue);
+}
+
+.mega-menu > div:first-child p:last-child a::after {
+  margin-left: 44px;
+}
+
+.mega-menu > div:first-child p:last-child div {
+  margin-top: 20px
 }
 
 .options-wrapper.show div {
@@ -564,12 +578,14 @@ header a.button:hover span.button-text {
   grid-area: 1 / 1 / 3 / 2;
 }
 
-.mega-menu > div:first-child p div {
+.mega-menu > div:first-child > p > a > div {
   margin-top: 10px;
   line-height: 1 !important;
   font-size: var(--body-font-size-xxs);
   font-weight: 400;
   color: var(--color-dark-gray);
+  white-space: break-spaces;
+  text-align: left;
 }
 
 .other-options {
