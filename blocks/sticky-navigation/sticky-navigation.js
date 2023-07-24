@@ -1,8 +1,4 @@
-/* eslint-disable max-len */
-
-function toHumanReadable(s) {
-  return s.replace(/-/g, ' ').replace(/(^|\s)\S/g, (match) => match.toUpperCase());
-}
+import { STICKY_NAVIGATION_DATASET_KEY } from '../../scripts/lib-franklin.js';
 
 function scrollToAnchorWithOffset(anchorId) {
   const anchorElement = document.getElementById(anchorId);
@@ -33,7 +29,7 @@ function renderMobileDropDown() {
 function renderStickyNavMenuItem(section) {
   const navMenuItem = document.createElement('li');
   if (section.id) {
-    const sectionTitle = toHumanReadable(section.id);
+    const sectionTitle = section.dataset[STICKY_NAVIGATION_DATASET_KEY] || '';
     const navItemLink = document.createElement('a');
     navItemLink.href = `#${section.id}`;
     navItemLink.title = sectionTitle;

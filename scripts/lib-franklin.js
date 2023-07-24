@@ -10,6 +10,9 @@
  * governing permissions and limitations under the License.
  */
 
+const STICKY_NAVIGATION_SECTION_METADATA_KEY = 'sticky-navigation-item';
+export const STICKY_NAVIGATION_DATASET_KEY = 'stickyNavName';
+
 /**
  * log RUM if part of the sample.
  * @param {string} checkpoint identifies the checkpoint in funnel
@@ -348,8 +351,9 @@ export function decorateSections(main) {
         if (key === 'style') {
           const styles = meta.style.split(',').map((style) => toClassName(style.trim()));
           styles.forEach((style) => section.classList.add(style));
-        } else if (key === 'sticky-navigation-item') {
-          toClassName(section.id = toCamelCase(meta[key]));
+        } else if (key === STICKY_NAVIGATION_SECTION_METADATA_KEY) {
+          section.id = toClassName(meta[key]);
+          section.dataset[STICKY_NAVIGATION_DATASET_KEY] = meta[key];
         } else {
           section.dataset[toCamelCase(key)] = meta[key];
         }

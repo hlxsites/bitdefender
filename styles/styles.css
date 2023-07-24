@@ -43,7 +43,8 @@
   /* body sizes */
   --body-font-size-m: 22px;
   --body-font-size-s: 18px;
-  --body-font-size-xs: 14px;
+  --body-font-size-xs: 16px;
+  --body-font-size-xxs: 14px;
 
 
   /* heading sizes */
@@ -117,7 +118,7 @@ html {
 }
 
 body {
-  font-size: var(--body-font-size-xs);
+  font-size: var(--body-font-size-xxs);
   width: 100%;
   height: 100%;
   font-family: var(--body-font-family);

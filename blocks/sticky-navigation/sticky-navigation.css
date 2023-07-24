@@ -1,6 +1,8 @@
 .sticky-navigation {
   --sticky-nav-font-size-s: 16px;
-  --sticky-nav-font-size-xs: 14px;
+
+  cursor: pointer;
+  position: relative;
 }
 
 .sticky-navigation .menu-with-button {
@@ -54,24 +56,23 @@
 }
 
 .sticky-navigation .mobile-dropdown::after {
+  transform: rotate(45deg);
+  border-color: #000;
+  border-style: solid;
+  border-width: 0 2px 2px 0;
   content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  display: inline-block;
   position: absolute;
-  right: 0;
-  width: 20px;
-  height: 11px;
-  margin-right: 20px;
-  margin-top: 6px;
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2218%22%20height%3D%2210%22%20viewBox%3D%220%200%2018%2010%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M9%206.982L2.195.366a1.312%201.312%200%200%200-1.818%200%201.226%201.226%200%200%200%200%201.768l7.714%207.5a1.312%201.312%200%200%200%201.818%200l7.714-7.5a1.226%201.226%200%200%200%200-1.768%201.312%201.312%200%200%200-1.818%200z%22%2F%3E%0A%3C%2Fsvg%3E");
-  background-repeat: no-repeat;
-  background-position: 100%;
-  background-color: transparent;
-  display: block;
-  transform: rotate(0deg);
-  transition: transform 0.3s ease-in-out;
+  top: 1.5rem;
+  right: 1.25rem;
+  transition: all .3s ease-in-out;
 }
 
 .sticky-navigation .mobile-dropdown.opened::after {
-  transform: rotate(180deg);
+  transform: rotate(225deg);
+  top: 1.70rem;
   transition: transform 0.3s ease-in-out;
 }
 
@@ -93,7 +94,7 @@
 }
 
 .sticky-navigation .button-container a {
-  font-size: var(--sticky-nav-font-size-xs);
+  font-size: var(--body-font-size-xxs);
   vertical-align: middle;
   padding: 6px 15px;
 }
@@ -132,13 +133,13 @@
   }
 }
 
-@media (min-width: 1600px) {
+@media (min-width: 1200px) {
   .sticky-navigation ul li a {
-    font-size: var(--sticky-nav-font-size-s);
+    font-size: var(--body-font-size-xs);
   }
 
   .sticky-navigation .button-container a {
-    font-size: var(--sticky-nav-font-size-s);
+    font-size: var(--body-font-size-xs);
     padding: 8px 15px;
   }
 
