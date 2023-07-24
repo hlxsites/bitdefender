@@ -68,6 +68,11 @@ header {
   height: 50px;
 }
 
+.bottom-links p {
+  height: fit-content;
+  margin-top: 65px;
+}
+
 .login-buttons a p {
   text-align: center;
   font-size: var(--body-font-size-xs);
@@ -248,15 +253,15 @@ header a.button::after {
   margin-left: 220px;
 }
 
-.mega-menu > div:first-child p a span:first-child {
-  font-weight: 600;
-  align-items: center;
-}
-
 .login-modal a.button:any-link span {
   margin-left: 25%;
   position: absolute;
   font-weight: 500;
+}
+
+.mega-menu > div:first-child p a span:first-child {
+  font-weight: 600;
+  align-items: center;
 }
 
 .login-modal.show p.button-container:nth-child(3) span {
@@ -309,11 +314,6 @@ header .icon {
   text-decoration: none;
   font-size: var(--body-font-size-xxs) !important;
   font-weight: 500 !important;
-}
-
-.bottom-links p {
-  height: fit-content;
-  margin-top: 75px;
 }
 
 .mega-menu div p a{
@@ -434,7 +434,7 @@ header a.button:hover span.button-text {
   width: 900px;
   height: 500px;
   background-color: var(--background-color);
-  opacity: 1; 
+  opacity: 0; 
   z-index: 3;
   transition: opacity 0.2s ease-in-out;
   border-bottom-left-radius: 8px;
@@ -475,6 +475,7 @@ header a.button:hover span.button-text {
   margin-top: 5px;
   border-radius: 5px;
   padding: 10px;
+  height: 85px;
 }
 
 
@@ -491,10 +492,6 @@ header a.button:hover span.button-text {
 }
 
 .mega-menu > div:first-child p a span::after {
-  /* margin-left: 36px;
-  position: relative;
-  bottom: 60px; */
-
   content: '';
   width: 24px;
   height: 24px;
@@ -504,7 +501,6 @@ header a.button:hover span.button-text {
   background-color: var(--button-link-color);
   display: inline-block;
   transition: all .2s cubic-bezier(.4,0,.2,1);
-  /* transform: translateX(10px); */
   opacity: 0;
 }
 
@@ -515,14 +511,6 @@ header a.button:hover span.button-text {
 
 .mega-menu > div:first-child p a::after {
   display: none;
-}
-
-.mega-menu > div:first-child p:last-child a::after {
-  margin-left: 44px;
-}
-
-.mega-menu > div:first-child p:last-child div {
-  margin-top: 20px
 }
 
 .options-wrapper.show div {
@@ -599,7 +587,7 @@ header a.button:hover span.button-text {
 }
 
 .mega-menu > div:first-child > p > a > div {
-  margin-top: 10px;
+  margin-top: 5px;
   line-height: 1 !important;
   font-size: var(--body-font-size-xxs);
   font-weight: 400;

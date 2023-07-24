@@ -294,6 +294,12 @@ function handleMenuClick() {
     }
     const optionWrapperShow = document.querySelector('.options-wrapper.show');
     optionWrapperShow.style.height = '100vh';
+
+    const optionWrapperShowDivs = optionWrapperShow.querySelectorAll('div:not(.sub-menu-title)');
+
+    optionWrapperShowDivs.forEach((div) => {
+      div.parentNode.removeChild(div);
+    });
   }
 
   function attachMenuOptionClickEvents() {
