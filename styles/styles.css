@@ -121,7 +121,7 @@ html {
 }
 
 body {
-  font-size: var(--body-font-size-xs);
+  font-size: var(--body-font-size-xxs);
   width: 100%;
   height: 100%;
   font-family: var(--body-font-family);
