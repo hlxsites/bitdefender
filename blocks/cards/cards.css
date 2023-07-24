@@ -1,112 +1,31 @@
 .cards > ul {
-  color: #3c3c3c;
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: grid;
-  gap: 16px;
-  width: 100%;
-  margin: 0 15px;
-  grid-template-columns: 1fr;
-}
-
-.cards-card-image {
-  width: 46px;
-  height: 61px;
-  display: inline-block;
-  flex-shrink: 0;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 16px;
 }
 
 .cards > ul > li {
-  border: 0 solid #e5e7eb;
-  background-color: var(--background-color);
-  border-radius: 8px;
-  box-shadow: 0 3px 8px 0 rgb(0 0 0 / 10%);
-  color: transparent;
-  font-size: 1px;
-  display: flex;
-  flex-direction: column;
-  padding: 30px 20px;
-  gap: 25px 20px;
-
+  border: 1px solid var(--highlight-background-color);
+  background-color: var(--background-color)
 }
 
-.cards.barchart.block h3 {
-  line-height: 1.25;
-  color: var(--text-color);
-  font-size: 22px;
-  font-weight: 500;
+.cards .cards-card-body {
+  margin: 16px;
+}
+
+.cards .cards-card-image {
+  line-height: 0;
+}
+
+.cards .cards-card-body > *:first-child {
   margin-top: 0;
 }
 
-
-.cards-card-body p {
-  line-height: 1.25;
-  color:  var(--text-color);
-  font-size: 14px;
-  font-weight: 400;
-}
-
-.cards-card-body > ul > li > ul > li {
-  display: none;
-}
-
-.bar {
-  display: flex;
-  font-size: 14px;
-  line-height: 1.5;
-  font-weight: 500;
-  color: #000;
-  justify-content: space-between;
-}
-
-.bar-label {
-  width: calc(100% - 40px);
-  height: 40px;
-  border-radius: 4px;
-  padding: 9px 16px;
-}
-
-.cards.barchart.block .bar-label {
-  background-color: #dedede;
-}
-
-.cards.barchart.block .first-bar .bar-label {
-  color: #fff;
-  background-color: #006EFF;;
-}
-
-.value-label {
-  margin-left: 3px;
-  line-height: 1.31;
-  font-weight: 400;
-  letter-spacing: .006em;
-  display: inline-block;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-}
-
-main .section .cards-wrapper {
-  padding: 0 20px;
-}
-
-@media (min-width:481px) {
-  .cards > ul > li {
-    flex-direction: row;
-  }
-}
-
-@media (min-width: 990px) { /* desktop */
-  .cards > ul{
-    grid-template-columns: repeat(2, minmax(300px, 1fr));
-  }
-  
-  main .section .cards-wrapper {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-}
-
-@media (min-width: 1600px) { /* large desktop */
-  main .section .cards-wrapper {
-    max-width: 1292px;
-    margin: 0 auto;
-  }
+.cards > ul > li img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
 }

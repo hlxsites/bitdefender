@@ -16,35 +16,4 @@ export default function decorate(block) {
   block.textContent = '';
   block.append(ul);
 
-  const containers = document.querySelectorAll('.cards.barchart.block .cards-card-body');
-  containers.forEach((container) => {
-    const progressBars = container.querySelectorAll('li > ul');
-    progressBars.forEach((progressBar, index) => {
-      const value = parseFloat(progressBar.textContent);
-      const label = progressBar.parentElement.firstChild.textContent.trim();
-
-      let bar = progressBar.querySelector('.bar');
-
-      if (!bar) {
-        bar = document.createElement('span');
-        bar.classList.add('bar');
-        bar.style.width = `${(value / 6) * 100}%`;
-        progressBar.appendChild(bar);
-
-        const labelElement = document.createElement('span');
-        labelElement.classList.add('bar-label');
-        labelElement.textContent = label;
-        bar.appendChild(labelElement);
-
-        const valueElement = document.createElement('span');
-        valueElement.classList.add('value-label');
-        valueElement.textContent = value;
-        bar.appendChild(valueElement);
-
-        if (index === 0) {
-          bar.classList.add('first-bar');
-        }
-      }
-    });
-  });
 }
