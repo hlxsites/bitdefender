@@ -17,7 +17,7 @@ header {
   position: relative;
   display: flex;
   align-items: center;
-  margin-top: -5px;
+  margin-top: -1px;
 }
 
 .nav-brand {
@@ -33,7 +33,8 @@ header {
   justify-content: flex-end; 
   right: min(200px, calc(100vw - 900px));
   width: 400px;
-  margin-top: -45px;
+  padding-bottom: 10px;
+  margin-top: -39px;
 }
 
 .nav-brand p,
@@ -50,7 +51,7 @@ header {
   width: 100%; 
   display: block;
   text-align: center; 
-  margin-top: 35px !important;
+  margin-top: 45px;
 }
 
 .header-wrapper > p {
@@ -70,7 +71,7 @@ header {
 
 .bottom-links p {
   height: fit-content;
-  margin-top: 65px;
+  margin-top: 73px;
 }
 
 .login-buttons a p {
@@ -91,7 +92,7 @@ header {
   position: relative;
   top: 10px;
   margin-left: 25px;
-  margin-top: -9px !important; 
+  margin-top: -5px !important; 
   border-radius: 4px !important;
 }
 
@@ -101,7 +102,7 @@ header {
 }
 
 .nav-sections p:not(:last-child) {
-  margin-top: 3px;
+  margin-top: -1px;
 }
 
 .nav-sections div {
@@ -111,8 +112,10 @@ header {
 .nav-sections p:last-child {
   width: 50px;
   border-bottom: 3px solid transparent; 
-  padding-bottom: 10px;
+  padding-bottom: 13px;
+  margin-top: 15px;
 }
+
 
 .nav-sections p:last-child.clicked {
  border-bottom: 3px solid var(--color-highlight-blue);
@@ -160,7 +163,7 @@ header {
 
 .home-button-border {
   position: absolute;
-  margin-top: 10px;
+  margin-top: 12px;
   width: 70px;
   height: 3px;
   background-color: var(--color-highlight-blue);
@@ -260,6 +263,7 @@ header a.button::after {
 }
 
 .mega-menu > div:first-child p a span:first-child {
+  font-size: var(--body-font-size-s);
   font-weight: 600;
   align-items: center;
 }
