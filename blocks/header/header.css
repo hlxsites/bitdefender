@@ -84,7 +84,7 @@ header {
 }
 
 .mega-menu div p {
-  line-height: 0.5 !important;
+  line-height: 0.5;
   margin-left: 15px;
 }
 
@@ -92,8 +92,8 @@ header {
   position: relative;
   top: 10px;
   margin-left: 25px;
-  margin-top: -5px !important; 
-  border-radius: 4px !important;
+  margin-top: -5px; 
+  border-radius: 4px;
 }
 
 .nav-brand p:hover,
