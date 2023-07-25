@@ -384,9 +384,25 @@ main .section {
   padding: 0;
   margin: 0;
 }
+main .section > div {
+  padding: 0 1.25rem; 
+}
 
 /* section metadata */
 main .section.highlight {
   background-color: var(--highlight-background-color);
 }
 
+@media(min-width: 990px) {
+  main .section > div {
+    padding: 0 3.125rem;
+    max-width: 81.25rem;
+    margin: 0 auto;
+  }
+}
+
+main .section.page-full-width > div {
+  padding: 0;
+  margin: 0;
+  max-width: unset;
+}
