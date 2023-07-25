@@ -138,10 +138,6 @@ body.appear {
   display: unset;
 }
 
-body main {
-  margin: 0 auto;
-}
-
 header {
   height: var(--nav-height);
 }
