@@ -1,4 +1,20 @@
 /* block specific CSS goes here */
+:root {
+  /* hero font size */
+  --hero-font-size-xxxl: 50px;
+  --hero-font-size-xxl: 48px;
+  --hero-font-size-xl: 40px;
+  --hero-font-size-l: 32px;
+  --hero-font-size-m: 22px;
+  --hero-font-size-s: 20px;
+  --hero-font-size-xs: 18px;
+  --hero-font-size-xxs: 16px;
+  --hero-font-size-xxxs: 14px;
+
+  /* breadcrumbs font size */
+  --breadcrumbs-font-size-s: 12px;
+}
+
 main .hero-container > div {
   max-width: unset;
 }
@@ -6,6 +22,10 @@ main .hero-container > div {
 main .hero-container {
   padding: 0;
   margin: 0 auto;
+}
+
+main .hero .hero-content > div {
+  width: 100%;
 }
 
 main .hero-container .hero-wrapper {
@@ -29,34 +49,26 @@ main .hero .hero-content .breadcrumb {
   font-size: var(--breadcrumbs-font-size-s);
   font-weight: var(--font-weight-bold);
   color: #dedede;
-  letter-spacing: .96px;
+  line-height: 1.5;
 }
 
 main .hero .hero-content .breadcrumb a {
   color: var(--breadcrumb-text-color);
   text-decoration: none;
   font-weight: var(--font-weight-bold);
+  line-height: 1.7;
 }
 
 main .hero .hero-content .breadcrumb a:hover {
   color: var(--text-color);
 }
 
-
-main .hero.black-background .hero-picture::before  {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: linear-gradient(90deg,rgb(0 0 0 / 90%) 0,rgb(0 0 0 / 90%) 10%,rgb(0 0 0 / 82%) 39%,rgb(0 0 0 / 64%) 55%,rgb(0 0 0 / 10%) 73%,transparent)
-}
-
 main .hero.black-background .hero-content .breadcrumb a {
   color: var(--breadcrumb-text-color-dark);
   text-decoration: none;
   font-weight: var(--font-weight-bold);
+  line-height: 1.7;
+  letter-spacing: .96px;
 }
 
 main .hero.black-background .hero-content .breadcrumb a:hover {
@@ -69,7 +81,6 @@ main .hero .hero-picture {
   bottom: 0;
   left: 0;
   right: 0;
-  padding-top: 40px;
 }
 
 main .hero .hero-content {
@@ -81,15 +92,10 @@ main .hero .hero-content {
   position: relative;
 }
 
-main .hero .hero-content > div {
-  width: 50%;
-
-}
-
 main .hero.black-background .hero-content{
-  padding: 112px 20px 56px;
+  padding: 80px 20px 56px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 main .hero.comparison .hero-content {
@@ -100,42 +106,28 @@ main .hero.comparison .hero-content {
 }
 
 main .hero h1 {
-  font-size: var(--hero-font-size-xl);
+  font-size: var(--hero-font-size-l);
   font-weight: var(--font-weight-boldest);
   color: var(--text-color);
-  line-height: 1;
+  line-height: 1.21;
   margin: 0 0 25px; 
 }
 
 main .hero h4 {
-  font-size: var(--hero-font-size-m);
+  font-size: var(--hero-font-size-xs);
   font-weight: var(--font-weight-bold);
   color: var(--text-color);
   line-height: 1.25;
   margin: 0 0 9px;
 }
 
-main .hero.black-background h1 {
-  font-size: var(--hero-font-size-xxxl);
-  line-height: 1.21;
-  font-weight: var(--font-weight-boldest);
-  margin: 0 0 25px;
+main .hero.black-background h1, 
+main .hero.black-background h4 {
+  color: var(--text-dark-color);
 }
 
 main .hero.comparison h1 {
   font-weight: var(--font-weight-regular);
-}
-
-main .hero.black-background h4 {
-  font-size: var(--hero-font-size-m);
-  line-height: 1.25;
-  font-weight: var(--font-weight-bold);
-  margin: 0 0 9px;
-}
-
-main .hero.hero.black-background h1, 
-main .hero.hero.black-background h4 {
-  color: var(--text-dark-color);
 }
 
 main .hero p {
@@ -165,8 +157,6 @@ main .hero.comparison p {
   margin: 24px 0 0;
 }
 
-
-
 main .hero p.button-container{
   margin: 40px 0 0;
   display: flex;
@@ -183,17 +173,11 @@ main .hero img {
 
 main .hero .hero-picture picture img{
   position: absolute;
-  z-index: -1;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  object-fit: cover;
-  box-sizing: border-box;
+  display: none;
 }
 
-main .hero.black-background .hero-picture picture img{
-  object-position: right;
+main .hero.black-background {
+  background-color: var(--background-color-black);
 }
 
 main .hero a.button {
@@ -292,19 +276,19 @@ main .hero ul li::before {
 
 main .hero.black-background ul.hero-awards {
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   align-items: center;
   justify-content: flex-start;
   margin: 0;
-  padding: 40px 0 0;
+  padding: 40px 0 48px;
+  text-align: left;
 }
 
 main .hero.black-background ul.hero-awards li {
   display: block;
   min-height: 20px;
-  margin: 9px 20px 0 0;
+  margin: 0 20px 30px 0;
   padding: 0;
-  width: 155px;
   width: auto;
 }
 
@@ -319,17 +303,58 @@ main .hero.black-background ul.hero-awards li picture{
   
 }
 
-@media (min-width: 990px) {
-
-  main .hero-container{
-    max-width: 1920px;    
+@media(min-width: 480px) { 
+  :root {
+    --hero-font-size-l: 34px;
   }
+}
+
+@media(min-width: 767px) { /* tablet */
+  :root {
+    --hero-font-size-l: 38px;
+  }
+
+}
+
+@media (min-width: 990px) { /* desktop */
+  :root {
+    --hero-font-size-l: 42px;
+  }
+
+
+  main .hero .hero-picture picture img {
+    display: block;
+  }
+
+  main .hero .hero-picture {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+  }
+
+  main .hero.black-background .hero-picture::before  {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(90deg,rgb(0 0 0 / 90%) 0,rgb(0 0 0 / 90%) 10%,rgb(0 0 0 / 82%) 39%,rgb(0 0 0 / 64%) 55%,rgb(0 0 0 / 10%) 73%,transparent)
+}
+
   main .hero .hero-content {
     min-height: 725px;
   }
 
-  main .hero.black-background .hero-content {
+  main .hero.black-background .hero-content{
+    padding: 112px 20px 56px;
+    display: flex;
+    flex-direction: row;
     min-height: unset;
+
   }
 
   main .hero a.button.primary {
@@ -345,7 +370,33 @@ main .hero.black-background ul.hero-awards li picture{
     width: 65%;
     padding: 40px 0 0;
   }
+
+  main .hero .hero-content .breadcrumb a {
+    line-height: 1;
+  }
+  
+  main .hero.black-background ul.hero-awards {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0;
+    padding: 40px 0 0;
+  }
+
+  main .hero.black-background ul.hero-awards li {
+    display: block;
+    min-height: 20px;
+    margin: 9px 20px 30px 0;
+    padding: 0;
+    width: 155px;
+    width: auto;
+  }
 }
 
-
-
+@media (min-width: 1600px) { /* large desktop */
+  :root {
+    --hero-font-size-l: 56px;
+  }
+ 
+}
