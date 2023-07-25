@@ -23,6 +23,9 @@
   --overlay-background-color: #eee;
   --highlight-background-color: #ccc;
   --text-color: #000;
+  --color-highlight-blue: #006dff;
+  --color-dark-gray: #616161;
+  --highlight-light-blue: #f3f7fe;
   --text-dark-color: #fff;
   --horizontal-separator-color: #dedede;
   --modal-background-color: rgb(0 0 0 / 50%);
@@ -43,8 +46,8 @@
   /* body sizes */
   --body-font-size-m: 22px;
   --body-font-size-s: 18px;
-  --body-font-size-xs: 14px;
-
+  --body-font-size-xs: 15px;
+  --body-font-size-xxs: 12px;
 
   /* heading sizes */
   --heading-font-size-xxl: 48px;
@@ -56,6 +59,7 @@
 
   /* nav height */
   --nav-height: 64px;
+  --nav-height-desktop: 40px;
 }
 
 html, body, div, span, applet, object, iframe,
@@ -81,10 +85,6 @@ time, mark, audio, video {
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
-}
-
-ol, ul {
-  list-style: none;
 }
 
 blockquote, q {
@@ -121,7 +121,7 @@ html {
 }
 
 body {
-  font-size: var(--body-font-size-xs);
+  font-size: var(--body-font-size-xxs);
   width: 100%;
   height: 100%;
   font-family: var(--body-font-family);
@@ -135,8 +135,14 @@ body.appear {
   display: unset;
 }
 
-header {
+header { 
   height: var(--nav-height);
+}
+
+@media (min-width: 1000px) {
+  header {
+    height: var(--nav-height-desktop);
+  } 
 }
 
 h1, h2, h3,
@@ -207,7 +213,7 @@ a.button:any-link, button {
   font-weight: var(--font-weight-bold);
   -webkit-font-smoothing: antialiased;
   display: inline-flex;
-  align-items: center;  
+  align-items: center;
   box-sizing: border-box;
   text-decoration: none;
   padding: 10px 26px 10px 28px;
@@ -321,7 +327,7 @@ a.button.modal:hover {
 a.button.modal:hover::after {
   transform: translateX(3px);
   background-color: var(--link-hover-color);
-} 
+}
 
 main input {
   font-size: 1.25rem;
@@ -382,3 +388,4 @@ main .section {
 main .section.highlight {
   background-color: var(--highlight-background-color);
 }
+
