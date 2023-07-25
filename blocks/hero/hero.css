@@ -86,8 +86,7 @@ main .hero .hero-picture {
 main .hero .hero-content {
   display: flex;
   flex-direction: row;
-  max-width: 1332px;
-  padding: 110px 20px 54px;
+  padding: 110px var(--body-padding) 54px;
   margin: 0 auto;
   position: relative;
 }
@@ -321,7 +320,6 @@ main .hero.black-background ul.hero-awards li picture{
     --hero-font-size-l: 42px;
   }
 
-
   main .hero .hero-picture picture img {
     display: block;
   }
@@ -335,7 +333,7 @@ main .hero.black-background ul.hero-awards li picture{
 
   }
 
-  main .hero.black-background .hero-picture::before  {
+  main .hero.black-background .hero-picture::before {
     content: "";
     position: absolute;
     top: 0;
@@ -347,14 +345,15 @@ main .hero.black-background ul.hero-awards li picture{
 
   main .hero .hero-content {
     min-height: 725px;
+    max-width: var(--section-desktop-max-width);
+    padding-left: var(--section-desktop-padding);
+    padding-right: var(--section-desktop-padding);
   }
 
-  main .hero.black-background .hero-content{
-    padding: 112px 20px 56px;
+  main .hero.black-background .hero-content {
     display: flex;
     flex-direction: row;
     min-height: unset;
-
   }
 
   main .hero a.button.primary {
@@ -397,6 +396,13 @@ main .hero.black-background ul.hero-awards li picture{
 @media (min-width: 1600px) { /* large desktop */
   :root {
     --hero-font-size-l: 56px;
+  }
+
+  main .hero .hero-content {
+    min-height: 725px;
+    max-width: var(--section-large-desktop-max-width);
+    padding-left: var(--section-large-desktop-padding);
+    padding-right: var(--section-large-desktop-padding);
   }
  
 }
