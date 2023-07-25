@@ -1,5 +1,16 @@
+function turnQuotesIntoSpan() {
+  const carouselItems = document.querySelectorAll('.carousel.block > div');
+
+  carouselItems.forEach(item => {
+    const firstParagraph = item.querySelector('p:first-of-type');
+    const span = document.createElement('span');
+    span.innerHTML = firstParagraph.innerHTML;
+    firstParagraph.replaceWith(span);
+  });
+}
+
 function createDivider() {
-  const paragraphs = document.querySelectorAll('.carousel.block > div > div > p:first-child');
+  const paragraphs = document.querySelectorAll('.carousel.block > div > div > p:nth-of-type(1)');
 
   paragraphs.forEach(p => {
     const divider = document.createElement('hr');
@@ -23,12 +34,13 @@ function createNextButtons() {
       circle.classList.add('circle');
       if (i === index) {
         circle.classList.add('active'); // set the circle of the current carousel item as active
+        circle.style.backgroundColor = '#005ed9';
       }
       circle.addEventListener('click', () => {
         document.querySelector('.carousel.block > div.active').classList.remove('active'); // hide the previously visible carousel item
-        carouselItems[i].classList.add('active'); // show the selected carousel item
-        document.querySelector('.circle.active').classList.remove('active'); // deactivate the previously active circle
-        circle.classList.add('active'); // activate the clicked circle
+        carouselItems[i].classList.add('active');
+        document.querySelector('.circle.active').classList.remove('active');
+        circle.classList.add('active');
       });
       nextButtons.appendChild(circle);
     }
@@ -39,6 +51,7 @@ function createNextButtons() {
 }
 
 export default function decorate() {
+  turnQuotesIntoSpan();
   createDivider();
   createNextButtons();
 }

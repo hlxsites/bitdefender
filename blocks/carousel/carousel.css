@@ -3,24 +3,43 @@ header {
 }
 
 .carousel.block > div {
+    margin: 0 auto;
+    position: relative;
     display: none;
     background-color: var(--background-color);
-    height: 250px;
-    width: 550px;
+    height: 275px;
+    width: 600px;
     border-radius: 6px;
     box-shadow: 0 3px 8px 0 rgba(0,0,0,.1);
     padding: 20px;
+    padding-left: 70px;
     margin-top: 20px;
+    transition: transform 0.2s ease;
+} 
+
+.next-buttons {
+    position: absolute; 
+    bottom: 30px;
+    left: 70px;
 }
 
-.carousel.block > div > div p:first-child {
+.carousel.block > div > div p:nth-of-type(1) {
     font-size: var( --body-font-size-xs);
-    line-height: 1.25;
+    line-height: 1.5;
+    font-weight: 400;
 }
 
-.carousel.block > div > div p:nth-child(2) {
+.carousel.block > div > div p:nth-of-type(2) {
     line-height: 1.2;
     font-weight: var(--font-weight-bold);
+}
+
+.carousel.block > div > div > span {
+    position: absolute;
+    font-size: 125px;
+    color: var(--link-hover-color);
+    top: 15px;
+    left: 15px;
 }
 
 .carousel.block > div > div p:last-child {
@@ -32,6 +51,7 @@ header {
     border-bottom: 1px solid var(--link-hover-color);
     width: 25px;
     display: inline-block;
+    margin-bottom: 5px;
 }
 
 .circle {
@@ -50,4 +70,20 @@ header {
 
 .carousel.block > div.active {
     display: block !important;
+}
+
+.carousel.block > div {
+    position: absolute;
+    transition: transform 0.2s ease;
+}
+
+.carousel.block {
+    position: relative;
+}
+
+@media (min-width: 990px) {
+    .carousel.block > div {
+        margin-left: 150px;
+        bottom: 75px;
+    }
 }

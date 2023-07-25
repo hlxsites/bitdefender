@@ -410,3 +410,10 @@ main .section.highlight {
   display: inline-block;
   text-align: center;
 }
+
+@media (min-width: 900px) {
+  .section.blue-background-section picture {
+    position: relative;
+    width: 494px;
+  }
+}
