@@ -1,27 +1,187 @@
 /* block specific CSS goes here */
-
 main .hero-container > div {
   max-width: unset;
 }
   
 main .hero-container {
   padding: 0;
+  margin: 0 auto;
 }
-  
+
+main .hero-container .hero-wrapper {
+  padding: 0;
+  border-bottom: 32px solid #e4f2ff;
+}
+
 main .hero {
   position: relative;
-  padding: 32px;
+  padding: 0;
   min-height: 300px;
 }
 
-main .hero h1 {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  color: white;
+main .hero.comparison {
+  height: 600px;
 }
 
-main .hero picture {
+main .hero .hero-content .breadcrumb {
+  padding: 12px 0;
+  margin-bottom: 12px;
+  font-size: var(--breadcrumbs-font-size-s);
+  font-weight: var(--font-weight-bold);
+  color: #dedede;
+  letter-spacing: .96px;
+}
+
+main .hero .hero-content .breadcrumb a {
+  color: var(--breadcrumb-text-color);
+  text-decoration: none;
+  font-weight: var(--font-weight-bold);
+}
+
+main .hero .hero-content .breadcrumb a:hover {
+  color: var(--text-color);
+}
+
+
+main .hero.black-background .hero-picture::before  {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(90deg,rgb(0 0 0 / 90%) 0,rgb(0 0 0 / 90%) 10%,rgb(0 0 0 / 82%) 39%,rgb(0 0 0 / 64%) 55%,rgb(0 0 0 / 10%) 73%,transparent)
+}
+
+main .hero.black-background .hero-content .breadcrumb a {
+  color: var(--breadcrumb-text-color-dark);
+  text-decoration: none;
+  font-weight: var(--font-weight-bold);
+}
+
+main .hero.black-background .hero-content .breadcrumb a:hover {
+  color: var(--breadcrumb-text-color-dark-hover);
+}
+
+main .hero .hero-picture {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding-top: 40px;
+}
+
+main .hero .hero-content {
+  display: flex;
+  flex-direction: row;
+  max-width: 1332px;
+  padding: 110px 20px 54px;
+  margin: 0 auto;
+  position: relative;
+}
+
+main .hero .hero-content > div {
+  width: 50%;
+
+}
+
+main .hero.black-background .hero-content{
+  padding: 112px 20px 56px;
+  display: flex;
+  flex-direction: row;
+}
+
+main .hero.comparison .hero-content {
+  height: 100%;
+  padding: 40px;
+  justify-content: center;
+  flex-direction: column;
+}
+
+main .hero h1 {
+  font-size: var(--hero-font-size-xl);
+  font-weight: var(--font-weight-boldest);
+  color: var(--text-color);
+  line-height: 1;
+  margin: 0 0 25px; 
+}
+
+main .hero h4 {
+  font-size: var(--hero-font-size-m);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-color);
+  line-height: 1.25;
+  margin: 0 0 9px;
+}
+
+main .hero.black-background h1 {
+  font-size: var(--hero-font-size-xxxl);
+  line-height: 1.21;
+  font-weight: var(--font-weight-boldest);
+  margin: 0 0 25px;
+}
+
+main .hero.comparison h1 {
+  font-weight: var(--font-weight-regular);
+}
+
+main .hero.black-background h4 {
+  font-size: var(--hero-font-size-m);
+  line-height: 1.25;
+  font-weight: var(--font-weight-bold);
+  margin: 0 0 9px;
+}
+
+main .hero.hero.black-background h1, 
+main .hero.hero.black-background h4 {
+  color: var(--text-dark-color);
+}
+
+main .hero p {
+  color: var(--text-color);
+  font-size: var(--hero-font-size-xxs);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.31;
+  display: block;
+  letter-spacing: 0.096px;
+}
+
+main .hero h1 + p {
+  margin: 0 0 28px;
+  color: #202020;
+  font-size: var(--hero-font-size-xxxs);
+  line-height: 1.5;
+}
+
+main .hero.comparison p {
+  font-size: 18px;
+  font-weight: 400;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #fff;
+  margin: 24px 0 0;
+}
+
+
+
+main .hero p.button-container{
+  margin: 40px 0 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+main .hero img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+main .hero .hero-picture picture img{
   position: absolute;
   z-index: -1;
   top: 0;
@@ -32,8 +192,160 @@ main .hero picture {
   box-sizing: border-box;
 }
 
-main .hero img {
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
+main .hero.black-background .hero-picture picture img{
+  object-position: right;
 }
+
+main .hero a.button {
+  margin: 8px 13px 0 0;
+  padding: 10px 26px 8px 28px;
+  border: 2px solid var(--button-background-color);
+  background-color: var(--button-background-color);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--hero-font-size-xs);
+  color: var(--button-link-color);
+  text-align: center;
+  min-width: 140px;
+  border-radius: 8px;
+  transition: all .25s cubic-bezier(.4,0,.2,1);
+  will-change: transform;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+
+main .hero a.button span.button-text {
+  transition: all .25s cubic-bezier(.4,0,.2,1);
+  display: inline-block;
+  position: relative;
+}
+
+main .hero .discount-bubble {
+  background: #2cb43d;
+  border-radius: 50%;
+  width: 83px;
+  height: 83px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+main .hero .discount-bubble .discount-bubble-1 {
+  font-size: var(--hero-font-size-xs);
+  color: #fff;
+  line-height: 1.3;
+  font-weight: var(--font-weight-bold);;
+  font-style: normal;
+  text-decoration: none;
+}
+
+main .hero .discount-bubble .discount-bubble-0 {
+  font-size: var(--hero-font-size-l);
+  color: #fff;
+  font-weight: var(--font-weight-boldest);
+  line-height: .8;
+  text-decoration: none;
+}
+
+main .hero .wrapper-plan-discount {
+  margin: 0 0 10px;
+  display: -webkit-box;
+  display: flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center
+}
+
+main .hero hero-content ul {
+  margin: 28px 0 0;
+  padding: 0;
+  text-align: left;
+  list-style-type: none;
+}
+
+main .hero ul li {
+  font-size: var(--hero-font-size-xxs);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: 0.096px;
+  line-height: 1.31;
+  color: var(--text-color);
+  margin: 15px 0;
+  padding: 0 0 0 20px;
+  position: relative;
+  list-style: none;
+}
+  
+main .hero ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 3px;
+  width: 15px;
+  height: 15px;
+  background: url("../../icons/checkmark_solid-circle.svg") no-repeat;
+  background-size: cover;
+} 
+
+main .hero.black-background ul.hero-awards {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0;
+  padding: 40px 0 0;
+}
+
+main .hero.black-background ul.hero-awards li {
+  display: block;
+  min-height: 20px;
+  margin: 9px 20px 0 0;
+  padding: 0;
+  width: 155px;
+  width: auto;
+}
+
+main .hero.black-background ul.hero-awards li::before {
+  content: none;
+}
+
+main .hero.black-background ul.hero-awards li picture{
+  width: 100%;
+  height: 81px;
+  display: block;
+  
+}
+
+@media (min-width: 990px) {
+
+  main .hero-container{
+    max-width: 1920px;    
+  }
+  main .hero .hero-content {
+    min-height: 725px;
+  }
+
+  main .hero.black-background .hero-content {
+    min-height: unset;
+  }
+
+  main .hero a.button.primary {
+    min-width: 360px;
+  }
+
+  main .hero.black-background .hero-content > div {
+    width: 60%;
+    padding: 0 20px 0 0;
+  }
+
+  main .hero.comparison .hero-content > div {
+    width: 65%;
+    padding: 40px 0 0;
+  }
+}
+
+
+
