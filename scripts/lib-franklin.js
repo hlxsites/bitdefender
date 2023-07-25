@@ -577,6 +577,7 @@ export function decorateButtons(element) {
     if (a.href !== a.textContent) {
       const up = a.parentElement;
       const twoup = a.parentElement.parentElement;
+
       if (!a.querySelector('img')) {
         // Example: <p><strong><a href="example.com">Text</a></strong></p>
         if (up.childNodes.length === 1 && up.tagName === 'STRONG'
