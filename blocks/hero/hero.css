@@ -177,7 +177,7 @@ main .hero .hero-picture picture img{
 }
 
 main .hero.black-background {
-  background-color: var(--background-color-black);
+  background-color: var(--dark-background-color);
 }
 
 main .hero a.button {
