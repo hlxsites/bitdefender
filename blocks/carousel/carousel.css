@@ -2,47 +2,52 @@ header {
     display: none;
 }
 
-.carousel.block {
-    background-color: var(--light-blue-highlight);
-    padding-top: 30px;
-    padding-left: 20px;
-    width: 100vw;
-    height: 150vh;
+.carousel.block > div {
+    display: none;
+    background-color: var(--background-color);
+    height: 250px;
+    width: 550px;
+    border-radius: 6px;
+    box-shadow: 0 3px 8px 0 rgba(0,0,0,.1);
+    padding: 20px;
+    margin-top: 20px;
 }
 
-.carousel.block > div:first-child > div:first-child p:first-child {
-    font-size: var(--heading-font-size-m);
-    font-weight: var(--font-weight-bold);
+.carousel.block > div > div p:first-child {
+    font-size: var( --body-font-size-xs);
     line-height: 1.25;
 }
 
-.carousel.block > div:first-child > div:first-child p:last-child {
-    font-size: var(--body-font-size-s);
-    line-height: 1.5;
-    letter-spacing: normal;
-    margin-top: -5px;
-    color: var(--text-light-color);
-    max-width: 710px;
+.carousel.block > div > div p:nth-child(2) {
+    line-height: 1.2;
+    font-weight: var(--font-weight-bold);
 }
 
-.carousel.block picture {
-    display: block;
-    margin-left: 10px;
-    max-width: 150px;
-    object-fit: contain;
-    margin-bottom: 20px;
+.carousel.block > div > div p:last-child {
+    font-size: var( --body-font-size-xs);
+    line-height: 1.2;
 }
 
-.carousel-container {
-    display: flex;
-    flex-direction: column;
-    width: 100vw;
-    margin: 0 auto;
+.carousel.block > div > div hr {
+    border-bottom: 1px solid var(--link-hover-color);
+    width: 25px;
+    display: inline-block;
 }
 
-.carousel-container > div > div{
-    background-color: var(--background-color);
-    width: 500px;
-    margin-top: 10px;
+.circle {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 1px solid var(--link-color);
+    display: inline-block;
+    margin-right: 10px;
+    transition: all 0.2s ease-in-out;
 }
 
+.circle:hover {
+    background-color: var(--link-color);
+}
+
+.carousel.block > div.active {
+    display: block !important;
+}

@@ -381,3 +381,32 @@ main .section.highlight {
   background-color: var(--highlight-background-color);
 }
 
+/* Light blue background section */
+.section.blue-background-section {
+  padding-top: 25px;
+  padding-left: 20px;
+  background-color: var(--light-blue-highlight);
+}
+
+.section.blue-background-section .default-content-wrapper h3 {
+  text-align: start;
+}
+
+.section.blue-background-section .default-content-wrapper p:nth-child(2) {
+  font-weight: var(--font-weight-regular);
+  font-size: var(--body-font-size-s);
+  color: var(--text-light-color);
+  line-height: 1.5;
+  max-width: 710px;
+  text-align: start;
+}
+
+.section.blue-background-section .default-content-wrapper {
+  text-align: center;
+}
+
+.section.blue-background-section picture {
+  width: 270px;
+  display: inline-block;
+  text-align: center;
+}
