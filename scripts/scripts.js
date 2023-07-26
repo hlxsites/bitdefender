@@ -154,7 +154,91 @@ function loadDelayed() {
   // load anything that can be postponed to the latest here
 }
 
+async function fetchProduct() {
+  const data = new FormData();
+  data.append('data', JSON.stringify({
+    ev: 1,
+    product_id: 'av',
+    config: {
+      country_code: 'ro',
+      extra_params: {
+        pid: null,
+      },
+    },
+  }));
+  const res = await fetch('https://www.bitdefender.com/site/Store/ajax', {
+    method: 'POST',
+    body: data,
+  });
+  if (!res.ok) {
+    throw new Error(res.statusText);
+  }
+  const json = await res.json();
+  return json.data;
+}
+
+const evaluationFunctions = new Map();
+
+function isPromise(p) {
+  if (typeof p === 'object' && typeof p.then === 'function') {
+    return true;
+  }
+  return false;
+}
+
+function findTextNodes(parent) {
+  let all = [];
+  for (let node = parent.firstChild; node; node = node.nextSibling) {
+    if (node.nodeType === 3) all.push(node);
+    else all = all.concat(findTextNodes(node));
+  }
+  return all;
+}
+
+function registerEvaluationFunction(name, fn) {
+  evaluationFunctions.set(name.toLowerCase(), fn);
+}
+
+function resolveEvaluationFunctions() {
+  findTextNodes(document.body).forEach((node) => {
+    const text = node.textContent.trim();
+    if (text.startsWith('{') && text.endsWith('}')) {
+      const [name, ...params] = text.slice(1, -1).split(',');
+      const fn = evaluationFunctions.get(name.toLowerCase());
+      if (fn) {
+        const element = fn(...params);
+        if (isPromise(element)) {
+          element.then((e) => {
+            node.parentNode.replaceChild(e, node);
+          });
+        } else if (element instanceof HTMLElement) {
+          node.parentNode.replaceChild(element, node);
+        }
+      }
+    }
+  });
+}
+
+registerEvaluationFunction('price', async () => {
+  const div = document.createElement('div');
+  div.classList.add('price');
+  const data = await fetchProduct();
+  const { price } = data.product.variations['1']['1'];
+  div.innerText = price;
+  return div;
+});
+
+registerEvaluationFunction('discount', async () => {
+  const div = document.createElement('div');
+  div.classList.add('discount');
+  const data = await fetchProduct();
+  const { discount } = data.product.variations['1']['1'];
+  div.innerText = discount.discounted_price;
+  return div;
+});
+
 async function loadPage() {
+  resolveEvaluationFunctions();
   await loadEager(document);
   await loadLazy(document);
   loadDelayed();
