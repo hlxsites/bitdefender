@@ -4,7 +4,7 @@
  * Builds hero block and prepends to main in a new section.
  * @param {Element} main The container element
  */
-export function buildHeroBlock(element) {
+function buildHeroBlock(element) {
   const h1 = element.querySelector('h1');
   const picture = element.querySelector('picture');
   const pictureParent = picture ? picture.parentNode : false;
@@ -62,6 +62,7 @@ function decorateDiscountBubble() {
  * @param {Element} block The hero block element
  */
 export default async function decorate(block) {
+  buildHeroBlock(block);
   // get div class hero-content
   const elementHeroContent = block.querySelector('.hero div.hero-content div');
 
