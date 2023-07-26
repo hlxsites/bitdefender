@@ -543,13 +543,15 @@ header a.button:hover span.button-text {
   .header-wrapper > p{
     display: none;
   }
-
+  header p {
+    margin: 0;
+  }
   header .icon {
     position: absolute;
-    top: 40px;
+    top: 78px;
     margin-left: 25px;
     width: 200px;
-    height: 100px;
+    height: 30px;
     filter: none;
   } 
 }
@@ -616,7 +618,8 @@ header a.button:hover span.button-text {
 
 @media (max-width: 990px) {
 .header-wrapper {
-  position: fixed;
+  position: sticky;
+  top: 0;
   background-color: var(--background-color);
   transition: all 0.3s ease-in-out;
 }
