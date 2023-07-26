@@ -9,6 +9,7 @@
   justify-content: center;
   align-items: baseline;
   box-shadow: 0 3px 6px 0 rgb(0 0 0 / 8%);
+  padding: var(--body-padding);
 }
 
 .sticky-navigation ul li a {
@@ -107,7 +108,9 @@
     display: flex;
     flex-direction: row;
     box-shadow: none;
-    padding: 0 50px;
+    max-width: var(--section-desktop-max-width);
+    padding: 0 var(--section-desktop-padding);
+    margin: 0 auto;
   }
 
   .sticky-navigation ul {
@@ -131,7 +134,7 @@
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1600px) { /* large desktop */
   .sticky-navigation ul li a {
     font-size: var(--body-font-size-xs);
   }
@@ -139,6 +142,11 @@
   .sticky-navigation .button-container a {
     font-size: var(--body-font-size-xs);
     padding: 8px 15px;
+  }
+
+  .sticky-navigation .menu-with-button {
+    max-width: var(--section-large-desktop-max-width);
+    padding: 0 var(--section-large-desktop-padding);
   }
 
 }
