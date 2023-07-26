@@ -222,18 +222,22 @@ function resolveEvaluationFunctions() {
 registerEvaluationFunction('price', async () => {
   const div = document.createElement('div');
   div.classList.add('price');
-  const data = await fetchProduct();
-  const { price } = data.product.variations['1']['1'];
-  div.innerText = price;
+  fetchProduct().then((data) => {
+    const { price } = data.product.variations['1']['1'];
+    div.innerText = price;
+  });
+  div.innerText = '-';
   return div;
 });
 
 registerEvaluationFunction('discount', async () => {
   const div = document.createElement('div');
   div.classList.add('discount');
-  const data = await fetchProduct();
-  const { discount } = data.product.variations['1']['1'];
-  div.innerText = discount.discounted_price;
+  fetchProduct().then((data) => {
+    const { discount } = data.product.variations['1']['1'];
+    div.innerText = discount.discounted_price;
+  });
+  div.innerText = '-';
   return div;
 });
 
