@@ -1,0 +1,28 @@
+.products-wrapper {
+  padding: 0 var(--body-padding);
+}
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  padding: 0 var(--body-padding);
+}
+
+.product-card {
+  margin: 16px 20px;
+  padding: 18px 54px;
+  border-radius: 10px;
+  border-color: rgb(229 231 235);
+  box-shadow: 0 3px 8px 0 rgb(0 0 0 / 10%);
+  display: flex;
+  width: 400px;
+  flex-direction: column;
+}
+
+.product-card img {
+  object-fit: cover;
+  object-position: -67px 22px;
+  overflow-clip-margin: content-box;
+  overflow: clip;
+}
