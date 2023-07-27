@@ -27,16 +27,24 @@ export function createMetadata(name, value) {
 }
 
 /**
- * Sets the language of the document and redirects nav/footer to the preferred country and language.
+ * Gets the language and country from the pathname.
  * @param {String} pathname The pathname of the document
+ * @returns {String} The language and country
  */
-export function setLanguage(pathname) {
-  const [, languageCountry] = pathname.split('/');
-  const [language] = languageCountry.split('-');
+export function getLanguageCountryFromPath(pathname) {
+  const [, languageCountryPath] = pathname.split('/');
+  const [language] = languageCountryPath.split('-');
+  return { languageCountryPath, language };
+}
 
-  document.documentElement.lang = language;
-  createMetadata('nav', `/${languageCountry}/nav`);
-  createMetadata('footer', `/${languageCountry}/footer`);
+/**
+ * Sets the page language.
+ * @param {Object} param The language and country
+ */
+export function setPageLanguage(param) {
+  document.documentElement.lang = param.language;
+  createMetadata('nav', `/${param.languageCountryPath}/nav`);
+  createMetadata('footer', `/${param.languageCountryPath}/footer`);
 }
 
 /**
@@ -112,7 +120,7 @@ export async function detectModalButtons(main) {
  * @param {Element} doc The container element
  */
 async function loadEager(doc) {
-  setLanguage(window.location.pathname);
+  setPageLanguage(getLanguageCountryFromPath(window.location.pathname));
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
