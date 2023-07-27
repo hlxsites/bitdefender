@@ -70,7 +70,7 @@ function renderStickyNavigation(block) {
   mobileDropDown.innerText = stickyNavMenu.querySelector('li').innerText;
 
   const stickyNavButton = block.querySelector('.button-container');
-  menuWithButton.appendChild(stickyNavButton);
+  if (stickyNavButton) menuWithButton.appendChild(stickyNavButton);
 
   block.replaceChildren(mobileDropDown);
   block.appendChild(menuWithButton);
