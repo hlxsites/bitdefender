@@ -3,36 +3,36 @@ import {
   loadScript,
   sampleRUM,
   fetchPlaceholders,
-  getMetadata,
 } from './lib-franklin.js';
 
 // eslint-disable-next-line import/no-cycle
-import { getLanguageCountryFromPath } from './scripts.js';
+import {
+  SUPPORTED_COUNTRY_LANGUAGE_MAPPING,
+  getLanguageCountryFromPath,
+} from './scripts.js';
 
 // Core Web Vitals RUM collection
 sampleRUM('cwv');
 
-const languageCountry = getLanguageCountryFromPath(window.location.pathname);
-const LAUNCH_URL = 'https://assets.adobedtm.com';
-const { LAUNCH_PROD_SCRIPT, LAUNCH_STAGE_SCRIPT } = await fetchPlaceholders(`/${languageCountry.languageCountryPath}`);
-
-function removeDoubleDashes(url) {
-  return url.replace(/([^:]\/)\/+/g, '$1');
-}
-
 /**
- * Returns the instance name based on the hostname
+ * Returns the environment name based on the hostname
  * @returns {String}
  */
-function getInstance(hostname) {
-  const hostToInstance = {
-    'bitdefender.com': 'prod',
-    'hlx.page': 'stage',
-    'hlx.live': 'stage',
-  };
-
-  return Object.entries(hostToInstance).find(([host]) => hostname.includes(host))?.[1] || 'dev';
+function getEnvironment(hostname, tlds) {
+  if (hostname.includes('hlx.page') || hostname.includes('hlx.live')) {
+    return 'stage';
+  }
+  if (tlds.some((tld) => hostname.includes(tld))) {
+    return 'prod';
+  }
+  return 'dev';
 }
+
+const PATHNAME = window.location.pathname;
+const HOSTNAME = window.location.hostname;
+const LANGUAGE_COUNTRY = getLanguageCountryFromPath(PATHNAME);
+const LAUNCH_URL = 'https://assets.adobedtm.com';
+const ENVIRONMENT = getEnvironment(HOSTNAME, Object.keys(SUPPORTED_COUNTRY_LANGUAGE_MAPPING));
 
 /**
  * Returns the current user operating system based on userAgent
@@ -57,57 +57,67 @@ function getOperatingSystem(userAgent) {
 }
 
 /**
- * Returns the sections based on the current URL
- * @returns {Object}
+ * Returns the value of a query parameter
+ * @returns {String}
  */
-function getPageSections(pathname, lc) {
-  const pageSectionParts = window.location.pathname.split('/').filter((subPath) => subPath !== '' || subPath !== lc.languageCountryPath);
-  const subSubSection = pageSectionParts[0];
+function getParamValue(param) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(param);
+}
 
-  pageSectionParts[0] = DEFAULT_LANGUAGE === 'en' ? 'us' : DEFAULT_LANGUAGE;
+/**
+ * Returns the current user time in the format HH:MM|HH:00-HH:59|dayOfWeek|timezone
+ * @returns {String}
+ */
+function getCurrentTime() {
+  const date = new Date();
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  const dayOfWeek = date.getDay();
+  const timezone = date.getTimezoneOffset();
+  return `${hours}:${minutes}|${hours}:00-${hours}:59|${dayOfWeek}|${timezone}`;
+}
 
-  try {
-    if (pageSectionParts[1].length === 2) pageSectionParts[1] = 'offers'; // landing pages
-
-    pageSectionParts.splice(2, 0, subSubSection);
-
-    return pageSectionParts;
-  } catch (e) {
-    return {
-      pageName: 'us:404',
-      section: 'us',
-      subSection: '404',
-    };
-  }
+/**
+ * Returns the current GMT date in the format DD/MM/YYYY
+ * @returns {String}
+ */
+function getCurrentDate() {
+  const date = new Date();
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  return `${day}/${month}/${year}`;
 }
 
 // Calculates the payload for tracking page load event.
 function getPageLoadTrackingPayload(params) {
-  const sections = getPageSections(window.location.pathname, languageCountry);
+  const { languageCountry, pathname, environment } = params;
+  const pageSections = pathname.split('/').filter((subPath) => subPath.trim() !== '' && subPath !== languageCountry.languageCountryPath) || [];
   return {
-    pageInstanceID: getInstance(window.location.hostname),
+    pageInstanceID: environment,
     page: {
       info: {
-        name: pageSectionParts.join(':') || 'Home', // e.g. au:consumer:product:internet security or au:consumer:solutions
-        section: sections[0] || '',
-        subSection: sections[1] || '',
-        subSubSection: sections[2] || '',
-        subSubSubSection: sections[3] || '',
+        name: (pageSections.length > 0) ? pageSections.unshift('au') && pageSections.join(':') : 'Home', // e.g. au:consumer:product:internet security or au:consumer:solutions
+        section: pageSections[0] || '',
+        subSection: pageSections[1] || '',
+        subSubSection: pageSections[2] || '',
+        subSubSubSection: pageSections[3] || '',
         destinationURL: window.location.href,
         queryString: window.location.search,
         referringURL: getParamValue('ref') || getParamValue('adobe_mc') || document.referrer || '',
         serverName: 'hlx.live',
-        language: navigator.language || navigator.userLanguage || params.languageCountry.language,
+        language: navigator.language || navigator.userLanguage || languageCountry.language,
         sysEnv: getOperatingSystem(window.navigator.userAgent),
       },
       attributes: {
         promotionID: getParamValue('pid') || '',
         internalPromotionID: getParamValue('icid') || '',
         trackingID: getParamValue('cid') || '',
-        time: formatUserTime,
-        date: currentGMTDate,
-        domain: window.location.hostname,
-        domainPeriod: window.location.hostname.split('.').length,
+        time: getCurrentTime(),
+        date: getCurrentDate(),
+        domain: HOSTNAME,
+        domainPeriod: HOSTNAME.split('.').length,
       },
     },
   };
@@ -119,7 +129,9 @@ function pushPageLoadEvent() {
   window.adobeDataLayerInPage = true;
 
   const trackingPayload = getPageLoadTrackingPayload({
-    languageCountry,
+    languageCountry: LANGUAGE_COUNTRY,
+    pathname: PATHNAME,
+    environment: ENVIRONMENT,
   });
 
   if (trackingPayload) {
@@ -131,10 +143,14 @@ function pushPageLoadEvent() {
 }
 
 // Load Adobe Experience platform data collection (Launch) script
-if (!window.location.host.includes('hlx.page') && !window.location.host.includes('localhost')) {
-  loadScript(`${removeDoubleDashes(LAUNCH_URL + LAUNCH_PROD_SCRIPT)}`);
-} else {
-  loadScript(`${removeDoubleDashes(LAUNCH_URL + LAUNCH_STAGE_SCRIPT)}`);
+const { launchProdScript, launchStageScript, launchDevScript } = await fetchPlaceholders(`/${LANGUAGE_COUNTRY.languageCountryPath}`);
+switch (ENVIRONMENT) {
+  case 'prod':
+    loadScript(LAUNCH_URL + launchProdScript); break;
+  case 'stage':
+    loadScript(LAUNCH_URL + launchStageScript); break;
+  default:
+    loadScript(LAUNCH_URL + launchDevScript); break;
 }
 
 pushPageLoadEvent();

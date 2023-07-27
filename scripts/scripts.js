@@ -14,6 +14,10 @@ import {
 
 const LCP_BLOCKS = []; // add your LCP blocks to the list
 
+export const SUPPORTED_COUNTRY_LANGUAGE_MAPPING = {
+  'com.au': 'en-au',
+};
+
 /**
  * Creates a meta tag with the given name and value and appends it to the head.
  * @param {String} name The name of the meta tag
