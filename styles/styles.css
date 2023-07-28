@@ -438,3 +438,76 @@ main .section.page-full-width > div {
   margin: 0;
   max-width: unset;
 }
+
+.section.section-full-width {
+  padding: 4rem 0;
+}
+
+.section.blue-background {
+  background-color: #006eff;
+  color: #fff;
+}
+
+.section.section-full-width h2 {
+  font-size: 2rem;
+  margin: 0 0 0.9375rem 0;
+  font-weight: var(--font-weight-bold);
+}
+
+.section.section-full-width p {
+  padding-bottom: 1.25rem;
+  font-size: 1rem;
+  font-weight: var(--font-weight-regular);
+  margin: 0;
+}
+
+.section.section-full-width ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.section.section-full-width ul li {
+  font-size: 1rem;
+  font-weight: var(--font-weight-regular);
+  line-height: 1.5;
+  margin: 0.625rem 0 0;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.section-full-width ul > li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 3px;
+  width: 15px;
+  height: 15px;
+  background: url("../../icons/checkmark_solid-circle.svg");
+  background-size: cover;
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(178deg) brightness(180%) contrast(101%);
+}
+.section.section-full-width > div > p.button-container {
+  display: inline;
+  margin-right: 0.8125rem;
+  padding: 0;
+
+}
+.section-full-width > div > .button-container > a {
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  margin-top: 2.875rem;
+}
+.section-full-width > div > .button-container > a {
+  background-color: #000;
+}
+
+.section-full-width > div > .button-container > a::after {
+  display: none;
+}
+
+.section-full-width > div > .button-container ~ .button-container > a {
+  background-color: transparent;
+  border: 2px solid #fff;
+}
