@@ -50,6 +50,36 @@ function setPageLanguage(param) {
 }
 
 /**
+ * Decorates picture elements with a link to a video.
+ * @param {Element} main The main element
+ */
+export default function decorateLinkedPicturesModal(main) {
+  main.querySelectorAll('picture').forEach((picture) => {
+    if (!picture.closest('div.block')) {
+      const next = picture.parentNode.nextElementSibling;
+      if (next) {
+        const a = next.querySelector('a');
+        const link = a?.textContent;
+        if (a && link.startsWith('https://') && link.includes('fragments')) {
+          a.innerHTML = '';
+          a.className = 'video-placeholder';
+          a.appendChild(picture);
+          const overlayPlayButton = document.createElement('span');
+          overlayPlayButton.className = 'video-placeholder-play';
+          a.appendChild(overlayPlayButton);
+          a.addEventListener('click', async (event) => {
+            event.preventDefault();
+            // eslint-disable-next-line no-use-before-define
+            const modalContainer = await createModal(link, 'video-modal');
+            document.body.append(modalContainer);
+          });
+        }
+      }
+    }
+  });
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -58,6 +88,7 @@ export function decorateMain(main) {
   // hopefully forward compatible button decoration
   decorateButtons(main);
   decorateIcons(main);
+  decorateLinkedPicturesModal(main);
   decorateSections(main);
   decorateBlocks(main);
 }
