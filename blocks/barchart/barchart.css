@@ -13,6 +13,10 @@
   flex-shrink: 0;
 }
 
+.barchart-body li {
+  list-style: none;
+}
+
 .barchart > ul > li {
   border: 0 solid #e5e7eb;
   background-color: var(--background-color);
@@ -51,10 +55,6 @@
   font-weight: 500;
   color: #000;
   background-color: transparent;
-}
-
-.barchart-body li {
-  list-style: none;
 }
 
 
