@@ -92,7 +92,7 @@ main .hero .hero-content {
 }
 
 main .hero.black-background .hero-content{
-  padding: 80px 20px 56px;
+  padding: 80px var(--body-padding) 56px;
   display: flex;
   flex-direction: column;
 }
@@ -156,7 +156,7 @@ main .hero.comparison p {
   margin: 24px 0 0;
 }
 
-main .hero p.button-container{
+main .hero p.button-container {
   margin: 40px 0 0;
   display: flex;
   flex-direction: row;
@@ -170,7 +170,7 @@ main .hero img {
   height: 100%;
 }
 
-main .hero .hero-picture picture img{
+main .hero .hero-picture picture img {
   position: absolute;
   display: none;
 }
@@ -362,6 +362,9 @@ aspect-ratio: inherit;
   }
 
   main .hero.black-background .hero-content {
+    max-width: var(--section-desktop-max-width);
+    padding-left: var(--section-desktop-padding);
+    padding-right: var(--section-desktop-padding);
     display: flex;
     flex-direction: row;
     min-height: unset;
@@ -411,6 +414,12 @@ aspect-ratio: inherit;
 
   main .hero .hero-content {
     min-height: 725px;
+    max-width: var(--section-large-desktop-max-width);
+    padding-left: var(--section-large-desktop-padding);
+    padding-right: var(--section-large-desktop-padding);
+  }
+
+  main .hero.black-background .hero-content {
     max-width: var(--section-large-desktop-max-width);
     padding-left: var(--section-large-desktop-padding);
     padding-right: var(--section-large-desktop-padding);
