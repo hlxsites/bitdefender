@@ -62,7 +62,7 @@
   --heading-font-size-xs: 18px;
 
   /* nav height */
-  --nav-height: 64px;
+  --nav-height: 63px;
   --nav-height-desktop: 40px;
 
   /* body width */
@@ -140,6 +140,10 @@ body {
 
 body.appear {
   display: unset;
+}
+
+body.no-scroll {
+  overflow: hidden;
 }
 
 main .section .default-content-wrapper { /* mobile */  

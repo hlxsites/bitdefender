@@ -303,12 +303,17 @@ header a.button::after {
 }
 
 header .icon {
-  margin-top: -60px;
-  margin-left: 200px;
+  position: absolute;
+  margin: 0;
   z-index: 1000;
-  filter: invert(100);
-  width: 175px;
+  top: 15px;
+  width: 103px;
+  height: 30px;
+  filter: none;
+  left: 20px;
 }
+
+
 
 .bottom-links p > a {
   text-decoration: none;
@@ -546,14 +551,7 @@ header a.button:hover span.button-text {
   header p {
     margin: 0;
   }
-  header .icon {
-    position: absolute;
-    top: 78px;
-    margin-left: 25px;
-    width: 200px;
-    height: 30px;
-    filter: none;
-  } 
+  
 }
 
 .icon.icon-arrow-right {
@@ -681,19 +679,21 @@ nav {
 
 .options-wrapper {
   position: relative;
-  top: 55px;
+  top: var(--nav-height);
   width: 100vw;
   height: 0;
-  visibility: hidden;
+  /* visibility: hidden; */
+  display: none;
 }
 
 .options-wrapper.show{
   width: 100vw;
-  height: 65vh;
+  height: 100vh;
   box-shadow: 0 10px 10px #0003;
   z-index: 3;
   border-top: 1px solid #cecccc;
-  visibility: visible;
+  /* visibility: visible; */
+  display: block;
 }
 
 .sub-menu {

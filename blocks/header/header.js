@@ -209,6 +209,7 @@ function handleMenuClick() {
 
   const headerWrapper = document.querySelector('.header-wrapper');
   headerWrapper.classList.toggle('expanded');
+  document.body.classList.toggle('no-scroll');
 
   let hasToggled = false;
 
@@ -308,7 +309,7 @@ function handleMenuClick() {
     });
     const optionWrapperShow = document.querySelector('.options-wrapper.show');
     if (optionWrapperShow) {
-      optionWrapperShow.style.height = '65vh';
+      optionWrapperShow.style.height = '100vh';
     }
   }
 
