@@ -1,6 +1,5 @@
 import {
   sampleRUM,
-  buildBlock,
   loadHeader,
   loadFooter,
   decorateButtons,
@@ -15,6 +14,12 @@ import {
 
 const LCP_BLOCKS = []; // add your LCP blocks to the list
 
+export const SUPPORTED_LANGUAGES = ['en'];
+export const DEFAULT_LANGUAGE = 'en';
+
+export const SUPPORTED_COUNTRIES = ['au'];
+export const DEFAULT_COUNTRY = 'au';
+
 /**
  * Creates a meta tag with the given name and value and appends it to the head.
  * @param {String} name The name of the meta tag
@@ -27,45 +32,21 @@ export function createMetadata(name, value) {
   document.head.append(meta);
 }
 
-/**
- * Sets the language of the document and redirects nav/footer to the preferred country and language.
- * @param {String} pathname The pathname of the document
- */
-export function setLanguage(pathname) {
-  const [, languageCountry] = pathname.split('/');
-  const [language] = languageCountry.split('-');
-
-  document.documentElement.lang = language;
-  createMetadata('nav', `/${languageCountry}/nav`);
-  createMetadata('footer', `/${languageCountry}/footer`);
+export function getLanguageCountryFromPath() {
+  return {
+    language: DEFAULT_LANGUAGE,
+    country: DEFAULT_COUNTRY,
+  };
 }
 
 /**
- * Builds hero block and prepends to main in a new section.
- * @param {Element} main The container element
+ * Sets the page language.
+ * @param {Object} param The language and country
  */
-function buildHeroBlock(main) {
-  const h1 = main.querySelector('h1');
-  const picture = main.querySelector('picture');
-  // eslint-disable-next-line no-bitwise
-  if (h1 && picture && (h1.compareDocumentPosition(picture) & Node.DOCUMENT_POSITION_PRECEDING)) {
-    const section = document.createElement('div');
-    section.append(buildBlock('hero', { elems: [picture, h1] }));
-    main.prepend(section);
-  }
-}
-
-/**
- * Builds all synthetic blocks in a container element.
- * @param {Element} main The container element
- */
-function buildAutoBlocks(main) {
-  try {
-    buildHeroBlock(main);
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error('Auto Blocking failed', error);
-  }
+function setPageLanguage(param) {
+  document.documentElement.lang = param.language;
+  createMetadata('nav', '/nav');
+  createMetadata('footer', '/footer');
 }
 
 /**
@@ -77,7 +58,6 @@ export function decorateMain(main) {
   // hopefully forward compatible button decoration
   decorateButtons(main);
   decorateIcons(main);
-  buildAutoBlocks(main);
   decorateSections(main);
   decorateBlocks(main);
 }
@@ -142,7 +122,7 @@ export async function detectModalButtons(main) {
  * @param {Element} doc The container element
  */
 async function loadEager(doc) {
-  setLanguage(window.location.pathname);
+  setPageLanguage(getLanguageCountryFromPath(window.location.pathname));
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {

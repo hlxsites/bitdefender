@@ -10,6 +10,9 @@
  * governing permissions and limitations under the License.
  */
 
+const STICKY_NAVIGATION_SECTION_METADATA_KEY = 'sticky-navigation-item';
+export const STICKY_NAVIGATION_DATASET_KEY = 'stickyNavName';
+
 /**
  * log RUM if part of the sample.
  * @param {string} checkpoint identifies the checkpoint in funnel
@@ -348,6 +351,9 @@ export function decorateSections(main) {
         if (key === 'style') {
           const styles = meta.style.split(',').map((style) => toClassName(style.trim()));
           styles.forEach((style) => section.classList.add(style));
+        } else if (key === STICKY_NAVIGATION_SECTION_METADATA_KEY) {
+          section.id = toClassName(meta[key]);
+          section.dataset[STICKY_NAVIGATION_DATASET_KEY] = meta[key];
         } else {
           section.dataset[toCamelCase(key)] = meta[key];
         }
@@ -563,10 +569,15 @@ export function decorateButtons(element) {
     : `<span class="button-text">${a.textContent}</span>${a.querySelector('span.icon')?.outerHTML || ''}`
   );
   element.querySelectorAll('a').forEach((a) => {
+    if (a.closest('.nav-brand') || a.closest('.nav-sections')) {
+      return;
+    }
+
     a.title = a.title || a.textContent;
     if (a.href !== a.textContent) {
       const up = a.parentElement;
       const twoup = a.parentElement.parentElement;
+
       if (!a.querySelector('img')) {
         // Example: <p><strong><a href="example.com">Text</a></strong></p>
         if (up.childNodes.length === 1 && up.tagName === 'STRONG'
