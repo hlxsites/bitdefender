@@ -165,6 +165,7 @@ function renderDesktopHeader(block, nav) {
   const homeSolutions = document.createElement('p');
   const homeSolutionText = document.querySelector('.bottom-links > div:last-child > p');
   homeSolutions.innerHTML = homeSolutionText.innerHTML;
+  homeSolutions.classList.add('home-solutions-link-default');
   const headerWrapper = document.querySelector('.header-wrapper');
   headerWrapper.appendChild(homeSolutions);
 
@@ -373,7 +374,12 @@ export default async function decorate(block) {
     renderMobileHeader(nav);
     renderDesktopHeader(block, nav);
 
-    decorateIcons(nav);
+    decorateIcons(nav).then(() => {
+      const svgPath = document.querySelector('#icons-sprite-bitdefender-logo path');
+      if (svgPath) {
+        svgPath.setAttribute('fill', 'currentColor');
+      }
+    });
 
     // Select the parent elements
     const bottomLinks = document.querySelector('.bottom-links');
@@ -382,7 +388,18 @@ export default async function decorate(block) {
     const thirdChild = bottomLinks.children[2];
 
     bottomLinks.removeChild(thirdChild);
-    header.appendChild(thirdChild);
+
+    thirdChild.classList.add('logo');
+
+    const container = document.createElement('div');
+    container.classList.add('logo-container');
+    container.appendChild(thirdChild);
+
+    if (header.querySelector('p.home-solutions-link-default')) {
+      container.appendChild(header.querySelector('p.home-solutions-link-default'));
+      // header.removeChild(header.querySelector('p.home-solutions-link-default'));
+    }
+    header.appendChild(container);
   }
 
   const secondSpan = document.querySelector('.header-wrapper > div > p span:nth-child(2)');
