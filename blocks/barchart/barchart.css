@@ -1,113 +1,126 @@
 .barchart > ul {
-    color: #3c3c3c;
-    display: grid;
-    gap: 16px;
-    width: 100%;
-    margin: 0 15px;
-    grid-template-columns: 1fr;
-  }
-  
-  .barchart-image {
-    width: 46px;
-    height: 61px;
-    display: inline-block;
-    flex-shrink: 0;
-  }
-  
+  color: #3c3c3c;
+  display: grid;
+  gap: 16px;
+  width: 100%;
+  margin: 0 15px;
+  grid-template-columns: 1fr;
+}
+
+.barchart-image {
+  width: 46px;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.barchart > ul > li {
+  border: 0 solid #e5e7eb;
+  background-color: var(--background-color);
+  border-radius: 8px;
+  box-shadow: 0 3px 8px 0 rgb(0 0 0 / 10%);
+  display: flex;
+  flex-direction: column;
+  padding: 30px 20px;
+  gap: 25px 20px;
+}
+
+.barchart.block h3 {
+  line-height: 1.25;
+  color: var(--text-color);
+  font-size: 22px;
+  font-weight: 500;
+  margin-top: 0;
+}
+
+
+.barchart-body p {
+  line-height: 1.25;
+  color:  var(--text-color);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.barchart-body ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: center;
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 500;
+  color: #000;
+  background-color: transparent;
+}
+
+.barchart-body li {
+  list-style: none;
+}
+
+
+.barchart-body li:nth-child(odd) { 
+  flex: 85%;
+  padding: 9px 16px;
+  height: 40px;
+  position: relative;
+  z-index: 1;
+}
+
+.barchart-body li:nth-child(even) { 
+  flex: 10%;
+  text-align: right;
+  padding-right: 10px;
+}
+
+
+.barchart-body li:nth-child(odd)::before {
+  background-color: #dedede;
+  width: var(--bar-width);
+  display: inline-block;
+  content: '';
+  height: 100%;
+  max-width: 100%;
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  top: 0;
+  padding: 0;
+  border-radius: 4px;
+}
+
+.barchart-body ul:first-of-type > *:first-child {
+  color: #fff;
+}
+
+.barchart-body ul:first-of-type > *:first-child::before {
+  background-color: #005ed9;
+}
+
+.barchart-wrapper {
+  padding: 0 var(--body-padding);
+}
+
+@media (min-width:481px) {
   .barchart > ul > li {
-    border: 0 solid #e5e7eb;
-    background-color: var(--background-color);
-    border-radius: 8px;
-    box-shadow: 0 3px 8px 0 rgb(0 0 0 / 10%);
-    color: transparent;
-    font-size: 1px;
-    display: flex;
-    flex-direction: column;
-    padding: 30px 20px;
-    gap: 25px 20px;
-  
+    flex-direction: row;
   }
-  
-  .barchart.block h3 {
-    line-height: 1.25;
-    color: var(--text-color);
-    font-size: 22px;
-    font-weight: 500;
-    margin-top: 0;
+}
+
+@media (min-width: 990px) { /* desktop */
+  .barchart > ul {
+    grid-template-columns: repeat(2, minmax(300px, 1fr));
   }
-  
-  
-  .barchart-body p {
-    line-height: 1.25;
-    color:  var(--text-color);
-    font-size: 14px;
-    font-weight: 400;
+
+  .barchart-wrapper {
+    max-width: var(--section-desktop-max-width);
+    padding: 0 var(--section-desktop-padding);
+    margin: 0 auto;
   }
-  
-  .barchart-body > ul > li > ul > li {
-    display: none;
+}
+
+@media (min-width: 1600px) { /* large desktop */
+  .barchart-wrapper {
+    max-width: var(--section-large-desktop-max-width);
+    padding: 0 var(--section-large-desktop-padding);
   }
-  
-  .bar {
-    display: flex;
-    font-size: 14px;
-    line-height: 1.5;
-    font-weight: 500;
-    color: #000;
-    justify-content: space-between;
-  }
-  
-  .bar-label {
-    width: calc(100% - 40px);
-    height: 40px;
-    border-radius: 4px;
-    padding: 9px 16px;
-  }
-  
-  .barchart.block .bar-label {
-    background-color: #dedede;
-  }
-  
-  .barchart.block .first-bar .bar-label {
-    color: #fff;
-    background-color: #005ed9;;
-  }
-  
-  .value-label {
-    margin-left: 3px;
-    line-height: 1.31;
-    font-weight: 400;
-    letter-spacing: .006em;
-    display: inline-block;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-  }
-  
-  main .section .barchart-wrapper {
-    padding: 0 20px;
-  }
-  
-  @media (min-width:481px) {
-    .barchart > ul > li {
-      flex-direction: row;
-    }
-  }
-  
-  @media (min-width: 990px) { /* desktop */
-    .barchart > ul{
-      grid-template-columns: repeat(2, minmax(300px, 1fr));
-    }
-    
-    main .section .barchart-wrapper {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-  }
-  
-  @media (min-width: 1600px) { /* large desktop */
-    main .section .barchart-wrapper {
-      max-width: 1292px;
-      margin: 0 auto;
-    }
-  }
-  
+}
