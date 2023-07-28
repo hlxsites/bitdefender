@@ -140,7 +140,7 @@ body {
 }
 
 body.appear {
-  display: unset;
+  display: block;
 }
 
 body.no-scroll {
@@ -182,12 +182,6 @@ main .section .default-content-wrapper { /* mobile */
 
 header {
   height: var(--nav-height);
-}
-
-@media (min-width: 1000px) {
-  header {
-    height: var(--nav-height-desktop);
-  } 
 }
 
 h1, h2, h3,

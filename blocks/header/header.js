@@ -130,9 +130,9 @@ function renderDesktopHeader(block, nav) {
     const navParagraphs = navSections.querySelectorAll('p');
     const lastNavParagraph = navParagraphs[navParagraphs.length - 1];
     navParagraphs.forEach((navParagraph) => {
-      const divider = document.createElement('div');
-      divider.className = 'nav-divider';
-      navSections.insertBefore(divider, navParagraph);
+      // const divider = document.createElement('div');
+      // divider.className = 'nav-divider';
+      // navSections.insertBefore(divider, navParagraph);
 
       if (navParagraph === lastNavParagraph) {
         const loginLink = document.createElement('a');
@@ -294,7 +294,7 @@ function handleMenuClick() {
       subMenuTitle.addEventListener('click', handleSubMenuTitleClick);
     }
     const optionWrapperShow = document.querySelector('.options-wrapper.show');
-    optionWrapperShow.style.height = '100vh';
+    optionWrapperShow.style.height = 'auto';
 
     const optionWrapperShowDivs = optionWrapperShow.querySelectorAll('div:not(.sub-menu-title)');
 
@@ -309,7 +309,7 @@ function handleMenuClick() {
     });
     const optionWrapperShow = document.querySelector('.options-wrapper.show');
     if (optionWrapperShow) {
-      optionWrapperShow.style.height = '100vh';
+      optionWrapperShow.style.height = 'auto';
     }
   }
 
