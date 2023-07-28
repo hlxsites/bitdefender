@@ -289,10 +289,6 @@ header a.button::after {
   margin-left: 200px;
 }
 
-.mega-menu-show {
-  opacity: 1 !important;
-}
-
 .home-solutions-link-hover {
   color: #FFF;
 }
@@ -316,8 +312,6 @@ header .icon {
   filter: none;
   left: 20px;
 }
-
-
 
 .bottom-links p > a {
   text-decoration: none;
@@ -422,7 +416,6 @@ header a.button:hover span.button-text {
   color: var(--background-color);
 }
 
-
 .triangle {
   position: absolute;
   width: 0;
@@ -443,13 +436,19 @@ header a.button:hover span.button-text {
   width: 900px;
   height: 500px;
   background-color: var(--background-color);
-  opacity: 0; 
+  opacity: 0;
   z-index: 3;
-  transition: opacity 0.2s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
   box-shadow: 0 10px 10px #0003;
   border-bottom: 35px solid #f5f6f7;
+  visibility: hidden;
+}
+
+.mega-menu-show {
+  opacity: 1;
+  visibility: visible;
 }
 
 @media (max-width: 1390px) {
