@@ -15,16 +15,13 @@ export default function decorate(block) {
   ul.querySelectorAll('img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
   block.textContent = '';
   block.append(ul);
-
   const containers = document.querySelectorAll('.barchart.block .barchart-body');
   containers.forEach((container) => {
     const progressBars = container.querySelectorAll('ul');
     progressBars.forEach((progressBar) => {
       progressBar.setAttribute('data-bar-chart', 'true');
-      let value = `${(parseFloat(progressBar.lastElementChild.textContent) / 6) * 100}%`;
+      const value = `${(parseFloat(progressBar.lastElementChild.textContent) / 6) * 100}%`;
       progressBar.style.setProperty('--bar-width', value);
-    }
-    )
-  }
-  )
+    });
+  });
 }
