@@ -53,6 +53,7 @@
     background-color: transparent;
   }
   
+  
   .barchart-body [data-bar-chart] > *:first-child { 
     width: calc(100% - 40px);
     padding: 9px 16px;
@@ -62,7 +63,7 @@
     z-index: 1;
   }
 
-  .barchart-body [data-bar-chart] > *:first-child::before { 
+  .barchart-body [data-bar-chart] > *:first-child::before {
     background-color: #dedede;
     width: var(--bar-width);
     display: inline-block;

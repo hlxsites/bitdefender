@@ -15,6 +15,7 @@ export default function decorate(block) {
   ul.querySelectorAll('img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
   block.textContent = '';
   block.append(ul);
+
   const containers = document.querySelectorAll('.barchart.block .barchart-body');
   containers.forEach((container) => {
     const progressBars = container.querySelectorAll('ul');
