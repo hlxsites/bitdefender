@@ -14,9 +14,11 @@ import {
 
 const LCP_BLOCKS = []; // add your LCP blocks to the list
 
-export const SUPPORTED_COUNTRY_LANGUAGE_MAPPING = {
-  'com.au': 'en-au',
-};
+export const SUPPORTED_LANGUAGES = ['en'];
+export const DEFAULT_LANGUAGE = 'en';
+
+export const SUPPORTED_COUNTRIES = ['au'];
+export const DEFAULT_COUNTRY = 'au';
 
 /**
  * Creates a meta tag with the given name and value and appends it to the head.
@@ -30,25 +32,21 @@ export function createMetadata(name, value) {
   document.head.append(meta);
 }
 
-/**
- * Gets the language and country from the pathname.
- * @param {String} pathname The pathname of the document
- * @returns {String} The language and country
- */
-export function getLanguageCountryFromPath(pathname) {
-  const [, languageCountryPath] = pathname.split('/');
-  const [language] = languageCountryPath.split('-');
-  return { languageCountryPath, language };
+export function getLanguageCountryFromPath() {
+  return {
+    language: DEFAULT_LANGUAGE,
+    country: DEFAULT_COUNTRY,
+  };
 }
 
 /**
  * Sets the page language.
  * @param {Object} param The language and country
  */
-export function setPageLanguage(param) {
+function setPageLanguage(param) {
   document.documentElement.lang = param.language;
-  createMetadata('nav', `/${param.languageCountryPath}/nav`);
-  createMetadata('footer', `/${param.languageCountryPath}/footer`);
+  createMetadata('nav', '/nav');
+  createMetadata('footer', '/footer');
 }
 
 /**

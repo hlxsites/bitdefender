@@ -7,7 +7,6 @@ import {
 
 // eslint-disable-next-line import/no-cycle
 import {
-  SUPPORTED_COUNTRY_LANGUAGE_MAPPING,
   getLanguageCountryFromPath,
 } from './scripts.js';
 
@@ -18,11 +17,11 @@ sampleRUM('cwv');
  * Returns the environment name based on the hostname
  * @returns {String}
  */
-function getEnvironment(hostname, tlds) {
+function getEnvironment(hostname, country) {
   if (hostname.includes('hlx.page') || hostname.includes('hlx.live')) {
     return 'stage';
   }
-  if (tlds.some((tld) => hostname.includes(tld))) {
+  if (hostname.includes(`.${country}`)) {
     return 'prod';
   }
   return 'dev';
@@ -32,7 +31,7 @@ const PATHNAME = window.location.pathname;
 const HOSTNAME = window.location.hostname;
 const LANGUAGE_COUNTRY = getLanguageCountryFromPath(PATHNAME);
 const LAUNCH_URL = 'https://assets.adobedtm.com';
-const ENVIRONMENT = getEnvironment(HOSTNAME, Object.keys(SUPPORTED_COUNTRY_LANGUAGE_MAPPING));
+const ENVIRONMENT = getEnvironment(HOSTNAME, LANGUAGE_COUNTRY.country);
 
 /**
  * Returns the current user operating system based on userAgent
@@ -143,7 +142,7 @@ function pushPageLoadEvent() {
 }
 
 // Load Adobe Experience platform data collection (Launch) script
-const { launchProdScript, launchStageScript, launchDevScript } = await fetchPlaceholders(`/${LANGUAGE_COUNTRY.languageCountryPath}`);
+const { launchProdScript, launchStageScript, launchDevScript } = await fetchPlaceholders();
 switch (ENVIRONMENT) {
   case 'prod':
     loadScript(LAUNCH_URL + launchProdScript); break;
