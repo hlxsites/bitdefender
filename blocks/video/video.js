@@ -5,7 +5,7 @@ export default function decorate(block) {
   const videoFragmentPath = block.querySelector('p:last-of-type');
   block.textContent = '';
 
-  if(placeholder && videoFragmentPath) {
+  if (placeholder && videoFragmentPath) {
     const wrapper = document.createElement('div');
     wrapper.className = 'video-placeholder';
     wrapper.innerHTML = '<div class="video-placeholder-play"><button title="Play"></button></div>';
