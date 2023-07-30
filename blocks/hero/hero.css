@@ -320,9 +320,11 @@ main .hero.black-background ul.hero-awards li picture img{
   main .hero h1 {
     font-size: 50px;
   }
+
   main .hero h4 {
     font-size: 24px;
   }
+
   main .hero .hero-picture picture img {
     display: block;
   }
@@ -401,9 +403,11 @@ main .hero.black-background ul.hero-awards li picture img{
   main .hero h1 {
     font-size: 56px;
   }
+
   main .hero h4 {
     font-size: 24px;
   }
+
   main .hero .hero-picture picture img {
     display: block;
   }
