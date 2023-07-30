@@ -97,7 +97,7 @@ main .hero .hero-content {
 }
 
 main .hero.black-background .hero-content{
-  padding: 76px var(--body-padding) 56px;
+  padding: 20px var(--body-padding) 56px;
   display: flex;
   flex-direction: column;
 }
@@ -317,6 +317,12 @@ main .hero.black-background ul.hero-awards li picture img{
 
 @media (min-width: 990px) { /* desktop */
   
+  main .hero.black-background .hero-content{
+    padding: 76px var(--body-padding) 56px;
+    display: flex;
+    flex-direction: column;
+  }
+
   main .hero h1 {
     font-size: 50px;
   }
