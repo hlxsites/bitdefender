@@ -149,9 +149,10 @@ function renderDesktopHeader(block, nav) {
   if (navBrandLinks && navBrandLinks.length > 0) {
     const forHomeLink = Array.from(navBrandLinks)[0];
     if (forHomeLink) {
-      const homeButtonBorder = document.createElement('div');
-      homeButtonBorder.className = 'home-button-border';
-      forHomeLink.parentNode.appendChild(homeButtonBorder);
+      forHomeLink.classList.add('active');
+      // const homeButtonBorder = document.createElement('div');
+      // homeButtonBorder.className = 'home-button-border';
+      // forHomeLink.parentNode.appendChild(homeButtonBorder);
     }
   }
 
@@ -178,7 +179,7 @@ function renderDesktopHeader(block, nav) {
   homeSolutions.addEventListener('mouseenter', () => {
     clearTimeout(hideTimeout);
     megaMenu.classList.add('mega-menu-show');
-    homeSolutions.classList.remove('home-solutions-link-default');
+    // homeSolutions.classList.remove('home-solutions-link-default');
     homeSolutions.classList.add('home-solutions-link-hover');
   });
 
@@ -186,7 +187,7 @@ function renderDesktopHeader(block, nav) {
     hideTimeout = setTimeout(() => {
       megaMenu.classList.remove('mega-menu-show');
       homeSolutions.classList.remove('home-solutions-link-hover');
-      homeSolutions.classList.add('home-solutions-link-default');
+      // homeSolutions.classList.add('home-solutions-link-default');
     }, 500);
   });
 
@@ -197,7 +198,7 @@ function renderDesktopHeader(block, nav) {
   megaMenu.addEventListener('mouseleave', () => {
     megaMenu.classList.remove('mega-menu-show');
     homeSolutions.classList.remove('home-solutions-link-hover');
-    homeSolutions.classList.add('home-solutions-link-default');
+    // homeSolutions.classList.add('home-solutions-link-default');
   });
 
   createLoginModal();

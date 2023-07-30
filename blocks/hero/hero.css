@@ -97,7 +97,7 @@ main .hero .hero-content {
 }
 
 main .hero.black-background .hero-content{
-  padding: 80px var(--body-padding) 56px;
+  padding: 76px var(--body-padding) 56px;
   display: flex;
   flex-direction: column;
 }
@@ -180,8 +180,6 @@ main .hero .hero-picture picture img {
   display: none;
 }
 
-
-
 main .hero a.button {
   margin: 8px 13px 0 0;
   padding: 10px 26px 8px 28px;
@@ -222,7 +220,7 @@ main .hero .discount-bubble .discount-bubble-1 {
   font-size: var(--hero-font-size-xs);
   color: #fff;
   line-height: 1.3;
-  font-weight: var(--font-weight-bold);;
+  font-weight: var(--font-weight-bold);
   font-style: normal;
   text-decoration: none;
 }
@@ -303,18 +301,6 @@ main .hero.black-background ul.hero-awards li picture img{
   height: 81px;
   width: auto;
 }
-/**
-picture {
-aspect-ratio: 7/5; (or 336/224)
-display: grid;
-}
-
-img {
-grid-area: 1 / -1;
-object-fit: cover;
-aspect-ratio: inherit;
-}
-*/
 
 @media(min-width: 480px) { 
   :root {
@@ -330,10 +316,13 @@ aspect-ratio: inherit;
 }
 
 @media (min-width: 990px) { /* desktop */
-  :root {
-    --hero-font-size-l: 42px;
+  
+  main .hero h1 {
+    font-size: 50px;
   }
-
+  main .hero h4 {
+    font-size: 24px;
+  }
   main .hero .hero-picture picture img {
     display: block;
   }
@@ -344,7 +333,6 @@ aspect-ratio: inherit;
     bottom: 0;
     left: 0;
     right: 0;
-
   }
 
   main .hero.black-background .hero-picture::before {
@@ -403,16 +391,21 @@ aspect-ratio: inherit;
   main .hero.black-background ul.hero-awards li {
     display: block;
     min-height: 20px;
-    margin: 9px 20px 30px 0;
+    margin: 9px 20px 0 0;
     padding: 0;
-    width: 155px;
     width: auto;
   }
 }
 
 @media (min-width: 1600px) { /* large desktop */
-  :root {
-    --hero-font-size-l: 56px;
+  main .hero h1 {
+    font-size: 56px;
+  }
+  main .hero h4 {
+    font-size: 24px;
+  }
+  main .hero .hero-picture picture img {
+    display: block;
   }
 
   main .hero .hero-content {
