@@ -101,7 +101,6 @@ nav {
 }
 
 .login-modal {
-  /* display: flex; */
   display: none;
   flex-direction: column;
   align-items: flex-start;
@@ -382,8 +381,6 @@ header a.button:hover span.button-text {
   box-shadow: 0 10px 10px #0003;
   z-index: 3;
   border-top: 1px solid #cecccc;
-
-  /* visibility: visible; */
   display: block;
   overflow: hidden;
 }
@@ -469,8 +466,6 @@ header a.button:hover span.button-text {
   .nav-wrapper {
     width: 100%;
     background-color: var(--text-color);
-
-    /* border-bottom: 2px solid #3c3c3c;; */
     z-index: 100;
     display: block;
     margin: 0 auto;
@@ -743,7 +738,6 @@ header a.button:hover span.button-text {
   }
   
   .mega-menu div p {
-    /* line-height: 0.5; */
     margin-left: 15px;
   }
 
@@ -751,7 +745,7 @@ header a.button:hover span.button-text {
     height: fit-content;
     margin-left: 20px;
   }
-  
+
   .mega-menu > div:first-child p {
     width: 250px;
     margin-top: 0;

@@ -130,10 +130,6 @@ function renderDesktopHeader(block, nav) {
     const navParagraphs = navSections.querySelectorAll('p');
     const lastNavParagraph = navParagraphs[navParagraphs.length - 1];
     navParagraphs.forEach((navParagraph) => {
-      // const divider = document.createElement('div');
-      // divider.className = 'nav-divider';
-      // navSections.insertBefore(divider, navParagraph);
-
       if (navParagraph === lastNavParagraph) {
         const loginLink = document.createElement('a');
         loginLink.textContent = lastNavParagraph.textContent;
@@ -150,9 +146,6 @@ function renderDesktopHeader(block, nav) {
     const forHomeLink = Array.from(navBrandLinks)[0];
     if (forHomeLink) {
       forHomeLink.classList.add('active');
-      // const homeButtonBorder = document.createElement('div');
-      // homeButtonBorder.className = 'home-button-border';
-      // forHomeLink.parentNode.appendChild(homeButtonBorder);
     }
   }
 
@@ -179,7 +172,6 @@ function renderDesktopHeader(block, nav) {
   homeSolutions.addEventListener('mouseenter', () => {
     clearTimeout(hideTimeout);
     megaMenu.classList.add('mega-menu-show');
-    // homeSolutions.classList.remove('home-solutions-link-default');
     homeSolutions.classList.add('home-solutions-link-hover');
   });
 
@@ -187,7 +179,6 @@ function renderDesktopHeader(block, nav) {
     hideTimeout = setTimeout(() => {
       megaMenu.classList.remove('mega-menu-show');
       homeSolutions.classList.remove('home-solutions-link-hover');
-      // homeSolutions.classList.add('home-solutions-link-default');
     }, 500);
   });
 
@@ -198,7 +189,6 @@ function renderDesktopHeader(block, nav) {
   megaMenu.addEventListener('mouseleave', () => {
     megaMenu.classList.remove('mega-menu-show');
     homeSolutions.classList.remove('home-solutions-link-hover');
-    // homeSolutions.classList.add('home-solutions-link-default');
   });
 
   createLoginModal();
