@@ -301,7 +301,7 @@ function handleMenuClick() {
     });
     const optionWrapperShow = document.querySelector('.options-wrapper.show');
     if (optionWrapperShow) {
-      optionWrapperShow.style.height = 'auto';
+      optionWrapperShow.style.height = '100vh';
     }
   }
 
