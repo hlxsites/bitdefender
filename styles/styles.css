@@ -36,7 +36,7 @@
   --icon-color: #205fff;
 
   /* fonts */
-  --body-font-family: 'Roboto', "roboto-normal-400-fallback", helvetica, ubuntu, roboto, noto, sans-serif;
+  --body-font-family: "Roboto", "roboto-normal-400-fallback", helvetica, ubuntu, roboto, noto, sans-serif;
   --heading-font-family: var(--body-font-family);
   --fixed-font-family: var(--body-font-family);
 
@@ -197,13 +197,6 @@ header {
   main .section .default-content-wrapper {
     max-width: var(--section-large-desktop-max-width);
     padding: 0 var(--section-large-desktop-padding)
-  }
-}
-
-
-@media (min-width: 1000px) {
-  header {
-    height: var(--nav-height-desktop);
   }
 }
 

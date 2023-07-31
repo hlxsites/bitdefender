@@ -2,6 +2,7 @@
 
 header {
   z-index: 100;
+  background-image: linear-gradient(180deg,rgb(0 0 0 / 80%),rgb(0 0 0 / 50%) 55%,transparent);
 }
 
 header p {
@@ -229,12 +230,6 @@ header.expanded .logo-container {
 }
 
 header .icon {
-<<<<<<< HEAD
-  margin: 0;
-  width: 103px;
-  height: 30px;
-  color: var(--text-color);
-=======
   position: absolute;
   margin: 0;
   z-index: 1000;
@@ -243,10 +238,7 @@ header .icon {
   height: 30px;
   filter: none;
   left: 20px;
->>>>>>> 1eb82de (Fix mobile nav)
 }
-
-
 
 .bottom-links p > a {
   text-decoration: none;
@@ -597,7 +589,7 @@ header a.button:hover span.button-text {
   }
 
   .header-wrapper {
-    position: absolute;
+    position: fixed;
     z-index: 999;
     margin: auto;
     left: 0;
@@ -668,6 +660,10 @@ header a.button:hover span.button-text {
     font-size: var(--body-font-size-xs);
     font-weight: 400;
     color: var(--text-color);
+  }
+
+  .nav-sections a:first-child{
+    margin-right: 16px;
   }
 
   .nav-sections a:first-child{
@@ -871,8 +867,6 @@ header a.button:hover span.button-text {
     padding-bottom: 14px;
   }
 
-  
-
   .mega-menu > div:first-child > p > a > div {
     margin-top: 5px;
     line-height: 18px;
@@ -956,8 +950,6 @@ header a.button:hover span.button-text {
     grid-gap: 0;
     padding-top: 14px;
   }
-  
-  
   
   #new, #evolved {
     position: relative;
