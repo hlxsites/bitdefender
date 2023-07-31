@@ -36,7 +36,7 @@
   --icon-color: #205fff;
 
   /* fonts */
-  --body-font-family: 'Roboto', helvetica, ubuntu, roboto, noto, sans-serif;
+  --body-font-family: "Roboto", "roboto-normal-400-fallback", helvetica, ubuntu, roboto, noto, sans-serif;
   --heading-font-family: var(--body-font-family);
   --fixed-font-family: var(--body-font-family);
 
@@ -64,7 +64,7 @@
   --heading-font-size-xs: 18px;
 
   /* nav height */
-  --nav-height: 64px;
+  --nav-height: 63px;
   --nav-height-desktop: 40px;
 
   /* body width */
@@ -74,6 +74,13 @@
   --section-desktop-padding: 50px;
   --section-large-desktop-max-width: 1332px;
   --section-large-desktop-padding: 20px;
+}
+
+/* fallback font for Roboto (normal - 400) */
+@font-face {
+  font-family: "roboto-normal-400-fallback";
+  size-adjust: 99.6%;
+  src: local("Helvetica");
 }
 
 html, body, div, span, applet, object, iframe,
@@ -121,25 +128,36 @@ html, body {
 
 html {
   scroll-behavior: smooth;
+  line-height: 1.5;
 }
 
 body {
-  font-size: var(--body-font-size-m);
+  font-size: var(--body-font-size-s);
   font-family: var(--body-font-family);
   color: var(--text-color);
   background-color: var(--background-color);
-  line-height: 1;
+  line-height: 1.5;
   display: none;
   margin: 0;
+  -webkit-font-smoothing: antialiased;
 }
 
 body.appear {
-  display: unset;
+  display: block;
+}
+
+body.no-scroll {
+  overflow: hidden;
 }
 
 main .section .default-content-wrapper { /* mobile */
   padding: 0 var(--body-padding);
 }
+
+header {
+  height: var(--nav-height);
+}
+
 
 @media (min-width: 990px) { /* desktop */
   :root {
@@ -149,6 +167,15 @@ main .section .default-content-wrapper { /* mobile */
     --heading-font-size-m: 32px;
     --heading-font-size-s: 24px;
     --heading-font-size-xs: 22px;
+  }
+
+  header {
+    height: var(--nav-height-desktop);
+    position: absolute;
+    z-index: 999;
+    margin: auto;
+    left: 0;
+    right: 0;
   }
 
   header, main, footer {
@@ -168,10 +195,6 @@ main .section .default-content-wrapper { /* mobile */
     max-width: var(--section-large-desktop-max-width);
     padding: 0 var(--section-large-desktop-padding)
   }
-}
-
-header {
-  height: var(--nav-height);
 }
 
 @media (min-width: 1000px) {

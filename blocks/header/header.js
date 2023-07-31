@@ -130,10 +130,6 @@ function renderDesktopHeader(block, nav) {
     const navParagraphs = navSections.querySelectorAll('p');
     const lastNavParagraph = navParagraphs[navParagraphs.length - 1];
     navParagraphs.forEach((navParagraph) => {
-      const divider = document.createElement('div');
-      divider.className = 'nav-divider';
-      navSections.insertBefore(divider, navParagraph);
-
       if (navParagraph === lastNavParagraph) {
         const loginLink = document.createElement('a');
         loginLink.textContent = lastNavParagraph.textContent;
@@ -149,9 +145,7 @@ function renderDesktopHeader(block, nav) {
   if (navBrandLinks && navBrandLinks.length > 0) {
     const forHomeLink = Array.from(navBrandLinks)[0];
     if (forHomeLink) {
-      const homeButtonBorder = document.createElement('div');
-      homeButtonBorder.className = 'home-button-border';
-      forHomeLink.parentNode.appendChild(homeButtonBorder);
+      forHomeLink.classList.add('active');
     }
   }
 
@@ -165,6 +159,7 @@ function renderDesktopHeader(block, nav) {
   const homeSolutions = document.createElement('p');
   const homeSolutionText = document.querySelector('.bottom-links > div:last-child > p');
   homeSolutions.innerHTML = homeSolutionText.innerHTML;
+  homeSolutions.classList.add('home-solutions-link-default');
   const headerWrapper = document.querySelector('.header-wrapper');
   headerWrapper.appendChild(homeSolutions);
 
@@ -177,7 +172,6 @@ function renderDesktopHeader(block, nav) {
   homeSolutions.addEventListener('mouseenter', () => {
     clearTimeout(hideTimeout);
     megaMenu.classList.add('mega-menu-show');
-    homeSolutions.classList.remove('home-solutions-link-default');
     homeSolutions.classList.add('home-solutions-link-hover');
   });
 
@@ -185,7 +179,6 @@ function renderDesktopHeader(block, nav) {
     hideTimeout = setTimeout(() => {
       megaMenu.classList.remove('mega-menu-show');
       homeSolutions.classList.remove('home-solutions-link-hover');
-      homeSolutions.classList.add('home-solutions-link-default');
     }, 500);
   });
 
@@ -196,7 +189,6 @@ function renderDesktopHeader(block, nav) {
   megaMenu.addEventListener('mouseleave', () => {
     megaMenu.classList.remove('mega-menu-show');
     homeSolutions.classList.remove('home-solutions-link-hover');
-    homeSolutions.classList.add('home-solutions-link-default');
   });
 
   createLoginModal();
@@ -209,6 +201,7 @@ function handleMenuClick() {
 
   const headerWrapper = document.querySelector('.header-wrapper');
   headerWrapper.classList.toggle('expanded');
+  document.body.classList.toggle('no-scroll');
 
   let hasToggled = false;
 
@@ -293,7 +286,7 @@ function handleMenuClick() {
       subMenuTitle.addEventListener('click', handleSubMenuTitleClick);
     }
     const optionWrapperShow = document.querySelector('.options-wrapper.show');
-    optionWrapperShow.style.height = '100vh';
+    optionWrapperShow.style.height = 'auto';
 
     const optionWrapperShowDivs = optionWrapperShow.querySelectorAll('div:not(.sub-menu-title)');
 
@@ -308,7 +301,7 @@ function handleMenuClick() {
     });
     const optionWrapperShow = document.querySelector('.options-wrapper.show');
     if (optionWrapperShow) {
-      optionWrapperShow.style.height = '65vh';
+      optionWrapperShow.style.height = '100vh';
     }
   }
 
@@ -381,7 +374,17 @@ export default async function decorate(block) {
     const thirdChild = bottomLinks.children[2];
 
     bottomLinks.removeChild(thirdChild);
-    header.appendChild(thirdChild);
+
+    thirdChild.classList.add('logo');
+
+    const container = document.createElement('div');
+    container.classList.add('logo-container');
+    container.appendChild(thirdChild);
+
+    if (header.querySelector('p.home-solutions-link-default')) {
+      container.appendChild(header.querySelector('p.home-solutions-link-default'));
+    }
+    header.appendChild(container);
   }
 
   const secondSpan = document.querySelector('.header-wrapper > div > p span:nth-child(2)');
