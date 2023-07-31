@@ -1,6 +1,6 @@
 {
   "project": "Bitdefender",
-  "host": "main--bitdefender--hlxsites.hlx.live",
+  "host": "svg-icons--bitdefender--hlxsites.hlx.live",
   "plugins": [
     {
       "id": "library",
