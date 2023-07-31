@@ -35,7 +35,7 @@
   --breadcrumb-text-color-dark-hover: #fff;
 
   /* fonts */
-  --body-font-family: 'Roboto', "roboto-normal-400-fallback", helvetica, ubuntu, roboto, noto, sans-serif;
+  --body-font-family: "Roboto", "roboto-normal-400-fallback", helvetica, ubuntu, roboto, noto, sans-serif;
   --heading-font-family: var(--body-font-family);
   --fixed-font-family: var(--body-font-family);
 
@@ -138,6 +138,7 @@ body {
   line-height: 1.5;
   display: none;
   margin: 0;
+  -webkit-font-smoothing: antialiased;
 }
 
 body.appear {
@@ -152,6 +153,10 @@ main .section .default-content-wrapper { /* mobile */
   padding: 0 var(--body-padding);
 }
 
+header {
+  height: var(--nav-height);
+}
+
 @media (min-width: 990px) { /* desktop */
   :root {
     --heading-font-size-xxl: 60px;
@@ -160,6 +165,10 @@ main .section .default-content-wrapper { /* mobile */
     --heading-font-size-m: 32px;
     --heading-font-size-s: 24px;
     --heading-font-size-xs: 22px;
+  }
+
+  header {
+    height: var(--nav-height-desktop);
   }
 
   header, main, footer {
@@ -181,9 +190,7 @@ main .section .default-content-wrapper { /* mobile */
   }
 }
 
-header {
-  height: var(--nav-height);
-}
+
 
 h1, h2, h3,
 h4, h5, h6 {

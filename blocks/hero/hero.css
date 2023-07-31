@@ -358,7 +358,7 @@ main .hero.black-background ul.hero-awards li picture img{
     max-width: var(--section-desktop-max-width);
     padding-left: var(--section-desktop-padding);
     padding-right: var(--section-desktop-padding);
-    padding-top: 76px;
+    padding-top: 115px;
     display: flex;
     flex-direction: row;
     min-height: unset;

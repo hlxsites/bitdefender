@@ -1,6 +1,8 @@
 /* header and nav layout */
+
 header {
   z-index: 100;
+  background-image: linear-gradient(180deg,rgb(0 0 0 / 80%),rgb(0 0 0 / 50%) 55%,transparent);
 }
 
 header p {
@@ -455,8 +457,11 @@ header a.button:hover span.button-text {
   }
 
   .header-wrapper {
-    position: relative;
+    position: fixed;
     z-index: 999;
+    margin: auto;
+    left: 0;
+    right: 0;
   }
 
   .menu-wrapper {
@@ -476,7 +481,7 @@ header a.button:hover span.button-text {
     max-width: var(--section-desktop-max-width);
     height: 100%;
     margin: 0 auto;
-    padding: 5px var(--section-desktop-padding);
+    padding: 6px var(--section-desktop-padding) 10px;
   }
 
   nav p {
@@ -507,7 +512,7 @@ header a.button:hover span.button-text {
   }
 
   .nav-sections a {
-    margin: 0 17px;
+    margin: 0 15.5px;
   }
 
   .logo a {
@@ -518,11 +523,17 @@ header a.button:hover span.button-text {
     margin: 0 19px;
   }
 
+  
+
   .mega-menu div p a{
     position: relative;
     font-size: var(--body-font-size-xs);
     font-weight: 400;
     color: var(--text-color) !important;
+  }
+
+  .nav-sections a:first-child{
+    margin-right: 16px;
   }
 
   .nav-brand p:first-child a{
@@ -535,7 +546,7 @@ header a.button:hover span.button-text {
     content: "";
     position: absolute;
     left: 0;
-    top: 26px;
+    top: 25px;
     height: 3px;
     width: 100%;
     background-color: var(--color-highlight-blue);
@@ -554,7 +565,7 @@ header a.button:hover span.button-text {
   .nav-sections p::before {
     content: "";
     position: absolute;
-    top: 1px;
+    top: 0;
     left: 0;
     height: 16px;
     width: 2px;
@@ -563,12 +574,13 @@ header a.button:hover span.button-text {
   
   .logo-container {
     padding: 20px var(--section-desktop-padding);
-    margin: 27px auto 0;
+    margin: 21px auto 0;
     gap: 10px;
   }
   
   .logo-container > p {
     display: block;
+    font-weight: var(--font-weight-bold);
   }
 
   .home-solutions-link-hover {
@@ -826,8 +838,6 @@ header a.button:hover span.button-text {
     margin-top: 20px;
   }
 
-
-
 }
 
 @media (max-width: 1390px) {
@@ -847,7 +857,8 @@ header a.button:hover span.button-text {
 
   .logo-container {
     max-width: var(--section-large-desktop-max-width);
-    padding: 1rem var(--section-large-desktop-padding);
+    padding-left: var(--section-large-desktop-padding);
+    padding-right: var(--section-large-desktop-padding);
   }
 
 }
