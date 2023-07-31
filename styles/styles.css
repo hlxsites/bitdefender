@@ -197,8 +197,6 @@ header {
   }
 }
 
-
-
 @media (min-width: 1000px) {
   header {
     height: var(--nav-height-desktop);
