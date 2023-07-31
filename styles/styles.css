@@ -150,7 +150,7 @@ body.no-scroll {
   overflow: hidden;
 }
 
-main .section .default-content-wrapper { /* mobile */  
+main .section .default-content-wrapper { /* mobile */
   padding: 0 var(--body-padding);
 }
 
@@ -193,6 +193,16 @@ header {
   main .section .default-content-wrapper {
     max-width: var(--section-large-desktop-max-width);
     padding: 0 var(--section-large-desktop-padding)
+  }
+}
+
+header {
+  height: var(--nav-height);
+}
+
+@media (min-width: 1000px) {
+  header {
+    height: var(--nav-height-desktop);
   }
 }
 
