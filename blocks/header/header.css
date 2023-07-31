@@ -1,9 +1,12 @@
 /* header and nav layout */
+:root {
+  --dark-header-icon-color: #000;;
+}
 
 header {
   z-index: 100;
-  background-image: linear-gradient(180deg,rgb(0 0 0 / 80%),rgb(0 0 0 / 50%) 55%,transparent);
 }
+
 
 header p {
   margin: 0;
@@ -238,6 +241,7 @@ header .icon {
   height: 30px;
   filter: none;
   left: 20px;
+  color: var(--dark-header-icon-color);
 }
 
 .bottom-links p > a {
@@ -390,10 +394,9 @@ header a.button:hover span.button-text {
 }
 
 .options-wrapper.show div {
-  font-weight: bold;
+  font-weight: var(--font-weight-bold);
   font-size: var(--body-font-size-s);
-  margin: 25px;
-  padding-right: 35px; 
+  margin: 25px 13px 25px 20px;
   position: relative; 
 }
 
@@ -416,11 +419,12 @@ header a.button:hover span.button-text {
     display: none;
   }
 
-  .header-wrapper > p{
-    display: none;
-  }
   header p {
     margin: 0;
+  }
+
+  .header-wrapper > p{
+    display: none;
   }
   
 }
@@ -476,33 +480,11 @@ header a.button:hover span.button-text {
   z-index: 2;
 }
 
-.options-wrapper.show div {
-  font-weight: var(--font-weight-bold);
-  font-size: var(--body-font-size-s);
-  margin: 25px 13px 25px 20px;
-  position: relative; 
-}
-
-.options-wrapper.show div::before {
-  border-color: black; 
-  border-style: solid;
-  border-width: 0 2px 2px 0;
-  content: "";
-  width: 0.5rem;
-  height: 0.5rem;
-  display: inline-block;
-  position: absolute;
-  right: 10px; 
-  top: 50%;
-  transform: translateY(-50%) rotate(-45deg);
-}
-
 .options-wrapper {
   position: relative;
   top: var(--nav-height);
   width: 100vw;
   height: 0;
-  /* visibility: hidden; */
   display: none;
 }
 
@@ -570,6 +552,7 @@ header a.button:hover span.button-text {
   header.header-wrapper {
     height: var(--nav-height-desktop);
     background-color: var(--text-color);
+    
   }
 
   header.header-wrapper::after {
@@ -586,10 +569,11 @@ header a.button:hover span.button-text {
 
   header .icon {
     color: var(--text-dark-color);
+    position: static;
   }
 
   .header-wrapper {
-    position: fixed;
+    position: absolute;
     z-index: 999;
     margin: auto;
     left: 0;
@@ -660,10 +644,6 @@ header a.button:hover span.button-text {
     font-size: var(--body-font-size-xs);
     font-weight: 400;
     color: var(--text-color);
-  }
-
-  .nav-sections a:first-child{
-    margin-right: 16px;
   }
 
   .nav-sections a:first-child{

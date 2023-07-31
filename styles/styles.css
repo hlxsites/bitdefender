@@ -150,10 +150,6 @@ body.no-scroll {
   overflow: hidden;
 }
 
-body.no-scroll {
-  overflow: hidden;
-}
-
 main .section .default-content-wrapper { /* mobile */  
   padding: 0 var(--body-padding);
 }
