@@ -197,6 +197,26 @@ h4 { font-size: var(--heading-font-size-m) }
 h5 { font-size: var(--heading-font-size-s) }
 h6 { font-size: var(--heading-font-size-xs) }
 
+@media (min-width: 596px) {
+  h3 { font-size: var(--heading-font-size-s) }
+}
+
+@media (min-width: 768px) {
+  h3 { font-size: 22px }
+}
+
+@media (min-width: 992px) {
+  h3 { font-size: var(--heading-font-size-m) }
+}
+
+@media (min-width: 1200px) {
+  h3 { font-size: 26px }
+}
+
+@media (min-width: 1400px) {
+  h3 { font-size: 30px }
+}
+
 p, dl, ol, ul, pre, blockquote {
   margin-top: 1em;
   margin-bottom: 1em;
