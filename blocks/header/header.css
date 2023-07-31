@@ -457,7 +457,7 @@ header a.button:hover span.button-text {
   }
 
   .header-wrapper {
-    position: fixed;
+    position: absolute;
     z-index: 999;
     margin: auto;
     left: 0;

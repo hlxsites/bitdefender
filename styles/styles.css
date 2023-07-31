@@ -169,6 +169,11 @@ header {
 
   header {
     height: var(--nav-height-desktop);
+    position: absolute;
+    z-index: 999;
+    margin: auto;
+    left: 0;
+    right: 0;
   }
 
   header, main, footer {
