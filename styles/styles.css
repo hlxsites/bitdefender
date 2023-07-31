@@ -427,21 +427,60 @@ main .section.highlight {
 }
 
 @media(min-width: 990px) {
+  .section.section-full-width > div > p.button-container {
+    margin: 0;
+  }
   main .section > div {
     padding: 0 3.125rem;
     max-width: 81.25rem;
     margin: 0 auto;
   }
+
+  .section.section-full-width > div {
+    display: grid;
+    grid-template-columns: [first-col] 15% [second-col] 15% [third-col] 20% [fourth-col] 50%;
+  }
+  
+  .section.section-full-width > div > :nth-child(1) {
+    grid-column: first-col / span 3;
+  }
+  
+  .section.section-full-width > div > :nth-child(2) {
+    grid-column: first-col / span 3;
+  }
+  
+  .section.section-full-width > div > :nth-child(3) {
+    grid-column: first-col / span 3;
+  }
+  
+  .section.section-full-width > div > :nth-child(4) {
+    grid-column: first-col / span 3;
+  }
+  
+  .section.section-full-width > div > :nth-child(5) {
+    grid-column: first-col / span 1;
+  }
+  
+  .section.section-full-width > div > :nth-child(6) {
+    grid-column: second-col / span 1;
+  }
+  
+  .section.section-full-width > div > :nth-child(7) {
+    grid-column: first-col / span 3;
+  }
+  
+  .section.section-full-width > div > p:last-of-type {
+    grid-column: fourth-col;
+    grid-row-start: 1;
+    grid-row-end: 6;
+  }
+  
 }
 
 main .section.page-full-width > div {
   padding: 0;
   margin: 0;
   max-width: unset;
-}
-
-.section.section-full-width {
-  padding: 4rem 0;
 }
 
 .section.blue-background {
@@ -460,6 +499,7 @@ main a.video-placeholder {
   position: relative;
   display: inline-block;
   color: var(--button-link-color);
+  border: none !important;
 }
 
 main .video-placeholder .video-placeholder-play {
@@ -497,23 +537,6 @@ main .video-placeholder .video-placeholder-play::before {
   top: 0.25rem;
   left: 0.4375rem;
 }
-
-@media(min-width: 990px) {
-  main .video-placeholder .video-placeholder-play {
-    width: 2rem;
-    height: 2rem;
-  }
-
-  main .video-placeholder .video-placeholder-play::before {
-    height: 1rem;
-    top: 0.39rem;
-    left: 0.625rem;
-    border-top: 0.5rem solid transparent;
-    border-bottom: 0.5rem solid transparent;
-    border-left: 0.7rem solid;
-  }
-}
-
 
 .section.section-full-width p {
   padding-bottom: 1.25rem;
