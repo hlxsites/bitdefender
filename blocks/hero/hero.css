@@ -13,6 +13,7 @@
 
   /* breadcrumbs font size */
   --breadcrumbs-font-size-s: 12px;
+  --hero-botton-border-color: #e4f2ff;
 }
 
 main .hero-container > div {
@@ -36,7 +37,7 @@ main .hero {
   position: relative;
   padding: 0;
   min-height: 300px;
-  border-bottom: 32px solid #e4f2ff;
+  border-bottom: 32px solid var(--hero-botton-border-color);
 }
 
 main .hero.black-background {
@@ -298,7 +299,7 @@ main .hero.black-background ul.hero-awards li::before {
 
 main .hero.black-background ul.hero-awards li picture img{
   display: block;
-  height: 81px;
+  height: 80px;
   width: auto;
 }
 
@@ -403,10 +404,6 @@ main .hero.black-background ul.hero-awards li picture img{
 @media (min-width: 1600px) { /* large desktop */
   main .hero h1 {
     font-size: 56px;
-  }
-
-  main .hero h4 {
-    font-size: 24px;
   }
 
   main .hero .hero-picture picture img {

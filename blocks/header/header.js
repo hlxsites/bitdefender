@@ -365,12 +365,7 @@ export default async function decorate(block) {
     renderMobileHeader(nav);
     renderDesktopHeader(block, nav);
 
-    decorateIcons(nav).then(() => {
-      const svgPath = document.querySelector('#icons-sprite-bitdefender-logo path');
-      if (svgPath) {
-        svgPath.setAttribute('fill', 'currentColor');
-      }
-    });
+    decorateIcons(nav);
 
     // Select the parent elements
     const bottomLinks = document.querySelector('.bottom-links');
