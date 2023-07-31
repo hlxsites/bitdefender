@@ -514,6 +514,7 @@ main .video-placeholder .video-placeholder-play::before {
 /* Cta section */
 main .section.cta {
   background-color: var(--background-light-blue);
+  padding: 0;
 }
 
 .cta-container {
