@@ -14,6 +14,12 @@ import {
 
 const LCP_BLOCKS = []; // add your LCP blocks to the list
 
+export const SUPPORTED_LANGUAGES = ['en'];
+export const DEFAULT_LANGUAGE = 'en';
+
+export const SUPPORTED_COUNTRIES = ['au'];
+export const DEFAULT_COUNTRY = 'au';
+
 /**
  * Creates a meta tag with the given name and value and appends it to the head.
  * @param {String} name The name of the meta tag
@@ -26,17 +32,51 @@ export function createMetadata(name, value) {
   document.head.append(meta);
 }
 
-/**
- * Sets the language of the document and redirects nav/footer to the preferred country and language.
- * @param {String} pathname The pathname of the document
- */
-export function setLanguage(pathname) {
-  const [, languageCountry] = pathname.split('/');
-  const [language] = languageCountry.split('-');
+export function getLanguageCountryFromPath() {
+  return {
+    language: DEFAULT_LANGUAGE,
+    country: DEFAULT_COUNTRY,
+  };
+}
 
-  document.documentElement.lang = language;
-  createMetadata('nav', `/${languageCountry}/nav`);
-  createMetadata('footer', `/${languageCountry}/footer`);
+/**
+ * Sets the page language.
+ * @param {Object} param The language and country
+ */
+function setPageLanguage(param) {
+  document.documentElement.lang = param.language;
+  createMetadata('nav', '/nav');
+  createMetadata('footer', '/footer');
+}
+
+/**
+ * Decorates picture elements with a link to a video.
+ * @param {Element} main The main element
+ */
+export default function decorateLinkedPicturesModal(main) {
+  main.querySelectorAll('picture').forEach((picture) => {
+    if (!picture.closest('div.block')) {
+      const next = picture.parentNode.nextElementSibling;
+      if (next) {
+        const a = next.querySelector('a');
+        const link = a?.textContent;
+        if (a && link.startsWith('https://') && link.includes('fragments')) {
+          a.innerHTML = '';
+          a.className = 'video-placeholder';
+          a.appendChild(picture);
+          const overlayPlayButton = document.createElement('span');
+          overlayPlayButton.className = 'video-placeholder-play';
+          a.appendChild(overlayPlayButton);
+          a.addEventListener('click', async (event) => {
+            event.preventDefault();
+            // eslint-disable-next-line no-use-before-define
+            const modalContainer = await createModal(link, 'video-modal');
+            document.body.append(modalContainer);
+          });
+        }
+      }
+    }
+  });
 }
 
 /**
@@ -48,6 +88,7 @@ export function decorateMain(main) {
   // hopefully forward compatible button decoration
   decorateButtons(main);
   decorateIcons(main);
+  decorateLinkedPicturesModal(main);
   decorateSections(main);
   decorateBlocks(main);
 }
@@ -112,7 +153,7 @@ export async function detectModalButtons(main) {
  * @param {Element} doc The container element
  */
 async function loadEager(doc) {
-  setLanguage(window.location.pathname);
+  setPageLanguage(getLanguageCountryFromPath(window.location.pathname));
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
