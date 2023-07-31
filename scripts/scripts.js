@@ -9,7 +9,7 @@ import {
   decorateTemplateAndTheme,
   waitForLCP,
   loadBlocks,
-  loadCSS,
+  loadCSS, createOptimizedPicture,
 } from './lib-franklin.js';
 
 const LCP_BLOCKS = []; // add your LCP blocks to the list
@@ -148,6 +148,33 @@ export async function detectModalButtons(main) {
   });
 }
 
+function buildCta(section) {
+  const backgroundImageSrc = section.dataset.backgroundImage;
+  const backgroundImage = backgroundImageSrc ? createOptimizedPicture(backgroundImageSrc) : null;
+
+  const leftEl = document.createElement('div');
+  const rightEl = document.createElement('div');
+  leftEl.classList.add('left-col');
+  rightEl.classList.add('right-col');
+  const containerEl = document.createElement('div');
+  containerEl.classList.add('cta-container');
+  containerEl.append(leftEl, rightEl);
+  [...section.children].forEach((e) => leftEl.append(e));
+  rightEl.innerHTML = `<div class="img-container">
+<img class="red-img" src="/images/b-red-mask.png">
+<div class="bg-img">
+${backgroundImage?.innerHTML}
+</div>
+<img class="transparent-img" src="/icons/cta-circle.svg">
+</div>`;
+  section.append(containerEl);
+}
+
+function buildCtaSections(main) {
+  main.querySelectorAll('div.section.cta')
+    .forEach(buildCta);
+}
+
 /**
  * Loads everything needed to get to LCP.
  * @param {Element} doc The container element
@@ -158,6 +185,7 @@ async function loadEager(doc) {
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
+    buildCtaSections(main);
     detectModalButtons(main);
     document.body.classList.add('appear');
     await waitForLCP(LCP_BLOCKS);

@@ -34,6 +34,7 @@
   --breadcrumb-text-color-dark: #c5c5c5;
   --breadcrumb-text-color-dark-hover: #fff;
   --icon-color: #205fff;
+  --background-light-blue: #d9eeff;
 
   /* fonts */
   --body-font-family: "Roboto", "roboto-normal-400-fallback", helvetica, ubuntu, roboto, noto, sans-serif;
@@ -509,5 +510,61 @@ main .video-placeholder .video-placeholder-play::before {
     border-left: 0.7rem solid;
   }
 }
+
+/* Cta section */
+main .section.cta {
+  background-color: var(--background-light-blue);
+}
+
+.cta-container {
+  display: flex;
+  flex-flow: column;
+}
+
+.cta-container .img-container {
+  position: relative;
+  width: 430px;
+  height: 420px;
+}
+
+.cta-container .img-container .red-img {
+  position: absolute;
+  z-index: 1;
+  top: 40px;
+  left: 0;
+  bottom: 0;
+  right: 5px;
+  height: 380px;
+  width: 434px;
+}
+
+.cta-container .img-container .bg-img {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+}
+
+.cta-container .img-container .bg-img img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.cta-container .img-container .transparent-img {
+  position: absolute;
+  z-index: 0;
+  top: 11px;
+  right: -50px;
+  width: 528px;
+  height: 528px;
+}
+
+@media(min-width: 768px) {
+  .cta-container {
+    flex-flow: row;
+  }
+}
+
 
 
