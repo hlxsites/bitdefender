@@ -84,7 +84,8 @@
   top: 0;
   background-color: #fff;
   width: 100%;
-  max-width: 20in
+  max-width: 20in;
+  z-index: 99999;
 }
 
 .sticky-navigation .button-container {
