@@ -241,7 +241,11 @@ header .icon {
   height: 30px;
   filter: none;
   left: 20px;
-  color: var(--dark-header-icon-color);
+  color: var(--background-color);
+}
+
+header.black-background  .icon {
+  color: var(--dark-background-color);
 }
 
 .bottom-links p > a {
@@ -567,7 +571,7 @@ header a.button:hover span.button-text {
     margin: 0 auto;
   }
 
-  header .icon {
+  header.black-background .icon {
     color: var(--text-dark-color);
     position: static;
   }
