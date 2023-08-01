@@ -4,6 +4,7 @@ main .quote-carousel .slides-container {
   margin-bottom: 30px;
   box-shadow: 0 3px 8px 0 rgb(0 0 0 / 10%);
   background: var(--background-color);
+  overflow: hidden;
 }
 
 @media (min-width: 596px) {
@@ -32,22 +33,38 @@ main .quote-carousel .slides-container {
 
 .slides-container .slides {
   display: flex;
-  overflow: hidden;
   flex-direction: row;
   transition: transform .5s ease-in-out;
 }
 
 .slides-container .slide {
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: row;
   flex-shrink: 0;
   width: 100%;
-  opacity: 0;
   transition: all 0.3s ease-in-out;
+  padding: 30px 30px 0;
+  gap: 8px;
 }
 
+.slide .quote {
+  padding-top: 10px;
+}
+
+.slide .icon {
+  width: 55px;
+  height: 56px;
+}
+
+@media (min-width: 1200px) {
+  .slide .icon {
+    width: 51px;
+    height: 52px;
+  }
+}
+
+
 .slides-container .slide h4 {
-  position: relative;
   font-weight: 400;
   font-stretch: normal;
   font-style: normal;
@@ -58,26 +75,6 @@ main .quote-carousel .slides-container {
 @media (min-width: 992px) {
   .slides-container .slide h4 {
     font-size: 18px;
-  }
-}
-
-.slides-container .slide h4::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -45px;
-  width: 41px;
-  height: 42px;
-  background: url("../../icons/dark-blue-quote.svg") no-repeat;
-  background-size: 100%
-}
-
-@media (min-width: 1200px) {
-  .slides-container .slide h4::before {
-    width: 51px;
-    height: 52px;
-    top: -5px;
-    left: -60px;
   }
 }
 
@@ -124,7 +121,6 @@ main .quote-carousel .slides-container {
 }
 
 .slides-container .slides-dots {
-  margin: -50px 0 30px 65px;
   padding: 0;
   width: auto;
   max-width: 855pt;
@@ -132,17 +128,17 @@ main .quote-carousel .slides-container {
   align-self: flex-start;
   display: flex;
   list-style: none;
+  gap: 16px
 }
 
-@media (min-width: 596px) {
-  margin: -10px 0 30px 65px;
+.slides-container .slides-controls {
+  padding-right: 30px;
+  padding-left: 90px;
+  padding-bottom: 30px;
+
 }
 
-@media (min-width: 1200px) {
-  margin: -20px 0 37px 85px;
-}
-
-.slides-container .slides-dots button {
+.slides-container .slides-dots li {
   padding: 0;
   background: transparent;
   width: 1pc;
@@ -156,11 +152,11 @@ main .quote-carousel .slides-container {
   transition: all .4s ease-in-out
 }
 
-.slides-container .slides-dots button.selected {
+.slides-container .slides-dots .active {
   pointer-events: none;
 }
 
-.slides-container .slides-dots button.selected, .slides-container .slides-dots button:hover {
+.slides-container .slides-dots .active, .slides-container .slides-dots li:hover {
   background: #006eff;
 }
 

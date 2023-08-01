@@ -1,5 +1,5 @@
 import { createTag } from '../../scripts/utils/utils.js';
-
+import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 function createSlide(item) {
   const quote = item.querySelector('p:not(:has(> strong, > em)):not(:empty)');
@@ -11,9 +11,11 @@ function createSlide(item) {
   return createTag(
     'div',
     { class: 'slide' },
-    `<h4>${quote?.textContent}</h4>
+    `<div class="quote"><span class="icon icon-dark-blue-quote"/></div><div class="quote-content">
+<h4>${quote?.textContent}</h4>
 <h5>${author?.textContent}</h5>
-<p>${description?.textContent}</p>`,
+<p>${description?.textContent}</p>
+</div>`,
   );
 }
 
@@ -46,7 +48,7 @@ function addDotsListeners(dotsControls, slides) {
   });
 }
 
-export default function decorate(block) {
+export default async function decorate(block) {
   const slides = createTag('div', { class: 'slides' });
   [...block.children]
     .map((item) => createSlide(item))
@@ -54,10 +56,10 @@ export default function decorate(block) {
     .forEach((item) => {
       slides.append(item);
     });
-  slides.children[0].classList.add('selected');
+  slides.children[0].classList.add('active');
   const dotsControls = createTag('ul', { class: 'slides-dots' });
   [...slides.children].forEach((slide, slideIndex) => {
-    const btn = createTag('li', {}, '<button class="dot"><button>');
+    const btn = createTag('li', {}, '<button class="dot"></button>');
     btn.addEventListener('click', () => {
       updateSlide(slideIndex, block);
     });
@@ -69,8 +71,10 @@ export default function decorate(block) {
   if (button) {
     slidesAction.append(button);
   }
-  const slidesContainer = createTag('div', { class: 'slides-container' }, [slides, dotsControls, slidesAction]);
+  const slidesControls = createTag('div', { class: 'slides-controls' }, [dotsControls, slidesAction]);
+  const slidesContainer = createTag('div', { class: 'slides-container' }, [slides, slidesControls]);
   block.replaceChildren(slidesContainer);
   updateControls(block, 0);
   addDotsListeners(dotsControls, slides);
+  await decorateIcons(block);
 }
