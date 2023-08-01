@@ -513,55 +513,222 @@ main .video-placeholder .video-placeholder-play::before {
 
 /* Cta section */
 main .section.cta {
-  background-color: var(--background-light-blue);
-  padding: 0;
+  padding: 0 20px;
+  overflow: hidden;
+}
+
+@media (min-width: 992px) {
+  main .section.cta {
+    padding: 0 50px;
+  }
 }
 
 .cta-container {
+  background-color: var(--background-light-blue);
   display: flex;
   flex-flow: column;
+  max-width: 1300px;
+  margin: 72px auto 0;
+}
+
+@media (min-width: 1600px) {
+  .cta-container {
+    max-width: 1332px;
+  }
+}
+
+.cta-container .left-col {
+  flex: 0 1 50%;
+  justify-items: center;
+  align-items: center;
+}
+
+.cta-container .right-col {
+  flex: 0 1 50%;
+  justify-items: center;
+  align-items: center;
+  position: relative;
+  overflow: visible;
 }
 
 .cta-container .img-container {
   position: relative;
-  width: 430px;
-  height: 420px;
+  width: 270px;
+  height: 270px;
+  margin: 30px auto 0;
+  left: 0;
+  bottom: 0;
+  overflow: visible;
+  text-align: center;
+  display: flex;
+  align-items: end;
+}
+
+@media (min-width: 596px) {
+  .cta-container .img-container {
+    display: block;
+  }
+}
+
+@media (min-width: 768px) {
+  .cta-container .img-container {
+    width: 370px;
+    height: 360px;
+    margin: 60px auto 0;
+  }
+}
+
+@media (min-width: 992px) {
+  .cta-container .img-container {
+    position: absolute;
+    width: 430px;
+    height: 420px;
+    margin: -40px 0 0 auto;
+    left: 40px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .cta-container .img-container {
+    width: 430px;
+    height: 420px;
+    left: 25%;
+  }
+}
+
+@media (min-width: 1600px) {
+  .cta-container .img-container {
+    width: 494px;
+    height: 500px;
+    margin: -91px 0 0 139px;
+    left: 0;
+  }
 }
 
 .cta-container .img-container .red-img {
-  position: absolute;
   z-index: 1;
-  top: 40px;
+  position: absolute;
   left: 0;
+  top: 44px;
   bottom: 0;
-  right: 5px;
-  height: 380px;
-  width: 434px;
+  right: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+@media (min-width: 768px) {
+  .cta-container .img-container .red-img {
+    left: 0;
+  }
+}
+
+@media (min-width: 992px) {
+  .cta-container .img-container .red-img {
+    width: 374px;
+    height: 350px;
+    left: 50px;
+    top: 64px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .cta-container .img-container .red-img {
+    width: 434px;
+    height: 380px;
+    left: -23px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .cta-container .img-container .red-img {
+    width: 494px;
+    height: 450px;
+    top: 59px;
+  }
 }
 
 .cta-container .img-container .bg-img {
+  margin: 0 auto;
+  height: 230px;
+  width: 100%;
+  max-width: 230px;
   position: relative;
   z-index: 2;
+}
+
+@media (min-width: 596px) {
+  .cta-container .img-container .bg-img {
+    max-width: unset;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.cta-container .img-container .bg-img .cmp-img {
   width: 100%;
   height: 100%;
 }
 
-.cta-container .img-container .bg-img img {
+.img-container img {
   height: 100%;
   width: 100%;
+  max-width: 100%;
   object-fit: cover;
+  object-position: inherit;
 }
 
 .cta-container .img-container .transparent-img {
   position: absolute;
   z-index: 0;
-  top: 11px;
-  right: -50px;
-  width: 528px;
-  height: 528px;
+  width: 310px;
+  height: 310px;
+  left: -20px;
+  top: 38px;
+  right: 0;
+  margin: auto;
+  max-width: inherit;
 }
 
-@media(min-width: 768px) {
+@media (min-width: 768px) {
+  .cta-container .img-container .transparent-img {
+    width: 409px;
+    height: 409px;
+    top: 44px;
+    left: -19px;
+    margin: 0;
+  }
+}
+
+@media (min-width: 992px) {
+  .cta-container .img-container .transparent-img {
+    width: 428px;
+    height: 428px;
+    top: 65px;
+    right: -20px;
+    left: 22px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .cta-container .img-container .transparent-img {
+    width: 528px;
+    height: 528px;
+    top: 42px;
+    right: -27px;
+    left: -72px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .cta-container .img-container .transparent-img {
+    width: 609px;
+    height: 609px;
+    top: 26px;
+    right: -35px;
+  }
+}
+
+@media(min-width: 992px) {
   .cta-container {
     flex-flow: row;
   }

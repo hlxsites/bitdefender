@@ -163,7 +163,9 @@ function buildCta(section) {
   rightEl.innerHTML = `<div class="img-container">
 <img class="red-img" src="/images/b-red-mask.png">
 <div class="bg-img">
+<div class="cmp-img">
 ${backgroundImage?.innerHTML}
+</div>
 </div>
 <img class="transparent-img" src="/icons/cta-circle.svg">
 </div>`;
