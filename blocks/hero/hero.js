@@ -39,7 +39,7 @@ function decorateDiscountBubble() {
   const p = document.querySelector('p.button-container');
   // find next p tag that contains a em element
   const emElement = p.nextElementSibling.querySelector('em');
-  // check if emElement exists
+  // check if em Element exists
   if (emElement !== null) {
     const div = document.createElement('div');
     div.classList.add('discount-bubble');
