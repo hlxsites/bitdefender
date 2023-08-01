@@ -12,6 +12,10 @@ import {
   loadCSS, createOptimizedPicture,
 } from './lib-franklin.js';
 
+import {
+  createTag,
+} from './utils/utils.js';
+
 const LCP_BLOCKS = []; // add your LCP blocks to the list
 
 export const SUPPORTED_LANGUAGES = ['en'];
@@ -151,25 +155,30 @@ export async function detectModalButtons(main) {
 function buildCta(section) {
   const backgroundImageSrc = section.dataset.backgroundImage;
   const backgroundImage = backgroundImageSrc ? createOptimizedPicture(backgroundImageSrc) : null;
+  const backgroundImageHtml = backgroundImage ? backgroundImage.innerHTML : '';
 
-  const leftEl = document.createElement('div');
-  const rightEl = document.createElement('div');
-  leftEl.classList.add('left-col');
-  rightEl.classList.add('right-col');
-  const containerEl = document.createElement('div');
-  containerEl.classList.add('cta-container');
-  containerEl.append(leftEl, rightEl);
-  [...section.children].forEach((e) => leftEl.append(e));
-  rightEl.innerHTML = `<div class="img-container">
-<img class="red-img" src="/images/b-red-mask.png">
-<div class="bg-img">
-<div class="cmp-img">
-${backgroundImage?.innerHTML}
+  const fullWidthContainer = createTag(
+    'div',
+    { class: 'full-width' },
+    `<div class="cta-container">
+<div class="left-col">
 </div>
-</div>
-<img class="transparent-img" src="/icons/cta-circle.svg">
-</div>`;
-  section.append(containerEl);
+<div class="right-col">
+    <div class="img-container">
+        <img class="red-img" src="/images/b-red-mask.png">
+        <div class="bg-img">
+            <div class="cmp-img">
+                ${backgroundImageHtml}
+            </div>
+        </div>
+        <img class="transparent-img" src="/icons/cta-circle.svg">
+    </img>
+</div>`,
+  );
+
+  const leftCol = fullWidthContainer.querySelector('.left-col');
+  [...section.children].forEach((e) => leftCol.append(e));
+  section.append(fullWidthContainer);
 }
 
 function buildCtaSections(main) {

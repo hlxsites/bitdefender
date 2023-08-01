@@ -513,22 +513,26 @@ main .video-placeholder .video-placeholder-play::before {
 
 /* Cta section */
 main .section.cta {
-  padding: 0 20px;
+  padding: 0;
   overflow: hidden;
 }
 
-@media (min-width: 992px) {
-  main .section.cta {
-    padding: 0 50px;
-  }
+.cta .full-width {
+  background-color: var(--background-light-blue);
 }
 
 .cta-container {
-  background-color: var(--background-light-blue);
+  padding: 0 20px;
   display: flex;
   flex-flow: column;
   max-width: 1300px;
-  margin: 72px auto 0;
+  margin: 140px auto 0;
+}
+
+@media (min-width: 992px) {
+  .cta-container {
+    padding: 0 50px;
+  }
 }
 
 @media (min-width: 1600px) {
@@ -538,7 +542,7 @@ main .section.cta {
 }
 
 .cta-container .left-col {
-  flex: 0 1 50%;
+  flex: 1 1 50%;
   justify-items: center;
   align-items: center;
 }
@@ -549,6 +553,18 @@ main .section.cta {
   align-items: center;
   position: relative;
   overflow: visible;
+}
+
+@media (min-width: 992px) {
+  .cta-container .right-col {
+    flex: 0 1 43%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .cta-container .right-col {
+    flex: 0 1 40%;
+  }
 }
 
 .cta-container .img-container {
@@ -598,8 +614,8 @@ main .section.cta {
 
 @media (min-width: 1600px) {
   .cta-container .img-container {
-    width: 494px;
-    height: 500px;
+    width: 491px;
+    height: 480px;
     margin: -91px 0 0 139px;
     left: 0;
   }
@@ -624,17 +640,15 @@ main .section.cta {
 
 @media (min-width: 992px) {
   .cta-container .img-container .red-img {
-    width: 374px;
-    height: 350px;
-    left: 50px;
-    top: 64px;
+    width: 434px;
+    height: 380px;
+    left: 11px;
+    top: 40px;
   }
 }
 
 @media (min-width: 1200px) {
   .cta-container .img-container .red-img {
-    width: 434px;
-    height: 380px;
     left: -23px;
   }
 }
@@ -701,11 +715,11 @@ main .section.cta {
 
 @media (min-width: 992px) {
   .cta-container .img-container .transparent-img {
-    width: 428px;
-    height: 428px;
-    top: 65px;
+    width: 528px;
+    height: 528px;
+    top: 11px;
     right: -20px;
-    left: 22px;
+    left: -37px;
   }
 }
 
@@ -713,9 +727,9 @@ main .section.cta {
   .cta-container .img-container .transparent-img {
     width: 528px;
     height: 528px;
-    top: 42px;
+    top: 14px;
     right: -27px;
-    left: -72px;
+    left: -74px;
   }
 }
 
@@ -723,8 +737,9 @@ main .section.cta {
   .cta-container .img-container .transparent-img {
     width: 609px;
     height: 609px;
-    top: 26px;
+    top: 38px;
     right: -35px;
+    left: -82px;
   }
 }
 
