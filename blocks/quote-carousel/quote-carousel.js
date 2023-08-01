@@ -66,12 +66,14 @@ export default async function decorate(block) {
     dotsControls.append(btn);
   });
   /* Add carousel action button if it exists */
-  const slidesAction = createTag('div', { class: 'slides-action' });
-  const button = block.querySelector('button');
+  const controlsElements = [dotsControls];
+  const button = block.querySelector('.button-container');
   if (button) {
+    const slidesAction = createTag('div', { class: 'slides-action' });
     slidesAction.append(button);
+    controlsElements.push(slidesAction);
   }
-  const slidesControls = createTag('div', { class: 'slides-controls' }, [dotsControls, slidesAction]);
+  const slidesControls = createTag('div', { class: 'slides-controls' }, controlsElements);
   const slidesContainer = createTag('div', { class: 'slides-container' }, [slides, slidesControls]);
   block.replaceChildren(slidesContainer);
   updateControls(block, 0);
