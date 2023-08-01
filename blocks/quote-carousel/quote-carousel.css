@@ -77,22 +77,22 @@ main .quote-carousel .slides-container {
 /* Quote text styles */
 
 .slides-container .slide h4 {
-  font-weight: 400;
+  font-weight: var(--font-weight-regular);
   font-stretch: normal;
   font-style: normal;
   letter-spacing: normal;
-  font-size: 16px
+  font-size: 16px;
 }
 
 @media (min-width: 992px) {
   .slides-container .slide h4 {
-    font-size: 18px;
+    font-size: var(--heading-font-size-xs);
   }
 }
 
 .slides-container .slide h5 {
   position: relative;
-  font-weight: 500;
+  font-weight: var(--font-weight-bold);
   font-stretch: normal;
   font-style: normal;
   line-height: 1.2;
@@ -158,10 +158,20 @@ main .quote-carousel .slides-container {
 }
 
 .slides-container .slides-dots li {
+  display: inline-block;
+  border: 0;
+  border-radius: 50%;
+  padding: 0;
+  margin: 0;
+  font-size: 0;
+  overflow: hidden;
+}
+
+.slides-container .slides-dots li button {
   padding: 0;
   background: transparent;
-  width: 1pc;
-  height: 1pc;
+  width: 16px;
+  height: 16px;
   outline: none;
   cursor: pointer;
   border-radius: 50%;
@@ -175,6 +185,7 @@ main .quote-carousel .slides-container {
   pointer-events: none;
 }
 
-.slides-container .slides-dots .active, .slides-container .slides-dots li:hover {
+.slides-container .slides-dots li.active button,
+.slides-container .slides-dots li:hover button {
   background: #006eff;
 }

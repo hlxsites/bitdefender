@@ -18,11 +18,14 @@ function createSlide(item, index) {
       'aria-described-by': `carousel-control-${index}`,
       tabindex: '-1',
     },
-    `<div class="quote"><span class="icon icon-dark-blue-quote"/></div><div class="quote-content">
-<h4>${quote?.textContent}</h4>
-<h5>${author?.textContent}</h5>
-<p>${description?.textContent}</p>
-</div>`,
+    `<div class="quote">
+        <span class="icon icon-dark-blue-quote"/>
+    </div>
+    <div class="quote-content">
+        <h4>${quote?.textContent}</h4>
+        <h5>${author?.textContent}</h5>
+        <p>${description?.textContent}</p>
+    </div>`,
   );
 }
 
@@ -30,7 +33,7 @@ function getCurrentSlideIndex(slides) {
   return [...slides.children].findIndex((slide) => slide.classList.contains('active'));
 }
 
-function updateControls(block, nextIndex) {
+function updateControlsState(block, nextIndex) {
   const dots = block.querySelector('.slides-dots');
   const currentActive = dots.querySelector('.active');
   if (currentActive) {
@@ -48,7 +51,7 @@ function updateControls(block, nextIndex) {
   }
 }
 
-function updateSlide(nextIndex, block) {
+function updateSlideState(nextIndex, block) {
   const slides = block.querySelector('.slides');
   const currentIndex = getCurrentSlideIndex(slides);
   slides.children[currentIndex].classList.remove('active');
@@ -64,19 +67,19 @@ function updateSlide(nextIndex, block) {
       slide.setAttribute('aria-hidden', 'true');
     }
   });
-  updateControls(block, nextIndex);
+  updateControlsState(block, nextIndex);
 }
 
 function addDotsListeners(dotsControls, slides) {
   [...dotsControls.children].forEach((dot, index) => {
     dot.addEventListener('click', (event) => {
       event.preventDefault();
-      updateSlide(index, slides.parentElement);
+      updateSlideState(index, slides.parentElement);
     });
   });
 }
 
-function createDotsControls(slides, block) {
+function createDotsControls(slides) {
   const dots = createTag('ul', { class: 'slides-dots' });
   const slidesNumber = slides.children.length;
   [...slides.children].forEach((slide, slideIndex) => {
@@ -94,9 +97,6 @@ function createDotsControls(slides, block) {
       },
     );
     const li = createTag('li', { role: 'presentation' }, btn);
-    li.addEventListener('click', () => {
-      updateSlide(slideIndex, block);
-    });
     dots.append(li);
   });
   return dots;
@@ -127,7 +127,7 @@ export default async function decorate(block) {
   const slidesControls = createTag('div', { class: 'slides-controls' }, controlsElements);
   const slidesContainer = createTag('div', { class: 'slides-container' }, [slides, slidesControls]);
   block.replaceChildren(slidesContainer);
-  updateControls(block, 0);
+  updateControlsState(block, 0);
   addDotsListeners(dotsControls, slides);
   await decorateIcons(block);
 }
