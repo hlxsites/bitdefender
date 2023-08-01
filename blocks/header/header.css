@@ -1,6 +1,6 @@
 /* header and nav layout */
 :root {
-  --dark-header-icon-color: #000;;
+  --dark-header-icon-color: #000;
 }
 
 header {
@@ -568,10 +568,12 @@ header a.button:hover span.button-text {
   }
 
   header .icon {
-    color: var(--text-dark-color);
+    color: var(--text-color);
     position: static;
   }
-
+  header.black-background .icon {
+    color: var(--text-dark-color);
+  }
   .header-wrapper {
     position: absolute;
     z-index: 999;
@@ -703,11 +705,14 @@ header a.button:hover span.button-text {
   
   .home-solutions-link-default {
     display: block;
-    color: #dedede;
+    color: var(--text-color);
     cursor: pointer;
     padding: 0 20px 29px;
     position: relative;
     margin-top: 35px;
+  }
+  header.black-background .home-solutions-link-default {
+    color: #dedede;
   }
   
   .home-solutions-link-default::before {
