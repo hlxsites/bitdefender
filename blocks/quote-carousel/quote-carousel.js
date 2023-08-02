@@ -1,6 +1,9 @@
 import { createTag } from '../../scripts/utils/utils.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
+const SLIDE_PREFIX = 'carousel-slide-';
+const CONTROL_PREFIX = 'carousel-control-';
+
 function createSlide(item, index) {
   const quote = item.querySelector('p:not(:has(> strong, > em)):not(:empty)');
   const author = item.querySelector('p > strong');
@@ -12,10 +15,10 @@ function createSlide(item, index) {
     'div',
     {
       class: 'slide',
-      id: `carousel-${index}`,
+      id: `${SLIDE_PREFIX}${index}`,
       role: 'tabpanel',
       'aria-hidden': 'true',
-      'aria-describedby': `carousel-control-${index}`,
+      'aria-describedby': `${CONTROL_PREFIX}${index}`,
       tabindex: '-1',
     },
     `<div class="quote">
@@ -87,12 +90,12 @@ function createDotsControls(slides) {
     const btn = createTag(
       'button',
       {
-        id: `carousel-control-${ariaIndex}`,
+        id: `${CONTROL_PREFIX}${ariaIndex}`,
         class: 'dot',
         role: 'tab',
         type: 'button',
         tabindex: '-1',
-        'aria-controls': `carousel-slide-${ariaIndex}`,
+        'aria-controls': `${SLIDE_PREFIX}${ariaIndex}`,
         'aria-label': `${ariaIndex} of ${slidesNumber}`,
       },
       `${ariaIndex}`,
