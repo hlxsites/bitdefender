@@ -132,12 +132,12 @@ html {
 }
 
 body {
-  font-size: var(--body-font-size-xs);
+  font-size: var(--body-font-size-s);
   font-family: var(--body-font-family);
   font-weight: var(--font-weight-regular);
   color: var(--text-color);
   background-color: var(--background-color);
-  line-height: 1.31;
+  line-height: 1.5;
   display: none;
   margin: 0;
   -webkit-font-smoothing: antialiased;
