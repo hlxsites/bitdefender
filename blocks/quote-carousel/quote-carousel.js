@@ -95,6 +95,7 @@ function createDotsControls(slides) {
         'aria-controls': `carousel-slide-${ariaIndex}`,
         'aria-label': `${ariaIndex} of ${slidesNumber}`,
       },
+      `${ariaIndex}`,
     );
     const li = createTag('li', { role: 'presentation' }, btn);
     dots.append(li);
