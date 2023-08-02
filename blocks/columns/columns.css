@@ -30,16 +30,16 @@
   margin: 0 10px 30px;
 }
 
-.columns.awards > div > div:first-of-type {
-  margin: 0 auto 24px;
-}
-
 .columns.awards > div > div {
   flex-direction: column;
   width: 100%;
   flex: 1;
   line-height: 1.13;
   text-align: center;
+}
+
+.columns.awards > div > div:first-of-type {
+  margin: 0 auto 24px;
 }
 
 .columns.awards img {
