@@ -23,8 +23,6 @@
   display: block;
 }
 
-
-
 @media (min-width: 990px) { /* desktop */
 
   .columns > div {
