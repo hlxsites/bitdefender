@@ -311,6 +311,11 @@ pre {
   overflow: scroll;
 }
 
+dl, ol, ul, pre, blockquote {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
 main pre {
   background-color: var(--overlay-background-color);
   padding: 1em;
