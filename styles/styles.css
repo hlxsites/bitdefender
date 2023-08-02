@@ -222,6 +222,7 @@ h1 {
   font-size: 34px;
   line-height: 1.21;
   font-weight: var(--font-weight-boldest);
+  margin-bottom: 25px;
 }
 
 h2 {
@@ -239,6 +240,7 @@ h3 {
 h4 {
   font-size: var(--heading-font-size-xs);
   line-height: 1.25;
+  margin-bottom: 9px;
 }
 
 h5 {
@@ -265,12 +267,12 @@ h6 { font-size: 16px }
 
   h2 {
     font-size: 38px;
-    margin-bottom: 0;
+    margin-bottom: 22px;
   }
 
   h3 {
     font-size: 26px;
-    margin-bottom: 0;
+    margin-bottom: 24px;
   }
   h4 { font-size: 22px }
 }
@@ -311,7 +313,7 @@ pre {
   overflow: scroll;
 }
 
-p, dl, ol, ul, pre, blockquote {
+dl, ol, ul, pre, blockquote {
   margin-top: 1em;
   margin-bottom: 1em;
 }
@@ -328,7 +330,7 @@ p {
   font-size: var(--body-font-size-xs);
   line-height: 1.31;
   letter-spacing: 0.006em;
-  margin: 0;
+  margin-bottom: 17px;
   padding: 0;
 }
 
