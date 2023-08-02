@@ -15,7 +15,7 @@ function createSlide(item, index) {
       id: `carousel-${index}`,
       role: 'tabpanel',
       'aria-hidden': 'true',
-      'aria-described-by': `carousel-control-${index}`,
+      'aria-describedby': `carousel-control-${index}`,
       tabindex: '-1',
     },
     `<div class="quote">
@@ -105,13 +105,13 @@ function createDotsControls(slides) {
 export default async function decorate(block) {
   const slides = createTag('div', { class: 'slides' });
   let slideIndex = 1;
-  [...block.children]
-    .map((item) => createSlide(item, slideIndex))
-    .filter((item) => item)
-    .forEach((item) => {
+  [...block.children].forEach((item) => {
+    const slide = createSlide(item, slideIndex);
+    if (slide) {
       slideIndex += 1;
-      slides.append(item);
-    });
+      slides.append(slide);
+    }
+  });
   slides.children[0].classList.add('active');
 
   const dotsControls = createDotsControls(slides, block);
