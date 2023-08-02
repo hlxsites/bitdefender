@@ -33,6 +33,7 @@
   --breadcrumb-text-color: #616161;
   --breadcrumb-text-color-dark: #c5c5c5;
   --breadcrumb-text-color-dark-hover: #fff;
+  --background-color-light-sky-blue: #e4f2ff;
   --icon-color: #205fff;
 
   /* fonts */
@@ -468,6 +469,11 @@ main .section {
 /* section metadata */
 main .section.highlight {
   background-color: var(--highlight-background-color);
+}
+
+main .section.wide-light-sky-blue {
+  background-color: var(--background-color-light-sky-blue);
+  padding: 64px 0;
 }
 
 /* linked pictures with video button overlay */
