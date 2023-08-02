@@ -80,7 +80,7 @@ function addDotsListeners(dotsControls, slides) {
 }
 
 function createDotsControls(slides) {
-  const dots = createTag('ul', { class: 'slides-dots' });
+  const dots = createTag('ul', { class: 'slides-dots', role: 'tablist' });
   const slidesNumber = slides.children.length;
   [...slides.children].forEach((slide, slideIndex) => {
     const ariaIndex = slideIndex + 1;
