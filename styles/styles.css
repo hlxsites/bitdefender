@@ -311,7 +311,7 @@ pre {
   overflow: scroll;
 }
 
-dl, ol, ul, pre, blockquote {
+p, dl, ol, ul, pre, blockquote {
   margin-top: 1em;
   margin-bottom: 1em;
 }
