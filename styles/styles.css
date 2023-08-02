@@ -292,12 +292,6 @@ h6 { font-size: 16px }
   }
 }
 
-menu, li, ol, ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
 hr {
   margin: 0;
   border: 0;
