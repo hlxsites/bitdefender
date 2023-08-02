@@ -289,7 +289,8 @@ h6 { font-size: 16px }
 }
 
 hr {
-  margin: 0;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
   border: 0;
   border-bottom: 1px solid var(--horizontal-separator-color);
 }
@@ -307,7 +308,7 @@ pre {
   overflow: scroll;
 }
 
-dl, ol, ul, pre, blockquote {
+p, dl, ol, ul, pre, blockquote {
   margin-top: 1em;
   margin-bottom: 1em;
 }
@@ -324,7 +325,6 @@ p {
   font-size: var(--body-font-size-xs);
   line-height: 1.31;
   letter-spacing: 0.006em;
-  margin-bottom: 17px;
   padding: 0;
 }
 
