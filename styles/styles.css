@@ -330,7 +330,7 @@ p {
 
 @media (min-width: 1400px) {
   p {
-    font-size: var(--body-font-size-xs);
+    font-size: var(--body-font-size-s);
   }
 }
 
