@@ -241,10 +241,6 @@ header .icon {
   height: 30px;
   filter: none;
   left: 20px;
-  color: var(--background-color);
-}
-
-header.black-background  .icon {
   color: var(--dark-background-color);
 }
 
@@ -455,8 +451,8 @@ header a.button:hover span.button-text {
 
 .menu-wrapper {
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: 17px;
+  right: 20px;
   width: 25px;
   height: 25px;
   cursor: pointer;
@@ -575,9 +571,11 @@ header a.button:hover span.button-text {
     color: var(--text-color);
     position: static;
   }
+
   header.black-background .icon {
     color: var(--text-dark-color);
   }
+
   .header-wrapper {
     position: absolute;
     z-index: 999;
@@ -642,7 +640,7 @@ header a.button:hover span.button-text {
   }
 
   .nav-brand p a {
-    margin: 0 19px;
+    margin: 0 12px;
   }
 
   .mega-menu div p a{
@@ -694,13 +692,15 @@ header a.button:hover span.button-text {
   
   .logo-container {
     padding: 20px var(--section-desktop-padding);
-    margin: 21px auto 0;
+    margin: 13px auto 0;
     gap: 10px;
   }
   
   .logo-container > p {
     display: block;
     font-weight: var(--font-weight-bold);
+    line-height: 1.63;
+    font-size: 15px;
   }
 
   .home-solutions-link-hover {
@@ -711,10 +711,11 @@ header a.button:hover span.button-text {
     display: block;
     color: var(--text-color);
     cursor: pointer;
-    padding: 0 20px 29px;
+    padding: 0 27px 31px;
     position: relative;
     margin-top: 35px;
   }
+
   header.black-background .home-solutions-link-default {
     color: #dedede;
   }
@@ -974,10 +975,22 @@ header a.button:hover span.button-text {
     padding-right: var(--section-large-desktop-padding);
   }
 
+  .nav-brand p a {
+    margin: 0 19px;
+  }
+
   .logo-container {
     max-width: var(--section-large-desktop-max-width);
     padding-left: var(--section-large-desktop-padding);
     padding-right: var(--section-large-desktop-padding);
+    margin-top: 21px;
   }
 
+  .logo-container > p {
+    font-size: 16px;
+  }
+
+  .home-solutions-link-default {
+    padding-left: 20px;
+  }
 }

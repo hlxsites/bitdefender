@@ -88,7 +88,7 @@ function wrapDivsInMegaMenu() {
 }
 
 function addDescriptionToHref() {
-  const descriptions = document.querySelectorAll('.button-container > div');
+  const descriptions = document.querySelectorAll('header .button-container > div');
 
   descriptions.forEach((description) => {
     const a = description.parentNode.querySelector('a');

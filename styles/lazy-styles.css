@@ -102,6 +102,11 @@
     padding: 52px 62px 54px 55px;
     max-width: 660px;
   }
+
+  .modal-container .modal-content .columns-wrapper {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 /* animations */

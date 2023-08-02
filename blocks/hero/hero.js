@@ -35,25 +35,31 @@ function buildHeroBlock(element) {
  * Decorates discount bubble div
  */
 function decorateDiscountBubble() {
-  // Example: <p><a href="example.com">Text</a> 50% Discount</p>
-  const p = document.querySelector('p.button-container');
-  // find next p tag that contains a em element
-  const emElement = p.nextElementSibling.querySelector('em');
-  // check if em Element exists
-  if (emElement !== null) {
-    const div = document.createElement('div');
-    div.classList.add('discount-bubble');
-    const textArray = emElement.textContent.trim().split(' ');
+  // search in hero block for p tag that contains a tag with class button only
+  if (document.querySelector('.hero p.button-container a.button:not([class*=" "])')) {
+    // Example: <p><a href="example.com">Text</a></p>
+    // <p>50% Discount</p>
+    const p = document.querySelector('.hero p.button-container a.button:not([class*=" "])').parentNode;
 
-    textArray.forEach((text) => {
-      const span = document.createElement('span');
-      span.classList.add(`discount-bubble-${textArray.indexOf(text)}`);
-      span.innerHTML = text;
-      div.append(span);
-    });
+    // find next p tag that contains a em element
+    const emElement = p.nextElementSibling.querySelector('em');
+    // check if em Element exists
+    if (emElement !== null) {
+      const divBubble = document.createElement('div');
+      divBubble.classList.add('discount-bubble');
+      const textArray = emElement.textContent.trim().split(' ');
 
-    p.append(div);
-    emElement.remove();
+      textArray.forEach((text) => {
+        const span = document.createElement('span');
+        span.classList.add(`discount-bubble-${textArray.indexOf(text)}`);
+        span.innerHTML = text;
+        divBubble.append(span);
+      });
+
+      p.appendChild(divBubble);
+      p.classList.add('discount-bubble-container');
+      emElement.parentNode.remove();
+    }
   }
 }
 
@@ -70,7 +76,7 @@ export default async function decorate(block) {
     // add div for breadcrumb
     const breadcrumb = document.createElement('div');
     breadcrumb.classList.add('breadcrumb');
-    breadcrumb.innerHTML = '<a href="/">Home</a> / <a href="#.html">Solutions</a> /';
+    breadcrumb.innerHTML = '<a href="/">Home</a> <a href="#.html">Solutions</a>';
 
     elementHeroContent.insertBefore(breadcrumb, elementHeroContent.firstChild);
 
