@@ -56,6 +56,7 @@
   --body-font-size-xxs: 12px;
 
   /* heading sizes */
+  --heading-font-size-xxxl: 60px;
   --heading-font-size-xxl: 48px;
   --heading-font-size-xl: 40px;
   --heading-font-size-l: 32px;
@@ -134,6 +135,7 @@ html {
 body {
   font-size: var(--body-font-size-s);
   font-family: var(--body-font-family);
+  font-weight: var(--font-weight-regular);
   color: var(--text-color);
   background-color: var(--background-color);
   line-height: 1.5;
@@ -160,15 +162,6 @@ header {
 
 
 @media (min-width: 990px) { /* desktop */
-  :root {
-    --heading-font-size-xxl: 60px;
-    --heading-font-size-xl: 48px;
-    --heading-font-size-l: 36px;
-    --heading-font-size-m: 32px;
-    --heading-font-size-s: 24px;
-    --heading-font-size-xs: 22px;
-  }
-
   header {
     height: var(--nav-height-desktop);
     position: absolute;
@@ -206,43 +199,85 @@ header {
 h1, h2, h3,
 h4, h5, h6 {
   font-family: var(--heading-font-family);
-  font-weight: var(--font-weight-bolder);
+  font-weight: var(--font-weight-bold);
   line-height: 1.25;
-  margin-top: 1em;
-  margin-bottom: .5em;
   scroll-margin: calc(var(--nav-height) + 1em);
 }
 
-h1 { font-size: var(--heading-font-size-xxl) }
-h2 { font-size: var(--heading-font-size-xl) }
-h3 { font-size: var(--heading-font-size-l) }
-h4 { font-size: var(--heading-font-size-m) }
-h5 { font-size: var(--heading-font-size-s) }
-h6 { font-size: var(--heading-font-size-xs) }
-
-@media (min-width: 596px) {
-  h3 { font-size: var(--heading-font-size-s) }
+h1 {
+  font-size: 34px;
+  line-height: 1.21;
+  font-weight: var(--font-weight-boldest);
+  margin-bottom: 25px;
 }
 
-@media (min-width: 768px) {
+h2 {
+  font-size: var(--heading-font-size-l);
+  line-height: 1.2;
+  margin-bottom: 15px;
+}
+
+h3 {
+  font-size: var(--heading-font-size-s);
+  line-height: 1.15;
+  margin-bottom: 15px;
+}
+
+h4 {
+  font-size: var(--heading-font-size-xs);
+  line-height: 1.25;
+  margin-bottom: 9px;
+}
+
+h5 {
+  font-size: 16px;
+  line-height: 1.5;
+}
+h6 { font-size: 16px }
+
+@media (min-width: 596px) {
+  h1 { font-size: 38px }
   h3 { font-size: 22px }
 }
 
+@media (min-width: 768px) {
+  h1 { font-size: 42px }
+  h2 { font-size: 34px; }
+  h3 { font-size: 24px; }
+  h4 { font-size: var(--heading-font-size-s) }
+  h5 { font-size: var(--heading-font-size-xs) }
+}
+
 @media (min-width: 992px) {
-  h3 { font-size: var(--heading-font-size-m) }
+  h1 { font-size: 50px }
+
+  h2 {
+    font-size: 38px;
+    margin-bottom: 22px;
+  }
+
+  h3 {
+    font-size: 26px;
+    margin-bottom: 24px;
+  }
+  h4 { font-size: 22px }
 }
 
 @media (min-width: 1200px) {
-  h3 { font-size: 26px }
-}
-
-@media (min-width: 1400px) {
   h3 { font-size: 30px }
 }
 
-p, dl, ol, ul, pre, blockquote {
-  margin-top: 1em;
-  margin-bottom: 1em;
+@media (min-width: 1400px) {
+  h2 { font-size: 40px }
+  h3 { font-size: 32px }
+  h4 { font-size: var(--heading-font-size-m) }
+}
+
+@media (min-width: 1600px) {
+  h1 {
+    font-size: 56px;
+    letter-spacing: normal;
+  }
 }
 
 hr {
@@ -265,12 +300,30 @@ pre {
   overflow: scroll;
 }
 
+p, dl, ol, ul, pre, blockquote {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
 main pre {
   background-color: var(--overlay-background-color);
   padding: 1em;
   border-radius: .25em;
   overflow-x: auto;
   white-space: pre;
+}
+
+p {
+  font-size: var(--body-font-size-xs);
+  line-height: 1.31;
+  letter-spacing: 0.006em;
+  padding: 0;
+}
+
+@media (min-width: 1400px) {
+  p {
+    font-size: var(--body-font-size-s);
+  }
 }
 
 a:any-link {
