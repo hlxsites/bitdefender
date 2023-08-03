@@ -245,6 +245,27 @@ p, dl, ol, ul, pre, blockquote {
   margin-bottom: 1em;
 }
 
+ul {
+  padding-left: 15px;
+  list-style: none;
+}
+
+li {
+  font-size: var(--body-font-size-s);
+  font-weight: var(--font-weight-regular);
+  line-height: 26px;
+  letter-spacing: normal;
+  font-stretch: normal;
+  padding-left: 20px;
+  margin: 15px 0;
+}
+
+@media (min-width: 992px) {
+  li {
+    font-size: var(--body-font-size-m);
+  }
+}
+
 hr {
   margin-top: 1.5em;
   margin-bottom: 1.5em;

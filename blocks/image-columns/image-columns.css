@@ -1,5 +1,5 @@
 .image-columns-wrapper {
-  padding: 0 var(--body-padding);
+  padding: 0;
 }
 
 .image-columns {
@@ -11,10 +11,16 @@
 .image-columns > div {
   display: flex;
   flex-direction: column;
+  column-gap: 58px;
+  row-gap: 30px;
 }
 
 .image-columns img {
   width: 100%;
+}
+
+.image-columns li {
+  list-style: initial;
 }
 
 .image-columns > div > div {
@@ -37,6 +43,7 @@
   max-width: 645px;
   width: 100%;
   height: auto;
+  margin: 0 auto;
 }
 
 .image-columns > div > .image-columns-img-col img {
@@ -99,7 +106,7 @@
 
   .image-columns-wrapper {
     max-width: var(--section-desktop-max-width);
-    padding: 0 18px;
+    padding: 36px 0;
     margin: 0 auto;
   }
 }
@@ -107,6 +114,5 @@
 @media (min-width: 1600px) { /* large desktop */
   .image-columns-wrapper {
     max-width: var(--section-large-desktop-max-width);
-    padding: 0 var(--section-large-desktop-padding);
   }
 }
