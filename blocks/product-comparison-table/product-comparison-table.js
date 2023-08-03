@@ -85,7 +85,7 @@ export default function decorate(block) {
     const pricePlaceholder = '<price>';
     let productName = '';
     let numberOfDevices = 0;
-    for (let y=0; y < childrenHeader.children.lenght; y++) {
+    for (let y=0; y < childrenHeader.children.length; y++) {
       const paragraph = childrenHeader.children[y];
       if (paragraph.tagName === 'H4') {
         productName = paragraph.textContent;

@@ -42,7 +42,7 @@
 }
 
 .product-comparison-header div[role="columnheader"]:not(:first-child).active {
-    box-shadow: 0 -10px 20px 0 #000001;
+    box-shadow: 0 -10px 20px 0 #0000001a;
     position: relative;
 }
 
@@ -183,7 +183,7 @@
 
 .product-comparison-table div[role='cell'].active {
     background: #fff;
-    box-shadow: 0 3px 8px 0 #000001;
+    box-shadow: 0 3px 8px 0 #0000001a;
     border-bottom: 1px solid #e4f2ff;
     border-right: 1px solid #e4f2ff;
 }
