@@ -460,7 +460,7 @@ main .hero.black-background ul.hero-awards li picture img{
   main .hero .hero-content {
     min-height: 725px;
     max-width: var(--section-desktop-max-width);
-    padding: 124px var(--section-desktop-padding) 54px var(--section-desktop-padding)
+    padding: 112px var(--section-desktop-padding) 54px var(--section-desktop-padding)
   }
 
   main .hero.black-background .hero-content {
