@@ -4,7 +4,7 @@ function scrollToAnchorWithOffset(anchorId) {
   const anchorElement = document.getElementById(anchorId);
 
   if (anchorElement) {
-    const offsetPosition = anchorElement.getBoundingClientRect().top + window.pageYOffset - 80;
+    const offsetPosition = anchorElement.getBoundingClientRect().top + window.scrollY - 80;
 
     window.scrollTo({
       top: offsetPosition,
