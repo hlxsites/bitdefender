@@ -596,6 +596,14 @@ export function decorateButtons(element) {
           a.nextSibling.remove();
           return;
         }
+        // Example: <p><a href="example.com">Text</a> <em>50% Discount</em></p>
+        if (up.childNodes.length === 3 && up.tagName === 'P' && a.nextElementSibling?.tagName === 'EM') {
+          a.className = 'button';
+          up.classList.add('button-container');
+          a.dataset.modal = a.nextSibling.textContent.trim().slice(1, -1);
+          a.nextSibling.remove();
+          return;
+        }
         // Example: <p><a href="example.com">Text</a></p>
         if (up.childNodes.length === 1 && (up.tagName === 'P' || up.tagName === 'DIV')) {
           a.className = 'button'; // default
