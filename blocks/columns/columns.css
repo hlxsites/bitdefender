@@ -36,18 +36,7 @@
     order: unset;
   }
 
-  .columns-wrapper {
-    max-width: var(--section-desktop-max-width);
-    padding: 0 var(--section-desktop-padding);
-    margin: 0 auto;
-  }
-}
-
-@media (min-width: 1600px) { /* large desktop */
-  .columns-wrapper {
-    max-width: var(--section-large-desktop-max-width);
-    padding: 0 var(--section-large-desktop-padding);
-  }
+  
 }
 
 /* Features cards */
