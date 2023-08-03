@@ -1,4 +1,4 @@
-import { getMockData } from "./product-mock-data.js";
+import { getMockData } from './product-mock-data.js';
 
 const fakeData = getMockData();
 
@@ -6,7 +6,8 @@ function buildPriceContainer(productName, numberOfDevices) {
   const priceContainer = document.createElement('div');
   priceContainer.classList.add('product-comparison-price');
 
-  const productData = fakeData.filter((product) => product.data.product.product_name === productName);
+  const productData = fakeData
+    .filter((product) => product.data.product.product_name === productName);
   if (productData.length === 0) {
     return;
   }
@@ -18,7 +19,7 @@ function buildPriceContainer(productName, numberOfDevices) {
   if (productVariationDiscountPrice) {
     const oldPriceContainer = document.createElement('div');
     oldPriceContainer.classList.add('old-price-container');
-    oldPriceContainer.innerHTML = `<p>Old Price <span class='price-strike-through'>${productVariationPrice} ${priceLabel}</span></p>`
+    oldPriceContainer.innerHTML = `<p>Old Price <span class='price-strike-through'>${productVariationPrice} ${priceLabel}</span></p>`;
     priceContainer.appendChild(oldPriceContainer);
   }
 
@@ -40,8 +41,8 @@ export default function decorate(block) {
       } else if (div.children.length <= 1 && !div.hasAttribute('role')) {
         div.setAttribute('role', 'cell');
       }
-      if (div.firstElementChild?.tagName === 'STRONG' ||
-        div.firstElementChild?.firstElementChild?.tagName === 'STRONG') {
+      if (div.firstElementChild?.tagName === 'STRONG' 
+        || div.firstElementChild?.firstElementChild?.tagName === 'STRONG') {
         div.classList.add('active');
       }
       if (div.textContent.match(/^[yY]es/)) {
@@ -66,8 +67,8 @@ export default function decorate(block) {
 
   for (const childrenHeader of header.children) {
     childrenHeader.setAttribute('role', 'columnheader');
-    const strongTagStartRegex = new RegExp(/<strong>/g);
-    const strongTagEndRegex = new RegExp(/<\/strong>/g);
+    const strongTagStartRegex = /<strong>/g;
+    const strongTagEndRegex = /<\/strong>/g;
     const result = childrenHeader.innerHTML.replace(strongTagStartRegex, '');
     childrenHeader.innerHTML = result.replace(strongTagEndRegex, '');
     const buttonSection = childrenHeader.querySelector('p.button-container');
