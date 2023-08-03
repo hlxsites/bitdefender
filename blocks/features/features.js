@@ -14,47 +14,60 @@ export default function decorate(block) {
         }
       }
 
+      // setup tabs
+      const mergedUl = document.createElement('ul');
+      mergedUl.classList.add('features-tabs');
 
-      /* **** setup tabs **** */
-
-      const mergedUl = document.createElement("ul");
-      mergedUl.classList.add("features-tabs");
-
-      col.querySelectorAll("ul").forEach((ul) => {
-        ul.querySelectorAll("li").forEach((li) => {
-
-          var a = document.createElement('a');
+      col.querySelectorAll('ul').forEach((ul) => {
+        ul.querySelectorAll('li').forEach((li) => {
+          const a = document.createElement('a');
 
           // register click event on a tag
           a.addEventListener('click', (event) => {
             // if the clicked node has children then toggle the nav-hidden class
             if (event.target.parentNode.children.length > 1) {
-              event.target.parentNode.children[1].classList.toggle('features-tabs-hidden');
+              event.target.parentNode.querySelectorAll('.features-tabs-content').forEach((content) => {
+                content.classList.toggle('features-tabs-hidden');
+              });
+
               event.target.classList.toggle('is-open');
             }
 
             // hid the other tabs
-            mergedUl.querySelectorAll("li").forEach((li) => {
-                if (li !== event.target.parentNode) {
-                    li.children[0].classList.remove('is-open');
-                    li.children[1].classList.add('features-tabs-hidden');
-                }
+            mergedUl.querySelectorAll('li').forEach((collapsedLi) => {
+              if (collapsedLi !== event.target.parentNode) {
+                collapsedLi.children[0].classList.remove('is-open');
+                collapsedLi.querySelectorAll('.features-tabs-content').forEach((content) => {
+                  content.classList.add('features-tabs-hidden');
+                });
+              }
             });
-
           });
 
-          a.innerText = li.innerText;
+          li.childNodes.forEach((node) => {
+            if (node.nodeType === Node.TEXT_NODE) {
+              a.appendChild(document.createTextNode(node.textContent));
+              // remove text node from li
+              node.remove();
+            } else {
+              if (node !== li.lastChild || node.tagName !== 'EM') {
+                a.appendChild(node);
+              }
+            }
+          });
 
-          li.innerText = "";
+          // insert a tag into li at the beginning
+          li.insertBefore(a, li.firstChild);
 
-          li.appendChild(a);
 
+          // li.appendChild(a);
+
+          // add paragraph
           if (li.nextElementSibling === null) {
-
-            const paragraph = li.closest("ul").nextElementSibling;
-            if (paragraph && paragraph.tagName === "P") {
-              paragraph.classList.add("features-tabs-content");
-              paragraph.classList.add("features-tabs-hidden");
+            const paragraph = li.closest('ul').nextElementSibling;
+            if (paragraph && paragraph.tagName === 'P') {
+              paragraph.classList.add('features-tabs-content');
+              paragraph.classList.add('features-tabs-hidden');
               li.appendChild(paragraph);
             }
           }
@@ -65,8 +78,6 @@ export default function decorate(block) {
       });
 
       col.appendChild(mergedUl);
-
-      /* **** end **** */
     });
   });
 }
