@@ -41,7 +41,7 @@ export default function decorate(block) {
       } else if (div.children.length <= 1 && !div.hasAttribute('role')) {
         div.setAttribute('role', 'cell');
       }
-      if (div.firstElementChild?.tagName === 'STRONG' 
+      if (div.firstElementChild?.tagName === 'STRONG'
         || div.firstElementChild?.firstElementChild?.tagName === 'STRONG') {
         div.classList.add('active');
       }
@@ -85,8 +85,9 @@ export default function decorate(block) {
     let productName = '';
     let numberOfDevices = 0;
     for (const paragraph of childrenHeader.children) {
-      if (paragraph.tagName === 'H4')
+      if (paragraph.tagName === 'H4') {
         productName = paragraph.textContent;
+      }
       if (paragraph.tagName === 'P' && paragraph.textContent.includes('Devices')) {
         numberOfDevices = paragraph.textContent.split(' ')[0];
       }
