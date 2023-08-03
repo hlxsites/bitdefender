@@ -36,30 +36,29 @@ function buildHeroBlock(element) {
  */
 function decorateDiscountBubble() {
   // search in hero block for p tag that contains a tag with class button only
-  if (document.querySelector('.hero p.button-container a.button:not([class*=" "])')) {
-    // Example: <p><a href="example.com">Text</a></p>
-    // <p>50% Discount</p>
-    const p = document.querySelector('.hero p.button-container a.button:not([class*=" "])').parentNode;
+  if (document.querySelectorAll('.hero p.button-container a.button')) {
+    // Example:  <p><a href="example.com">Text</a> 50% Discount</p>
+    const linksList = document.querySelectorAll('.hero p.button-container a.button');
+    // iterate through all linksList
+    linksList.forEach((link) => {
+      // check if next element is em tag
+      if (link.nextElementSibling?.tagName === 'EM') {
+        const divBubble = document.createElement('div');
+        divBubble.classList.add('discount-bubble');
+        const textArray = link.nextElementSibling.textContent.trim().split(' ');
 
-    // find next p tag that contains a em element
-    const emElement = p.nextElementSibling.querySelector('em');
-    // check if em Element exists
-    if (emElement !== null) {
-      const divBubble = document.createElement('div');
-      divBubble.classList.add('discount-bubble');
-      const textArray = emElement.textContent.trim().split(' ');
+        textArray.forEach((text) => {
+          const span = document.createElement('span');
+          span.classList.add(`discount-bubble-${textArray.indexOf(text)}`);
+          span.innerHTML = text;
+          divBubble.append(span);
+        });
 
-      textArray.forEach((text) => {
-        const span = document.createElement('span');
-        span.classList.add(`discount-bubble-${textArray.indexOf(text)}`);
-        span.innerHTML = text;
-        divBubble.append(span);
-      });
-
-      p.appendChild(divBubble);
-      p.classList.add('discount-bubble-container');
-      emElement.parentNode.remove();
-    }
+        link.parentNode.appendChild(divBubble);
+        link.classList.add('discount-bubble-container');
+        link.nextElementSibling.remove();
+      }
+    });
   }
 }
 
