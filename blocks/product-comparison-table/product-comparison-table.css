@@ -1,6 +1,6 @@
 :root {
     --first-table-cell-color: #e4f2ff;
-    --table-cell-color: hsla(0,0%,93.3%,.5);
+    --table-cell-color: #eee;
     --yes-check-color: #78b13f;
     --no-check-color: #fb0000;
     --column-header-highlight-color: #de2985;
@@ -42,11 +42,11 @@
 }
 
 .product-comparison-header div[role="columnheader"]:not(:first-child).active {
-    box-shadow: 0 -10px 20px 0 rgba(0,0,0,.1);
+    box-shadow: 0 -10px 20px 0 #000001;
     position: relative;
 }
 
-.product-comparison-header div[role="columnheader"]:not(:first-child).active:before {
+.product-comparison-header div[role="columnheader"]:not(:first-child).active::before {
     content: "";
     position: absolute;
     top: -9px;
@@ -107,7 +107,7 @@
 }
 
 .product-comparison-header div[role="columnheader"] h4 {
-    margin: 3rem 0.625rem 0.25rem 0.625rem;
+    margin: 3rem 0.625rem 0.25rem;
     font-size: var(--heading-font-size-s);
 }
 
@@ -120,6 +120,7 @@
     line-height: 1.2;
     color: var(--product-comparison-text-color);
 }
+
 .product-comparison-header div[role="columnheader"] .product-comparison-price {
     padding-top: 0.9375rem;
     margin: 0.9375rem 0.625rem 0;
@@ -156,6 +157,7 @@
     display: table-cell;
     text-align: center;
 }
+
 .product-comparison-table div[role='cell'] {
     text-align: center;
     vertical-align: middle;
@@ -166,7 +168,6 @@
 }
 
 .product-comparison-table div[role='cell']:first-child {
-    text-align: left;
     background-color: var(--first-table-cell-color);
     padding: 0.875rem 1.75rem 1.0625rem 2.125rem;
     width: 100%;
@@ -182,7 +183,7 @@
 
 .product-comparison-table div[role='cell'].active {
     background: #fff;
-    box-shadow: 0 3px 8px 0 rgba(0,0,0,.1);
+    box-shadow: 0 3px 8px 0 #000001;
     border-bottom: 1px solid #e4f2ff;
     border-right: 1px solid #e4f2ff;
 }
@@ -202,9 +203,11 @@
     .product-comparison-table {
         width: unset;
     }
+
     .product-comparison-header {
         display: table-row;
     }
+    
     .product-comparison-table div[role='cell'] {
         display: table-cell;
 
