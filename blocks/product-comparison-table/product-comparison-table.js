@@ -1,8 +1,8 @@
-import { getMockData } from './product-mock-data.js';
+import getMockData from './product-mock-data.js';
 
 const fakeData = getMockData();
 
-function buildPriceContainer(productName, numberOfDevices) {
+function buildPriceContainer(productName, numberOfDevices, elementToReplace) {
   const priceContainer = document.createElement('div');
   priceContainer.classList.add('product-comparison-price');
 
@@ -28,7 +28,7 @@ function buildPriceContainer(productName, numberOfDevices) {
   currentPriceContainer.innerHTML = `<p>${productVariationDiscountPrice ?? productVariationPrice} ${priceLabel}</p>`;
   priceContainer.appendChild(currentPriceContainer);
 
-  return priceContainer;
+  elementToReplace.replaceWith(priceContainer);;
 }
 
 export default function decorate(block) {
@@ -92,8 +92,7 @@ export default function decorate(block) {
         numberOfDevices = paragraph.textContent.split(' ')[0];
       }
       if (paragraph.textContent.match(pricePlaceholder)) {
-        const priceContainer = buildPriceContainer(productName, numberOfDevices);
-        paragraph.replaceWith(priceContainer);
+        buildPriceContainer(productName, numberOfDevices, paragraph);
       }
     }
   }

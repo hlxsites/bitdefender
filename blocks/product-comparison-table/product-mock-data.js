@@ -1,4 +1,4 @@
-export function getMockData() {
+export default function getMockData() {
   return [
     {
       code: 0,
