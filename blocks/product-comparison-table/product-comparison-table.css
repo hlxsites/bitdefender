@@ -121,7 +121,9 @@
     color: var(--product-comparison-text-color);
 }
 .product-comparison-header div[role="columnheader"] .product-comparison-price {
-    padding-top: 1.875rem;
+    padding-top: 0.9375rem;
+    margin: 0.9375rem 0.625rem 0;
+    border-top: 1px solid #dedede; 
 }
 
 .product-comparison-header div[role="columnheader"] .product-comparison-price .current-price-container {
@@ -131,7 +133,9 @@
 .product-comparison-header div[role="columnheader"] .per-year-statement {
     font-size: var(--body-font-size-xs);
     color: var(--product-comparison-text-color);
-    padding-bottom: 0.9375rem;
+    border-bottom: 1px dashed #dedede;
+    margin: 0 0.625rem 0.9375rem;
+    padding-bottom: 0.625rem;
 }
 
 .product-comparison-header div[role="columnheader"] .current-price-container p{
