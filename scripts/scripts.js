@@ -9,8 +9,12 @@ import {
   decorateTemplateAndTheme,
   waitForLCP,
   loadBlocks,
-  loadCSS,
+  loadCSS, createOptimizedPicture,
 } from './lib-franklin.js';
+
+import {
+  createTag,
+} from './utils/utils.js';
 
 const LCP_BLOCKS = []; // add your LCP blocks to the list
 
@@ -148,6 +152,40 @@ export async function detectModalButtons(main) {
   });
 }
 
+function buildCta(section) {
+  const backgroundImageSrc = section.dataset.backgroundImage;
+  const backgroundImage = backgroundImageSrc ? createOptimizedPicture(backgroundImageSrc) : null;
+  const backgroundImageHtml = backgroundImage ? backgroundImage.innerHTML : '';
+
+  const fullWidthContainer = createTag(
+    'div',
+    { class: 'full-width' },
+    `<div class="cta-container">
+<div class="left-col">
+</div>
+<div class="right-col">
+    <div class="img-container">
+        <img class="red-img" src="/images/b-red-mask.png">
+        <div class="bg-img">
+            <div class="cmp-img">
+                ${backgroundImageHtml}
+            </div>
+        </div>
+        <img class="transparent-img" src="/icons/cta-circle.svg">
+    </img>
+</div>`,
+  );
+
+  const leftCol = fullWidthContainer.querySelector('.left-col');
+  [...section.children].forEach((e) => leftCol.append(e));
+  section.append(fullWidthContainer);
+}
+
+function buildCtaSections(main) {
+  main.querySelectorAll('div.section.cta')
+    .forEach(buildCta);
+}
+
 /**
  * Loads everything needed to get to LCP.
  * @param {Element} doc The container element
@@ -158,6 +196,7 @@ async function loadEager(doc) {
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
+    buildCtaSections(main);
     detectModalButtons(main);
     document.body.classList.add('appear');
     await waitForLCP(LCP_BLOCKS);
