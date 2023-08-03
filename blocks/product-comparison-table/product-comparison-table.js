@@ -28,7 +28,7 @@ function buildPriceContainer(productName, numberOfDevices, elementToReplace) {
   currentPriceContainer.innerHTML = `<p>${productVariationDiscountPrice ?? productVariationPrice} ${priceLabel}</p>`;
   priceContainer.appendChild(currentPriceContainer);
 
-  elementToReplace.replaceWith(priceContainer);;
+  elementToReplace.replaceWith(priceContainer);
 }
 
 export default function decorate(block) {
@@ -65,7 +65,8 @@ export default function decorate(block) {
   const header = block.querySelector('div > div');
   header.classList.add('product-comparison-header');
 
-  for (const childrenHeader of header.children) {
+  for (var i=0; i < header.children.length; i++) {
+    const childrenHeader = header.children[i];
     childrenHeader.setAttribute('role', 'columnheader');
     const strongTagStartRegex = /<strong>/g;
     const strongTagEndRegex = /<\/strong>/g;
@@ -84,7 +85,8 @@ export default function decorate(block) {
     const pricePlaceholder = '<price>';
     let productName = '';
     let numberOfDevices = 0;
-    for (const paragraph of childrenHeader.children) {
+    for (let y=0; y < childrenHeader.children.lenght; y++) {
+      const paragraph = childrenHeader.children[y];
       if (paragraph.tagName === 'H4') {
         productName = paragraph.textContent;
       }
