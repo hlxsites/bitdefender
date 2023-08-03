@@ -97,3 +97,38 @@
     font-size: 18px;
   }
 }
+
+/* awards styling */
+.columns.awards > div {
+  row-gap: 30px;
+  align-items: flex-start;
+}
+
+.columns.awards > div > div {
+  flex-direction: column;
+  width: 100%;
+  flex: 1;
+  line-height: 1.13;
+  text-align: center;
+  margin: 0 10px;
+}
+
+/* paragraph with image */
+.columns.awards > div > div > p {
+  margin: 0;
+  padding: 0 5px;
+}
+
+.columns.awards > div > div > p:not(:last-of-type) {
+  margin-bottom: 8px;
+}
+
+.columns.awards > div > div > p:first-of-type {
+  margin-bottom: 24px;
+}
+
+.columns.awards > div img {
+  display: block;
+  height: 56px;
+  object-fit: contain;
+}

@@ -33,6 +33,7 @@
   --breadcrumb-text-color: #616161;
   --breadcrumb-text-color-dark: #c5c5c5;
   --breadcrumb-text-color-dark-hover: #fff;
+  --background-color-light-sky-blue: #e4f2ff;
   --icon-color: #205fff;
 
   /* fonts */
@@ -521,6 +522,31 @@ main .section {
 /* section metadata */
 main .section.highlight {
   background-color: var(--highlight-background-color);
+}
+
+main .section.light-sky-blue {
+  background-color: var(--background-color-light-sky-blue);
+}
+
+main .section.wide {
+  padding: 56px 0 57px;
+  border-radius: unset;
+}
+
+@media (min-width: 1200px) { /* desktop */
+  main .section.wide {
+    max-width: var(--section-desktop-max-width);
+    border-radius: 8px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 1600px) { /* large desktop */
+  main .section .wide {
+    max-width: var(--section-large-desktop-max-width);
+    border-radius: 8px;
+    margin: 0 auto;
+  }
 }
 
 /* linked pictures with video button overlay */
