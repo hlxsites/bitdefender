@@ -37,7 +37,7 @@ function buildHeroBlock(element) {
 function decorateDiscountBubble() {
   // search in hero block for p tag that contains a tag with class button only
   if (document.querySelectorAll('.hero p.button-container a.button')) {
-    // Example:  <p><a href="example.com">Text</a> 50% Discount</p>
+    // Example:  <p><a href="example.com">Text</a> <em>50% Discount</em></p>
     const linksList = document.querySelectorAll('.hero p.button-container a.button');
     // iterate through all linksList
     linksList.forEach((link) => {
