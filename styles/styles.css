@@ -75,6 +75,9 @@
   --section-desktop-padding: 50px;
   --section-large-desktop-max-width: 1332px;
   --section-large-desktop-padding: 20px;
+
+  /* cta styles */
+  --cta-background-light-blue: var(--background-light-blue)
 }
 
 /* fallback font for Roboto (normal - 400) */
@@ -518,7 +521,7 @@ main .section.cta {
 }
 
 .cta .full-width {
-  background-color: var(--background-light-blue);
+  background-color: var(--cta-background-light-blue);
 }
 
 .cta-container {
