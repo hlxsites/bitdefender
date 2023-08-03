@@ -101,6 +101,7 @@
 /* awards styling */
 .columns.awards > div {
   row-gap: 30px;
+  align-items: flex-start;
 }
 
 .columns.awards > div > div {
