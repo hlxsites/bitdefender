@@ -56,11 +56,9 @@ export default function decorate(block) {
             }
           });
 
-          // insert a tag into li at the beginning
+          a.classList.add('features-tabs-title');
+
           li.insertBefore(a, li.firstChild);
-
-
-          // li.appendChild(a);
 
           // add paragraph
           if (li.nextElementSibling === null) {

@@ -28,6 +28,41 @@
   display: none;
 }
 
+.features .features-tabs li > a::after {
+  content: "";
+  position: relative;
+  display: inline-block;
+  width: 14px;
+  height: 8px;
+  margin: 0 3px;
+  background: url(../../../icons/tabs_arrow.svg) no-repeat;
+  background-size: 100%;
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+  -webkit-transition: all .3s linear;
+  transition: all .3s linear;
+}
+
+.features .features-tabs li > a.is-open::after {
+  content: "";
+  position: relative;
+  display: inline-block;
+  width: 14px;
+  height: 8px;
+  margin: 0 3px;
+  background: url(../../../icons/tabs_arrow.svg) no-repeat;
+  background-size: 100%;
+  -webkit-transition: all .3s linear;
+  transition: all .3s linear;
+}
+
+/* a link that is child of li and a link has class is-open */
+.features .features-tabs li > a.is-open::after {
+  -webkit-transform: rotate(0);
+  transform: rotate(0)
+}
+
+
 @media (min-width: 990px) { /* desktop */
 
   .features > div {
