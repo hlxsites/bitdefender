@@ -272,7 +272,7 @@ export function decorateBlock(block) {
     block.dataset.blockName = shortBlockName;
     block.dataset.blockStatus = 'initialized';
     const blockWrapper = block.parentElement;
-    blockWrapper.classList.add('wrapper', `${shortBlockName}-wrapper`);
+    blockWrapper.classList.add(`${shortBlockName}-wrapper`);
     const section = block.closest('.section');
     if (section) section.classList.add(`${shortBlockName}-container`);
   }
@@ -334,7 +334,7 @@ export function decorateSections(main) {
         const wrapper = document.createElement('div');
         wrappers.push(wrapper);
         defaultContent = e.tagName !== 'DIV';
-        if (defaultContent) wrapper.classList.add('wrapper', 'default-content-wrapper');
+        if (defaultContent) wrapper.classList.add('default-content-wrapper');
       }
       wrappers[wrappers.length - 1].append(e);
     });
