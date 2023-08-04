@@ -577,6 +577,7 @@ export function decorateButtons(element) {
     if (a.href !== a.textContent) {
       const up = a.parentElement;
       const twoup = a.parentElement.parentElement;
+      const threeup = a.parentElement.parentElement?.parentElement;
 
       if (!a.querySelector('img')) {
         // Example: <p><strong><a href="example.com">Text</a></strong></p>
@@ -589,9 +590,10 @@ export function decorateButtons(element) {
           return;
         }
         if (up.childNodes.length === 1 && up.tagName === 'EM'
-            && twoup.childNodes.length === 1 && twoup.tagName === 'P') {
+            && twoup.childNodes.length === 1 && twoup.tagName === 'STRONG'
+            && threeup?.childNodes.length === 1 && threeup?.tagName === 'P') {
           a.className = 'button secondary';
-          twoup.classList.add('button-container');
+          threeup.classList.add('button-container');
           up.replaceWith(a);
           a.innerHTML = wrapButtonText(a);
           return;

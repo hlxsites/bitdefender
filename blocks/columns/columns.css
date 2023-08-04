@@ -119,6 +119,10 @@
   padding: 0 5px;
 }
 
+.columns.video-presentation > div > div > p {
+  font-size: var(--body-font-size-s);
+}
+
 .columns.awards > div > div > p:not(:last-of-type) {
   margin-bottom: 8px;
 }
@@ -136,10 +140,6 @@
 /* video presentation */
 .columns.video-presentation > div > div {
   margin: 0 auto;
-}
-
-.columns.video-presentation > div > div > p {
-  font-size: var(--body-font-size-s);
 }
 
 .columns.video-presentation .button-container {
