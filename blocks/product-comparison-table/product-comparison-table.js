@@ -2,6 +2,10 @@ import getMockData from './product-mock-data.js';
 
 const fakeData = getMockData();
 
+function addAccesibilityRoles() {
+
+}
+
 function buildPriceContainer(productName, numberOfDevices, elementToReplace) {
   const priceContainer = document.createElement('div');
   priceContainer.classList.add('product-comparison-price');
@@ -52,7 +56,7 @@ export default function decorate(block) {
         icon.classList.add('yes-check');
         iconWrapper.appendChild(icon);
         div.appendChild(iconWrapper);
-      } else if (div.textContent.match(/^[nN]o/)) {
+      } else if (div.textContent.match(/^no/i)) {
         div.textContent = '';
         const iconWrapper = document.createElement('div');
         const icon = document.createElement('div');
