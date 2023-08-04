@@ -2,8 +2,43 @@ import getMockData from './product-mock-data.js';
 
 const fakeData = getMockData();
 
-function addAccesibilityRoles() {
+function addAccesibilityRoles(block) {
+  block.setAttribute('role', 'table');
 
+  block.querySelectorAll('div')
+    .forEach((div) => {
+      if (div.children.length > 1) {
+        div.setAttribute('role', 'row');
+      } else if (div.children.length <= 1 && !div.hasAttribute('role')) {
+        div.setAttribute('role', 'cell');
+      }
+    });
+
+  const header = block.querySelector('div > div');
+  [...header.children].forEach((childrenHeader) => {
+    childrenHeader.setAttribute('role', 'columnheader');
+  });
+}
+
+function replaceTableTextToProperCheckmars(block) {
+  block.querySelectorAll('div')
+    .forEach(async (div) => {
+      if (div.textContent.match(/^yes/i)) {
+        div.textContent = '';
+        const iconWrapper = document.createElement('div');
+        const icon = document.createElement('div');
+        icon.classList.add('yes-check');
+        iconWrapper.appendChild(icon);
+        div.appendChild(iconWrapper);
+      } else if (div.textContent.match(/^no/i)) {
+        div.textContent = '';
+        const iconWrapper = document.createElement('div');
+        const icon = document.createElement('div');
+        icon.classList.add('no-check');
+        iconWrapper.appendChild(icon);
+        div.appendChild(iconWrapper);
+      }
+    });
 }
 
 function buildPriceContainer(productName, numberOfDevices, elementToReplace) {
@@ -35,48 +70,33 @@ function buildPriceContainer(productName, numberOfDevices, elementToReplace) {
   elementToReplace.replaceWith(priceContainer);
 }
 
-export default function decorate(block) {
-  block.setAttribute('role', 'table');
+function replacePricePlaceholderWithActualPrices(headerColumns) {
+  const pricePlaceholder = '<price>';
+  let productName = '';
+  let numberOfDevices = 0;
+  [...headerColumns.children].forEach((paragraph) => { 
+    if (paragraph.tagName === 'H4') {
+      productName = paragraph.textContent;
+    }
+    if (paragraph.tagName === 'P' && paragraph.textContent.includes('Devices')) {
+      [numberOfDevices] = paragraph.textContent.split(' ');
+    }
+    if (paragraph.textContent.match(pricePlaceholder)) {
+      buildPriceContainer(productName, numberOfDevices, paragraph);
+    }
+  });
+}
 
-  block.querySelectorAll('div')
-    .forEach(async (div) => {
-      if (div.children.length > 1) {
-        div.setAttribute('role', 'row');
-      } else if (div.children.length <= 1 && !div.hasAttribute('role')) {
-        div.setAttribute('role', 'cell');
-      }
-      if (div.firstElementChild?.tagName === 'STRONG'
-        || div.firstElementChild?.firstElementChild?.tagName === 'STRONG') {
-        div.classList.add('active');
-      }
-      if (div.textContent.match(/^yes/i)) {
-        div.textContent = '';
-        const iconWrapper = document.createElement('div');
-        const icon = document.createElement('div');
-        icon.classList.add('yes-check');
-        iconWrapper.appendChild(icon);
-        div.appendChild(iconWrapper);
-      } else if (div.textContent.match(/^no/i)) {
-        div.textContent = '';
-        const iconWrapper = document.createElement('div');
-        const icon = document.createElement('div');
-        icon.classList.add('no-check');
-        iconWrapper.appendChild(icon);
-        div.appendChild(iconWrapper);
-      }
-    });
-
+function buildTableHeader(block) {
   const header = block.querySelector('div > div');
   header.classList.add('product-comparison-header');
 
-  for (let i = 0; i < header.children.length; i += 1) {
-    const childrenHeader = header.children[i];
-    childrenHeader.setAttribute('role', 'columnheader');
+  [...header.children].forEach((headerColumns) => {
     const strongTagStartRegex = /<strong>/g;
     const strongTagEndRegex = /<\/strong>/g;
-    const result = childrenHeader.innerHTML.replace(strongTagStartRegex, '');
-    childrenHeader.innerHTML = result.replace(strongTagEndRegex, '');
-    const buttonSection = childrenHeader.querySelector('p.button-container');
+    const result = headerColumns.innerHTML.replace(strongTagStartRegex, '');
+    headerColumns.innerHTML = result.replace(strongTagEndRegex, '');
+    const buttonSection = headerColumns.querySelector('p.button-container');
 
     if (buttonSection) {
       const paragraphBefore = buttonSection.previousElementSibling;
@@ -86,20 +106,27 @@ export default function decorate(block) {
       paragraphAfter?.nextElementSibling.classList.add('product-comparison-header-subtitle');
     }
 
-    const pricePlaceholder = '<price>';
-    let productName = '';
-    let numberOfDevices = 0;
-    for (let y = 0; y < childrenHeader.children.length; y += 1) {
-      const paragraph = childrenHeader.children[y];
-      if (paragraph.tagName === 'H4') {
-        productName = paragraph.textContent;
-      }
-      if (paragraph.tagName === 'P' && paragraph.textContent.includes('Devices')) {
-        [numberOfDevices] = paragraph.textContent.split(' ');
-      }
-      if (paragraph.textContent.match(pricePlaceholder)) {
-        buildPriceContainer(productName, numberOfDevices, paragraph);
-      }
-    }
+    replacePricePlaceholderWithActualPrices(headerColumns);
+  });
+}
+
+function setActiveColumn(block) {
+  const columnHeaders = block.querySelectorAll('div[role="columnheader"]');
+  const tableActiveColumn = [...columnHeaders]
+    .findIndex((header) => header.innerHTML.includes('<strong>'));
+  console.log(tableActiveColumn);
+
+  if (tableActiveColumn <= 0) {
+    return;
   }
+
+  const rows = block.querySelectorAll('div[role="row"]');
+  [...rows].forEach((row) => row.children[tableActiveColumn].classList.add('active'));
+}
+
+export default function decorate(block) {
+  addAccesibilityRoles(block);
+  replaceTableTextToProperCheckmars(block);
+  setActiveColumn(block);
+  buildTableHeader(block);
 }
