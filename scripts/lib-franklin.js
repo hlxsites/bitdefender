@@ -236,9 +236,9 @@ export async function decorateTags(element) {
 
       // Capture all tags that follow the format [TAG]
       const tagRegex = /\[(.*?)\]/g;
-      let match;
+      let match = tagRegex.exec(nodeValue);
 
-      while ((match = tagRegex.exec(nodeValue)) !== null) {
+      while (match !== null) {
         const fullTag = match[0];
         const tagContent = match[1];
 
@@ -249,6 +249,8 @@ export async function decorateTags(element) {
         // Replace the tag with a span with a unique class
         nodeValue = nodeValue.replace(new RegExp(`\\${fullTag}`, 'g'), `<span class="tag tag-${tagClass}">${tagContent}</span>`);
         replaced = true;
+
+        match = tagRegex.exec(nodeValue);
       }
 
       if (replaced) {
@@ -257,7 +259,6 @@ export async function decorateTags(element) {
         node.parentNode.replaceChild(newNode, node);
       }
     } else if (node.nodeType === Node.ELEMENT_NODE) {
-      // This is an element node, process its child nodes
       node.childNodes.forEach(replaceTagsInNode);
     }
   }
