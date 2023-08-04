@@ -65,7 +65,7 @@ export default function decorate(block) {
   const header = block.querySelector('div > div');
   header.classList.add('product-comparison-header');
 
-  for (var i=0; i < header.children.length; i++) {
+  for (let i = 0; i < header.children.length; i += 1) {
     const childrenHeader = header.children[i];
     childrenHeader.setAttribute('role', 'columnheader');
     const strongTagStartRegex = /<strong>/g;
@@ -85,13 +85,13 @@ export default function decorate(block) {
     const pricePlaceholder = '<price>';
     let productName = '';
     let numberOfDevices = 0;
-    for (let y=0; y < childrenHeader.children.length; y++) {
+    for (let y = 0; y < childrenHeader.children.length; y += 1) {
       const paragraph = childrenHeader.children[y];
       if (paragraph.tagName === 'H4') {
         productName = paragraph.textContent;
       }
       if (paragraph.tagName === 'P' && paragraph.textContent.includes('Devices')) {
-        numberOfDevices = paragraph.textContent.split(' ')[0];
+        [ numberOfDevices ] = paragraph.textContent.split(' ');
       }
       if (paragraph.textContent.match(pricePlaceholder)) {
         buildPriceContainer(productName, numberOfDevices, paragraph);
