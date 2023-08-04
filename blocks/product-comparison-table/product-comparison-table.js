@@ -87,14 +87,6 @@ function replacePricePlaceholderWithActualPrices(headerColumns) {
   });
 }
 
-function removeStrongTag(headerColumn) {
-  if (headerColumn.children.length > 0) {
-    [...headerColumn.children].forEach((headerColumnSection) => {
-      extractTextFromStrongTagToParent(headerColumnSection);
-    })
-  }
-}
-
 function extractTextFromStrongTagToParent(element) {
   if (element.children.length > 0) {
     [...element.children].forEach((children) => {
