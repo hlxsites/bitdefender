@@ -49,3 +49,121 @@
     padding: 0 var(--section-large-desktop-padding);
   }
 }
+
+/* Features cards */
+
+.columns.features > p {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.columns.features > div {
+  align-items: flex-start;
+}
+
+.columns.features > .icon {
+  width: unset;
+  max-width: 66px;
+  margin-bottom: 16px;
+}
+
+.columns.features p {
+  font-size: var(--body-font-size-s);
+  line-height: 1.5;
+  letter-spacing: .006em;
+  font-weight: var(--font-weight-regular);
+}
+
+.columns.features h3 {
+  font-size: var(--heading-font-size-m);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.25;
+}
+
+@media (min-width: 596px) {
+  max-width: 81px;
+  margin-bottom: 28px;
+}
+
+@media (min-width: 767px) {
+  .columns.features > div {
+    flex-direction: unset;
+    gap: 32px;
+  }
+}
+
+@media (min-width: 1271px) {
+  .columns.features p {
+    font-size: 18px;
+  }
+}
+
+/* awards styling */
+.columns.awards > div {
+  row-gap: 30px;
+  align-items: flex-start;
+}
+
+.columns.awards > div > div {
+  flex-direction: column;
+  width: 100%;
+  flex: 1;
+  line-height: 1.13;
+  text-align: center;
+  margin: 0 10px;
+}
+
+/* paragraph with image */
+.columns.awards > div > div > p {
+  margin: 0;
+  padding: 0 5px;
+}
+
+.columns.video-presentation > div > div > p {
+  font-size: var(--body-font-size-s);
+}
+
+.columns.awards > div > div > p:not(:last-of-type) {
+  margin-bottom: 8px;
+}
+
+.columns.awards > div > div > p:first-of-type {
+  margin-bottom: 24px;
+}
+
+.columns.awards > div img {
+  display: block;
+  height: 56px;
+  object-fit: contain;
+}
+
+/* video presentation */
+.columns.video-presentation > div > div {
+  margin: 0 auto;
+}
+
+.columns.video-presentation .button-container {
+  display: inline-block;
+  padding-right: 13px;
+}
+
+.columns.video-presentation .linked-image-container {
+  display: inline-block;
+  padding-right: 3px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.columns.video-presentation .linked-image-container img {
+  width: 150px;
+  height: 44px;
+}
+
+.columns.video-presentation ul {
+  padding-top: 1px;
+}
+
+.columns.video-presentation .modal-video-container {
+  max-width: 520px;
+  max-height: 293px;
+}

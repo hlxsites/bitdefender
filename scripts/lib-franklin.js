@@ -577,6 +577,7 @@ export function decorateButtons(element) {
     if (a.href !== a.textContent) {
       const up = a.parentElement;
       const twoup = a.parentElement.parentElement;
+      const threeup = a.parentElement.parentElement?.parentElement;
 
       if (!a.querySelector('img')) {
         // Example: <p><strong><a href="example.com">Text</a></strong></p>
@@ -588,9 +589,26 @@ export function decorateButtons(element) {
           a.innerHTML = wrapButtonText(a);
           return;
         }
+        if (up.childNodes.length === 1 && up.tagName === 'EM'
+            && twoup.childNodes.length === 1 && twoup.tagName === 'STRONG'
+            && threeup?.childNodes.length === 1 && threeup?.tagName === 'P') {
+          a.className = 'button secondary';
+          threeup.classList.add('button-container');
+          up.replaceWith(a);
+          a.innerHTML = wrapButtonText(a);
+          return;
+        }
         // Example: <p><a href="example.com">Text</a> (example.com)</p>
         if (up.childNodes.length === 2 && up.tagName === 'P' && a.nextSibling?.textContent.trim().startsWith('(')) {
           a.className = 'button modal';
+          up.classList.add('button-container');
+          a.dataset.modal = a.nextSibling.textContent.trim().slice(1, -1);
+          a.nextSibling.remove();
+          return;
+        }
+        // Example: <p><a href="example.com">Text</a> <em>50% Discount</em></p>
+        if (up.childNodes.length === 3 && up.tagName === 'P' && a.nextElementSibling?.tagName === 'EM') {
+          a.className = 'button';
           up.classList.add('button-container');
           a.dataset.modal = a.nextSibling.textContent.trim().slice(1, -1);
           a.nextSibling.remove();
