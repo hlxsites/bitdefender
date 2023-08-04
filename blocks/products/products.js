@@ -68,12 +68,23 @@ createNanoBlock('price', (code, variant, label) => {
   return priceRoot;
 });
 
+createNanoBlock('featured', (text) => {
+  const root = document.createElement('div');
+  root.classList.add('featured');
+  root.innerText = text;
+  return root;
+});
+
 export default function decorate(block) {
+  if (!block.querySelectorAll('img').length) {
+    block.classList.add('col-3');
+  }
   [...block.children].forEach((row) => {
     [...(row.children)].forEach((col) => {
       col.classList.add('product-card');
       block.appendChild(col);
     });
+    row.remove();
   });
   renderNanoBlocks(block);
 }

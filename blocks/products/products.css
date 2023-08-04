@@ -3,22 +3,34 @@
 }
 
 .products {
+  --max-colunms: 2;
+  --image-spacing: 170px;
+  --side-spacing: 18px;
+
   display: flex;
   flex-flow: column;
   justify-content: start;
 }
 
+.products.col-3, .products.compact {
+  --max-colunms: 3;
+  --image-spacing: 18px;
+}
+
+@media (max-width: 1200px) {
+  .products.compact {
+    --max-colunms: 2;
+  }
+}
+
 @media (min-width: 768px) {
   .products {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(var(--max-colunms), 1fr);
   }
 }
 
 .product-card {
-  --image-spacing: 170px;
-  --side-spacing: 18px;
-
   position: relative;
   margin: 16px 10px;
   padding: var(--side-spacing) var(--image-spacing) var(--side-spacing) var(--side-spacing);
@@ -26,6 +38,10 @@
   border-color: rgb(229 231 235);
   box-shadow: 0 3px 8px 0 rgb(0 0 0 / 10%);
   overflow: hidden;
+}
+
+.products.compact .product-card {
+  text-align: center;
 }
 
 @media (max-width: 1200px) {
@@ -42,8 +58,11 @@
   font-weight: normal;
   flex: 1;
   font-size: var(--heading-font-size-s);
-  line-height: 36px;
   margin-top: 0;
+}
+
+.products.compact .product-card h1 {
+  margin: 5px;
 }
 
 .product-card h2 {
@@ -51,9 +70,23 @@
   font-size: var(--body-font-size-xs);
 }
 
+.products.compact .product-card h2 {
+  margin: 5px;
+}
+
 .product-card h3 {
   font-weight: normal;
   font-size: var(--body-font-size-s);
+}
+
+.product-card .featured {
+  color: white;
+  background-color: #2cb43d;
+  border-radius: 15px;
+  font-size: var(--body-font-size-xs);
+  padding: 5px 15px;
+  font-weight: bold;
+  display: inline-block;
 }
 
 .product-card img {
@@ -67,8 +100,20 @@
   right: -40px;
 }
 
+.products.compact img {
+  position: inherit;
+  object-position: inherit;
+  object-fit: inherit;
+  border-radius: inherit;
+  width: 210px;
+  height: 210px;
+  margin: 30px 0;
+  top: auto;
+  right: auto;
+}
+
 @media (max-width: 1200px) {
-  .product-card img {
+  .products:not(.compact) .product-card img {
     display: none;
   }
 }
@@ -84,9 +129,10 @@
   padding: 0 0 0 30px;
   font-size: 14px;
   background-image: url('../../icons/checkmark_solid-circle.svg');
-  background-position: left center;
+  background-position: left 2px;
   background-repeat: no-repeat;
   background-size: 15px;
+  line-height: var(--body-font-size-m);
 }
 
 .product-card li:has(del) {
@@ -123,6 +169,10 @@
   font-size: var(--heading-font-size-m);
   line-height: 1em;
   color: black;
+}
+
+.products.compact .product-card .price strong {
+  font-size: var(--heading-font-size-l);
 }
 
 .product-card .price em {
