@@ -1,6 +1,7 @@
 import getMockData from './product-mock-data.js';
 
 const fakeData = getMockData();
+const pricePlaceholder = '<price>';
 
 function addAccesibilityRoles(block) {
   block.setAttribute('role', 'table');
@@ -71,7 +72,6 @@ function buildPriceContainer(productName, numberOfDevices, elementToReplace) {
 }
 
 function replacePricePlaceholderWithActualPrices(headerColumns) {
-  const pricePlaceholder = '<price>';
   let productName = '';
   let numberOfDevices = 0;
   [...headerColumns.children].forEach((paragraph) => {
@@ -87,16 +87,35 @@ function replacePricePlaceholderWithActualPrices(headerColumns) {
   });
 }
 
+function removeStrongTag(headerColumn) {
+  if (headerColumn.children.length > 0) {
+    [...headerColumn.children].forEach((headerColumnSection) => {
+      extractTextFromStrongTagToParent(headerColumnSection);
+    })
+  }
+}
+
+function extractTextFromStrongTagToParent(element) {
+  if (element.children.length > 0) {
+    [...element.children].forEach((children) => {
+      extractTextFromStrongTagToParent(children);
+    });
+  }
+
+  if(element.tagName === 'STRONG' && !element.innerHTML.match(pricePlaceholder)) {
+    element.parentElement.innerHTML = element.textContent;
+  }
+
+  return;
+}
+
 function buildTableHeader(block) {
   const header = block.querySelector('div > div');
   header.classList.add('product-comparison-header');
 
-  [...header.children].forEach((headerColumns) => {
-    const strongTagStartRegex = /<strong>/g;
-    const strongTagEndRegex = /<\/strong>/g;
-    const result = headerColumns.innerHTML.replace(strongTagStartRegex, '');
-    headerColumns.innerHTML = result.replace(strongTagEndRegex, '');
-    const buttonSection = headerColumns.querySelector('p.button-container');
+  [...header.children].forEach((headerColumn) => {
+    replacePricePlaceholderWithActualPrices(headerColumn);
+    const buttonSection = headerColumn.querySelector('p.button-container');
 
     if (buttonSection) {
       const paragraphBefore = buttonSection.previousElementSibling;
@@ -105,8 +124,6 @@ function buildTableHeader(block) {
       paragraphAfter?.classList.add('product-comparison-header-subtitle');
       paragraphAfter?.nextElementSibling.classList.add('product-comparison-header-subtitle');
     }
-
-    replacePricePlaceholderWithActualPrices(headerColumns);
   });
 }
 
@@ -128,4 +145,5 @@ export default function decorate(block) {
   replaceTableTextToProperCheckmars(block);
   setActiveColumn(block);
   buildTableHeader(block);
+  extractTextFromStrongTagToParent(block);
 }
