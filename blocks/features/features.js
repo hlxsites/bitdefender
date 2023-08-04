@@ -49,10 +49,8 @@ export default function decorate(block) {
               a.appendChild(document.createTextNode(node.textContent));
               // remove text node from li
               node.remove();
-            } else {
-              if (node !== li.lastChild || node.tagName !== 'EM') {
-                a.appendChild(node);
-              }
+            } else if (node !== li.lastChild || node.tagName !== 'EM') {
+              a.appendChild(node);
             }
           });
 

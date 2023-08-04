@@ -59,23 +59,9 @@
   width: 14px;
   height: 8px;
   margin: 0 3px;
-  background: url(../../../icons/tabs_arrow.svg) no-repeat;
-  background-size: 100%;
-  -webkit-transform: rotate(180deg);
+  background: url("../../../icons/tabs_arrow.svg") no-repeat;
+  background-size: 100%;;
   transform: rotate(180deg);
-  -webkit-transition: all .3s linear;
-  transition: all .3s linear;
-}
-
-.features .features-tabs li > a.is-open::after {
-  content: "";
-  position: relative;
-  display: inline-block;
-  width: 14px;
-  height: 8px;
-  margin: 0 3px;
-  background: url(../../../icons/tabs_arrow.svg) no-repeat;
-  background-size: 100%;
   transition: all .3s linear;
 }
 
@@ -97,7 +83,7 @@
   color: var(--text-dark-color);
   text-transform: uppercase;
   letter-spacing: 0.8px;
-  box-shadow: 0 2px 4px 0 rgba(0,0,0,.04);
+  box-shadow: 0 2px 4px 0 #0000000a;
 }
 
 
