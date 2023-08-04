@@ -14,11 +14,11 @@
 
 .sticky-navigation ul li a {
   display: block;
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-regular);
+  line-height: normal;
   color: #3c3c3c;
   transition: color .3s ease-in-out;
-  text-decoration:none;  
-  padding: 24px 0;
+  text-decoration:none;
 }
 
 .sticky-navigation ul li {
