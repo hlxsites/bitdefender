@@ -885,6 +885,15 @@ main .section.full-width {
 main .section.blue {
   background-color: var(--background-blue);
   color: white;
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+
+@media (min-width: 992px) {
+  main .section.blue {
+    padding-top: 96px;
+    padding-bottom: 96px;
+  }
 }
 
 main .section.checked-lists  ul li {
@@ -925,13 +934,13 @@ main .section.blue a.button.secondary::after {
     background-image: url("/icons/blue-circle.svg");
     background-position: top 0 right 60%;
     background-repeat: no-repeat;
-    background-size: auto 120%;
+    background-size: auto 100%;
   }
 }
 
 @media (min-width: 1200px) {
   main .section.circle {
-    background-position: top right 40%;
+    background-position: top right 50%;
   }
 }
 
