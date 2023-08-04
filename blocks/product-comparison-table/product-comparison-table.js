@@ -91,7 +91,7 @@ export default function decorate(block) {
         productName = paragraph.textContent;
       }
       if (paragraph.tagName === 'P' && paragraph.textContent.includes('Devices')) {
-        [ numberOfDevices ] = paragraph.textContent.split(' ');
+        [numberOfDevices] = paragraph.textContent.split(' ');
       }
       if (paragraph.textContent.match(pricePlaceholder)) {
         buildPriceContainer(productName, numberOfDevices, paragraph);
