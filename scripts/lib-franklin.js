@@ -266,7 +266,6 @@ export async function decorateTags(element) {
   replaceTagsInNode(element);
 }
 
-
 /**
  * Gets placeholders object.
  * @param {string} [prefix] Location of placeholders
