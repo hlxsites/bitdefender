@@ -588,6 +588,14 @@ export function decorateButtons(element) {
           a.innerHTML = wrapButtonText(a);
           return;
         }
+        if (up.childNodes.length === 1 && up.tagName === 'EM'
+            && twoup.childNodes.length === 1 && twoup.tagName === 'P') {
+          a.className = 'button secondary';
+          twoup.classList.add('button-container');
+          up.replaceWith(a);
+          a.innerHTML = wrapButtonText(a);
+          return;
+        }
         // Example: <p><a href="example.com">Text</a> (example.com)</p>
         if (up.childNodes.length === 2 && up.tagName === 'P' && a.nextSibling?.textContent.trim().startsWith('(')) {
           a.className = 'button modal';
