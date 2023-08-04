@@ -226,21 +226,31 @@ export async function decorateIcons(element) {
 }
 
 export async function decorateTags(element) {
-  const tags = ['[NEW]', '[EVOLVED]', '[IMPROVED]'];
+  const specialTags = ['[NEW]', '[EVOLVED]'];
 
   function replaceTagsInNode(node) {
     if (node.nodeType === Node.TEXT_NODE) {
       // This is a text node, check and replace tags
       let { nodeValue } = node;
       let replaced = false;
-      tags.forEach((tag) => {
-        if (nodeValue.includes(tag)) {
-          const tagContent = tag.replace(/\[|\]/g, ''); // Remove square brackets
-          // Replace the tag with a span with a unique class
-          nodeValue = nodeValue.replace(new RegExp(`\\${tag}`, 'g'), `<span class="tag tag-${tagContent.toLowerCase()}">${tagContent}</span>`);
-          replaced = true;
-        }
-      });
+
+      // Capture all tags that follow the format [TAG]
+      const tagRegex = /\[(.*?)\]/g;
+      let match;
+
+      while ((match = tagRegex.exec(nodeValue)) !== null) {
+        const fullTag = match[0];
+        const tagContent = match[1];
+
+        // Check if the tag is special (NEW or EVOLVED), otherwise it's considered IMPROVED
+        const isSpecialTag = specialTags.includes(fullTag);
+        const tagClass = isSpecialTag ? tagContent.toLowerCase() : 'improved';
+
+        // Replace the tag with a span with a unique class
+        nodeValue = nodeValue.replace(new RegExp(`\\${fullTag}`, 'g'), `<span class="tag tag-${tagClass}">${tagContent}</span>`);
+        replaced = true;
+      }
+
       if (replaced) {
         const newNode = document.createElement('span');
         newNode.innerHTML = nodeValue;
@@ -254,6 +264,7 @@ export async function decorateTags(element) {
 
   replaceTagsInNode(element);
 }
+
 
 /**
  * Gets placeholders object.
