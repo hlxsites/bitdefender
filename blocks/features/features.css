@@ -21,7 +21,6 @@
 .features > div > div {
   position: relative;
   order: 1;
-
 }
 
 .features > div > div::after {
@@ -125,10 +124,8 @@
 }
 
 @media (min-width: 768px) { /* desktop */
-
   .features > div {
-    flex-direction: unset;
-    flex-wrap: wrap;
+    flex-flow: wrap;
   }
 
   .features > div > div {
