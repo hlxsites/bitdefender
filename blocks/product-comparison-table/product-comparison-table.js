@@ -94,11 +94,9 @@ function extractTextFromStrongTagToParent(element) {
     });
   }
 
-  if(element.tagName === 'STRONG' && !element.innerHTML.match(pricePlaceholder)) {
+  if (element.tagName === 'STRONG' && !element.innerHTML.match(pricePlaceholder)) {
     element.parentElement.innerHTML = element.textContent;
   }
-
-  return;
 }
 
 function buildTableHeader(block) {
