@@ -118,6 +118,10 @@
   padding: 0 5px;
 }
 
+.columns.video-presentation > div > div > p {
+  font-size: var(--body-font-size-s);
+}
+
 .columns.awards > div > div > p:not(:last-of-type) {
   margin-bottom: 8px;
 }
@@ -130,4 +134,35 @@
   display: block;
   height: 56px;
   object-fit: contain;
+}
+
+/* video presentation */
+.columns.video-presentation > div > div {
+  margin: 0 auto;
+}
+
+.columns.video-presentation .button-container {
+  display: inline-block;
+  padding-right: 13px;
+}
+
+.columns.video-presentation .linked-image-container {
+  display: inline-block;
+  padding-right: 3px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.columns.video-presentation .linked-image-container img {
+  width: 150px;
+  height: 44px;
+}
+
+.columns.video-presentation ul {
+  padding-top: 1px;
+}
+
+.columns.video-presentation .modal-video-container {
+  max-width: 520px;
+  max-height: 293px;
 }

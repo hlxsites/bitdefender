@@ -57,13 +57,14 @@ function setPageLanguage(param) {
  * Decorates picture elements with a link to a video.
  * @param {Element} main The main element
  */
-export default function decorateLinkedPicturesModal(main) {
+export default function decorateLinkedPictures(main) {
   main.querySelectorAll('picture').forEach((picture) => {
     if (!picture.closest('div.block')) {
       const next = picture.parentNode.nextElementSibling;
       if (next) {
         const a = next.querySelector('a');
         const link = a?.textContent;
+        /* Modal video */
         if (a && link.startsWith('https://') && link.includes('fragments')) {
           a.innerHTML = '';
           a.className = 'video-placeholder';
@@ -77,6 +78,25 @@ export default function decorateLinkedPicturesModal(main) {
             const modalContainer = await createModal(link, 'video-modal');
             document.body.append(modalContainer);
           });
+          const up = a.parentElement;
+          if (up.childNodes.length === 1 && (up.tagName === 'P' || up.tagName === 'DIV')) {
+            up.classList.add('modal-video-container');
+          }
+          return;
+        }
+        // Basic linked image
+        if (a && link.startsWith('https://')) {
+          a.innerHTML = '';
+          a.className = 'linked-image';
+          const pictureParent = picture.parentNode;
+          a.append(picture);
+          if (pictureParent.children.length === 0) {
+            pictureParent.parentNode.removeChild(pictureParent);
+          }
+          const up = a.parentElement;
+          if (up.childNodes.length === 1 && (up.tagName === 'P' || up.tagName === 'DIV')) {
+            up.classList.add('linked-image-container');
+          }
         }
       }
     }
@@ -92,7 +112,7 @@ export function decorateMain(main) {
   // hopefully forward compatible button decoration
   decorateButtons(main);
   decorateIcons(main);
-  decorateLinkedPicturesModal(main);
+  decorateLinkedPictures(main);
   decorateSections(main);
   decorateBlocks(main);
 }
