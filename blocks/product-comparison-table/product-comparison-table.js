@@ -74,7 +74,7 @@ function replacePricePlaceholderWithActualPrices(headerColumns) {
   const pricePlaceholder = '<price>';
   let productName = '';
   let numberOfDevices = 0;
-  [...headerColumns.children].forEach((paragraph) => { 
+  [...headerColumns.children].forEach((paragraph) => {
     if (paragraph.tagName === 'H4') {
       productName = paragraph.textContent;
     }
@@ -114,7 +114,6 @@ function setActiveColumn(block) {
   const columnHeaders = block.querySelectorAll('div[role="columnheader"]');
   const tableActiveColumn = [...columnHeaders]
     .findIndex((header) => header.innerHTML.includes('<strong>'));
-  console.log(tableActiveColumn);
 
   if (tableActiveColumn <= 0) {
     return;
