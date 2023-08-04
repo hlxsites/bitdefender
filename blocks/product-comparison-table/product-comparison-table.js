@@ -15,8 +15,8 @@ function addAccesibilityRoles(block) {
     });
 
   const header = block.querySelector('div > div');
-  [...header.children].forEach((childrenHeader) => {
-    childrenHeader.setAttribute('role', 'columnheader');
+  [...header.children].forEach((headerColumns) => {
+    headerColumns.setAttribute('role', 'columnheader');
   });
 }
 
