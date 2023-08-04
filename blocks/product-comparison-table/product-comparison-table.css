@@ -195,6 +195,12 @@
 }
 
 @media (min-width: 990px) {
+    .product-comparison-table-wrapper {
+        max-width: var(--section-desktop-max-width);
+        padding: 0 var(--section-desktop-padding);
+        margin: 0 auto;
+    }
+
     .product-comparison-table-container {
         padding-left: 2rem !important;
         padding-right: 2rem !important;
