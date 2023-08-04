@@ -24,8 +24,32 @@
   display: block;
 }
 
+.features p {
+  color: var(--tab-description-color-light-grey);
+  line-height: 1.5;
+}
+
 .features p.features-tabs-hidden {
   display: none;
+}
+
+.features ul {
+  padding: 0;
+}
+
+.features li {
+  padding: 0;
+}
+
+.features .features-tabs li > a {
+  color: var(--tab-header-color-blue);
+  font-size: var(--body-font-size-xs);
+  font-weight: var(--font-weight-bold);
+  position: relative;
+  display: inline-block;
+  letter-spacing: .004em;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .features .features-tabs li > a::after {
@@ -52,16 +76,36 @@
   margin: 0 3px;
   background: url(../../../icons/tabs_arrow.svg) no-repeat;
   background-size: 100%;
-  -webkit-transition: all .3s linear;
   transition: all .3s linear;
 }
 
-/* a link that is child of li and a link has class is-open */
 .features .features-tabs li > a.is-open::after {
-  -webkit-transform: rotate(0);
   transform: rotate(0)
 }
 
+.features .features-tabs li > a + em {
+  position: relative;
+  display: inline-block;
+  background-color: var(--tab-emphasis-color);
+  padding: 3px 7px 3px 8px;
+  margin: 0 0 5px;
+  border-radius: 75pt;
+  font-size: var(--body-font-size-xxxs);
+  font-weight: var(--font-weight-boldest);
+  font-style: normal;
+  line-height: 1.5;
+  color: var(--text-dark-color);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.04);
+}
+
+
+.features .features-tabs .features-tabs-content {
+  font-size: var(--body-font-size-xxs);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.6;
+}
 
 @media (min-width: 990px) { /* desktop */
 
