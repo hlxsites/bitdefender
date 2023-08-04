@@ -23,6 +23,8 @@
   --button-hover-background-color: #d80000;
   --button-primary-background-color: #000;
   --button-primary-hover-background-color: #000;
+  --button-secondary-color: #000;
+  --button-secondary-hover-background-color: #000;
   --overlay-background-color: #eee;
   --highlight-background-color: #ccc;
   --text-color: #000;
@@ -447,8 +449,13 @@ button:disabled, button:disabled:hover {
 
 a.button.secondary, button.secondary {
   background-color: unset;
-  border: 2px solid currentcolor;
-  color: var(--text-color)
+  border: 2px solid var(--button-secondary-color);
+  color: var(--button-secondary-color)
+}
+
+a.button:hover.secondary {
+  background-color: var(--button-secondary-hover-background-color);
+  color: var(--white-color)
 }
 
 a.button.modal {
