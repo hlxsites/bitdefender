@@ -1,3 +1,7 @@
+:root {
+  --sticky-nav-border-color: #dedede;
+}
+
 .sticky-navigation {
   cursor: pointer;
   position: relative;
@@ -32,7 +36,7 @@
 }
 
 .sticky-navigation ul li {
-  border-bottom: 1px solid #dedede;
+  border-bottom: 1px solid var(--sticky-nav-border-color);
   padding: 0;
   margin: 0;
 }
@@ -46,7 +50,7 @@
   display: block;
   height: 4px;
   width: 0;
-  background-color: #006eff;
+  background-color: var(--background-blue);
   transition: width .3s ease-in-out;
 }
 
@@ -54,9 +58,9 @@
   font-weight: var(--font-weight-bold);
   font-size: var(--body-font-size-xs);
   padding: 22px 20px;
-  color: #000;
+  color: var(--black-color);
   display: flex;
-  border-bottom: 1px solid #dedede;
+  border-bottom: 1px solid var(--sticky-nav-border-color);
   width: 100%;
   height: 100%;
   align-items: center;
@@ -65,7 +69,7 @@
 
 .sticky-navigation .mobile-dropdown::after {
   transform: rotate(45deg);
-  border-color: #000;
+  border-color: var(--black-color);
   border-style: solid;
   border-width: 0 2px 2px 0;
   content: "";
@@ -86,13 +90,13 @@
 
 .mobile-dropdown.opened + .menu-with-button {
   display: flex;
-  background-color: #fff;
+  background-color: var(--white-color-color);
 }
 
 .sticky-navigation.fixed-nav {
   position: fixed;
   top: 0;
-  background-color: #fff;
+  background-color: var(--white-color-color);
   width: 100%;
   max-width: 20in;
   z-index: 99999;
@@ -110,9 +114,8 @@
 }
 
 @media (min-width: 992px) { /* desktop */
-
   .sticky-navigation {
-    border-bottom: 1px solid #dedede;
+    border-bottom: 1px solid var(--sticky-nav-border-color);
   }
 
   .sticky-navigation .menu-with-button {
@@ -152,7 +155,6 @@
 }
 
 @media (min-width: 1600px) { /* large desktop */
-
   .sticky-navigation .button-container a {
     font-size: var(--body-font-size-xs);
     padding: 8px 15px;
