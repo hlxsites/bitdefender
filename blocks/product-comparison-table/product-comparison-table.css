@@ -223,6 +223,7 @@
     .product-comparison-header div[role="columnheader"] h4 {
         font-size: var(--heading-font-size-m);
     }
+    
     .product-comparison-table div[role='cell'] {
         display: table-cell;
 
