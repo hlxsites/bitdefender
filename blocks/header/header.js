@@ -1,4 +1,4 @@
-import { getMetadata, decorateIcons, decorateButtons } from '../../scripts/lib-franklin.js';
+import { getMetadata, decorateIcons, decorateButtons, decorateTags } from '../../scripts/lib-franklin.js';
 
 function createLoginModal() {
   const loginModal = document.querySelector('nav > div:nth-child(4)');
@@ -374,6 +374,8 @@ export default async function decorate(block) {
     renderDesktopHeader(block, nav);
 
     decorateIcons(nav);
+
+    decorateTags(nav);
 
     // Select the parent elements
     const bottomLinks = document.querySelector('.bottom-links');

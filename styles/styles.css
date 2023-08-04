@@ -41,6 +41,8 @@
   --icon-color: #205fff;
   --background-light-blue: #d9eeff;
   --background-blue: #006eff;
+  --EVOLVED-tag: #13b0a7;
+  --IMPROVED-tag: #2cb43d;
 
   /* fonts */
   --body-font-family: "Roboto", "roboto-normal-400-fallback", helvetica, ubuntu, roboto, noto, sans-serif;
@@ -61,6 +63,7 @@
   --body-font-size-s: 16px;
   --body-font-size-xs: 14px;
   --body-font-size-xxs: 12px;
+  --body-font-size-xxxs: 10px;
 
   /* heading sizes */
   --heading-font-size-xxxl: 60px;
@@ -955,4 +958,27 @@ main .section.blue a.button.secondary::after {
   main .section.circle {
     background-position: top right;
   }
+}
+
+.tag {
+  margin-left: 5px;
+  color: var(--background-color);
+  font-size: var(--body-font-size-xxxs);
+  font-weight: var(--font-weight-boldest);
+  line-height: 1;
+  border-radius: 3px;
+  padding: 2px 4px;
+  height: 15px;
+}
+
+.tag-new {
+  background-color: var(--icon-color);
+}
+
+.tag-evolved {
+  background-color: var(--EVOLVED-tag);
+}
+
+.tag-improved {
+  background-color: var(--IMPROVED-tag);
 }

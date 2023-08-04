@@ -225,6 +225,38 @@ export async function decorateIcons(element) {
   });
 }
 
+export async function decorateTags(element) {
+  const tags = ['[NEW]', '[EVOLVED]', '[IMPROVED]'];
+
+  function replaceTagsInNode(node) {
+    if (node.nodeType === Node.TEXT_NODE) {
+      // This is a text node, check and replace tags
+      let nodeValue = node.nodeValue;
+      let replaced = false;
+      tags.forEach(tag => {
+        if (nodeValue.includes(tag)) {
+          // Wrap the tag in a span, remove square brackets, and add a class
+          let tagContent = tag.replace(/\[|\]/g, ''); // Remove square brackets
+          // Replace the tag with a span with a unique class
+          nodeValue = nodeValue.replace(new RegExp(`\\${tag}`, 'g'), `<span class="tag tag-${tagContent.toLowerCase()}">${tagContent}</span>`);
+          replaced = true;
+        }
+      });
+      if (replaced) {
+        const newNode = document.createElement('span');
+        newNode.innerHTML = nodeValue;
+        node.parentNode.replaceChild(newNode, node);
+      }
+    } else if (node.nodeType === Node.ELEMENT_NODE) {
+      // This is an element node, process its child nodes
+      node.childNodes.forEach(replaceTagsInNode);
+    }
+  }
+
+  replaceTagsInNode(element);
+}
+
+
 /**
  * Gets placeholders object.
  * @param {string} [prefix] Location of placeholders

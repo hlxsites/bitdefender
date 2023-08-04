@@ -371,7 +371,7 @@ header a.button:hover span.button-text {
   grid-column: 2; 
 }
 
-.mega-menu > div:first-child p a span::after {
+.mega-menu > div:first-child p a > span::after {
   content: '';
   width: 24px;
   height: 24px;
@@ -828,7 +828,7 @@ header a.button:hover span.button-text {
     background-color: var(--color-highlight-blue);
   }
 
-  header .other-options > div > p a.button span {
+  header .other-options > div > p a.button > span {
     font-size: var(--body-font-size-xs);
     font-weight: var(--font-weight-regular);
     line-height: 18px;
@@ -836,7 +836,7 @@ header a.button:hover span.button-text {
     color: var(--text-color);
   }
 
-  .mega-menu > div:first-child p a span:first-child {
+  .mega-menu > div:first-child p a > span:first-child {
     font-size: var(--body-font-size-xs);
     font-weight: var(--font-weight-boldest);
     line-height: 18px;
@@ -900,7 +900,7 @@ header a.button:hover span.button-text {
     grid-column: 2; 
   }
 
-  .mega-menu > div:first-child p a span::after {
+  .mega-menu > div:first-child p a > span::after {
     content: '';
     width: 24px;
     height: 24px;
@@ -913,7 +913,7 @@ header a.button:hover span.button-text {
     opacity: 0;
   }
 
-  .mega-menu > div:first-child p a:hover span::after {
+  .mega-menu > div:first-child p a:hover > span::after {
     opacity: 1;
     background-color: var(--color-highlight-blue);
   }
