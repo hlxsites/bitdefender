@@ -255,7 +255,7 @@ header .icon {
   color: var(--background-color) !important;
 }
 
-a.button span.button-text {
+header a.button span.button-text {
   display: flex;
   font-size: var(--body-font-size-xs);
   font-weight: 400;
