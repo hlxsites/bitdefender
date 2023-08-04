@@ -19,7 +19,7 @@ function buildPriceContainer(productName, numberOfDevices, elementToReplace) {
   if (productVariationDiscountPrice) {
     const oldPriceContainer = document.createElement('div');
     oldPriceContainer.classList.add('old-price-container');
-    oldPriceContainer.innerHTML = `<p>Old Price <span class='price-strike-through'>${productVariationPrice} ${priceLabel}</span></p>`;
+    oldPriceContainer.innerHTML = `<p>Old Price <del>${productVariationPrice} ${priceLabel}</del></p>`;
     priceContainer.appendChild(oldPriceContainer);
   }
 
@@ -45,7 +45,7 @@ export default function decorate(block) {
         || div.firstElementChild?.firstElementChild?.tagName === 'STRONG') {
         div.classList.add('active');
       }
-      if (div.textContent.match(/^[yY]es/)) {
+      if (div.textContent.match(/^yes/i)) {
         div.textContent = '';
         const iconWrapper = document.createElement('div');
         const icon = document.createElement('div');
