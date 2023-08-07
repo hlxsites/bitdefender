@@ -214,13 +214,6 @@ main .section .default-content-wrapper {
   }
 }
 
-@media (min-width: 1600px) { /* large desktop */
-  main .section .default-content-wrapper {
-    padding: 0 var(--section-desktop-padding);
-    max-width: var(--section-large-desktop-max-width);
-  }
-}
-
 @media (min-width: 1000px) {
   header {
     height: var(--nav-height-desktop);
