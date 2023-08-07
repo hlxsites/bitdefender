@@ -5,6 +5,7 @@
 .sticky-navigation {
   cursor: pointer;
   position: relative;
+  background-color: var(--white-color);
 }
 
 .sticky-navigation .menu-with-button {
@@ -14,6 +15,7 @@
   align-items: baseline;
   box-shadow: 0 3px 6px 0 rgb(0 0 0 / 8%);
   padding: 0 var(--body-padding) var(--body-padding) var(--body-padding);
+  
 }
 
 .sticky-navigation ul {
@@ -90,13 +92,11 @@
 
 .mobile-dropdown.opened + .menu-with-button {
   display: flex;
-  background-color: var(--white-color-color);
 }
 
 .sticky-navigation.fixed-nav {
   position: fixed;
   top: 0;
-  background-color: var(--white-color-color);
   width: 100%;
   max-width: 20in;
   z-index: 99999;
