@@ -16,7 +16,6 @@ function collapseItem(content) {
   });
 }
 
-
 export default function decorate(block) {
   const cols = [...block.firstElementChild.children];
   block.classList.add(`features-${cols.length}-cols`);
@@ -72,8 +71,6 @@ export default function decorate(block) {
                 });
               }
             }
-
-
           });
 
           li.childNodes.forEach((node) => {
