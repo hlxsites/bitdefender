@@ -1,3 +1,22 @@
+function expandItem(content) {
+  content.style.height = `${content.scrollHeight}px`;
+  const transitionEndCallback = () => {
+    content.removeEventListener('transitionend', transitionEndCallback);
+    content.style.height = 'auto';
+  };
+  content.addEventListener('transitionend', transitionEndCallback);
+  content.classList.add('expanded');
+}
+
+function collapseItem(content) {
+  content.style.height = `${content.scrollHeight}px`;
+  requestAnimationFrame(() => {
+    content.classList.remove('expanded');
+    content.style.height = 0;
+  });
+}
+
+
 export default function decorate(block) {
   const cols = [...block.firstElementChild.children];
   block.classList.add(`features-${cols.length}-cols`);
@@ -24,24 +43,37 @@ export default function decorate(block) {
 
           // register click event on a tag
           a.addEventListener('click', (event) => {
-            // if the clicked node has children then toggle the nav-hidden class
-            if (event.target.parentNode.children.length > 1) {
-              event.target.parentNode.querySelectorAll('.features-tabs-content').forEach((content) => {
-                content.classList.toggle('features-tabs-hidden');
-              });
+            // if the clicked node is not open then open it
+            if (!event.target.classList.contains('is-open')) {
+              event.target.classList.add('is-open');
 
-              event.target.classList.toggle('is-open');
-            }
-
-            // hid the other tabs
-            mergedUl.querySelectorAll('li').forEach((collapsedLi) => {
-              if (collapsedLi !== event.target.parentNode) {
-                collapsedLi.children[0].classList.remove('is-open');
-                collapsedLi.querySelectorAll('.features-tabs-content').forEach((content) => {
-                  content.classList.add('features-tabs-hidden');
+              // if the clicked node has children then toggle the expanded class
+              if (event.target.parentNode.children.length > 1) {
+                event.target.parentNode.querySelectorAll('.features-tabs-content').forEach((content) => {
+                  expandItem(content);
                 });
               }
-            });
+
+              // hid the other tabs
+              mergedUl.querySelectorAll('li').forEach((collapsedLi) => {
+                if (collapsedLi !== event.target.parentNode) {
+                  collapsedLi.children[0].classList.remove('is-open');
+                  collapsedLi.querySelectorAll('.features-tabs-content').forEach((content) => {
+                    collapseItem(content);
+                  });
+                }
+              });
+            } else {
+              event.target.classList.remove('is-open');
+              // if the clicked node has children then toggle the expanded class
+              if (event.target.parentNode.children.length > 1) {
+                event.target.parentNode.querySelectorAll('.features-tabs-content').forEach((content) => {
+                  collapseItem(content);
+                });
+              }
+            }
+
+
           });
 
           li.childNodes.forEach((node) => {
@@ -63,7 +95,6 @@ export default function decorate(block) {
             const paragraph = li.closest('ul').nextElementSibling;
             if (paragraph && paragraph.tagName === 'P') {
               paragraph.classList.add('features-tabs-content');
-              paragraph.classList.add('features-tabs-hidden');
               li.appendChild(paragraph);
             }
           }

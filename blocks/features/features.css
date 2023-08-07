@@ -1,3 +1,9 @@
+:root {
+  --tab-header-color-blue: #006eff;
+  --tab-description-color-light-grey: #3c3c3c;
+  --tab-emphasis-color: #2cb43d;
+}
+
 .features-wrapper {
   padding: 0 var(--body-padding);
 }
@@ -115,6 +121,17 @@
   font-size: var(--body-font-size-xxs);
   font-weight: var(--font-weight-regular);
   line-height: 1.6;
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.features .features-tabs .features-tabs-content.expanded {
+  opacity: 1;
+  height: auto;
+  transition: all 0.3s ease-in-out;
+  display: block;
 }
 
 @media (min-width: 480px) {
