@@ -3,22 +3,48 @@ function countSlides(carouselContent) {
   return Math.ceil(numberOfItems / 3);
 }
 
-function hideExcessElements() {
-  const carousel = document.querySelector('.columns.carousel');
+function showSlides(carousel, slideNumber) {
   const carouselContentImage = carousel.querySelector('.columns.carousel > div:nth-child(1)');
   const carouselContentText = carousel.querySelector('.columns.carousel > div:nth-child(2)');
 
-  // Hide excess images
-  const childImageDivs = carouselContentImage.querySelectorAll('.columns-img-col');
-  for (let i = 3; i < childImageDivs.length; i++) {
-    childImageDivs[i].style.display = 'none';
+  // Common function to handle showing of slides
+  function handleSlideDisplay(childDivs) {
+    // Hide all elements
+    childDivs.forEach((div) => { div.style.display = 'none'; });
+
+    // Calculate the start and end for the items to display based on slideNumber
+    let start;
+    let end;
+
+    if (childDivs.length % 3 === 0) {
+      // Non-overlapping
+      start = slideNumber * 3;
+      end = start + 3;
+    } else {
+      // Overlapping logic
+      start = slideNumber * 2; // from 2x the slide number to account for overlapping element
+      end = start + 3;
+
+      if (end > childDivs.length) {
+        // Adjust start to always show 3 items
+        start = childDivs.length - 3;
+        end = childDivs.length;
+      }
+    }
+
+    for (let i = start; i < end && i < childDivs.length; i++) {
+      childDivs[i].style.display = 'block';
+    }
   }
 
-  // Hide excess texts
-  const childTextDivs = carouselContentText.querySelectorAll('div');
-  for (let i = 3; i < childTextDivs.length; i++) {
-    childTextDivs[i].style.display = 'none';
-  }
+  // Apply the display logic for both images and texts
+  handleSlideDisplay(carouselContentImage.querySelectorAll('.columns-img-col'));
+  handleSlideDisplay(carouselContentText.querySelectorAll('div'));
+}
+
+
+function hideExcessElements(carousel) {
+  showSlides(carousel, 0); // Default: Show the first set of three elements
 }
 
 function setActiveButton(button, buttonsWrapper) {
@@ -30,13 +56,14 @@ function setActiveButton(button, buttonsWrapper) {
   button.classList.add('active');
 }
 
-function createNavigationButtons(numberOfSlides) {
+function createNavigationButtons(numberOfSlides, carousel) {
   const buttonsWrapper = document.createElement('div');
   buttonsWrapper.className = 'carousel-buttons';
 
   for (let i = 0; i < numberOfSlides; i++) {
     const button = document.createElement('button');
     button.addEventListener('click', function() {
+      showSlides(carousel, i);
       setActiveButton(button, buttonsWrapper);
     });
     buttonsWrapper.appendChild(button);
@@ -50,17 +77,15 @@ function createNavigationButtons(numberOfSlides) {
   return buttonsWrapper;
 }
 
+
 function setupCarousel(carousel) {
   const carouselContent = carousel.querySelector('.columns.carousel > div');
 
-  // Determine the number of slides
   const numberOfSlides = countSlides(carouselContent);
-  // Generate navigation buttons for the carousel
-  const buttonsWrapper = createNavigationButtons(numberOfSlides);
+  const buttonsWrapper = createNavigationButtons(numberOfSlides, carousel);
 
   carousel.appendChild(buttonsWrapper);
-
-  hideExcessElements();
+  hideExcessElements(carousel);
 }
 
 export default function decorate(block) {
