@@ -23,7 +23,7 @@
   display: block;
 }
 
-@media (min-width: 992px) { /* desktop */
+@media (min-width: 990px) { /* desktop */
 
   .columns > div {
     align-items: center;
