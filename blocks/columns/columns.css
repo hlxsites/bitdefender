@@ -164,6 +164,29 @@
   max-height: 293px;
 }
 
-.columns.carousel > div > div.columns-img-col:nth-child(n+4), .columns.carousel > div:nth-child(2) > div:nth-child(n+4)  {
-  display: none;
+
+.columns.carousel.awards button{
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  margin: -5px;
+  padding: 0;
+  background-color: var(--black-color);
+  border: none;
+}
+
+.columns.carousel.awards button:hover {
+  background-color: var(--link-color);
+}
+
+.carousel-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  transition: all .4s ease-in-out;
+}
+
+.active {
+  background-color: var(--link-color) !important;
 }
