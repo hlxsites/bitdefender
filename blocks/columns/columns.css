@@ -80,10 +80,6 @@
   line-height: 1.25;
 }
 
-@media (min-width: 596px) {
-  max-width: 81px;
-  margin-bottom: 28px;
-}
 
 @media (min-width: 767px) {
   .columns.features > div {
@@ -166,4 +162,8 @@
 .columns.video-presentation .modal-video-container {
   max-width: 520px;
   max-height: 293px;
+}
+
+.columns.carousel > div > div.columns-img-col:nth-child(n+4), .columns.carousel > div:nth-child(2) > div:nth-child(n+4)  {
+  display: none;
 }
