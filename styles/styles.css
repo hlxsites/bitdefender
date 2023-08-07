@@ -209,7 +209,7 @@ main .section .default-content-wrapper {
 }
 
 @media (min-width: 1400px){
-  .section {
+  main .section {
     padding: 60px 0;
   }
 }
