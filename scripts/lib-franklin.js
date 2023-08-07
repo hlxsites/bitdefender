@@ -226,33 +226,31 @@ export async function decorateIcons(element) {
 }
 
 export async function decorateTags(element) {
-  const specialTags = ['[NEW]', '[EVOLVED]'];
+  const tagTypes = [
+    { regex: /\[#(.*?)#\]/g, className: 'new' },
+    { regex: /\[{(.*?)}\]/g, className: 'evolved' },
+    { regex: /\[(.*?)\]/g, className: 'improved' }
+  ];
+
+  function replaceTags(nodeValue) {
+    let replaced = false;
+
+    for (const tagType of tagTypes) {
+      let match = tagType.regex.exec(nodeValue);
+      while (match !== null) {
+        nodeValue = nodeValue.replace(match[0], `<span class="tag tag-${tagType.className}">${match[1]}</span>`);
+        replaced = true;
+        tagType.regex.lastIndex = 0; // Reset regex index
+        match = tagType.regex.exec(nodeValue);
+      }
+    }
+
+    return { nodeValue, replaced };
+  }
 
   function replaceTagsInNode(node) {
     if (node.nodeType === Node.TEXT_NODE) {
-      // This is a text node, check and replace tags
-      let { nodeValue } = node;
-      let replaced = false;
-
-      // Capture all tags that follow the format [TAG]
-      const tagRegex = /\[(.*?)\]/g;
-      let match = tagRegex.exec(nodeValue);
-
-      while (match !== null) {
-        const fullTag = match[0];
-        const tagContent = match[1];
-
-        // Check if the tag is special (NEW or EVOLVED), otherwise it's considered IMPROVED
-        const isSpecialTag = specialTags.includes(fullTag);
-        const tagClass = isSpecialTag ? tagContent.toLowerCase() : 'improved';
-
-        // Replace the tag with a span with a unique class
-        nodeValue = nodeValue.replace(new RegExp(`\\${fullTag}`, 'g'), `<span class="tag tag-${tagClass}">${tagContent}</span>`);
-        replaced = true;
-
-        match = tagRegex.exec(nodeValue);
-      }
-
+      const { nodeValue, replaced } = replaceTags(node.nodeValue);
       if (replaced) {
         const newNode = document.createElement('span');
         newNode.innerHTML = nodeValue;
