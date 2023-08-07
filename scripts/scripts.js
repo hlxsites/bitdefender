@@ -54,6 +54,19 @@ function setPageLanguage(param) {
 }
 
 /**
+ * Decorates tags in the element.
+ * @param element - the element to decorate
+ */
+export async function decorateTags(element) {
+  const tags = element.querySelectorAll('em');
+  tags.forEach((tag) => {
+    const span = createTag('span', { class: 'tag' }, tag.textContent);
+
+    tag.replaceWith(span);
+  });
+}
+
+/**
  * Decorates picture elements with a link to a video.
  * @param {Element} main The main element
  */

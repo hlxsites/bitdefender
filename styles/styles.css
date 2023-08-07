@@ -115,6 +115,23 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
+span.tag {
+  position: relative;
+  display: inline-block;
+  background-color: var(--tab-emphasis-color);
+  padding: 3px 7px 3px 8px;
+  margin: 0 0 5px;
+  border-radius: 75pt;
+  font-size: var(--body-font-size-xxxs);
+  font-weight: var(--font-weight-boldest);
+  font-style: normal;
+  line-height: 1.5;
+  color: var(--text-dark-color);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  box-shadow: 0 2px 4px 0 #0000000a;
+}
+
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;

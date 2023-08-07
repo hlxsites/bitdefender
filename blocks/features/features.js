@@ -1,3 +1,7 @@
+import {
+  decorateTags,
+} from '../../scripts/scripts.js';
+
 function expandItem(content) {
   content.style.height = `${content.scrollHeight}px`;
   const transitionEndCallback = () => {
@@ -38,6 +42,8 @@ export default function decorate(block) {
 
       col.querySelectorAll('ul').forEach((ul) => {
         ul.querySelectorAll('li').forEach((li) => {
+          decorateTags(li);
+
           const a = document.createElement('a');
 
           // register click event on a tag
