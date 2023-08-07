@@ -227,15 +227,16 @@ export async function decorateIcons(element) {
 
 export async function decorateTags(element) {
   const tagTypes = [
-    { regex: /\[#(.*?)#\]/g, className: 'new' },
-    { regex: /\[{(.*?)}\]/g, className: 'evolved' },
-    { regex: /\[(.*?)\]/g, className: 'improved' }
+    { regex: /\[#(.*?)#\]/g, className: 'dark-blue' },
+    { regex: /\[{(.*?)}\]/g, className: 'light-blue' },
+    { regex: /\[(.*?)\]/g, className: 'green' },
   ];
 
-  function replaceTags(nodeValue) {
+  function replaceTags(inputValue) {
+    let nodeValue = inputValue; // Create a local copy to work on
     let replaced = false;
 
-    for (const tagType of tagTypes) {
+    tagTypes.forEach((tagType) => {
       let match = tagType.regex.exec(nodeValue);
       while (match !== null) {
         nodeValue = nodeValue.replace(match[0], `<span class="tag tag-${tagType.className}">${match[1]}</span>`);
@@ -243,7 +244,7 @@ export async function decorateTags(element) {
         tagType.regex.lastIndex = 0; // Reset regex index
         match = tagType.regex.exec(nodeValue);
       }
-    }
+    });
 
     return { nodeValue, replaced };
   }

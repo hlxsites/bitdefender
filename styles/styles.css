@@ -41,9 +41,9 @@
   --icon-color: #205fff;
   --background-light-blue: #d9eeff;
   --background-blue: #006eff;
-  --new-tag: #005eff;
-  --evolved-tag: #13b0a7;
-  --improved-tag: #2cb43d;
+  --dark-blue-tag: #005eff;
+  --light-blue-tag: #13b0a7;
+  --green-tag: #2cb43d;
 
   /* fonts */
   --body-font-family: "Roboto", "roboto-normal-400-fallback", helvetica, ubuntu, roboto, noto, sans-serif;
@@ -971,14 +971,14 @@ main .section.blue a.button.secondary::after {
   padding: 2px 4px;
 }
 
-.tag-new {
-  background-color: var(--new-tag);
+.tag-dark-blue {
+  background-color: var(--dark-blue-tag);
 }
 
-.tag-evolved {
-  background-color: var(--evolved-tag);
+.tag-light-blue {
+  background-color: var(--light-blue-tag);
 }
 
-.tag-improved {
-  background-color: var(--improved-tag);
+.tag-green {
+  background-color: var(--green-tag);
 }
