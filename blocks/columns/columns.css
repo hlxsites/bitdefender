@@ -164,8 +164,7 @@
   max-height: 293px;
 }
 
-
-.columns.carousel.awards button{
+.columns.carousel button{
   width: 10px;
   height: 10px;
   border-radius: 100%;
@@ -175,7 +174,7 @@
   border: none;
 }
 
-.columns.carousel.awards button:hover {
+.columns.carousel button:hover {
   background-color: var(--link-color);
 }
 
@@ -192,20 +191,29 @@
 }
 
 .columns.carousel > div:nth-child(1), .columns.carousel > div:nth-child(2) {
-  padding-left: 150px;
-  padding-right: 150px;
+  margin-left: 175px;
+  width: 100%;
   overflow: hidden;
   display: flex;
-  justify-content: center; 
+  justify-content: space-between; 
+  transition: transform 0.3s ease-in-out;
 }
 
 .columns.carousel > div > div {
-  flex: 0 0 calc(33.33% - 10px); 
   margin: 0 5px;
-  transform: translateX(100%);
+  box-sizing: border-box;
   transition: transform 0.3s, opacity 0.3s; 
 }
 
-.columns.carousel > div > div[style*="opacity: 1"] {
-  transform: translateX(0);
+.columns-img-col img {
+  width: 100%;
+  height: auto;
+}
+
+.slide-left {
+  transform: translateX(-30%);
+}
+
+.slide-right {
+  transform: translateX(0%);
 }

@@ -46,7 +46,34 @@ function hideExcessElements(carousel) {
   showSlides(carousel, 0); // Default: Show the first set of three elements
 }
 
-function setActiveButton(button, buttonsWrapper) {
+function getButtonIndex(button) {
+  const buttons = Array.from(button.parentElement.children);
+  return buttons.indexOf(button);
+}
+
+function setActiveButton(button, buttonsWrapper, carousel) {
+  const activeButton = buttonsWrapper.querySelector('.active');
+  // Determine the index of the active button and the clicked button
+  const activeButtonIndex = getButtonIndex(activeButton);
+  const clickedButtonIndex = getButtonIndex(button);
+
+  const carouselContentImage = carousel.querySelector('.columns.carousel > div:nth-child(1)');
+  const carouselContentText = carousel.querySelector('.columns.carousel > div:nth-child(2)');
+
+  // Clear any previous slide classes
+  carouselContentImage.classList.remove('slide-left', 'slide-right');
+  carouselContentText.classList.remove('slide-left', 'slide-right');
+
+  if (clickedButtonIndex > activeButtonIndex) {
+    console.log('slide left');
+    carouselContentImage.classList.add('slide-left');
+    carouselContentText.classList.add('slide-left');
+  } else if (clickedButtonIndex < activeButtonIndex) {
+    console.log('slide right');
+    carouselContentImage.classList.add('slide-right');
+    carouselContentText.classList.add('slide-right');
+  }
+
   // Remove active class from all buttons
   buttonsWrapper.querySelectorAll('button').forEach((btn) => {
     btn.classList.remove('active');
@@ -55,15 +82,22 @@ function setActiveButton(button, buttonsWrapper) {
   button.classList.add('active');
 }
 
+
 function createNavigationButtons(numberOfSlides, carousel) {
   const buttonsWrapper = document.createElement('div');
   buttonsWrapper.className = 'carousel-buttons';
 
   for (let i = 0; i < numberOfSlides; i += 1) {
     const button = document.createElement('button');
+
     button.addEventListener('click', () => {
+      // Return early if the button clicked is already active
+      if (button.classList.contains('active')) {
+        return;
+      }
+
       showSlides(carousel, i);
-      setActiveButton(button, buttonsWrapper);
+      setActiveButton(button, buttonsWrapper, carousel);
     });
 
     buttonsWrapper.appendChild(button);
