@@ -78,10 +78,12 @@
   /* body width */
   --body-max-width: 1920px;
   --body-padding: 20px;
-  --section-desktop-max-width: 1200px;
-  --section-desktop-padding: 50px;
+  --section-desktop-max-width: 1300px;
+  --section-desktop-padding: 20px;
   --section-large-desktop-max-width: 1332px;
-  --section-large-desktop-padding: 20px;
+  --section-large-desktop-padding: 50px;
+  --section-desktop-padding-vertical: 48px;
+  --section-mobile-padding-vertical: 32px;
 
   /* cta styles */
   --cta-background-light-blue: var(--background-light-blue)
@@ -150,8 +152,9 @@ body {
   background-color: var(--background-color);
   line-height: 1.5;
   display: none;
-  margin: 0;
   -webkit-font-smoothing: antialiased;
+  max-width: 1920px;
+  margin: 0 auto;
 }
 
 body.appear {
@@ -162,16 +165,26 @@ body.no-scroll {
   overflow: hidden;
 }
 
-main .section .default-content-wrapper { /* mobile */
-  padding: 0 var(--body-padding);
-}
-
 header {
   height: var(--nav-height);
 }
 
+main .section {
+  width: 100%;
+  position: relative;
+  padding: var(--section-mobile-padding-vertical) 0;
+  overflow: hidden;
+}
 
-@media (min-width: 990px) { /* desktop */
+main .section .default-content-wrapper {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--section-desktop-padding);
+  max-width: var(--section-desktop-max-width);
+  position: relative;  
+}
+
+@media (min-width: 992px) { /* desktop */
   header {
     height: var(--nav-height-desktop);
     position: absolute;
@@ -186,17 +199,18 @@ header {
     margin: 0 auto;
   }
 
+  main .section {
+    padding: var(--section-desktop-padding-vertical) 0;
+  }
+
   main .section .default-content-wrapper {
-    max-width: var(--section-desktop-max-width);
-    padding: 0 var(--section-desktop-padding);
-    margin: 0 auto;
+    padding: 0 var(--section-large-desktop-padding);
   }
 }
 
-@media (min-width: 1600px) { /* large desktop */
-  main .section .default-content-wrapper {
-    max-width: var(--section-large-desktop-max-width);
-    padding: 0 var(--section-large-desktop-padding)
+@media (min-width: 1400px){
+  main .section {
+    padding: 60px 0;
   }
 }
 
@@ -550,10 +564,6 @@ main img {
   width: 100%;
 }
 
-main .section {
-  padding: 64px 32px;
-}
-
 /* section metadata */
 main .section.highlight {
   background-color: var(--highlight-background-color);
@@ -881,6 +891,7 @@ main .section.cta {
     flex-flow: row;
   }
 }
+
 
 /* video presentation */
 
