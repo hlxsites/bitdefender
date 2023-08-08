@@ -16,7 +16,7 @@ function handleExpanableRowClick(rows, expandableRowIndex, evt) {
     } else if (row.classList.contains('expanded') && index !== expandableRowIndex) {
       row.classList.remove('expanded');
     }
-  })
+  });
 }
 
 function markHiddenRowsUnderExpandableRows(rows, expandableRowsIndexes) {
@@ -26,7 +26,7 @@ function markHiddenRowsUnderExpandableRows(rows, expandableRowsIndexes) {
   let lastExpandableRow = 0;
   rows.forEach((row, rowIndex) => {
     const index = expandableRowsIndexes.indexOf(rowIndex);
-    if (index != -1 || rowIndex === 0) {
+    if (index !== -1 || rowIndex === 0) {
       lastExpandableRow = expandableRowsIndexes[index];
       return;
     }
@@ -56,7 +56,7 @@ function addClassesForExpandableRows(rows) {
     if (italicStyleElements.length === 0 || row.classList.contains('product-comparison-header')) {
       return;
     }
-    
+
     row.classList.add('expandable-row');
     expandableRowsIndexes.push(index);
   });
@@ -69,7 +69,6 @@ function setExpandableRows(block) {
   const rows = block.querySelectorAll('div[role="row"]');
   addClassesForExpandableRows(rows);
   markHiddenRowsUnderExpandableRows(rows);
-
 }
 
 function addAccesibilityRoles(block) {
