@@ -956,3 +956,7 @@ main .section.blue a.button.secondary::after {
     background-position: top right;
   }
 }
+
+.section.wide.light-sky-blue.columns-container {
+  height: 437px;
+}

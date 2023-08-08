@@ -5,6 +5,11 @@
 .columns > div {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+}
+
+.columns.carousel > div {
+  flex-direction: row;
 }
 
 .columns img {
@@ -166,13 +171,24 @@
 }
 
 .columns.carousel button{
+  align-items: flex-start;
   width: 10px;
   height: 10px;
   border-radius: 100%;
-  margin: -5px;
+  margin: 10px;
   padding: 0;
   background-color: var(--black-color);
   border: none;
+}
+
+@media (min-width: 990px) {
+  .columns.carousel button{
+    margin: -5px;
+  }
+
+  .columns.carousel > div:nth-child(1), .columns.carousel > div:nth-child(2) {
+    left: 175px !important;
+  }
 }
 
 .columns.carousel button:hover {
@@ -193,16 +209,31 @@
 
 .columns.carousel > div > div {
   margin: 10px 5px;
+  width: 100%;
   box-sizing: border-box;
   transition: transform 0.3s, opacity 0.3s; 
 }
 
+@media (min-width: 767px) {
+  .columns.carousel > div:nth-child(1), .columns.carousel > div:nth-child(2) { 
+    left: 12vw !important;
+  }
+}
+
 .columns.carousel > div:nth-child(1), .columns.carousel > div:nth-child(2) {
-  margin-left: 275px;
+  position: relative;
+  left: 35vw;
   overflow: hidden;
   display: flex;
-  justify-content: space-between; 
   transition: transform 0.3s ease-in-out;
+}
+
+.columns.carousel > div:nth-child(2) {
+  height: 200px;
+}
+
+.columns.carousel > div:nth-child(2) > div {
+  
 }
 
 .slide-left {

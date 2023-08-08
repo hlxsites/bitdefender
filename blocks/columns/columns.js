@@ -1,5 +1,5 @@
 function getItemsToShow() {
-  if (window.innerWidth <= 600) {
+  if (window.innerWidth <= 767) {
     return 1; // Show 1 item for mobile screens
   } if (window.innerWidth <= 990) {
     return 2; // Show 2 items for tablets
