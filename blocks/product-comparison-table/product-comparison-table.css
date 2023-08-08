@@ -298,8 +298,12 @@
     padding-left: 3rem;
 }
 
-.product-comparison-table .expandable-arrow > div:first-of-type::before {
+.product-comparison-table .expandable-arrow > div[role='cell'] {
     position: relative;
+}
+
+.product-comparison-table .expandable-arrow > div:first-of-type::before {
+    position: absolute;
     transform: rotate(45deg);
     border-color: #c5c5c5;
     border-style: solid;
@@ -308,7 +312,8 @@
     width: 10px;
     height: 10px;
     display: block;
-    left: -1rem;
+    left: 1rem;
+    top: 1rem;
     margin: 3px 0;
     transition: top .3s ease-in-out,transform .3s ease-in-out,-webkit-transform .3s ease-in-out;
 }
