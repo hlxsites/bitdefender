@@ -85,6 +85,7 @@ function createNavigationButtons(numberOfSlides, carousel) {
 
   for (let i = 0; i < numberOfSlides; i += 1) {
     const button = document.createElement('button');
+    button.setAttribute('aria-label', `Slide ${i + 1}`);
 
     button.addEventListener('click', () => {
       // Return early if the button clicked is already active
