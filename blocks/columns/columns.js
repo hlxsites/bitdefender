@@ -10,7 +10,7 @@ function showSlides(carousel, slideNumber) {
   // Common function to handle showing of slides
   function handleSlideDisplay(childDivs) {
     // Hide all elements
-    childDivs.forEach((div) => { div.style.display = 'none'; });
+    childDivs.forEach((div) => { div.style.opacity = '0'; });
 
     // Calculate the start and end for the items to display based on slideNumber
     let start;
@@ -33,7 +33,7 @@ function showSlides(carousel, slideNumber) {
     }
 
     for (let i = start; i < end && i < childDivs.length; i += 1) {
-      childDivs[i].style.display = 'block';
+      childDivs[i].style.opacity = '1';
     }
   }
 

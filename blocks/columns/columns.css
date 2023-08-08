@@ -190,3 +190,22 @@
 .active {
   background-color: var(--link-color) !important;
 }
+
+.columns.carousel > div:nth-child(1), .columns.carousel > div:nth-child(2) {
+  padding-left: 150px;
+  padding-right: 150px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center; 
+}
+
+.columns.carousel > div > div {
+  flex: 0 0 calc(33.33% - 10px); 
+  margin: 0 5px;
+  transform: translateX(100%);
+  transition: transform 0.3s, opacity 0.3s; 
+}
+
+.columns.carousel > div > div[style*="opacity: 1"] {
+  transform: translateX(0);
+}
