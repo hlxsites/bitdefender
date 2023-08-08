@@ -62,7 +62,7 @@
 .product-comparison-header div[role="columnheader"] .product-comparison-header-subtitle {
     font-size: var(--body-font-size-xxs);
     color: var(--product-comparison-text-color);
-    padding: 0 1.7rem;
+    padding: 0 4rem;
     text-align: left;
 }
 
