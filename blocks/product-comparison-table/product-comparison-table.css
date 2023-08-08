@@ -154,6 +154,15 @@
     text-align: center;
 }
 
+.product-comparison-table div[role='columnheader']:nth-child(1) {
+    text-align: left;
+    position: relative
+}
+
+.product-comparison-table div[role='columnheader']:nth-child(1) > h2 {
+    position: absolute;
+}
+
 .product-comparison-table div[role='cell'] {
     text-align: center;
     vertical-align: middle;
