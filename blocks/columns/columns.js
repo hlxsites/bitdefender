@@ -32,7 +32,7 @@ function showSlides(carousel, slideNumber) {
       }
     }
 
-    for (let i = start; i < end && i < childDivs.length; i++) {
+    for (let i = start; i < end && i < childDivs.length; i += 1) {
       childDivs[i].style.display = 'block';
     }
   }
@@ -41,7 +41,6 @@ function showSlides(carousel, slideNumber) {
   handleSlideDisplay(carouselContentImage.querySelectorAll('.columns-img-col'));
   handleSlideDisplay(carouselContentText.querySelectorAll('div'));
 }
-
 
 function hideExcessElements(carousel) {
   showSlides(carousel, 0); // Default: Show the first set of three elements
@@ -60,12 +59,13 @@ function createNavigationButtons(numberOfSlides, carousel) {
   const buttonsWrapper = document.createElement('div');
   buttonsWrapper.className = 'carousel-buttons';
 
-  for (let i = 0; i < numberOfSlides; i++) {
+  for (let i = 0; i < numberOfSlides; i += 1) {
     const button = document.createElement('button');
-    button.addEventListener('click', function() {
+    button.addEventListener('click', () => {
       showSlides(carousel, i);
       setActiveButton(button, buttonsWrapper);
     });
+
     buttonsWrapper.appendChild(button);
   }
 
@@ -76,7 +76,6 @@ function createNavigationButtons(numberOfSlides, carousel) {
 
   return buttonsWrapper;
 }
-
 
 function setupCarousel(carousel) {
   const carouselContent = carousel.querySelector('.columns.carousel > div');
