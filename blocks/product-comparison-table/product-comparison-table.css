@@ -320,7 +320,7 @@
 }
 
 
-.product-comparison-table .expandable-row.expanded > div:first-of-type::before {
+.product-comparison-table .expandable-arrow > div.expanded:first-of-type::before {
     transform: rotate(-135deg);
 }
 
