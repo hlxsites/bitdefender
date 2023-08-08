@@ -54,27 +54,27 @@
   flex: 0;
 }
 
-.product-card h1 {
+.product-card h3 {
   font-weight: normal;
   flex: 1;
   font-size: var(--heading-font-size-s);
   margin-top: 0;
 }
 
-.products.compact .product-card h1 {
+.products.compact .product-card h3 {
   margin: 5px;
 }
 
-.product-card h2 {
+.product-card h4 {
   font-weight: bold;
   font-size: var(--body-font-size-xs);
 }
 
-.products.compact .product-card h2 {
+.products.compact .product-card h4 {
   margin: 5px;
 }
 
-.product-card h3 {
+.product-card h5 {
   font-weight: normal;
   font-size: var(--body-font-size-s);
 }
