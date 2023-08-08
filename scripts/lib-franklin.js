@@ -610,6 +610,7 @@ export function decorateButtons(element) {
         if (up.childNodes.length === 3 && up.tagName === 'P' && a.nextElementSibling?.tagName === 'EM') {
           a.className = 'button';
           up.classList.add('button-container');
+          a.innerHTML = wrapButtonText(a);
           a.dataset.modal = a.nextSibling.textContent.trim().slice(1, -1);
           a.nextSibling.remove();
           return;
