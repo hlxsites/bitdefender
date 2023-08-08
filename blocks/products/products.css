@@ -10,6 +10,9 @@
   display: flex;
   flex-flow: column;
   justify-content: start;
+
+  max-width: var(--section-desktop-max-width);
+  margin: 0 auto;
 }
 
 .products.col-3, .products.compact {
