@@ -3,14 +3,83 @@ import getMockData from './product-mock-data.js';
 const fakeData = getMockData();
 const pricePlaceholder = '<price>';
 
+function handleExpanableRowClick(rows, expandableRowIndex, evt) {
+  evt.currentTarget.classList.toggle('expanded');
+
+  [...rows].forEach((row, index) => {
+    if (parseInt(row.getAttribute('expandable-row-index'), 10) === expandableRowIndex) {
+      row.classList.toggle('hidden');
+      row.classList.remove('not-visible');
+    } else if (row.hasAttribute('expandable-row-index') && !row.classList.contains('hidden')) {
+      row.classList.add('hidden');
+      row.classList.add('not-visible');
+    } else if (row.classList.contains('expanded') && index !== expandableRowIndex) {
+      row.classList.remove('expanded');
+    }
+  })
+}
+
+function markHiddenRowsUnderExpandableRows(rows, expandableRowsIndexes) {
+  if (!expandableRowsIndexes || expandableRowsIndexes.length === 0) {
+    return;
+  }
+  let lastExpandableRow = 0;
+  rows.forEach((row, rowIndex) => {
+    const index = expandableRowsIndexes.indexOf(rowIndex);
+    if (index != -1 || rowIndex === 0) {
+      lastExpandableRow = expandableRowsIndexes[index];
+      return;
+    }
+
+    row.classList.add('hidden');
+    row.classList.add('not-visible');
+    row.setAttribute('expandable-row-index', lastExpandableRow);
+  });
+}
+
+function addArrowAndEventToExpandableRows(rows) {
+  rows.forEach((row, index) => {
+    if (row.classList.contains('expandable-row')
+      && row.nextElementSibling !== null
+      && !row.nextElementSibling.classList.contains('expandable-row')) {
+      row.classList.add('expandable-arrow');
+      row.addEventListener('click', handleExpanableRowClick.bind(null, rows, index));
+    }
+  });
+}
+
+function addClassesForExpandableRows(rows) {
+  const expandableRowsIndexes = [];
+
+  rows.forEach((row, index) => {
+    const italicStyleElements = row.querySelectorAll('h5');
+    if (italicStyleElements.length === 0 || row.classList.contains('product-comparison-header')) {
+      return;
+    }
+    
+    row.classList.add('expandable-row');
+    expandableRowsIndexes.push(index);
+  });
+
+  addArrowAndEventToExpandableRows(rows);
+  markHiddenRowsUnderExpandableRows(rows, expandableRowsIndexes);
+}
+
+function setExpandableRows(block) {
+  const rows = block.querySelectorAll('div[role="row"]');
+  addClassesForExpandableRows(rows);
+  markHiddenRowsUnderExpandableRows(rows);
+
+}
+
 function addAccesibilityRoles(block) {
   block.setAttribute('role', 'table');
 
   block.querySelectorAll('div')
     .forEach((div) => {
-      if (div.children.length > 1) {
+      if (div.childElementCount > 1 && div.parentElement.getAttribute('role') === 'table') {
         div.setAttribute('role', 'row');
-      } else if (div.children.length <= 1 && !div.hasAttribute('role')) {
+      } else if (!div.hasAttribute('role')) {
         div.setAttribute('role', 'cell');
       }
     });
@@ -133,6 +202,7 @@ function setActiveColumn(block) {
 export default function decorate(block) {
   addAccesibilityRoles(block);
   replaceTableTextToProperCheckmars(block);
+  setExpandableRows(block);
   setActiveColumn(block);
   buildTableHeader(block);
   extractTextFromStrongTagToParent(block);
