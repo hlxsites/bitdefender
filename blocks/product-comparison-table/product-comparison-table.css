@@ -279,6 +279,10 @@
     cursor: pointer;
 }
 
+.product-comparison-table div[role='row'].expandable-row:nth-child(2) > div {
+    border-top-left-radius: 8px;
+}
+
 .product-comparison-table div[role='row'].expandable-row > div:first-of-type {
     background-color: var(--expandable-row-background-color);
     color: var(--expandable-row-text-color);

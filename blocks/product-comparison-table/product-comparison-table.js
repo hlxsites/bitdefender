@@ -1,6 +1,5 @@
-import getMockData from './product-mock-data.js';
+import fetchProduct, { PRODUCTS } from './fetch-product.js';
 
-const fakeData = getMockData();
 const pricePlaceholder = '<price>';
 
 function handleExpanableRowClick(rows, expandableRowIndex, evt) {
@@ -110,19 +109,23 @@ function replaceTableTextToProperCheckmars(block) {
     });
 }
 
-function buildPriceContainer(productName, numberOfDevices, elementToReplace) {
+function getProductData(productName, numberOfDevices) {
+  const variation = `${numberOfDevices}u-1y`;
+  return fetchProduct(PRODUCTS[productName], variation);
+}
+
+async function buildPriceContainer(productName, numberOfDevices, elementToReplace) {
   const priceContainer = document.createElement('div');
   priceContainer.classList.add('product-comparison-price');
 
-  const productData = fakeData
-    .filter((product) => product.data.product.product_name === productName);
-  if (productData.length === 0) {
+  const productData = await getProductData(productName, numberOfDevices);
+  if (!productData) {
     return;
   }
-  const variationPrice = productData[0].data.product.variations[numberOfDevices][1];
-  const productVariationPrice = variationPrice.price;
-  const productVariationDiscountPrice = variationPrice.discount.discounted_price;
-  const priceLabel = variationPrice.currency_label;
+
+  const productVariationPrice = productData.price;
+  const productVariationDiscountPrice = productData.discount.discounted_price;
+  const priceLabel = productData.currency_label;
 
   if (productVariationDiscountPrice) {
     const oldPriceContainer = document.createElement('div');
@@ -146,7 +149,7 @@ function replacePricePlaceholderWithActualPrices(headerColumns) {
     if (paragraph.tagName === 'H4') {
       productName = paragraph.textContent;
     }
-    if (paragraph.tagName === 'P' && paragraph.textContent.includes('Devices')) {
+    if (paragraph.tagName === 'P' && (paragraph.textContent.search(/Devices/i) !== -1 || paragraph.textContent.search(/account/i) !== -1)) {
       [numberOfDevices] = paragraph.textContent.split(' ');
     }
     if (paragraph.textContent.match(pricePlaceholder)) {
