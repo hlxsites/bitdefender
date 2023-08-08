@@ -7,7 +7,6 @@ function showSlides(carousel, slideNumber) {
   const carouselContentImage = carousel.querySelector('.columns.carousel > div:nth-child(1)');
   const carouselContentText = carousel.querySelector('.columns.carousel > div:nth-child(2)');
 
-  // Common function to handle showing of slides
   function handleSlideDisplay(childDivs) {
     // Hide all elements
     childDivs.forEach((div) => { div.style.opacity = '0'; });
@@ -65,11 +64,9 @@ function setActiveButton(button, buttonsWrapper, carousel) {
   carouselContentText.classList.remove('slide-left', 'slide-right');
 
   if (clickedButtonIndex > activeButtonIndex) {
-    console.log('slide left');
     carouselContentImage.classList.add('slide-left');
     carouselContentText.classList.add('slide-left');
   } else if (clickedButtonIndex < activeButtonIndex) {
-    console.log('slide right');
     carouselContentImage.classList.add('slide-right');
     carouselContentText.classList.add('slide-right');
   }
@@ -81,7 +78,6 @@ function setActiveButton(button, buttonsWrapper, carousel) {
 
   button.classList.add('active');
 }
-
 
 function createNavigationButtons(numberOfSlides, carousel) {
   const buttonsWrapper = document.createElement('div');

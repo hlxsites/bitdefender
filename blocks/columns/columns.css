@@ -15,6 +15,7 @@
   order: 1;
 }
 
+
 .columns > div > .columns-img-col {
   order: 0;
 }
@@ -190,6 +191,12 @@
   background-color: var(--link-color) !important;
 }
 
+.columns.carousel > div > div {
+  margin: 10px 5px;
+  box-sizing: border-box;
+  transition: transform 0.3s, opacity 0.3s; 
+}
+
 .columns.carousel > div:nth-child(1), .columns.carousel > div:nth-child(2) {
   margin-left: 175px;
   width: 100%;
@@ -197,17 +204,6 @@
   display: flex;
   justify-content: space-between; 
   transition: transform 0.3s ease-in-out;
-}
-
-.columns.carousel > div > div {
-  margin: 0 5px;
-  box-sizing: border-box;
-  transition: transform 0.3s, opacity 0.3s; 
-}
-
-.columns-img-col img {
-  width: 100%;
-  height: auto;
 }
 
 .slide-left {
