@@ -25,7 +25,7 @@ export default async function fetchProduct(code = 'av', variant = '1u-1y') {
           pid: null,
         },
       },
-    })
+    }),
   );
 
   const res = await fetch(FETCH_URL, {
