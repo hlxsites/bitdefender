@@ -2,9 +2,7 @@ version: 1
 indices:
   default:
     include:
-      - /**
-    exclude:
-      - '/content/**'
+      - /solutions/**
     target: /query-index.json
     properties:
       title:
@@ -13,9 +11,16 @@ indices:
       description:
         select: head > meta[name="description"]
         value: attribute(el, "content")
+      h1:
+        # There can be multiple h1s in the document, but we want to index just the very first one
+        # Assumptions:
+        # 1. if the h1 is in a block, than that block is the first one in the document => main > div:first-child > div:first-child h1
+        # 2. if the h1 is in the default content, than there are no other blocks before this default content => main > div > h1
+        select: main > div:first-child > div:first-child h1, main > div > h1
+        value: textContent(el)
+      type:
+        select: head > meta[name="type"]
+        value: attribute(el, "content")  
       robots:
         select: head > meta[name="robots"]
         value: attribute(el, "content")  
-      lastModified:
-        select: none
-        value: parseTimestamp(headers["last-modified"], "ddd, DD MMM YYYY hh:mm:ss GMT")    
