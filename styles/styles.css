@@ -13,6 +13,8 @@
 :root {
   /* colors */
   --dark-background-color: #000;
+  --black-color: #000;
+  --white-color: #fff;
   --background-color: #fff;
   --link-color: #005ed9;
   --link-hover-color: #00439c;
@@ -21,6 +23,8 @@
   --button-hover-background-color: #d80000;
   --button-primary-background-color: #000;
   --button-primary-hover-background-color: #000;
+  --button-secondary-color: #000;
+  --button-secondary-hover-background-color: #000;
   --overlay-background-color: #eee;
   --highlight-background-color: #ccc;
   --text-color: #000;
@@ -36,6 +40,7 @@
   --background-color-light-sky-blue: #e4f2ff;
   --icon-color: #205fff;
   --background-light-blue: #d9eeff;
+  --background-blue: #006eff;
 
   /* fonts */
   --body-font-family: "Roboto", "roboto-normal-400-fallback", helvetica, ubuntu, roboto, noto, sans-serif;
@@ -73,10 +78,12 @@
   /* body width */
   --body-max-width: 1920px;
   --body-padding: 20px;
-  --section-desktop-max-width: 1200px;
-  --section-desktop-padding: 50px;
+  --section-desktop-max-width: 1300px;
+  --section-desktop-padding: 20px;
   --section-large-desktop-max-width: 1332px;
-  --section-large-desktop-padding: 20px;
+  --section-large-desktop-padding: 50px;
+  --section-desktop-padding-vertical: 48px;
+  --section-mobile-padding-vertical: 32px;
 
   /* cta styles */
   --cta-background-light-blue: var(--background-light-blue)
@@ -145,8 +152,9 @@ body {
   background-color: var(--background-color);
   line-height: 1.5;
   display: none;
-  margin: 0;
   -webkit-font-smoothing: antialiased;
+  max-width: 1920px;
+  margin: 0 auto;
 }
 
 body.appear {
@@ -157,16 +165,26 @@ body.no-scroll {
   overflow: hidden;
 }
 
-main .section .default-content-wrapper { /* mobile */
-  padding: 0 var(--body-padding);
-}
-
 header {
   height: var(--nav-height);
 }
 
+main .section {
+  width: 100%;
+  position: relative;
+  padding: var(--section-mobile-padding-vertical) 0;
+  overflow: hidden;
+}
 
-@media (min-width: 990px) { /* desktop */
+main .section .default-content-wrapper {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--section-desktop-padding);
+  max-width: var(--section-desktop-max-width);
+  position: relative;  
+}
+
+@media (min-width: 992px) { /* desktop */
   header {
     height: var(--nav-height-desktop);
     position: absolute;
@@ -181,17 +199,18 @@ header {
     margin: 0 auto;
   }
 
+  main .section {
+    padding: var(--section-desktop-padding-vertical) 0;
+  }
+
   main .section .default-content-wrapper {
-    max-width: var(--section-desktop-max-width);
-    padding: 0 var(--section-desktop-padding);
-    margin: 0 auto;
+    padding: 0 var(--section-large-desktop-padding);
   }
 }
 
-@media (min-width: 1600px) { /* large desktop */
-  main .section .default-content-wrapper {
-    max-width: var(--section-large-desktop-max-width);
-    padding: 0 var(--section-large-desktop-padding)
+@media (min-width: 1400px){
+  main .section {
+    padding: 60px 0;
   }
 }
 
@@ -373,7 +392,7 @@ a.button:any-link, button {
   align-items: center;
   box-sizing: border-box;
   text-decoration: none;
-  padding: 10px 26px 10px 28px;
+  padding: 10px 26px 8px 28px;
   text-align: center;
   cursor: pointer;
   color: var(--button-link-color);
@@ -444,8 +463,13 @@ button:disabled, button:disabled:hover {
 
 a.button.secondary, button.secondary {
   background-color: unset;
-  border: 2px solid currentcolor;
-  color: var(--text-color)
+  border: 2px solid var(--button-secondary-color);
+  color: var(--button-secondary-color)
+}
+
+a.button:hover.secondary {
+  background-color: var(--button-secondary-hover-background-color);
+  color: var(--white-color)
 }
 
 a.button.modal {
@@ -538,10 +562,6 @@ main img {
 .icon svg {
   height: 100%;
   width: 100%;
-}
-
-main .section {
-  padding: 64px 32px;
 }
 
 /* section metadata */
@@ -873,4 +893,77 @@ main .section.cta {
 }
 
 
+/* video presentation */
 
+main .section.full-width {
+  padding: 0;
+  overflow: hidden;
+}
+
+main .section.blue {
+  background-color: var(--background-blue);
+  color: white;
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+
+@media (min-width: 992px) {
+  main .section.blue {
+    padding-top: 96px;
+    padding-bottom: 96px;
+  }
+}
+
+main .section.checked-lists  ul li {
+  padding-left: 8px;
+  list-style-image: url("/icons/checkmark_solid-circle.svg");
+}
+
+main .section.blue.checked-lists  ul li {
+  padding-left: 8px;
+  list-style-image: url("/icons/checkmark-solid-circle-white.svg");
+}
+
+main .section.blue a.button:any-link {
+  background-color: var(--black-color);
+  border: 2px solid var(--black-color);
+}
+
+main .section.blue a.button.secondary, main .section.blue button.secondary {
+  border-color: var(--white-color);
+  color: var(--white-color);
+  background-color: unset;
+  border-width: 2px;
+  border-style: solid;
+}
+
+main .section.blue a.button.secondary:hover, main .section.blue a.button.secondary:focus,
+main .section.blue button.secondary:hover, main .section.blue button.secondary:focus {
+  background-color: var(--white-color);
+  color: var(--black-color);
+}
+
+main .section.blue a.button.secondary::after {
+  background-color: var(--link-color);
+}
+
+@media (min-width: 992px) {
+  main .section.circle {
+    background-image: url("/icons/blue-circle.svg");
+    background-position: top 0 right 60%;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+  }
+}
+
+@media (min-width: 1200px) {
+  main .section.circle {
+    background-position: top right 50%;
+  }
+}
+
+@media (min-width: 1400px) {
+  main .section.circle {
+    background-position: top right;
+  }
+}
