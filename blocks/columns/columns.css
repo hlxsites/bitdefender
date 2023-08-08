@@ -198,8 +198,7 @@
 }
 
 .columns.carousel > div:nth-child(1), .columns.carousel > div:nth-child(2) {
-  margin-left: 175px;
-  width: 100%;
+  margin-left: 275px;
   overflow: hidden;
   display: flex;
   justify-content: space-between; 

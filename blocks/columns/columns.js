@@ -1,6 +1,15 @@
+function getItemsToShow() {
+  if (window.innerWidth <= 600) {
+    return 1; // Show 1 item for mobile screens
+  } if (window.innerWidth <= 990) {
+    return 2; // Show 2 items for tablets
+  }
+  return 3; // Show 3 items for desktops
+}
+
 function countSlides(carouselContent) {
   const numberOfItems = carouselContent.children.length;
-  return Math.ceil(numberOfItems / 3);
+  return Math.ceil(numberOfItems / getItemsToShow());
 }
 
 function showSlides(carousel, slideNumber) {
@@ -15,18 +24,17 @@ function showSlides(carousel, slideNumber) {
     let start;
     let end;
 
-    if (childDivs.length % 3 === 0) {
-      // Non-overlapping
-      start = slideNumber * 3;
-      end = start + 3;
+    const itemsToShow = getItemsToShow();
+
+    if (childDivs.length % itemsToShow === 0) {
+      start = slideNumber * itemsToShow;
+      end = start + itemsToShow;
     } else {
-      // Overlapping logic
-      start = slideNumber * 2; // from 2x the slide number to account for overlapping element
-      end = start + 3;
+      start = slideNumber * (itemsToShow - 1);
+      end = start + itemsToShow;
 
       if (end > childDivs.length) {
-        // Adjust start to always show 3 items
-        start = childDivs.length - 3;
+        start = childDivs.length - itemsToShow;
         end = childDivs.length;
       }
     }
@@ -111,11 +119,29 @@ function createNavigationButtons(numberOfSlides, carousel) {
 function setupCarousel(carousel) {
   const carouselContent = carousel.querySelector('.columns.carousel > div');
 
+  // Remove existing navigation buttons
+  const existingButtonsWrapper = carousel.querySelector('.carousel-buttons');
+  if (existingButtonsWrapper) {
+    existingButtonsWrapper.remove();
+  }
+
   const numberOfSlides = countSlides(carouselContent);
   const buttonsWrapper = createNavigationButtons(numberOfSlides, carousel);
 
   carousel.appendChild(buttonsWrapper);
   hideExcessElements(carousel);
+}
+
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
 }
 
 export default function decorate(block) {
@@ -140,4 +166,12 @@ export default function decorate(block) {
   if (block.classList.contains('carousel')) {
     setupCarousel(block);
   }
+
+  // Add a debounced event listener to handle window resizes
+  window.addEventListener('resize', debounce(() => {
+    // Check if the block still has the carousel class before resetting
+    if (block.classList.contains('carousel')) {
+      setupCarousel(block);
+    }
+  }, 250));
 }
