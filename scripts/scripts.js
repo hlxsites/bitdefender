@@ -58,12 +58,6 @@ function setPageLanguage(param) {
  * @param element - the element to decorate
  */
 export async function decorateTags(element) {
-  const tags = element.querySelectorAll('em');
-  tags.forEach((tag) => {
-    const span = createTag('span', { class: 'tag' }, tag.textContent);
-
-    tag.replaceWith(span);
-  });
 }
 
 /**
