@@ -194,11 +194,17 @@
   }
 
   .slide-left {
-    transform: translateX(-24%) !important;
+    transform: translateX(-25%) !important;
   }
 
   .slide-right {
     transform: translateX(0%) !important;
+  }
+}
+
+@media (min-width: 676px) and (max-width: 989px) {
+  .slide-left {
+      transform: translateX(-50%) !important;
   }
 }
 
@@ -226,19 +232,22 @@
   transition: transform 0.3s, opacity 0.3s; 
 }
 
+.columns.carousel > div > div > p {
+  width: inherit;
+}
+
 .columns.carousel > div:nth-child(1) {
   width: max-content;
   position: relative;
   left: 0;
   gap: 0;
   overflow: hidden;
-  display: flex;
   transition: transform 0.3s ease-in-out;
   height: 200px;
 }
 
 .slide-left {
-  transform: translateX(-33vw);
+  transform: translateX(-25%);
 }
 
 .slide-right {

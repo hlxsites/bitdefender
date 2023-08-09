@@ -17,7 +17,9 @@ function showSlides(carousel, slideNumber) {
 
   function handleSlideDisplay(childDivs) {
     // Hide all elements
-    childDivs.forEach((div) => { div.style.opacity = '0'; });
+    childDivs.forEach((div) => { 
+        div.style.opacity = '0'; 
+    });
 
     // Calculate the start and end for the items to display based on slideNumber
     let start;
@@ -37,10 +39,20 @@ function showSlides(carousel, slideNumber) {
         end = childDivs.length;
       }
     }
+    
+    // Get the width of the container in pixels
+    const containerWidth = carousel.clientWidth;
+    // Calculate column width in pixels
+    const columnWidthPx = containerWidth / itemsToShow;
+
+    console.log('containerWidth', containerWidth);
+    console.log('columnWidthPx', columnWidthPx);
 
     for (let i = start; i < end && i < childDivs.length; i += 1) {
       childDivs[i].style.opacity = '1';
+    childDivs[i].style.width = columnWidthPx +'px';
     }
+
   }
 
   // Apply the display logic for both images and texts
@@ -172,4 +184,5 @@ export default function decorate(block) {
       setupCarousel(block);
     }
   }, 250));
+  window.dispatchEvent(new Event('resize')); // trigger resize to give width to columns
 }

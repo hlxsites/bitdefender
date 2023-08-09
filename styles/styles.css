@@ -960,3 +960,7 @@ main .section.blue a.button.secondary::after {
 .section.wide.light-sky-blue.columns-container {
   height: 437px;
 }
+
+.no-padding .columns-wrapper {
+  padding: 0;
+}
