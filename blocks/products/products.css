@@ -215,6 +215,7 @@
 @media (min-width: 992px) { /* desktop */
   .products-wrapper {
     max-width: var(--section-desktop-max-width);
+    padding: 0 var(--section-desktop-padding);
     margin: 0 auto;
   }
 }

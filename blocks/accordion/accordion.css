@@ -76,11 +76,6 @@
   max-width: 1110px;
 }
 
-@media (min-width: 992px) {
-  font-size: 18px;
-  word-break: normal;
-}
-
 .accordion-item.expanded .accordion-item-content {
   opacity: 1;
   height: auto;
@@ -91,7 +86,7 @@
   display: block;
 }
 
-@media (min-width: 990px) { /* desktop */
+@media (min-width: 992px) { /* desktop */
 
   .accordion-wrapper {
     max-width: var(--section-desktop-max-width);
