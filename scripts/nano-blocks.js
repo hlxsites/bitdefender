@@ -3,7 +3,7 @@ const nanoBlocks = new Map();
 function findTextNodes(parent) {
   let all = [];
   for (let node = parent.firstChild; node; node = node.nextSibling) {
-    if (node.nodeType === 3) all.push(node);
+    if (node.nodeType === Node.TEXT_NODE) all.push(node);
     else all = all.concat(findTextNodes(node));
   }
   return all;
