@@ -3,8 +3,8 @@
   display: grid;
   gap: 16px;
   width: 100%;
-  margin: 0 15px;
   grid-template-columns: 1fr;
+  padding: 0;
 }
 
 .barchart-image {
@@ -15,6 +15,7 @@
 
 .barchart-body li {
   list-style: none;
+  margin: 0;
 }
 
 .barchart > ul > li {
@@ -55,13 +56,14 @@
   font-weight: 500;
   color: #000;
   background-color: transparent;
+  margin: 0;
+  padding: 0;
 }
 
 
 .barchart-body li:nth-child(odd) { 
   flex: 85%;
-  padding: 9px 16px;
-  height: 40px;
+  line-height: 40px;
   position: relative;
   z-index: 1;
 }
@@ -69,7 +71,7 @@
 .barchart-body li:nth-child(even) { 
   flex: 10%;
   text-align: right;
-  padding-right: 10px;
+  padding: 0 10px 0 0;
 }
 
 
