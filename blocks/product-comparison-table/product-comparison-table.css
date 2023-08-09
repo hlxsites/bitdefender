@@ -7,6 +7,7 @@
     --product-comparison-text-color: #5d5c5c;
     --expandable-row-background-color: #0040F0;
     --expandable-row-text-color: #fff;
+    --product-table-badge-color: #2cb43d;
 }
 
 .section.product-comparison-table-container {
@@ -335,4 +336,14 @@
 .product-comparison-table div[role='row'].not-visible {
     opacity: 0;
     transition: all .5s linear;
+}
+
+.product-comparison-table div[role='cell'] > p em {
+    background-color: var(--product-table-badge-color);
+    padding: 0.1875rem 0.5625rem;
+    border-radius: 50px;
+    font-weight: var(--font-weight-boldest);
+    font-size: 10px;
+    color: var(--expandable-row-text-color);
+    font-style: normal;
 }
