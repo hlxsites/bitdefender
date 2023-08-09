@@ -382,7 +382,7 @@ a.button:any-link, button {
   align-items: center;
   box-sizing: border-box;
   text-decoration: none;
-  padding: 10px 26px 10px 28px;
+  padding: 10px 26px 8px 28px;
   text-align: center;
   cursor: pointer;
   color: var(--button-link-color);
