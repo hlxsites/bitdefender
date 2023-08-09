@@ -205,10 +205,11 @@
 
 .product-card a.button {
   width: 100% !important;
+  display: flex;
+  justify-content: center;
 }
 
 .product-card .button-text {
   font-weight: 500 !important;
   font-size: var(--body-font-size-s) !important;
-  margin: 0 auto !important;
 }
