@@ -71,7 +71,7 @@ function extractFeatures(col) {
     h4.childNodes.forEach((node) => {
       if (node.nodeType === Node.TEXT_NODE) {
         a.appendChild(document.createTextNode(node.textContent));
-      } else if (node !== li.lastChild || node.tagName !== 'SPAM') {
+      } else if (node !== li.lastChild || node.tagName !== 'SPAN') {
         a.appendChild(node);
       }
     });
@@ -80,15 +80,14 @@ function extractFeatures(col) {
 
     li.appendChild(a);
 
+    const content = document.createElement('div');
+    content.classList.add('features-tabs-content');
+    li.appendChild(content);
+
     // every oaragraph until next h4
     let nextElement = h4.nextElementSibling;
     while (nextElement && nextElement.tagName !== 'H4') {
-      if (nextElement.tagName === 'P') {
-        nextElement.classList.add('features-tabs-content');
-        li.appendChild(nextElement);
-      } else {
-        break;
-      }
+      content.appendChild(nextElement);
       nextElement = h4.nextElementSibling;
     }
 
