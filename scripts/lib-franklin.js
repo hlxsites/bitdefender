@@ -615,6 +615,13 @@ export function decorateButtons(element) {
           a.nextSibling.remove();
           return;
         }
+        if (up.childNodes.length === 1 && up.tagName === 'P' && up.innerText.startsWith('?')) {
+          a.className = 'info-button modal';
+          up.classList.add('info-button-container');
+          a.textContent = a.textContent.slice(1).trim();
+          a.title = a.title.slice(1).trim();
+          return;
+        }
         // Example: <p><a href="example.com">Text</a></p>
         if (up.childNodes.length === 1 && (up.tagName === 'P' || up.tagName === 'DIV')) {
           a.className = 'button'; // default

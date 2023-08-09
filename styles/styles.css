@@ -405,6 +405,21 @@ a.button:any-link, button {
   height: fit-content;
 }
 
+a.info-button.modal::before {
+  content: url('/icons/user-guide.svg');
+  display: flex;
+}
+
+p.info-button-container {
+  font-weight: 500;
+  font-size: 1pc;
+  line-height: 1.5;
+}
+
+p.info-button-container:hover {
+  text-decoration: none
+}
+
 a.button::after {
   content: '';
   width: 24px;
