@@ -171,7 +171,10 @@
 }
 
 .columns.carousel {
+  width: 100%;
+  margin-top: 50px;
   overflow: hidden;
+  height: 437px;
 }
 
 .columns.carousel button{
@@ -190,8 +193,12 @@
     margin: -5px;
   }
 
-  .columns.carousel > div:nth-child(1), .columns.carousel > div:nth-child(2) {
-    left: 175px !important;
+  .slide-left {
+    transform: translateX(-24%) !important;
+  }
+
+  .slide-right {
+    transform: translateX(0%) !important;
   }
 }
 
@@ -201,7 +208,7 @@
 
 .carousel-buttons {
   position: relative;
-  bottom: 20px;
+  top: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -219,22 +226,21 @@
   transition: transform 0.3s, opacity 0.3s; 
 }
 
-.columns.carousel > div:nth-child(1), .columns.carousel > div:nth-child(2) {
+.columns.carousel > div:nth-child(1) {
+  width: max-content;
   position: relative;
-  left: 35vw;
+  left: 0;
+  gap: 0;
   overflow: hidden;
   display: flex;
   transition: transform 0.3s ease-in-out;
-}
-
-.columns.carousel > div:nth-child(2) {
   height: 200px;
 }
 
 .slide-left {
-  transform: translateX(-33%);
+  transform: translateX(-33vw);
 }
 
 .slide-right {
-  transform: translateX(0%);
+  transform: translateX(0vw);
 }

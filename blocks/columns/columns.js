@@ -13,8 +13,7 @@ function countSlides(carouselContent) {
 }
 
 function showSlides(carousel, slideNumber) {
-  const carouselContentImage = carousel.querySelector('.columns.carousel > div:nth-child(1)');
-  const carouselContentText = carousel.querySelector('.columns.carousel > div:nth-child(2)');
+  const carouselContent = carousel.querySelector('.columns.carousel > div:nth-child(1)');
 
   function handleSlideDisplay(childDivs) {
     // Hide all elements
@@ -45,19 +44,15 @@ function showSlides(carousel, slideNumber) {
   }
 
   // Apply the display logic for both images and texts
-  handleSlideDisplay(carouselContentImage.querySelectorAll('.columns-img-col'));
-  handleSlideDisplay(carouselContentText.querySelectorAll('div'));
+  handleSlideDisplay(carouselContent.querySelectorAll('.columns-img-col'));
+  handleSlideDisplay(carouselContent.querySelectorAll('div'));
 }
 
 function hideExcessElements(carousel) {
   showSlides(carousel, 0); // Default: Show the first set of three elements
 
-  const carouselContentImage = carousel.querySelector('.columns.carousel > div:nth-child(1)');
-  const carouselContentText = carousel.querySelector('.columns.carousel > div:nth-child(2)');
-
-  // Assign the 'slide-right' class to both the image and text sections
-  carouselContentImage.classList.add('slide-right');
-  carouselContentText.classList.add('slide-right');
+  const carouselContent = carousel.querySelector('.columns.carousel > div:nth-child(1)');
+  carouselContent.classList.add('slide-right');
 }
 
 function getButtonIndex(button) {
@@ -71,19 +66,15 @@ function setActiveButton(button, buttonsWrapper, carousel) {
   const activeButtonIndex = getButtonIndex(activeButton);
   const clickedButtonIndex = getButtonIndex(button);
 
-  const carouselContentImage = carousel.querySelector('.columns.carousel > div:nth-child(1)');
-  const carouselContentText = carousel.querySelector('.columns.carousel > div:nth-child(2)');
+  const carouselContent = carousel.querySelector('.columns.carousel > div:nth-child(1)');
 
   // Clear any previous slide classes
-  carouselContentImage.classList.remove('slide-left', 'slide-right');
-  carouselContentText.classList.remove('slide-left', 'slide-right');
+  carouselContent.classList.remove('slide-left', 'slide-right');
 
   if (clickedButtonIndex > activeButtonIndex) {
-    carouselContentImage.classList.add('slide-left');
-    carouselContentText.classList.add('slide-left');
+    carouselContent.classList.add('slide-left');
   } else if (clickedButtonIndex < activeButtonIndex) {
-    carouselContentImage.classList.add('slide-right');
-    carouselContentText.classList.add('slide-right');
+    carouselContent.classList.add('slide-right');
   }
 
   // Remove active class from all buttons
