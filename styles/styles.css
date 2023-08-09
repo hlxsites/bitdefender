@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-:root {
+ :root {
   /* colors */
   --dark-background-color: #000;
   --black-color: #000;
@@ -79,10 +79,10 @@
   /* body width */
   --body-max-width: 1920px;
   --body-padding: 20px;
-  --section-desktop-max-width: 1300px;
-  --section-desktop-padding: 20px;
-  --section-large-desktop-max-width: 1332px;
-  --section-large-desktop-padding: 50px;
+  --section-desktop-max-width: 1260px;
+  --section-desktop-padding: 0;
+  --section-large-desktop-max-width: 1282px;
+  --section-large-desktop-padding: 0;
   --section-desktop-padding-vertical: 48px;
   --section-mobile-padding-vertical: 32px;
 
@@ -194,10 +194,9 @@ main .section {
   overflow: hidden;
 }
 
-main .section .default-content-wrapper {
+.default-content-wrapper {
   width: 100%;
   margin: 0 auto;
-  padding: 0 var(--section-desktop-padding);
   max-width: var(--section-desktop-max-width);
   position: relative;  
 }
@@ -221,8 +220,8 @@ main .section .default-content-wrapper {
     padding: var(--section-desktop-padding-vertical) 0;
   }
 
-  main .section .default-content-wrapper {
-    padding: 0 var(--section-large-desktop-padding);
+  .default-content-wrapper {
+    max-width: var(--section-desktop-max-width);
   }
 }
 
@@ -315,10 +314,14 @@ h6 { font-size: 16px }
   h4 { font-size: var(--heading-font-size-m) }
 }
 
-@media (min-width: 1600px) {
+@media (min-width: 1600px) { /* large desktop */
   h1 {
     font-size: 56px;
     letter-spacing: normal;
+  }
+
+  .default-content-wrapper {
+    max-width: var(--section-large-desktop-max-width);
   }
 }
 
@@ -603,32 +606,27 @@ main img {
 }
 
 /* section metadata */
-main .section.highlight > :first-child {
+main .section.highlight > * {
   background-color: var(--highlight-background-color);
 }
 
-main .section.light-sky-blue > :first-child {
+main .section.light-sky-blue > * {
   background-color: var(--background-color-light-sky-blue);
 }
 
 main div.section.wide > :first-child {
-  border-radius: 8px;
-  padding: 56px 0 57px;
+  border-radius: 8px 8px 0 0;
+  padding-top: 56px;
 }
 
-@media (min-width: 1200px) { /* desktop */
-  main .section.wide {
-    max-width: var(--section-desktop-max-width);
-    padding: 0 var(--section-desktop-padding);
-    margin: 0 auto;
-  }
+main div.section.wide > :last-child {
+  border-radius: 0 0 8px 8px;
+  padding-bottom: 56px;
 }
 
-@media (min-width: 1600px) { /* large desktop */
-  main .section.wide {
-    max-width: var(--section-large-desktop-max-width);
-    padding: 0 var(--section-large-desktop-padding);
-  }
+main div.section.wide .default-content-wrapper {
+  text-align: center;
+  padding-bottom: 15px;
 }
 
 /* linked pictures with video button overlay */
