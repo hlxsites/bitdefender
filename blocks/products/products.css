@@ -10,8 +10,6 @@
   display: flex;
   flex-flow: column;
   justify-content: start;
-  max-width: var(--section-desktop-max-width);
-  margin: 0 auto;
 }
 
 .products.col-3, .products.compact {
@@ -212,4 +210,17 @@
 .product-card .button-text {
   font-weight: 500 !important;
   font-size: var(--body-font-size-s) !important;
+}
+
+@media (min-width: 992px) { /* desktop */
+  .products-wrapper {
+    max-width: var(--section-desktop-max-width);
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 1600px) { /* large desktop */
+  .products-wrapper {
+    max-width: var(--section-large-desktop-max-width);
+  }
 }
