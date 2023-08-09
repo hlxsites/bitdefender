@@ -20,7 +20,7 @@ export function createTag(tag, attributes, html) {
   return el;
 }
 
-const FETCH_URL = 'https://www.bitdefender.com/site/Store/ajax';
+const FETCH_URL = 'https://www.bitdefender.com.au/site/Store/ajax';
 
 /**
  * Fetches a product from the Bitdefender store.

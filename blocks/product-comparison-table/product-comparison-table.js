@@ -1,6 +1,34 @@
-import fetchProduct, { PRODUCTS } from './fetch-product.js';
+import { createNanoBlock, renderNanoBlocks, fetchProduct } from '../../scripts/utils/utils.js';
 
-const pricePlaceholder = '<price>';
+createNanoBlock('price-comparison', (code, variant, label) => {
+  const priceRoot = document.createElement('div');
+  priceRoot.classList.add('product-comparison-price');
+  const oldPriceElement = document.createElement('p');
+  priceRoot.appendChild(oldPriceElement);
+  oldPriceElement.innerText = '-';
+  oldPriceElement.classList.add('old-price-container');
+  const priceElement = document.createElement('strong');
+  priceRoot.appendChild(priceElement);
+  priceElement.innerText = '-';
+  priceElement.classList.add('current-price-container');
+  const priceAppliedOnTime = document.createElement('p');
+  priceRoot.appendChild(priceAppliedOnTime);
+
+  fetchProduct(code, variant)
+    .then((product) => {
+      // eslint-disable-next-line camelcase
+      const { price, discount: { discounted_price: discounted }, currency_iso: currency } = product;
+      oldPriceElement.innerHTML = `Old Price <del>${price} ${currency}</del>`;
+      priceElement.innerHTML = `${discounted} ${currency}`;
+      priceAppliedOnTime.innerHTML = label;
+    })
+    .catch((err) => {
+      // eslint-disable-next-line no-console
+      console.error(err);
+    });
+
+  return priceRoot;
+});
 
 function handleExpanableRowClick(rows, expandableRowIndex, evt) {
   evt.currentTarget.classList.toggle('expanded');
@@ -51,8 +79,8 @@ function addClassesForExpandableRows(rows) {
   const expandableRowsIndexes = [];
 
   rows.forEach((row, index) => {
-    const italicStyleElements = row.querySelectorAll('h5');
-    if (italicStyleElements.length === 0 || row.classList.contains('product-comparison-header')) {
+    const expandableRowMarker = row.querySelectorAll('h5');
+    if (expandableRowMarker.length === 0 || row.classList.contains('product-comparison-header')) {
       return;
     }
 
@@ -109,55 +137,6 @@ function replaceTableTextToProperCheckmars(block) {
     });
 }
 
-function getProductData(productName, numberOfDevices) {
-  const variation = `${numberOfDevices}u-1y`;
-  return fetchProduct(PRODUCTS[productName], variation);
-}
-
-async function buildPriceContainer(productName, numberOfDevices, elementToReplace) {
-  const priceContainer = document.createElement('div');
-  priceContainer.classList.add('product-comparison-price');
-
-  const productData = await getProductData(productName, numberOfDevices);
-  if (!productData) {
-    return;
-  }
-
-  const productVariationPrice = productData.price;
-  const productVariationDiscountPrice = productData.discount.discounted_price;
-  const priceLabel = productData.currency_label;
-
-  if (productVariationDiscountPrice) {
-    const oldPriceContainer = document.createElement('div');
-    oldPriceContainer.classList.add('old-price-container');
-    oldPriceContainer.innerHTML = `<p>Old Price <del>${productVariationPrice} ${priceLabel}</del></p>`;
-    priceContainer.appendChild(oldPriceContainer);
-  }
-
-  const currentPriceContainer = document.createElement('div');
-  currentPriceContainer.classList.add('current-price-container');
-  currentPriceContainer.innerHTML = `<p>${productVariationDiscountPrice ?? productVariationPrice} ${priceLabel}</p>`;
-  priceContainer.appendChild(currentPriceContainer);
-
-  elementToReplace.replaceWith(priceContainer);
-}
-
-function replacePricePlaceholderWithActualPrices(headerColumns) {
-  let productName = '';
-  let numberOfDevices = 0;
-  [...headerColumns.children].forEach((paragraph) => {
-    if (paragraph.tagName === 'H4') {
-      productName = paragraph.textContent;
-    }
-    if (paragraph.tagName === 'P' && (paragraph.textContent.search(/Devices/i) !== -1 || paragraph.textContent.search(/account/i) !== -1)) {
-      [numberOfDevices] = paragraph.textContent.split(' ');
-    }
-    if (paragraph.textContent.match(pricePlaceholder)) {
-      buildPriceContainer(productName, numberOfDevices, paragraph);
-    }
-  });
-}
-
 function extractTextFromStrongTagToParent(element) {
   if (element.children.length > 0) {
     [...element.children].forEach((children) => {
@@ -165,7 +144,7 @@ function extractTextFromStrongTagToParent(element) {
     });
   }
 
-  if (element.tagName === 'STRONG' && !element.innerHTML.match(pricePlaceholder)) {
+  if (element.tagName === 'STRONG') {
     element.parentElement.innerHTML = element.textContent;
   }
 }
@@ -175,7 +154,6 @@ function buildTableHeader(block) {
   header.classList.add('product-comparison-header');
 
   [...header.children].forEach((headerColumn) => {
-    replacePricePlaceholderWithActualPrices(headerColumn);
     const buttonSection = headerColumn.querySelector('p.button-container');
 
     if (buttonSection) {
@@ -208,4 +186,5 @@ export default function decorate(block) {
   setActiveColumn(block);
   buildTableHeader(block);
   extractTextFromStrongTagToParent(block);
+  renderNanoBlocks(block);
 }
