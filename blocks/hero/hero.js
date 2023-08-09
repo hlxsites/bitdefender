@@ -1,5 +1,5 @@
 // Description: Hero block
-
+import { createTag } from '../../scripts/utils/utils.js';
 /**
  * Builds hero block and prepends to main in a new section.
  * @param {Element} main The container element
@@ -62,6 +62,11 @@ function decorateDiscountBubble() {
   }
 }
 
+async function loadBreadcrumbs(breadcrumbsContainer) {
+  const breadCrumbsModule = await import('../breadcrumbs/breadcrumbs-create.js');
+  breadCrumbsModule.default(breadcrumbsContainer);
+}
+
 /**
  * decorates hero block
  * @param {Element} block The hero block element
@@ -73,11 +78,10 @@ export default async function decorate(block) {
 
   if (elementHeroContent !== null) {
     // add div for breadcrumb
-    const breadcrumb = document.createElement('div');
-    breadcrumb.classList.add('breadcrumb');
-    breadcrumb.innerHTML = '<a href="/">Home</a> <a href="#.html">Solutions</a>';
+    const breadcrumb = createTag('div', { class: 'breadcrumb' });
 
     elementHeroContent.insertBefore(breadcrumb, elementHeroContent.firstChild);
+    loadBreadcrumbs(breadcrumb);
 
     // find pattern for discount bubble
     // <p class="button-container"><a class="button primary" href="example.com">Text</a></p>
