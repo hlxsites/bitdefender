@@ -360,6 +360,7 @@ h6 { font-size: 16px }
 
   .default-content-wrapper {
     max-width: var(--section-large-desktop-max-width);
+    padding: 0 var(--section-large-desktop-padding);
   }
 }
 
