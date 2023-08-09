@@ -240,6 +240,7 @@ main .hero a.button {
 
 main .hero a.button.modal {
   padding: 0 28px 0 0;
+  min-width: unset;
 }
 
 @media (min-width: 1400px){

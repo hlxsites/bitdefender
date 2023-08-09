@@ -61,6 +61,7 @@
   --body-font-size-s: 16px;
   --body-font-size-xs: 14px;
   --body-font-size-xxs: 12px;
+  --body-font-size-xxxs: 10px;
 
   /* heading sizes */
   --heading-font-size-xxxl: 60px;
@@ -114,6 +115,23 @@ time, mark, audio, video {
   border: 0;
   font-size: 100%;
   vertical-align: baseline;
+}
+
+span.tag {
+  position: relative;
+  display: inline-block;
+  background-color: var(--tab-emphasis-color);
+  padding: 3px 7px 3px 8px;
+  margin: 0 0 5px;
+  border-radius: 75pt;
+  font-size: var(--body-font-size-xxxs);
+  font-weight: var(--font-weight-boldest);
+  font-style: normal;
+  line-height: 1.5;
+  color: var(--text-dark-color);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  box-shadow: 0 2px 4px 0 #0000000a;
 }
 
 article, aside, details, figcaption, figure,
@@ -585,32 +603,31 @@ main img {
 }
 
 /* section metadata */
-main .section.highlight {
+main .section.highlight > :first-child {
   background-color: var(--highlight-background-color);
 }
 
-main .section.light-sky-blue {
+main .section.light-sky-blue > :first-child {
   background-color: var(--background-color-light-sky-blue);
 }
 
-main .section.wide {
+main div.section.wide > :first-child {
+  border-radius: 8px;
   padding: 56px 0 57px;
-  border-radius: unset;
 }
 
 @media (min-width: 1200px) { /* desktop */
   main .section.wide {
     max-width: var(--section-desktop-max-width);
-    border-radius: 8px;
+    padding: 0 var(--section-desktop-padding);
     margin: 0 auto;
   }
 }
 
 @media (min-width: 1600px) { /* large desktop */
-  main .section .wide {
+  main .section.wide {
     max-width: var(--section-large-desktop-max-width);
-    border-radius: 8px;
-    margin: 0 auto;
+    padding: 0 var(--section-large-desktop-padding);
   }
 }
 
