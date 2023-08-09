@@ -23,7 +23,7 @@
   display: block;
 }
 
-@media (min-width: 990px) { /* desktop */
+@media (min-width: 992px) { /* desktop */
 
   .columns > div {
     align-items: center;
@@ -78,11 +78,6 @@
   font-size: var(--heading-font-size-m);
   font-weight: var(--font-weight-bold);
   line-height: 1.25;
-}
-
-@media (min-width: 596px) {
-  max-width: 81px;
-  margin-bottom: 28px;
 }
 
 @media (min-width: 767px) {
