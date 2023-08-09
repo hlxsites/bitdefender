@@ -212,7 +212,8 @@ main .section.light-sky-blue > * { /* apply to all children wrapper */
 }
 
 main div.section.wide {
-  padding: 0 var(--body-padding);
+  padding-left: var(--body-padding);
+  padding-right: var(--body-padding);
 }
 
 main div.section.wide > :first-child {
