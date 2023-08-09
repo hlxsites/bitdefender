@@ -615,6 +615,7 @@ export function decorateButtons(element) {
           a.nextSibling.remove();
           return;
         }
+        // Example: <p><a href="example.com">? Text</a></p>
         if (up.childNodes.length === 1 && up.tagName === 'P' && up.innerText.startsWith('?')) {
           a.className = 'info-button modal';
           up.classList.add('info-button-container');

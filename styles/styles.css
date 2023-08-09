@@ -415,15 +415,14 @@ a.info-button.modal::before {
 }
 
 p.info-button-container {
-  font-weight: 500;
-  font-size: 1pc;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--body-font-size-s);
   line-height: 1.5;
 }
 
 p.info-button-container a.info-button.modal:hover {
   text-decoration: none; 
   color: var(--link-color);
-
 }
 
 a.button::after {
