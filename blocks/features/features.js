@@ -1,7 +1,3 @@
-import {
-  decorateTags,
-} from '../../scripts/scripts.js';
-
 function expandItem(content) {
   content.style.height = `${content.scrollHeight}px`;
   const transitionEndCallback = () => {
@@ -102,8 +98,6 @@ function extractFeatures(col) {
 export default function decorate(block) {
   const cols = [...block.firstElementChild.children];
   block.classList.add(`features-${cols.length}-cols`);
-
-  decorateTags(block);
 
   // setup image columns
   [...block.children].forEach((row) => {
