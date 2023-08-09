@@ -20,74 +20,6 @@ function collapseItem(content) {
   });
 }
 
-function extractFeaturesLI(col, mergedUl) {
-  col.querySelectorAll('ul').forEach((ul) => {
-    ul.querySelectorAll('li').forEach((li) => {
-
-      const a = document.createElement('a');
-
-      // register click event on a tag
-      a.addEventListener('click', (event) => {
-        // if the clicked node is not open then open it
-        if (!event.target.classList.contains('is-open')) {
-          event.target.classList.add('is-open');
-
-          // if the clicked node has children then toggle the expanded class
-          if (event.target.parentNode.children.length > 1) {
-            event.target.parentNode.querySelectorAll('.features-tabs-content').forEach((content) => {
-              expandItem(content);
-            });
-          }
-
-          // hid the other tabs
-          mergedUl.querySelectorAll('li').forEach((collapsedLi) => {
-            if (collapsedLi !== event.target.parentNode) {
-              collapsedLi.children[0].classList.remove('is-open');
-              collapsedLi.querySelectorAll('.features-tabs-content').forEach((content) => {
-                collapseItem(content);
-              });
-            }
-          });
-        } else {
-          event.target.classList.remove('is-open');
-          // if the clicked node has children then toggle the expanded class
-          if (event.target.parentNode.children.length > 1) {
-            event.target.parentNode.querySelectorAll('.features-tabs-content').forEach((content) => {
-              collapseItem(content);
-            });
-          }
-        }
-      });
-
-      li.childNodes.forEach((node) => {
-        if (node.nodeType === Node.TEXT_NODE) {
-          a.appendChild(document.createTextNode(node.textContent));
-          // remove text node from li
-          node.remove();
-        } else if (node !== li.lastChild || node.tagName !== 'EM') {
-          a.appendChild(node);
-        }
-      });
-
-      a.classList.add('features-tabs-title');
-
-      li.insertBefore(a, li.firstChild);
-
-      // add paragraph
-      if (li.nextElementSibling === null) {
-        const paragraph = li.closest('ul').nextElementSibling;
-        if (paragraph && paragraph.tagName === 'P') {
-          paragraph.classList.add('features-tabs-content');
-          li.appendChild(paragraph);
-        }
-      }
-
-      mergedUl.appendChild(li);
-    });
-    ul.remove();
-  });
-}
-
 function eventListener(ul) {
   return (event) => {
     // if the clicked node is not open then open it
@@ -123,7 +55,6 @@ function eventListener(ul) {
 }
 
 function extractFeatures(col) {
-
   const ul = document.createElement('ul');
   ul.classList.add('features-tabs');
 
