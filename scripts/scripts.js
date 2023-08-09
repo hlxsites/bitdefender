@@ -55,11 +55,6 @@ function setPageLanguage(param) {
 }
 
 /**
- * Decorates tags in the element.
- * @param element - the element to decorate
- */
-
-/**
  * Decorates picture elements with a link to a video.
  * @param {Element} main The main element
  */

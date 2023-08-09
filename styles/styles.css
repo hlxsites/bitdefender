@@ -426,6 +426,26 @@ a.button:any-link, button {
   height: fit-content;
 }
 
+a.info-button.modal{
+  color: var(--background-blue);
+}
+
+a.info-button.modal::before {
+  content: url('/icons/user-guide.svg');
+  display: flex;
+}
+
+p.info-button-container {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--body-font-size-s);
+  line-height: 1.5;
+}
+
+p.info-button-container a.info-button.modal:hover {
+  text-decoration: none; 
+  color: var(--link-color);
+}
+
 a.button::after {
   content: '';
   width: 24px;
