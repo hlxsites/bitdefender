@@ -84,6 +84,45 @@ export function createNanoBlock(name, renderer) {
 }
 
 /**
+ * Parse nano block parameters, support string and array.
+ * parseString("aa, bb, cc") -> [ 'aa', 'bb', 'cc' ]
+ * parseString("aa, [x, y, z], cc") -> [ 'aa', [ 'x', 'y', 'z' ], 'cc' ]
+ * @param params string representing nanoblock parameters
+ * @returns an array representation of the parameters
+ */
+function parseParams(params) {
+  const segments = params.split(',').map((segment) => segment.trim());
+  const result = [];
+
+  let tempArray = [];
+  let isInArray = false;
+
+  segments.forEach((segment) => {
+    if (isInArray) {
+      if (segment.endsWith(']')) {
+        tempArray.push(segment.slice(0, -1));
+        result.push(tempArray);
+        tempArray = [];
+        isInArray = false;
+      } else {
+        tempArray.push(segment);
+      }
+    } else if (segment.startsWith('[')) {
+      if (segment.endsWith(']')) {
+        result.push(JSON.parse(segment));
+      } else {
+        tempArray.push(segment.slice(1));
+        isInArray = true;
+      }
+    } else {
+      result.push(segment);
+    }
+  });
+
+  return result;
+}
+
+/**
  * Renders nano blocks
  * @param parent The parent element
  */
@@ -94,7 +133,7 @@ export function renderNanoBlocks(parent = document.body) {
     const matches = text.match(regex);
     if (matches) {
       matches.forEach((match) => {
-        const [name, ...params] = match.slice(1, -1).split(',').map((p) => p.trim());
+        const [name, ...params] = parseParams(match.slice(1, -1));
         const renderer = nanoBlocks.get(name.toLowerCase());
         if (renderer) {
           const element = renderer(...params);

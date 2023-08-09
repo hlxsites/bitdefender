@@ -120,12 +120,12 @@
   }
 }
 
-.product-card ul {
+.product-card > ul:not(.prices) {
   margin: 0;
   padding-left: 5px;
 }
 
-.product-card li {
+.product-card > ul:not(.prices) li {
   list-style: none;
   margin: 10px 0 0;
   padding: 0 0 0 30px;
@@ -137,12 +137,12 @@
   line-height: var(--body-font-size-m);
 }
 
-.product-card li:has(del) {
+.product-card > ul:not(.prices) li:has(del) {
   color: #999;
   background-image: url('../../icons/checkmark_circle_grayed_out.svg');
 }
 
-.product-card li a {
+.product-card > ul:not(:has(.prices)) li a {
   color: inherit;
   text-decoration: underline;
 }
@@ -212,4 +212,43 @@
 .product-card .button-text {
   font-weight: 500 !important;
   font-size: var(--body-font-size-s) !important;
+}
+
+
+.product-card ul.prices {
+  list-style: none;
+  padding: 0;
+}
+
+.product-card ul.prices > li {
+  display: inline-block;
+  border: 2px solid #e4f2ff;
+  padding: 6px 13px;
+  margin: 0px 5px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  color: #006eff;
+  opacity: .8;
+  margin-bottom: 120px; 
+}
+
+.product-card ul.prices > li > div.price {
+  display: none;
+  position: absolute;
+  left: 0;
+  margin-top:30px;
+  width:100%;
+}
+
+.product-card ul.prices > li.active {
+  opacity: 1;
+  color: #fff;
+  background: #006eff;
+  border-color: #006eff;
+}
+
+
+.product-card ul.prices > li.active > div.price {
+  display: block;
 }
