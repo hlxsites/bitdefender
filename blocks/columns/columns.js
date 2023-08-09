@@ -51,6 +51,13 @@ function showSlides(carousel, slideNumber) {
 
 function hideExcessElements(carousel) {
   showSlides(carousel, 0); // Default: Show the first set of three elements
+
+  const carouselContentImage = carousel.querySelector('.columns.carousel > div:nth-child(1)');
+  const carouselContentText = carousel.querySelector('.columns.carousel > div:nth-child(2)');
+
+  // Assign the 'slide-right' class to both the image and text sections
+  carouselContentImage.classList.add('slide-right');
+  carouselContentText.classList.add('slide-right');
 }
 
 function getButtonIndex(button) {
