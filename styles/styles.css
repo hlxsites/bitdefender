@@ -71,6 +71,7 @@
   --heading-font-size-m: 24px;
   --heading-font-size-s: 20px;
   --heading-font-size-xs: 18px;
+  --heading-font-size-xxs: 16px;
 
   /* nav height */
   --nav-height: 63px;
@@ -211,22 +212,36 @@ main .section.light-sky-blue > * { /* apply to all children wrapper */
   background-color: var(--background-color-light-sky-blue);
 }
 
-main div.section.wide {
+main .section.wide {
   padding-left: var(--body-padding);
   padding-right: var(--body-padding);
 }
 
-main div.section.wide > :first-child {
+main .section.wide h2 {
+  font-size: var(--heading-font-size-s);
+  font-weight: var(--font-weight-boldest);
+}
+
+main .section.wide img {
+  height: 56px;
+  object-fit: contain;
+}
+
+main .section.wide > :first-child {
   border-radius: 8px 8px 0 0;
   padding-top: 56px;
 }
 
-main div.section.wide > :last-child {
+main .section.wide > :last-child {
   border-radius: 0 0 8px 8px;
   padding-bottom: 56px;
 }
 
-main div.section.wide .default-content-wrapper {
+main .section.wide > :only-child {
+  border-radius: 8px;
+}
+
+main .section.wide .default-content-wrapper {
   text-align: center;
   padding-bottom: 15px;
 }
@@ -248,6 +263,7 @@ main div.section.wide .default-content-wrapper {
 
   main div.section.wide > * { /* apply to all children wrapper */
     max-width: calc(var(--section-desktop-max-width) - 2 * var(--section-desktop-padding));
+    padding-top: 1px; /* hack to handle margin of child paragraphs */
   }
 
   main .section {
@@ -306,10 +322,13 @@ h4 {
 }
 
 h5 {
-  font-size: 16px;
+  font-size: var(--heading-font-size-xxs);
   line-height: 1.5;
 }
-h6 { font-size: 16px }
+
+h6 {
+  font-size: var(--heading-font-size-xxs);
+}
 
 @media (min-width: 596px) {
   h1 { font-size: 38px }
@@ -325,27 +344,38 @@ h6 { font-size: 16px }
 }
 
 @media (min-width: 992px) {
-  h1 { font-size: 50px }
+  h1 { font-size: var(--heading-font-size-xxl) }
 
   h2 {
-    font-size: 38px;
+    font-size: var(--heading-font-size-xl);
     margin-bottom: 22px;
   }
 
   h3 {
-    font-size: 26px;
+    font-size: var(--heading-font-size-m);
     margin-bottom: 24px;
   }
-  h4 { font-size: 22px }
+  h4 { font-size: var(--heading-font-size-s) }
+
+  main .section.wide h2 {
+    font-size: var(--heading-font-size-m);
+    font-weight: var(--font-weight-boldest);
+  }
+
 }
 
 @media (min-width: 1200px) {
   h3 { font-size: 30px }
+
+  main .section.wide h2 {
+    font-size: var(--heading-font-size-l);
+    font-weight: var(--font-weight-boldest);
+  }
 }
 
 @media (min-width: 1400px) {
-  h2 { font-size: 40px }
-  h3 { font-size: 32px }
+  h2 { font-size: var(--heading-font-size-xl) }
+  h3 { font-size: var(--heading-font-size-l) }
   h4 { font-size: var(--heading-font-size-m) }
 }
 
@@ -357,6 +387,7 @@ h6 { font-size: 16px }
 
   main div.section.wide > * { /* apply to all children wrapper */
     max-width: calc(var(--section-large-desktop-max-width) - 2 * var(--section-large-desktop-padding));
+    padding-top: 1px; /* hack to handle margin of child paragraphs */
   }
 
   .default-content-wrapper {
