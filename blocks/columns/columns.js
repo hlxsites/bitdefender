@@ -18,7 +18,10 @@ function showSlides(carousel, slideNumber) {
   function handleSlideDisplay(childDivs) {
     // Hide all elements
     childDivs.forEach((div) => { 
-        div.style.opacity = '1'; 
+        div.style.opacity = '0';
+        if (window.innerWidth <= 676) {
+          div.style.width = '0px';
+        }
     });
 
     // Calculate the start and end for the items to display based on slideNumber
@@ -39,6 +42,9 @@ function showSlides(carousel, slideNumber) {
         end = childDivs.length;
       }
     }
+
+    console.log ('start', start);
+    console.log ('end', end);
     
     // Get the width of the container in pixels
     const containerWidth = carousel.clientWidth;
@@ -50,13 +56,12 @@ function showSlides(carousel, slideNumber) {
 
     for (let i = start; i < end && i < childDivs.length; i += 1) {
       childDivs[i].style.opacity = '1';
-    childDivs[i].style.width = columnWidthPx +'px';
+      childDivs[i].style.width = columnWidthPx +'px';
     }
 
   }
 
   // Apply the display logic for both images and texts
-  handleSlideDisplay(carouselContent.querySelectorAll('.columns-img-col'));
   handleSlideDisplay(carouselContent.querySelectorAll('div'));
 }
 
