@@ -305,14 +305,14 @@ header a.button:hover span.button-text {
   border-bottom: 20px solid white;
 }
 
-.mega-menu {
+/* .mega-menu {
   display: flex;
   flex-direction: column;
   position: absolute;
   margin-left: 435px;
   top: 120px;
-  width: 900px;
-  height: 500px;
+  max-width: 920px;
+  height: auto;
   background-color: var(--background-color);
   opacity: 0; 
   z-index: 3;
@@ -320,16 +320,15 @@ header a.button:hover span.button-text {
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
   box-shadow: 0 10px 10px #0003;
-  border-bottom: 35px solid #f5f6f7;
-}
+} */
 
-@media (max-width: 1390px) {
+/* @media (max-width: 1390px) {
   .mega-menu {
     left: 50%;
     transform: translateX(-50%);
     margin-left: 0;
   }
-} 
+}  */
 
 .mega-menu div h2 {
   position: relative;
@@ -414,7 +413,7 @@ header a.button:hover span.button-text {
   transform: translateY(-50%) rotate(-45deg);
 }
 
-@media (max-width: 990px) {
+@media (max-width: 992px) {
   .nav-wrapper {
     display: none;
   }
@@ -548,7 +547,7 @@ header a.button:hover span.button-text {
 
 }
 
-@media(min-width: 990px) {
+@media(min-width: 992px) {
   header.header-wrapper {
     height: var(--nav-height-desktop);
     background-color: var(--text-color);
@@ -602,6 +601,7 @@ header a.button:hover span.button-text {
     height: 100%;
     margin: 0 auto;
     padding: 6px var(--section-desktop-padding) 10px;
+    position: relative;
   }
 
   nav p {
@@ -692,7 +692,7 @@ header a.button:hover span.button-text {
   
   .logo-container {
     padding: 20px var(--section-desktop-padding);
-    margin: 13px auto 0;
+    margin: 21px auto 0;
     gap: 10px;
   }
   
@@ -741,9 +741,10 @@ header a.button:hover span.button-text {
   .mega-menu {
     flex-direction: column;
     position: absolute;
-    margin-left: 190px;
-    top: 122px;
-    width: 900px;
+    left: 80px;
+    top: 123px;
+    max-width: 920px;
+    width: 100%;
     background-color: var(--background-color);
     opacity: 0;
     z-index: 3;
@@ -960,11 +961,21 @@ header a.button:hover span.button-text {
 
 }
 
-@media (max-width: 1390px) {
+@media (min-width: 1200px) { 
   .mega-menu {
-    left: 50%;
-    transform: translateX(-50%);
-    margin-left: 0;
+    left: 80px;
+  }
+}
+
+@media (min-width: 1400px) { 
+  .mega-menu {
+    left: 210px;
+  }
+}
+
+@media (min-width: 1600px) { 
+  .mega-menu {
+    left: 240px;
   }
 }
 
@@ -983,7 +994,6 @@ header a.button:hover span.button-text {
     max-width: var(--section-large-desktop-max-width);
     padding-left: var(--section-large-desktop-padding);
     padding-right: var(--section-large-desktop-padding);
-    margin-top: 21px;
   }
 
   .logo-container > p {
