@@ -18,20 +18,29 @@ function collapseItem(content) {
 
 function eventListener(ul) {
   return (event) => {
+    let target = null;
+
+    // find ancestor a tag
+    if (event.target.tagName !== 'A') {
+      target = event.target.closest('a');
+    } else {
+      target = event.target;
+    }
+
     // if the clicked node is not open then open it
-    if (!event.target.classList.contains('is-open')) {
-      event.target.classList.add('is-open');
+    if (!target.classList.contains('is-open')) {
+      target.classList.add('is-open');
 
       // if the clicked node has children then toggle the expanded class
-      if (event.target.parentNode.children.length > 1) {
-        event.target.parentNode.querySelectorAll('.features-tabs-content').forEach((content) => {
+      if (target.parentNode.children.length > 1) {
+        target.parentNode.querySelectorAll('.features-tabs-content').forEach((content) => {
           expandItem(content);
         });
       }
 
       // hid the other tabs
       ul.querySelectorAll('li').forEach((collapsedLi) => {
-        if (collapsedLi !== event.target.parentNode) {
+        if (collapsedLi !== target.parentNode) {
           collapsedLi.children[0].classList.remove('is-open');
           collapsedLi.querySelectorAll('.features-tabs-content').forEach((content) => {
             collapseItem(content);
@@ -39,10 +48,10 @@ function eventListener(ul) {
         }
       });
     } else {
-      event.target.classList.remove('is-open');
+      target.classList.remove('is-open');
       // if the clicked node has children then toggle the expanded class
-      if (event.target.parentNode.children.length > 1) {
-        event.target.parentNode.querySelectorAll('.features-tabs-content').forEach((content) => {
+      if (target.parentNode.children.length > 1) {
+        target.parentNode.querySelectorAll('.features-tabs-content').forEach((content) => {
           collapseItem(content);
         });
       }
@@ -67,7 +76,7 @@ function extractFeatures(col) {
     h4.childNodes.forEach((node) => {
       if (node.nodeType === Node.TEXT_NODE) {
         a.appendChild(document.createTextNode(node.textContent));
-      } else if (node !== li.lastChild || node.tagName !== 'SPAN') {
+      } else {
         a.appendChild(node);
       }
     });
@@ -75,6 +84,11 @@ function extractFeatures(col) {
     a.classList.add('features-tabs-title');
 
     li.appendChild(a);
+
+    // all descendants of a that have class tag
+    a.querySelectorAll('.tag').forEach((tag) => {
+      li.appendChild(tag);
+    });
 
     const content = document.createElement('div');
     content.classList.add('features-tabs-content');
