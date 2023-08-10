@@ -1,5 +1,5 @@
 function getItemsToShow() {
-  if (window.innerWidth <= 767) {
+  if (window.innerWidth <= 676) {
     return 1; // Show 1 item for mobile screens
   } if (window.innerWidth <= 990) {
     return 2; // Show 2 items for tablets
@@ -18,7 +18,7 @@ function showSlides(carousel, slideNumber) {
   function handleSlideDisplay(childDivs) {
     // Hide all elements
     childDivs.forEach((div) => { 
-        div.style.opacity = '0'; 
+        div.style.opacity = '1'; 
     });
 
     // Calculate the start and end for the items to display based on slideNumber

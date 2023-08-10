@@ -232,10 +232,6 @@
   transition: transform 0.3s, opacity 0.3s; 
 }
 
-.columns.carousel > div > div > p {
-  width: inherit;
-}
-
 .columns.carousel > div:nth-child(1) {
   width: max-content;
   position: relative;
@@ -251,5 +247,5 @@
 }
 
 .slide-right {
-  transform: translateX(0vw);
+  transform: translateX(0%);
 }
