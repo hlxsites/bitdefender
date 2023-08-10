@@ -105,7 +105,6 @@ export function renderNanoBlocks(parent = document.body) {
   });
 }
 
-
 /**
  * Results returned from {@link fetchIndex} come from a derived Excel sheet that is constructed
  * with the FILTER function. This FILTER function has the unwanted side effect of returning '0' in
