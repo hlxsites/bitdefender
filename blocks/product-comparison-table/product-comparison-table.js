@@ -36,10 +36,8 @@ function handleExpanableRowClick(rows, expandableRowIndex, evt) {
   [...rows].forEach((row, index) => {
     if (parseInt(row.getAttribute('expandable-row-index'), 10) === expandableRowIndex) {
       row.classList.toggle('hidden');
-      row.classList.remove('not-visible');
     } else if (row.hasAttribute('expandable-row-index') && !row.classList.contains('hidden')) {
       row.classList.add('hidden');
-      row.classList.add('not-visible');
     } else if (row.classList.contains('expanded') && index !== expandableRowIndex) {
       row.classList.remove('expanded');
     }
@@ -59,7 +57,6 @@ function markHiddenRowsUnderExpandableRows(rows, expandableRowsIndexes) {
     }
 
     row.classList.add('hidden');
-    row.classList.add('not-visible');
     row.setAttribute('expandable-row-index', lastExpandableRow);
   });
 }
