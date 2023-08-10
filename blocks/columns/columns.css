@@ -28,7 +28,7 @@
   display: block;
 }
 
-@media (min-width: 990px) { /* desktop */
+@media (min-width: 992px) { /* desktop */
 
   .columns > div {
     align-items: center;
@@ -84,7 +84,6 @@
   font-weight: var(--font-weight-bold);
   line-height: 1.25;
 }
-
 
 @media (min-width: 767px) {
   .columns.features > div {
