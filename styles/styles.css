@@ -1012,6 +1012,7 @@ main .section.blue a.button.secondary::after {
 .no-padding .columns-wrapper {
   padding: 0;
 }
+
 .tag {
   margin-left: 5px;
   color: var(--background-color);

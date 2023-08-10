@@ -121,8 +121,13 @@ function createNavigationButtons(numberOfSlides, carousel) {
   return buttonsWrapper;
 }
 
-function setupCarousel(carousel) {
+function setupCarousel(carousel, resetSlidePosition = false) {
   const carouselContent = carousel.querySelector('.columns.carousel > div');
+
+  // Remove the slide-left class if necessary
+  if (resetSlidePosition) {
+    carouselContent.classList.remove('slide-left');
+  }
 
   // Remove existing navigation buttons
   const existingButtonsWrapper = carousel.querySelector('.carousel-buttons');
@@ -172,11 +177,10 @@ export default function decorate(block) {
     setupCarousel(block);
   }
 
-  // Add a debounced event listener to handle window resizes
   window.addEventListener('resize', debounce(() => {
     // Check if the block still has the carousel class before resetting
     if (block.classList.contains('carousel')) {
-      setupCarousel(block);
+      setupCarousel(block, true); // Pass true to reset the slide position
     }
   }, 250));
   window.dispatchEvent(new Event('resize')); // trigger resize to give width to columns
