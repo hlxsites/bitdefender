@@ -610,8 +610,17 @@ export function decorateButtons(element) {
         if (up.childNodes.length === 3 && up.tagName === 'P' && a.nextElementSibling?.tagName === 'EM') {
           a.className = 'button';
           up.classList.add('button-container');
+          a.innerHTML = wrapButtonText(a);
           a.dataset.modal = a.nextSibling.textContent.trim().slice(1, -1);
           a.nextSibling.remove();
+          return;
+        }
+        // Example: <p><a href="example.com">? Text</a></p>
+        if (up.childNodes.length === 1 && up.tagName === 'P' && up.innerText.startsWith('?')) {
+          a.className = 'info-button modal';
+          up.classList.add('info-button-container');
+          a.textContent = a.textContent.slice(1).trim();
+          a.title = a.title.slice(1).trim();
           return;
         }
         // Example: <p><a href="example.com">Text</a></p>
