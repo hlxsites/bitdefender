@@ -41,6 +41,9 @@
   --icon-color: #205fff;
   --background-light-blue: #d9eeff;
   --background-blue: #006eff;
+  --dark-blue-tag: #005eff;
+  --light-blue-tag: #13b0a7;
+  --green-tag: #2cb43d;
 
   /* fonts */
   --body-font-family: "Roboto", "roboto-normal-400-fallback", helvetica, ubuntu, roboto, noto, sans-serif;
@@ -115,23 +118,6 @@ time, mark, audio, video {
   border: 0;
   font-size: 100%;
   vertical-align: baseline;
-}
-
-span.tag {
-  position: relative;
-  display: inline-block;
-  background-color: var(--tab-emphasis-color);
-  padding: 3px 7px 3px 8px;
-  margin: 0 0 5px;
-  border-radius: 75pt;
-  font-size: var(--body-font-size-xxxs);
-  font-weight: var(--font-weight-boldest);
-  font-style: normal;
-  line-height: 1.5;
-  color: var(--text-dark-color);
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  box-shadow: 0 2px 4px 0 #0000000a;
 }
 
 article, aside, details, figcaption, figure,
@@ -1017,4 +1003,26 @@ main .section.blue a.button.secondary::after {
   main .section.circle {
     background-position: top right;
   }
+}
+
+.tag {
+  margin-left: 5px;
+  color: var(--background-color);
+  font-size: var(--body-font-size-xxxs);
+  font-weight: var(--font-weight-boldest);
+  line-height: 1;
+  border-radius: 3px;
+  padding: 2px 4px;
+}
+
+.tag-dark-blue {
+  background-color: var(--dark-blue-tag);
+}
+
+.tag-light-blue {
+  background-color: var(--light-blue-tag);
+}
+
+.tag-green {
+  background-color: var(--green-tag);
 }
