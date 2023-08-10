@@ -939,18 +939,21 @@ header a.button:hover span.button-text {
 @media (min-width: 1200px) { 
   .mega-menu {
     left: 80px;
+    transform: translateX(0);
   }
 }
 
 @media (min-width: 1400px) { 
   .mega-menu {
     left: 210px;
+    transform: translateX(0);
   }
 }
 
 @media (min-width: 1600px) { 
   .mega-menu {
     left: 240px;
+    transform: translateX(0);
   }
 }
 
