@@ -305,31 +305,6 @@ header a.button:hover span.button-text {
   border-bottom: 20px solid white;
 }
 
-/* .mega-menu {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  margin-left: 435px;
-  top: 120px;
-  max-width: 920px;
-  height: auto;
-  background-color: var(--background-color);
-  opacity: 0; 
-  z-index: 3;
-  transition: opacity 0.2s ease-in-out;
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
-  box-shadow: 0 10px 10px #0003;
-} */
-
-/* @media (max-width: 1390px) {
-  .mega-menu {
-    left: 50%;
-    transform: translateX(-50%);
-    margin-left: 0;
-  }
-}  */
-
 .mega-menu div h2 {
   position: relative;
   font-size: var(--body-font-size-s);
