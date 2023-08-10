@@ -49,6 +49,7 @@ function showSlides(carousel, slideNumber) {
 
     for (let i = start; i < end && i < childDivs.length; i += 1) {
       childDivs[i].style.opacity = '1';
+      childDivs[i].style.position = 'relative';
       childDivs[i].style.width = `${columnWidthPx}px`;
     }
   }
@@ -59,9 +60,6 @@ function showSlides(carousel, slideNumber) {
 
 function hideExcessElements(carousel) {
   showSlides(carousel, 0); // Default: Show the first set of three elements
-
-  const carouselContent = carousel.querySelector('.columns.carousel > div:nth-child(1)');
-  carouselContent.classList.add('slide-right');
 }
 
 function getButtonIndex(button) {
@@ -78,12 +76,12 @@ function setActiveButton(button, buttonsWrapper, carousel) {
   const carouselContent = carousel.querySelector('.columns.carousel > div:nth-child(1)');
 
   // Clear any previous slide classes
-  carouselContent.classList.remove('slide-left', 'slide-right');
+  carouselContent.classList.remove('slide-left');
 
   if (clickedButtonIndex > activeButtonIndex) {
     carouselContent.classList.add('slide-left');
   } else if (clickedButtonIndex < activeButtonIndex) {
-    carouselContent.classList.add('slide-right');
+    carouselContent.classList.remove('slide-left');
   }
 
   // Remove active class from all buttons

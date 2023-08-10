@@ -219,22 +219,14 @@
   position: relative;
   left: 0;
   gap: 0;
-  overflow: hidden;
   transition: transform 0.3s ease-in-out;
   height: 200px;
 }
 
-.slide-right {
-  transform: translateX(0%);
-}
 
 @media (min-width: 676px) {
   .columns.carousel > div > div {
     transition: transform 0.3s, opacity 0.3s; 
-  }
-
-  .columns.carousel > div > div >p {
-    width: auto;
   }
 
   .columns.carousel > div:nth-child(1) {
