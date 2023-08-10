@@ -328,8 +328,9 @@
 }
 
 
-.product-comparison-table .expandable-arrow > div.expanded:first-of-type::before {
+.product-comparison-table .expandable-arrow.expanded > div:first-of-type::before {
     transform: rotate(-135deg);
+    top: 1.2rem;
 }
 
 .product-comparison-table div:first-of-type.expandable-row {
@@ -338,11 +339,6 @@
 
 .product-comparison-table div[role='row'].hidden {
     display: none;
-}
-
-.product-comparison-table div[role='row'].not-visible {
-    opacity: 0;
-    transition: all .5s linear;
 }
 
 .product-comparison-table div[role='cell'] > p em {

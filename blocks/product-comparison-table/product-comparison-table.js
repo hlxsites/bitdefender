@@ -70,7 +70,7 @@ function addArrowAndEventToExpandableRows(rows) {
       && row.nextElementSibling !== null
       && !row.nextElementSibling.classList.contains('expandable-row')) {
       row.classList.add('expandable-arrow');
-      row.children[0].addEventListener('click', handleExpanableRowClick.bind(null, rows, index));
+      row.addEventListener('click', handleExpanableRowClick.bind(null, rows, index));
     }
   });
 }
