@@ -25,38 +25,28 @@ createNanoBlock('price', (code, variant, label) => {
   return priceRoot;
 });
 
+function renderProductPrice(product) {
+  return `<strong>${product.price} ${product.currency_iso}</strong>`;
+}
+
+function renderProductPriceWithDiscount(product) {
+  return `<strong>${product.discount.discounted_price} ${product.currency_iso}</strong>
+          <span>Old Price <del>${product.price} ${product.currency_iso}</del></span>`;
+}
+
 createNanoBlock('prices', (code, variants, label) => {
   const root = document.createElement('ul');
   root.classList.add('prices');
 
-  // const root = document.createElement('div');
-  // root.classList.add('price-selector');
-
-  // const ul = document.createElement('ul');
-  // ul.classList.add('selector');
-  // root.appendChild(ul);
-
-  // const ul = document.createElement('ul');
-  // ul.classList.add('prices');
-  // root.appendChild(ul);
   const promises = variants.map((variant) => fetchProduct(code, variant));
 
   Promise.all(promises).then((products) => products.forEach((product) => {
-    // eslint-disable-next-line camelcase, max-len
-    const {
-      price,
-      discount: { discounted_price: discounted },
-      currency_iso: currency,
-      variation: { dimension_value: unit },
-    } = product;
-
     const tmpDiv = document.createElement('div');
     tmpDiv.innerHTML = `
     <li>
-      <span>${unit}</span>
-      <div class="price">                
-        <strong>${discounted} ${currency}</strong>
-        <span>Old Price <del>${price} ${currency}</del></span>
+      <span>${product.variation.dimension_value}</span>
+      <div class="price">      
+        ${product.discount ? renderProductPriceWithDiscount(product) : renderProductPrice(product)}          
         <em>${label}</em>
       </div>
     </li>`;
