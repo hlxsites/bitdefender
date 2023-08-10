@@ -84,11 +84,10 @@ export default async function decorate(block) {
     // <p><em>50% Discount</em></p>
     decorateDiscountBubble();
 
-    // find ul tag that contains picture tag
-    const elementPicture = elementHeroContent.querySelector('ul:has(picture)');
+    // Select  <ul> elements that contain a <picture> tag
+    const ulsWithPicture = Array.from(document.querySelectorAll('ul')).filter((ul) => ul.querySelector('picture'));
 
-    if (elementPicture !== null) {
-      elementPicture.classList.add('hero-awards');
-    }
+    // Apply a CSS class to each selected <ul> element
+    ulsWithPicture.forEach((ul) => ul.classList.add('hero-awards'));
   }
 }
