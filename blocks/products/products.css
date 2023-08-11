@@ -55,6 +55,10 @@
   flex: 0;
 }
 
+.product-card {
+  padding-top: 40px;
+}
+
 .product-card h3 {
   font-weight: normal;
   flex: 1;
@@ -141,7 +145,7 @@
   background-image: url('../../icons/checkmark_circle_grayed_out.svg');
 }
 
-.product-card > ul:not(:has(.prices)) li a {
+.product-card > ul:not(.prices) li a {
   color: inherit;
   text-decoration: underline;
 }
@@ -156,8 +160,14 @@
   color: inherit;
 }
 
+.product-card .price {
+  color: #7e7e7e;
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
 .product-card .price del {
-  display: block;
   font-weight: normal;
   font-size: var(--body-font-size-l);
   color: #666;
@@ -216,7 +226,10 @@
 .product-card ul.prices {
   list-style: none;
   padding: 0;
+  height:260px;
 }
+
+
 
 .product-card ul.prices > li {
   display: inline-block;
@@ -237,6 +250,7 @@
   left: 0;
   margin-top:30px;
   width:100%;
+  padding: 0px 18px;
 }
 
 .product-card ul.prices > li.active {
@@ -262,4 +276,33 @@
   .products-wrapper {
     max-width: var(--section-large-desktop-max-width);
   }
+}
+
+.product-card .savings {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #2cb43d;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  padding: 4px 0 8px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: .96px;
+}
+
+.product-card .discount {
+  display: block;
+  margin: 9px auto 9px;
+
+  padding: 2px 8px;
+  border-radius: 8px;
+  background: rgba(44,180,61,.2);
+  color: #2cb43d;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: normal;
+  width: fit-content;
 }

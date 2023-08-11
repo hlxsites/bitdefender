@@ -137,7 +137,8 @@ export function renderNanoBlocks(parent = document.body) {
         const renderer = nanoBlocks.get(name.toLowerCase());
         if (renderer) {
           const element = renderer(...params);
-          node.parentNode.replaceChild(element, node);
+          const oldElement = node.parentNode;
+          oldElement.parentNode.replaceChild(element, oldElement);
         }
       });
     }
