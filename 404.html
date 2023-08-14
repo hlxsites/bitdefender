@@ -6,7 +6,6 @@
   <script type="text/javascript">
     window.isErrorPage = true;
     window.errorCode = '404';
-    window.location.href = 'https://www.bitdefender.com.au/solutions/404';
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta property="og:title" content="Page not found">
@@ -36,14 +35,18 @@
       min-height: calc(100vh - var(--nav-height));
       display: flex;
       align-items: center;
+      justify-content: center;
     }
 
-    main.error .error-number {
-      width: 100%;
+    .error .default-content-wrapper {
+      width: fit-content;
+      margin: 0 auto;
     }
 
     main.error .error-number text {
+      font-size: var(--heading-font-size-m);
       font-family: var(--fixed-font-family);
+      font-weight: var(--font-weight-bold);
     }
   </style>
   <link rel="stylesheet" href="/styles/lazy-styles.css">
@@ -57,9 +60,6 @@
         <text x="0" y="17">404</text>
       </svg>
       <h2 class="error-message">Page Not Found</h2>
-      <p class="button-container">
-        <a href="/" class="button secondary error-button-home">Go home</a>
-      </p>
     </div>
   </main>
   <footer></footer>
