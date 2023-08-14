@@ -25,6 +25,16 @@ export default function decorate(block) {
     const [header, content] = item.children;
     header.classList.add('accordion-item-header');
     content.classList.add('accordion-item-content');
+    // check if .accordion-item-content has a <p>
+    const p = content.querySelector('p');
+    // if it doesn't, add a <p> and move the content inside
+    if (!p) {
+      const newP = document.createElement('p');
+      newP.innerHTML = content.innerHTML;
+      content.innerHTML = '';
+      content.appendChild(newP);
+    }
+
     item.addEventListener('click', () => {
       if (!item.classList.contains('expanded')) {
         items.filter((i) => i.classList.contains('expanded')).forEach((i) => collapseItem(i));

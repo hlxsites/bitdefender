@@ -231,6 +231,7 @@ p {
   line-height: 1.31;
   letter-spacing: 0.006em;
   padding: 0;
+  font-weight: var(--font-weight-regular);
 }
 
 main input {
@@ -992,6 +993,7 @@ main .section.blue {
     padding-bottom: 96px;
   }
 }
+
 
 main .section.checked-lists  ul li {
   padding-left: 8px;
