@@ -965,6 +965,20 @@ main .section.full-width {
   overflow: hidden;
 }
 
+main .terms-of-use h5 {
+  display: inline-block;
+}
+
+main .terms-of-use ul {
+  list-style: disc;
+  
+}
+
+main .terms-of-use ul li {
+  line-height: 1.67;
+  padding-left: 0;
+}
+
 main .section.blue {
   background-color: var(--background-blue);
   color: white;
