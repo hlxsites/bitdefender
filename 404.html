@@ -94,9 +94,9 @@ main .link-section {
   margin-top: 1rem;
   column-count: 1; 
   width: 100%;
-  display: flex; /* Added for centering */
+  display: flex;
   flex-direction: column; 
-  align-items: center; /* Centers the content */
+  align-items: center;
 }
 
 .link-section > div:last-child .button-container {
@@ -110,7 +110,7 @@ main .link-section {
   color: var(--link-color);
   padding: 0;
   padding-left: 10px;
-  text-align: center; /* Makes sure the text within the anchor is centered */
+  text-align: center;
 }
 
 .link-section > div:last-child .button-container a::after {
@@ -119,16 +119,15 @@ main .link-section {
   margin: 0;
 }
 
-/* Larger screens (over 990px) */
-
 @media (min-width: 990px) {
   main .link-section {
     width: 50vw;
+    max-width: 650px;
   }
 
   .link-section > div:last-child {
     column-count: 2;
-    display: block; /* Reverting back to default display for larger screens */
+    display: block; 
     align-items: initial;
   }
 }
