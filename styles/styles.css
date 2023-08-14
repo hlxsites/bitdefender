@@ -951,6 +951,20 @@ main .section.blue {
   }
 }
 
+main .terms-of-use h5 {
+  display: inline-block;
+}
+
+main .terms-of-use ul {
+  list-style: disc;
+  
+}
+
+main .terms-of-use ul li {
+  line-height: 1.67;
+  padding-left: 0;
+}
+
 main .section.checked-lists  ul li {
   padding-left: 8px;
   list-style-image: url("/icons/checkmark_solid-circle.svg");
@@ -1026,3 +1040,4 @@ main .section.blue a.button.secondary::after {
 .tag-green {
   background-color: var(--green-tag);
 }
+
