@@ -245,6 +245,6 @@
   }
 }
 
-.active-button {
-  background-color: var(--link-color) !important;
+.columns.carousel .active-button {
+  background-color: var(--link-color);
 }
