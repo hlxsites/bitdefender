@@ -44,6 +44,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      text-align: center;
     }
 
     .error-number {
@@ -67,50 +68,70 @@
       font-weight: var(--font-weight-bold);
     }
 
-    main .link-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 40vw;
-      padding: 30px;
-      margin: 0 auto;
-      border-radius: 12px;
-      background-color: var(--fourofour-background-color);
-    }
+   
+/* Default styles (mobile-first) */
 
-    .link-section > div:first-child > p{
-      font-size: var(--body-font-size-xs);
-      font-weight: var(--font-weight-bold);
-      color: var(--color-dark-gray);
-      text-align: center;
-      text-decoration: none;
-    }
+main .link-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;  /* Adjusted to fit smaller screens */
+  padding: 30px;
+  margin: 0 auto;
+  border-radius: 12px;
+  background-color: var(--fourofour-background-color);
+}
 
-    .link-section > div:last-child {
-      margin-top: 1rem;
-      column-count: 2;
-      width: 100%;
-    }
+.link-section > div:first-child > p {
+  font-size: var(--body-font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-dark-gray);
+  text-align: center;
+  text-decoration: none;
+}
 
-    .link-section > div:last-child .button-container {
-      margin-bottom: 1rem;
-      margin-top: 0;
-    }
+.link-section > div:last-child {
+  margin-top: 1rem;
+  column-count: 1; 
+  width: 100%;
+  display: flex; /* Added for centering */
+  flex-direction: column; 
+  align-items: center; /* Centers the content */
+}
 
-    .link-section > div:last-child .button-container a {
-      background-color: transparent;
-      border: none;
-      color: var(--link-color);
-      padding: 0;
-      padding-left: 10px;
-    }
+.link-section > div:last-child .button-container {
+  margin-bottom: 1rem;
+  margin-top: 0;
+}
 
-    .link-section > div:last-child .button-container a::after {
-      background-color: var(--link-color);
-      opacity: 1;
-      margin: 0;
-    }
+.link-section > div:last-child .button-container a {
+  background-color: transparent;
+  border: none;
+  color: var(--link-color);
+  padding: 0;
+  padding-left: 10px;
+  text-align: center; /* Makes sure the text within the anchor is centered */
+}
 
+.link-section > div:last-child .button-container a::after {
+  background-color: var(--link-color);
+  opacity: 1;
+  margin: 0;
+}
+
+/* Larger screens (over 990px) */
+
+@media (min-width: 990px) {
+  main .link-section {
+    width: 50vw;
+  }
+
+  .link-section > div:last-child {
+    column-count: 2;
+    display: block; /* Reverting back to default display for larger screens */
+    align-items: initial;
+  }
+}
 
   </style>
   <link rel="stylesheet" href="/styles/lazy-styles.css">
