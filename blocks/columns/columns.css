@@ -204,10 +204,6 @@
   transition: all .4s ease-in-out;
 }
 
-.active {
-  background-color: var(--link-color) !important;
-}
-
 .columns.carousel > div > div {
   margin: 10px 5px;
   width: 100%;
@@ -247,4 +243,8 @@
   .slide-left {
     transform: translateX(-25%);
   }
+}
+
+.active-button {
+  background-color: var(--link-color) !important;
 }

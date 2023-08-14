@@ -68,7 +68,7 @@ function getButtonIndex(button) {
 }
 
 function setActiveButton(button, buttonsWrapper, carousel) {
-  const activeButton = buttonsWrapper.querySelector('.active');
+  const activeButton = buttonsWrapper.querySelector('.active-button');
   // Determine the index of the active button and the clicked button
   const activeButtonIndex = getButtonIndex(activeButton);
   const clickedButtonIndex = getButtonIndex(button);
@@ -86,10 +86,10 @@ function setActiveButton(button, buttonsWrapper, carousel) {
 
   // Remove active class from all buttons
   buttonsWrapper.querySelectorAll('button').forEach((btn) => {
-    btn.classList.remove('active');
+    btn.classList.remove('active-button');
   });
 
-  button.classList.add('active');
+  button.classList.add('active-button');
 }
 
 function createNavigationButtons(numberOfSlides, carousel) {
@@ -102,7 +102,7 @@ function createNavigationButtons(numberOfSlides, carousel) {
 
     button.addEventListener('click', () => {
       // Return early if the button clicked is already active
-      if (button.classList.contains('active')) {
+      if (button.classList.contains('active-button')) {
         return;
       }
 
@@ -115,7 +115,7 @@ function createNavigationButtons(numberOfSlides, carousel) {
 
   // By default, set the first button as the active button
   if (buttonsWrapper.firstChild) {
-    buttonsWrapper.firstChild.classList.add('active');
+    buttonsWrapper.firstChild.classList.add('active-button');
   }
 
   return buttonsWrapper;
