@@ -28,6 +28,22 @@
       }
       sampleRUM('404', { source: document.referrer, target: window.location.href });
     });
+
+    //function to get the html from 404.plain.html
+    async function get404Html() {
+      return fetch('/404.plain.html')
+        .then((response) => {
+          return response.text();
+        })
+        .then((html) => {
+          return html;
+        });
+    }
+
+    get404Html().then(htmlContent => {
+        const specialSection = document.querySelector('.link-section');
+        specialSection.innerHTML = htmlContent;
+      });
   </script>
   <link rel="stylesheet" href="/styles/styles.css">
   <style>
@@ -77,6 +93,9 @@
       </svg>
       <h2 class="error-message">Page Not Found</h2>
       <p>The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
+    </div>
+    <div class="link-section">
+
     </div>  
   </main>
   <footer></footer>
