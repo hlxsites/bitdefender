@@ -355,6 +355,10 @@ main .section.wide .default-content-wrapper {
   padding-bottom: 15px;
 }
 
+main .section.wide.center .products.compact .product-card {
+  grid-column: 2;
+}
+
 @media (min-width: 992px) { /* desktop */
   header {
     height: var(--nav-height-desktop);
