@@ -102,3 +102,24 @@
   }
 
 }
+
+.accordion.faq .accordion-item {
+  padding: 25px 31px 19px;
+  margin-bottom: 18px;
+}
+
+.accordion.faq .accordion-item-header h4{
+  display: inline-block;
+  margin-bottom: 15px;
+}
+
+.accordion.faq  .accordion-item-content p {
+  padding: 0;
+  margin: 0 0 15px;
+  font-size: var(--body-font-size-m);
+  color: #3c3c3c;
+}
+
+.accordion.faq  .accordion-item-content p:last-of-type {
+  margin-bottom: 0;
+}
