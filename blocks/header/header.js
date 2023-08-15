@@ -16,17 +16,17 @@ function createLoginModal() {
 }
 
 function handleLoginClick() {
-  const loginModal = document.querySelector('.login-modal'); 
-  if(loginModal.classList.contains('show')) {
+  const loginModal = document.querySelector('.login-modal');
+  if (loginModal.classList.contains('show')) {
     loginModal.classList.remove('show');
     setTimeout(() => {
       loginModal.style.display = 'none';
-    }, 300); 
+    }, 300);
   } else {
-    loginModal.style.display = 'flex'; 
+    loginModal.style.display = 'flex';
     setTimeout(() => {
-      loginModal.classList.add('show'); 
-    }, 10);  // Small delay to ensure that the modal is rendered before adding the transition
+      loginModal.classList.add('show');
+    }, 10); // Small delay to ensure that the modal is rendered before adding the transition
   }
 
   const loginButton = document.querySelector('.nav-sections p:last-child');
@@ -141,10 +141,9 @@ function renderDesktopHeader(block, nav) {
   if (navSections) {
     const LoginLink = document.querySelector('.nav-sections p:last-child');
     LoginLink.addEventListener('click', handleLoginClick);
-    LoginLink.addEventListener('click', function (e) {
+    LoginLink.addEventListener('click', (e) => {
       e.preventDefault();
-    }
-    );
+    });
   }
 
   if (navBrandLinks && navBrandLinks.length > 0) {
@@ -180,7 +179,7 @@ function renderDesktopHeader(block, nav) {
     setTimeout(() => {
       megaMenu.classList.add('mega-menu-show');
     }, 10);
-  }
+  };
 
   const hideMegaMenu = () => {
     if (!isOverHomeSolutions && !isOverMegaMenu) {
@@ -192,7 +191,7 @@ function renderDesktopHeader(block, nav) {
         }
       }, 300);
     }
-  }
+  };
 
   homeSolutions.addEventListener('mouseenter', () => {
     isOverHomeSolutions = true;
@@ -202,7 +201,7 @@ function renderDesktopHeader(block, nav) {
 
   homeSolutions.addEventListener('mouseleave', () => {
     isOverHomeSolutions = false;
-    setTimeout(hideMegaMenu, 300);  // This will allow for a smoother transition.
+    setTimeout(hideMegaMenu, 300); // This will allow for a smoother transition.
   });
 
   megaMenu.addEventListener('mouseenter', () => {
@@ -428,15 +427,15 @@ export default async function decorate(block) {
 
   const header = document.getElementsByClassName('header-wrapper')[0];
 
-  window.addEventListener('scroll', function() {
-      if (window.innerWidth > 990) {
-          if (window.scrollY > 0) {
-              header.style.display = 'none';
-              const loginModal = document.querySelector('nav > div:nth-child(4)');
-              loginModal.classList.remove('show');
-          } else {
-              header.style.display = 'block';
-          }
+  window.addEventListener('scroll', () => {
+    if (window.innerWidth > 990) {
+      if (window.scrollY > 0) {
+        header.style.display = 'none';
+        const loginModal = document.querySelector('nav > div:nth-child(4)');
+        loginModal.classList.remove('show');
+      } else {
+        header.style.display = 'block';
       }
+    }
   });
 }
