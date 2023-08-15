@@ -403,4 +403,14 @@ export default async function decorate(block) {
   if (secondSpan) {
     secondSpan.parentNode.removeChild(secondSpan);
   }
+
+  const header = document.getElementsByClassName('header-wrapper')[0];
+
+  window.addEventListener('scroll', function () {
+    if (window.scrollY > 0) {
+      header.style.display = 'none';
+    } else {
+      header.style.display = 'block';
+    }
+  });
 }

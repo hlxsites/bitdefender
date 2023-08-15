@@ -523,12 +523,6 @@ header a.button:hover span.button-text {
 }
 
 @media(min-width: 992px) {
-  header.header-wrapper {
-    height: var(--nav-height-desktop);
-    background-color: var(--text-color);
-    
-  }
-
   header.header-wrapper::after {
     content: "";
     position: absolute;
@@ -551,7 +545,9 @@ header a.button:hover span.button-text {
   }
 
   .header-wrapper {
-    position: absolute;
+    height: var(--nav-height-desktop);
+    background-color: var(--text-color);
+    position: fixed;
     z-index: 999;
     margin: auto;
     left: 0;
