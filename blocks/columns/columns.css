@@ -248,3 +248,31 @@
 .columns.carousel .active-button {
   background-color: var(--link-color);
 }
+
+/* awards, grey2color */
+.columns.awards-grey2color > div {
+  row-gap: 30px;
+  align-items: flex-start;
+}
+
+.columns.awards-grey2color > div > div {
+  flex-direction: row;
+  display: inline-table;
+  width: 100%;
+  flex: 1;
+  line-height: 1.13;
+  text-align: center;
+  margin: auto;
+  filter: grayscale(100%);
+  transition: all .3s ease;
+}
+
+.columns.awards-grey2color > div > div:hover {
+  flex-direction: row;
+  width: 100%;
+  flex: 1;
+  line-height: 1.13;
+  text-align: center;
+  margin: auto;
+  filter: none;
+}
