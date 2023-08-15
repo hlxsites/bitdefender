@@ -25,6 +25,21 @@ createNanoBlock('price', (code, variant, label) => {
   return priceRoot;
 });
 
+createNanoBlock('intro', (code, variant) => {
+  const price = document.createElement('p');
+
+  fetchProduct(code, variant)
+    .then((product) => {
+      price.innerHTML = `Start today for as low as ${product.currency_iso}${(product.discount.discounted_price / 12).toFixed(2)}/mo`;
+    })
+    .catch((err) => {
+      // eslint-disable-next-line no-console
+      console.error(err);
+    });
+
+  return price;
+});
+
 function renderProductPrice(product) {
   return `<strong>${product.price} ${product.currency_iso}</strong>`;
 }
@@ -37,17 +52,25 @@ function renderProductPriceWithDiscount(product) {
           `;
 }
 
-createNanoBlock('prices', (code, variants, label) => {
+function renderFeatured(product) {
+  const discount = Math.round((1 - (product.discount.discounted_price) / product.price) * 100);
+  return `<span class='savings'>Save ${discount}%</span>`;
+}
+
+createNanoBlock('priceWithDiscount', (code, variants, label, featured) => {
   const root = document.createElement('ul');
   root.classList.add('prices');
+  root.innerHTML = '<p>Number of devices</p>';
 
-  const promises = variants.map((variant) => fetchProduct(code, variant));
+  // eslint-disable-next-line max-len
+  const promises = (Array.isArray(variants)?variants:[variants]).map((variant) => fetchProduct(code, variant));
 
   Promise.all(promises).then((products) => products.forEach((product) => {
     const tmpDiv = document.createElement('div');
     tmpDiv.innerHTML = `
     <li>
       <span>${product.variation.dimension_value}</span>
+      ${product.discount && featured ? renderFeatured(product) : ''}          
       <div class="price">      
         ${product.discount ? renderProductPriceWithDiscount(product) : renderProductPrice(product)}          
         <em>${label}</em>
@@ -63,7 +86,7 @@ createNanoBlock('prices', (code, variants, label) => {
     });
 
     // activate first element
-    if (root.childElementCount === 0) {
+    if (root.childElementCount === 1) {
       li.classList.add('active');
     }
 
@@ -75,20 +98,6 @@ createNanoBlock('prices', (code, variants, label) => {
   return root;
 });
 
-createNanoBlock('featured', (text) => {
-  const root = document.createElement('div');
-  root.classList.add('featured');
-  root.innerText = text;
-  return root;
-});
-
-createNanoBlock('savings', () => {
-  const root = document.createElement('div');
-  root.classList.add('savings');
-  root.innerText = 'Save ???%';
-  return root;
-});
-
 export default function decorate(block) {
   [...block.children].forEach((row) => {
     [...(row.children)].forEach((col) => {
@@ -97,5 +106,5 @@ export default function decorate(block) {
     });
     row.remove();
   });
-  renderNanoBlocks(block);
+  renderNanoBlocks(block.parentNode.parentNode);
 }

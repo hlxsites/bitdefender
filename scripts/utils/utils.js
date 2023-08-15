@@ -109,7 +109,7 @@ function parseParams(params) {
       }
     } else if (segment.startsWith('[')) {
       if (segment.endsWith(']')) {
-        result.push(JSON.parse(segment));
+        result.push(segment.slice(1, -1));
       } else {
         tempArray.push(segment.slice(1));
         isInArray = true;
