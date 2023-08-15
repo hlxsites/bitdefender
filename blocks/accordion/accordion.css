@@ -18,13 +18,18 @@
 }
 
 .accordion-item .accordion-item-header {
+  position: relative;
   font-weight: normal;
   font-size: 18px;
   line-height: 27px;
   color: #000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .accordion-item-header::after {
+  position: absolute;
   transform: rotate(45deg);
   border-color: #c5c5c5;
   border-style: solid;
@@ -33,8 +38,7 @@
   width: 10px;
   height: 10px;
   display: block;
-  float: right;
-  margin: 3px 0;
+  right: 0;
   transition: top .3s ease-in-out,transform .3s ease-in-out,-webkit-transform .3s ease-in-out;
 }
 
@@ -92,6 +96,10 @@
     max-width: var(--section-desktop-max-width);
     padding: 0 var(--section-desktop-padding);
     margin: 0 auto;
+  }
+
+  accordion-item-header::after {
+    right: calc(((100% - var(--section-desktop-max-width)) / 2));
   }
 }
 
