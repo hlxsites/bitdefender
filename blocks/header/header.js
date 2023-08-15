@@ -139,10 +139,10 @@ function renderDesktopHeader(block, nav) {
   const navBrandLinks = nav.querySelectorAll('.nav-brand a');
 
   if (navSections) {
-    const LoginLink = document.querySelector('.nav-sections p:last-child');
-    LoginLink.addEventListener('click', handleLoginClick);
-    LoginLink.addEventListener('click', (e) => {
+    const loginLink = document.querySelector('.nav-sections p:last-child');
+    loginLink.addEventListener('click', (e) => {
       e.preventDefault();
+      handleLoginClick();
     });
   }
 
