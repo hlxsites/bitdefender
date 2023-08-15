@@ -1049,6 +1049,11 @@ main .section.blue a.button.secondary::after {
   }
 }
 
+.section.wide.light-sky-blue.columns-container {
+  height: 437px;
+}
+
+
 .tag {
   margin-left: 5px;
   color: var(--background-color);
