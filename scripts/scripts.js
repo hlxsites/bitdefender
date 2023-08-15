@@ -4,7 +4,7 @@ import {
   loadFooter,
   decorateButtons,
   decorateIcons,
-  decorateTags,
+  // decorateTags,
   decorateSections,
   decorateBlocks,
   decorateTemplateAndTheme,

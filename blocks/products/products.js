@@ -53,7 +53,7 @@ createNanoBlock('priceWithOldPrice', (label) => {
 createNanoBlock('LowestPrice', (code) => {
   const root = document.createElement('span');
 
-  fetchProduct(code).then( (product) => {
+  fetchProduct(code).then((product) => {
     // eslint-disable-next-line max-len
     const price = ((product.discount ? product.discount.discount_value : product.price) / 12).toFixed(2);
     root.innerHTML = `Start today for as low as  ${price} ${product.currency_label}/mo`;
@@ -129,8 +129,8 @@ export default function decorate(block) {
 
   // listen to variantSelectionChanged and update button accordingly
   block.querySelectorAll('.button-container').forEach((b) => {
-    b.addEventListener('variantSelectionChanged', (e) => { 
-      e.target.querySelector('a').href = `https://www.bitdefender.com/site/Store/buy/${e.detail.code}/${e.detail.product.variation.dimension_value}/${e.detail.product.variation.years}/`; 
+    b.addEventListener('variantSelectionChanged', (e) => {
+      e.target.querySelector('a').href = `https://www.bitdefender.com/site/Store/buy/${e.detail.code}/${e.detail.product.variation.dimension_value}/${e.detail.product.variation.years}/`;
     });
   });
 
