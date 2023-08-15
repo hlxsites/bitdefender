@@ -115,7 +115,7 @@
   padding-left: 5px;
 }
 
-.product-card li {
+.product-card > ul li {
   list-style: none;
   margin: 10px 0 0;
   padding: 0 0 0 30px;
@@ -127,12 +127,12 @@
   line-height: var(--body-font-size-m);
 }
 
-.product-card li:has(del) {
+.product-card > ul li:has(del) {
   color: #999;
   background-image: url('../../icons/checkmark_circle_grayed_out.svg');
 }
 
-.product-card li a {
+.product-card > ul li a {
   color: inherit;
   text-decoration: underline;
 }
@@ -150,6 +150,10 @@
 
 .product-card .price {
   margin-bottom: 15px;
+}
+
+.product-card span {
+  display: inline;
 }
 
 .product-card .price del {
@@ -202,15 +206,14 @@
   .products {
     grid-template-columns: repeat(var(--max-colunms), 1fr);
   }
-.product-card ul.prices {
+.product-card ul.variant-selector {
   list-style: none;
   padding: 0;
-  height:260px;
 }
 
 
 
-.product-card ul.prices > li {
+.product-card ul.variant-selector > li {
   display: inline-block;
   border: 2px solid #e4f2ff;
   padding: 6px 13px;
@@ -220,28 +223,19 @@
   cursor: pointer;
   color: #006eff;
   opacity: .8;
-  margin-bottom: 120px; 
+  background-image: none;
 }
 
-.product-card ul.prices > li > div.price {
-  display: none;
-  position: absolute;
-  left: 0;
-  margin-top:30px;
-  width:100%;
-  padding: 0px 18px;
-}
 
-.product-card ul.prices > li.active {
+
+.product-card ul.variant-selector > li.active {
   opacity: 1;
   color: #fff;
   background: #006eff;
   border-color: #006eff;
 }
 
-.product-card ul.prices > li.active > :is(div.price, span.savings) {
-  display: block;
-}
+
 
 @media (min-width: 992px) { /* desktop */
   .products-wrapper {
@@ -276,8 +270,7 @@
 }
 
 
-.product-card .savings {
-  display:none;
+.product-card .highlight {
   width: 100%;
   position: absolute;
   top: 0;

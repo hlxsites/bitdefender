@@ -113,7 +113,7 @@ export function decorateMain(main) {
   // hopefully forward compatible button decoration
   decorateButtons(main);
   decorateIcons(main);
-  decorateTags(main);
+  // decorateTags(main);
   decorateLinkedPictures(main);
   decorateSections(main);
   decorateBlocks(main);

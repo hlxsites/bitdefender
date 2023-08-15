@@ -25,75 +25,95 @@ createNanoBlock('price', (code, variant, label) => {
   return priceRoot;
 });
 
-createNanoBlock('intro', (code, variant) => {
-  const price = document.createElement('p');
+function renderProductPrice(product) {
+  if (!product.discount) {
+    return `<strong>${product.price} ${product.currency_iso}</strong>`;
+  // eslint-disable-next-line no-else-return
+  } else {
+    const discount = product.price - product.discount.discounted_price;
+    return `<strong>${product.discount.discounted_price} ${product.currency_iso}</strong>
+            <span>Old Price <del>${product.price} ${product.currency_iso}</del></span>
+            <span class="discount">Save ${discount.toFixed(2)} ${product.currency_iso}</span>
+            `;
+  }
+}
 
-  fetchProduct(code, variant)
-    .then((product) => {
-      price.innerHTML = `Start today for as low as ${product.currency_iso}${(product.discount.discounted_price / 12).toFixed(2)}/mo`;
-    })
-    .catch((err) => {
-      // eslint-disable-next-line no-console
-      console.error(err);
-    });
-
-  return price;
+createNanoBlock('priceWithOldPrice', (label) => {
+  const root = document.createElement('div');
+  root.classList.add('price');
+  root.innerHTML = `
+    loading...
+    <em>${label}</em>`;
+  root.addEventListener('variantSelectionChanged', (e) => {
+    root.innerHTML = renderProductPrice(e.detail.product);
+  });
+  return root;
 });
 
-function renderProductPrice(product) {
-  return `<strong>${product.price} ${product.currency_iso}</strong>`;
-}
+createNanoBlock('LowestPrice', (code) => {
+  const root = document.createElement('span');
 
-function renderProductPriceWithDiscount(product) {
-  const discount = product.price - product.discount.discounted_price;
-  return `<strong>${product.discount.discounted_price} ${product.currency_iso}</strong>
-          <span>Old Price <del>${product.price} ${product.currency_iso}</del></span>
-          <span class="discount">Save ${discount.toFixed(2)} ${product.currency_iso}</span>
-          `;
-}
+  fetchProduct(code).then( (product) => {
+    // eslint-disable-next-line max-len
+    const price = ((product.discount ? product.discount.discount_value : product.price) / 12).toFixed(2);
+    root.innerHTML = `Start today for as low as  ${price} ${product.currency_label}/mo`;
+  });
 
-function renderFeatured(product) {
-  const discount = Math.round((1 - (product.discount.discounted_price) / product.price) * 100);
-  return `<span class='savings'>Save ${discount}%</span>`;
-}
+  return root;
+});
 
-createNanoBlock('priceWithDiscount', (code, variants, label, featured) => {
+createNanoBlock('variantSelector', (code, variants, label, defaultSelection) => {
   const root = document.createElement('ul');
-  root.classList.add('prices');
-  root.innerHTML = '<p>Number of devices</p>';
+  root.classList.add('variant-selector');
+  root.innerHTML = `<p>${label}</p>`;
 
   // eslint-disable-next-line max-len
-  const promises = (Array.isArray(variants)?variants:[variants]).map((variant) => fetchProduct(code, variant));
+  const promises = (Array.isArray(variants) ? variants : [variants]).map((variant) => fetchProduct(code, variant));
 
   Promise.all(promises).then((products) => products.forEach((product) => {
     const tmpDiv = document.createElement('div');
+
     tmpDiv.innerHTML = `
     <li>
       <span>${product.variation.dimension_value}</span>
-      ${product.discount && featured ? renderFeatured(product) : ''}          
-      <div class="price">      
-        ${product.discount ? renderProductPriceWithDiscount(product) : renderProductPrice(product)}          
-        <em>${label}</em>
-        <p class="button-container"><a href="https://www.bitdefender.com.au/site/Store/buy/is/${product.variation.dimension_value}/${product.variation.years}/?CART=1&CARD=2&SHORT_FORM=1" class="button">Buy Now</a></p>
-        <p>GST included</br>
-        See <a href="#tos">Terms of Use</a> below.</p>
-      </div>
     </li>`;
+
     const li = tmpDiv.children[0];
+
     li.addEventListener('click', () => {
-      root.querySelector('.active').classList.remove('active');
+      root.querySelector('.active')?.classList.remove('active');
       li.classList.add('active');
+
+      [...root.parentElement.children].forEach((e) => {
+        e.dispatchEvent(new CustomEvent('variantSelectionChanged', { detail: { product, code } }));
+      });
     });
 
-    // activate first element
-    if (root.childElementCount === 1) {
-      li.classList.add('active');
+    // activate default selection
+    if (product.variation.variation_name === defaultSelection) {
+      li.click();
     }
 
     root.appendChild(li);
   })).catch((error) => {
     // eslint-disable-next-line no-console
     console.error(error);
+  });
+  return root;
+});
+
+createNanoBlock('highlightSavings', () => {
+  const root = document.createElement('div');
+  root.classList.add('highlight');
+  root.addEventListener('variantSelectionChanged', (e) => {
+    const { detail: { product } } = e;
+    if (product.discount) {
+      const discount = Math.round((1 - (product.discount.discounted_price) / product.price) * 100);
+      root.innerHTML = `<span class='highlight'>Save ${discount}%</span>`;
+      root.style.display = 'block';
+    } else {
+      root.style.display = 'none';
+    }
   });
   return root;
 });
@@ -106,5 +126,13 @@ export default function decorate(block) {
     });
     row.remove();
   });
+
+  // listen to variantSelectionChanged and update button accordingly
+  block.querySelectorAll('.button-container').forEach((b) => {
+    b.addEventListener('variantSelectionChanged', (e) => { 
+      e.target.querySelector('a').href = `https://www.bitdefender.com/site/Store/buy/${e.detail.code}/${e.detail.product.variation.dimension_value}/${e.detail.product.variation.years}/`; 
+    });
+  });
+
   renderNanoBlocks(block.parentNode.parentNode);
 }
