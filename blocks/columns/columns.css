@@ -90,6 +90,8 @@
     flex-direction: unset;
     gap: 32px;
   }
+
+
 }
 
 @media (min-width: 1271px) {
@@ -140,6 +142,7 @@
   margin: auto;
   filter: grayscale(100%);
   transition: all .3s ease;
+  justify-content: space-evenly;
 }
 
 .columns.carousel > div:nth-child(1) {
@@ -158,6 +161,7 @@
   text-align: center;
   margin: auto;
   filter: none;
+  justify-content: space-evenly;
 }
 
 /* paragraph with image */
@@ -254,6 +258,7 @@
   .columns.carousel > div:nth-child(1) {
     width: max-content;
   }
+
 }
 
 @media (min-width: 676px) and (max-width: 989px) {
