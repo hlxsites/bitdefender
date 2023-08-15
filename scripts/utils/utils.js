@@ -1,3 +1,6 @@
+const cacheResponse = new Map();
+const FETCH_URL = 'https://www.bitdefender.com/site/Store/ajax';
+
 // eslint-disable-next-line import/prefer-default-export
 export function createTag(tag, attributes, html) {
   const el = document.createElement(tag);
@@ -20,34 +23,10 @@ export function createTag(tag, attributes, html) {
   return el;
 }
 
-const FETCH_URL = 'https://www.bitdefender.com/site/Store/ajax';
-
-/**
- * Fetches a product from the Bitdefender store.
- * @param code The product code
- * @param variant The product variant
- * @returns {Promise<*>}
- */
-export async function fetchProduct(code = 'av', variant = '1u-1y') {
-  const data = new FormData();
-  data.append('data', JSON.stringify({
-    ev: 1,
-    product_id: code,
-    config: {
-      extra_params: {
-        pid: null,
-      },
-    },
-  }));
-
-  const res = await fetch(FETCH_URL, {
-    method: 'POST',
-    body: data,
-  });
-  if (!res.ok) {
-    throw new Error(res.statusText);
-  }
-  const json = await res.json();
+async function findProductVariant(cachedResponse, variant) {
+  const response = await cachedResponse;
+  if (!response.ok) throw new Error(`${response.statusText}`);
+  const json = await response.clone().json();
 
   // eslint-disable-next-line guard-for-in,no-restricted-syntax
   for (const i in json.data.product.variations) {
@@ -61,6 +40,39 @@ export async function fetchProduct(code = 'av', variant = '1u-1y') {
   }
 
   throw new Error('Variant not found');
+}
+
+/**
+ * Fetches a product from the Bitdefender store.
+ * @param code The product code
+ * @param variant The product variant
+ * @returns {Promise<*>}
+ */
+export async function fetchProduct(code = 'av', variant = '1u-1y') {
+  const cacheKey = `${code}-${variant}`;
+  const data = new FormData();
+  data.append('data', JSON.stringify({
+    ev: 1,
+    product_id: code,
+    config: {
+      extra_params: {
+        pid: null,
+      },
+    },
+  }));
+
+  if (cacheResponse.has(cacheKey)) {
+    return findProductVariant(cacheResponse.get(cacheKey), variant);
+  }
+
+  // we don't await the response here, because we want to cache it
+  const response = fetch(FETCH_URL, {
+    method: 'POST',
+    body: data,
+  });
+
+  cacheResponse.set(cacheKey, response);
+  return findProductVariant(response, variant);
 }
 
 const nanoBlocks = new Map();
