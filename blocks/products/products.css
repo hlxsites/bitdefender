@@ -206,6 +206,8 @@
   .products {
     grid-template-columns: repeat(var(--max-colunms), 1fr);
   }
+}
+
 .product-card ul.variant-selector {
   list-style: none;
   padding: 0;
