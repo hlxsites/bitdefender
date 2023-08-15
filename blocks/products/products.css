@@ -132,6 +132,11 @@
   background-image: url('../../icons/checkmark_circle_grayed_out.svg');
 }
 
+.product-card p a {
+  text-decoration: underline;
+  color: inherit;
+}
+
 .product-card > ul li a {
   color: inherit;
   text-decoration: underline;
@@ -141,11 +146,6 @@
   font-size: var(--body-font-size-s);
   color: #3c3c3c;
   margin: 0;
-}
-
-.product-card p a {
-  text-decoration: underline;
-  color: inherit;
 }
 
 .product-card .price {
@@ -219,7 +219,7 @@
   display: inline-block;
   border: 2px solid #e4f2ff;
   padding: 6px 13px;
-  margin: 0px 5px;
+  margin: 0 5px;
   border-radius: 8px;
   font-weight: 500;
   cursor: pointer;
@@ -289,12 +289,11 @@
 
 .product-card .discount {
   display: block;
-  margin: 9px auto 9px;
-
+  margin: 9px auto;
   padding: 2px 8px;
   border-radius: 8px;
-  background: rgba(44,180,61,.2);
-  color: #2cb43d;
+  background: rgba(44 180 61 20%);
+  color: rgb(44 180 61);
   font-size: 14px;
   font-weight: 600;
   line-height: normal;
