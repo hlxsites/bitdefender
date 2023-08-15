@@ -36,6 +36,7 @@
   width: 10px;
   height: 10px;
   float: right;
+  margin: 0px 0;
   transition: top .3s ease-in-out,transform .3s ease-in-out,-webkit-transform .3s ease-in-out;
 }
 
