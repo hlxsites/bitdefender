@@ -406,11 +406,15 @@ export default async function decorate(block) {
 
   const header = document.getElementsByClassName('header-wrapper')[0];
 
-  window.addEventListener('scroll', function () {
-    if (window.scrollY > 0) {
-      header.style.display = 'none';
-    } else {
-      header.style.display = 'block';
-    }
+  window.addEventListener('scroll', function() {
+      if (window.innerWidth > 990) {
+          if (window.scrollY > 0) {
+              header.style.display = 'none';
+              const loginModal = document.querySelector('nav > div:nth-child(4)');
+              loginModal.classList.remove('show');
+          } else {
+              header.style.display = 'block';
+          }
+      }
   });
 }

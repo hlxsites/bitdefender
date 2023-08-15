@@ -111,7 +111,7 @@ nav {
   align-items: flex-start;
   justify-content: flex-start;
   position: absolute;
-  right: min(190px, calc(100vw - 880px));
+  right: min(15px, calc(100vw - 880px));
   width: 375px;
   height: 275px;
   top: 70px;
@@ -124,6 +124,7 @@ nav {
 }
 
 .login-modal.show {
+  display: flex;
   opacity: 1;
   top: 60px;
   z-index: 5;
@@ -136,6 +137,7 @@ nav {
   font-size: var(--body-font-size-s);
   width: 100%;
   margin-left: 25px;
+  top: 15px;
   text-align: left; 
 }
 
