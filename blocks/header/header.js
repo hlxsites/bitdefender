@@ -129,19 +129,12 @@ function renderDesktopHeader(block, nav) {
   const navBrandLinks = nav.querySelectorAll('.nav-brand a');
 
   if (navSections) {
-    const navParagraphs = navSections.querySelectorAll('p');
-    const lastNavParagraph = navParagraphs[navParagraphs.length - 1];
-    navParagraphs.forEach((navParagraph) => {
-      if (navParagraph === lastNavParagraph) {
-        const loginLink = document.createElement('a');
-        loginLink.textContent = lastNavParagraph.textContent;
-        loginLink.href = 'https://bitdefender.com';
-        navParagraph.innerHTML = '';
-        navParagraph.appendChild(loginLink);
-        loginLink.addEventListener('click', handleLoginClick);
-        loginLink.addEventListener('click', (e) => e.preventDefault());
-      }
-    });
+    const LoginLink = document.querySelector('.nav-sections p:last-child');
+    LoginLink.addEventListener('click', handleLoginClick);
+    LoginLink.addEventListener('click', function(e) {
+      e.preventDefault();
+    }
+    );
   }
 
   if (navBrandLinks && navBrandLinks.length > 0) {
