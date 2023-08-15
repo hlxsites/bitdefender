@@ -236,6 +236,14 @@ export async function decorateTags(element) {
     let nodeValue = inputValue; // Create a local copy to work on
     let replaced = false;
 
+    const exceptionPattern = /\$\[(.*?)]\$/g;
+
+    if (exceptionPattern.test(nodeValue)) {
+      // Removing the $ signs around the tag
+      nodeValue = nodeValue.replace(exceptionPattern, (match, p1) => `[${p1}]`);
+      return { nodeValue, replaced };
+    }
+
     tagTypes.forEach((tagType) => {
       let match = tagType.regex.exec(nodeValue);
       while (match !== null) {
@@ -251,8 +259,9 @@ export async function decorateTags(element) {
 
   function replaceTagsInNode(node) {
     if (node.nodeType === Node.TEXT_NODE) {
-      const { nodeValue, replaced } = replaceTags(node.nodeValue);
-      if (replaced) {
+      const originalValue = node.nodeValue;
+      const { nodeValue } = replaceTags(originalValue);
+      if (nodeValue !== originalValue) { // This checks if the nodeValue has been modified.
         const newNode = document.createElement('span');
         newNode.innerHTML = nodeValue;
         node.parentNode.replaceChild(newNode, node);
