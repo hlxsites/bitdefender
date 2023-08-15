@@ -22,9 +22,6 @@
   font-size: 18px;
   line-height: 27px;
   color: #000;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .accordion-item-header::after {
