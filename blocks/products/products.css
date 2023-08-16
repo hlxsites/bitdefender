@@ -141,7 +141,6 @@
   object-fit: inherit;
   border-radius: inherit;
   width: 210px;
-  height: 210px;
   margin: 60px 0 25px;
   top: auto;
   right: auto;
@@ -246,7 +245,7 @@
   line-height: 1.67;
   letter-spacing: normal;
   cursor: pointer;
-  color: #006eff;
+  color: #006CFA;
   opacity: .8;
   background-image: none;
 }
@@ -307,7 +306,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  background-color: #2cb43d;
+  background-color: #218728;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   padding: 4px 0 8px;
@@ -323,7 +322,7 @@
   padding: 2px 8px;
   border-radius: 8px;
   background: rgb(44 180 61 / 20%);
-  color: rgb(44 180 61);
+  color: #1D7727;
   font-size: 14px;
   font-weight: 600;
   line-height: normal;
