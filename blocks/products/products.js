@@ -13,9 +13,8 @@ createNanoBlock('price', (code, variant, label) => {
   fetchProduct(code, variant)
     .then((product) => {
       // eslint-disable-next-line camelcase
-      const { price, discount: { discounted_price: discounted }, currency_iso: currency } = product;
-      oldPriceElement.innerText = `${price} ${currency}`;
-      priceElement.innerHTML = `${discounted} ${currency} <em>${label}</em>`;
+      oldPriceElement.innerText = `${product.price} ${product.currency_label}`;
+      priceElement.innerHTML = `${product.discount.discount_value} ${product.currency_label} <em>${label}</em>`;
     })
     .catch((err) => {
       // eslint-disable-next-line no-console
@@ -27,13 +26,13 @@ createNanoBlock('price', (code, variant, label) => {
 
 function renderProductPrice(product) {
   if (!product.discount) {
-    return `<strong>${product.price} ${product.currency_iso}</strong>`;
+    return `<strong>${product.price} ${product.currency_label}</strong>`;
   // eslint-disable-next-line no-else-return
   } else {
     const discount = product.price - product.discount.discounted_price;
-    return `<strong>${product.discount.discounted_price} ${product.currency_iso}</strong>
-            <span>Old Price <del>${product.price} ${product.currency_iso}</del></span>
-            <span class="discount">Save ${discount.toFixed(2)} ${product.currency_iso}</span>`;
+    return `<strong>${product.discount.discount_value} ${product.currency_label}</strong>
+            <span>Old Price <del>${product.price} ${product.currency_label}</del></span>
+            <span class="discount">Save ${discount.toFixed(2)} ${product.currency_label}</span>`;
   }
 }
 
