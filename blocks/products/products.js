@@ -31,10 +31,17 @@ function renderProductPrice(product) {
   } else {
     const discount = product.price - product.discount.discounted_price;
     return `<strong>${product.discount.discount_value} ${product.currency_label}</strong>
-            <span>Old Price <del>${product.price} ${product.currency_label}</del></span>
+            <span class="old-price">Old Price <del>${product.price} ${product.currency_label}</del></span>
             <span class="discount">Save ${discount.toFixed(2)} ${product.currency_label}</span>`;
   }
 }
+
+createNanoBlock('featured', (text) => {
+  const root = document.createElement('div');
+  root.classList.add('featured');
+  root.innerText = text;
+  return root;
+});
 
 createNanoBlock('lowestPrice', (code, variant) => {
   const root = document.createElement('p');
