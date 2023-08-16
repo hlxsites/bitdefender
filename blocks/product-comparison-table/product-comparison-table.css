@@ -317,6 +317,11 @@
     padding-left: 3rem;
 }
 
+.product-comparison-table div[role='row'] > div[role="cell"]:not(:first-of-type) {
+    display: flex;
+    justify-content: center;
+}
+
 .product-comparison-table .expandable-arrow > div[role='cell'] {
     position: relative;
 }

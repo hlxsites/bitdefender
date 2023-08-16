@@ -118,18 +118,14 @@ function replaceTableTextToProperCheckmars(block) {
     .forEach(async (div) => {
       if (div.textContent.match(/^yes/i)) {
         div.textContent = '';
-        const iconWrapper = document.createElement('div');
         const icon = document.createElement('div');
         icon.classList.add('yes-check');
-        iconWrapper.appendChild(icon);
-        div.appendChild(iconWrapper);
+        div.appendChild(icon);
       } else if (div.textContent.match(/^no/i)) {
         div.textContent = '';
-        const iconWrapper = document.createElement('div');
         const icon = document.createElement('div');
         icon.classList.add('no-check');
-        iconWrapper.appendChild(icon);
-        div.appendChild(iconWrapper);
+        div.appendChild(icon);
       }
     });
 }
