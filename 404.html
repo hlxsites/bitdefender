@@ -11,27 +11,26 @@
   <meta property="og:title" content="Page not found">
   <script src="/scripts/scripts.js" type="module" crossorigin="use-credentials"></script>
   <script type="module">
-    import { decorateButtons } from '/scripts/lib-franklin.js';
-    //function to get the html from 404.plain.html
-    async function get404Html() {
-      return fetch('/404.plain.html')
-        .then((response) => {
-          return response.text();
-        })
-        .then((html) => {
-          return html;
-        });
-    }
-
-    get404Html().then(htmlContent => {
+    import { decorateButtons, sampleRUM } from '/scripts/lib-franklin.js';
+  
+    window.addEventListener('load', async () => {
+      const response = await fetch('/404.plain.html');
+      if (response.ok) {
+        const htmlContent = await response.text();
         const specialSection = document.querySelector('.link-section');
         specialSection.innerHTML = htmlContent;
-
         decorateButtons(specialSection);
-      });
-  </script>
+      }
+      sampleRUM('404', { source: document.referrer, target: window.location.href });
+    });
+  </script>  
   <link rel="stylesheet" href="/styles/styles.css">
   <style>
+
+    :root {
+      --fourofour-background-color: #f4f4f4;
+    }
+
     main.error {
       min-height: calc(100vh - var(--nav-height));
       display: flex;
@@ -119,7 +118,7 @@ main .link-section {
   margin: 0;
 }
 
-@media (min-width: 990px) {
+@media (min-width: 992px) {
   main .link-section {
     width: 50vw;
     max-width: 650px;
