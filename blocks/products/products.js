@@ -84,6 +84,9 @@ createNanoBlock('plans', (code, variants, label, defaultSelection) => {
       [...root.children].forEach((e) => {
         e.dispatchEvent(new CustomEvent('variantSelectionChanged', { detail: { product, code } }));
       });
+      [...root.parentNode.children].forEach((e) => {
+        e.dispatchEvent(new CustomEvent('variantSelectionChanged', { detail: { product, code } }));
+      });
     });
 
     // activate default selection
