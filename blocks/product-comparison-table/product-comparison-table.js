@@ -1,4 +1,6 @@
 import getMockData from './product-mock-data.js';
+import { createNanoBlock, renderNanoBlocks, fetchProduct } from '../../scripts/utils/utils.js';
+
 
 const fakeData = getMockData();
 const pricePlaceholder = '<price>';
@@ -130,10 +132,37 @@ function setActiveColumn(block) {
   [...rows].forEach((row) => row.children[tableActiveColumn].classList.add('active'));
 }
 
+createNanoBlock('price-Comparison', (code, variant, label) => {
+  const priceRoot = document.createElement('div');
+  priceRoot.classList.add('price');
+  const oldPriceElement = document.createElement('del');
+  priceRoot.appendChild(oldPriceElement);
+  oldPriceElement.innerText = '-';
+  const priceElement = document.createElement('strong');
+  priceRoot.appendChild(priceElement);
+  priceElement.innerText = '-';
+
+  fetchProduct(code, variant)
+    .then((product) => {
+      // eslint-disable-next-line camelcase
+      const { price, discount: { discounted_price: discounted }, currency_iso: currency } = product;
+      oldPriceElement.innerText = `${price} ${currency}`;
+      priceElement.innerHTML = `${discounted} ${currency} <em>${label}</em>`;
+    })
+    .catch((err) => {
+      // eslint-disable-next-line no-console
+      console.error(err);
+    });
+
+  return priceRoot;
+});
+
+
 export default function decorate(block) {
   addAccesibilityRoles(block);
   replaceTableTextToProperCheckmars(block);
   setActiveColumn(block);
   buildTableHeader(block);
   extractTextFromStrongTagToParent(block);
+  renderNanoBlocks(block);
 }
