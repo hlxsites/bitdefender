@@ -5,14 +5,19 @@
 .columns > div {
   display: flex;
   flex-direction: column;
-}
-
-.columns img {
-  width: 100%;
+  justify-content: center;
 }
 
 .columns > div > div {
   order: 1;
+}
+
+.columns.carousel > div {
+  flex-direction: row;
+}
+
+.columns img {
+  width: 100%;
 }
 
 .columns > div > .columns-img-col {
@@ -23,7 +28,7 @@
   display: block;
 }
 
-@media (min-width: 990px) { /* desktop */
+@media (min-width: 992px) { /* desktop */
 
   .columns > div {
     align-items: center;
@@ -80,11 +85,6 @@
   line-height: 1.25;
 }
 
-@media (min-width: 596px) {
-  max-width: 81px;
-  margin-bottom: 28px;
-}
-
 @media (min-width: 767px) {
   .columns.features > div {
     flex-direction: unset;
@@ -121,6 +121,11 @@
 
 .columns.video-presentation > div > div > p {
   font-size: var(--body-font-size-s);
+}
+
+.columns.carousel > div > div >p {
+  width: inherit;
+  padding: 0 50px;
 }
 
 .columns.awards > div > div > p:not(:last-of-type) {
@@ -166,4 +171,80 @@
 .columns.video-presentation .modal-video-container {
   max-width: 520px;
   max-height: 293px;
+}
+
+.columns.carousel {
+  width: 100%;
+  margin-top: 50px;
+  overflow: hidden;
+  height: 437px;
+}
+
+.columns.carousel button{
+  align-items: flex-start;
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  margin: 10px;
+  padding: 0;
+  background-color: var(--black-color);
+  border: none;
+}
+
+.columns.carousel button:hover {
+  background-color: var(--link-color);
+}
+
+.carousel-buttons {
+  position: relative;
+  top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all .4s ease-in-out;
+}
+
+.columns.carousel > div > div {
+  margin: 10px 5px;
+  width: 100%;
+  box-sizing: border-box; 
+}
+
+.columns.carousel > div:nth-child(1) {
+  position: relative;
+  left: 0;
+  gap: 0;
+  transition: transform 0.3s ease-in-out;
+  height: 200px;
+}
+
+
+@media (min-width: 676px) {
+  .columns.carousel > div > div {
+    transition: transform 0.3s, opacity 0.3s; 
+  }
+
+  .columns.carousel > div:nth-child(1) {
+    width: max-content;
+  }
+}
+
+@media (min-width: 676px) and (max-width: 989px) {
+  .slide-left {
+      transform: translateX(-50%);
+  }
+}
+
+@media (min-width: 990px) {
+  .columns.carousel button{
+    margin: -5px;
+  }
+
+  .slide-left {
+    transform: translateX(-25%);
+  }
+}
+
+.columns.carousel .active-button {
+  background-color: var(--link-color);
 }

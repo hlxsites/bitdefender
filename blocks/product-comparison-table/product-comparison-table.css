@@ -213,15 +213,10 @@
     }
 }
 
-@media (min-width: 990px) {
+@media (min-width: 992px) {
     .product-comparison-table-wrapper {
         max-width: var(--section-desktop-max-width);
         padding: 0 var(--section-desktop-padding);
-    }
-
-    .section.product-comparison-table-container {
-        padding-left: 2rem;
-        padding-right: 2rem;
     }
 
     .product-comparison-header {
