@@ -3,9 +3,9 @@ import {
   fixExcelFilterZeroes,
   createTag,
 } from '../../scripts/utils/utils.js';
-// import {
-//   loadCSS,
-// } from '../../scripts/lib-franklin.js';
+import {
+  loadCSS,
+} from '../../scripts/lib-franklin.js';
 
 function prependSlash(path) {
   return path.startsWith('/') ? path : `/${path}`;
@@ -33,10 +33,7 @@ function renderBreadcrumb(breadcrumbs) {
 }
 
 export default async function createBreadcrumbs(container) {
-  // const breadCrumbsCSS = new Promise((resolve) => {
-  //   loadCSS('/blocks/breadcrumbs/breadcrumbs.css', (e) => resolve(e));
-  // });
-
+  loadCSS('/blocks/breadcrumbs/breadcrumbs.css');
   const { pathname } = window.location;
   const pathSeparator = '/';
   // split pathname into parts add / at the end and remove empty parts
@@ -78,6 +75,4 @@ export default async function createBreadcrumbs(container) {
       container.append(renderBreadcrumb(crumb));
     }
   });
-
-  // await breadCrumbsCSS;
 }
