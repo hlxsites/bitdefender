@@ -1,5 +1,5 @@
 const cacheResponse = new Map();
-const FETCH_URL = 'https://www.bitdefender.com/site/Store/ajax';
+const FETCH_URL = 'https://www.bitdefender.com.au/site/Store/ajax';
 
 // eslint-disable-next-line import/prefer-default-export
 export function createTag(tag, attributes, html) {

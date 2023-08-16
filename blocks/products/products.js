@@ -40,17 +40,6 @@ function renderProductPrice(product, label) {
   }
 }
 
-createNanoBlock('priceWithOldPrice', (label) => {
-  const root = document.createElement('div');
-  root.classList.add('price');
-  root.innerHTML = `
-    loading...`;
-  root.addEventListener('variantSelectionChanged', (e) => {
-    root.innerHTML = renderProductPrice(e.detail.product, label);
-  });
-  return root;
-});
-
 createNanoBlock('lowestPrice', (code, variant) => {
   const root = document.createElement('p');
 
@@ -63,10 +52,20 @@ createNanoBlock('lowestPrice', (code, variant) => {
   return root;
 });
 
-createNanoBlock('variantSelector', (code, variants, label, defaultSelection) => {
-  const root = document.createElement('ul');
-  root.classList.add('variant-selector');
-  root.innerHTML = `<p>${label}</p>`;
+createNanoBlock('plans', (code, variants, label, defaultSelection) => {
+  const root = document.createElement('div');
+  const ul = document.createElement('ul');
+  root.appendChild(ul);
+  ul.classList.add('variant-selector');
+  ul.innerHTML = `<p>${label}</p>`;
+
+  const price = document.createElement('div');
+  price.classList.add('price');
+  price.innerHTML = 'loading...';
+  price.addEventListener('variantSelectionChanged', (e) => {
+    price.innerHTML = renderProductPrice(e.detail.product, label);
+  });
+  root.appendChild(price);
 
   // eslint-disable-next-line max-len
   const promises = (Array.isArray(variants) ? variants : [variants]).map((variant) => fetchProduct(code, variant));
@@ -82,10 +81,10 @@ createNanoBlock('variantSelector', (code, variants, label, defaultSelection) => 
     const li = tmpDiv.children[0];
 
     li.addEventListener('click', () => {
-      root.querySelector('.active')?.classList.remove('active');
+      ul.querySelector('.active')?.classList.remove('active');
       li.classList.add('active');
 
-      [...root.parentElement.children].forEach((e) => {
+      [...root.children].forEach((e) => {
         e.dispatchEvent(new CustomEvent('variantSelectionChanged', { detail: { product, code } }));
       });
     });
@@ -95,11 +94,12 @@ createNanoBlock('variantSelector', (code, variants, label, defaultSelection) => 
       li.click();
     }
 
-    root.appendChild(li);
+    ul.appendChild(li);
   })).catch((error) => {
     // eslint-disable-next-line no-console
     console.error(error);
   });
+
   return root;
 });
 
