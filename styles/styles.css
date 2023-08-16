@@ -234,6 +234,10 @@ p {
   font-weight: var(--font-weight-regular);
 }
 
+b, strong {
+  font-weight: var(--font-weight-boldest);
+}
+
 main input {
   font-size: 1.25rem;
   width: 100%;
@@ -1063,6 +1067,11 @@ main .section.blue a.button.secondary::after {
     background-position: top right;
   }
 }
+
+.section.wide.light-sky-blue.columns-container {
+  height: 437px;
+}
+
 
 .tag {
   margin-left: 5px;

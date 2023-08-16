@@ -15,7 +15,6 @@ header p {
 .header-wrapper {
   position: sticky;
   top: 0;
-  background-color: var(--background-color);
   transition: all 0.3s ease-in-out;
 }
 
@@ -111,23 +110,26 @@ nav {
   align-items: flex-start;
   justify-content: flex-start;
   position: absolute;
-  right: min(190px, calc(100vw - 880px));
+  right: min(15px, calc(100vw - 880px));
   width: 375px;
   height: 275px;
-  top: 70px;
+  top: 80px;
   background-color: var(--background-color);
   border-radius: 5px;
   opacity: 0; 
-  transition: all 0.2s ease-in-out; 
+  transition: all 0.3s ease-in-out;
   box-shadow: 0 10px 10px #0003;
   z-index: 0;
+  transform: translateY(20px);
 }
 
 .login-modal.show {
   opacity: 1;
   top: 60px;
   z-index: 5;
+  transform: translateY(0);
 }
+
 
 .login-modal h2 {
   position: relative;
@@ -136,6 +138,7 @@ nav {
   font-size: var(--body-font-size-s);
   width: 100%;
   margin-left: 25px;
+  top: 15px;
   text-align: left; 
 }
 
@@ -523,12 +526,6 @@ header a.button:hover span.button-text {
 }
 
 @media(min-width: 992px) {
-  header.header-wrapper {
-    height: var(--nav-height-desktop);
-    background-color: var(--text-color);
-    
-  }
-
   header.header-wrapper::after {
     content: "";
     position: absolute;
@@ -551,7 +548,8 @@ header a.button:hover span.button-text {
   }
 
   .header-wrapper {
-    position: absolute;
+    height: var(--nav-height-desktop);
+    position: fixed;
     z-index: 999;
     margin: auto;
     left: 0;
@@ -721,21 +719,21 @@ header a.button:hover span.button-text {
     max-width: 920px;
     width: 100%;
     background-color: var(--background-color);
-    opacity: 0;
     z-index: 3;
-    transition: opacity 0.3s ease-in-out;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
     box-shadow: 0 10px 10px #0003;
     visibility: hidden;
     display: none;
+    opacity: 0;
   }
   
   .mega-menu-show {
     opacity: 1;
     visibility: visible;
     display: flex;
-  }
+  }  
 
   .mega-menu div h2 {
     position: relative;
