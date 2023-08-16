@@ -1,4 +1,4 @@
-import { createNanoBlock, renderNanoBlocks, fetchProduct } from '../../scripts/utils/utils.js';
+import { createNanoBlock, renderNanoBlocks, createNanoBlockWithPostProcessing, fetchProduct } from '../../scripts/utils/utils.js';
 
 createNanoBlock('price', (code, variant, label) => {
   const priceRoot = document.createElement('div');
@@ -36,11 +36,14 @@ function renderProductPrice(product) {
   }
 }
 
-createNanoBlock('featured', (text) => {
+createNanoBlockWithPostProcessing('featured', (text) => {
   const root = document.createElement('div');
   root.classList.add('featured');
   root.innerText = text;
   return root;
+}, (element) => {
+  const productCard = element.closest('.product-card');
+  productCard.classList.add('featured');
 });
 
 createNanoBlock('lowestPrice', (code, variant) => {
