@@ -16,15 +16,11 @@ function createLoginModal() {
 }
 
 function handleLoginClick() {
-  let isLoginModalInitialized = false;
   const loginModal = document.querySelector('.login-modal');
   if (loginModal.classList.contains('show')) {
     loginModal.classList.remove('show');
   } else {
-    if (!isLoginModalInitialized) {
-      loginModal.style.display = 'flex';
-      isLoginModalInitialized = true;
-    }
+    loginModal.style.display = 'flex';
     setTimeout(() => {
       loginModal.classList.add('show');
     }, 10); // Small delay to ensure that the modal is rendered before adding the transition
@@ -174,13 +170,9 @@ function renderDesktopHeader(block, nav) {
   const megaMenu = document.querySelector('.mega-menu');
   let isOverHomeSolutions = false;
   let isOverMegaMenu = false;
-  let isMegaMenuInitialized = false;
 
   const showMegaMenu = () => {
-    if (!isMegaMenuInitialized) {
-      megaMenu.style.display = 'flex';
-      isMegaMenuInitialized = true;
-    }
+    megaMenu.style.display = 'flex';
     setTimeout(() => {
       megaMenu.classList.add('mega-menu-show');
     }, 10);
