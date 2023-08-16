@@ -25,15 +25,17 @@ createNanoBlock('price', (code, variant, label) => {
   return priceRoot;
 });
 
-function renderProductPrice(product) {
+function renderProductPrice(product, label) {
   if (!product.discount) {
-    return `<strong>${product.price} ${product.currency_iso}</strong>`;
+    return `<strong>${product.price} ${product.currency_iso}</strong>
+            <em>${label}</em>`;
   // eslint-disable-next-line no-else-return
   } else {
     const discount = product.price - product.discount.discounted_price;
     return `<strong>${product.discount.discounted_price} ${product.currency_iso}</strong>
             <span>Old Price <del>${product.price} ${product.currency_iso}</del></span>
             <span class="discount">Save ${discount.toFixed(2)} ${product.currency_iso}</span>
+            <em>${label}</em>
             `;
   }
 }
@@ -42,16 +44,15 @@ createNanoBlock('priceWithOldPrice', (label) => {
   const root = document.createElement('div');
   root.classList.add('price');
   root.innerHTML = `
-    loading...
-    <em>${label}</em>`;
+    loading...`;
   root.addEventListener('variantSelectionChanged', (e) => {
-    root.innerHTML = renderProductPrice(e.detail.product);
+    root.innerHTML = renderProductPrice(e.detail.product, label);
   });
   return root;
 });
 
 createNanoBlock('lowestPrice', (code, variant) => {
-  const root = document.createElement('span');
+  const root = document.createElement('p');
 
   fetchProduct(code, variant).then((product) => {
     // eslint-disable-next-line max-len
