@@ -23,7 +23,7 @@ function handleLoginClick() {
     loginModal.style.display = 'flex';
     setTimeout(() => {
       loginModal.classList.add('show');
-    }, 10); // Small delay to ensure that the modal is rendered before adding the transition
+    }, 0); // Small delay to ensure that the modal is rendered before adding the transition
   }
 
   const loginButton = document.querySelector('.nav-sections p:last-child');
@@ -193,7 +193,7 @@ function renderDesktopHeader(block, nav) {
 
   homeSolutions.addEventListener('mouseleave', () => {
     isOverHomeSolutions = false;
-    setTimeout(hideMegaMenu, 5); // avoid menu to close when moving mouse to menu.
+    setTimeout(hideMegaMenu, 0); // avoid menu to close when moving mouse to menu.
   });
 
   megaMenu.addEventListener('mouseenter', () => {
