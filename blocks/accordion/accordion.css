@@ -35,7 +35,7 @@
   border-style: solid;
   border-width: 0 2px 2px 0;
   content: " ";
-  right: 0;
+  right: -30px;
   width: 10px;
   height: 10px;
   transition: top .3s ease-in-out,transform .3s ease-in-out,-webkit-transform .3s ease-in-out;
