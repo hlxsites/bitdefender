@@ -33,8 +33,6 @@ function renderBreadcrumb(breadcrumbs) {
 }
 
 export default async function createBreadcrumbs(container) {
-  const cssLoaded = loadCSS('/blocks/breadcrumbs/breadcrumbs.css');
-
   const { pathname } = window.location;
   const pathSeparator = '/';
   // split pathname into parts add / at the end and remove empty parts
@@ -77,5 +75,5 @@ export default async function createBreadcrumbs(container) {
     }
   });
 
-  await Promise.all([cssLoaded]);
+  await loadCSS('/blocks/breadcrumbs/breadcrumbs.css');
 }
