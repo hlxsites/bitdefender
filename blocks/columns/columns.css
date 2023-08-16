@@ -28,6 +28,8 @@
   display: block;
 }
 
+
+
 @media (min-width: 992px) { /* desktop */
 
   .columns > div {
@@ -55,18 +57,7 @@
     max-width: var(--section-large-desktop-max-width);
     padding: 0 var(--section-large-desktop-padding);
   }
-
-  .columns.awards.grey2color > div > div {
-  filter: grayscale(100%);
-  transition: all .3s ease;
-  max-width: 130px;
-}
-
-.columns.awards.grey2color > div > div:hover {
-  filter: none;
-  max-width: 130px;
-}
-
+  
 }
 
 /* Features cards */
@@ -292,4 +283,10 @@
 
 .columns.carousel .active-button {
   background-color: var(--link-color);
+}
+
+.columns.awards.columns.awards.grey2color > div img {
+  display: block;
+  height: auto;
+  object-fit: contain;
 }
