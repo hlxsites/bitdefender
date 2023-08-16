@@ -341,7 +341,7 @@
     padding: 0.1875rem 0.5625rem;
     border-radius: 50px;
     font-weight: var(--font-weight-boldest);
-    font-size: 10px;
+    font-size: var(--body-font-size-xxxs);
     color: var(--expandable-row-text-color);
     font-style: normal;
 }
