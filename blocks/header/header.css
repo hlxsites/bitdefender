@@ -15,7 +15,6 @@ header p {
 .header-wrapper {
   position: sticky;
   top: 0;
-  background-color: var(--background-color);
   transition: all 0.3s ease-in-out;
 }
 
@@ -550,7 +549,6 @@ header a.button:hover span.button-text {
 
   .header-wrapper {
     height: var(--nav-height-desktop);
-    background-color: var(--text-color);
     position: fixed;
     z-index: 999;
     margin: auto;

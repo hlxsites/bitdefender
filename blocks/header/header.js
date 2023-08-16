@@ -420,6 +420,10 @@ export default async function decorate(block) {
     header.appendChild(container);
   }
 
+  // assign an aria-label to the a tag inside of .logo
+  const logoLink = document.querySelector('.logo a');
+  logoLink.setAttribute('aria-label', 'Logo');
+
   const secondSpan = document.querySelector('.header-wrapper > div > p span:nth-child(2)');
   if (secondSpan) {
     secondSpan.parentNode.removeChild(secondSpan);
