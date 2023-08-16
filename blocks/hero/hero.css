@@ -23,11 +23,13 @@
 
 
 /* breadcrumbs */
+
 main .hero .hero-content .breadcrumb {
   padding: 14px 0 20px;
   margin-bottom: 20px;
   font-weight: var(--font-weight-bold);
   color: #dedede;
+  min-height: 48px;
 }
 
 main .hero.black-background .hero-content .breadcrumb{
