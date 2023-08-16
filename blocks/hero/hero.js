@@ -1,78 +1,80 @@
 // Description: Hero block
-import {
-  fetchIndex,
-  fixExcelFilterZeroes,
-  createTag,
-} from '../../scripts/utils/utils.js';
+// import {
+//   fetchIndex,
+//   fixExcelFilterZeroes,
+//   createTag,
+// } from '../../scripts/utils/utils.js';
 
-function prependSlash(path) {
-  return path.startsWith('/') ? path : `/${path}`;
-}
+// function prependSlash(path) {
+//   return path.startsWith('/') ? path : `/${path}`;
+// }
 
-function getName(pageIndex, path, part, current) {
-  const pg = pageIndex.find((page) => page.path === path);
-  if (pg && pg.breadcrumbtitle && pg.breadcrumbtitle !== '0') {
-    return pg.breadcrumbtitle;
-  }
+// function getName(pageIndex, path, part, current) {
+//   const pg = pageIndex.find((page) => page.path === path);
+//   if (pg && pg.breadcrumbtitle && pg.breadcrumbtitle !== '0') {
+//     return pg.breadcrumbtitle;
+//   }
 
-  if (pg && pg.title && pg.title !== '0') {
-    return pg.title;
-  }
+//   if (pg && pg.title && pg.title !== '0') {
+//     return pg.title;
+//   }
 
-  if (current) {
-    return document.title;
-  }
+//   if (current) {
+//     return document.title;
+//   }
 
-  return part;
-}
+//   return part;
+// }
 
-function renderBreadcrumb(breadcrumbs) {
-  return createTag('a', { href: breadcrumbs.url_path ? breadcrumbs.url_path : '#' }, breadcrumbs.name);
-}
+// function renderBreadcrumb(breadcrumbs) {
+//   return createTag('a',
+//   { href: breadcrumbs.url_path ? breadcrumbs.url_path : '#' },
+//   breadcrumbs.name);
+// }
 
-async function createBreadcrumbs(container) {
-  const { pathname } = window.location;
-  const pathSeparator = '/';
-  // split pathname into parts add / at the end and remove empty parts
-  const pathSplit = pathname.split('/').reduce((acc, curr, index, array) => {
-    if (index < array.length - 1) {
-      acc.push(`${curr}/`);
-    } else if (curr !== '') {
-      acc.push(curr);
-    }
-    return acc;
-  }, []);
+// async function createBreadcrumbs(container) {
+//   const { pathname } = window.location;
+//   const pathSeparator = '/';
+//   // split pathname into parts add / at the end and remove empty parts
+//   const pathSplit = pathname.split('/').reduce((acc, curr, index, array) => {
+//     if (index < array.length - 1) {
+//       acc.push(`${curr}/`);
+//     } else if (curr !== '') {
+//       acc.push(curr);
+//     }
+//     return acc;
+//   }, []);
 
-  const pageIndex = (await fetchIndex('query-index')).data;
-  fixExcelFilterZeroes(pageIndex);
-  // eslint-disable-next-line max-len
-  const urlForIndex = (index) => prependSlash(pathSplit.slice(1, index + 2).join(pathSeparator));
+//   const pageIndex = (await fetchIndex('query-index')).data;
+//   fixExcelFilterZeroes(pageIndex);
+//   // eslint-disable-next-line max-len
+//   const urlForIndex = (index) => prependSlash(pathSplit.slice(1, index + 2).join(pathSeparator));
 
-  const breadcrumbs = [
-    {
-      name: 'Home',
-      url_path: '/',
-    },
-    ...pathSplit.slice(1, -1).map((part, index) => {
-      const url = urlForIndex(index);
-      return {
-        name: getName(pageIndex, url, part, false),
-        url_path: url,
-      };
-    }),
-    {
-      // get the breadcrumb title from the metadata; if the metadata does not contain it,
-      // the last part of the path is used as the breadcrumb title
-      name: getName(pageIndex, pathname, pathSplit[pathSplit.length - 1], true),
-    },
-  ];
+//   const breadcrumbs = [
+//     {
+//       name: 'Home',
+//       url_path: '/',
+//     },
+//     ...pathSplit.slice(1, -1).map((part, index) => {
+//       const url = urlForIndex(index);
+//       return {
+//         name: getName(pageIndex, url, part, false),
+//         url_path: url,
+//       };
+//     }),
+//     {
+//       // get the breadcrumb title from the metadata; if the metadata does not contain it,
+//       // the last part of the path is used as the breadcrumb title
+//       name: getName(pageIndex, pathname, pathSplit[pathSplit.length - 1], true),
+//     },
+//   ];
 
-  breadcrumbs.forEach((crumb) => {
-    if (crumb.name) {
-      container.append(renderBreadcrumb(crumb));
-    }
-  });
-}
+//   breadcrumbs.forEach((crumb) => {
+//     if (crumb.name) {
+//       container.append(renderBreadcrumb(crumb));
+//     }
+//   });
+// }
 
 /**
  * Builds hero block and prepends to main in a new section.
@@ -95,10 +97,9 @@ async function buildHeroBlock(element) {
       subSection.children[i].classList.add(`hero-content-${i}`);
     }
 
-    const breadcrumb = createTag('div', { class: 'breadcrumb' });
-    // await loadBreadcrumbs(breadcrumb);
-    await createBreadcrumbs(breadcrumb);
-    subSection.querySelector('.hero-content-0').prepend(breadcrumb);
+    // const breadcrumb = createTag('div', { class: 'breadcrumb' });
+    // await createBreadcrumbs(breadcrumb);
+    // subSection.querySelector('.hero-content-0').prepend(breadcrumb);
 
     const pictureEl = document.createElement('div');
     pictureEl.classList.add('hero-picture');
