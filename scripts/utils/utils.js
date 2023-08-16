@@ -140,7 +140,6 @@ function parseParams(params) {
   return result;
 }
 
-
 /**
  * Renders nano blocks
  * @param parent The parent element

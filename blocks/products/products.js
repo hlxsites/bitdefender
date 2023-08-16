@@ -1,4 +1,9 @@
-import { createNanoBlock, renderNanoBlocks, createNanoBlockWithPostProcessing, fetchProduct } from '../../scripts/utils/utils.js';
+import {
+  createNanoBlock,
+  renderNanoBlocks,
+  createNanoBlockWithPostProcessing,
+  fetchProduct,
+} from '../../scripts/utils/utils.js';
 
 createNanoBlock('price', (code, variant, label) => {
   const priceRoot = document.createElement('div');
