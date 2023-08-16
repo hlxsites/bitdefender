@@ -17,7 +17,7 @@ import {
   createTag,
 } from './utils/utils.js';
 
-const LCP_BLOCKS = ['hero']; // add your LCP blocks to the list
+const LCP_BLOCKS = ['hero', 'sticky-navigation']; // add your LCP blocks to the list
 
 export const SUPPORTED_LANGUAGES = ['en'];
 export const DEFAULT_LANGUAGE = 'en';
