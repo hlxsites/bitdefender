@@ -28,9 +28,8 @@ function buildHeroBlock(element) {
       if (i === 0) {
         // add div for breadcrumb
         const breadcrumb = createTag('div', { class: 'breadcrumb' });
-        subSection.children[i].insertBefore(breadcrumb, subSection.children[i].firstChild);
-
         loadBreadcrumbs(breadcrumb);
+        subSection.children[i].insertBefore(breadcrumb, subSection.children[i].firstChild);
       }
     }
 
