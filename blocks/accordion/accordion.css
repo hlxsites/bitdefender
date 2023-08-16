@@ -38,7 +38,7 @@
   width: 10px;
   height: 10px;
   display: block;
-  right: 0;
+  right: -30px;
   transition: top .3s ease-in-out,transform .3s ease-in-out,-webkit-transform .3s ease-in-out;
 }
 
