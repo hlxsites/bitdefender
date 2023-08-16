@@ -93,17 +93,13 @@ main .hero.comparison .hero-content {
 
 main .hero h1 {
   font-size: var(--hero-font-size-xl);
-  font-weight: var(--font-weight-boldest);
-  line-height: 1;
   margin: 0;
 
 }
 
 main .hero h4 {
   font-size: 18px;
-  font-weight: var(--font-weight-bold);
   color: var(--text-color);
-  line-height: 1.25;
   margin: 0 0 9px;
   padding: 15px 0 0;
   letter-spacing: .003em;
@@ -111,8 +107,6 @@ main .hero h4 {
 
 main .hero.black-background h1 {
   font-size: var(--hero-h1-font-size);
-  font-weight: var(--font-weight-boldest);
-  line-height: 1.21;
   margin: 0 0 25px; 
 }
 
