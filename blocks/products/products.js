@@ -50,10 +50,10 @@ createNanoBlock('priceWithOldPrice', (label) => {
   return root;
 });
 
-createNanoBlock('LowestPrice', (code) => {
+createNanoBlock('lowestPrice', (code, variant) => {
   const root = document.createElement('span');
 
-  fetchProduct(code).then((product) => {
+  fetchProduct(code, variant).then((product) => {
     // eslint-disable-next-line max-len
     const price = ((product.discount ? product.discount.discount_value : product.price) / 12).toFixed(2);
     root.innerHTML = `Start today for as low as  ${price} ${product.currency_label}/mo`;
