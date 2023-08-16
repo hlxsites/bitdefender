@@ -201,7 +201,7 @@ function renderDesktopHeader(block, nav) {
 
   homeSolutions.addEventListener('mouseleave', () => {
     isOverHomeSolutions = false;
-    setTimeout(hideMegaMenu, 300); // This will allow for a smoother transition.
+    setTimeout(hideMegaMenu, 5); // avoid menu to close when moving mouse to menu.
   });
 
   megaMenu.addEventListener('mouseenter', () => {
