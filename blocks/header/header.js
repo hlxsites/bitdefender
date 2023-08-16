@@ -16,14 +16,15 @@ function createLoginModal() {
 }
 
 function handleLoginClick() {
+  let isLoginModalInitialized = false;
   const loginModal = document.querySelector('.login-modal');
   if (loginModal.classList.contains('show')) {
     loginModal.classList.remove('show');
-    setTimeout(() => {
-      loginModal.style.display = 'none';
-    }, 300);
   } else {
-    loginModal.style.display = 'flex';
+    if (!isLoginModalInitialized) {
+      loginModal.style.display = 'flex';
+      isLoginModalInitialized = true;
+    }
     setTimeout(() => {
       loginModal.classList.add('show');
     }, 10); // Small delay to ensure that the modal is rendered before adding the transition
@@ -173,9 +174,13 @@ function renderDesktopHeader(block, nav) {
   const megaMenu = document.querySelector('.mega-menu');
   let isOverHomeSolutions = false;
   let isOverMegaMenu = false;
+  let isMegaMenuInitialized = false;
 
   const showMegaMenu = () => {
-    megaMenu.style.display = 'flex';
+    if (!isMegaMenuInitialized) {
+      megaMenu.style.display = 'flex';
+      isMegaMenuInitialized = true;
+    }
     setTimeout(() => {
       megaMenu.classList.add('mega-menu-show');
     }, 10);
@@ -185,11 +190,6 @@ function renderDesktopHeader(block, nav) {
     if (!isOverHomeSolutions && !isOverMegaMenu) {
       megaMenu.classList.remove('mega-menu-show');
       homeSolutions.classList.remove('home-solutions-link-hover');
-      setTimeout(() => {
-        if (!megaMenu.classList.contains('mega-menu-show')) {
-          megaMenu.style.display = 'none';
-        }
-      }, 300);
     }
   };
 
