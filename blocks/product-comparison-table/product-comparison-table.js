@@ -76,7 +76,7 @@ function addClassesForExpandableRows(rows) {
   const expandableRowsIndexes = [];
 
   rows.forEach((row, index) => {
-    const expandableRowMarker = row.querySelectorAll('h5');
+    const expandableRowMarker = row.querySelectorAll('h3');
     if (expandableRowMarker.length === 0 || row.classList.contains('product-comparison-header')) {
       return;
     }
