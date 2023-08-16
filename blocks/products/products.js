@@ -25,18 +25,15 @@ createNanoBlock('price', (code, variant, label) => {
   return priceRoot;
 });
 
-function renderProductPrice(product, label) {
+function renderProductPrice(product) {
   if (!product.discount) {
-    return `<strong>${product.price} ${product.currency_iso}</strong>
-            <em>${label}</em>`;
+    return `<strong>${product.price} ${product.currency_iso}</strong>`;
   // eslint-disable-next-line no-else-return
   } else {
     const discount = product.price - product.discount.discounted_price;
     return `<strong>${product.discount.discounted_price} ${product.currency_iso}</strong>
             <span>Old Price <del>${product.price} ${product.currency_iso}</del></span>
-            <span class="discount">Save ${discount.toFixed(2)} ${product.currency_iso}</span>
-            <em>${label}</em>
-            `;
+            <span class="discount">Save ${discount.toFixed(2)} ${product.currency_iso}</span>`;
   }
 }
 
@@ -63,7 +60,7 @@ createNanoBlock('plans', (code, variants, label, defaultSelection) => {
   price.classList.add('price');
   price.innerHTML = 'loading...';
   price.addEventListener('variantSelectionChanged', (e) => {
-    price.innerHTML = renderProductPrice(e.detail.product, label);
+    price.innerHTML = renderProductPrice(e.detail.product);
   });
   root.appendChild(price);
 
