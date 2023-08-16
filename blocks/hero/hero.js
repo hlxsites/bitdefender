@@ -1,5 +1,11 @@
 // Description: Hero block
 import { createTag } from '../../scripts/utils/utils.js';
+
+async function loadBreadcrumbs(breadcrumbsContainer) {
+  const breadCrumbsModule = await import('../breadcrumbs/breadcrumbs-create.js');
+  breadCrumbsModule.default(breadcrumbsContainer);
+}
+
 /**
  * Builds hero block and prepends to main in a new section.
  * @param {Element} main The container element
@@ -13,6 +19,10 @@ function buildHeroBlock(element) {
     const section = document.querySelector('div.hero');
     const subSection = document.querySelector('div.hero div');
     subSection.classList.add('hero-content');
+    // add div for breadcrumb
+    const breadcrumb = createTag('div', { class: 'breadcrumb' });
+    subSection.insertBefore(breadcrumb, subSection.firstChild);
+    loadBreadcrumbs(breadcrumb);
 
     // get number of children in hero-content
     const numberOfChildren = subSection.childElementCount;
@@ -62,27 +72,17 @@ function decorateDiscountBubble() {
   }
 }
 
-async function loadBreadcrumbs(breadcrumbsContainer) {
-  const breadCrumbsModule = await import('../breadcrumbs/breadcrumbs-create.js');
-  breadCrumbsModule.default(breadcrumbsContainer);
-}
-
 /**
  * decorates hero block
  * @param {Element} block The hero block element
  */
 export default async function decorate(block) {
   buildHeroBlock(block);
+
   // get div class hero-content
   const elementHeroContent = block.querySelector('.hero div.hero-content div');
 
   if (elementHeroContent !== null) {
-    // add div for breadcrumb
-    const breadcrumb = createTag('div', { class: 'breadcrumb' });
-
-    elementHeroContent.insertBefore(breadcrumb, elementHeroContent.firstChild);
-    loadBreadcrumbs(breadcrumb);
-
     // find pattern for discount bubble
     // <p class="button-container"><a class="button primary" href="example.com">Text</a></p>
     // <p><em>50% Discount</em></p>
