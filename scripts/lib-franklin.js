@@ -229,20 +229,12 @@ export async function decorateTags(element) {
   const tagTypes = [
     { regex: /\[#(.*?)#\]/g, className: 'dark-blue' },
     { regex: /\[{(.*?)}\]/g, className: 'light-blue' },
-    { regex: /\[(.*?)\]/g, className: 'green' },
+    { regex: /\[\$(.*?)\$\]/g, className: 'green' },
   ];
 
   function replaceTags(inputValue) {
     let nodeValue = inputValue; // Create a local copy to work on
     let replaced = false;
-
-    const exceptionPattern = /\$\[(.*?)]\$/g;
-
-    if (exceptionPattern.test(nodeValue)) {
-      // Removing the $ signs around the tag
-      nodeValue = nodeValue.replace(exceptionPattern, (match, p1) => `[${p1}]`);
-      return { nodeValue, replaced };
-    }
 
     tagTypes.forEach((tagType) => {
       let match = tagType.regex.exec(nodeValue);
