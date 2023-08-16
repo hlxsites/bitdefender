@@ -2,10 +2,7 @@ import {
   fetchIndex,
   fixExcelFilterZeroes,
   createTag,
-} from '../../scripts/utils/utils.js';
-import {
-  loadCSS,
-} from '../../scripts/lib-franklin.js';
+} from './utils/utils.js';
 
 function prependSlash(path) {
   return path.startsWith('/') ? path : `/${path}`;
@@ -29,14 +26,14 @@ function getName(pageIndex, path, part, current) {
 }
 
 function renderBreadcrumb(breadcrumbs) {
-  return createTag('a', { href: breadcrumbs.url_path ? breadcrumbs.url_path : '#' }, breadcrumbs.name);
+  return createTag(
+    'a',
+    { href: breadcrumbs.url_path ? breadcrumbs.url_path : '#' },
+    breadcrumbs.name,
+  );
 }
 
-export default async function createBreadcrumbs(container) {
-  const breadCrumbsCSS = new Promise((resolve) => {
-    loadCSS('/blocks/breadcrumbs/breadcrumbs.css', (e) => resolve(e));
-  });
-
+function createBreadcrumbs(container) {
   const { pathname } = window.location;
   const pathSeparator = '/';
   // split pathname into parts add / at the end and remove empty parts
@@ -49,7 +46,7 @@ export default async function createBreadcrumbs(container) {
     return acc;
   }, []);
 
-  const pageIndex = (await fetchIndex('query-index')).data;
+  const pageIndex = fetchIndex('query-index').data;
   fixExcelFilterZeroes(pageIndex);
   // eslint-disable-next-line max-len
   const urlForIndex = (index) => prependSlash(pathSplit.slice(1, index + 2).join(pathSeparator));
@@ -78,6 +75,11 @@ export default async function createBreadcrumbs(container) {
       container.append(renderBreadcrumb(crumb));
     }
   });
+}
 
-  await breadCrumbsCSS;
+const breadcrumb = document.querySelector('.breadcrumb');
+
+// check if breadcrumb div exists
+if (breadcrumb !== undefined) {
+  createBreadcrumbs(breadcrumb);
 }
