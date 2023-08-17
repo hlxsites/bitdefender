@@ -254,6 +254,7 @@
         font-size: var(--heading-font-size-m);
     }
 
+    
     .product-comparison-table div[role='cell'] {
         display: table-cell;
 
@@ -328,6 +329,16 @@
 
 .product-comparison-table .expandable-arrow > div[role='cell'] {
     position: relative;
+}
+
+@media(min-width: 992px) {
+    .product-comparison-table div[role='row'] > div[role="cell"]:not(:first-of-type) {
+        display: table-cell;
+    }
+
+    .product-comparison-table div[role='row'] > div[role="cell"]:not(:first-of-type) > div {
+        margin: auto;
+    }
 }
 
 .product-comparison-table .expandable-arrow > div:first-of-type::before {
