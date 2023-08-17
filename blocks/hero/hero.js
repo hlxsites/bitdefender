@@ -19,13 +19,6 @@ async function buildHeroBlock(element) {
     // iterate though children and add numbered class to each child
     for (let i = 0; i < numberOfChildren; i += 1) {
       subSection.children[i].classList.add(`hero-content-${i}`);
-      if (i === 0) {
-        // add div for breadcrumb
-        const breadcrumb = createTag('div', { class: 'breadcrumb' });
-        subSection.children[i].insertBefore(breadcrumb, subSection.children[i].firstChild);
-
-        loadBreadcrumbs(breadcrumb);
-      }
     }
 
     const breadcrumb = createTag('div', { class: 'breadcrumb' });
@@ -79,7 +72,7 @@ function decorateDiscountBubble() {
  * @param {Element} block The hero block element
  */
 export default async function decorate(block) {
-  buildHeroBlock(block);
+  await buildHeroBlock(block);
 
   // get div class hero-content
   const elementHeroContent = block.querySelector('.hero div.hero-content div');
