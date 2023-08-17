@@ -27,8 +27,6 @@ async function buildHeroBlock(element) {
     const breadcrumb = createTag('div', { class: 'breadcrumb' });
     subSection.querySelector('.hero-content-0').prepend(breadcrumb);
 
-    import('../../scripts/breadcrumbs.js');
-
     const pictureEl = document.createElement('div');
     pictureEl.classList.add('hero-picture');
     pictureEl.append(picture);
