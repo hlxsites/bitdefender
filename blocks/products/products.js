@@ -1,7 +1,6 @@
 import {
   createNanoBlock,
   renderNanoBlocks,
-  createNanoBlockWithPostProcessing,
   fetchProduct,
 } from '../../scripts/utils/utils.js';
 
@@ -41,7 +40,7 @@ function renderProductPrice(product) {
   }
 }
 
-createNanoBlockWithPostProcessing('featured', (text) => {
+createNanoBlock('featured', (text) => {
   const root = document.createElement('div');
   root.classList.add('featured');
   root.innerText = text;
