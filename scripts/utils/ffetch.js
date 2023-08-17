@@ -166,7 +166,7 @@ function assignOperations(generator, context) {
 }
 
 export default function ffetch(url) {
-  let chunks = 255;
+  chunks = 255;
   const fetch = (...rest) => window.fetch.apply(null, rest);
   const parseHtml = (html) => new window.DOMParser().parseFromString(html, 'text/html');
 
