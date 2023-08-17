@@ -61,11 +61,14 @@
     font-size: var(--body-font-size-xxs);
     color: var(--product-comparison-text-color);
     padding: 0 1.7rem;
-    text-align: left;
 }
 
 .product-comparison-header div[role="columnheader"] p {
     margin: 0;
+}
+
+.product-comparison-header div[role="columnheader"] .button-container {
+    margin-bottom: 5px;
 }
 
 .product-comparison-header div[role="columnheader"] p:first-of-type {

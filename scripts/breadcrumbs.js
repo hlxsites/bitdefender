@@ -47,6 +47,7 @@ async function createBreadcrumbs(container) {
   }, []);
 
   const pageIndex = (await fetchIndex('query-index')).data;
+
   fixExcelFilterZeroes(pageIndex);
   // eslint-disable-next-line max-len
   const urlForIndex = (index) => prependSlash(pathSplit.slice(1, index + 2).join(pathSeparator));
