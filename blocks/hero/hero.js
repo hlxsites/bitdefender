@@ -1,7 +1,7 @@
 // Description: Hero block
 import {
-  fetchIndex,
-  fixExcelFilterZeroes,
+  // fetchIndex,
+  // fixExcelFilterZeroes,
   createTag,
 } from '../../scripts/utils/utils.js';
 
