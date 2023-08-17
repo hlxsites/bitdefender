@@ -46,6 +46,6 @@ export default function decorate(block) {
   });
 
   if (block.classList.contains('first-open')) {
-    items[0].classList.add('expanded')
+    items[0].classList.add('expanded');
   }
 }
