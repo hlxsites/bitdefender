@@ -33,7 +33,7 @@ function renderBreadcrumb(breadcrumbs) {
   );
 }
 
-function createBreadcrumbs(container) {
+async function createBreadcrumbs(container) {
   const { pathname } = window.location;
   const pathSeparator = '/';
   // split pathname into parts add / at the end and remove empty parts
@@ -46,7 +46,7 @@ function createBreadcrumbs(container) {
     return acc;
   }, []);
 
-  const pageIndex = fetchIndex('query-index').data;
+  const pageIndex = (await fetchIndex('query-index')).data;
   fixExcelFilterZeroes(pageIndex);
   // eslint-disable-next-line max-len
   const urlForIndex = (index) => prependSlash(pathSplit.slice(1, index + 2).join(pathSeparator));
