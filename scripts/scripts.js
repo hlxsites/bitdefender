@@ -13,10 +13,6 @@ import {
   loadCSS, createOptimizedPicture,
 } from './lib-franklin.js';
 
-import {
-  createTag,
-} from './utils/utils.js';
-
 const LCP_BLOCKS = ['hero']; // add your LCP blocks to the list
 
 export const SUPPORTED_LANGUAGES = ['en'];
@@ -174,7 +170,7 @@ export async function detectModalButtons(main) {
   });
 }
 
-function buildCta(section) {
+function buildCta(section, createTag) {
   const backgroundImageSrc = section.dataset.backgroundImage;
   const backgroundImage = backgroundImageSrc ? createOptimizedPicture(backgroundImageSrc) : null;
   const backgroundImageHtml = backgroundImage ? backgroundImage.innerHTML : '';
@@ -203,9 +199,13 @@ function buildCta(section) {
   section.append(fullWidthContainer);
 }
 
-function buildCtaSections(main) {
-  main.querySelectorAll('div.section.cta')
-    .forEach(buildCta);
+async function buildCtaSections(main) {
+  const ctaSections = main.querySelectorAll('div.section.cta');
+
+  if (ctaSections.length > 0) {
+    const { createTag } = await import('./utils/utils.js');
+    ctaSections.forEach((section) => buildCta(section, createTag));
+  }
 }
 
 /**
@@ -256,7 +256,7 @@ function loadDelayed() {
   window.setTimeout(() => {
     // eslint-disable-next-line import/no-cycle
     import('./delayed.js');
-    import('./breadcrumbs.js');
+    // import('./breadcrumbs.js');
   }, 3000);
   // load anything that can be postponed to the latest here
 }
