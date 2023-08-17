@@ -1,8 +1,8 @@
 import {
-  fetchIndex,
-  fixExcelFilterZeroes,
   createTag,
 } from './utils/utils.js';
+
+import ffetch from './utils/ffetch.js';
 
 function prependSlash(path) {
   return path.startsWith('/') ? path : `/${path}`;
@@ -46,9 +46,8 @@ async function createBreadcrumbs(container) {
     return acc;
   }, []);
 
-  const pageIndex = (await fetchIndex('query-index')).data;
+  const pageIndex = await ffetch('/query-index.json').all();
 
-  fixExcelFilterZeroes(pageIndex);
   // eslint-disable-next-line max-len
   const urlForIndex = (index) => prependSlash(pathSplit.slice(1, index + 2).join(pathSeparator));
 
