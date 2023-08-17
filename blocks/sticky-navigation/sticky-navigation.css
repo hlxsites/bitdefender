@@ -2,6 +2,10 @@
   --sticky-nav-border-color: #dedede;
 }
 
+main .section.sticky-navigation-container {
+  padding-top: 0;
+}
+
 .sticky-navigation {
   cursor: pointer;
   position: relative;

@@ -357,6 +357,20 @@ main .section.wide .default-content-wrapper {
   padding-bottom: 15px;
 }
 
+main .section.center .products {
+  grid-template-columns: none;
+}
+
+main .section.center .products .product-card {
+  justify-self: center;
+}
+
+@media (min-width: 768px) {
+  main .section.center .products .product-card {
+    min-width: 380px;
+  }
+}
+
 @media (min-width: 992px) { /* desktop */
   header {
     height: var(--nav-height-desktop);
@@ -385,6 +399,7 @@ main .section.wide .default-content-wrapper {
     max-width: var(--section-desktop-max-width);
     padding: 0 var(--section-desktop-padding);
   }
+  
 }
 
 @media (min-width: 1400px) {
