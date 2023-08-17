@@ -77,9 +77,9 @@ async function createBreadcrumbs(container) {
   });
 }
 
-// const breadcrumb = document.querySelector('.breadcrumb');
+const breadcrumb = document.querySelector('.breadcrumb');
 
-// // check if breadcrumb div exists
-// if (breadcrumb !== undefined) {
-//   createBreadcrumbs(breadcrumb);
-// }
+// check if breadcrumb div exists
+if (breadcrumb !== undefined && 1 === 0) {
+  createBreadcrumbs(breadcrumb);
+}
