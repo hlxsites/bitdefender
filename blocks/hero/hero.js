@@ -1,7 +1,5 @@
 // Description: Hero block
-import {
-  createTag,
-} from '../../scripts/utils/utils.js';
+import { createTag } from '../../scripts/utils/utils.js';
 
 /**
  * Builds hero block and prepends to main in a new section.
@@ -16,7 +14,6 @@ async function buildHeroBlock(element) {
     const section = document.querySelector('div.hero');
     const subSection = document.querySelector('div.hero div');
     subSection.classList.add('hero-content');
-
     // get number of children in hero-content
     const numberOfChildren = subSection.childElementCount;
     // iterate though children and add numbered class to each child
@@ -75,7 +72,7 @@ function decorateDiscountBubble() {
  * @param {Element} block The hero block element
  */
 export default async function decorate(block) {
-  await buildHeroBlock(block);
+  buildHeroBlock(block);
 
   // get div class hero-content
   const elementHeroContent = block.querySelector('.hero div.hero-content div');

@@ -1,8 +1,8 @@
 import {
   createTag,
+  fetchIndex,
+  fixExcelFilterZeroes,
 } from './utils/utils.js';
-
-import ffetch from './utils/ffetch.js';
 
 function prependSlash(path) {
   return path.startsWith('/') ? path : `/${path}`;
@@ -46,8 +46,8 @@ async function createBreadcrumbs(container) {
     return acc;
   }, []);
 
-  const pageIndex = await ffetch('/query-index.json').all();
-
+  const pageIndex = (await fetchIndex('query-index')).data;
+  fixExcelFilterZeroes(pageIndex);
   // eslint-disable-next-line max-len
   const urlForIndex = (index) => prependSlash(pathSplit.slice(1, index + 2).join(pathSeparator));
 
@@ -81,5 +81,5 @@ const breadcrumb = document.querySelector('.breadcrumb');
 
 // check if breadcrumb div exists
 if (breadcrumb !== undefined) {
-  createBreadcrumbs(breadcrumb);
+  await createBreadcrumbs(breadcrumb);
 }
