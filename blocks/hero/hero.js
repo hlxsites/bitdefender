@@ -1,5 +1,9 @@
 // Description: Hero block
-import { createTag } from '../../scripts/utils/utils.js';
+import {
+  fetchIndex,
+  fixExcelFilterZeroes,
+  createTag,
+} from '../../scripts/utils/utils.js';
 
 /**
  * Builds hero block and prepends to main in a new section.
