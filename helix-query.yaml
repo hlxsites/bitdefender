@@ -3,6 +3,8 @@ indices:
   default:
     include:
       - /solutions/**
+    exclude:
+      - /solutions/fragments/**  
     target: /query-index.json
     properties:
       title:
