@@ -4,10 +4,6 @@ export default async function decorate(block) {
   const resp = await fetch(url.pathname);
   if (resp.ok) {
     const json = await resp.json();
-    // json looks like this:
-    // {"total":1,"offset":0,"limit":1,"data":
-    // [{"Field":"Email","Type":"email","Label":"Email Address","Default":"you@example.com"}],
-    // ":type":"sheet"}
     const { data } = json;
     const form = document.createElement('form');
     form.setAttribute('method', 'post');
@@ -28,4 +24,19 @@ export default async function decorate(block) {
 
     block.append(form);
   }
+
+  // wrap the input of type checkbox and the following label into a div
+  block.querySelectorAll('input[type="checkbox"]').forEach((input) => {
+    const div = document.createElement('div');
+    div.classList.add('checkbox');
+
+    const label = input.nextElementSibling;
+    if (label && label.tagName === 'LABEL') {
+      input.before(div);
+      div.append(input, label);
+    } else {
+      input.after(div);
+      div.append(input);
+    }
+  });
 }

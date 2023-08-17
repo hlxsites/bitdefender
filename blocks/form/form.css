@@ -1,0 +1,18 @@
+.form-wrapper {
+    width: 100%;
+    margin: 0 auto;
+    max-width: var(--body-max-width);
+    padding: var(--body-padding);
+    position: relative;
+}
+
+.form > div:first-child {
+  display: none;
+}
+
+.form input[type="email"] {
+    border: 1px solid var(--input-border);
+    transition: all 0.3s ease-in-out;
+    font-size: var(--body-font-size-xs);
+    height: 50px;
+}
