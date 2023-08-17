@@ -167,10 +167,7 @@ export async function detectModalButtons(main) {
   main.querySelectorAll('a.button.modal').forEach((link) => {
     link.addEventListener('click', async (e) => {
       e.preventDefault();
-      const modalPath = link.href;
-      const modalTemplate = modalPath.split('/').pop();
-      const modalContainer = await createModal(modalPath, modalTemplate);
-      document.body.append(modalContainer);
+      document.body.append(await createModal(link.href));
     });
   });
 }
