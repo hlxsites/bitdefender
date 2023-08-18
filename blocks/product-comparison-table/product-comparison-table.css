@@ -78,62 +78,6 @@
     text-align: left;
 }
 
-.product-comparison-header div[role="columnheader"] p, div[role="cell"] p {
-    margin: 0;
-}
-
-.product-comparison-header div[role="columnheader"] .button-container, div[role="cell"] .button-container {
-    margin-bottom: 5px;
-}
-
-.product-comparison-header div[role="columnheader"] p:first-of-type, div[role="cell"] p:first-of-type {
-    font-weight: 500;
-    padding: 0;
-    color: var(--product-comparison-text-color);
-    text-align: center;
-    font-size: 14px;
-}
-
-.product-comparison-header div[role="columnheader"] p.button-container a, div[role="cell"] p.button-container a {
-    width: 80%;
-    justify-content: center;
-    margin-top: 0.5625rem;
-    border: 2px solid var(--button-primary-background-color);
-    color: var(--text-color);
-    background-color: unset;
-
-}
-
-.product-comparison-header div[role="columnheader"] p.button-container a.button:hover::after, div[role="cell"] p.button-container a.button:hover::after {
-    background-color: var(--text-color);
-}
-
-.product-comparison-header div[role="columnheader"] p:last-of-type.product-comparison-header-subtitle, div[role="cell"] p:last-of-type.product-comparison-header-subtitle {
-    padding-bottom: 2rem;
-}
-
-.product-comparison-header div[role="columnheader"].active p.button-container a, div[role="cell"] p.button-container a{
-    background-color: var(--button-background-color);
-    border: 2px solid var(--button-background-color);
-    color: var(--button-link-color);
-}
-
-.product-comparison-header div[role="columnheader"].active p.button-container a.button:hover::after, div[role="cell"] p.button-container a.button:hover::after {
-    background-color: var(--button-link-color);
-}
-
-.product-comparison-header div[role="columnheader"] h2 {
-    margin: 3rem 0.625rem 0.25rem;
-    font-size: var(--heading-font-size-s);
-    min-height: 4rem;
-}
-
-.product-comparison-header div[role="columnheader"] .old-price-container p{
-    font-size: var(--body-font-size-xxs);
-    line-height: 1.2;
-    color: var(--product-comparison-text-color);
-}
-
 .product-comparison-price {
     padding-top: 0.9375rem;
     margin: 0.9375rem 0.625rem 0;
@@ -145,7 +89,78 @@
     font-weight: var(--font-weight-boldest);
 }
 
+div[role="cell"] p {
+    margin: 0;
+}
+
 .product-comparison-price p:last-of-type {
+    color: var(--product-comparison-text-color);
+}
+
+.product-comparison-header div[role="columnheader"] p {
+    margin: 0;
+}
+
+div[role="cell"] .button-container , .product-comparison-header div[role="columnheader"] .button-container{
+    margin-bottom: 5px;
+}
+
+div[role="cell"] p:first-of-type, .product-comparison-header div[role="columnheader"] p:first-of-type {
+    font-weight: 500;
+    padding: 0;
+    color: var(--product-comparison-text-color);
+    text-align: center;
+    font-size: 14px;
+}
+
+div[role="cell"] p.button-container a {
+    background-color: var(--button-background-color);
+    border: 2px solid var(--button-background-color);
+    color: var(--button-link-color);
+}
+
+div[role="cell"] p.button-container a, .product-comparison-header div[role="columnheader"] p.button-container a {
+    width: 80%;
+    justify-content: center;
+    margin-top: 0.5625rem;
+    border: 2px solid var(--button-primary-background-color);
+    color: var(--text-color);
+    background-color: unset;
+
+}
+
+.product-comparison-header div[role="columnheader"].active p.button-container a {
+    background-color: var(--button-background-color);
+    border: 2px solid var(--button-background-color);
+    color: var(--button-link-color);
+}
+
+div[role="cell"] p.button-container a.button:hover::after {
+    background-color: var(--button-link-color);
+}
+
+.product-comparison-header div[role="columnheader"] p.button-container a.button:hover::after {
+    background-color: var(--text-color);
+}
+
+.product-comparison-header div[role="columnheader"].active p.button-container a.button:hover::after {
+    background-color: var(--button-link-color);
+}
+
+div[role="cell"] p:last-of-type.product-comparison-header-subtitle,
+.product-comparison-header div[role="columnheader"] p:last-of-type.product-comparison-header-subtitle {
+    padding-bottom: 2rem;
+}
+
+.product-comparison-header div[role="columnheader"] h2 {
+    margin: 3rem 0.625rem 0.25rem;
+    font-size: var(--heading-font-size-s);
+    min-height: 4rem;
+}
+
+.product-comparison-header div[role="columnheader"] .old-price-container p{
+    font-size: var(--body-font-size-xxs);
+    line-height: 1.2;
     color: var(--product-comparison-text-color);
 }
 
