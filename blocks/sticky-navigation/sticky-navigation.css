@@ -18,7 +18,7 @@ main .section.sticky-navigation-container {
   width: 100%;
   max-width: 20in;
   z-index: 101;
-  top: -1px;
+  top: 0;
 }
 
 .sticky-navigation .menu-with-button {
