@@ -3,14 +3,28 @@
 }
 
 main .section.sticky-navigation-container {
+  position: static;
   padding-top: 0;
+  overflow: visible;
 }
 
 .sticky-navigation {
   cursor: pointer;
-  position: relative;
   background-color: var(--white-color);
+  position: sticky;
+  top: 0;
+  width: 100%;
+  max-width: 20in;
+  z-index: 101;
 }
+
+/* .sticky-navigation.fixed-nav {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  max-width: 20in;
+  z-index: 101;
+} */
 
 .sticky-navigation .menu-with-button {
   display: none;
@@ -98,13 +112,7 @@ main .section.sticky-navigation-container {
   display: flex;
 }
 
-.sticky-navigation.fixed-nav {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  max-width: 20in;
-  z-index: 99999;
-}
+
 
 .sticky-navigation .button-container {
   margin:0;
