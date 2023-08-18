@@ -4,7 +4,7 @@ import {
   loadFooter,
   decorateButtons,
   decorateIcons,
-  // decorateTags,
+  decorateTags,
   decorateSections,
   decorateBlocks,
   decorateTemplateAndTheme,
@@ -113,7 +113,7 @@ export function decorateMain(main) {
   // hopefully forward compatible button decoration
   decorateButtons(main);
   decorateIcons(main);
-  // decorateTags(main);
+  decorateTags(main);
   decorateLinkedPictures(main);
   decorateSections(main);
   decorateBlocks(main);
@@ -256,7 +256,6 @@ function loadDelayed() {
   window.setTimeout(() => {
     // eslint-disable-next-line import/no-cycle
     import('./delayed.js');
-    import('./breadcrumbs.js');
   }, 3000);
   // load anything that can be postponed to the latest here
 }
