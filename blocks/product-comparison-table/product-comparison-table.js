@@ -1,7 +1,6 @@
 import { createNanoBlock, renderNanoBlocks, fetchProduct } from '../../scripts/utils/utils.js';
 
-let fetchedProducts = [];
-let priceComparisonDisplayText = '';
+const fetchedProducts = [];
 
 createNanoBlock('price-comparison', (code, variant, label) => {
   const priceRoot = document.createElement('div');
@@ -19,7 +18,7 @@ createNanoBlock('price-comparison', (code, variant, label) => {
 
   fetchProduct(code, variant)
     .then((product) => {
-      fetchedProducts.push({code, variant, product});
+      fetchedProducts.push({ code, variant, product });
       // eslint-disable-next-line camelcase
       const { price, discount: { discounted_price: discounted }, currency_iso: currency } = product;
       oldPriceElement.innerHTML = `Old Price <del>${price} ${currency}</del>`;
@@ -179,7 +178,7 @@ function setActiveColumn(block) {
 function setColumnWithPriceDisplayedAlsoBelow(block) {
   const columnHeaders = block.querySelectorAll('div[role="columnheader"]');
   const columnWithPriceBelow = [...columnHeaders]
-    .findIndex((header) => header.innerHTML.includes('<em>')); 
+    .findIndex((header) => header.innerHTML.includes('<em>'));
 
   if (columnWithPriceBelow <= 0) {
     return;
@@ -196,13 +195,11 @@ function removeNotNeededRoles(element) {
     if (children.tagName === 'H2' || children.innerText.match(/devices/i)) {
       children.remove();
     }
-
   });
 }
 
 function addProductPriceBelowSelectedColumn(block) {
   const lastRow = block.querySelector('div[role="row"]:last-of-type');
-  
   const copiedRow = lastRow.cloneNode(true);
 
   lastRow.after(copiedRow);
@@ -215,9 +212,7 @@ function addProductPriceBelowSelectedColumn(block) {
         const copiedCell = headerCellToCopy.cloneNode(true);
         removeNotNeededRoles(copiedCell);
         cell.appendChild(copiedCell);
-
       }
-      //cell.appendChild(priceComparisonParagraph);
     }
   });
 }
