@@ -3,28 +3,23 @@
 }
 
 main .section.sticky-navigation-container {
-  position: static;
   padding-top: 0;
-  overflow: visible;
 }
 
 .sticky-navigation {
   cursor: pointer;
   background-color: var(--white-color);
-  position: sticky;
-  top: 0;
-  width: 100%;
-  max-width: 20in;
+  position: relative;
   z-index: 101;
 }
 
-/* .sticky-navigation.fixed-nav {
-  position: sticky;
-  top: 0;
+.sticky-navigation.fixed-nav {
+  position: fixed;
   width: 100%;
   max-width: 20in;
   z-index: 101;
-} */
+  top: -1px;
+}
 
 .sticky-navigation .menu-with-button {
   display: none;
