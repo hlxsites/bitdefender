@@ -1,5 +1,8 @@
 import { createNanoBlock, renderNanoBlocks, fetchProduct } from '../../scripts/utils/utils.js';
 
+let fetchedProducts = [];
+let priceComparisonDisplayText = '';
+
 createNanoBlock('price-comparison', (code, variant, label) => {
   const priceRoot = document.createElement('div');
   priceRoot.classList.add('product-comparison-price');
@@ -16,6 +19,7 @@ createNanoBlock('price-comparison', (code, variant, label) => {
 
   fetchProduct(code, variant)
     .then((product) => {
+      fetchedProducts.push({code, variant, product});
       // eslint-disable-next-line camelcase
       const { price, discount: { discounted_price: discounted }, currency_iso: currency } = product;
       oldPriceElement.innerHTML = `Old Price <del>${price} ${currency}</del>`;
@@ -172,12 +176,60 @@ function setActiveColumn(block) {
   [...rows].forEach((row) => row.children[tableActiveColumn].classList.add('active'));
 }
 
+function setColumnWithPriceDisplayedAlsoBelow(block) {
+  const columnHeaders = block.querySelectorAll('div[role="columnheader"]');
+  const columnWithPriceBelow = [...columnHeaders]
+    .findIndex((header) => header.innerHTML.includes('<em>')); 
+
+  if (columnWithPriceBelow <= 0) {
+    return;
+  }
+
+  const rows = block.querySelectorAll('div[role="row"]');
+  [...rows].forEach((row) => row.children[columnWithPriceBelow].classList.add('display-price-below'));
+}
+
+function removeNotNeededRoles(element) {
+  element.removeAttribute('role');
+
+  [...element.children].forEach((children) => {
+    if (children.tagName === 'H2' || children.innerText.match(/devices/i)) {
+      children.remove();
+    }
+
+  });
+}
+
+function addProductPriceBelowSelectedColumn(block) {
+  const lastRow = block.querySelector('div[role="row"]:last-of-type');
+  
+  const copiedRow = lastRow.cloneNode(true);
+
+  lastRow.after(copiedRow);
+  [...copiedRow.children].forEach((cell, index) => {
+    cell.innerHTML = '';
+    if (cell.classList.contains('display-price-below')) {
+      const headerRow = block.querySelector('div[role="row"]');
+      if (headerRow) {
+        const headerCellToCopy = headerRow.children[index];
+        const copiedCell = headerCellToCopy.cloneNode(true);
+        removeNotNeededRoles(copiedCell);
+        cell.appendChild(copiedCell);
+
+      }
+      //cell.appendChild(priceComparisonParagraph);
+    }
+  });
+}
+
 export default function decorate(block) {
   addAccesibilityRoles(block);
   replaceTableTextToProperCheckmars(block);
   setExpandableRows(block);
   setActiveColumn(block);
+  setColumnWithPriceDisplayedAlsoBelow(block);
   buildTableHeader(block);
   extractTextFromStrongTagToParent(block);
+  addProductPriceBelowSelectedColumn(block);
   renderNanoBlocks(block);
 }
