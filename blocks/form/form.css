@@ -29,6 +29,10 @@
     width: fit-content;
 }
 
+.button.disabled::after { /* TODO: Add all of the styles to the disabled button */
+    display: none;
+}
+
 form .button-container .button {
     margin-top: 40px;
     opacity: 0.5;
@@ -67,3 +71,27 @@ a.button.clickable:hover {
     font-weight: var(--font-weight-bold);
 }
 
+.fragment-metadata-container {
+    display: none;
+}
+
+.hidden {
+    display: none;
+  }
+  
+.visible {
+    display: block;
+}
+
+.animation {
+    display: none;
+}  
+
+.loading .default-content-wrapper h2 {
+    transition: opacity 1s ease-in-out; 
+    opacity: 1;
+}
+
+.loading .default-content-wrapper h2.fade-out {
+    opacity: 0;
+}

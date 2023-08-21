@@ -7,8 +7,10 @@ function makeButtonClickable(form, emailInput) {
 
   if (allCheckboxesChecked && emailPopulated) {
     submitButton.classList.add('clickable');
+    submitButton.classList.remove('disabled');
   } else {
     submitButton.classList.remove('clickable');
+    submitButton.classList.add('disabled');
   }
 }
 
@@ -26,6 +28,8 @@ function wrapSubmitInButton(form) {
   anchorButton.title = submitInput.value;
   anchorButton.classList.add('button');
 
+  submitInput.classList.add('disabled');
+
   // Create the span containing the button text
   const buttonText = document.createElement('span');
   buttonText.classList.add('button-text');
@@ -37,6 +41,37 @@ function wrapSubmitInButton(form) {
 
   // Replace the submit input with the new button container
   form.replaceChild(buttonContainer, submitInput);
+}
+
+function displaySlide(index, slides) {
+  const animationSection = document.querySelector('.section.animation');
+
+  if (index < slides.length) {
+    slides[index].classList.remove('hidden');
+    animationSection.style.display = 'block';
+
+    if (index === slides.length - 1) { // If it's the last loading slide
+      animationSection.style.display = 'none';
+    }
+    setTimeout(() => {
+      slides[index].classList.add('hidden');
+      displaySlide(index + 1, slides);
+    }, 3000);
+  } else {
+    // When all loading slides have finished, display the slide-4
+    const resultSlide = document.querySelector('.section.result.slide-4');
+    resultSlide.classList.remove('hidden');
+  }
+}
+
+function hideAllSlides(slides) {
+  slides.forEach((slide) => {
+    slide.classList.add('hidden');
+  });
+
+  // Initially hide the slide-4 too
+  const resultSlide = document.querySelector('.section.result.slide-4');
+  resultSlide.classList.add('hidden');
 }
 
 export default async function decorate(block) {
@@ -73,6 +108,7 @@ export default async function decorate(block) {
     const emailInput = form.querySelector('input[type="email"]');
 
     wrapSubmitInButton(form);
+    makeButtonClickable(form, emailInput);
 
     // Add event listeners to checkboxes
     form.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
@@ -96,5 +132,20 @@ export default async function decorate(block) {
       input.after(div);
       div.append(input);
     }
+  });
+
+  // Slide display functionality starts here
+  const formContainer = document.querySelector('.form-container');
+  const slides = Array.from(document.querySelectorAll('.section.loading, .section.result.slide-4'));
+  const submitButton = document.querySelector('.button-container .button');
+
+  // Initially hide all slides
+  hideAllSlides(slides);
+
+  submitButton.addEventListener('click', (e) => {
+    e.preventDefault(); // Prevent default action
+    formContainer.classList.add('hidden'); // Hide form container using class
+
+    displaySlide(0, slides);
   });
 }
