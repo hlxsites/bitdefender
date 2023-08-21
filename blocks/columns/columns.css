@@ -24,24 +24,6 @@
   height: auto;
 }
 
-.modal-container.get-bitdefender-familypack .columns.block.columns-2-cols > div {
-  display: flex;
-  flex-direction: column-reverse;
-  text-align: center;
-}
-
-
-@media (min-width: 768px) { 
-  .modal-container.get-bitdefender-familypack .columns.block.columns-2-cols > div {
-    display: flex;
-    flex: 1;
-    flex-direction: row;
-    order: unset;
-    justify-content: center;
-    align-items: center;
-}}
-
-
 .columns > div > .columns-img-col {
   order: 0;
 }
@@ -270,3 +252,20 @@
 .columns.carousel .active-button {
   background-color: var(--link-color);
 }
+
+.modal-container.get-bitdefender-familypack .columns.block.columns-2-cols > div {
+  display: flex;
+  flex-direction: column-reverse;
+  text-align: center;
+}
+
+
+@media (min-width: 768px) { 
+  .modal-container.get-bitdefender-familypack .columns.block.columns-2-cols > div {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    order: unset;
+    justify-content: center;
+    align-items: center;
+}}
