@@ -46,17 +46,36 @@ function wrapSubmitInButton(form) {
 function displaySlide(index, slides) {
   const animationSection = document.querySelector('.section.animation');
 
+  const fadeOutAndProceed = (slide, callback) => {
+    // After 2.5 seconds, start the fade-out effect
+    setTimeout(() => {
+      const h2Element = slide.querySelector('h2');
+      if (h2Element) {
+        h2Element.classList.add('fade-out');
+
+        // After the fade-out effect is done (0.5 seconds later), proceed
+        setTimeout(() => {
+          h2Element.classList.remove('fade-out');
+          slide.classList.add('hidden');
+          callback(); // Proceed to the next slide
+        }, 500);
+      } else {
+        callback();
+      }
+    }, 2500);
+  };
+
   if (index < slides.length) {
-    slides[index].classList.remove('hidden');
+    slides[index].classList.remove('hidden'); // Display the current slide
     animationSection.style.display = 'block';
 
+    // Start the fade-out effect and proceed to the next slide when it's done
     if (index === slides.length - 1) { // If it's the last loading slide
       animationSection.style.display = 'none';
     }
-    setTimeout(() => {
-      slides[index].classList.add('hidden');
+    fadeOutAndProceed(slides[index], () => {
       displaySlide(index + 1, slides);
-    }, 3000);
+    });
   } else {
     // When all loading slides have finished, display the slide-4
     const resultSlide = document.querySelector('.section.result.slide-4');
