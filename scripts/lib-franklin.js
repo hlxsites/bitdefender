@@ -229,7 +229,7 @@ export async function decorateTags(element) {
   const tagTypes = [
     { regex: /\[#(.*?)#\]/g, className: 'dark-blue' },
     { regex: /\[{(.*?)}\]/g, className: 'light-blue' },
-    { regex: /\[(.*?)\]/g, className: 'green' },
+    { regex: /\[\$(.*?)\$\]/g, className: 'green' },
   ];
 
   function replaceTags(inputValue) {
@@ -251,8 +251,9 @@ export async function decorateTags(element) {
 
   function replaceTagsInNode(node) {
     if (node.nodeType === Node.TEXT_NODE) {
-      const { nodeValue, replaced } = replaceTags(node.nodeValue);
-      if (replaced) {
+      const originalValue = node.nodeValue;
+      const { nodeValue } = replaceTags(originalValue);
+      if (nodeValue !== originalValue) { // This checks if the nodeValue has been modified.
         const newNode = document.createElement('span');
         newNode.innerHTML = nodeValue;
         node.parentNode.replaceChild(newNode, node);
