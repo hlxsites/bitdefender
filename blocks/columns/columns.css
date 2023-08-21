@@ -271,7 +271,8 @@
     order: unset;
     justify-content: center;
     align-items: center;
-}}
+}
+}
 
 .modal-container.modal-container.get-bitdefender-familypack .modal-content .section.columns-container {
   border-bottom: none;
@@ -287,11 +288,12 @@
 
 .columns.bg-image > div > div > h4 {
   padding: 0 0 50px;
-  font-size: 26px;
+  font-size: var(--heading-font-size-m);
   font-style: bold;
 }
 
 .columns.bg-image > div > div > h3 {
-  font-size: 40px;
+  font-size: var(--heading-font-size-xl);
   font-style: bold;
 }
+
