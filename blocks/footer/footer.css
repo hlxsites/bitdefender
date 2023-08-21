@@ -23,6 +23,8 @@ footer .footer a {
   font-size: var(--body-font-size-s);
   line-height: 1.63;
   font-family: var(--body-font-family),sans-serif;
+  margin: 0 0 0.4375rem;
+  padding-left: 0;
 }
 
 .footer ul li a {
@@ -108,7 +110,7 @@ footer .footer a:hover {
 
 .footer > div > :nth-child(1) > ul li {
   padding: 0;
-  margin-bottom: 0.4375rem;
+  margin: 0 0 0.4375rem 0;
 }
 
 .footer > div > :nth-child(1) > ul li a {
@@ -154,7 +156,7 @@ footer .footer a:hover {
   transform: rotate(45deg);
   border-color: #fff;
   border-style: solid;
-  border-width: 0 2px 2px 0;
+  border-width: 0 0.1875rem 0.1875rem 0;
   content: "";
   width: 0.5rem;
   height: 0.5rem;
@@ -176,7 +178,8 @@ footer .footer a:hover {
 
 .footer > div > :nth-child(3) > ul li,
 .footer > div > :nth-child(4) > ul li {
-  margin-bottom: 0.625rem;
+  margin: 0 0 0.625rem 0;
+  padding-left: 0;
 }
 
 .footer > div > :nth-child(3) > ul li > a,
@@ -513,6 +516,10 @@ footer .footer a:hover {
     font: normal normal normal 13px/18px var(--body-font-family);
     margin-top: 0.875rem;
     margin-bottom: 0;
+  }
+
+  .footer > div > :nth-child(4) > p.active + ul {
+    column-count: 3;
   }
 }
 
