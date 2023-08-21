@@ -95,3 +95,11 @@ a.button.clickable:hover {
 .loading .default-content-wrapper h2.fade-out {
     opacity: 0;
 }
+
+.loading {
+    display: none;
+}
+
+.result {
+    display: none;
+}

@@ -132,9 +132,6 @@ export async function createModal(path, template) {
   const modalContainer = document.createElement('div');
   modalContainer.classList.add('modal-container');
 
-  const closeModal = () => modalContainer.remove();
-  modalContainer.addEventListener('click', closeModal);
-
   const modalContent = document.createElement('div');
   modalContent.classList.add('modal-content');
 
@@ -156,6 +153,7 @@ export async function createModal(path, template) {
   // add class to modal container for opportunity to add custom modal styling
   if (template) modalContainer.classList.add(template);
 
+  const closeModal = () => modalContainer.remove();
   const close = document.createElement('div');
   close.classList.add('modal-close');
   close.addEventListener('click', closeModal);

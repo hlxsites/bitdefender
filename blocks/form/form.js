@@ -44,6 +44,7 @@ function wrapSubmitInButton(form) {
 }
 
 function displaySlide(index, slides) {
+  console.log('1');
   const animationSection = document.querySelector('.section.animation');
 
   const fadeOutAndProceed = (slide, callback) => {
@@ -81,16 +82,6 @@ function displaySlide(index, slides) {
     const resultSlide = document.querySelector('.section.result.slide-4');
     resultSlide.classList.remove('hidden');
   }
-}
-
-function hideAllSlides(slides) {
-  slides.forEach((slide) => {
-    slide.classList.add('hidden');
-  });
-
-  // Initially hide the slide-4 too
-  const resultSlide = document.querySelector('.section.result.slide-4');
-  resultSlide.classList.add('hidden');
 }
 
 export default async function decorate(block) {
@@ -153,18 +144,13 @@ export default async function decorate(block) {
     }
   });
 
-  // Slide display functionality starts here
-  const formContainer = document.querySelector('.form-container');
-  const slides = Array.from(document.querySelectorAll('.section.loading, .section.result.slide-4'));
-  const submitButton = document.querySelector('.button-container .button');
-
-  // Initially hide all slides
-  hideAllSlides(slides);
-
-  submitButton.addEventListener('click', (e) => {
-    e.preventDefault(); // Prevent default action
-    formContainer.classList.add('hidden'); // Hide form container using class
-
-    displaySlide(0, slides);
+  document.addEventListener('click', (e) => {
+    const formContainer = document.querySelector('.form-container');
+    const slides = Array.from(document.querySelectorAll('.section.loading, .section.result.slide-4'));
+    if (e.target && e.target.closest('.button-container .button')) {
+      e.preventDefault(); // Prevent default action
+      formContainer.classList.add('hidden'); // Hide form container using class
+      displaySlide(0, slides);
+    }
   });
 }
