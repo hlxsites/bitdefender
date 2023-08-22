@@ -57,6 +57,20 @@ function setPageLanguage(param) {
   createMetadata('footer', '/footer');
 }
 
+function setRumToAnalyticsMapping() {
+  sampleRUM.always.on('viewblock', async (data) => {
+    if (data) {
+      // cache or act on the RUM event data
+    }
+  });
+
+  sampleRUM.always.on('convert', async (data) => {
+    if (data) {
+      // cache or act on the RUM event data
+    }
+  });
+}
+
 /**
  * Decorates picture elements with a link to a video.
  * @param {Element} main The main element
@@ -217,6 +231,7 @@ function buildCtaSections(main) {
  */
 async function loadEager(doc) {
   setPageLanguage(getLanguageCountryFromPath(window.location.pathname));
+  setRumToAnalyticsMapping();
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
