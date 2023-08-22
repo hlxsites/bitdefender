@@ -1094,3 +1094,11 @@ main .section.blue a.button.secondary::after {
 .tag-green {
   background-color: var(--green-tag);
 }
+
+main .products-container.section.light-sky-blue h2 {
+  font-weight: var(--font-weight-bold);
+}
+
+main .products-container.section.light-sky-blue > .default-content-wrapper p{
+ font-size: var(--body-font-size-l);
+}
