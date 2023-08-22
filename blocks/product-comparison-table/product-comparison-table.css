@@ -75,7 +75,7 @@
     font-size: var(--body-font-size-xxs);
     color: var(--product-comparison-text-color);
     padding: 0 4rem;
-    text-align: left;
+    text-align: center;
 }
 
 .product-comparison-price {
@@ -114,9 +114,9 @@ div[role="cell"] p:first-of-type, .product-comparison-header div[role="columnhea
 }
 
 div[role="cell"] p.button-container a {
-    background-color: var(--button-background-color);
-    border: 2px solid var(--button-background-color);
-    color: var(--button-link-color);
+    background-color: var(--button-background-color) !important;
+    border: 2px solid var(--button-background-color) !important;
+    color: var(--button-link-color) !important;
 }
 
 div[role="cell"] p.button-container a, .product-comparison-header div[role="columnheader"] p.button-container a {
@@ -126,7 +126,6 @@ div[role="cell"] p.button-container a, .product-comparison-header div[role="colu
     border: 2px solid var(--button-primary-background-color);
     color: var(--text-color);
     background-color: unset;
-
 }
 
 .product-comparison-header div[role="columnheader"].active p.button-container a {
@@ -255,6 +254,7 @@ div[role="cell"] p:last-of-type.product-comparison-header-subtitle,
 
     .product-comparison-table div[role='columnheader']:nth-child(1) > h1 {
         position: absolute;
+        font-size: var(--heading-font-size-xl);
     }
 
     .product-comparison-header div[role="columnheader"] .old-price-container p {
