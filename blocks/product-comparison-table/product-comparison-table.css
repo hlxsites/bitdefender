@@ -9,6 +9,7 @@
     --expandable-row-text-color: #fff;
     --product-table-badge-color: #2cb43d;
     --current-price-color: #000;
+    --expandable-row-arrow-color: #c5c5c5;
 }
 
 .section.product-comparison-table-container {
@@ -54,7 +55,7 @@
 }
 
 .product-comparison-header div[role="columnheader"]:not(:first-child).active {
-    box-shadow: 0 -10px 20px 0 #0000001a;
+    box-shadow: 0 -10px 20px 0 var(--dark-shadow);
     position: relative;
 }
 
@@ -65,7 +66,7 @@
     left: 0;
     width: 100%;
     height: 9px;
-    background: #000;
+    background: var(--black-color);
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     background-color: var(--column-header-highlight-color);
@@ -81,7 +82,7 @@
 .product-comparison-price {
     padding-top: 0.9375rem;
     margin: 0.9375rem 0.625rem 0;
-    border-top: 1px solid #dedede; 
+    border-top: 1px solid var(--horizontal-separator-color); 
 }
 
 .current-price-container p{
@@ -172,7 +173,7 @@ div[role="cell"] p:last-of-type.product-comparison-header-subtitle,
 .product-comparison-header div[role="columnheader"] .per-year-statement {
     font-size: var(--body-font-size-xs);
     color: var(--product-comparison-text-color);
-    border-bottom: 1px dashed #dedede;
+    border-bottom: 1px dashed var(--horizontal-separator-color);
     margin: 0 0.625rem 0.9375rem;
     padding-bottom: 0.625rem;
 }
@@ -182,7 +183,7 @@ div[role="cell"] p:last-of-type.product-comparison-header-subtitle,
     flex-wrap: wrap;
     font-size: 14px;
     font-family: var(--body-font-family);
-    color: #616161;
+    color: var(--color-dark-gray);
     width: 100%;
 }
 
@@ -201,8 +202,8 @@ div[role="cell"] p:last-of-type.product-comparison-header-subtitle,
     text-align: center;
     vertical-align: middle;
     background-color: var(--table-cell-color);
-    border-right: 1px solid #fff;
-    border-bottom: 1px solid #fff;
+    border-right: 1px solid var(--white-color);
+    border-bottom: 1px solid var(--white-color);
     text-transform: capitalize;
 }
 
@@ -221,10 +222,10 @@ div[role="cell"] p:last-of-type.product-comparison-header-subtitle,
 }
 
 .product-comparison-table div[role='cell'].active {
-    background: #fff;
-    box-shadow: 0 3px 8px 0 #0000001a;
-    border-bottom: 1px solid #e4f2ff;
-    border-right: 1px solid #e4f2ff;
+    background: var(--white-color);
+    box-shadow: 0 3px 8px 0 var(--dark-shadow);
+    border-bottom: 1px solid var(--background-color-light-sky-blue);
+    border-right: 1px solid var(--background-color-light-sky-blue);
 }
 
 @media (min-width: 580px) {
@@ -359,7 +360,7 @@ div[role="cell"] p:last-of-type.product-comparison-header-subtitle,
 .product-comparison-table .expandable-arrow > div:first-of-type::before {
     position: absolute;
     transform: rotate(45deg);
-    border-color: #c5c5c5;
+    border-color: var(--expandable-row-arrow-color);
     border-style: solid;
     border-width: 0 2px 2px 0;
     content: " ";
@@ -396,12 +397,12 @@ div[role="cell"] p:last-of-type.product-comparison-header-subtitle,
     font-style: normal;
 }
 
-.product-comparison-table div[role="row"]:last-of-type div[role='cell'] {
+.product-comparison-table .product-comparison-last-row-with-prices div[role='cell'] {
     background-color: transparent;
     border: none;
 }
 
-.product-comparison-table div[role="row"]:last-of-type div[role="cell"] .display-price-below {
+.product-comparison-table .product-comparison-last-row-with-prices div[role="cell"] .display-price-below {
     flex-direction: column;
 }
 

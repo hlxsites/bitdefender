@@ -201,7 +201,8 @@ function removeNotNeededRoles(element) {
 function addProductPriceBelowSelectedColumn(block) {
   const lastRow = block.querySelector('div[role="row"]:last-of-type');
   const copiedRow = lastRow.cloneNode(true);
-
+  
+  copiedRow.classList.add('product-comparison-last-row-with-prices');
   lastRow.after(copiedRow);
   [...copiedRow.children].forEach((cell, index) => {
     cell.innerHTML = '';
@@ -224,7 +225,9 @@ export default function decorate(block) {
   setActiveColumn(block);
   setColumnWithPriceDisplayedAlsoBelow(block);
   buildTableHeader(block);
+  if (block.querySelector('div[role="columnheader"] em')) {
+      addProductPriceBelowSelectedColumn(block);
+  }
   extractTextFromStrongTagToParent(block);
-  addProductPriceBelowSelectedColumn(block);
   renderNanoBlocks(block);
 }
