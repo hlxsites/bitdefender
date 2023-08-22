@@ -755,6 +755,7 @@ main .section.cta {
 }
 
 .cta .full-width {
+  padding-top: 1px;
   background-color: var(--cta-background-light-blue);
 }
 
