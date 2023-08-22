@@ -48,7 +48,7 @@
 
 .product-card p a {
   text-decoration: underline;
-  color: inherit;
+  color: var(--color-highlight-blue);
 }
 
 .product-card .price ~ p {
@@ -327,4 +327,8 @@
   font-weight: 600;
   line-height: normal;
   width: fit-content;
+}
+
+.product-card .button-container ~ p:last-of-type {
+  color: var(--color-lighter-gray)
 }
