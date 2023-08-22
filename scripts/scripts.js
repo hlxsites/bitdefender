@@ -10,7 +10,10 @@ import {
   decorateTemplateAndTheme,
   waitForLCP,
   loadBlocks,
-  loadCSS, createOptimizedPicture,
+  loadCSS,
+  createOptimizedPicture,
+  getMetadata,
+  toClassName,
 } from './lib-franklin.js';
 
 import {
@@ -242,6 +245,11 @@ async function loadLazy(doc) {
   sampleRUM('lazy');
   sampleRUM.observe(main.querySelectorAll('div[data-block-name]'));
   sampleRUM.observe(main.querySelectorAll('picture > img'));
+
+  const context = { getMetadata, toClassName };
+  // eslint-disable-next-line import/no-relative-packages
+  const { initConversionTracking } = await import('../plugins/rum-conversion/src/index.js');
+  await initConversionTracking.call(context, document);
 }
 
 /**
@@ -252,7 +260,6 @@ function loadDelayed() {
   window.setTimeout(() => {
     // eslint-disable-next-line import/no-cycle
     import('./delayed.js');
-    import('./breadcrumbs.js');
   }, 3000);
   // load anything that can be postponed to the latest here
 }
