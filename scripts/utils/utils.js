@@ -89,13 +89,11 @@ function findTextNodes(parent) {
 /**
  * Create a nano block
  * The renderer should return a valid HTMLElement. This parameter is mandatory.
- * The post renderer method is called after this element has been added to the dom.
  * @param name The name of the block
  * @param renderer The renderer function
- * @param renderer The post renderer function
  */
-export function createNanoBlock(name, renderer, postRenderer = null) {
-  nanoBlocks.set(name.toLowerCase(), { renderer, postRenderer });
+export function createNanoBlock(name, renderer) {
+  nanoBlocks.set(name.toLowerCase(), renderer);
 }
 
 /**
@@ -149,14 +147,11 @@ export function renderNanoBlocks(parent = document.body) {
     if (matches) {
       matches.forEach((match) => {
         const [name, ...params] = parseParams(match.slice(1, -1));
-        const { renderer, postRenderer } = nanoBlocks.get(name.toLowerCase());
+        const renderer = nanoBlocks.get(name.toLowerCase());
         if (renderer) {
           const element = renderer(...params);
           const oldElement = node.parentNode;
           oldElement.parentNode.replaceChild(element, oldElement);
-          if (postRenderer) {
-            postRenderer(element);
-          }
         }
       });
     }

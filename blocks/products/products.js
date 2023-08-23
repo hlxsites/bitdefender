@@ -70,15 +70,6 @@ function renderFeatured(text) {
 }
 
 /**
- * Postrender method adding the featured class to the parent product card element
- * @param element root node of the nano block
- */
-function postRenderFeatured(element) {
-  const productCard = element.closest('.product-card');
-  productCard.classList.add('featured');
-}
-
-/**
  * Render the lowest product price
  * @param code Product code
  * @param variant Product variant
@@ -184,7 +175,7 @@ function renderHighlightSavings() {
 
 createNanoBlock('price', renderPrice);
 createNanoBlock('lowestPrice', renderLowestPrice);
-createNanoBlock('featured', renderFeatured, postRenderFeatured);
+createNanoBlock('featured', renderFeatured);
 createNanoBlock('plans', renderPlans);
 createNanoBlock('highlightSavings', renderHighlightSavings);
 
@@ -206,4 +197,9 @@ export default function decorate(block) {
 
   // section's content default contains a nanoblock
   renderNanoBlocks(block.parentNode.parentNode);
+
+  // style the product card if the author has added a featured card inside
+  [...block.querySelectorAll('.product-card .featured')].forEach((featured) => {
+    featured.closest('.product-card').classList.add('featured');
+  });
 }
