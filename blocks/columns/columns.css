@@ -20,17 +20,13 @@
   width: 100%;
 }
 
-.columns-img-col {
-}
-
-.modal-container.get-bitdefender-familypack img{
+.modal-container.get-bitdefender-familypack img {
   height: auto;
 }
 
 .columns > div > .columns-img-col {
   order: 0;
   text-align: center;
-
 }
 
 .columns > div > .columns-img-col img {
