@@ -190,7 +190,7 @@ function buildCta(section) {
 </div>
 <div class="right-col">
     <div class="img-container">
-        <img class="red-img" src="/images/b-red-mask.png">
+        <img class="red-img" src="/images/b-red-mask.webp">
         <div class="bg-img">
             <div class="cmp-img">
                 ${backgroundImageHtml}
