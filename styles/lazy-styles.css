@@ -229,3 +229,49 @@
 .modal-container.video-modal .modal-content .modal-close::before {
   transform: rotate(-45deg);
 }
+
+/* identity-exposed modal */
+
+.identity-exposed .modal-container .modal-content {
+  padding: 30px;
+}
+  
+.identity-exposed .modal-content img {
+  width: 32px;
+  height: 32px;
+}
+
+.identity-exposed .modal-container .modal-content .section:first-child {
+  padding: 0;
+  border: 0;
+}
+
+.identity-exposed .scan-loading .default-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.identity-exposed .modal-container .modal-content .section:first-child .default-content-wrapper {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.identity-exposed .products.plans {
+  --max-columns: 1;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.identity-exposed .section[class*="scan-"], .identity-exposed .scan-loading h3, .identity-exposed .hide {
+  display: none;
+}
+
+.identity-exposed .section[class*="scan-"].show, .identity-exposed .scan-loading h3.show {
+  display: block;
+}
+
+@media (min-width: 900px) {
+  .identity-exposed .modal-container .modal-content {
+      padding: 30px;
+  }
+}

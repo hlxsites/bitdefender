@@ -11,5 +11,5 @@ export default function decorate(block) {
     window.open(openUrl, '_self');
   }
 
-  block.innerHTML = '';
+  block.parentElement?.parentElement.remove();
 }
