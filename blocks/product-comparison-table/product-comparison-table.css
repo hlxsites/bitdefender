@@ -114,6 +114,19 @@ div[role="cell"] p:first-of-type, .product-comparison-header div[role="columnhea
     font-size: 14px;
 }
 
+div[role="cell"] p:has(.tag) + p {
+    font-weight: 500;
+    padding: 0;
+    color: var(--product-comparison-text-color);
+    text-align: center;
+    font-size: 14px;
+}
+
+.expandable-row [role="cell"] > h3 + p {
+    color: white;
+    text-align: left;
+}
+
 div[role="cell"] p.button-container a {
     background-color: var(--button-background-color) !important;
     border: 2px solid var(--button-background-color) !important;
@@ -409,3 +422,4 @@ div[role="cell"] p:last-of-type.product-comparison-header-subtitle,
 .display-price-below .product-comparison-price {
     border: none;
 }
+
