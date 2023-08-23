@@ -20,6 +20,10 @@
   width: 100%;
 }
 
+.columns-img-col {
+  text-align: center;
+}
+
 .modal-container.get-bitdefender-familypack img{
   height: auto;
 }
@@ -271,7 +275,7 @@
     order: unset;
     justify-content: center;
     align-items: center;
-}
+  } 
 }
 
 .modal-container.modal-container.get-bitdefender-familypack .modal-content .section.columns-container {
@@ -296,4 +300,9 @@
   font-size: var(--heading-font-size-xl);
   font-style: bold;
 }
+
+.columns.bg-image .button-container {
+  padding: 10px 0 0;
+}
+
 
