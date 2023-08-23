@@ -1,7 +1,7 @@
 import { STICKY_NAVIGATION_DATASET_KEY } from '../../scripts/lib-franklin.js';
 
 function scrollToAnchorWithOffset(anchorId) {
-  const anchorElement = document.getElementById(anchorId);
+  const anchorElement = document.querySelector(`.section#${anchorId}`);
 
   if (anchorElement) {
     const offsetPosition = anchorElement.getBoundingClientRect().top + window.scrollY - 80;
