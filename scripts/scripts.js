@@ -190,13 +190,13 @@ function buildCta(section) {
 </div>
 <div class="right-col">
     <div class="img-container">
-        <img class="red-img" src="/images/b-red-mask.webp">
+        <img class="red-img" src="/images/b-red-mask.webp" alt="red-background">
         <div class="bg-img">
             <div class="cmp-img">
                 ${backgroundImageHtml}
             </div>
         </div>
-        <img class="transparent-img" src="/icons/cta-circle.svg">
+        <img class="transparent-img" src="/icons/cta-circle.svg" alt="circle">
     </img>
 </div>`,
   );
