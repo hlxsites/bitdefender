@@ -106,7 +106,7 @@ div[role="cell"] .button-container , .product-comparison-header div[role="column
     margin-bottom: 5px;
 }
 
-.expandable-row [role="cell"] > h3 + p {
+.product-comparison-table .expandable-row [role="cell"] > h3 + p {
     color: white;
     text-align: left;
 }
