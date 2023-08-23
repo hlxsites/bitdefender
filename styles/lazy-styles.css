@@ -235,6 +235,10 @@
 .identity-exposed .modal-container .modal-content {
   padding: 30px;
 }
+
+.identity-exposed .default-content-wrapper {
+  padding: 0 var(--body-padding);
+}
   
 .identity-exposed .modal-content img {
   width: 32px;

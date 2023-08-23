@@ -9,7 +9,7 @@ function onChange(form) {
   const submitButton = form.querySelector('input[type="submit"]');
   const emailInput = form.querySelector('input[type="email"]');
 
-  const allCheckboxesChecked = [...form.querySelectorAll('input[type="checkbox"]')].every((checkbox) => checkbox.checked);
+  const allCheckboxesChecked = [...form.querySelectorAll('input[type="checkbox"]:required')].every((checkbox) => checkbox.checked);
   const emailPopulated = emailInput.value.trim() !== '';
 
   submitButton.disabled = !((allCheckboxesChecked && emailPopulated));
@@ -33,22 +33,27 @@ export async function createForm(formURL) {
 
   form.setAttribute('method', 'post');
 
-  data.forEach((field) => {
+  data.forEach((field, index) => {
     const input = document.createElement('input');
+    input.id = `form-${index}-${field.Field}`;
     input.addEventListener('change', () => onChange(form));
     input.addEventListener('input', () => onChange(form));
     input.setAttribute('type', field.Type);
     input.setAttribute('name', field.Field);
     input.setAttribute('placeholder', field.Default);
-    input.setAttribute('required', field.Required);
     input.setAttribute('value', field.Value);
+
+    if (field.Required && field.Required.toLowerCase() === 'true') {
+      input.setAttribute('required', '');
+      input.setAttribute('aria-required', 'true');
+    }
 
     form.append(input);
 
     // Only create a label if the field.Label is not null
     if (field.Label) {
       const label = document.createElement('label');
-      label.setAttribute('for', field.Field);
+      label.setAttribute('for', input.id);
       label.textContent = field.Label;
       form.append(label);
     }
