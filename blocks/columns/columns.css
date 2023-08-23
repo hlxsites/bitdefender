@@ -21,7 +21,6 @@
 }
 
 .columns-img-col {
-  text-align: center;
 }
 
 .modal-container.get-bitdefender-familypack img{
@@ -30,6 +29,8 @@
 
 .columns > div > .columns-img-col {
   order: 0;
+  text-align: center;
+
 }
 
 .columns > div > .columns-img-col img {
