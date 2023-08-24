@@ -1,6 +1,12 @@
+/* eslint-disable max-len */
+/* eslint-disable no-console */
+/* eslint-disable no-else-return */
 // Description: Hero block
 import {
   createTag,
+  createNanoBlock,
+  renderNanoBlocks,
+  fetchProduct,  
 } from '../../scripts/utils/utils.js';
 
 /**
@@ -69,6 +75,28 @@ function decorateDiscountBubble() {
   }
 }
 
+createNanoBlock('discount', (code, variant) => {
+  const root = document.createElement('div');
+  root.classList.add('discount-bubble');
+
+  fetchProduct(code, variant)
+    .then((product) => {
+      if (product.discount) {
+        const discount = Math.round((1 - (product.discount.discounted_price) / product.price) * 100);
+        root.innerHTML = `
+          <span class="discount-bubble-0">${discount}%</span>
+          <span class="discount-bubble-1">Discount</span>
+        `;
+      } else {
+        console.error('no discount available');
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+  return root;
+});
+
 /**
  * decorates hero block
  * @param {Element} block The hero block element
@@ -91,4 +119,9 @@ export default async function decorate(block) {
     // Apply a CSS class to each selected <ul> element
     ulsWithPicture.forEach((ul) => ul.classList.add('hero-awards'));
   }
+  renderNanoBlocks(block);
+
+  // move discount bubble inside the button
+  const bubble = block.querySelector('.discount-bubble');
+  bubble.parentElement.querySelector('.button-container').append(bubble);
 }
