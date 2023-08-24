@@ -300,6 +300,10 @@
     background-image: linear-gradient(to right, rgb(0 0 0 / 100%) 20%, rgb(0 0 0 / 0%)), var(--bg-image-url);
   }
 
+  .columns-container[data-bg-image]{
+    background-image: var(--bg-image-url);
+  }
+
   .linear-gradient.columns.bg-image > div {
     width: calc(100% - 30%)!important;
   }
