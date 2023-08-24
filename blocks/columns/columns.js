@@ -184,4 +184,12 @@ export default function decorate(block) {
     }
   }, 250));
   window.dispatchEvent(new Event('resize')); // trigger resize to give width to columns
+
+  const sectionDiv = document.querySelector('.columns-container[data-bg-image]');
+  if (sectionDiv) {
+    const bgImageUrl = sectionDiv.getAttribute('data-bg-image');
+    if (bgImageUrl) {
+      sectionDiv.style.setProperty('--bg-image-url', `url(${bgImageUrl})`);
+    }
+  }
 }
