@@ -340,6 +340,11 @@ main .section.wide h2 {
   font-weight: var(--font-weight-boldest);
 }
 
+.centered img {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
 main .section.wide img {
   height: 56px;
   object-fit: contain;
@@ -1099,11 +1104,6 @@ main .section.blue a.button.secondary::after {
 
 .centered {
   text-align: center;
-}
-
-.centered img {
-  margin-top: 50px;
-  margin-bottom: 50px;
 }
 
 .icon-apple, .icon-android {
