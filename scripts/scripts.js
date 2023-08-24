@@ -264,10 +264,23 @@ function loadDelayed() {
   // load anything that can be postponed to the latest here
 }
 
+function reportCLS() {
+  let cls = 0;
+  new PerformanceObserver((entryList) => {
+    for (const entry of entryList.getEntries()) {
+      if (!entry.hadRecentInput) {
+        cls += entry.value;
+        console.log('Current CLS value:', cls, entry);
+      }
+    }
+  }).observe({ type: 'layout-shift', buffered: true });
+}
+
 async function loadPage() {
   await loadEager(document);
   await loadLazy(document);
   loadDelayed();
+  reportCLS();
 }
 
 loadPage();

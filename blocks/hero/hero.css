@@ -157,7 +157,16 @@ main .hero.comparison .hero-content {
 main .hero h1 {
   font-size: var(--hero-font-size-xl);
   margin: 0;
+}
 
+@media (max-width: 767px) {
+  main .hero h1 {
+    height: 150px;
+  }
+
+  main .hero h4 {
+    height: 60px;
+  }
 }
 
 main .hero h4 {
