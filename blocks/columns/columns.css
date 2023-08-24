@@ -103,10 +103,6 @@
   }
 }
 
-.columns.bg-image > div {
-  width: calc(100% - 30%)!important;
-}
-
 /* awards styling */
 .columns.awards > div {
   row-gap: 30px;
@@ -292,6 +288,10 @@
 @media (min-width: 768px) {
   .columns-container[data-bg-image]{
     background-image: linear-gradient(to right, rgb(0 0 0 / 100%) 20%, rgb(0 0 0 / 0%)), var(--bg-image-url);
+  }
+
+  .columns.bg-image > div {
+    width: calc(100% - 30%)!important;
   }
 }
 
