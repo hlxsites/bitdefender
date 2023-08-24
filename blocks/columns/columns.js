@@ -188,8 +188,10 @@ export default function decorate(block) {
   const sectionDiv = document.querySelector('.columns-container[data-bg-image]');
   if (sectionDiv) {
     const bgImageUrl = sectionDiv.getAttribute('data-bg-image');
-    if (bgImageUrl) {
+    if (window.innerWidth >= 767 && bgImageUrl) {
       sectionDiv.style.backgroundImage = `linear-gradient(to right, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0)), url(${bgImageUrl})`;
+    } else {
+      sectionDiv.style.backgroundImage = '';
     }
   }
 }

@@ -281,10 +281,11 @@
 }
 
 .columns-container[data-bg-image]{
-  background-repeat: no-repeat;
   background-size: cover;
-  padding: 115px 0;
+  background-position: center;
+  transition: padding-left 0.3s ease; 
   color: white;
+  background-color: black;
 }
 
 .columns.bg-image > div > div > h4 {
