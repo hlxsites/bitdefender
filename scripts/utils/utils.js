@@ -76,7 +76,6 @@ export async function fetchProduct(code = 'av', variant = '1u-1y') {
 }
 
 const nanoBlocks = new Map();
-const nanoBlocksPost = new Map();
 
 function findTextNodes(parent) {
   let all = [];
@@ -89,16 +88,12 @@ function findTextNodes(parent) {
 
 /**
  * Create a nano block
+ * The renderer should return a valid HTMLElement. This parameter is mandatory.
  * @param name The name of the block
  * @param renderer The renderer function
  */
 export function createNanoBlock(name, renderer) {
   nanoBlocks.set(name.toLowerCase(), renderer);
-}
-
-export function createNanoBlockWithPostProcessing(name, renderer, post) {
-  nanoBlocks.set(name.toLowerCase(), renderer);
-  nanoBlocksPost.set(name.toLowerCase(), post);
 }
 
 /**
@@ -157,10 +152,6 @@ export function renderNanoBlocks(parent = document.body) {
           const element = renderer(...params);
           const oldElement = node.parentNode;
           oldElement.parentNode.replaceChild(element, oldElement);
-          const postProcess = nanoBlocksPost.get(name.toLowerCase());
-          if (postProcess) {
-            postProcess(element);
-          }
         }
       });
     }
