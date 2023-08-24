@@ -285,7 +285,14 @@
   background-position: center;
   transition: padding-left 0.3s ease; 
   color: white;
+  background-image: none;
   background-color: black;
+}
+
+@media (min-width: 768px) {
+  .columns-container[data-bg-image]{
+    background-image: linear-gradient(to right, rgb(0 0 0 / 100%) 20%, rgb(0 0 0 / 0%)), var(--bg-image-url);
+  }
 }
 
 .columns.bg-image > div > div > h4 {
