@@ -3,7 +3,7 @@
 }
 
 .products {
-  --max-colunms: 2;
+  --max-columns: 2;
   --image-spacing: 170px;
   --side-spacing: 25px;
   --highlight-spacing: 45px;
@@ -259,11 +259,11 @@
 
 @media (min-width: 768px) {
   .products {
-    grid-template-columns: repeat(var(--max-colunms), 1fr);
+    grid-template-columns: repeat(var(--max-columns), 1fr);
   }
 
   .products.compact, .products.plans {
-    --max-colunms: 2;
+    --max-columns: 2;
   }
 }
 
@@ -275,7 +275,7 @@
   }
 
   .products.compact, .products.plans {
-    --max-colunms: 3;
+    --max-columns: 3;
   }
 }
 
