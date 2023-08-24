@@ -375,11 +375,6 @@ main .hero.black-background ul.hero-awards li picture img{
   width: auto;
 }
 
-.hero-content .icon {
-  width: 18px;
-  transform: translateY(22px);
-}
-
 @media(min-width: 767px) { /* tablet */
   :root {
     --hero-h1-font-size: 42px;

@@ -1096,3 +1096,17 @@ main .section.blue a.button.secondary::after {
 .tag-green {
   background-color: var(--green-tag);
 }
+
+.centered {
+  text-align: center;
+}
+
+.centered img {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.icon-apple, .icon-android {
+  width: 18px;
+  transform: translateY(22px);
+}
