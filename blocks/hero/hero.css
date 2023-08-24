@@ -220,6 +220,7 @@ main .hero.comparison p {
 main .hero p.button-container {
   margin: 0;
   padding: 10px 0;
+  height: 75px;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -243,6 +244,7 @@ main .hero .hero-picture picture img {
 }
 
 main .hero a.button {
+  height: 50px;
   margin: 8px 13px 0 0;
 } 
 
