@@ -1,7 +1,5 @@
 import {
   createTag,
-  fetchIndex,
-  fixExcelFilterZeroes,
 } from './utils/utils.js';
 
 function prependSlash(path) {
@@ -33,7 +31,7 @@ function renderBreadcrumb(breadcrumbs) {
   );
 }
 
-async function createBreadcrumbs(container) {
+function createBreadcrumbs(container) {
   const { pathname } = window.location;
   const pathSeparator = '/';
   // split pathname into parts add / at the end and remove empty parts
@@ -46,8 +44,9 @@ async function createBreadcrumbs(container) {
     return acc;
   }, []);
 
-  const pageIndex = (await fetchIndex('query-index')).data;
-  fixExcelFilterZeroes(pageIndex);
+  const pageIndex = [];
+  // const pageIndex = (await fetchIndex('query-index')).data;
+  // fixExcelFilterZeroes(pageIndex);
   // eslint-disable-next-line max-len
   const urlForIndex = (index) => prependSlash(pathSplit.slice(1, index + 2).join(pathSeparator));
 
@@ -81,5 +80,5 @@ const breadcrumb = document.querySelector('.breadcrumb');
 
 // check if breadcrumb div exists
 if (breadcrumb !== undefined) {
-  await createBreadcrumbs(breadcrumb);
+  createBreadcrumbs(breadcrumb);
 }
