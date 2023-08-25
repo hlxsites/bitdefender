@@ -265,6 +265,10 @@ async function loadLazy(doc) {
   sampleRUM.observe(main.querySelectorAll('div[data-block-name]'));
   sampleRUM.observe(main.querySelectorAll('picture > img'));
 
+  if (getMetadata('analytics-tracking') === 'product') {
+    sampleRUM.observe(main.querySelectorAll('.product-card'));
+  }
+
   const context = { getMetadata, toClassName };
   // eslint-disable-next-line import/no-relative-packages
   const { initConversionTracking } = await import('../plugins/rum-conversion/src/index.js');
