@@ -219,7 +219,7 @@ main .hero.comparison p {
 
 main .hero p.button-container {
   margin: 0;
-  padding: 10px 0 0;
+  padding: 10px 0;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;

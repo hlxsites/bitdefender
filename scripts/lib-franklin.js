@@ -643,11 +643,9 @@ export function decorateButtons(element) {
           return;
         }
         // Example: <p><a href="example.com">Text</a> (example.com)</p>
-        if (up.childNodes.length === 2 && up.tagName === 'P' && a.nextSibling?.textContent.trim().startsWith('(')) {
+        if (up.childNodes.length === 1 && up.tagName === 'P' && a.href.includes('/fragments/')) {
           a.className = 'button modal';
           up.classList.add('button-container');
-          a.dataset.modal = a.nextSibling.textContent.trim().slice(1, -1);
-          a.nextSibling.remove();
           return;
         }
         // Example: <p><a href="example.com">Text</a> <em>50% Discount</em></p>
