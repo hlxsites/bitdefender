@@ -1,12 +1,9 @@
-/* eslint-disable max-len */
-/* eslint-disable no-console */
-/* eslint-disable no-else-return */
 // Description: Hero block
 import {
   createTag,
   createNanoBlock,
   renderNanoBlocks,
-  fetchProduct,  
+  fetchProduct,
 } from '../../scripts/utils/utils.js';
 
 /**
@@ -78,20 +75,25 @@ function decorateDiscountBubble() {
 createNanoBlock('discount', (code, variant) => {
   const root = document.createElement('div');
   root.classList.add('discount-bubble');
+  root.innerHTML = `
+    <span class="discount-bubble-0">--%</span>
+    <span class="discount-bubble-1">Discount</span>
+  `;
 
   fetchProduct(code, variant)
     .then((product) => {
       if (product.discount) {
-        const discount = Math.round((1 - (product.discount.discounted_price) / product.price) * 100);
-        root.innerHTML = `
-          <span class="discount-bubble-0">${discount}%</span>
-          <span class="discount-bubble-1">Discount</span>
-        `;
+        const discount = Math.round(
+          (1 - (product.discount.discounted_price) / product.price) * 100,
+        );
+        root.querySelector('.discount-bubble-0').textContent = `${discount}%`;
       } else {
+        // eslint-disable-next-line no-console
         console.error('no discount available');
       }
     })
     .catch((err) => {
+      // eslint-disable-next-line no-console
       console.error(err);
     });
   return root;
