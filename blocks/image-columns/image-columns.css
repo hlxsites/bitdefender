@@ -75,10 +75,10 @@
 .image-columns ul li::after {
   content: "";
   position: absolute;
-  left: 4px;
-  top: 6px;
-  width: 4px;
-  height: 8px;
+  left: 5px;
+  top: 7px;
+  width: 3px;
+  height: 7px;
   border-bottom: 2px solid var( --white-color);
   border-right: 2px solid var( --white-color);
   transform: rotate(45deg);
