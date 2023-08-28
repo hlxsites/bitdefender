@@ -1,27 +1,9 @@
 import {
   createTag,
+  fetchIndex,
+  fixExcelFilterZeroes,
 } from './utils/utils.js';
 
-function prependSlash(path) {
-  return path.startsWith('/') ? path : `/${path}`;
-}
-
-function getName(pageIndex, path, part, current) {
-  const pg = pageIndex.find((page) => page.path === path);
-  if (pg && pg.breadcrumbtitle && pg.breadcrumbtitle !== '0') {
-    return pg.breadcrumbtitle;
-  }
-
-  if (pg && pg.title && pg.title !== '0') {
-    return pg.title;
-  }
-
-  if (current) {
-    return document.title;
-  }
-
-  return part;
-}
 
 function renderBreadcrumb(breadcrumbs) {
   return createTag(
@@ -31,7 +13,7 @@ function renderBreadcrumb(breadcrumbs) {
   );
 }
 
-function createBreadcrumbs(container) {
+async function createBreadcrumbs(container) {
   const { pathname } = window.location;
   const pathSeparator = '/';
   // split pathname into parts add / at the end and remove empty parts
@@ -44,9 +26,8 @@ function createBreadcrumbs(container) {
     return acc;
   }, []);
 
-  const pageIndex = [];
-  // const pageIndex = (await fetchIndex('query-index')).data;
-  // fixExcelFilterZeroes(pageIndex);
+  const pageIndex = (await fetchIndex('query-index')).data;
+  fixExcelFilterZeroes(pageIndex);
   // eslint-disable-next-line max-len
   const urlForIndex = (index) => prependSlash(pathSplit.slice(1, index + 2).join(pathSeparator));
 
