@@ -53,8 +53,10 @@
   object-position: center;
 }
 
-@media (min-width: 768px) {
-  object-position: top right;
+.image-columns ul li {
+  font-size: var(--body-font-size-l);
+  list-style: none;
+  transform: translateX(-25px);
 }
 
 .image-columns > div > .image-columns-txt-col h3 {
