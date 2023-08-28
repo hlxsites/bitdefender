@@ -29,7 +29,7 @@ main .hero .hero-content .breadcrumb {
   margin-bottom: 20px;
   font-weight: var(--font-weight-bold);
   color: #dedede;
-  min-height: 48px;
+  min-height: 82px;
 }
 
 main .hero.black-background .hero-content .breadcrumb{
