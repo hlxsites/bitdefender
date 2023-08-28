@@ -21,7 +21,7 @@ import {
 } from './utils/utils.js';
 
 import {
-  updateBreadcrumb
+  updateBreadcrumb,
 } from './breadcrumbs.js';
 
 const LCP_BLOCKS = ['hero']; // add your LCP blocks to the list

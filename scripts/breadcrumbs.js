@@ -2,7 +2,7 @@ import {
   createTag,
 } from './utils/utils.js';
 
-function prependSlash(path) {
+export function prependSlash(path) {
   return path.startsWith('/') ? path : `/${path}`;
 }
 
@@ -76,7 +76,7 @@ function createBreadcrumbs(container) {
   });
 }
 
-export default async function updateBreadcrumb() {
+export async function updateBreadcrumb() {
   const breadcrumb = document.querySelector('.breadcrumb');
 
   // check if breadcrumb div exists
