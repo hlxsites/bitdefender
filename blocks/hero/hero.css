@@ -400,6 +400,7 @@ main .hero.black-background ul.hero-awards li picture img{
 
   main .hero .hero-content .breadcrumb {
     margin-bottom: 0;
+    min-height: 58px;
   }
 
   main .hero .hero-content .breadcrumb a::after {
