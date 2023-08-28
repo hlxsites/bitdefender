@@ -156,15 +156,37 @@
 }
 
 .product-card li {
+  position: relative;
   list-style: none;
   margin: 10px 0 0;
   padding: 0 0 0 30px;
   font-size: 14px;
-  background-image: url('../../icons/checkmark_solid-circle.svg');
-  background-position: left 2px;
-  background-repeat: no-repeat;
-  background-size: 15px;
   line-height: var(--body-font-size-m);
+}
+
+.product-card.featured > ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 15px;
+  height: 15px;
+  background-color: var(--background-checkmark);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.product-card.featured > ul li::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 7px;
+  width: 3px;
+  height: 7px;
+  border-bottom: 2px solid var( --white-color);
+  border-right: 2px solid var( --white-color);
+  transform: rotate(45deg);
+  z-index: 2;
 }
 
 .product-card li:has(del) {

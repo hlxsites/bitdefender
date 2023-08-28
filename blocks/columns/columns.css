@@ -324,4 +324,10 @@
   padding: 10px 0 0;
 }
 
+.columns.bg-image a{
+  color: white
+}
 
+.columns.bg-image svg {
+  filter: invert(1) grayscale(1) brightness(100);
+}
