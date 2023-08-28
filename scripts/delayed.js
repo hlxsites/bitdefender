@@ -8,6 +8,7 @@ import {
 // eslint-disable-next-line import/no-cycle
 import {
   getLanguageCountryFromPath,
+  pushProductsToDataLayer,
 } from './scripts.js';
 
 // Core Web Vitals RUM collection
@@ -153,3 +154,4 @@ switch (ENVIRONMENT) {
 }
 
 pushPageLoadEvent();
+pushProductsToDataLayer();
