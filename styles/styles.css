@@ -1021,15 +1021,42 @@ main .section.blue {
   }
 }
 
-
 main .section.checked-lists  ul li {
-  padding-left: 8px;
-  list-style-image: url("/icons/checkmark_solid-circle.svg");
+  position: relative;
 }
 
-main .section.blue.checked-lists  ul li {
-  padding-left: 8px;
-  list-style-image: url("/icons/checkmark-solid-circle-white.svg");
+main .section.checked-lists  ul li::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 5px;
+  width: 15px;
+  height: 15px;
+  background-color: var(--background-checkmark);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+main .section.checked-lists ul li::after {
+  content: "";
+  position: absolute;
+  left: -5px;
+  top: 7px;
+  width: 3px;
+  height: 7px;
+  border-bottom: 2px solid var( --white-color);
+  border-right: 2px solid var( --white-color);
+  transform: rotate(45deg);
+  z-index: 2;
+}
+
+main .section.blue.checked-lists  ul li::before {
+  background-color: var(--background-color);
+}
+
+main .section.blue.checked-lists  ul li::after {
+  border-bottom: 2px solid var( --background-blue);
+  border-right: 2px solid var( --background-blue);
 }
 
 main .section.blue a.button:any-link {
