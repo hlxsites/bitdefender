@@ -157,7 +157,7 @@ function debounce(func, wait) {
 function setImageAsBackgroundImage() {
   const columns = document.querySelectorAll('.columns.text-over-image > div > div');
 
-  columns.forEach(column => {
+  columns.forEach((column) => {
     const image = column.querySelector('img');
 
     if (image) {
