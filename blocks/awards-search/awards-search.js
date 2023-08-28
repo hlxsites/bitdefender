@@ -1,5 +1,5 @@
 let awardsData = [];
-let filteredAwards = [];
+let filtredAwards = [];
 let yearsToFilterBy = [];
 
 function renderAwardItem(block, award) {
@@ -59,7 +59,7 @@ function renderAwards(block, data) {
 
 function renderFilteredAwards(block) {
     if (yearsToFilterBy.length > 0) {
-        const filtredAwards = awardsData.filter((award) => yearsToFilterBy.includes(award.Year));
+        filtredAwards = awardsData.filter((award) => yearsToFilterBy.includes(award.Year));
         renderAwards(block, filtredAwards);
     } else {
         renderAwards(block, awardsData);
@@ -84,8 +84,8 @@ async function fetchAwardsData(block) {
     const data = await fetch(awardsLink.href);
     const awards = await data.json();
     awardsData = [...awards.data];
-    filteredAwards = [...awardsData];
-    renderAwards(block, filteredAwards);
+    filtredAwards = [...awardsData];
+    renderAwards(block, filtredAwards);
     createFilterBySection(block, awardsData);
 }
 
@@ -97,7 +97,7 @@ function createSearchTextBox(block) {
 
     searchTextBox.addEventListener('keyup', () => {
         const filterBy = searchTextBox.value;
-        const filteredByTextAwards = filteredAwards.filter((award) => award.Title.includes(filterBy));
+        const filteredByTextAwards = filtredAwards.filter((award) => award.Title.includes(filterBy));
         renderAwards(block, filteredByTextAwards);
     });
 

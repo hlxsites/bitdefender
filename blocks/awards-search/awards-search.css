@@ -17,8 +17,8 @@ main .section .awards-search {
     flex-direction: column;
 }
 
-main .section .awards-search-container {
-    padding: 0 var(--body-padding);
+.awards-search-container {
+    padding: 0 var(--body-padding) !important;
 }
 
 main .section .awards-search .award-search-filter-wrapper {
@@ -127,9 +127,9 @@ main .section .awards-search .awards-results-container .award-results-filters-co
         font-size: var(--heading-font-size-l);
     }
 
-    main .section .awards-search-container {
+    .awards-search-container {
         max-width: var(--section-desktop-max-width);
-        padding: 0 var(--section-desktop-padding);
+        padding: 0 var(--section-desktop-padding) !important;
         margin: 0 auto;
     }
 }
