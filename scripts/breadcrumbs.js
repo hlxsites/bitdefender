@@ -76,9 +76,11 @@ function createBreadcrumbs(container) {
   });
 }
 
-const breadcrumb = document.querySelector('.breadcrumb');
+export default async function updateBreadcrumb() {
+  const breadcrumb = document.querySelector('.breadcrumb');
 
-// check if breadcrumb div exists
-if (breadcrumb !== undefined) {
-  createBreadcrumbs(breadcrumb);
+  // check if breadcrumb div exists
+  if (breadcrumb !== undefined) {
+    createBreadcrumbs(breadcrumb);
+  }
 }

@@ -15,7 +15,7 @@
   --hero-botton-border-color: #616161;
   --hero-p-color: #3c3c3c;
 
-  /* breadcrumbs font size */  
+  /* breadcrumbs font size */
   --breadcrumb-text-color-dark: #c5c5c5;
   --breadcrumb-text-color-dark-hover: #616161;
   --breadcrumbs-font-size-s: 12px;
@@ -29,7 +29,7 @@ main .hero .hero-content .breadcrumb {
   margin-bottom: 20px;
   font-weight: var(--font-weight-bold);
   color: #dedede;
-  min-height: 48px;
+  min-height: 82px;
 }
 
 main .hero.black-background .hero-content .breadcrumb{
@@ -82,7 +82,7 @@ main .hero.black-background .hero-content .breadcrumb a:hover {
 main .hero-container > div {
   max-width: unset;
 }
-  
+
 main .hero-container {
   padding: 0;
   margin: 0 auto;
@@ -170,10 +170,10 @@ main .hero h4 {
 
 main .hero.black-background h1 {
   font-size: var(--hero-h1-font-size);
-  margin: 0 0 25px; 
+  margin: 0 0 25px;
 }
 
-main .hero.black-background h1, 
+main .hero.black-background h1,
 main .hero.black-background h4 {
   color: var(--text-dark-color);
 }
@@ -244,7 +244,7 @@ main .hero .hero-picture picture img {
 
 main .hero a.button {
   margin: 8px 13px 0 0;
-} 
+}
 
 main .hero a.button.modal {
   padding: 0 28px 0 0;
@@ -335,7 +335,7 @@ main .hero .hero-content ul li {
 main .hero .hero-content ul li:first-child {
   margin: 9px 0 0;
 }
-  
+
 main .hero ul li::before {
   content: "";
   position: absolute;
@@ -345,7 +345,7 @@ main .hero ul li::before {
   height: 15px;
   background: url("../../icons/checkmark_solid-circle.svg") no-repeat;
   background-size: cover;
-} 
+}
 
 main .hero.black-background ul.hero-awards {
   display: flex;
@@ -464,7 +464,7 @@ main .hero.black-background ul.hero-awards li picture img{
     line-height: 1;
     letter-spacing: .96px;
   }
-  
+
   main .hero.black-background ul.hero-awards {
     display: flex;
     flex-direction: row;
@@ -485,7 +485,7 @@ main .hero.black-background ul.hero-awards li picture img{
 }
 
 @media (min-width: 1600px) { /* large desktop */
-  
+
 
   main .hero.black-background .hero-content .breadcrumb {
     padding: 9px 0;
@@ -533,5 +533,5 @@ main .hero.black-background ul.hero-awards li picture img{
     padding-left: var(--section-large-desktop-padding);
     padding-right: var(--section-large-desktop-padding);
   }
- 
+
 }

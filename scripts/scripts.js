@@ -20,6 +20,10 @@ import {
   createTag,
 } from './utils/utils.js';
 
+import {
+  updateBreadcrumb
+} from './breadcrumbs.js';
+
 const LCP_BLOCKS = ['hero']; // add your LCP blocks to the list
 
 export const SUPPORTED_LANGUAGES = ['en'];
@@ -224,6 +228,24 @@ async function loadEager(doc) {
   }
 }
 
+function renderBreadcrumb(breadcrumbs) {
+  return createTag(
+    'a',
+    { href: breadcrumbs.url_path ? breadcrumbs.url_path : '#' },
+    breadcrumbs.name,
+  );
+}
+
+async function loadBreadcrumbs() {
+  const breadcrumbs = await updateBreadcrumb();
+  const breadcrumb = document.querySelector('.breadcrumb');
+  breadcrumbs.forEach((crumb) => {
+    if (crumb.name) {
+      breadcrumb.append(renderBreadcrumb(crumb));
+    }
+  });
+}
+
 /**
  * Loads everything that doesn't need to be delayed.
  * @param {Element} doc The container element
@@ -234,6 +256,7 @@ async function loadLazy(doc) {
   // eslint-disable-next-line no-unused-vars
   loadHeader(doc.querySelector('header'));
   await loadBlocks(main);
+  loadBreadcrumbs();
 
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
