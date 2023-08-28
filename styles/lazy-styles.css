@@ -97,6 +97,10 @@
   transition: all .3s ease-in-out;
 }
 
+.modal-container img {
+  height: 225px;
+}
+
 @media (min-width: 900px) {
   .modal-container .modal-content {
     padding: 52px 62px 54px 55px;
