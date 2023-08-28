@@ -1,23 +1,13 @@
 // Description: Hero block
 import {
   createTag,
-  createBreadcrumbs,
 } from '../../scripts/utils/utils.js';
-
-function renderBreadcrumb(breadcrumbs) {
-  return createTag(
-    'a',
-    { href: breadcrumbs.url_path ? breadcrumbs.url_path : '#' },
-    breadcrumbs.name,
-  );
-}
 
 /**
  * Builds hero block and prepends to main in a new section.
  * @param {Element} main The container element
  */
 async function buildHeroBlock(element) {
-  const breadcrumbs = await createBreadcrumbs();
   const h1 = element.querySelector('h1');
   const picture = element.querySelector('picture');
   const pictureParent = picture ? picture.parentNode : false;
@@ -35,12 +25,6 @@ async function buildHeroBlock(element) {
 
     const breadcrumb = createTag('div', { class: 'breadcrumb' });
     subSection.querySelector('.hero-content-0').prepend(breadcrumb);
-
-    breadcrumbs.forEach((crumb) => {
-      if (crumb.name) {
-        breadcrumb.append(renderBreadcrumb(crumb));
-      }
-    });
 
     const pictureEl = document.createElement('div');
     pictureEl.classList.add('hero-picture');

@@ -17,6 +17,7 @@ import {
 } from './lib-franklin.js';
 
 import {
+  createBreadcrumbs,
   createTag,
 } from './utils/utils.js';
 
@@ -224,6 +225,24 @@ async function loadEager(doc) {
   }
 }
 
+function renderBreadcrumb(breadcrumbs) {
+  return createTag(
+    'a',
+    { href: breadcrumbs.url_path ? breadcrumbs.url_path : '#' },
+    breadcrumbs.name,
+  );
+}
+
+async function updateBreadcrumbs() {
+  const breadcrumbs = await createBreadcrumbs();
+  const breadcrumb = document.querySelector('.breadcrumb');
+  breadcrumbs.forEach((crumb) => {
+    if (crumb.name) {
+      breadcrumb.append(renderBreadcrumb(crumb));
+    }
+  });
+}
+
 /**
  * Loads everything that doesn't need to be delayed.
  * @param {Element} doc The container element
@@ -233,6 +252,7 @@ async function loadLazy(doc) {
 
   // eslint-disable-next-line no-unused-vars
   loadHeader(doc.querySelector('header'));
+  await updateBreadcrumbs();
   await loadBlocks(main);
 
   const { hash } = window.location;
