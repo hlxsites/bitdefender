@@ -67,7 +67,7 @@
   top: 5px;
   width: 15px;
   height: 15px;
-  background-color: #61AF53;
+  background-color: var(--background-checkmark);
   border-radius: 50%;
   z-index: 1;
 }
@@ -79,8 +79,8 @@
   top: 6px;
   width: 4px;
   height: 8px;
-  border-bottom: 2px solid white;
-  border-right: 2px solid white;
+  border-bottom: 2px solid var( --white-color);
+  border-right: 2px solid var( --white-color);
   transform: rotate(45deg);
   z-index: 2;
 }
