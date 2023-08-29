@@ -108,20 +108,13 @@ div[role="cell"] .button-container , .product-comparison-header div[role="column
     font-size: var(--body-font-size-xs);
 }
 
-div[role="cell"] p:first-of-type {
+.product-comparison-header div[role="cell"] p:first-of-type {
     font-weight: var(--font-weight-bold);
     padding: 0;
     color: var(--product-comparison-text-color);
     text-align: left;
     font-size: var(--body-font-size-xs);
     padding-bottom: 0.2rem;
-}
-
-div[role="row"].expandable-row div[role="cell"] p:first-of-type {
-    color: var(--expandable-row-text-color);
-    text-align: left;
-    font-size: var(--body-font-size-xs);
-    font-weight: var(--font-weight-regular);
 }
 
 div[role="cell"] p.button-container a {
@@ -162,7 +155,7 @@ div[role="cell"] p:last-of-type.product-comparison-header-subtitle,
     padding-bottom: 2rem;
 }
 
-.product-comparison-header div[role="columnheader"] h2 {
+.product-comparison-header div[role="columnheader"] h3 {
     margin: 3rem 0.625rem 0.25rem;
     font-size: var(--heading-font-size-s);
     min-height: 4rem;
@@ -172,6 +165,13 @@ div[role="cell"] p:last-of-type.product-comparison-header-subtitle,
     font-size: var(--body-font-size-xxs);
     line-height: 1.2;
     color: var(--product-comparison-text-color);
+}
+
+div[role="row"].expandable-row div[role="cell"] p:first-of-type {
+    color: var(--expandable-row-text-color);
+    text-align: left;
+    font-size: var(--body-font-size-xs);
+    font-weight: var(--font-weight-regular);
 }
 
 .product-comparison-price .current-price-container {
