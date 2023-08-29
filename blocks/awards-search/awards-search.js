@@ -22,6 +22,17 @@ function renderAwardItem(block, award) {
   block.appendChild(awardItemContainer);
 }
 
+function renderFilteredAwards(block) {
+  if (yearsToFilterBy.length > 0) {
+    filtredAwards = awardsData.filter((award) =>
+    yearsToFilterBy.includes(award.Year)
+    );
+    renderAwards(block, filtredAwards);
+  } else {
+    renderAwards(block, awardsData);
+  }
+}
+
 function renderFilters(block) {
   if (yearsToFilterBy.length === 0) {
     return;
@@ -38,12 +49,18 @@ function renderFilters(block) {
   clearAllLink.addEventListener('click', () => {
     yearsToFilterBy = [];
     const checkboxes = block.querySelectorAll('.accordion-item-content input');
-    [...checkboxes].forEach((checkbox) => (checkbox.checked = false));
+    [...checkboxes].forEach((checkbox) => checkbox.checked = false);
     filtredAwards = awardsData;
     renderFilteredAwards(block);
   });
   clearAllLink.innerText = 'Clear All';
   filtersContainer.append(clearAllLink);
+}
+
+function createFiltersContainer(parent) {
+  const filtersContainer = document.createElement('div');
+  filtersContainer.classList.add('award-results-filters-container');
+  parent.append(filtersContainer);
 }
 
 function renderAwards(block, data) {
@@ -56,28 +73,35 @@ function renderAwards(block, data) {
   });
 }
 
-function renderFilteredAwards(block) {
-  if (yearsToFilterBy.length > 0) {
-    filtredAwards = awardsData.filter((award) =>
-      yearsToFilterBy.includes(award.Year)
-    );
-    renderAwards(block, filtredAwards);
-  } else {
-    renderAwards(block, awardsData);
-  }
-}
-
-function createFiltersContainer(parent) {
-  const filtersContainer = document.createElement('div');
-  filtersContainer.classList.add('award-results-filters-container');
-  parent.append(filtersContainer);
-}
-
 function createAwardsResultContainer(block) {
   const awardsResultsContainer = document.createElement('div');
   awardsResultsContainer.classList.add('awards-results-container');
   createFiltersContainer(awardsResultsContainer);
   block.appendChild(awardsResultsContainer);
+}
+
+function createFilterBySection(block, data) {
+  const filterByContent = document.createElement('div');
+  filterByContent.classList.add('accordion-item-content');
+  
+  const filterByYears = data.map((award) => award.Year);
+  const filterByYearsUniqueValue = [...new Set(filterByYears)];
+  
+  filterByYearsUniqueValue.forEach((year) => {
+    const checkboxElement = document.createElement('input');
+    checkboxElement.setAttribute('type', 'checkbox');
+    checkboxElement.setAttribute('value', year);
+    checkboxElement.addEventListener('click', handleFilterByYearCheckbox.bind(null, block));
+    const checkboxLabel = document.createElement('label');
+    checkboxLabel.append(checkboxElement);
+    checkboxLabel.append(year);
+    filterByContent.append(checkboxLabel);
+  });
+  
+  const filterWrapperSection = block.querySelector('.accordion-item');
+  filterWrapperSection.classList.add('expanded');
+  
+  filterWrapperSection.appendChild(filterByContent);
 }
 
 async function fetchAwardsData(block) {
@@ -109,18 +133,12 @@ function createSearchTextBox(block) {
   searchTextBox.setAttribute('type', 'text');
   searchTextBox.setAttribute('placeholder', 'Search Awards');
 
-  searchTextBox.addEventListener(
-    'keyup',
-    handleTextSearch.bind(null, searchTextBox, block)
-  );
+  searchTextBox.addEventListener('keyup', handleTextSearch.bind(null, searchTextBox, block));
 
   const searchMagnifingGlass = document.createElement('button');
   searchMagnifingGlass.classList.add('text-box-search-magnifing-glass');
   searchTextBox.after(searchMagnifingGlass);
-  searchMagnifingGlass.addEventListener(
-    'click',
-    handleTextSearch.bind(null, searchTextBox, block)
-  );
+  searchMagnifingGlass.addEventListener('click', handleTextSearch.bind(null, searchTextBox, block));
 
   const filterSection = block.querySelector('.award-search-filter-wrapper');
   filterSection.appendChild(searchTextBox);
@@ -137,30 +155,6 @@ function handleFilterByYearCheckbox(block, event) {
   }
 
   renderFilteredAwards(block);
-}
-
-function createFilterBySection(block, data) {
-  const filterByContent = document.createElement('div');
-  filterByContent.classList.add('accordion-item-content');
-
-  const filterByYears = data.map((award) => award.Year);
-  const filterByYearsUniqueValue = [...new Set(filterByYears)];
-
-  filterByYearsUniqueValue.forEach((year) => {
-    const checkboxElement = document.createElement('input');
-    checkboxElement.setAttribute('type', 'checkbox');
-    checkboxElement.setAttribute('value', year);
-    checkboxElement.addEventListener('click', handleFilterByYearCheckbox.bind(null, block));
-    const checkboxLabel = document.createElement('label');
-    checkboxLabel.append(checkboxElement);
-    checkboxLabel.append(year);
-    filterByContent.append(checkboxLabel);
-  });
-
-  const filterWrapperSection = block.querySelector('.accordion-item');
-  filterWrapperSection.classList.add('expanded');
-
-  filterWrapperSection.appendChild(filterByContent);
 }
 
 function removeAwardsLinkFromDom(block) {
