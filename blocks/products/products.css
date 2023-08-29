@@ -164,6 +164,28 @@
   line-height: var(--body-font-size-m);
 }
 
+.product-card li:has(del)::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1px;
+  width: 15px;
+  height: 15px;
+  border: 1px solid #999;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.product-card li:has(del)::after {
+  content: "X";
+  position: absolute;
+  left: 4px;
+  top: 0.5px;
+  font-size: 13px;
+  color: #999;
+  z-index: 2;
+}
+
 .product-card > ul li:not(:has(del))::before {
   content: "";
   position: absolute;
@@ -192,28 +214,6 @@
 .product-card li:has(del) {
   color: #999;
   position: relative;
-}
-
-.product-card li:has(del)::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 1px;
-  width: 15px;
-  height: 15px;
-  border: 1px solid #999;
-  border-radius: 50%;
-  z-index: 1;
-}
-
-.product-card li:has(del)::after {
-  content: "X";
-  position: absolute;
-  left: 4px;
-  top: 0.5px;
-  font-size: 13px;
-  color: #999;
-  z-index: 2;
 }
 
 .product-card li a {
