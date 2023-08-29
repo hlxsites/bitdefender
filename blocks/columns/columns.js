@@ -154,6 +154,26 @@ function debounce(func, wait) {
   };
 }
 
+function setImageAsBackgroundImage() {
+  const columns = document.querySelectorAll('.columns.text-over-image > div > div');
+
+  columns.forEach((column) => {
+    const image = column.querySelector('img');
+
+    if (image) {
+      const src = image.getAttribute('src');
+
+      column.style.backgroundImage = `url(${src})`;
+
+      // remove the p tag that contains the picture element
+      const pContainer = image.closest('p');
+      if (pContainer) {
+        pContainer.remove();
+      }
+    }
+  });
+}
+
 export default function decorate(block) {
   const cols = [...block.firstElementChild.children];
   block.classList.add(`columns-${cols.length}-cols`);
@@ -171,6 +191,10 @@ export default function decorate(block) {
       }
     });
   });
+
+  if (block.classList.contains('text-over-image')) {
+    setImageAsBackgroundImage();
+  }
 
   // If it has the carousel class, then setup the carousel
   if (block.classList.contains('carousel')) {
