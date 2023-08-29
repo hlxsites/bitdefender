@@ -31,6 +31,8 @@ export function sampleRUM(checkpoint, data = {}) {
         .filter(({ fnname }) => dfnname === fnname)
         .forEach(({ fnname, args }) => sampleRUM[fnname](...args));
     });
+  sampleRUM.always = sampleRUM.always || [];
+  sampleRUM.always.on = (chkpnt, fn) => { sampleRUM.always[chkpnt] = fn; };
   sampleRUM.on = (chkpnt, fn) => { sampleRUM.cases[chkpnt] = fn; };
   defer('observe');
   defer('cwv');
@@ -74,8 +76,9 @@ export function sampleRUM(checkpoint, data = {}) {
         },
       };
       sendPing(data);
+      if (sampleRUM.cases[checkpoint]) { sampleRUM.cases[checkpoint](); }
     }
-    if (sampleRUM.cases[checkpoint]) { sampleRUM.cases[checkpoint](); }
+    if (sampleRUM.always[checkpoint]) { sampleRUM.always[checkpoint](data); }
   } catch (error) {
     // something went wrong
   }
@@ -393,7 +396,7 @@ export function decorateSections(main) {
           const styles = meta.style.split(',').map((style) => toClassName(style.trim()));
           styles.forEach((style) => section.classList.add(style));
         } else if (key === STICKY_NAVIGATION_SECTION_METADATA_KEY) {
-          section.id = toClassName(meta[key]);
+          section.id = `section-${toClassName(meta[key])}`;
           section.dataset[STICKY_NAVIGATION_DATASET_KEY] = meta[key];
         } else {
           section.dataset[toCamelCase(key)] = meta[key];
