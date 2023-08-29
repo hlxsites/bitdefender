@@ -9,6 +9,7 @@ import {
 import {
   getLanguageCountryFromPath,
 } from './scripts.js';
+import { loadBreadcrumbs } from './breadcrumbs.js';
 
 // Core Web Vitals RUM collection
 sampleRUM('cwv');
@@ -153,3 +154,6 @@ switch (ENVIRONMENT) {
 }
 
 pushPageLoadEvent();
+
+// Load breadcrumbs
+loadBreadcrumbs();

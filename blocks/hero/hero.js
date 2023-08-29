@@ -123,5 +123,7 @@ export default async function decorate(block) {
 
   // move discount bubble inside the button
   const bubble = block.querySelector('.discount-bubble');
-  bubble.parentElement.querySelector('.button-container').append(bubble);
+  if (bubble) {
+    bubble.parentElement.querySelector('.button-container').append(bubble);
+  }
 }

@@ -19,7 +19,6 @@ import {
 import {
   createTag,
 } from './utils/utils.js';
-import { loadBreadcrumbs } from './breadcrumbs.js';
 
 const LCP_BLOCKS = ['hero']; // add your LCP blocks to the list
 
@@ -235,7 +234,6 @@ async function loadLazy(doc) {
   // eslint-disable-next-line no-unused-vars
   loadHeader(doc.querySelector('header'));
   await loadBlocks(main);
-  loadBreadcrumbs();
 
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
