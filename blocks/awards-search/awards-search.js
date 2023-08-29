@@ -22,17 +22,6 @@ function renderAwardItem(block, award) {
   block.appendChild(awardItemContainer);
 }
 
-function renderFilteredAwards(block) {
-  if (yearsToFilterBy.length > 0) {
-    filtredAwards = awardsData.filter((award) =>
-    yearsToFilterBy.includes(award.Year)
-    );
-    renderAwards(block, filtredAwards);
-  } else {
-    renderAwards(block, awardsData);
-  }
-}
-
 function renderFilters(block) {
   if (yearsToFilterBy.length === 0) {
     return;
@@ -71,6 +60,15 @@ function renderAwards(block, data) {
   data.forEach((award) => {
     renderAwardItem(awardsResultsContainer, award);
   });
+}
+
+function renderFilteredAwards(block) {
+  if (yearsToFilterBy.length > 0) {
+    filtredAwards = awardsData.filter((award) => yearsToFilterBy.includes(award.Year));
+    renderAwards(block, filtredAwards);
+  } else {
+    renderAwards(block, awardsData);
+  }
 }
 
 function createAwardsResultContainer(block) {
