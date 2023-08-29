@@ -23,7 +23,7 @@ function renderAwardItem(block, award) {
   const itemDescription = document.createElement('div');
   itemDescription.append(award.Description);
   awardItemContent.append(itemDescription);
-  
+
   if (award.Link) {
     const itemLink = document.createElement('a');
     itemLink.innerHTML = 'Read More';
