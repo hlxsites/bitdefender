@@ -105,7 +105,7 @@ div[role="cell"] .button-container , .product-comparison-header div[role="column
     padding: 0;
     color: var(--product-comparison-text-color);
     text-align: center;
-    font-size: var(----body-font-size-xs);
+    font-size: var(--body-font-size-xs);
 }
 
 div[role="cell"] p:first-of-type {
@@ -113,7 +113,7 @@ div[role="cell"] p:first-of-type {
     padding: 0;
     color: var(--product-comparison-text-color);
     text-align: left;
-    font-size: var(----body-font-size-xs);
+    font-size: var(--body-font-size-xs);
     padding-bottom: 0.2rem;
 }
 
