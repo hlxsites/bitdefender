@@ -55,10 +55,10 @@ function renderProductPrice(product) {
     return `<strong>${product.price} ${product.currency_label}</strong>`;
   // eslint-disable-next-line no-else-return
   } else {
-    const discount = product.price - product.discount.discounted_price;
+    const productDiscount = product.price - product.discount.discounted_price;
     return `<strong>${product.discount.discount_value} ${product.currency_label}</strong>
             <span class="old-price">Old Price <del>${product.price} ${product.currency_label}</del></span>
-            <span class="discount">Save ${discount.toFixed(2)} ${product.currency_label}</span>`;
+            <span class="discount">Save ${productDiscount.toFixed(2)} ${product.currency_label}</span>`;
   }
 }
 
