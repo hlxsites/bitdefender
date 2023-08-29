@@ -1,3 +1,5 @@
+import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
+
 let awardsData = [];
 let filteredAwards = [];
 let yearsToFilterBy = [];
@@ -9,13 +11,7 @@ function renderAwardItem(block, award) {
   if (award.Logo) {
     const awardsLogo = document.createElement('div');
     awardsLogo.classList.add('award-logo');
-    const awardLogoImage = document.createElement('img');
-    awardLogoImage.width = 90;
-    awardLogoImage.height = 160;
-    const logoUrl = new URL(award.Logo);
-    logoUrl.hostname = window.location.host;
-    awardLogoImage.src = logoUrl;
-    awardsLogo.append(awardLogoImage);
+    awardsLogo.append(createOptimizedPicture(award.Logo, award.Title));
     awardItemContainer.append(awardsLogo);
   }
 
