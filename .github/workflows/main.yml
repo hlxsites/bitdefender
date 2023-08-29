@@ -1,8 +1,5 @@
 name: GI
 on:
-  push:
-    branches:
-      - "ghost-inspector-tests"
   pull_request:
     branches:
       - "main"
