@@ -77,9 +77,12 @@ async function createBreadcrumbs(container) {
   });
 }
 
-const breadcrumb = document.querySelector('.breadcrumb');
+// eslint-disable-next-line import/prefer-default-export
+export async function loadBreadcrumbs() {
+  const breadcrumb = document.querySelector('.breadcrumb');
 
-// check if breadcrumb div exists
-if (breadcrumb !== undefined) {
-  await createBreadcrumbs(breadcrumb);
+  // check if breadcrumb div exists
+  if (breadcrumb !== undefined) {
+    await createBreadcrumbs(breadcrumb);
+  }
 }
