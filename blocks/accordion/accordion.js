@@ -52,7 +52,6 @@ export default function decorate(block) {
     } else {
       item.addEventListener('click', handleAccordionItemClick.bind(null, item, items));
     }
-
   });
 
   if (block.classList.contains('first-open')) {
