@@ -235,4 +235,10 @@ export default function decorate(block) {
       li.classList.remove('with-del');
     }
   });
+
+  block.querySelectorAll('.product-card ul').forEach((ul) => {
+    if (ul.previousElementSibling?.tagName === 'P') {
+      ul.previousElementSibling.classList.add('ul-header-text');
+    }
+  });
 }
