@@ -164,11 +164,11 @@
   line-height: var(--body-font-size-m);
 }
 
-.product-card.featured > ul li::before {
+.product-card > ul li:not(:has(del))::before {
   content: "";
   position: absolute;
   left: 0;
-  top: 5px;
+  top: 3px;
   width: 15px;
   height: 15px;
   background-color: var(--background-checkmark);
@@ -176,15 +176,15 @@
   z-index: 1;
 }
 
-.product-card.featured > ul li::after {
+.product-card > ul li:not(:has(del))::after {
   content: "";
   position: absolute;
   left: 5px;
-  top: 7px;
+  top: 5px;
   width: 3px;
   height: 7px;
-  border-bottom: 2px solid var( --white-color);
-  border-right: 2px solid var( --white-color);
+  border-bottom: 2px solid var(--white-color);
+  border-right: 2px solid var(--white-color);
   transform: rotate(45deg);
   z-index: 2;
 }
@@ -192,6 +192,7 @@
 .product-card li:has(del) {
   color: #999;
   background-image: url('../../icons/checkmark_circle_grayed_out.svg');
+  background-repeat: no-repeat;
 }
 
 .product-card li a {

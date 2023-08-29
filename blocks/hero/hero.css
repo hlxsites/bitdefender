@@ -340,7 +340,7 @@ main .hero ul li::before {
   content: "";
   position: absolute;
   left: 0;
-  top: 5px;
+  top: 3px;
   width: 15px;
   height: 15px;
   background-color: var(--background-checkmark);
@@ -352,7 +352,7 @@ main .hero ul li::after {
   content: "";
   position: absolute;
   left: 5px;
-  top: 7px;
+  top: 5px;
   width: 3px;
   height: 7px;
   border-bottom: 2px solid var( --white-color);
