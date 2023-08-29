@@ -27,9 +27,7 @@ function renderFilters(block) {
     return;
   }
 
-  const filtersContainer = block.querySelector(
-    '.award-results-filters-container'
-  );
+  const filtersContainer = block.querySelector('.award-results-filters-container');
   yearsToFilterBy.forEach((year) => {
     const filterItem = document.createElement('div');
     filterItem.append(year);
@@ -49,9 +47,7 @@ function renderFilters(block) {
 }
 
 function renderAwards(block, data) {
-  const awardsResultsContainer = block.querySelector(
-    '.awards-results-container'
-  );
+  const awardsResultsContainer = block.querySelector('.awards-results-container');
   awardsResultsContainer.innerHTML = '';
   createFiltersContainer(awardsResultsContainer);
   renderFilters(block);
@@ -154,10 +150,7 @@ function createFilterBySection(block, data) {
     const checkboxElement = document.createElement('input');
     checkboxElement.setAttribute('type', 'checkbox');
     checkboxElement.setAttribute('value', year);
-    checkboxElement.addEventListener(
-      'click',
-      handleFilterByYearCheckbox.bind(null, block)
-    );
+    checkboxElement.addEventListener('click', handleFilterByYearCheckbox.bind(null, block));
     const checkboxLabel = document.createElement('label');
     checkboxLabel.append(checkboxElement);
     checkboxLabel.append(year);
@@ -183,7 +176,6 @@ function moveAccordionUnderFilterSection(block) {
   const awardSearchFilterSection = document.createElement('div');
   awardSearchFilterSection.classList.add('award-search-filter-wrapper');
   block.append(awardSearchFilterSection);
-
   createSearchTextBox(block);
   awardSearchFilterSection.append(accordion);
 }
