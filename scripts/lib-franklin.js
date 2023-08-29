@@ -393,7 +393,7 @@ export function decorateSections(main) {
           const styles = meta.style.split(',').map((style) => toClassName(style.trim()));
           styles.forEach((style) => section.classList.add(style));
         } else if (key === STICKY_NAVIGATION_SECTION_METADATA_KEY) {
-          section.id = toClassName(meta[key]);
+          section.id = `section-${toClassName(meta[key])}`;
           section.dataset[STICKY_NAVIGATION_DATASET_KEY] = meta[key];
         } else {
           section.dataset[toCamelCase(key)] = meta[key];

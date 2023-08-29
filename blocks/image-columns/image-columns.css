@@ -54,9 +54,35 @@
 }
 
 .image-columns ul li {
+  position: relative;
   font-size: var(--body-font-size-l);
   list-style: none;
-  transform: translateX(-25px);
+  transform: translateX(-35px);
+}
+
+.image-columns ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 15px;
+  height: 15px;
+  background-color: var(--background-checkmark);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.image-columns ul li::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 7px;
+  width: 3px;
+  height: 7px;
+  border-bottom: 2px solid var( --white-color);
+  border-right: 2px solid var( --white-color);
+  transform: rotate(45deg);
+  z-index: 2;
 }
 
 .image-columns > div > .image-columns-txt-col h3 {
