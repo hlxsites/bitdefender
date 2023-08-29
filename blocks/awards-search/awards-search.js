@@ -12,7 +12,9 @@ function renderAwardItem(block, award) {
     const awardLogoImage = document.createElement('img');
     awardLogoImage.width = 90;
     awardLogoImage.height = 160;
-    awardLogoImage.src = award.Logo;
+    const logoUrl = new URL(award.Logo);
+    logoUrl.hostname = window.location.host;
+    awardLogoImage.src = logoUrl;
     awardsLogo.append(awardLogoImage);
     awardItemContainer.append(awardsLogo);
   }
@@ -127,7 +129,9 @@ function createFilterBySection(block, data) {
   });
 
   const filterWrapperSection = block.querySelector('.accordion-item');
-  filterWrapperSection.classList.add('expanded');
+  if (window.window.innerWidth >= 768) {
+      filterWrapperSection.classList.add('expanded');
+  }
   filterWrapperSection.appendChild(filterByContent);
 }
 
