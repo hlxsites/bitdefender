@@ -128,8 +128,6 @@ export function decorateMain(main) {
  * @param {String} template The template to use for the modal styling
  * @returns {Promise<Element>}
  * @example
- * const modalContainer = await createModal(modalPath, modalTemplate);
- * document.body.append(modalContainer);
  */
 export async function createModal(path, template) {
   const modalContainer = document.createElement('div');
@@ -149,6 +147,9 @@ export async function createModal(path, template) {
 
   const html = await resp.text();
   modalContent.innerHTML = html;
+  console.log('modalContent:', modalContent);
+  console.log('modalContentInnerHTML:', modalContent.innerHTML);
+
   decorateMain(modalContent);
   await loadBlocks(modalContent);
   modalContainer.append(modalContent);
