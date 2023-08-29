@@ -127,9 +127,7 @@ function handleTextSearch(searchTextBox, block) {
     return;
   }
 
-  const filteredByTextAwards = filtredAwards.filter((award) =>
-    award.Title.match(new RegExp(`${filterBy}`, 'i'))
-  );
+  const filteredByTextAwards = filtredAwards.filter((award) => award.Title.match(new RegExp(`${filterBy}`, 'i')));
   renderAwards(block, filteredByTextAwards);
 }
 
