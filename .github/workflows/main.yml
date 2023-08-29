@@ -1,5 +1,10 @@
 name: GI
+env:
+ BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
 on:
+  push:
+    branches:
+      - "ghost-inspector-tests"
   pull_request:
     branches:
       - "main"
@@ -12,4 +17,5 @@ jobs:
         with:
           args: suite execute ${{ secrets.GI_SUITE }} \
             --apiKey ${{ secrets.GI_API_KEY }} \
+            --startUrl https://${{ BRANCH_NAME }}--bitdefender--hlxsites.hlx.live/solutions/ \
             --errorOnFail
