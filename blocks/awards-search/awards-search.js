@@ -32,6 +32,7 @@ function renderAwards(block, data) {
   const awardsResultsContainer = block.querySelector('.awards-results-container');
   awardsResultsContainer.innerHTML = '';
   createFiltersContainer(awardsResultsContainer);
+  renderFilters(block);
   data.forEach((award) => {
     renderAwardItem(awardsResultsContainer, award);
   });
@@ -62,7 +63,6 @@ function renderFilters(block) {
 }
 
 function renderFilteredAwards(block) {
-  renderFilters(block);
   if (yearsToFilterBy.length > 0) {
     filteredAwards = awardsData.filter((award) => yearsToFilterBy.includes(award.Year));
     renderAwards(block, filteredAwards);
