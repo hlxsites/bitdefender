@@ -130,7 +130,7 @@ function createFilterBySection(block, data) {
 
   const filterWrapperSection = block.querySelector('.accordion-item');
   if (window.window.innerWidth >= 768) {
-      filterWrapperSection.classList.add('expanded');
+    filterWrapperSection.classList.add('expanded');
   }
   filterWrapperSection.appendChild(filterByContent);
 }
