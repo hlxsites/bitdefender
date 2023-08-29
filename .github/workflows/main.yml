@@ -1,7 +1,11 @@
 name: GI
 on:
+  push:
+    branches:
+      - "ghost-inspector-tests"
   pull_request:
-    branches: [stable]
+    branches:
+      - "main"
 jobs:
   test:
     runs-on: ubuntu-latest
