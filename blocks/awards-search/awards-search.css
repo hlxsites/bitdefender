@@ -37,10 +37,11 @@ main .section .awards-search .awards-results-container .award-item-container {
     border-top: 4px solid #006eff;
     padding: 30px 35px 22px 38px;
     min-height: 210px;
-
     border-radius: 5px;
     box-shadow: 0 3px 8px 0 rgba(0,0,0,.1);
     margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
 }
 
 main .section .awards-search .awards-results-container .award-item-container h2 {
@@ -185,6 +186,6 @@ main .section .awards-search .awards-results-container .award-results-filters-co
     }
 
     .text-box-search-magnifing-glass {
-        left: 15rem;
+        left: 11rem;
     }
 }
