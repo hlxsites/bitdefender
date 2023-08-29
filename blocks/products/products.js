@@ -207,4 +207,13 @@ export default function decorate(block) {
   [...block.querySelectorAll('.product-card .featured')].forEach((featured) => {
     featured.closest('.product-card').classList.add('featured');
   });
+
+  // add class to avoid using :has selector
+  block.querySelectorAll('.product-card li').forEach((li) => {
+    if (li.querySelector('del')) {
+      li.classList.add('with-del');
+    } else {
+      li.classList.remove('with-del');
+    }
+  });
 }
