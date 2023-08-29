@@ -10,6 +10,8 @@ function renderAwardItem(block, award) {
     const awardsLogo = document.createElement('div');
     awardsLogo.classList.add('award-logo');
     const awardLogoImage = document.createElement('img');
+    awardLogoImage.width = 90;
+    awardLogoImage.height = 160;
     awardLogoImage.src = award.Logo;
     awardsLogo.append(awardLogoImage);
     awardItemContainer.append(awardsLogo);
@@ -20,7 +22,7 @@ function renderAwardItem(block, award) {
   const itemTitle = document.createElement('h2');
   itemTitle.append(award.Title);
   awardItemContent.append(itemTitle);
-  const itemDescription = document.createElement('div');
+  const itemDescription = document.createElement('p');
   itemDescription.append(award.Description);
   awardItemContent.append(itemDescription);
 
@@ -162,6 +164,8 @@ function createSearchTextBox(block) {
 
   const searchMagnifingGlass = document.createElement('button');
   searchMagnifingGlass.classList.add('text-box-search-magnifing-glass');
+  searchMagnifingGlass.setAttribute('aria-label', 'Search');
+  searchMagnifingGlass.setAttribute('role', 'button');
   searchTextBox.after(searchMagnifingGlass);
   searchMagnifingGlass.addEventListener('click', handleTextSearch.bind(null, searchTextBox, block));
 
