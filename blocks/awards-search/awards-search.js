@@ -28,11 +28,14 @@ function createFiltersContainer(parent) {
   parent.append(filtersContainer);
 }
 
-function renderAwards(block, data) {
+function clearAwardsResultsSection(block) {
   const awardsResultsContainer = block.querySelector('.awards-results-container');
   awardsResultsContainer.innerHTML = '';
   createFiltersContainer(awardsResultsContainer);
-  renderFilters(block);
+}
+
+function renderAwards(block, data) {
+  const awardsResultsContainer = block.querySelector('.awards-results-container');
   data.forEach((award) => {
     renderAwardItem(awardsResultsContainer, award);
   });
@@ -63,6 +66,8 @@ function renderFilters(block) {
 }
 
 function renderFilteredAwards(block) {
+  clearAwardsResultsSection(block);
+  renderFilters(block);
   if (yearsToFilterBy.length > 0) {
     filteredAwards = awardsData.filter((award) => yearsToFilterBy.includes(award.Year));
     renderAwards(block, filteredAwards);
@@ -123,6 +128,8 @@ async function fetchAwardsData(block) {
 
 function handleTextSearch(searchTextBox, block) {
   const filterBy = searchTextBox.value;
+  clearAwardsResultsSection(block);
+  renderFilters(block);
   if (filterBy.length === 0) {
     renderAwards(block, filteredAwards);
     return;
