@@ -1,0 +1,14 @@
+name: GI
+on:
+  pull_request:
+    branches: [stable]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: execute Ghost Inspector test
+        uses: docker://ghostinspector/cli
+        with:
+          args: test execute ${{ secrets.GI_SUITE }} \
+            --apiKey ${{ secrets.GI_API_KEY }} \
+            --errorOnFail
