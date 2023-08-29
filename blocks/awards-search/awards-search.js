@@ -39,6 +39,7 @@ function renderFilters(block) {
         yearsToFilterBy = [];
         const checkboxes = block.querySelectorAll('.accordion-item-content input');
         [...checkboxes].forEach((checkbox) => checkbox.checked = false);
+        filtredAwards = awardsData;
         renderFilteredAwards(block);
 
     });
@@ -89,21 +90,29 @@ async function fetchAwardsData(block) {
     createFilterBySection(block, awardsData);
 }
 
+function handleTextSearch(searchTextBox, block) {
+    const filterBy = searchTextBox.value;
+    if (filterBy.length === 0) {
+        renderAwards(block, filtredAwards);
+        return;
+    }
+
+    const filteredByTextAwards = filtredAwards.filter((award) => award.Title.match(new RegExp(`${filterBy}`, 'i')));
+    renderAwards(block, filteredByTextAwards);
+}
+
 function createSearchTextBox(block) {
     const searchTextBox = document.createElement('input');
     searchTextBox.classList.add('text-box-wrapper');
     searchTextBox.setAttribute('type', 'text');
     searchTextBox.setAttribute('placeholder', 'Search Awards');
 
-    searchTextBox.addEventListener('keyup', () => {
-        const filterBy = searchTextBox.value;
-        const filteredByTextAwards = filtredAwards.filter((award) => award.Title.includes(filterBy));
-        renderAwards(block, filteredByTextAwards);
-    });
+    searchTextBox.addEventListener('keyup', handleTextSearch.bind(null, searchTextBox, block));
 
-    const searchMagnifingGlass = document.createElement('div');
+    const searchMagnifingGlass = document.createElement('button');
     searchMagnifingGlass.classList.add('text-box-search-magnifing-glass');
     searchTextBox.after(searchMagnifingGlass);
+    searchMagnifingGlass.addEventListener('click', handleTextSearch.bind(null, searchTextBox, block));
 
     const filterSection = block.querySelector('.award-search-filter-wrapper');
     filterSection.appendChild(searchTextBox); 

@@ -18,6 +18,15 @@ function collapseItem(item) {
   });
 }
 
+function handleAccordionItemClick(item, items) {
+  if (!item.classList.contains('expanded')) {
+    items.filter((i) => i.classList.contains('expanded')).forEach((i) => collapseItem(i));
+    expandItem(item);
+  } else {
+    collapseItem(item);
+  }
+}
+
 export default function decorate(block) {
   const items = Array.from(block.querySelectorAll(':scope > div'));
   items.forEach((item) => {
@@ -38,14 +47,12 @@ export default function decorate(block) {
       }
     }
 
-    item.addEventListener('click', () => {
-      if (!item.classList.contains('expanded')) {
-        items.filter((i) => i.classList.contains('expanded')).forEach((i) => collapseItem(i));
-        expandItem(item);
-      } else {
-        collapseItem(item);
-      }
-    });
+    if ([...block.classList].includes('action-only-on-header')) {
+      header.addEventListener('click', handleAccordionItemClick.bind(null, header.parentElement, items));
+    } else {
+      item.addEventListener('click', handleAccordionItemClick.bind(null, item, items));
+    }
+
   });
 
   if (block.classList.contains('first-open')) {
