@@ -1,5 +1,5 @@
 let awardsData = [];
-let filtredAwards = [];
+let filteredAwards = [];
 let yearsToFilterBy = [];
 
 function renderAwardItem(block, award) {
@@ -22,6 +22,21 @@ function renderAwardItem(block, award) {
   block.appendChild(awardItemContainer);
 }
 
+function createFiltersContainer(parent) {
+  const filtersContainer = document.createElement('div');
+  filtersContainer.classList.add('award-results-filters-container');
+  parent.append(filtersContainer);
+}
+
+function renderAwards(block, data) {
+  const awardsResultsContainer = block.querySelector('.awards-results-container');
+  awardsResultsContainer.innerHTML = '';
+  createFiltersContainer(awardsResultsContainer);
+  data.forEach((award) => {
+    renderAwardItem(awardsResultsContainer, award);
+  });
+}
+
 function renderFilters(block) {
   if (yearsToFilterBy.length === 0) {
     return;
@@ -39,34 +54,20 @@ function renderFilters(block) {
     yearsToFilterBy = [];
     const checkboxes = block.querySelectorAll('.accordion-item-content input');
     [...checkboxes].forEach((checkbox) => { checkbox.checked = false; });
-    filtredAwards = awardsData;
-    renderFilteredAwards(block);
+    filteredAwards = awardsData;
+    renderAwards(block, awardsData);
   });
   clearAllLink.innerText = 'Clear All';
   filtersContainer.append(clearAllLink);
 }
 
-function createFiltersContainer(parent) {
-  const filtersContainer = document.createElement('div');
-  filtersContainer.classList.add('award-results-filters-container');
-  parent.append(filtersContainer);
-}
-
-function renderAwards(block, data) {
-  const awardsResultsContainer = block.querySelector('.awards-results-container');
-  awardsResultsContainer.innerHTML = '';
-  createFiltersContainer(awardsResultsContainer);
-  renderFilters(block);
-  data.forEach((award) => {
-    renderAwardItem(awardsResultsContainer, award);
-  });
-}
-
 function renderFilteredAwards(block) {
+  renderFilters(block);
   if (yearsToFilterBy.length > 0) {
-    filtredAwards = awardsData.filter((award) => yearsToFilterBy.includes(award.Year));
-    renderAwards(block, filtredAwards);
+    filteredAwards = awardsData.filter((award) => yearsToFilterBy.includes(award.Year));
+    renderAwards(block, filteredAwards);
   } else {
+    filteredAwards = awardsData;
     renderAwards(block, awardsData);
   }
 }
@@ -115,19 +116,19 @@ async function fetchAwardsData(block) {
   const data = await fetch(awardsLink.href);
   const awards = await data.json();
   awardsData = [...awards.data];
-  filtredAwards = [...awardsData];
-  renderAwards(block, filtredAwards);
+  filteredAwards = [...awardsData];
+  renderAwards(block, filteredAwards);
   createFilterBySection(block, awardsData);
 }
 
 function handleTextSearch(searchTextBox, block) {
   const filterBy = searchTextBox.value;
   if (filterBy.length === 0) {
-    renderAwards(block, filtredAwards);
+    renderAwards(block, filteredAwards);
     return;
   }
 
-  const filteredByTextAwards = filtredAwards.filter((award) => award.Title.match(new RegExp(`${filterBy}`, 'i')));
+  const filteredByTextAwards = filteredAwards.filter((award) => award.Title.match(new RegExp(`${filterBy}`, 'i')));
   renderAwards(block, filteredByTextAwards);
 }
 
