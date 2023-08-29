@@ -25,12 +25,6 @@ main .quote-carousel .slides-container {
   }
 }
 
-@media (min-width: 1600px) {
-  main .quote-carousel .slides-container {
-    margin-bottom: 100px;
-  }
-}
-
 /* Fix for missing global styles */
 .slides-container h4, .slides-container h5, .slides-container p {
   padding-top: 0;

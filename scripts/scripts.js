@@ -174,36 +174,31 @@ export async function detectModalButtons(main) {
 }
 
 function buildCta(section) {
-  const backgroundImageSrc = section.dataset.backgroundImage;
-  const backgroundImage = backgroundImageSrc ? createOptimizedPicture(backgroundImageSrc) : null;
-  const backgroundImageHtml = backgroundImage ? backgroundImage.innerHTML : '';
-
   const fullWidthContainer = createTag(
     'div',
     { class: 'full-width' },
-    `<div class="cta-container">
+    `<div class="columnar-container">
 <div class="left-col">
 </div>
 <div class="right-col">
     <div class="img-container">
-        <img class="red-img" src="/images/b-red-mask.png">
-        <div class="bg-img">
-            <div class="cmp-img">
-                ${backgroundImageHtml}
-            </div>
-        </div>
-        <img class="transparent-img" src="/icons/cta-circle.svg">
     </img>
 </div>`,
   );
 
+  // Add last image to right col.
+  const imageContainer = fullWidthContainer.querySelector('.img-container');
+  const images = [...section.querySelectorAll(':scope picture')];
+  if (images.length > 0) {
+    imageContainer.append(images[images.length - 1]);
+  }
   const leftCol = fullWidthContainer.querySelector('.left-col');
   [...section.children].forEach((e) => leftCol.append(e));
   section.append(fullWidthContainer);
 }
 
 function buildCtaSections(main) {
-  main.querySelectorAll('div.section.cta')
+  main.querySelectorAll('div.section.columnar')
     .forEach(buildCta);
 }
 
