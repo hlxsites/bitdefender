@@ -5,20 +5,33 @@ let yearsToFilterBy = [];
 function renderAwardItem(block, award) {
   const awardItemContainer = document.createElement('div');
   awardItemContainer.classList.add('award-item-container');
+
+  if (award.Logo) {
+    const awardsLogo = document.createElement('div');
+    awardsLogo.classList.add('award-logo');
+    const awardLogoImage = document.createElement('img');
+    awardLogoImage.src = award.Logo;
+    awardsLogo.append(awardLogoImage);
+    awardItemContainer.append(awardsLogo);
+  }
+
+  const awardItemContent = document.createElement('div');
+  awardItemContent.classList.add('award-item-description');
   const itemTitle = document.createElement('h2');
   itemTitle.append(award.Title);
-  awardItemContainer.append(itemTitle);
+  awardItemContent.append(itemTitle);
   const itemDescription = document.createElement('div');
   itemDescription.append(award.Description);
-  awardItemContainer.append(itemDescription);
-
+  awardItemContent.append(itemDescription);
+  
   if (award.Link) {
     const itemLink = document.createElement('a');
     itemLink.innerHTML = 'Read More';
     itemLink.href = award.Link;
-    awardItemContainer.append(itemLink);
+    awardItemContent.append(itemLink);
   }
 
+  awardItemContainer.append(awardItemContent);
   block.appendChild(awardItemContainer);
 }
 
