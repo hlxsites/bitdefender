@@ -1,0 +1,18 @@
+name: GI
+env:
+ BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+on:
+  pull_request:
+    branches:
+      - "main"
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: execute Ghost Inspector test
+        uses: docker://ghostinspector/cli
+        with:
+          args: suite execute ${{ secrets.GI_SUITE }} \
+            --apiKey ${{ secrets.GI_API_KEY }} \
+            --startUrl https://${{ env.BRANCH_NAME }}--bitdefender--hlxsites.hlx.page/solutions/ \
+            --errorOnFail

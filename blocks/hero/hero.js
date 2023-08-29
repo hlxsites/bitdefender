@@ -29,8 +29,6 @@ async function buildHeroBlock(element) {
     const breadcrumb = createTag('div', { class: 'breadcrumb' });
     subSection.querySelector('.hero-content-0').prepend(breadcrumb);
 
-    import('../../scripts/breadcrumbs.js');
-
     const pictureEl = document.createElement('div');
     pictureEl.classList.add('hero-picture');
     pictureEl.append(picture);
@@ -125,5 +123,7 @@ export default async function decorate(block) {
 
   // move discount bubble inside the button
   const bubble = block.querySelector('.discount-bubble');
-  bubble.parentElement.querySelector('.button-container').append(bubble);
+  if (bubble) {
+    bubble.parentElement.querySelector('.button-container').append(bubble);
+  }
 }
