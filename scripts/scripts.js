@@ -147,8 +147,6 @@ export async function createModal(path, template) {
 
   const html = await resp.text();
   modalContent.innerHTML = html;
-  console.log('modalContent:', modalContent);
-  console.log('modalContentInnerHTML:', modalContent.innerHTML);
 
   decorateMain(modalContent);
   await loadBlocks(modalContent);
