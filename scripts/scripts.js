@@ -11,7 +11,6 @@ import {
   waitForLCP,
   loadBlocks,
   loadCSS,
-  createOptimizedPicture,
   getMetadata,
   toClassName,
 } from './lib-franklin.js';
