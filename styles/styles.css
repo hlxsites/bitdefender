@@ -1101,7 +1101,3 @@ main .section.blue a.button.secondary::after {
 .tag-green {
   background-color: var(--green-tag);
 }
-
-.products-container h4 {
-  margin-bottom: 0;
-}
