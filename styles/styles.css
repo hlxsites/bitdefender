@@ -979,6 +979,10 @@ main .section.blue a.button.secondary::after {
   height: 437px;
 }
 
+.section.wide.light-sky-blue.columns-container.awards {
+  height: auto;
+}
+
 
 .tag {
   margin-left: 5px;
@@ -1009,4 +1013,8 @@ main .section.blue a.button.secondary::after {
 .icon-apple, .icon-android {
   width: 18px;
   transform: translateY(22px);
+}
+
+.section.wide.awards h2 {
+  font-weight: var(--font-weight-bold);
 }
