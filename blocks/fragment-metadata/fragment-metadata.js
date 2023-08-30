@@ -1,23 +1,18 @@
 import { readBlockConfig } from '../../scripts/lib-franklin.js';
-import getOperatingSystem from '../../scripts/delayed.js';
+import { getOperatingSystem } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
-  const { template } = readBlockConfig(block);
+  const {
+    template,
+    'Open-URL-MacOS': openUrlMacos,
+    'Open-URL-Windows': openUrlWindows,
+    'Open-URL-Android': openUrlAndroid,
+    'Open-URL-IOS': openUrlIos,
+  } = readBlockConfig(block);
 
   if (template) {
     document.body.classList.add(template);
   }
-
-  // Read OS-specific URLs
-  const osUrls = {};
-  const urlDivs = block.querySelectorAll('div > div');
-  urlDivs.forEach((div) => {
-    const key = div.children[0]?.textContent?.trim();
-    const value = div.children[1]?.querySelector('a')?.href;
-    if (key && value) {
-      osUrls[key.replace('Open URL ', '')] = value;
-    }
-  });
 
   // Get user's operating system
   const { userAgent } = navigator;
@@ -27,7 +22,7 @@ export default function decorate(block) {
   let openUrl;
   switch (userOS) {
     case 'MacOS':
-      openUrl = osUrls.MacOS;
+      openUrl = openUrlMacos;
       break;
     case 'Windows 10':
     case 'Windows 8':
@@ -35,13 +30,13 @@ export default function decorate(block) {
     case 'Windows Vista':
     case 'Windows XP':
     case 'Windows 2000':
-      openUrl = osUrls.Windows;
+      openUrl = openUrlWindows;
       break;
     case 'Android':
-      openUrl = osUrls.Android;
+      openUrl = openUrlAndroid;
       break;
     case 'iOS':
-      openUrl = osUrls.IOS;
+      openUrl = openUrlIos;
       break;
     default:
       openUrl = null; // Fallback or 'Unknown' case
@@ -51,10 +46,12 @@ export default function decorate(block) {
     window.open(openUrl, '_self');
   }
 
-  // clean up
-  const parentWrapper = block.parentElement;
-  if (parentWrapper) {
-    parentWrapper.remove();
-    parentWrapper.parentElement?.classList.remove('fragment-metadata-container');
+  // Remove the Fragments Metadata table
+  if (block.parentElement) {
+    const parentWrapper = block.parentElement;
+    if (parentWrapper) {
+      parentWrapper.remove();
+      parentWrapper.parentElement?.classList.remove('fragment-metadata-container');
+    }
   }
 }

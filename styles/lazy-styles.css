@@ -97,7 +97,7 @@
   transition: all .3s ease-in-out;
 }
 
-.modal-container img {
+.modal-container .columns-wrapper img {
   height: 225px;
 }
 
