@@ -110,9 +110,6 @@ function createAwardsResultContainer(block) {
 function createFilterBySection(block, data) {
   const filterByContent = document.createElement('div');
   filterByContent.classList.add('accordion-item-content');
-  if (!filterByContent) {
-    return;
-  }
 
   const filterByYears = data.map((award) => award.Year);
   const filterByYearsUniqueValue = [...new Set(filterByYears)];
@@ -129,6 +126,10 @@ function createFilterBySection(block, data) {
   });
 
   const filterWrapperSection = block.querySelector('.accordion-item');
+  if (!filterWrapperSection) {
+    return;
+  }
+  
   if (window.window.innerWidth >= 768) {
     filterWrapperSection.classList.add('expanded');
   }
