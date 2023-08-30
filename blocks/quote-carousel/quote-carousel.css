@@ -161,6 +161,11 @@ main .quote-carousel .slides-container {
   overflow: hidden;
 }
 
+.section .slides-container .slides-dots li::before,
+.section .slides-container .slides-dots li::after {
+  content: none;
+}
+
 .slides-container .slides-dots li button {
   padding: 0;
   background: transparent;
