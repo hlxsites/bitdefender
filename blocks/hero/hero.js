@@ -3,7 +3,7 @@ import {
   createTag,
   createNanoBlock,
   renderNanoBlocks,
-  fetchProduct,
+  fetchProductVariant,
 } from '../../scripts/utils/utils.js';
 
 /**
@@ -78,7 +78,7 @@ createNanoBlock('discount', (code, variant) => {
     <span class="discount-bubble-1">Discount</span>
   `;
 
-  fetchProduct(code, variant)
+  fetchProductVariant(code, variant)
     .then((product) => {
       if (product.discount) {
         const discount = Math.round(

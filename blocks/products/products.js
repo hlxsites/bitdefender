@@ -2,6 +2,8 @@ import {
   createNanoBlock,
   renderNanoBlocks,
   fetchProduct,
+  fetchProductVariant,
+  findProductVariant
 } from '../../scripts/utils/utils.js';
 
 import { trackProduct } from '../../scripts/scripts.js';
@@ -28,7 +30,7 @@ function renderPrice(code, variant, label) {
   priceRoot.appendChild(priceElement);
   priceElement.innerText = '-';
 
-  fetchProduct(code, variant)
+  fetchProductVariant(code, variant)
     .then((product) => {
       trackProduct(product);
       // eslint-disable-next-line camelcase
@@ -81,7 +83,7 @@ function renderFeatured(text) {
 function renderLowestPrice(code, variant) {
   const root = document.createElement('p');
 
-  fetchProduct(code, variant).then((product) => {
+  fetchProductVariant(code, variant).then((product) => {
     trackProduct(product);
     // eslint-disable-next-line max-len
     const price = ((product.discount ? product.discount.discount_value : product.price) / 12).toFixed(2);
@@ -117,7 +119,7 @@ function renderPlans(code, variants, label, defaultSelection) {
   root.appendChild(price);
 
   // eslint-disable-next-line max-len
-  const promises = (Array.isArray(variants) ? variants : [variants]).map((variant) => fetchProduct(code, variant));
+  const promises = (Array.isArray(variants) ? variants : [variants]).map((variant) => fetchProductVariant(code, variant));
 
   Promise.all(promises).then((products) => products.forEach((product) => {
     trackProduct(product);
@@ -209,8 +211,8 @@ function renderYearlyMonthly(codes, variant, label, defaultSelection) {
   Promise.all(promises).then((products) => products.forEach((product) => {
     const tmpDiv = document.createElement('div');
 
-    const code = product.data.product.product_alias;
-    const variant = product.data.product.variations[1][1];
+    const code = product.product_alias;
+    const productVariant = findProductVariant(product, variant);
 
     tmpDiv.innerHTML = `
     <li>
@@ -224,10 +226,14 @@ function renderYearlyMonthly(codes, variant, label, defaultSelection) {
       li.classList.add('active');
 
       [...root.children].forEach((e) => {
-        e.dispatchEvent(new CustomEvent(VARIANT_SELECTION_CHANGED, { detail: { variant, code } }));
+        e.dispatchEvent(
+          new CustomEvent(VARIANT_SELECTION_CHANGED, { detail: { productVariant, code } }),
+        );
       });
       [...root.parentNode.children].forEach((e) => {
-        e.dispatchEvent(new CustomEvent(VARIANT_SELECTION_CHANGED, { detail: { variant, code } }));
+        e.dispatchEvent(
+          new CustomEvent(VARIANT_SELECTION_CHANGED, { detail: { productVariant, code } }),
+        );
       });
     });
 

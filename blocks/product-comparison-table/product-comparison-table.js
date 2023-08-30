@@ -1,4 +1,4 @@
-import { createNanoBlock, renderNanoBlocks, fetchProduct } from '../../scripts/utils/utils.js';
+import { createNanoBlock, renderNanoBlocks, fetchProductVariant } from '../../scripts/utils/utils.js';
 
 const fetchedProducts = [];
 
@@ -16,7 +16,7 @@ createNanoBlock('price-comparison', (code, variant, label) => {
   const priceAppliedOnTime = document.createElement('p');
   priceRoot.appendChild(priceAppliedOnTime);
 
-  fetchProduct(code, variant)
+  fetchProductVariant(code, variant)
     .then((product) => {
       fetchedProducts.push({ code, variant, product });
       // eslint-disable-next-line camelcase

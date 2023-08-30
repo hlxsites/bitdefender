@@ -23,12 +23,12 @@ export function createTag(tag, attributes, html) {
   return el;
 }
 
-async function findProductVariant(json, variant) {
+export async function findProductVariant(product, variant) {
   // eslint-disable-next-line guard-for-in,no-restricted-syntax
-  for (const i in json.data.product.variations) {
+  for (const i in product.variations) {
     // eslint-disable-next-line guard-for-in,no-restricted-syntax
-    for (const j in json.data.product.variations[i]) {
-      const v = json.data.product.variations[i][j];
+    for (const j in product.variations[i]) {
+      const v = product.variations[i][j];
       if (v.variation.variation_name === variant) {
         return v;
       }
@@ -38,19 +38,12 @@ async function findProductVariant(json, variant) {
   throw new Error('Variant not found');
 }
 
-async function toJson(response) {
-  const r = await response;
-  if (!r.ok) throw new Error(`${r.statusText}`);
-  return r.clone().json();
-}
-
 /**
  * Fetches a product from the Bitdefender store.
  * @param code The product code
- * @param variant The product variant
  * @returns {Promise<*>}
  */
-export async function fetchProduct(code, variant) {
+export async function fetchProduct(code) {
   const cacheKey = `${code}`;
   const data = new FormData();
   data.append('data', JSON.stringify({
@@ -63,27 +56,33 @@ export async function fetchProduct(code, variant) {
     },
   }));
 
-  let response;
+  let cachedResponse;
   if (cacheResponse.has(cacheKey)) {
-    response = cacheResponse.get(cacheKey);
+    cachedResponse = cacheResponse.get(cacheKey);
   } else {
     // we don't await the response here, because we want to cache it
-    response = fetch(FETCH_URL, {
+    cachedResponse = fetch(FETCH_URL, {
       method: 'POST',
       body: data,
     });
 
-    cacheResponse.set(cacheKey, response);
+    cacheResponse.set(cacheKey, cachedResponse);
   }
 
-  const json = toJson(response);
+  const response = await cachedResponse;
+  if (!response.ok) throw new Error(`${response.statusText}`);
+  return response.clone().json().data.product;
+}
 
-  if (variant) {
-    return findProductVariant(json, variant);
-  // eslint-disable-next-line no-else-return
-  } else {
-    return json;
-  }
+/**
+ * Fetches a product variant from the Bitdefender store.
+ * @param code The product code
+ * @param variant The product variant
+ * @returns {Promise<*>}
+ */
+export async function fetchProductVariant(code, variant) {
+  const product = fetchProduct(code);
+  return findProductVariant(product, variant);
 }
 
 const nanoBlocks = new Map();
