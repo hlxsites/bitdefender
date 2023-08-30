@@ -80,6 +80,10 @@
   font-weight: var(--font-weight-boldest);
 }
 
+.product-card .ul-header-text strong{
+  font-size: var(--body-font-size-s);
+}
+
 .products.compact .product-card h3, .products.plans .product-card h3 {
   margin: 0;
   flex: 0;
@@ -162,7 +166,18 @@
   padding: 0 0 0 30px;
   font-size: 14px;
   line-height: var(--body-font-size-m);
+  text-align: left;
 }
+
+.product-card ul li {
+  text-align: left;
+}
+
+.product-card .ul-header-text {
+  margin: 1.5rem 0; 
+  text-align: left;
+}
+
 
 .product-card li.with-del {
   color: #999;
@@ -370,4 +385,9 @@
   font-weight: 600;
   line-height: normal;
   width: fit-content;
+}
+
+.product-card .icon {
+  width: 15px;
+  height: 15px;
 }
