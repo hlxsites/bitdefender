@@ -219,7 +219,7 @@ export async function detectModalButtons(main) {
   });
 }
 
-function buildCta(section) {
+function buildColumnar(section) {
   const fullWidthContainer = createTag(
     'div',
     { class: 'full-width' },
@@ -245,7 +245,7 @@ function buildCta(section) {
 
 function buildCtaSections(main) {
   main.querySelectorAll('div.section.columnar')
-    .forEach(buildCta);
+    .forEach(buildColumnar);
 }
 
 /**
