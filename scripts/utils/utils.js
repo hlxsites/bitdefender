@@ -23,11 +23,7 @@ export function createTag(tag, attributes, html) {
   return el;
 }
 
-async function findProductVariant(cachedResponse, variant) {
-  const response = await cachedResponse;
-  if (!response.ok) throw new Error(`${response.statusText}`);
-  const json = await response.clone().json();
-
+async function findProductVariant(json, variant) {
   // eslint-disable-next-line guard-for-in,no-restricted-syntax
   for (const i in json.data.product.variations) {
     // eslint-disable-next-line guard-for-in,no-restricted-syntax
@@ -42,14 +38,20 @@ async function findProductVariant(cachedResponse, variant) {
   throw new Error('Variant not found');
 }
 
+async function toJson(response) {
+  const r = await response;
+  if (!r.ok) throw new Error(`${r.statusText}`);
+  return r.clone().json();
+}
+
 /**
  * Fetches a product from the Bitdefender store.
  * @param code The product code
  * @param variant The product variant
  * @returns {Promise<*>}
  */
-export async function fetchProduct(code = 'av', variant = '1u-1y') {
-  const cacheKey = `${code}-${variant}`;
+export async function fetchProduct(code, variant) {
+  const cacheKey = `${code}`;
   const data = new FormData();
   data.append('data', JSON.stringify({
     ev: 1,
@@ -61,18 +63,27 @@ export async function fetchProduct(code = 'av', variant = '1u-1y') {
     },
   }));
 
+  let response;
   if (cacheResponse.has(cacheKey)) {
-    return findProductVariant(cacheResponse.get(cacheKey), variant);
+    response = cacheResponse.get(cacheKey);
+  } else {
+    // we don't await the response here, because we want to cache it
+    response = fetch(FETCH_URL, {
+      method: 'POST',
+      body: data,
+    });
+
+    cacheResponse.set(cacheKey, response);
   }
 
-  // we don't await the response here, because we want to cache it
-  const response = fetch(FETCH_URL, {
-    method: 'POST',
-    body: data,
-  });
+  const json = toJson(response);
 
-  cacheResponse.set(cacheKey, response);
-  return findProductVariant(response, variant);
+  if (variant) {
+    return findProductVariant(json, variant);
+  // eslint-disable-next-line no-else-return
+  } else {
+    return json;
+  }
 }
 
 const nanoBlocks = new Map();

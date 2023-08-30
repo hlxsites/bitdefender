@@ -173,10 +173,78 @@ function renderHighlightSavings() {
   return root;
 }
 
+/**
+ * Renders the plans selector, display the price and potential discount
+ * corresponding to the selected plan.
+ * @param code List of product codes
+ * @param variant List of product variants (ex. 1u-1y)
+ * @param label Label of the variant selector
+ * @param defaultSelection Default variant
+ * @returns Root node of the plan nanoblock
+ */
+function renderYearlyMonthly(codes, variant, label, defaultSelection) {
+  const root = document.createElement('div');
+  const ul = document.createElement('ul');
+  root.appendChild(ul);
+  ul.classList.add('variant-selector');
+  ul.innerHTML = `<p>${label}</p>`;
+
+  const price = document.createElement('div');
+  price.classList.add('price');
+  price.innerHTML = 'loading...';
+
+  price.addEventListener(VARIANT_SELECTION_CHANGED, (e) => {
+    price.innerHTML = renderProductPrice(e.detail.variant);
+  });
+  root.appendChild(price);
+
+  // eslint-disable-next-line max-len
+  const promises = (Array.isArray(codes) ? codes : [codes]).map((code) => fetchProduct(code));
+
+  Promise.all(promises).then((products) => products.forEach((product) => {
+    const tmpDiv = document.createElement('div');
+
+    const code = product.data.product.product_alias;
+    const variant = product.data.product.variations[1][1];
+
+    tmpDiv.innerHTML = `
+    <li>
+      <span>${code.endsWith('m') ? 'Monthly' : 'Yearly'}</span>
+    </li>`;
+
+    const li = tmpDiv.children[0];
+
+    li.addEventListener('click', () => {
+      ul.querySelector('.active')?.classList.remove('active');
+      li.classList.add('active');
+
+      [...root.children].forEach((e) => {
+        e.dispatchEvent(new CustomEvent(VARIANT_SELECTION_CHANGED, { detail: { variant, code } }));
+      });
+      [...root.parentNode.children].forEach((e) => {
+        e.dispatchEvent(new CustomEvent(VARIANT_SELECTION_CHANGED, { detail: { variant, code } }));
+      });
+    });
+
+    // activate default selection
+    if (product.product_alias === defaultSelection) {
+      li.click();
+    }
+
+    ul.appendChild(li);
+  })).catch((error) => {
+    // eslint-disable-next-line no-console
+    console.error(error);
+  });
+
+  return root;
+}
+
 createNanoBlock('price', renderPrice);
 createNanoBlock('lowestPrice', renderLowestPrice);
 createNanoBlock('featured', renderFeatured);
 createNanoBlock('plans', renderPlans);
+createNanoBlock('yearlyMonthly', renderYearlyMonthly);
 createNanoBlock('highlightSavings', renderHighlightSavings);
 
 export default function decorate(block) {
