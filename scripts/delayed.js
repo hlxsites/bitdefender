@@ -37,7 +37,7 @@ const ENVIRONMENT = getEnvironment(HOSTNAME, LANGUAGE_COUNTRY.country);
  * Returns the current user operating system based on userAgent
  * @returns {String}
  */
-function getOperatingSystem(userAgent) {
+export default function getOperatingSystem(userAgent) {
   const systems = [
     ['Windows NT 10.0', 'Windows 10'],
     ['Windows NT 6.2', 'Windows 8'],
