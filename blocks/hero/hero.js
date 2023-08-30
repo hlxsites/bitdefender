@@ -122,8 +122,4 @@ export default async function decorate(block) {
     ulsWithPicture.forEach((ul) => ul.classList.add('hero-awards'));
   }
   renderNanoBlocks(block);
-
-  // move discount bubble inside the button
-  const bubble = block.querySelector('.discount-bubble');
-  bubble.parentElement.querySelector('.button-container').append(bubble);
 }

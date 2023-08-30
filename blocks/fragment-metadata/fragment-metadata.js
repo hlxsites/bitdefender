@@ -11,5 +11,10 @@ export default function decorate(block) {
     window.open(openUrl, '_self');
   }
 
-  block.parentElement?.parentElement.remove();
+  // clean up
+  const parentWrapper = block.parentElement;
+  if (parentWrapper) {
+    parentWrapper.remove();
+    parentWrapper.parentElement?.classList.remove('fragment-metadata-container');
+  }
 }
