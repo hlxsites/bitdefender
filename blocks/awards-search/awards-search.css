@@ -34,6 +34,10 @@ main .section .awards-search .award-search-filter-wrapper {
     margin-top: 0.5rem;
 }
 
+.text-box-wrapper:hover {
+    border: none;
+}
+
 .accordion-wrapper {
     width: 16rem;
     padding: 0 !important;
