@@ -131,9 +131,7 @@
 
 .thank-you-for-downloading .modal-content h2 {
   font-size: var(--heading-font-size-m);
-  font-weight: var(--font-weight-bolder);
-  text-align: center;
-  margin: 0;
+  margin-top: 10px;
 }
 
 .thank-you-for-downloading .modal-content h3 {
