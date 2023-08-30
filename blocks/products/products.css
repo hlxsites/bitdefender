@@ -80,6 +80,10 @@
   font-weight: var(--font-weight-boldest);
 }
 
+.product-card .ul-header-text strong{
+  font-size: var(--body-font-size-s);
+}
+
 .products.compact .product-card h3, .products.plans .product-card h3 {
   margin: 0;
   flex: 0;
@@ -155,19 +159,6 @@
   padding-left: 5px;
 }
 
-.product-card ul li {
-  text-align: left;
-}
-
-.product-card .ul-header-text {
-  margin: 1.5rem 0; 
-  text-align: left;
-}
-
-.product-card .ul-header-text strong{
-  font-size: var(--body-font-size-s);
-}
-
 .product-card li {
   position: relative;
   list-style: none;
@@ -177,6 +168,16 @@
   line-height: var(--body-font-size-m);
   text-align: left;
 }
+
+.product-card ul li {
+  text-align: left;
+}
+
+.product-card .ul-header-text {
+  margin: 1.5rem 0; 
+  text-align: left;
+}
+
 
 .product-card li.with-del {
   color: #999;
