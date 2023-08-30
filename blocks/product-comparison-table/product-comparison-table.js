@@ -79,7 +79,7 @@ function addClassesForExpandableRows(rows) {
   const expandableRowsIndexes = [];
 
   rows.forEach((row, index) => {
-    const expandableRowMarker = row.querySelectorAll('h3');
+    const expandableRowMarker = row.querySelectorAll('h4');
     if (expandableRowMarker.length === 0 || row.classList.contains('product-comparison-header')) {
       return;
     }
@@ -192,7 +192,7 @@ function removeNotNeededRoles(element) {
   element.removeAttribute('role');
 
   [...element.children].forEach((children) => {
-    if (children.tagName === 'H2' || children.innerText.match(/devices/i)) {
+    if (children.tagName === 'H3' || children.innerText.match(/devices/i)) {
       children.remove();
     }
   });
