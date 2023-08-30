@@ -5,6 +5,8 @@ import {
   createTag,
 } from '../../scripts/utils/utils.js';
 
+import { trackProduct } from '../../scripts/scripts.js';
+
 /**
  * Custom event representing a change in the slected variant (plans)
  */
@@ -29,6 +31,8 @@ function renderPrice(code, variant, label) {
 
   fetchProduct(code, variant)
     .then((product) => {
+      trackProduct(product);
+
       if (product.discount) {
         // eslint-disable-next-line camelcase
         oldPriceElement.innerText = `${product.price} ${product.currency_label}`;
@@ -84,6 +88,7 @@ function renderLowestPrice(code, variant) {
   const root = document.createElement('p');
 
   fetchProduct(code, variant).then((product) => {
+    trackProduct(product);
     // eslint-disable-next-line max-len
     const price = ((product.discount ? product.discount.discount_value : product.price) / 12).toFixed(2);
     root.innerHTML = `Start today for as low as  ${price} ${product.currency_label}/mo`;
@@ -121,6 +126,7 @@ function renderPlans(code, variants, label, defaultSelection) {
   const promises = (Array.isArray(variants) ? variants : [variants]).map((variant) => fetchProduct(code, variant));
 
   Promise.all(promises).then((products) => products.forEach((product) => {
+    trackProduct(product);
     const tmpDiv = document.createElement('div');
 
     tmpDiv.innerHTML = `

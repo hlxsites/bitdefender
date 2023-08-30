@@ -8,6 +8,7 @@ import {
 // eslint-disable-next-line import/no-cycle
 import {
   getLanguageCountryFromPath,
+  pushProductsToDataLayer,
 } from './scripts.js';
 import { loadBreadcrumbs } from './breadcrumbs.js';
 
@@ -154,6 +155,7 @@ switch (ENVIRONMENT) {
 }
 
 pushPageLoadEvent();
+pushProductsToDataLayer();
 
 // Load breadcrumbs
 loadBreadcrumbs();
