@@ -97,6 +97,10 @@
   transition: all .3s ease-in-out;
 }
 
+.modal-container .columns-wrapper img {
+  height: 225px;
+}
+
 @media (min-width: 900px) {
   .modal-container .modal-content {
     padding: 52px 62px 54px 55px;
@@ -127,9 +131,7 @@
 
 .thank-you-for-downloading .modal-content h2 {
   font-size: var(--heading-font-size-m);
-  font-weight: var(--font-weight-bolder);
-  text-align: center;
-  margin: 0;
+  margin-top: 10px;
 }
 
 .thank-you-for-downloading .modal-content h3 {

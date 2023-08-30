@@ -47,6 +47,24 @@ export function getLanguageCountryFromPath() {
   };
 }
 
+export function getOperatingSystem(userAgent) {
+  const systems = [
+    ['Windows NT 10.0', 'Windows 10'],
+    ['Windows NT 6.2', 'Windows 8'],
+    ['Windows NT 6.1', 'Windows 7'],
+    ['Windows NT 6.0', 'Windows Vista'],
+    ['Windows NT 5.1', 'Windows XP'],
+    ['Windows NT 5.0', 'Windows 2000'],
+    ['X11', 'X11'],
+    ['Mac', 'MacOS'],
+    ['Linux', 'Linux'],
+    ['Android', 'Android'],
+    ['like Mac', 'iOS'],
+  ];
+
+  return systems.find(([substr]) => userAgent.includes(substr))?.[1] || 'Unknown';
+}
+
 /**
  * Sets the page language.
  * @param {Object} param The language and country
@@ -173,8 +191,6 @@ export function decorateMain(main) {
  * @param {String} template The template to use for the modal styling
  * @returns {Promise<Element>}
  * @example
- * const modalContainer = await createModal(modalPath, modalTemplate);
- * document.body.append(modalContainer);
  */
 export async function createModal(path, template) {
   const modalContainer = document.createElement('div');
@@ -194,6 +210,7 @@ export async function createModal(path, template) {
 
   const html = await resp.text();
   modalContent.innerHTML = html;
+
   decorateMain(modalContent);
   await loadBlocks(modalContent);
   modalContainer.append(modalContent);
