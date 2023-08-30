@@ -28,6 +28,8 @@ export const DEFAULT_LANGUAGE = 'en';
 export const SUPPORTED_COUNTRIES = ['au'];
 export const DEFAULT_COUNTRY = 'au';
 
+export const METADATA_ANAYTICS_TAGS = 'analytics-tags';
+
 /**
  * Creates a meta tag with the given name and value and appends it to the head.
  * @param {String} name The name of the meta tag
@@ -75,32 +77,34 @@ function setPageLanguage(param) {
   createMetadata('footer', '/footer');
 }
 
-export function pushToDataLayer(data) {
-  if (!data || !data.event) {
+export function pushToDataLayer(event, payload) {
+  if (!event) {
     // eslint-disable-next-line no-console
     console.error('The data layer event is missing');
     return;
   }
-
   if (!window.adobeDataLayer) {
     window.adobeDataLayer = [];
     window.adobeDataLayerInPage = true;
   }
+  window.adobeDataLayer.push({ event, ...payload });
+}
 
-  window.adobeDataLayer.push(data);
+export function getTags(tags) {
+  return tags ? tags.split(':').filter((tag) => !!tag).map((tag) => tag.trim()) : [];
 }
 
 export function trackProduct(product) {
   // eslint-disable-next-line max-len
   const isDuplicate = TRACKED_PRODUCTS.find((p) => p.platform_product_id === product.platform_product_id && p.variation_id === product.variation_id);
-  const isTrackedPage = getMetadata('analytics-tracking') === 'product';
+  const tags = getTags(getMetadata(METADATA_ANAYTICS_TAGS));
+  const isTrackedPage = tags.includes('product') || tags.includes('service');
   if (isTrackedPage && !isDuplicate) TRACKED_PRODUCTS.push(product);
 }
 
 export function pushProductsToDataLayer() {
   if (TRACKED_PRODUCTS.length > 0) {
-    pushToDataLayer({
-      event: 'product loaded',
+    pushToDataLayer('product loaded', {
       product: TRACKED_PRODUCTS
         .map((p) => ({
           info: {
