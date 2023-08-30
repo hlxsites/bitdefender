@@ -311,7 +311,7 @@ main .section {
   margin: 0 auto;
   max-width: var(--body-max-width);
   padding: var(--body-padding);
-  position: relative;  
+  position: relative;
 }
 
 .img-container img {
@@ -412,7 +412,7 @@ main .section.center .products .product-card {
     max-width: var(--section-desktop-max-width);
     padding: 0 var(--section-desktop-padding);
   }
-  
+
 }
 
 @media (min-width: 1400px) {
@@ -578,7 +578,7 @@ p.info-button-container {
 }
 
 p.info-button-container a.info-button.modal:hover {
-  text-decoration: none; 
+  text-decoration: none;
   color: var(--link-color);
 }
 
@@ -756,235 +756,101 @@ main .video-placeholder .video-placeholder-play::before {
 }
 
 /* Cta section */
-main .section.cta {
+main .section.cta, .section.columnar {
   padding: 0;
   overflow: hidden;
 }
 
-.cta .full-width {
+.columnar .full-width {
+  padding-top: 64px;
   background-color: var(--cta-background-light-blue);
 }
 
-.cta-container {
+@media (min-width: 992px) {
+  .columnar .full-width {
+    padding-top: 100px;
+  }
+
+  .columnar.image-overflow .full-width {
+    padding-top: 50px;
+    margin-top: 50px;
+  }
+}
+
+.columnar-container {
   padding: 0 20px;
   display: flex;
   flex-flow: column;
   max-width: 1300px;
-  margin: 140px auto 0;
+  margin: 0 auto;
 }
 
 @media (min-width: 992px) {
-  .cta-container {
+  .columnar-container {
     padding: 0 50px;
   }
 }
 
 @media (min-width: 1600px) {
-  .cta-container {
+  .columnar-container {
     max-width: 1332px;
   }
 }
 
-.cta-container .left-col {
+.columnar-container .left-col {
+  display: flex;
+  flex-direction: column;
   flex: 1 1 50%;
   justify-items: center;
   align-items: center;
+  justify-content: space-around;
 }
 
-.cta-container .right-col {
+.columnar-container .right-col {
+  display: flex;
   flex: 0 1 50%;
-  justify-items: center;
   align-items: center;
-  position: relative;
   overflow: visible;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 @media (min-width: 992px) {
-  .cta-container .right-col {
+  .columnar-container .right-col {
     flex: 0 1 43%;
+  }
+
+  .image-overflow .columnar-container .img-container {
+    margin-top: -100px;
   }
 }
 
 @media (min-width: 1200px) {
-  .cta-container .right-col {
+  .columnar-container .right-col {
     flex: 0 1 40%;
   }
 }
 
-.cta-container .img-container {
-  position: relative;
-  width: 270px;
-  height: 270px;
-  margin: 30px auto 0;
-  left: 0;
-  bottom: 0;
-  overflow: visible;
-  text-align: center;
-  display: flex;
-  align-items: end;
-}
-
 @media (min-width: 596px) {
-  .cta-container .img-container {
-    display: block;
-  }
-}
-
-@media (min-width: 768px) {
-  .cta-container .img-container {
-    width: 370px;
-    height: 360px;
-    margin: 60px auto 0;
-  }
-}
-
-@media (min-width: 992px) {
-  .cta-container .img-container {
-    position: absolute;
-    width: 430px;
-    height: 420px;
-    margin: -40px 0 0 auto;
-    left: 40px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .cta-container .img-container {
-    width: 430px;
-    height: 420px;
-    left: 25%;
+  .columnar-container .img-container {
+    display: flex;
+    min-width: 491px;
+    min-height: 480px;
   }
 }
 
 @media (min-width: 1600px) {
-  .cta-container .img-container {
+  .columnar-container .img-container {
     width: 491px;
     height: 480px;
-    margin: -91px 0 0 139px;
-    left: 0;
-  }
-}
-
-.cta-container .img-container .red-img {
-  z-index: 1;
-  position: absolute;
-  left: 0;
-  top: 44px;
-  bottom: 0;
-  right: auto;
-  height: auto;
-  object-fit: contain;
-}
-
-@media (min-width: 768px) {
-  .cta-container .img-container .red-img {
-    left: 0;
-  }
-}
-
-@media (min-width: 992px) {
-  .cta-container .img-container .red-img {
-    width: 434px;
-    height: 380px;
-    left: 11px;
-    top: 40px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .cta-container .img-container .red-img {
-    left: -23px;
-  }
-}
-
-@media (min-width: 1600px) {
-  .cta-container .img-container .red-img {
-    width: 494px;
-    height: 450px;
-    top: 59px;
-  }
-}
-
-.cta-container .img-container .bg-img {
-  margin: 0 auto;
-  height: 230px;
-  width: 100%;
-  max-width: 230px;
-  position: relative;
-  z-index: 2;
-}
-
-@media (min-width: 596px) {
-  .cta-container .img-container .bg-img {
-    max-width: unset;
-    width: 100%;
-    height: 100%;
-  }
-}
-
-.cta-container .img-container .bg-img .cmp-img {
-  width: 100%;
-  height: 100%;
-}
-
-.cta-container .img-container .transparent-img {
-  position: absolute;
-  z-index: 0;
-  width: 310px;
-  height: 310px;
-  left: -20px;
-  top: 38px;
-  right: 0;
-  margin: auto;
-  max-width: inherit;
-}
-
-@media (min-width: 768px) {
-  .cta-container .img-container .transparent-img {
-    width: 409px;
-    height: 409px;
-    top: 44px;
-    left: -19px;
-    margin: 0;
-  }
-}
-
-@media (min-width: 992px) {
-  .cta-container .img-container .transparent-img {
-    width: 528px;
-    height: 528px;
-    top: 11px;
-    right: -20px;
-    left: -37px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .cta-container .img-container .transparent-img {
-    width: 528px;
-    height: 528px;
-    top: 14px;
-    right: -27px;
-    left: -74px;
-  }
-}
-
-@media (min-width: 1600px) {
-  .cta-container .img-container .transparent-img {
-    width: 609px;
-    height: 609px;
-    top: 38px;
-    right: -35px;
-    left: -82px;
   }
 }
 
 @media(min-width: 992px) {
-  .cta-container {
+  .columnar-container {
     flex-flow: row;
   }
 }
-
 
 /* video presentation */
 
@@ -999,7 +865,7 @@ main .terms-of-use h5 {
 
 main .terms-of-use ul {
   list-style: disc;
-  
+
 }
 
 main .terms-of-use ul li {
@@ -1021,11 +887,15 @@ main .section.blue {
   }
 }
 
-main .section.checked-lists  ul li {
+main .section.checked-lists  ul li,
+main .section.columnar  ul li
+{
   position: relative;
 }
 
-main .section.checked-lists  ul li::before {
+main .section.checked-lists  ul li::before,
+main .section.columnar  ul li::before
+{
   content: "";
   position: absolute;
   left: -10px;
@@ -1037,7 +907,9 @@ main .section.checked-lists  ul li::before {
   z-index: 1;
 }
 
-main .section.checked-lists ul li::after {
+main .section.checked-lists ul li::after,
+main .section.columnar ul li::after
+{
   content: "";
   position: absolute;
   left: -5px;
