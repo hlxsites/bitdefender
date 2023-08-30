@@ -2,6 +2,7 @@ import {
   createNanoBlock,
   renderNanoBlocks,
   fetchProduct,
+  createTag,
 } from '../../scripts/utils/utils.js';
 
 import { trackProduct } from '../../scripts/scripts.js';
@@ -31,9 +32,14 @@ function renderPrice(code, variant, label) {
   fetchProduct(code, variant)
     .then((product) => {
       trackProduct(product);
-      // eslint-disable-next-line camelcase
-      oldPriceElement.innerText = `${product.price} ${product.currency_label}`;
-      priceElement.innerHTML = `${product.discount.discount_value} ${product.currency_label} <em>${label}</em>`;
+
+      if (product.discount) {
+        // eslint-disable-next-line camelcase
+        oldPriceElement.innerText = `${product.price} ${product.currency_label}`;
+        priceElement.innerHTML = `${product.discount.discount_value} ${product.currency_label} <em>${label}</em>`;
+      } else {
+        priceElement.innerHTML = `${product.price} ${product.currency_label} <em>${label}</em>`;
+      }
     })
     .catch((err) => {
       // eslint-disable-next-line no-console
@@ -53,10 +59,10 @@ function renderProductPrice(product) {
     return `<strong>${product.price} ${product.currency_label}</strong>`;
   // eslint-disable-next-line no-else-return
   } else {
-    const discount = product.price - product.discount.discounted_price;
+    const productDiscount = product.price - product.discount.discounted_price;
     return `<strong>${product.discount.discount_value} ${product.currency_label}</strong>
             <span class="old-price">Old Price <del>${product.price} ${product.currency_label}</del></span>
-            <span class="discount">Save ${discount.toFixed(2)} ${product.currency_label}</span>`;
+            <span class="discount">Save ${productDiscount.toFixed(2)} ${product.currency_label}</span>`;
   }
 }
 
@@ -157,23 +163,42 @@ function renderPlans(code, variants, label, defaultSelection) {
 }
 
 /**
+ * Calculates a discount
+ */
+function discount(product) {
+  return Math.round((1 - (product.discount.discounted_price) / product.price) * 100);
+}
+
+/**
  * Renders the green section on top of the product card highlighting the potential savings
  * @returns the root node of the highilight block
  */
-function renderHighlightSavings() {
-  const root = document.createElement('div');
-  root.classList.add('highlight');
+function renderHighlightSavings(code, variant) {
+  const root = createTag(
+    'div',
+    {
+      class: 'highlight',
+    },
+    '<span class="highlight">Save --%</span>',
+  );
 
-  // update the potential saving when variant selection changed
-  root.addEventListener(VARIANT_SELECTION_CHANGED, (e) => {
-    const { detail: { product } } = e;
+  function renderSavings(product) {
     if (product.discount) {
-      const discount = Math.round((1 - (product.discount.discounted_price) / product.price) * 100);
-      root.innerHTML = `<span class='highlight'>Save ${discount}%</span>`;
+      root.querySelector('.highlight').innerText = `Save ${discount(product)}%`;
       root.style.display = 'block';
     } else {
       root.style.display = 'none';
     }
+  }
+
+  // render the highlight if author provides the product code and variant
+  if (code !== undefined && variant !== undefined) {
+    fetchProduct(code, variant).then((product) => renderSavings(product));
+  }
+
+  // update the potential saving when variant selection changed
+  root.addEventListener(VARIANT_SELECTION_CHANGED, (e) => {
+    renderSavings(e.detail.product);
   });
   return root;
 }
@@ -214,6 +239,12 @@ export default function decorate(block) {
       li.classList.add('with-del');
     } else {
       li.classList.remove('with-del');
+    }
+  });
+
+  block.querySelectorAll('.product-card ul').forEach((ul) => {
+    if (ul.previousElementSibling?.tagName === 'P') {
+      ul.previousElementSibling.classList.add('ul-header-text');
     }
   });
 }
