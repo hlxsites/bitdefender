@@ -1,4 +1,4 @@
-name: Linting & Ghost Inspector
+name: Testing
 
 env:
  BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
@@ -9,7 +9,7 @@ on:
       - "main"
 
 jobs:
-  build:
+  linting:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -21,7 +21,7 @@ jobs:
     - run: npm run lint
       env:
         CI: true
-  test:
+  ghost_inspector_tests:
     needs: build
     runs-on: ubuntu-latest
     steps:
