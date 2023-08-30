@@ -125,7 +125,7 @@ function createFilterBySection(block, data) {
     filterByContent.append(checkboxLabel);
   });
 
-  const filterWrapperSection = block.querySelector('.accordion-item');
+  const filterWrapperSection = block.querySelector('.accordion > div');
   if (!filterWrapperSection) {
     return;
   }
