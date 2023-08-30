@@ -129,7 +129,7 @@ function createFilterBySection(block, data) {
   if (!filterWrapperSection) {
     return;
   }
-  
+
   if (window.window.innerWidth >= 768) {
     filterWrapperSection.classList.add('expanded');
   }
