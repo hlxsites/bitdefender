@@ -198,7 +198,7 @@ function moveAccordionUnderFilterSection(block) {
 
 export default async function decorate(block) {
   moveAccordionUnderFilterSection(block);
+  createAwardsResultContainer(block);
   fetchAwardsData(block);
   removeAwardsLinkFromDom(block);
-  createAwardsResultContainer(block);
 }
