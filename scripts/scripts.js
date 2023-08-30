@@ -21,6 +21,7 @@ import {
 } from './utils/utils.js';
 
 const LCP_BLOCKS = ['hero']; // add your LCP blocks to the list
+const TRACKED_PRODUCTS = [];
 
 export const SUPPORTED_LANGUAGES = ['en'];
 export const DEFAULT_LANGUAGE = 'en';
@@ -55,6 +56,51 @@ function setPageLanguage(param) {
   document.documentElement.lang = param.language;
   createMetadata('nav', '/nav');
   createMetadata('footer', '/footer');
+}
+
+export function pushToDataLayer(data) {
+  if (!data || !data.event) {
+    // eslint-disable-next-line no-console
+    console.error('The data layer event is missing');
+    return;
+  }
+
+  if (!window.adobeDataLayer) {
+    window.adobeDataLayer = [];
+    window.adobeDataLayerInPage = true;
+  }
+
+  window.adobeDataLayer.push(data);
+}
+
+export function trackProduct(product) {
+  // eslint-disable-next-line max-len
+  const isDuplicate = TRACKED_PRODUCTS.find((p) => p.platform_product_id === product.platform_product_id && p.variation_id === product.variation_id);
+  const isTrackedPage = getMetadata('analytics-tracking') === 'product';
+  if (isTrackedPage && !isDuplicate) TRACKED_PRODUCTS.push(product);
+}
+
+export function pushProductsToDataLayer() {
+  if (TRACKED_PRODUCTS.length > 0) {
+    pushToDataLayer({
+      event: 'product loaded',
+      product: TRACKED_PRODUCTS
+        .map((p) => ({
+          info: {
+            ID: p.platform_product_id,
+            name: getMetadata('breadcrumb-title') || getMetadata('og:title'),
+            devices: +p.variation.dimension_value,
+            subscription: p.variation.years * 12,
+            version: p.variation.years ? 'yearly' : 'monthly',
+            basePrice: +p.price,
+            discountValue: Math.round(p.price - p.discount.discounted_price),
+            discountRate: Math.floor(((p.price - p.discount.discounted_price) / p.price) * 100),
+            currency: p.currency_iso,
+            priceWithTax: +p.discount.discounted_price,
+          },
+        })),
+    });
+  }
 }
 
 /**
