@@ -110,10 +110,11 @@ export function pushProductsToDataLayer() {
             subscription: p.variation.years * 12,
             version: p.variation.years ? 'yearly' : 'monthly',
             basePrice: +p.price,
-            discountValue: Math.round(p.price - p.discount.discounted_price),
-            discountRate: Math.floor(((p.price - p.discount.discounted_price) / p.price) * 100),
+            discountValue: p.discount ? Math.round(p.price - p.discount.discounted_price) : 0,
+            // eslint-disable-next-line max-len
+            discountRate: p.discount ? Math.floor(((p.price - p.discount.discounted_price) / p.price) * 100) : 0,
             currency: p.currency_iso,
-            priceWithTax: +p.discount.discounted_price,
+            priceWithTax: p.discount ? +p.discount.discounted_price : +p.price,
           },
         })),
     });
