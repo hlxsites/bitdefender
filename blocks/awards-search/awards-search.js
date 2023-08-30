@@ -142,8 +142,8 @@ async function fetchAwardsData(block) {
   const awards = await data.json();
   awardsData = [...awards.data];
   filteredAwards = [...awardsData];
-  renderAwards(block, filteredAwards);
   createFilterBySection(block, awardsData);
+  renderAwards(block, filteredAwards);
 }
 
 function handleTextSearch(searchTextBox, block) {
@@ -197,8 +197,8 @@ function moveAccordionUnderFilterSection(block) {
 }
 
 export default async function decorate(block) {
+  moveAccordionUnderFilterSection(block);
   fetchAwardsData(block);
   removeAwardsLinkFromDom(block);
-  moveAccordionUnderFilterSection(block);
   createAwardsResultContainer(block);
 }
