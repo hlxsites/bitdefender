@@ -1,6 +1,12 @@
-name: Linting
+name: Linting & Ghost Inspector
 
-on: [pull_request]
+env:
+ BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+
+on:
+  pull_request:
+    branches:
+      - "main"
 
 jobs:
   build:
@@ -15,3 +21,14 @@ jobs:
     - run: npm run lint
       env:
         CI: true
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: execute Ghost Inspector test
+        uses: docker://ghostinspector/cli
+        with:
+          args: suite execute ${{ secrets.GI_SUITE }} \
+            --apiKey ${{ secrets.GI_API_KEY }} \
+            --branchName ${{ env.BRANCH_NAME }} \
+            --errorOnFail
