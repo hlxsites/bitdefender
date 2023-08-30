@@ -14,36 +14,38 @@ export default function decorate(block) {
     document.body.classList.add(template);
   }
 
-  // Get user's operating system
-  const { userAgent } = navigator;
-  const userOS = getOperatingSystem(userAgent);
+  if (openUrlMacos || openUrlWindows || openUrlAndroid || openUrlIos) {
+    // Get user's operating system
+    const { userAgent } = navigator;
+    const userOS = getOperatingSystem(userAgent);
 
-  // Open the appropriate URL based on the OS
-  let openUrl;
-  switch (userOS) {
-    case 'MacOS':
-      openUrl = openUrlMacos;
-      break;
-    case 'Windows 10':
-    case 'Windows 8':
-    case 'Windows 7':
-    case 'Windows Vista':
-    case 'Windows XP':
-    case 'Windows 2000':
-      openUrl = openUrlWindows;
-      break;
-    case 'Android':
-      openUrl = openUrlAndroid;
-      break;
-    case 'iOS':
-      openUrl = openUrlIos;
-      break;
-    default:
-      openUrl = null; // Fallback or 'Unknown' case
-  }
+    // Open the appropriate URL based on the OS
+    let openUrl;
+    switch (userOS) {
+      case 'MacOS':
+        openUrl = openUrlMacos;
+        break;
+      case 'Windows 10':
+      case 'Windows 8':
+      case 'Windows 7':
+      case 'Windows Vista':
+      case 'Windows XP':
+      case 'Windows 2000':
+        openUrl = openUrlWindows;
+        break;
+      case 'Android':
+        openUrl = openUrlAndroid;
+        break;
+      case 'iOS':
+        openUrl = openUrlIos;
+        break;
+      default:
+        openUrl = null; // Fallback or 'Unknown' case
+    }
 
-  if (openUrl) {
-    window.open(openUrl, '_self');
+    if (openUrl) {
+      window.open(openUrl, '_self');
+    }
   }
 
   // Remove the Fragments Metadata table
