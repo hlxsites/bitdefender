@@ -20,8 +20,8 @@
   color: var(--white-color);
   padding: 30px;
   justify-content: flex-end;
-  background-size: cover; 
-  background-repeat: no-repeat; 
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .columns.carousel > div {
@@ -72,24 +72,24 @@
   }
 }
 
-/* Features cards */
+/* Benefits columns (icon, text, description) */
 
-.columns.features > p {
+.columns.benefits > p {
   margin-bottom: 0;
   margin-top: 0;
 }
 
-.columns.features > div {
+.columns.benefits > div {
   align-items: flex-start;
 }
 
-.columns.features > .icon {
+.columns.benefits > .icon {
   width: unset;
   max-width: 66px;
   margin-bottom: 16px;
 }
 
-.columns.features p {
+.columns.benefits p {
   font-size: var(--body-font-size-s);
   line-height: 1.5;
   letter-spacing: .006em;
@@ -101,21 +101,21 @@
   margin-bottom: -10px;
 }
 
-.columns.features h3 {
+.columns.benefits h3 {
   font-size: var(--heading-font-size-m);
   font-weight: var(--font-weight-bold);
   line-height: 1.25;
 }
 
 @media (min-width: 767px) {
-  .columns.features > div {
+  .columns.benefits > div {
     flex-direction: unset;
     gap: 32px;
   }
 }
 
 @media (min-width: 1271px) {
-  .columns.features p {
+  .columns.benefits p {
     font-size: 18px;
   }
 }
@@ -229,7 +229,7 @@
 .columns.carousel > div > div {
   margin: 10px 5px;
   width: 100%;
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
 
 .columns.carousel > div:nth-child(1) {
@@ -243,7 +243,7 @@
 
 @media (min-width: 676px) {
   .columns.carousel > div > div {
-    transition: transform 0.3s, opacity 0.3s; 
+    transition: transform 0.3s, opacity 0.3s;
   }
 
   .columns.carousel > div:nth-child(1) {
@@ -277,7 +277,7 @@
   text-align: center;
 }
 
-@media (min-width: 768px) { 
+@media (min-width: 768px) {
   .modal-container.get-bitdefender-familypack .columns.block.columns-2-cols > div {
     display: flex;
     flex: 1;
@@ -285,7 +285,7 @@
     order: unset;
     justify-content: center;
     align-items: center;
-  } 
+  }
 }
 
 .modal-container.modal-container.get-bitdefender-familypack .modal-content .section.columns-container {
@@ -297,7 +297,7 @@
   background-image: var(--bg-image-url);
   background-size: cover;
   background-position: center;
-  transition: padding-left 0.3s ease; 
+  transition: padding-left 0.3s ease;
   color: white;
   text-align: center;
   background-color: black;
@@ -306,7 +306,7 @@
 .linear-gradient.columns-container[data-bg-image]{
   background-size: cover;
   background-position: center;
-  transition: padding-left 0.3s ease; 
+  transition: padding-left 0.3s ease;
   color: white;
   background-image: none;
   background-color: black;
