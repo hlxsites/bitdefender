@@ -113,7 +113,7 @@ function createFilterBySection(block, data) {
   if (!filterByContent) {
     return;
   }
-  
+
   const filterByYears = data.map((award) => award.Year);
   const filterByYearsUniqueValue = [...new Set(filterByYears)];
 
