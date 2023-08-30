@@ -42,7 +42,7 @@ footer .footer p {
   pointer-events: none;
 }
 
-footer .footer a:hover {  
+footer .footer a:hover {
   text-decoration: underline;
 }
 
@@ -213,7 +213,7 @@ footer .footer a:hover {
   display: none;
 }
 
-.footer > div > :nth-child(3) > p.active + ul,  
+.footer > div > :nth-child(3) > p.active + ul,
 .footer > div > :nth-child(4) > p.active + ul {
   display: inline-block;
 }
@@ -285,7 +285,7 @@ footer .footer a:hover {
 @media(min-width: 767px) { /* tablet */
   footer {
     padding: 3.625rem 0 2.6875rem;
-    margin: 2.5rem auto 0;
+    margin: 0 auto 0;
     max-width: 120rem;
   }
 
@@ -438,7 +438,7 @@ footer .footer a:hover {
     display: block !important;
     margin-bottom: 0;
   }
-  
+
   .footer > div > :nth-child(3) ul {
     column-count: 2;
   }

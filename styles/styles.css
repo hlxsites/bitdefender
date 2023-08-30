@@ -770,6 +770,11 @@ main .section.cta, .section.columnar {
   .columnar .full-width {
     padding-top: 100px;
   }
+
+  .columnar.image-overflow .full-width {
+    padding-top: 50px;
+    margin-top: 50px;
+  }
 }
 
 .columnar-container {
@@ -793,6 +798,8 @@ main .section.cta, .section.columnar {
 }
 
 .columnar-container .left-col {
+  display: flex;
+  flex-direction: column;
   flex: 1 1 50%;
   justify-items: center;
   align-items: center;
@@ -810,6 +817,10 @@ main .section.cta, .section.columnar {
 @media (min-width: 992px) {
   .columnar-container .right-col {
     flex: 0 1 43%;
+  }
+
+  .image-overflow .columnar-container .img-container {
+    margin-top: -100px;
   }
 }
 
@@ -875,11 +886,15 @@ main .section.blue {
   }
 }
 
-main .section.checked-lists  ul li {
+main .section.checked-lists  ul li,
+main .section.columnar  ul li
+{
   position: relative;
 }
 
-main .section.checked-lists  ul li::before {
+main .section.checked-lists  ul li::before,
+main .section.columnar  ul li::before
+{
   content: "";
   position: absolute;
   left: -10px;
@@ -891,7 +906,9 @@ main .section.checked-lists  ul li::before {
   z-index: 1;
 }
 
-main .section.checked-lists ul li::after {
+main .section.checked-lists ul li::after,
+main .section.columnar ul li::after
+{
   content: "";
   position: absolute;
   left: -5px;
