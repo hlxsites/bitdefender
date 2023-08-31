@@ -10,20 +10,25 @@ import {
   decorateTemplateAndTheme,
   waitForLCP,
   loadBlocks,
-  loadCSS, createOptimizedPicture,
+  loadCSS,
+  getMetadata,
+  toClassName,
 } from './lib-franklin.js';
 
 import {
   createTag,
 } from './utils/utils.js';
 
-const LCP_BLOCKS = []; // add your LCP blocks to the list
+const LCP_BLOCKS = ['hero']; // add your LCP blocks to the list
+const TRACKED_PRODUCTS = [];
 
 export const SUPPORTED_LANGUAGES = ['en'];
 export const DEFAULT_LANGUAGE = 'en';
 
 export const SUPPORTED_COUNTRIES = ['au'];
 export const DEFAULT_COUNTRY = 'au';
+
+export const METADATA_ANAYTICS_TAGS = 'analytics-tags';
 
 /**
  * Creates a meta tag with the given name and value and appends it to the head.
@@ -44,6 +49,24 @@ export function getLanguageCountryFromPath() {
   };
 }
 
+export function getOperatingSystem(userAgent) {
+  const systems = [
+    ['Windows NT 10.0', 'Windows 10'],
+    ['Windows NT 6.2', 'Windows 8'],
+    ['Windows NT 6.1', 'Windows 7'],
+    ['Windows NT 6.0', 'Windows Vista'],
+    ['Windows NT 5.1', 'Windows XP'],
+    ['Windows NT 5.0', 'Windows 2000'],
+    ['X11', 'X11'],
+    ['Mac', 'MacOS'],
+    ['Linux', 'Linux'],
+    ['Android', 'Android'],
+    ['like Mac', 'iOS'],
+  ];
+
+  return systems.find(([substr]) => userAgent.includes(substr))?.[1] || 'Unknown';
+}
+
 /**
  * Sets the page language.
  * @param {Object} param The language and country
@@ -52,6 +75,54 @@ function setPageLanguage(param) {
   document.documentElement.lang = param.language;
   createMetadata('nav', '/nav');
   createMetadata('footer', '/footer');
+}
+
+export function pushToDataLayer(event, payload) {
+  if (!event) {
+    // eslint-disable-next-line no-console
+    console.error('The data layer event is missing');
+    return;
+  }
+  if (!window.adobeDataLayer) {
+    window.adobeDataLayer = [];
+    window.adobeDataLayerInPage = true;
+  }
+  window.adobeDataLayer.push({ event, ...payload });
+}
+
+export function getTags(tags) {
+  return tags ? tags.split(':').filter((tag) => !!tag).map((tag) => tag.trim()) : [];
+}
+
+export function trackProduct(product) {
+  // eslint-disable-next-line max-len
+  const isDuplicate = TRACKED_PRODUCTS.find((p) => p.platform_product_id === product.platform_product_id && p.variation_id === product.variation_id);
+  const tags = getTags(getMetadata(METADATA_ANAYTICS_TAGS));
+  const isTrackedPage = tags.includes('product') || tags.includes('service');
+  if (isTrackedPage && !isDuplicate) TRACKED_PRODUCTS.push(product);
+}
+
+export function pushProductsToDataLayer() {
+  if (TRACKED_PRODUCTS.length > 0) {
+    pushToDataLayer('product loaded', {
+      product: TRACKED_PRODUCTS
+        .map((p) => ({
+          info: {
+            ID: p.platform_product_id,
+            name: getMetadata('breadcrumb-title') || getMetadata('og:title'),
+            devices: +p.variation.dimension_value,
+            subscription: p.variation.years * 12,
+            version: p.variation.years ? 'yearly' : 'monthly',
+            basePrice: +p.price,
+            discountValue: p.discount ? Math.round(p.price - p.discount.discounted_price) : 0,
+            // eslint-disable-next-line max-len
+            discountRate: p.discount ? Math.floor(((p.price - p.discount.discounted_price) / p.price) * 100) : 0,
+            currency: p.currency_iso,
+            priceWithTax: p.discount ? +p.discount.discounted_price : +p.price,
+          },
+        })),
+    });
+  }
 }
 
 /**
@@ -125,15 +196,10 @@ export function decorateMain(main) {
  * @param {String} template The template to use for the modal styling
  * @returns {Promise<Element>}
  * @example
- * const modalContainer = await createModal(modalPath, modalTemplate);
- * document.body.append(modalContainer);
  */
 export async function createModal(path, template) {
   const modalContainer = document.createElement('div');
   modalContainer.classList.add('modal-container');
-
-  const closeModal = () => modalContainer.remove();
-  modalContainer.addEventListener('click', closeModal);
 
   const modalContent = document.createElement('div');
   modalContent.classList.add('modal-content');
@@ -149,6 +215,7 @@ export async function createModal(path, template) {
 
   const html = await resp.text();
   modalContent.innerHTML = html;
+
   decorateMain(modalContent);
   await loadBlocks(modalContent);
   modalContainer.append(modalContent);
@@ -156,6 +223,7 @@ export async function createModal(path, template) {
   // add class to modal container for opportunity to add custom modal styling
   if (template) modalContainer.classList.add(template);
 
+  const closeModal = () => modalContainer.remove();
   const close = document.createElement('div');
   close.classList.add('modal-close');
   close.addEventListener('click', closeModal);
@@ -165,47 +233,40 @@ export async function createModal(path, template) {
 
 export async function detectModalButtons(main) {
   main.querySelectorAll('a.button.modal').forEach((link) => {
-    link.addEventListener('click', async () => {
-      const modalPath = link.dataset.modal;
-      const modalTemplate = modalPath.split('/').pop();
-      const modalContainer = await createModal(modalPath, modalTemplate);
-      document.body.append(modalContainer);
+    link.addEventListener('click', async (e) => {
+      e.preventDefault();
+      document.body.append(await createModal(link.href));
     });
   });
 }
 
-function buildCta(section) {
-  const backgroundImageSrc = section.dataset.backgroundImage;
-  const backgroundImage = backgroundImageSrc ? createOptimizedPicture(backgroundImageSrc) : null;
-  const backgroundImageHtml = backgroundImage ? backgroundImage.innerHTML : '';
-
+function buildColumnar(section) {
   const fullWidthContainer = createTag(
     'div',
     { class: 'full-width' },
-    `<div class="cta-container">
+    `<div class="columnar-container">
 <div class="left-col">
 </div>
 <div class="right-col">
     <div class="img-container">
-        <img class="red-img" src="/images/b-red-mask.png">
-        <div class="bg-img">
-            <div class="cmp-img">
-                ${backgroundImageHtml}
-            </div>
-        </div>
-        <img class="transparent-img" src="/icons/cta-circle.svg">
     </img>
 </div>`,
   );
 
+  // Add last image to right col.
+  const imageContainer = fullWidthContainer.querySelector('.img-container');
+  const images = [...section.querySelectorAll(':scope picture')];
+  if (images.length > 0) {
+    imageContainer.append(images[images.length - 1]);
+  }
   const leftCol = fullWidthContainer.querySelector('.left-col');
   [...section.children].forEach((e) => leftCol.append(e));
   section.append(fullWidthContainer);
 }
 
 function buildCtaSections(main) {
-  main.querySelectorAll('div.section.cta')
-    .forEach(buildCta);
+  main.querySelectorAll('div.section.columnar')
+    .forEach(buildColumnar);
 }
 
 /**
@@ -231,19 +292,26 @@ async function loadEager(doc) {
  */
 async function loadLazy(doc) {
   const main = doc.querySelector('main');
+
+  // eslint-disable-next-line no-unused-vars
+  loadHeader(doc.querySelector('header'));
   await loadBlocks(main);
 
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
   if (hash && element) element.scrollIntoView();
 
-  loadHeader(doc.querySelector('header'));
   loadFooter(doc.querySelector('footer'));
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   sampleRUM('lazy');
   sampleRUM.observe(main.querySelectorAll('div[data-block-name]'));
   sampleRUM.observe(main.querySelectorAll('picture > img'));
+
+  const context = { getMetadata, toClassName };
+  // eslint-disable-next-line import/no-relative-packages
+  const { initConversionTracking } = await import('../plugins/rum-conversion/src/index.js');
+  await initConversionTracking.call(context, document);
 }
 
 /**
@@ -251,8 +319,10 @@ async function loadLazy(doc) {
  * without impacting the user experience.
  */
 function loadDelayed() {
-  // eslint-disable-next-line import/no-cycle
-  window.setTimeout(() => import('./delayed.js'), 3000);
+  window.setTimeout(() => {
+    // eslint-disable-next-line import/no-cycle
+    import('./delayed.js');
+  }, 3000);
   // load anything that can be postponed to the latest here
 }
 
