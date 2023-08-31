@@ -1035,4 +1035,9 @@ main .section.blue a.button.secondary::after {
 
 .section.big-image {
   height: 760px;
+  padding: 0;
+}
+
+.section.big-image .columns-wrapper {
+  padding: 0;
 }
