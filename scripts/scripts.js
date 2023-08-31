@@ -11,7 +11,6 @@ import {
   waitForLCP,
   loadBlocks,
   loadCSS,
-  createOptimizedPicture,
   getMetadata,
   toClassName,
 } from './lib-franklin.js';
@@ -46,6 +45,24 @@ export function getLanguageCountryFromPath() {
     language: DEFAULT_LANGUAGE,
     country: DEFAULT_COUNTRY,
   };
+}
+
+export function getOperatingSystem(userAgent) {
+  const systems = [
+    ['Windows NT 10.0', 'Windows 10'],
+    ['Windows NT 6.2', 'Windows 8'],
+    ['Windows NT 6.1', 'Windows 7'],
+    ['Windows NT 6.0', 'Windows Vista'],
+    ['Windows NT 5.1', 'Windows XP'],
+    ['Windows NT 5.0', 'Windows 2000'],
+    ['X11', 'X11'],
+    ['Mac', 'MacOS'],
+    ['Linux', 'Linux'],
+    ['Android', 'Android'],
+    ['like Mac', 'iOS'],
+  ];
+
+  return systems.find(([substr]) => userAgent.includes(substr))?.[1] || 'Unknown';
 }
 
 /**
@@ -174,8 +191,6 @@ export function decorateMain(main) {
  * @param {String} template The template to use for the modal styling
  * @returns {Promise<Element>}
  * @example
- * const modalContainer = await createModal(modalPath, modalTemplate);
- * document.body.append(modalContainer);
  */
 export async function createModal(path, template) {
   const modalContainer = document.createElement('div');
@@ -195,6 +210,7 @@ export async function createModal(path, template) {
 
   const html = await resp.text();
   modalContent.innerHTML = html;
+
   decorateMain(modalContent);
   await loadBlocks(modalContent);
   modalContainer.append(modalContent);
@@ -219,38 +235,33 @@ export async function detectModalButtons(main) {
   });
 }
 
-function buildCta(section) {
-  const backgroundImageSrc = section.dataset.backgroundImage;
-  const backgroundImage = backgroundImageSrc ? createOptimizedPicture(backgroundImageSrc) : null;
-  const backgroundImageHtml = backgroundImage ? backgroundImage.innerHTML : '';
-
+function buildColumnar(section) {
   const fullWidthContainer = createTag(
     'div',
     { class: 'full-width' },
-    `<div class="cta-container">
+    `<div class="columnar-container">
 <div class="left-col">
 </div>
 <div class="right-col">
     <div class="img-container">
-        <img class="red-img" src="/images/b-red-mask.png">
-        <div class="bg-img">
-            <div class="cmp-img">
-                ${backgroundImageHtml}
-            </div>
-        </div>
-        <img class="transparent-img" src="/icons/cta-circle.svg">
     </img>
 </div>`,
   );
 
+  // Add last image to right col.
+  const imageContainer = fullWidthContainer.querySelector('.img-container');
+  const images = [...section.querySelectorAll(':scope picture')];
+  if (images.length > 0) {
+    imageContainer.append(images[images.length - 1]);
+  }
   const leftCol = fullWidthContainer.querySelector('.left-col');
   [...section.children].forEach((e) => leftCol.append(e));
   section.append(fullWidthContainer);
 }
 
 function buildCtaSections(main) {
-  main.querySelectorAll('div.section.cta')
-    .forEach(buildCta);
+  main.querySelectorAll('div.section.columnar')
+    .forEach(buildColumnar);
 }
 
 /**

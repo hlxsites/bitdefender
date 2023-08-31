@@ -3,7 +3,8 @@ import {
   renderNanoBlocks,
   fetchProduct,
   fetchProductVariant,
-  findProductVariant
+  findProductVariant,
+  createTag,
 } from '../../scripts/utils/utils.js';
 
 import { trackProduct } from '../../scripts/scripts.js';
@@ -12,6 +13,20 @@ import { trackProduct } from '../../scripts/scripts.js';
  * Custom event representing a change in the slected variant (plans)
  */
 const VARIANT_SELECTION_CHANGED = 'variantSelectionChanged';
+
+/**
+ * Calculates a discount
+ */
+ function discount(price, discountedPrice) {
+  return (price - discountedPrice).toFixed(2);
+}
+
+/**
+ * Calculates a discount rate
+ */
+function discountRate(price, discountedPrice) {
+  return Math.round((1 - (discountedPrice) / price) * 100);
+}
 
 /**
  * Render a product price nanoblock
@@ -33,9 +48,14 @@ function renderPrice(code, variant, label) {
   fetchProductVariant(code, variant)
     .then((product) => {
       trackProduct(product);
-      // eslint-disable-next-line camelcase
-      oldPriceElement.innerText = `${product.price} ${product.currency_label}`;
-      priceElement.innerHTML = `${product.discount.discount_value} ${product.currency_label} <em>${label}</em>`;
+
+      if (product.discount) {
+        // eslint-disable-next-line camelcase
+        oldPriceElement.innerText = `${product.price} ${product.currency_label}`;
+        priceElement.innerHTML = `${product.discount.discount_value} ${product.currency_label} <em>${label}</em>`;
+      } else {
+        priceElement.innerHTML = `${product.price} ${product.currency_label} <em>${label}</em>`;
+      }
     })
     .catch((err) => {
       // eslint-disable-next-line no-console
@@ -50,15 +70,14 @@ function renderPrice(code, variant, label) {
  * @param product Product representation as returned by the product information db
  * @returns an HTML string
  */
-function renderProductPrice(product) {
-  if (!product.discount) {
-    return `<strong>${product.price} ${product.currency_label}</strong>`;
+function renderProductPrice(price, discountedPrice, currency) {
+  if (!discountedPrice) {
+    return `<strong>${discountedPrice} ${currency}</strong>`;
   // eslint-disable-next-line no-else-return
   } else {
-    const discount = product.price - product.discount.discounted_price;
-    return `<strong>${product.discount.discount_value} ${product.currency_label}</strong>
-            <span class="old-price">Old Price <del>${product.price} ${product.currency_label}</del></span>
-            <span class="discount">Save ${discount.toFixed(2)} ${product.currency_label}</span>`;
+    return `<strong>${discountedPrice} ${currency}</strong>
+            <span class="old-price">Old Price <del>${price} ${currency}</del></span>
+            <span class="discount">Save ${discount(price, discountedPrice)} ${currency}</span>`;
   }
 }
 
@@ -88,6 +107,65 @@ function renderLowestPrice(code, variant) {
     // eslint-disable-next-line max-len
     const price = ((product.discount ? product.discount.discount_value : product.price) / 12).toFixed(2);
     root.innerHTML = `Start today for as low as  ${price} ${product.currency_label}/mo`;
+  });
+
+  return root;
+}
+
+function renderPlansSelection(promises, label, defaultSelection) {
+  const root = createTag(
+    'div',
+    {},
+    `<ul class="plan-selector">
+       <p>${label}</p>
+     </ul>
+     <div class="price">loading...</div>`,
+  );
+
+  const priceElt = root.querySelector('.price');
+  const ulElt = root.querySelector('ul');
+
+  priceElt.addEventListener(VARIANT_SELECTION_CHANGED, (e) => {
+    const { price, discountedPrice, currency } = e.detail.plan;
+    price.innerHTML = renderProductPrice(price, discountedPrice, currency);
+  });
+  root.appendChild(priceElt);
+
+  // eslint-disable-next-line max-len
+  // const promises = (Array.isArray(codes) ? codes : [codes]).map((code) => fetchProduct(code));
+
+  Promise.all(promises).then((variants) => variants.forEach((variant) => {
+    const liElt = createTag(
+      'li',
+      {},
+      `<span>${variant.label}</span>`,
+    );
+
+    liElt.addEventListener('click', () => {
+      ulElt.querySelector('.active')?.classList.remove('active');
+      liElt.classList.add('active');
+
+      [...root.children].forEach((e) => {
+        e.dispatchEvent(
+          new CustomEvent(VARIANT_SELECTION_CHANGED, { detail: { variant } }),
+        );
+      });
+      [...root.parentNode.children].forEach((e) => {
+        e.dispatchEvent(
+          new CustomEvent(VARIANT_SELECTION_CHANGED, { detail: { variant } }),
+        );
+      });
+    });
+
+    // activate default selection
+    if (variant.productAlias === defaultSelection) {
+      liElt.click();
+    }
+
+    ulElt.appendChild(liElt);
+  })).catch((error) => {
+    // eslint-disable-next-line no-console
+    console.error(error);
   });
 
   return root;
@@ -158,24 +236,38 @@ function renderPlans(code, variants, label, defaultSelection) {
   return root;
 }
 
+
+
 /**
  * Renders the green section on top of the product card highlighting the potential savings
  * @returns the root node of the highilight block
  */
-function renderHighlightSavings() {
-  const root = document.createElement('div');
-  root.classList.add('highlight');
+function renderHighlightSavings(code, variant) {
+  const root = createTag(
+    'div',
+    {
+      class: 'highlight',
+    },
+    '<span class="highlight">Save --%</span>',
+  );
 
-  // update the potential saving when variant selection changed
-  root.addEventListener(VARIANT_SELECTION_CHANGED, (e) => {
-    const { detail: { product } } = e;
+  function renderSavings(product) {
     if (product.discount) {
-      const discount = Math.round((1 - (product.discount.discounted_price) / product.price) * 100);
-      root.innerHTML = `<span class='highlight'>Save ${discount}%</span>`;
+      root.querySelector('.highlight').innerText = `Save ${discount(product)}%`;
       root.style.display = 'block';
     } else {
       root.style.display = 'none';
     }
+  }
+
+  // render the highlight if author provides the product code and variant
+  if (code !== undefined && variant !== undefined) {
+    fetchProduct(code, variant).then((product) => renderSavings(product));
+  }
+
+  // update the potential saving when variant selection changed
+  root.addEventListener(VARIANT_SELECTION_CHANGED, (e) => {
+    renderSavings(e.detail.product);
   });
   return root;
 }
@@ -190,65 +282,77 @@ function renderHighlightSavings() {
  * @returns Root node of the plan nanoblock
  */
 function renderYearlyMonthly(codes, variant, label, defaultSelection) {
-  const root = document.createElement('div');
-  const ul = document.createElement('ul');
-  root.appendChild(ul);
-  ul.classList.add('variant-selector');
-  ul.innerHTML = `<p>${label}</p>`;
+  return renderPlansSelection(
+    (Array.isArray(codes) ? codes : [codes]).map((code) => fetchProductVariant(code, variant)),
+    // return {
+    //   label: code.endsWith('m') ? 'Monthly' : 'Yearly',
+    //   price: productVariant.price,
+    //   discountedPrice: productVariant.discount.discount_value,
+    //   currency: productVariant.currency_label,
+    // };
+    label,
+    defaultSelection,
+  );
 
-  const price = document.createElement('div');
-  price.classList.add('price');
-  price.innerHTML = 'loading...';
+  // const root = document.createElement('div');
+  // const ul = document.createElement('ul');
+  // root.appendChild(ul);
+  // ul.classList.add('variant-selector');
+  // ul.innerHTML = `<p>${label}</p>`;
 
-  price.addEventListener(VARIANT_SELECTION_CHANGED, (e) => {
-    price.innerHTML = renderProductPrice(e.detail.variant);
-  });
-  root.appendChild(price);
+  // const price = document.createElement('div');
+  // price.classList.add('price');
+  // price.innerHTML = 'loading...';
 
-  // eslint-disable-next-line max-len
-  const promises = (Array.isArray(codes) ? codes : [codes]).map((code) => fetchProduct(code));
+  // price.addEventListener(VARIANT_SELECTION_CHANGED, (e) => {
+  //   price.innerHTML = renderProductPrice(e.detail.variant);
+  // });
+  // root.appendChild(price);
 
-  Promise.all(promises).then((products) => products.forEach((product) => {
-    const tmpDiv = document.createElement('div');
+  // // eslint-disable-next-line max-len
+  // const promises = (Array.isArray(codes) ? codes : [codes]).map((code) => fetchProduct(code));
 
-    const code = product.product_alias;
-    const productVariant = findProductVariant(product, variant);
+  // Promise.all(promises).then((products) => products.forEach((product) => {
+  //   const tmpDiv = document.createElement('div');
 
-    tmpDiv.innerHTML = `
-    <li>
-      <span>${code.endsWith('m') ? 'Monthly' : 'Yearly'}</span>
-    </li>`;
+  //   const code = product.product_alias;
+  //   const productVariant = findProductVariant(product, variant);
 
-    const li = tmpDiv.children[0];
+  //   tmpDiv.innerHTML = `
+  //   <li>
+  //     <span>${code.endsWith('m') ? 'Monthly' : 'Yearly'}</span>
+  //   </li>`;
 
-    li.addEventListener('click', () => {
-      ul.querySelector('.active')?.classList.remove('active');
-      li.classList.add('active');
+  //   const li = tmpDiv.children[0];
 
-      [...root.children].forEach((e) => {
-        e.dispatchEvent(
-          new CustomEvent(VARIANT_SELECTION_CHANGED, { detail: { productVariant, code } }),
-        );
-      });
-      [...root.parentNode.children].forEach((e) => {
-        e.dispatchEvent(
-          new CustomEvent(VARIANT_SELECTION_CHANGED, { detail: { productVariant, code } }),
-        );
-      });
-    });
+  //   li.addEventListener('click', () => {
+  //     ul.querySelector('.active')?.classList.remove('active');
+  //     li.classList.add('active');
 
-    // activate default selection
-    if (product.product_alias === defaultSelection) {
-      li.click();
-    }
+  //     [...root.children].forEach((e) => {
+  //       e.dispatchEvent(
+  //         new CustomEvent(VARIANT_SELECTION_CHANGED, { detail: { productVariant, code } }),
+  //       );
+  //     });
+  //     [...root.parentNode.children].forEach((e) => {
+  //       e.dispatchEvent(
+  //         new CustomEvent(VARIANT_SELECTION_CHANGED, { detail: { productVariant, code } }),
+  //       );
+  //     });
+  //   });
 
-    ul.appendChild(li);
-  })).catch((error) => {
-    // eslint-disable-next-line no-console
-    console.error(error);
-  });
+  //   // activate default selection
+  //   if (product.product_alias === defaultSelection) {
+  //     li.click();
+  //   }
 
-  return root;
+  //   ul.appendChild(li);
+  // })).catch((error) => {
+  //   // eslint-disable-next-line no-console
+  //   console.error(error);
+  // });
+
+  // return root;
 }
 
 createNanoBlock('price', renderPrice);
@@ -288,6 +392,12 @@ export default function decorate(block) {
       li.classList.add('with-del');
     } else {
       li.classList.remove('with-del');
+    }
+  });
+
+  block.querySelectorAll('.product-card ul').forEach((ul) => {
+    if (ul.previousElementSibling?.tagName === 'P') {
+      ul.previousElementSibling.classList.add('ul-header-text');
     }
   });
 }
