@@ -18,15 +18,19 @@
 }
 
 .accordion-item .accordion-item-header {
+  position: relative;
   font-weight: normal;
   font-size: 18px;
   line-height: 27px;
   color: #000;
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  padding-right: 25px;
 }
 
 .accordion-item-header::after {
+  position: absolute;
   transform: rotate(45deg);
   border-color: #c5c5c5;
   border-style: solid;
@@ -35,8 +39,7 @@
   width: 10px;
   height: 10px;
   display: block;
-  float: right;
-  margin: 8px 0;
+  right: 0;
   transition: top .3s ease-in-out,transform .3s ease-in-out,-webkit-transform .3s ease-in-out;
 }
 
@@ -49,12 +52,11 @@
   border-color: #006eff;
   border-style: solid;
   border-width: 0 2px 2px 0;
-  top: 10px;
+  top: 40px;
   content: "";
   width: 10px;
   height: 10px;
   display: inline-block;
-  float: right;
 }
 
 .accordion-item .accordion-item-content {

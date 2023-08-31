@@ -1,3 +1,7 @@
+main .quote-carousel-wrapper {
+  max-width: 100%;
+}
+
 main .quote-carousel .slides-container {
   border-radius: 8px;
   max-width: 630px;
