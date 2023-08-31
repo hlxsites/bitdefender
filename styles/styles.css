@@ -644,7 +644,7 @@ a.button:hover.secondary {
   color: var(--white-color)
 }
 
-a.button.modal {
+a.button.modal, a.button.with-arrow {
   color: var(--link-color);
   font-weight: var(--font-weight-bold);
   background-color: transparent;
@@ -656,7 +656,7 @@ a.button.modal {
   text-overflow: ellipsis;
 }
 
-a.button.modal::after {
+a.button.modal::after, a.button.with-arrow::after {
   background-color: var(--link-color);
   opacity: 1;
   margin: 0;

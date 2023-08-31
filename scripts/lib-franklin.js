@@ -670,7 +670,7 @@ export function decorateButtons(element) {
         twoup.childNodes.length === 1 && twoup.tagName === 'P' &&
         a.href.match(/#([A-Za-z])\w+/)) {
           up.replaceWith(a);
-          //a.className = 'button';
+          a.className = 'button with-arrow';
           up.classList.add('button-container');
           return;
         }
