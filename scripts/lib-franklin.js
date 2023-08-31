@@ -642,7 +642,7 @@ export function decorateButtons(element) {
           a.innerHTML = wrapButtonText(a);
           return;
         }
-        // Example: <p><a href="example.com">Text</a> (example.com)</p>
+        // Example: <p><a href="example.com/fragments/some-resource">Text</a> (example.com)</p>
         if (up.childNodes.length === 1 && up.tagName === 'P' && a.href.includes('/fragments/')) {
           a.className = 'button modal';
           up.classList.add('button-container');
@@ -663,6 +663,15 @@ export function decorateButtons(element) {
           up.classList.add('info-button-container');
           a.textContent = a.textContent.slice(1).trim();
           a.title = a.title.slice(1).trim();
+          return;
+        }
+        // Example: <p><em><a href="example.com#something"</a></em></p>
+        if (up.childNodes.length === 1 && up.tagName === 'EM' && 
+        twoup.childNodes.length === 1 && twoup.tagName === 'P' &&
+        a.href.match(/#([A-Za-z])\w+/)) {
+          up.replaceWith(a);
+          //a.className = 'button';
+          up.classList.add('button-container');
           return;
         }
         // Example: <p><a href="example.com">Text</a></p>
