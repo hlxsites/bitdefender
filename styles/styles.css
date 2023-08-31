@@ -780,14 +780,14 @@ main .section.cta, .section.columnar {
 .columnar-container {
   padding: 0 20px;
   display: flex;
-  flex-flow: column;
+  flex-direction: column;
   max-width: 1300px;
   margin: 0 auto;
 }
 
 @media (min-width: 768px) {
   .columnar-container {
-    flex-flow: row;
+    flex-direction: row;
   }
 }
 
@@ -859,7 +859,7 @@ main .section.cta, .section.columnar {
 
 @media(min-width: 992px) {
   .columnar-container {
-    flex-flow: row;
+    flex-direction: row;
   }
 }
 
