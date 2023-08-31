@@ -786,7 +786,7 @@ main .section.cta, .section.columnar {
 }
 
 @media (min-width: 768px) {
-  .columnar-container {
+  .image-overflow .columnar-container {
     flex-direction: row;
   }
 }
@@ -794,6 +794,7 @@ main .section.cta, .section.columnar {
 @media (min-width: 992px) {
   .columnar-container {
     padding: 0 50px;
+    flex-direction: row;
   }
 }
 
@@ -806,6 +807,10 @@ main .section.cta, .section.columnar {
 .columnar-container .left-col {
   flex: 1 1 50%;
   justify-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .columnar-container .right-col {
@@ -815,15 +820,6 @@ main .section.cta, .section.columnar {
   overflow: visible;
   flex-direction: column;
   justify-content: flex-end;
-}
-
-@media (min-width: 768px) {
-  .columnar-container .left-col {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-  }
 }
 
 @media (min-width: 992px) {
