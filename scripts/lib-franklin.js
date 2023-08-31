@@ -666,9 +666,9 @@ export function decorateButtons(element) {
           return;
         }
         // Example: <p><em><a href="example.com#something"</a></em></p>
-        if (up.childNodes.length === 1 && up.tagName === 'EM' && 
-        twoup.childNodes.length === 1 && twoup.tagName === 'P' &&
-        a.href.match(/#([A-Za-z])\w+/)) {
+        if (up.childNodes.length === 1 && up.tagName === 'EM'
+        && twoup.childNodes.length === 1 && twoup.tagName === 'P'
+        && a.href.match(/#([A-Za-z])\w+/)) {
           up.replaceWith(a);
           a.className = 'button with-arrow';
           up.classList.add('button-container');
