@@ -859,6 +859,13 @@ main .section.full-width {
   overflow: hidden;
 }
 
+.products-container h5 {
+  font-size: var(--heading-font-size-m);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-dark-gray);
+  margin-bottom: 15px;
+}
+
 main .terms-of-use h5 {
   display: inline-block;
 }
