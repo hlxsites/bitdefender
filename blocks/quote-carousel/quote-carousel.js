@@ -5,7 +5,12 @@ const SLIDE_PREFIX = 'carousel-slide-';
 const CONTROL_PREFIX = 'carousel-control-';
 
 function createSlide(item, index) {
-  const quote = item.querySelector('p:not(:has(> strong, > em)):not(:empty)');
+  const paragraphs = Array.from(item.querySelectorAll('p'));
+  const quote = paragraphs.find((paragraph) => {
+    const strongOrEm = paragraph.querySelector('strong, em');
+    return !strongOrEm && paragraph.textContent.trim() !== '';
+  });
+
   const author = item.querySelector('p > strong');
   const description = item.querySelector('p > em');
   if (!quote) {

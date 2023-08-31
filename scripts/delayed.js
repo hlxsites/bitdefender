@@ -8,7 +8,10 @@ import {
 // eslint-disable-next-line import/no-cycle
 import {
   getLanguageCountryFromPath,
+  pushProductsToDataLayer,
+  getOperatingSystem,
 } from './scripts.js';
+import { loadBreadcrumbs } from './breadcrumbs.js';
 
 // Core Web Vitals RUM collection
 sampleRUM('cwv');
@@ -37,24 +40,6 @@ const ENVIRONMENT = getEnvironment(HOSTNAME, LANGUAGE_COUNTRY.country);
  * Returns the current user operating system based on userAgent
  * @returns {String}
  */
-function getOperatingSystem(userAgent) {
-  const systems = [
-    ['Windows NT 10.0', 'Windows 10'],
-    ['Windows NT 6.2', 'Windows 8'],
-    ['Windows NT 6.1', 'Windows 7'],
-    ['Windows NT 6.0', 'Windows Vista'],
-    ['Windows NT 5.1', 'Windows XP'],
-    ['Windows NT 5.0', 'Windows 2000'],
-    ['X11', 'X11'],
-    ['Mac', 'MacOS'],
-    ['Linux', 'Linux'],
-    ['Android', 'Android'],
-    ['like Mac', 'iOS'],
-  ];
-
-  return systems.find(([substr]) => userAgent.includes(substr))?.[1] || 'Unknown';
-}
-
 /**
  * Returns the value of a query parameter
  * @returns {String}
@@ -153,3 +138,7 @@ switch (ENVIRONMENT) {
 }
 
 pushPageLoadEvent();
+pushProductsToDataLayer();
+
+// Load breadcrumbs
+loadBreadcrumbs();

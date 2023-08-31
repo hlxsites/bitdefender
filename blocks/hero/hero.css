@@ -12,12 +12,72 @@
   --hero-font-size-xxxs: 14px;
   --hero-h1-font-size: 32px;
   --hero-h4-font-size: 24px;
-
-  /* breadcrumbs font size */
-  --breadcrumbs-font-size-s: 12px;
   --hero-botton-border-color: #616161;
-  --hero-p-color: #3c3c3c
+  --hero-p-color: #3c3c3c;
+
+  /* breadcrumbs font size */  
+  --breadcrumb-text-color-dark: #c5c5c5;
+  --breadcrumb-text-color-dark-hover: #616161;
+  --breadcrumbs-font-size-s: 12px;
 }
+
+
+/* breadcrumbs */
+
+main .hero .hero-content .breadcrumb {
+  padding: 14px 0 20px;
+  margin-bottom: 20px;
+  font-weight: var(--font-weight-bold);
+  color: #dedede;
+  min-height: 82px;
+}
+
+main .hero.black-background .hero-content .breadcrumb{
+  padding: 12px 0;
+  margin-bottom: 12px;
+}
+
+main .hero .hero-content .breadcrumb a {
+  font-size: var(--breadcrumbs-font-size-s);
+  font-weight: var(--font-weight-bold);
+  color: var(--breadcrumb-text-color-dark-hover);
+  text-decoration: none;
+  line-height: 1.7;
+  letter-spacing: .96px;
+}
+
+main .hero .hero-content .breadcrumb a:last-child {
+  padding: 0;
+  margin: 0;
+  pointer-events: none;
+}
+
+main .hero .hero-content .breadcrumb a::after {
+  content: "/";
+  display: inline-block;
+  color: var(--color-dark-gray);
+  margin: 0 3px;
+  font-size: 9pt;
+}
+
+main .hero .hero-content .breadcrumb a:hover {
+  color: var(--text-color);
+}
+
+main .hero.black-background .hero-content .breadcrumb a {
+  color: var(--breadcrumb-text-color-dark);
+  text-decoration: none;
+}
+
+main .hero.black-background .hero-content .breadcrumb a::after {
+  color: #dedede;
+}
+
+main .hero.black-background .hero-content .breadcrumb a:hover {
+  color: var(--breadcrumb-text-color-dark-hover);
+}
+
+/* hero */
 
 main .hero-container > div {
   max-width: unset;
@@ -65,52 +125,6 @@ main .hero.comparison {
   height: 600px;
 }
 
-main .hero .hero-content .breadcrumb {
-  padding: 14px 0 20px;
-  margin-bottom: 20px;
-  font-weight: var(--font-weight-bold);
-  color: #dedede;
-}
-
-main .hero.black-background .hero-content .breadcrumb{
-  padding: 12px 0;
-  margin-bottom: 12px;
-}
-
-main .hero .hero-content .breadcrumb a {
-  font-size: var(--breadcrumbs-font-size-s);
-  font-weight: var(--font-weight-bold);
-  color: var(--breadcrumb-text-color);
-  text-decoration: none;
-  line-height: 1.7;
-  letter-spacing: .96px;
-}
-
-main .hero .hero-content .breadcrumb a::after {
-  content: "/";
-  display: inline-block;
-  color: #616161;
-  margin: 0 3px;
-  font-size: 9pt;
-}
-
-main .hero .hero-content .breadcrumb a:hover {
-  color: var(--text-color);
-}
-
-main .hero.black-background .hero-content .breadcrumb a {
-  color: var(--breadcrumb-text-color-dark);
-  text-decoration: none;
-}
-
-main .hero.black-background .hero-content .breadcrumb a::after {
-  color: #dedede;
-}
-
-main .hero.black-background .hero-content .breadcrumb a:hover {
-  color: var(--breadcrumb-text-color-dark-hover);
-}
-
 main .hero .hero-picture {
   position: absolute;
   top: 0;
@@ -142,17 +156,13 @@ main .hero.comparison .hero-content {
 
 main .hero h1 {
   font-size: var(--hero-font-size-xl);
-  font-weight: var(--font-weight-boldest);
-  line-height: 1;
   margin: 0;
 
 }
 
 main .hero h4 {
   font-size: 18px;
-  font-weight: var(--font-weight-bold);
   color: var(--text-color);
-  line-height: 1.25;
   margin: 0 0 9px;
   padding: 15px 0 0;
   letter-spacing: .003em;
@@ -160,8 +170,6 @@ main .hero h4 {
 
 main .hero.black-background h1 {
   font-size: var(--hero-h1-font-size);
-  font-weight: var(--font-weight-boldest);
-  line-height: 1.21;
   margin: 0 0 25px; 
 }
 
@@ -211,7 +219,7 @@ main .hero.comparison p {
 
 main .hero p.button-container {
   margin: 0;
-  padding: 10px 0 0;
+  padding: 10px 0;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -335,9 +343,23 @@ main .hero ul li::before {
   top: 3px;
   width: 15px;
   height: 15px;
-  background: url("../../icons/checkmark_solid-circle.svg") no-repeat;
-  background-size: cover;
-} 
+  background-color: var(--background-checkmark);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+main .hero ul li::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  width: 3px;
+  height: 7px;
+  border-bottom: 2px solid var( --white-color);
+  border-right: 2px solid var( --white-color);
+  transform: rotate(45deg);
+  z-index: 2;
+}
 
 main .hero.black-background ul.hero-awards {
   display: flex;
@@ -378,6 +400,7 @@ main .hero.black-background ul.hero-awards li picture img{
 
   main .hero .hero-content .breadcrumb {
     margin-bottom: 0;
+    min-height: 58px;
   }
 
   main .hero .hero-content .breadcrumb a::after {

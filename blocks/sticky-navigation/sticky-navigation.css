@@ -2,10 +2,23 @@
   --sticky-nav-border-color: #dedede;
 }
 
+main .section.sticky-navigation-container {
+  padding-top: 0;
+}
+
 .sticky-navigation {
   cursor: pointer;
-  position: relative;
   background-color: var(--white-color);
+  position: relative;
+  z-index: 101;
+}
+
+.sticky-navigation.fixed-nav {
+  position: fixed;
+  width: 100%;
+  max-width: 20in;
+  z-index: 101;
+  top: 0;
 }
 
 .sticky-navigation .menu-with-button {
@@ -94,13 +107,7 @@
   display: flex;
 }
 
-.sticky-navigation.fixed-nav {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  max-width: 20in;
-  z-index: 99999;
-}
+
 
 .sticky-navigation .button-container {
   margin:0;

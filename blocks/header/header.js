@@ -16,8 +16,15 @@ function createLoginModal() {
 }
 
 function handleLoginClick() {
-  const loginModal = document.querySelector('nav > div:nth-child(4)');
-  loginModal.classList.toggle('show');
+  const loginModal = document.querySelector('.login-modal');
+  if (loginModal.classList.contains('show')) {
+    loginModal.classList.remove('show');
+  } else {
+    loginModal.style.display = 'flex';
+    setTimeout(() => {
+      loginModal.classList.add('show');
+    }, 0); // Small delay to ensure that the modal is rendered before adding the transition
+  }
 
   const loginButton = document.querySelector('.nav-sections p:last-child');
   loginButton.classList.toggle('clicked');
@@ -129,18 +136,10 @@ function renderDesktopHeader(block, nav) {
   const navBrandLinks = nav.querySelectorAll('.nav-brand a');
 
   if (navSections) {
-    const navParagraphs = navSections.querySelectorAll('p');
-    const lastNavParagraph = navParagraphs[navParagraphs.length - 1];
-    navParagraphs.forEach((navParagraph) => {
-      if (navParagraph === lastNavParagraph) {
-        const loginLink = document.createElement('a');
-        loginLink.textContent = lastNavParagraph.textContent;
-        loginLink.href = 'https://bitdefender.com';
-        navParagraph.innerHTML = '';
-        navParagraph.appendChild(loginLink);
-        loginLink.addEventListener('click', handleLoginClick);
-        loginLink.addEventListener('click', (e) => e.preventDefault());
-      }
+    const loginLink = document.querySelector('.nav-sections p:last-child');
+    loginLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      handleLoginClick();
     });
   }
 
@@ -169,27 +168,41 @@ function renderDesktopHeader(block, nav) {
   bottomLinks.removeChild(bottomLinks.lastElementChild);
 
   const megaMenu = document.querySelector('.mega-menu');
-  let hideTimeout = null;
+  let isOverHomeSolutions = false;
+  let isOverMegaMenu = false;
+
+  const showMegaMenu = () => {
+    megaMenu.style.display = 'flex';
+    setTimeout(() => {
+      megaMenu.classList.add('mega-menu-show');
+    }, 10);
+  };
+
+  const hideMegaMenu = () => {
+    if (!isOverHomeSolutions && !isOverMegaMenu) {
+      megaMenu.classList.remove('mega-menu-show');
+      homeSolutions.classList.remove('home-solutions-link-hover');
+    }
+  };
 
   homeSolutions.addEventListener('mouseenter', () => {
-    clearTimeout(hideTimeout);
-    megaMenu.classList.add('mega-menu-show');
+    isOverHomeSolutions = true;
+    showMegaMenu();
     homeSolutions.classList.add('home-solutions-link-hover');
   });
 
   homeSolutions.addEventListener('mouseleave', () => {
-    hideTimeout = setTimeout(() => {
-      megaMenu.classList.remove('mega-menu-show');
-      homeSolutions.classList.remove('home-solutions-link-hover');
-    }, 500);
+    isOverHomeSolutions = false;
+    setTimeout(hideMegaMenu, 0); // avoid menu to close when moving mouse to menu.
   });
 
   megaMenu.addEventListener('mouseenter', () => {
-    clearTimeout(hideTimeout);
+    isOverMegaMenu = true;
   });
 
   megaMenu.addEventListener('mouseleave', () => {
-    megaMenu.classList.remove('mega-menu-show');
+    isOverMegaMenu = false;
+    hideMegaMenu();
     homeSolutions.classList.remove('home-solutions-link-hover');
   });
 
@@ -344,13 +357,12 @@ function renderMobileHeader(nav) {
 export default async function decorate(block) {
   // check if div class has class black-background
   const hero = document.querySelector('.hero');
+  if (!hero) return;
 
-  if (hero) {
-    if (hero.classList.contains('black-background')) {
-      // add class to header
-      const header = document.querySelector('header');
-      header.classList.add('black-background');
-    }
+  if (hero.classList.contains('black-background')) {
+    // add class to header
+    const header = document.querySelector('header');
+    header.classList.add('black-background');
   }
 
   const headerBlock = document.querySelector('.header.block');
@@ -402,8 +414,26 @@ export default async function decorate(block) {
     header.appendChild(container);
   }
 
+  // assign an aria-label to the a tag inside of .logo
+  const logoLink = document.querySelector('.logo a');
+  logoLink.setAttribute('aria-label', 'Logo');
+
   const secondSpan = document.querySelector('.header-wrapper > div > p span:nth-child(2)');
   if (secondSpan) {
     secondSpan.parentNode.removeChild(secondSpan);
   }
+
+  const header = document.getElementsByClassName('header-wrapper')[0];
+
+  window.addEventListener('scroll', () => {
+    if (window.innerWidth > 990) {
+      if (window.scrollY > 0) {
+        header.style.display = 'none';
+        const loginModal = document.querySelector('nav > div:nth-child(4)');
+        loginModal.classList.remove('show');
+      } else {
+        header.style.display = 'block';
+      }
+    }
+  });
 }

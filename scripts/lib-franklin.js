@@ -31,6 +31,8 @@ export function sampleRUM(checkpoint, data = {}) {
         .filter(({ fnname }) => dfnname === fnname)
         .forEach(({ fnname, args }) => sampleRUM[fnname](...args));
     });
+  sampleRUM.always = sampleRUM.always || [];
+  sampleRUM.always.on = (chkpnt, fn) => { sampleRUM.always[chkpnt] = fn; };
   sampleRUM.on = (chkpnt, fn) => { sampleRUM.cases[chkpnt] = fn; };
   defer('observe');
   defer('cwv');
@@ -76,6 +78,7 @@ export function sampleRUM(checkpoint, data = {}) {
       sendPing(data);
       if (sampleRUM.cases[checkpoint]) { sampleRUM.cases[checkpoint](); }
     }
+    if (sampleRUM.always[checkpoint]) { sampleRUM.always[checkpoint](data); }
   } catch (error) {
     // something went wrong
   }
@@ -229,7 +232,7 @@ export async function decorateTags(element) {
   const tagTypes = [
     { regex: /\[#(.*?)#\]/g, className: 'dark-blue' },
     { regex: /\[{(.*?)}\]/g, className: 'light-blue' },
-    { regex: /\[(.*?)\]/g, className: 'green' },
+    { regex: /\[\$(.*?)\$\]/g, className: 'green' },
   ];
 
   function replaceTags(inputValue) {
@@ -251,8 +254,9 @@ export async function decorateTags(element) {
 
   function replaceTagsInNode(node) {
     if (node.nodeType === Node.TEXT_NODE) {
-      const { nodeValue, replaced } = replaceTags(node.nodeValue);
-      if (replaced) {
+      const originalValue = node.nodeValue;
+      const { nodeValue } = replaceTags(originalValue);
+      if (nodeValue !== originalValue) { // This checks if the nodeValue has been modified.
         const newNode = document.createElement('span');
         newNode.innerHTML = nodeValue;
         node.parentNode.replaceChild(newNode, node);
@@ -392,7 +396,7 @@ export function decorateSections(main) {
           const styles = meta.style.split(',').map((style) => toClassName(style.trim()));
           styles.forEach((style) => section.classList.add(style));
         } else if (key === STICKY_NAVIGATION_SECTION_METADATA_KEY) {
-          section.id = toClassName(meta[key]);
+          section.id = `section-${toClassName(meta[key])}`;
           section.dataset[STICKY_NAVIGATION_DATASET_KEY] = meta[key];
         } else {
           section.dataset[toCamelCase(key)] = meta[key];
@@ -639,11 +643,9 @@ export function decorateButtons(element) {
           return;
         }
         // Example: <p><a href="example.com">Text</a> (example.com)</p>
-        if (up.childNodes.length === 2 && up.tagName === 'P' && a.nextSibling?.textContent.trim().startsWith('(')) {
+        if (up.childNodes.length === 1 && up.tagName === 'P' && a.href.includes('/fragments/')) {
           a.className = 'button modal';
           up.classList.add('button-container');
-          a.dataset.modal = a.nextSibling.textContent.trim().slice(1, -1);
-          a.nextSibling.remove();
           return;
         }
         // Example: <p><a href="example.com">Text</a> <em>50% Discount</em></p>
