@@ -39,37 +39,6 @@ async function buildHeroBlock(element) {
   }
 }
 
-/**
- * Decorates discount bubble div
- */
-function decorateDiscountBubble() {
-  // search in hero block for p tag that contains a tag with class button only
-  if (document.querySelectorAll('.hero p.button-container a.button')) {
-    // Example:  <p><a href="example.com">Text</a> <em>50% Discount</em></p>
-    const linksList = document.querySelectorAll('.hero p.button-container a.button');
-    // iterate through all linksList
-    linksList.forEach((link) => {
-      // check if next element is em tag
-      if (link.nextElementSibling?.tagName === 'EM') {
-        const divBubble = document.createElement('div');
-        divBubble.classList.add('discount-bubble');
-        const textArray = link.nextElementSibling.textContent.trim().split(' ');
-
-        textArray.forEach((text) => {
-          const span = document.createElement('span');
-          span.classList.add(`discount-bubble-${textArray.indexOf(text)}`);
-          span.innerHTML = text;
-          divBubble.append(span);
-        });
-
-        link.parentNode.appendChild(divBubble);
-        link.classList.add('discount-bubble-container');
-        link.nextElementSibling.remove();
-      }
-    });
-  }
-}
-
 createNanoBlock('discount', (code, variant) => {
   const root = document.createElement('div');
   root.classList.add('discount-bubble');
@@ -108,16 +77,21 @@ export default async function decorate(block) {
   const elementHeroContent = block.querySelector('.hero div.hero-content div');
 
   if (elementHeroContent !== null) {
-    // find pattern for discount bubble
-    // <p class="button-container"><a class="button primary" href="example.com">Text</a></p>
-    // <p><em>50% Discount</em></p>
-    decorateDiscountBubble();
-
     // Select  <ul> elements that contain a <picture> tag
     const ulsWithPicture = Array.from(document.querySelectorAll('ul')).filter((ul) => ul.querySelector('picture'));
 
     // Apply a CSS class to each selected <ul> element
     ulsWithPicture.forEach((ul) => ul.classList.add('hero-awards'));
+
+    renderNanoBlocks(block);
+
+    // move discount bubble inside the button
+    const bubble = block.querySelector('.discount-bubble');
+    if (bubble) {
+      const button = bubble.parentElement.querySelector('.button-container');
+      if (button) {
+        button.append(bubble);
+      }
+    }
   }
-  renderNanoBlocks(block);
 }
