@@ -1,11 +1,25 @@
 import {
   createNanoBlock,
   renderNanoBlocks,
-  createNanoBlockWithPostProcessing,
   fetchProduct,
+  createTag,
 } from '../../scripts/utils/utils.js';
 
-createNanoBlock('price', (code, variant, label) => {
+import { trackProduct } from '../../scripts/scripts.js';
+
+/**
+ * Custom event representing a change in the slected variant (plans)
+ */
+const VARIANT_SELECTION_CHANGED = 'variantSelectionChanged';
+
+/**
+ * Render a product price nanoblock
+ * @param code Product code
+ * @param variant Product variant
+ * @param label Label
+ * @returns Root node of the nanoblock
+ */
+function renderPrice(code, variant, label) {
   const priceRoot = document.createElement('div');
   priceRoot.classList.add('price');
   const oldPriceElement = document.createElement('del');
@@ -17,9 +31,15 @@ createNanoBlock('price', (code, variant, label) => {
 
   fetchProduct(code, variant)
     .then((product) => {
-      // eslint-disable-next-line camelcase
-      oldPriceElement.innerText = `${product.price} ${product.currency_label}`;
-      priceElement.innerHTML = `${product.discount.discount_value} ${product.currency_label} <em>${label}</em>`;
+      trackProduct(product);
+
+      if (product.discount) {
+        // eslint-disable-next-line camelcase
+        oldPriceElement.innerText = `${product.price} ${product.currency_label}`;
+        priceElement.innerHTML = `${product.discount.discount_value} ${product.currency_label} <em>${label}</em>`;
+      } else {
+        priceElement.innerHTML = `${product.price} ${product.currency_label} <em>${label}</em>`;
+      }
     })
     .catch((err) => {
       // eslint-disable-next-line no-console
@@ -27,43 +47,66 @@ createNanoBlock('price', (code, variant, label) => {
     });
 
   return priceRoot;
-});
+}
 
+/**
+ * Render a product price
+ * @param product Product representation as returned by the product information db
+ * @returns an HTML string
+ */
 function renderProductPrice(product) {
   if (!product.discount) {
     return `<strong>${product.price} ${product.currency_label}</strong>`;
   // eslint-disable-next-line no-else-return
   } else {
-    const discount = product.price - product.discount.discounted_price;
+    const productDiscount = product.price - product.discount.discounted_price;
     return `<strong>${product.discount.discount_value} ${product.currency_label}</strong>
             <span class="old-price">Old Price <del>${product.price} ${product.currency_label}</del></span>
-            <span class="discount">Save ${discount.toFixed(2)} ${product.currency_label}</span>`;
+            <span class="discount">Save ${productDiscount.toFixed(2)} ${product.currency_label}</span>`;
   }
 }
 
-createNanoBlockWithPostProcessing('featured', (text) => {
+/**
+ * Render a Featured nanoblock
+ * @param text Text of the featured nanoblock
+ * @returns Root node of the feature nanoblock
+ */
+function renderFeatured(text) {
   const root = document.createElement('div');
   root.classList.add('featured');
   root.innerText = text;
   return root;
-}, (element) => {
-  const productCard = element.closest('.product-card');
-  productCard.classList.add('featured');
-});
+}
 
-createNanoBlock('lowestPrice', (code, variant) => {
+/**
+ * Render the lowest product price
+ * @param code Product code
+ * @param variant Product variant
+ * @returns root node of the nanoblock
+ */
+function renderLowestPrice(code, variant) {
   const root = document.createElement('p');
 
   fetchProduct(code, variant).then((product) => {
+    trackProduct(product);
     // eslint-disable-next-line max-len
     const price = ((product.discount ? product.discount.discount_value : product.price) / 12).toFixed(2);
     root.innerHTML = `Start today for as low as  ${price} ${product.currency_label}/mo`;
   });
 
   return root;
-});
+}
 
-createNanoBlock('plans', (code, variants, label, defaultSelection) => {
+/**
+ * Renders the plans selector, display the price and potential discount
+ * corresponding to the selected plan.
+ * @param code Product code
+ * @param variants List of product variants (ex. 1u-1y)
+ * @param label Label of the variant selector
+ * @param defaultSelection Default variant
+ * @returns Root node of the plan nanoblock
+ */
+function renderPlans(code, variants, label, defaultSelection) {
   const root = document.createElement('div');
   const ul = document.createElement('ul');
   root.appendChild(ul);
@@ -73,7 +116,8 @@ createNanoBlock('plans', (code, variants, label, defaultSelection) => {
   const price = document.createElement('div');
   price.classList.add('price');
   price.innerHTML = 'loading...';
-  price.addEventListener('variantSelectionChanged', (e) => {
+
+  price.addEventListener(VARIANT_SELECTION_CHANGED, (e) => {
     price.innerHTML = renderProductPrice(e.detail.product);
   });
   root.appendChild(price);
@@ -82,6 +126,7 @@ createNanoBlock('plans', (code, variants, label, defaultSelection) => {
   const promises = (Array.isArray(variants) ? variants : [variants]).map((variant) => fetchProduct(code, variant));
 
   Promise.all(promises).then((products) => products.forEach((product) => {
+    trackProduct(product);
     const tmpDiv = document.createElement('div');
 
     tmpDiv.innerHTML = `
@@ -96,10 +141,10 @@ createNanoBlock('plans', (code, variants, label, defaultSelection) => {
       li.classList.add('active');
 
       [...root.children].forEach((e) => {
-        e.dispatchEvent(new CustomEvent('variantSelectionChanged', { detail: { product, code } }));
+        e.dispatchEvent(new CustomEvent(VARIANT_SELECTION_CHANGED, { detail: { product, code } }));
       });
       [...root.parentNode.children].forEach((e) => {
-        e.dispatchEvent(new CustomEvent('variantSelectionChanged', { detail: { product, code } }));
+        e.dispatchEvent(new CustomEvent(VARIANT_SELECTION_CHANGED, { detail: { product, code } }));
       });
     });
 
@@ -115,23 +160,54 @@ createNanoBlock('plans', (code, variants, label, defaultSelection) => {
   });
 
   return root;
-});
+}
 
-createNanoBlock('highlightSavings', () => {
-  const root = document.createElement('div');
-  root.classList.add('highlight');
-  root.addEventListener('variantSelectionChanged', (e) => {
-    const { detail: { product } } = e;
+/**
+ * Calculates a discount
+ */
+function discount(product) {
+  return Math.round((1 - (product.discount.discounted_price) / product.price) * 100);
+}
+
+/**
+ * Renders the green section on top of the product card highlighting the potential savings
+ * @returns the root node of the highilight block
+ */
+function renderHighlightSavings(code, variant) {
+  const root = createTag(
+    'div',
+    {
+      class: 'highlight',
+    },
+    '<span class="highlight">Save --%</span>',
+  );
+
+  function renderSavings(product) {
     if (product.discount) {
-      const discount = Math.round((1 - (product.discount.discounted_price) / product.price) * 100);
-      root.innerHTML = `<span class='highlight'>Save ${discount}%</span>`;
+      root.querySelector('.highlight').innerText = `Save ${discount(product)}%`;
       root.style.display = 'block';
     } else {
       root.style.display = 'none';
     }
+  }
+
+  // render the highlight if author provides the product code and variant
+  if (code !== undefined && variant !== undefined) {
+    fetchProduct(code, variant).then((product) => renderSavings(product));
+  }
+
+  // update the potential saving when variant selection changed
+  root.addEventListener(VARIANT_SELECTION_CHANGED, (e) => {
+    renderSavings(e.detail.product);
   });
   return root;
-});
+}
+
+createNanoBlock('price', renderPrice);
+createNanoBlock('lowestPrice', renderLowestPrice);
+createNanoBlock('featured', renderFeatured);
+createNanoBlock('plans', renderPlans);
+createNanoBlock('highlightSavings', renderHighlightSavings);
 
 export default function decorate(block) {
   [...block.children].forEach((row) => {
@@ -144,10 +220,31 @@ export default function decorate(block) {
 
   // listen to variantSelectionChanged and update button accordingly
   block.querySelectorAll('.button-container').forEach((b) => {
-    b.addEventListener('variantSelectionChanged', (e) => {
+    b.addEventListener(VARIANT_SELECTION_CHANGED, (e) => {
       e.target.querySelector('a').href = `https://www.bitdefender.com/site/Store/buy/${e.detail.code}/${e.detail.product.variation.dimension_value}/${e.detail.product.variation.years}/`;
     });
   });
 
+  // section's content default contains a nanoblock
   renderNanoBlocks(block.parentNode.parentNode);
+
+  // style the product card if the author has added a featured card inside
+  [...block.querySelectorAll('.product-card .featured')].forEach((featured) => {
+    featured.closest('.product-card').classList.add('featured');
+  });
+
+  // add class to avoid using :has selector
+  block.querySelectorAll('.product-card li').forEach((li) => {
+    if (li.querySelector('del')) {
+      li.classList.add('with-del');
+    } else {
+      li.classList.remove('with-del');
+    }
+  });
+
+  block.querySelectorAll('.product-card ul').forEach((ul) => {
+    if (ul.previousElementSibling?.tagName === 'P') {
+      ul.previousElementSibling.classList.add('ul-header-text');
+    }
+  });
 }

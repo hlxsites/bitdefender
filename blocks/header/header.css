@@ -345,10 +345,6 @@ header a.button:hover span.button-text {
   grid-column: 1;
 }
 
-.mega-menu > div:first-child > p:last-child {
-  grid-column: 2; 
-}
-
 .mega-menu > div:first-child p a > span::after {
   content: '';
   width: 24px;
@@ -869,10 +865,6 @@ header a.button:hover span.button-text {
 
   .mega-menu > div:first-child > p:first-child {
     grid-column: 1;
-  }
-
-  .mega-menu > div:first-child > p:last-child {
-    grid-column: 2; 
   }
 
   .mega-menu > div:first-child p a > span::after {

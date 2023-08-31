@@ -3,12 +3,19 @@ import {
   loadScript,
   sampleRUM,
   fetchPlaceholders,
+  getMetadata,
 } from './lib-franklin.js';
 
 // eslint-disable-next-line import/no-cycle
 import {
   getLanguageCountryFromPath,
+  pushProductsToDataLayer,
+  pushToDataLayer,
+  getTags,
+  getOperatingSystem,
+  METADATA_ANAYTICS_TAGS,
 } from './scripts.js';
+import { loadBreadcrumbs } from './breadcrumbs.js';
 
 // Core Web Vitals RUM collection
 sampleRUM('cwv');
@@ -37,24 +44,6 @@ const ENVIRONMENT = getEnvironment(HOSTNAME, LANGUAGE_COUNTRY.country);
  * Returns the current user operating system based on userAgent
  * @returns {String}
  */
-function getOperatingSystem(userAgent) {
-  const systems = [
-    ['Windows NT 10.0', 'Windows 10'],
-    ['Windows NT 6.2', 'Windows 8'],
-    ['Windows NT 6.1', 'Windows 7'],
-    ['Windows NT 6.0', 'Windows Vista'],
-    ['Windows NT 5.1', 'Windows XP'],
-    ['Windows NT 5.0', 'Windows 2000'],
-    ['X11', 'X11'],
-    ['Mac', 'MacOS'],
-    ['Linux', 'Linux'],
-    ['Android', 'Android'],
-    ['like Mac', 'iOS'],
-  ];
-
-  return systems.find(([substr]) => userAgent.includes(substr))?.[1] || 'Unknown';
-}
-
 /**
  * Returns the value of a query parameter
  * @returns {String}
@@ -89,24 +78,22 @@ function getCurrentDate() {
   return `${day}/${month}/${year}`;
 }
 
-// Calculates the payload for tracking page load event.
-function getPageLoadTrackingPayload(params) {
-  const { languageCountry, pathname, environment } = params;
-  const pageSections = pathname.split('/').filter((subPath) => subPath.trim() !== '' && subPath !== languageCountry.languageCountryPath) || [];
-  return {
-    pageInstanceID: environment,
+function pushPageLoadToDataLayer() {
+  const tags = getTags(getMetadata(METADATA_ANAYTICS_TAGS));
+  pushToDataLayer('page load started', {
+    pageInstanceID: ENVIRONMENT,
     page: {
       info: {
-        name: (pageSections.length > 0) ? pageSections.unshift('au') && pageSections.join(':') : 'Home', // e.g. au:consumer:product:internet security or au:consumer:solutions
-        section: pageSections[0] || '',
-        subSection: pageSections[1] || '',
-        subSubSection: pageSections[2] || '',
-        subSubSubSection: pageSections[3] || '',
+        name: [LANGUAGE_COUNTRY.country, ...tags].join(':'), // e.g. au:consumer:product:internet security
+        section: LANGUAGE_COUNTRY.country || '',
+        subSection: tags[0] || '',
+        subSubSection: tags[1] || '',
+        subSubSubSection: tags[2] || '',
         destinationURL: window.location.href,
         queryString: window.location.search,
         referringURL: getParamValue('ref') || getParamValue('adobe_mc') || document.referrer || '',
-        serverName: 'hlx.live',
-        language: navigator.language || navigator.userLanguage || languageCountry.language,
+        serverName: 'hlx.live', // indicator for AEM Success Edge
+        language: navigator.language || navigator.userLanguage || LANGUAGE_COUNTRY.language,
         sysEnv: getOperatingSystem(window.navigator.userAgent),
       },
       attributes: {
@@ -119,26 +106,7 @@ function getPageLoadTrackingPayload(params) {
         domainPeriod: HOSTNAME.split('.').length,
       },
     },
-  };
-}
-
-function pushPageLoadEvent() {
-  // Init Adobe data layer
-  window.adobeDataLayer = window.adobeDataLayer || [];
-  window.adobeDataLayerInPage = true;
-
-  const trackingPayload = getPageLoadTrackingPayload({
-    languageCountry: LANGUAGE_COUNTRY,
-    pathname: PATHNAME,
-    environment: ENVIRONMENT,
   });
-
-  if (trackingPayload) {
-    window.adobeDataLayer.push({
-      event: 'page load started',
-      ...trackingPayload,
-    });
-  }
 }
 
 // Load Adobe Experience platform data collection (Launch) script
@@ -152,4 +120,8 @@ switch (ENVIRONMENT) {
     loadScript(LAUNCH_URL + launchDevScript); break;
 }
 
-pushPageLoadEvent();
+pushPageLoadToDataLayer();
+pushProductsToDataLayer();
+
+// Load breadcrumbs
+loadBreadcrumbs();

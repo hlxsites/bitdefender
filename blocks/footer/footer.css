@@ -23,6 +23,8 @@ footer .footer a {
   font-size: var(--body-font-size-s);
   line-height: 1.63;
   font-family: var(--body-font-family),sans-serif;
+  margin: 0 0 0.4375rem;
+  padding-left: 0;
 }
 
 .footer ul li a {
@@ -40,7 +42,7 @@ footer .footer p {
   pointer-events: none;
 }
 
-footer .footer a:hover {  
+footer .footer a:hover {
   text-decoration: underline;
 }
 
@@ -108,7 +110,7 @@ footer .footer a:hover {
 
 .footer > div > :nth-child(1) > ul li {
   padding: 0;
-  margin-bottom: 0.4375rem;
+  margin: 0 0 0.4375rem;
 }
 
 .footer > div > :nth-child(1) > ul li a {
@@ -154,7 +156,7 @@ footer .footer a:hover {
   transform: rotate(45deg);
   border-color: #fff;
   border-style: solid;
-  border-width: 0 2px 2px 0;
+  border-width: 0 0.1875rem 0.1875rem 0;
   content: "";
   width: 0.5rem;
   height: 0.5rem;
@@ -176,7 +178,8 @@ footer .footer a:hover {
 
 .footer > div > :nth-child(3) > ul li,
 .footer > div > :nth-child(4) > ul li {
-  margin-bottom: 0.625rem;
+  margin: 0 0 0.625rem;
+  padding-left: 0;
 }
 
 .footer > div > :nth-child(3) > ul li > a,
@@ -210,7 +213,7 @@ footer .footer a:hover {
   display: none;
 }
 
-.footer > div > :nth-child(3) > p.active + ul,  
+.footer > div > :nth-child(3) > p.active + ul,
 .footer > div > :nth-child(4) > p.active + ul {
   display: inline-block;
 }
@@ -282,7 +285,7 @@ footer .footer a:hover {
 @media(min-width: 767px) { /* tablet */
   footer {
     padding: 3.625rem 0 2.6875rem;
-    margin: 2.5rem auto 0;
+    margin: 0 auto;
     max-width: 120rem;
   }
 
@@ -435,7 +438,7 @@ footer .footer a:hover {
     display: block !important;
     margin-bottom: 0;
   }
-  
+
   .footer > div > :nth-child(3) ul {
     column-count: 2;
   }
@@ -513,6 +516,10 @@ footer .footer a:hover {
     font: normal normal normal 13px/18px var(--body-font-family);
     margin-top: 0.875rem;
     margin-bottom: 0;
+  }
+
+  .footer > div > :nth-child(4) > p.active + ul {
+    column-count: 3;
   }
 }
 
