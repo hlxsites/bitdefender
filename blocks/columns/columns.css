@@ -12,6 +12,11 @@
   order: 1;
 }
 
+.columns.highlight-text.black {
+  background-color: var(--black-color);
+  width: 500px;
+}
+
 .text-over-image > div > div {
   height: 600px;
   border-radius: 12px;

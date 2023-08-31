@@ -1032,3 +1032,7 @@ main .section.blue a.button.secondary::after {
 .section.wide.awards h2 {
   font-weight: var(--font-weight-bold);
 }
+
+.section.big-image {
+  height: 760px;
+}
