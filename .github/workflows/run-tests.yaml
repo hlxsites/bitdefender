@@ -31,4 +31,5 @@ jobs:
           args: suite execute ${{ secrets.GI_SUITE }} \
             --apiKey ${{ secrets.GI_API_KEY }} \
             --branchName ${{ env.BRANCH_NAME }} \
-            --errorOnFail
+            --errorOnFail \
+            --errorOnScreenshotFail
