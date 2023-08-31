@@ -76,7 +76,9 @@ function getCurrentDate() {
 }
 
 function pushPageLoadToDataLayer() {
+  // eslint-disable-next-line no-undef
   const tags = getTags(getMetadata(METADATA_ANAYTICS_TAGS));
+  // eslint-disable-next-line no-undef
   pushToDataLayer('page load started', {
     pageInstanceID: ENVIRONMENT,
     page: {
