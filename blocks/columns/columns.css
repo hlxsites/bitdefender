@@ -373,3 +373,20 @@
 .columns.bg-image svg {
   filter: invert(1) grayscale(1) brightness(100);
 }
+
+.columns.with-box-shadow {
+  box-shadow: 0 3px 8px 0 rgba(0,0, 0, 0.2);
+  border-radius: 5px;
+  padding: 35px 0;
+  color: var(--checkbox-label);
+}
+
+.columns.with-box-shadow > div > div{
+  padding: 0 20px;
+  height: 350px;
+  border-right: 2px solid var(--overlay-background-color);
+}
+
+.columns.with-box-shadow > div > div:last-child{
+  border-right: none;
+}
