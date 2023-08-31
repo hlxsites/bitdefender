@@ -20,7 +20,7 @@
   width: 100%;
 }
 
-.text-over-image > div > div h3 {
+.text-over-image > div > div:first-child {
   font-size: var(--heading-font-size-s);
   margin-bottom: -10px;
 }
@@ -31,13 +31,9 @@
   line-height: 1.25;
 }
 
-.columns.bg-image > div > div > h3 {
+.columns.bg-image > div > div:first-child {
   font-size: var(--heading-font-size-xl);
-  font-style: bold;
-}
-
-.columns.highlight-text.black h3 {
-  font-size: var(--heading-font-size-l);
+  font-weight: bold;
 }
 
 .text-over-image > div > div {
@@ -394,4 +390,8 @@
   border-radius: 5px;
   padding: 35px 0;
   color: var(--checkbox-label);
+}
+
+.columns.highlight-text.black.block > div > div:first-child {
+  font-size: var(--heading-font-size-l);
 }
