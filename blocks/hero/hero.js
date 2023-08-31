@@ -77,7 +77,6 @@ export default async function decorate(block) {
   const elementHeroContent = block.querySelector('.hero div.hero-content div');
 
   if (elementHeroContent !== null) {
-
     // Select  <ul> elements that contain a <picture> tag
     const ulsWithPicture = Array.from(document.querySelectorAll('ul')).filter((ul) => ul.querySelector('picture'));
 
@@ -95,5 +94,4 @@ export default async function decorate(block) {
       }
     }
   }
-
 }
