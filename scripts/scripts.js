@@ -61,6 +61,7 @@ export function getOperatingSystem(userAgent) {
     ['Linux', 'Linux'],
     ['Android', 'Android'],
     ['like Mac', 'iOS'],
+    ['iPhone', 'iOS'],
   ];
 
   return systems.find(([substr]) => userAgent.includes(substr))?.[1] || 'Unknown';
