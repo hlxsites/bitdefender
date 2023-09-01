@@ -126,8 +126,8 @@ export function pushProductsToDataLayer() {
 }
 
 export function decorateBlockWithRegionId(element, id) {
-  // element.setAttribute('s-object-region', id); // TODO: requires support from Launch
-  element.id = id; // workaround for now
+  // we could consider to use `element.setAttribute('s-object-region', id);` in the future
+  element.id = id;
 }
 
 export function decorateLinkWithLinkTrackingId(element, id) {
