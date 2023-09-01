@@ -316,6 +316,8 @@ header a.button:hover span.button-text {
   margin-left: 25px;
 }
 
+
+
 .mega-menu > div:first-child {
   display: grid;
   grid-template-rows: auto auto;
@@ -586,6 +588,7 @@ header a.button:hover span.button-text {
     gap: 0;
   }
 
+
   .nav-brand a,
   .nav-sections a {
   color: var(--horizontal-separator-color);
@@ -611,6 +614,13 @@ header a.button:hover span.button-text {
 
   .nav-brand p a {
     margin: 0 12px;
+  }
+
+  .mega-menu div h2 > a {
+    padding-left: 20px;
+    color: var(--link-color);
+    font-size: var(--body-font-size-xs);
+    font-weight: var(--font-weight-bold);
   }
 
   .mega-menu div p a{
