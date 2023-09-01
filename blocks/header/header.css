@@ -624,10 +624,6 @@ header a.button:hover span.button-text {
     font-weight: var(--font-weight-bold);
   }
 
-  .mega-menu div h2 > a:hover {
-    background-color: var(--highlight-light-blue);
-  }
-
   .mega-menu div p a{
     position: relative;
     font-size: var(--body-font-size-xs);
@@ -656,7 +652,11 @@ header a.button:hover span.button-text {
     transition: all 0.2s ease-in-out;
     animation: animate-bottom-border 0.3s linear forwards;
   }
-  
+
+  .mega-menu div h2 > a:hover {
+    background-color: var(--highlight-light-blue);
+  }
+
   .nav-sections p:last-child:hover::after {
     width: 50px;
   }
