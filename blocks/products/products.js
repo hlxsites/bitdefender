@@ -36,7 +36,7 @@ function renderPrice(code, variant, label) {
       if (product.discount) {
         // eslint-disable-next-line camelcase
         oldPriceElement.innerText = `${product.price} ${product.currency_label}`;
-        priceElement.innerHTML = `${product.discount.discount_value} ${product.currency_label} <em>${label}</em>`;
+        priceElement.innerHTML = `${Math.round(product.discount.discount_value)} ${product.currency_label} <em>${label}</em>`;
       } else {
         priceElement.innerHTML = `${product.price} ${product.currency_label} <em>${label}</em>`;
       }
@@ -60,9 +60,9 @@ function renderProductPrice(product) {
   // eslint-disable-next-line no-else-return
   } else {
     const productDiscount = product.price - product.discount.discounted_price;
-    return `<strong>${product.discount.discount_value} ${product.currency_label}</strong>
-            <span class="old-price">Old Price <del>${product.price} ${product.currency_label}</del></span>
-            <span class="discount">Save ${productDiscount.toFixed(2)} ${product.currency_label}</span>`;
+    return `<strong>${Math.round(product.discount.discount_value)} ${product.currency_label}</strong>
+        <span class="old-price">Old Price <del>${Math.round(product.price)} ${product.currency_label}</del></span>
+        <span class="discount">Save ${Math.round(productDiscount)} ${product.currency_label}</span>`;
   }
 }
 
@@ -90,7 +90,7 @@ function renderLowestPrice(code, variant) {
   fetchProduct(code, variant).then((product) => {
     trackProduct(product);
     // eslint-disable-next-line max-len
-    const price = ((product.discount ? product.discount.discount_value : product.price) / 12).toFixed(2);
+    const price = Math.round((product.discount ? product.discount.discount_value : product.price) / 12);
     root.innerHTML = `Start today for as low as  ${price} ${product.currency_label}/mo`;
   });
 
