@@ -617,6 +617,8 @@ header a.button:hover span.button-text {
   }
 
   .mega-menu div h2 > a {
+    transition: all 0.2s ease-in-out;
+    border-radius: 3px;
     text-decoration: none;
     padding: 7px 10px;
     color: var(--link-color);
