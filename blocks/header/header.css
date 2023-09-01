@@ -617,10 +617,15 @@ header a.button:hover span.button-text {
   }
 
   .mega-menu div h2 > a {
-    padding-left: 20px;
+    text-decoration: none;
+    padding: 7px 10px;
     color: var(--link-color);
     font-size: var(--body-font-size-xs);
     font-weight: var(--font-weight-bold);
+  }
+
+  .mega-menu div h2 > a:hover {
+    background-color: var(--highlight-light-blue);
   }
 
   .mega-menu div p a{
