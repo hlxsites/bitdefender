@@ -7,8 +7,9 @@
   padding: 0;
 }
 
-.barchart-image {
+.barchart-image img{
   width: 46px;
+  max-height: 100%;
   display: inline-block;
   flex-shrink: 0;
 }
@@ -32,7 +33,7 @@
 .barchart.block h3 {
   line-height: 1.25;
   color: var(--text-color);
-  font-size: 22px;
+  font-size: var(--body-font-size-m);
   font-weight: 500;
   margin-top: 0;
 }
@@ -60,6 +61,10 @@
   padding: 0;
 }
 
+.barchart-body > ul > li {
+  font-size: 14px;
+  font-weight: var(--font-weight-bold);
+}
 
 .barchart-body li:nth-child(odd) { 
   flex: 85%;
@@ -75,6 +80,9 @@
   width: 10px;
 }
 
+.barchart-body > ul > li:nth-child(even) {
+  font-weight: var(--font-weight-regular);
+}
 
 .barchart-body li:nth-child(odd)::before {
   background-color: #dedede;
@@ -109,10 +117,13 @@
   }
 }
 
-@media (min-width: 990px) { /* desktop */
+@media (min-width: 768px) {
   .barchart > ul {
     grid-template-columns: repeat(2, minmax(300px, 1fr));
   }
+}
+
+@media (min-width: 990px) { /* desktop */
 
   .barchart-wrapper {
     max-width: var(--section-desktop-max-width);
