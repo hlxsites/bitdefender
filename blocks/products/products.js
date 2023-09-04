@@ -24,7 +24,6 @@ function customRound(value) {
   const numValue = parseFloat(value);
 
   if (Number.isNaN(numValue)) {
-    console.error('The value passed to customRound is not a number:', value);
     return value;
   }
 
