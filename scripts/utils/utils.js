@@ -23,12 +23,78 @@ export function createTag(tag, attributes, html) {
   return el;
 }
 
-export async function findProductVariant(product, variant) {
+// export async function findProductVariant(product, variant) {
+//   // eslint-disable-next-line guard-for-in,no-restricted-syntax
+//   for (const i in product.variations) {
+//     // eslint-disable-next-line guard-for-in,no-restricted-syntax
+//     for (const j in product.variations[i]) {
+//       const v = product.variations[i][j];
+//       if (v.variation.variation_name === variant) {
+//         return v;
+//       }
+//     }
+//   }
+
+//   throw new Error('Variant not found');
+// }
+
+// /**
+//  * Fetches a product from the Bitdefender store.
+//  * @param code The product code
+//  * @returns {Promise<*>}
+//  */
+// export async function fetchProduct(code) {
+//   const cacheKey = `${code}`;
+//   const data = new FormData();
+//   data.append('data', JSON.stringify({
+//     ev: 1,
+//     product_id: code,
+//     config: {
+//       extra_params: {
+//         pid: null,
+//       },
+//     },
+//   }));
+
+//   let cachedResponse;
+//   if (cacheResponse.has(cacheKey)) {
+//     cachedResponse = cacheResponse.get(cacheKey);
+//   } else {
+//     // we don't await the response here, because we want to cache it
+//     cachedResponse = fetch(FETCH_URL, {
+//       method: 'POST',
+//       body: data,
+//     });
+
+//     cacheResponse.set(cacheKey, cachedResponse);
+//   }
+
+//   const response = await cachedResponse;
+//   if (!response.ok) throw new Error(`${response.statusText}`);
+//   return response.clone().json().data.product;
+// }
+
+// /**
+//  * Fetches a product variant from the Bitdefender store.
+//  * @param code The product code
+//  * @param variant The product variant
+//  * @returns {Promise<*>}
+//  */
+// export async function fetchProductVariant(code, variant) {
+//   const product = fetchProduct(code);
+//   return findProductVariant(product, variant);
+// }
+
+async function findProductVariant(cachedResponse, variant) {
+  const response = await cachedResponse;
+  if (!response.ok) throw new Error(`${response.statusText}`);
+  const json = await response.clone().json();
+
   // eslint-disable-next-line guard-for-in,no-restricted-syntax
-  for (const i in product.variations) {
+  for (const i in json.data.product.variations) {
     // eslint-disable-next-line guard-for-in,no-restricted-syntax
-    for (const j in product.variations[i]) {
-      const v = product.variations[i][j];
+    for (const j in json.data.product.variations[i]) {
+      const v = json.data.product.variations[i][j];
       if (v.variation.variation_name === variant) {
         return v;
       }
@@ -41,10 +107,11 @@ export async function findProductVariant(product, variant) {
 /**
  * Fetches a product from the Bitdefender store.
  * @param code The product code
+ * @param variant The product variant
  * @returns {Promise<*>}
  */
-export async function fetchProduct(code) {
-  const cacheKey = `${code}`;
+export async function fetchProduct(code = 'av', variant = '1u-1y') {
+  const cacheKey = `${code}-${variant}`;
   const data = new FormData();
   data.append('data', JSON.stringify({
     ev: 1,
@@ -56,34 +123,20 @@ export async function fetchProduct(code) {
     },
   }));
 
-  let cachedResponse;
   if (cacheResponse.has(cacheKey)) {
-    cachedResponse = cacheResponse.get(cacheKey);
-  } else {
-    // we don't await the response here, because we want to cache it
-    cachedResponse = fetch(FETCH_URL, {
-      method: 'POST',
-      body: data,
-    });
-
-    cacheResponse.set(cacheKey, cachedResponse);
+    return findProductVariant(cacheResponse.get(cacheKey), variant);
   }
 
-  const response = await cachedResponse;
-  if (!response.ok) throw new Error(`${response.statusText}`);
-  return response.clone().json().data.product;
+  // we don't await the response here, because we want to cache it
+  const response = fetch(FETCH_URL, {
+    method: 'POST',
+    body: data,
+  });
+
+  cacheResponse.set(cacheKey, response);
+  return findProductVariant(response, variant);
 }
 
-/**
- * Fetches a product variant from the Bitdefender store.
- * @param code The product code
- * @param variant The product variant
- * @returns {Promise<*>}
- */
-export async function fetchProductVariant(code, variant) {
-  const product = fetchProduct(code);
-  return findProductVariant(product, variant);
-}
 
 const nanoBlocks = new Map();
 
@@ -123,18 +176,18 @@ function parseParams(params) {
   segments.forEach((segment) => {
     if (isInArray) {
       if (segment.endsWith(']')) {
-        tempArray.push(segment.slice(0, -1));
+        tempArray.push(segment.slice(0, -1).trim());
         result.push(tempArray);
         tempArray = [];
         isInArray = false;
       } else {
-        tempArray.push(segment);
+        tempArray.push(segment.trim());
       }
     } else if (segment.startsWith('[')) {
       if (segment.endsWith(']')) {
-        result.push(segment.slice(1, -1));
+        result.push(segment.slice(1, -1).trim());
       } else {
-        tempArray.push(segment.slice(1));
+        tempArray.push(segment.slice(1).trim());
         isInArray = true;
       }
     } else {
@@ -149,7 +202,7 @@ function parseParams(params) {
  * Renders nano blocks
  * @param parent The parent element
  */
-export function renderNanoBlocks(parent = document.body) {
+export function renderNanoBlocks(parent = document.body, model = undefined) {
   const regex = /{([^}]+)}/g;
   findTextNodes(parent).forEach((node) => {
     const text = node.textContent.trim();
@@ -159,7 +212,8 @@ export function renderNanoBlocks(parent = document.body) {
         const [name, ...params] = parseParams(match.slice(1, -1));
         const renderer = nanoBlocks.get(name.toLowerCase());
         if (renderer) {
-          const element = renderer(...params);
+          const element = model ? renderer(...params, model) : renderer(...params);
+          element.classList.add('nanoblock');
           const oldElement = node.parentNode;
           oldElement.parentNode.replaceChild(element, oldElement);
         }
