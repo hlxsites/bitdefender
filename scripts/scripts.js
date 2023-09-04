@@ -179,11 +179,11 @@ export function pushProductsToDataLayer() {
 
 export function decorateBlockWithRegionId(element, id) {
   // we could consider to use `element.setAttribute('s-object-region', id);` in the future
-  element.id = id;
+  if (element) element.id = id;
 }
 
 export function decorateLinkWithLinkTrackingId(element, id) {
-  element.setAttribute('s-object-id', id);
+  if (element) element.setAttribute('s-object-id', id);
 }
 
 /**
