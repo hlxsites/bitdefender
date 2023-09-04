@@ -21,11 +21,11 @@ const VARIANT_SELECTION_CHANGED = 'variantSelectionChanged';
  */
 
 function customRound(value) {
-  const numValue = parseFloat(value);  // Convert to number if it's a string
+  const numValue = parseFloat(value);
 
-  if (isNaN(numValue)) {
+  if (Number.isNaN(numValue)) {
     console.error('The value passed to customRound is not a number:', value);
-    return value;  // return the value as-is or handle it appropriately
+    return value;
   }
 
   // Convert to a fixed number of decimal places then back to a number to deal with precision issues
