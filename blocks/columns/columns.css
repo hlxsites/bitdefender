@@ -344,6 +344,10 @@
   background-color: black;
 }
 
+.section.wide.light-sky-blue.columns-container {
+  height: auto;
+}
+
 .linear-gradient.columns-container[data-bg-image]{
   background-size: cover;
   background-position: center;
