@@ -23,68 +23,6 @@ export function createTag(tag, attributes, html) {
   return el;
 }
 
-// export async function findProductVariant(product, variant) {
-//   // eslint-disable-next-line guard-for-in,no-restricted-syntax
-//   for (const i in product.variations) {
-//     // eslint-disable-next-line guard-for-in,no-restricted-syntax
-//     for (const j in product.variations[i]) {
-//       const v = product.variations[i][j];
-//       if (v.variation.variation_name === variant) {
-//         return v;
-//       }
-//     }
-//   }
-
-//   throw new Error('Variant not found');
-// }
-
-// /**
-//  * Fetches a product from the Bitdefender store.
-//  * @param code The product code
-//  * @returns {Promise<*>}
-//  */
-// export async function fetchProduct(code) {
-//   const cacheKey = `${code}`;
-//   const data = new FormData();
-//   data.append('data', JSON.stringify({
-//     ev: 1,
-//     product_id: code,
-//     config: {
-//       extra_params: {
-//         pid: null,
-//       },
-//     },
-//   }));
-
-//   let cachedResponse;
-//   if (cacheResponse.has(cacheKey)) {
-//     cachedResponse = cacheResponse.get(cacheKey);
-//   } else {
-//     // we don't await the response here, because we want to cache it
-//     cachedResponse = fetch(FETCH_URL, {
-//       method: 'POST',
-//       body: data,
-//     });
-
-//     cacheResponse.set(cacheKey, cachedResponse);
-//   }
-
-//   const response = await cachedResponse;
-//   if (!response.ok) throw new Error(`${response.statusText}`);
-//   return response.clone().json().data.product;
-// }
-
-// /**
-//  * Fetches a product variant from the Bitdefender store.
-//  * @param code The product code
-//  * @param variant The product variant
-//  * @returns {Promise<*>}
-//  */
-// export async function fetchProductVariant(code, variant) {
-//   const product = fetchProduct(code);
-//   return findProductVariant(product, variant);
-// }
-
 async function findProductVariant(cachedResponse, variant) {
   const response = await cachedResponse;
   if (!response.ok) throw new Error(`${response.statusText}`);
