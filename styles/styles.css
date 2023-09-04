@@ -873,6 +873,11 @@ main .section.full-width {
   margin-bottom: 15px;
 }
 
+.products-container h2 {
+  font-weight: var(--font-weight-bolder);
+  font-size: var(--heading-font-size-m);
+}
+
 main .terms-of-use h5 {
   display: inline-block;
 }

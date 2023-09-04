@@ -71,8 +71,13 @@
 .product-card h3 {
   font-weight: var(--font-weight-regular);
   flex: 1;
-  font-size: var(--heading-font-size-s);
+  font-size: var(--heading-font-size-m);
   margin-top: 0;
+}
+
+
+.products .product-card.featured h3 {
+  font-size: var(--body-font-size-s);
 }
 
 .products.plans h3 {
@@ -85,6 +90,7 @@
 }
 
 .products.compact .product-card h3, .products.plans .product-card h3 {
+  font-size: var(--body-font-size-s);
   margin: 0;
   flex: 0;
 }
@@ -122,7 +128,7 @@
   color: white;
   background-color: #218728;
   border-radius: 15px;
-  font-size: var(--body-font-size-xs);
+  font-size: var(--body-font-size-xxs);
   padding: 5px 15px;
   font-weight: bold;
   display: inline-block;
@@ -390,4 +396,12 @@
 .product-card .icon {
   width: 15px;
   height: 15px;
+}
+
+.product-card.featured .icon {
+  transform: translateY(0);
+  width: 22px;
+  height: 22px;
+  margin-right: 10px;
+  filter: invert(78%) sepia(11%) saturate(298%) hue-rotate(183deg) brightness(83%) contrast(87%);
 }
