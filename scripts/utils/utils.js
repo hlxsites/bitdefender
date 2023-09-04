@@ -202,7 +202,7 @@ function parseParams(params) {
  * Renders nano blocks
  * @param parent The parent element
  */
-export function renderNanoBlocks(parent = document.body, model = undefined) {
+export function renderNanoBlocks(parent = document.body, mv = undefined) {
   const regex = /{([^}]+)}/g;
   findTextNodes(parent).forEach((node) => {
     const text = node.textContent.trim();
@@ -212,7 +212,7 @@ export function renderNanoBlocks(parent = document.body, model = undefined) {
         const [name, ...params] = parseParams(match.slice(1, -1));
         const renderer = nanoBlocks.get(name.toLowerCase());
         if (renderer) {
-          const element = model ? renderer(...params, model) : renderer(...params);
+          const element = mv ? renderer(mv, ...params) : renderer(...params);
           element.classList.add('nanoblock');
           const oldElement = node.parentNode;
           oldElement.parentNode.replaceChild(element, oldElement);

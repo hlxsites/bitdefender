@@ -130,7 +130,7 @@
   margin-bottom: 10px;
 }
 
-.products.compact .product-card .featured {
+:is(.products.compact, .products.plans) .product-card .featured {
   align-self: center;
   margin: 10px 0 15px;
 }
