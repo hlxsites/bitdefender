@@ -645,9 +645,9 @@ header a.button:hover span.button-text {
 .nav-brand p a::before {
   content: "";
   position: absolute;
-  bottom: 3px;
-  height: 4px;
-  background: var(--color-highlight-blue);  /* You can adjust this color as needed */
+  top: 25px;
+  height: 3px;
+  background: var(--color-highlight-blue);
   transition: all .3s ease;
   width: 100%;
   transform: scaleX(0);
@@ -677,7 +677,7 @@ header a.button:hover span.button-text {
 }
 
 .nav-sections p::before,
-.nav-brand p::before {
+.nav-brand p:not(:first-child)::before {
   content: "";
   position: absolute;
   top: 0;
