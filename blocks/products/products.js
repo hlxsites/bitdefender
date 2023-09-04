@@ -258,7 +258,7 @@ function renderLowestPrice(code, variant) {
   fetchProduct(code, variant).then((product) => {
     trackProduct(product);
     // eslint-disable-next-line max-len
-    const price = ((product.discount ? product.discount.discount_value : product.price) / 12).toFixed(2);
+    const price = customRound((product.discount ? product.discount.discount_value : product.price) / 12);
     root.innerHTML = `Start today for as low as  ${price} ${product.currency_label}/mo`;
   });
 
