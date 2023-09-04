@@ -125,6 +125,15 @@ export function pushProductsToDataLayer() {
   }
 }
 
+export function decorateBlockWithRegionId(element, id) {
+  // we could consider to use `element.setAttribute('s-object-region', id);` in the future
+  element.id = id;
+}
+
+export function decorateLinkWithLinkTrackingId(element, id) {
+  element.setAttribute('s-object-id', id);
+}
+
 /**
  * Decorates picture elements with a link to a video.
  * @param {Element} main The main element
