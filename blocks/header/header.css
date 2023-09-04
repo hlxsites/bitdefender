@@ -641,7 +641,7 @@ header a.button:hover span.button-text {
     margin-left: 0;
   }
 
-  .nav-sections p a::before,
+.nav-sections p a::before,
 .nav-brand p a::before {
   content: "";
   position: absolute;
@@ -657,7 +657,8 @@ header a.button:hover span.button-text {
 
 .nav-sections p a:hover::before,
 .nav-brand p a.active::before,
-.nav-brand p a:hover::before {
+.nav-brand p a:hover::before,
+.nav-sections p.clicked a::before {
   transform: scaleX(1);    
   transform-origin: left;
 }
