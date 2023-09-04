@@ -316,6 +316,8 @@ header a.button:hover span.button-text {
   margin-left: 25px;
 }
 
+
+
 .mega-menu > div:first-child {
   display: grid;
   grid-template-rows: auto auto;
@@ -482,7 +484,7 @@ header a.button:hover span.button-text {
 .options-wrapper.show .sub-menu-title {
   font-size: var(--body-font-size-xs);
   font-weight: var(--font-weight-bold);
-  margin-left: 30px;
+  margin-left: 20px;
   padding-left: 20px; 
   position: relative;
 }
@@ -586,6 +588,7 @@ header a.button:hover span.button-text {
     gap: 0;
   }
 
+
   .nav-brand a,
   .nav-sections a {
   color: var(--horizontal-separator-color);
@@ -611,6 +614,16 @@ header a.button:hover span.button-text {
 
   .nav-brand p a {
     margin: 0 12px;
+  }
+
+  .mega-menu div h2 > a {
+    transition: all 0.2s ease-in-out;
+    border-radius: 3px;
+    text-decoration: none;
+    padding: 7px 10px;
+    color: var(--link-color);
+    font-size: var(--body-font-size-xs);
+    font-weight: var(--font-weight-bold);
   }
 
   .mega-menu div p a{
@@ -641,7 +654,11 @@ header a.button:hover span.button-text {
     transition: all 0.2s ease-in-out;
     animation: animate-bottom-border 0.3s linear forwards;
   }
-  
+
+  .mega-menu div h2 > a:hover {
+    background-color: var(--highlight-light-blue);
+  }
+
   .nav-sections p:last-child:hover::after {
     width: 50px;
   }
@@ -738,7 +755,7 @@ header a.button:hover span.button-text {
     font-weight: var(--font-weight-boldest);
     line-height: 18px;
     padding: 7px 10px;
-    margin: 10px 25px 0 19px;
+    margin: 10px 25px 0 15px;
   }
 
   .other-options > div:nth-child(5) {

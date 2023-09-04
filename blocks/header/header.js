@@ -251,10 +251,13 @@ function handleMenuClick() {
     // Find the h2 within this div and assign its innerHTML to the title of menuOption
     const h2 = div.querySelector('h2');
     if (h2) {
-      menuOption.title = h2.innerHTML;
+      menuOption.title = h2.childNodes[0].textContent.trim();
+
+      // find all links that are not children of h2
+      const links = div.querySelectorAll('a:not(h2 a)');
 
       // Find all a tags within this div
-      const links = div.querySelectorAll('a');
+      // const links = div.querySelectorAll('a');
       if (links.length > 0) {
         menuOption.subMenu = [];
 
