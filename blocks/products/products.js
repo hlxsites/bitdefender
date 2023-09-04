@@ -19,6 +19,22 @@ const VARIANT_SELECTION_CHANGED = 'variantSelectionChanged';
  * @param label Label
  * @returns Root node of the nanoblock
  */
+
+function customRound(value) {
+  const numValue = parseFloat(value);  // Convert to number if it's a string
+
+  if (isNaN(numValue)) {
+    console.error('The value passed to customRound is not a number:', value);
+    return value;  // return the value as-is or handle it appropriately
+  }
+
+  // Convert to a fixed number of decimal places then back to a number to deal with precision issues
+  const roundedValue = Number(numValue.toFixed(2));
+
+  // If it's a whole number, return it as an integer
+  return (roundedValue % 1 === 0) ? Math.round(roundedValue) : roundedValue;
+}
+
 function renderPrice(code, variant, label) {
   const priceRoot = document.createElement('div');
   priceRoot.classList.add('price');
@@ -36,7 +52,7 @@ function renderPrice(code, variant, label) {
       if (product.discount) {
         // eslint-disable-next-line camelcase
         oldPriceElement.innerText = `${product.price} ${product.currency_label}`;
-        priceElement.innerHTML = `${Math.round(product.discount.discount_value)} ${product.currency_label} <em>${label}</em>`;
+        priceElement.innerHTML = `${customRound(product.discount.discount_value)} ${product.currency_label} <em>${label}</em>`;
       } else {
         priceElement.innerHTML = `${product.price} ${product.currency_label} <em>${label}</em>`;
       }
@@ -60,9 +76,9 @@ function renderProductPrice(product) {
   // eslint-disable-next-line no-else-return
   } else {
     const productDiscount = product.price - product.discount.discounted_price;
-    return `<strong>${Math.round(product.discount.discount_value)} ${product.currency_label}</strong>
-        <span class="old-price">Old Price <del>${Math.round(product.price)} ${product.currency_label}</del></span>
-        <span class="discount">Save ${Math.round(productDiscount)} ${product.currency_label}</span>`;
+    return `<strong>${customRound(product.discount.discount_value)} ${product.currency_label}</strong>
+        <span class="old-price">Old Price <del>${customRound(product.price)} ${product.currency_label}</del></span>
+        <span class="discount">Save ${customRound(productDiscount)} ${product.currency_label}</span>`;
   }
 }
 
@@ -90,7 +106,7 @@ function renderLowestPrice(code, variant) {
   fetchProduct(code, variant).then((product) => {
     trackProduct(product);
     // eslint-disable-next-line max-len
-    const price = Math.round((product.discount ? product.discount.discount_value : product.price) / 12);
+    const price = customRound((product.discount ? product.discount.discount_value : product.price) / 12);
     root.innerHTML = `Start today for as low as  ${price} ${product.currency_label}/mo`;
   });
 
