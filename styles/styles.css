@@ -778,7 +778,7 @@ main .section.cta, .section.columnar {
 }
 
 .columnar-container {
-  padding: 0 20px;
+  padding: 0 0 0 20px;
   display: flex;
   flex-direction: column;
   max-width: 1300px;
@@ -793,7 +793,7 @@ main .section.cta, .section.columnar {
 
 @media (min-width: 992px) {
   .columnar-container {
-    padding: 0 50px;
+    padding: 0 0 0 50px;
     flex-direction: row;
   }
 }
@@ -822,6 +822,10 @@ main .section.cta, .section.columnar {
   justify-content: flex-end;
 }
 
+.image-overflow .columnar-container .img-container {
+  height: 230px;
+}
+
 @media (min-width: 992px) {
   .columnar-container .right-col {
     flex: 0 1 43%;
@@ -841,14 +845,23 @@ main .section.cta, .section.columnar {
 @media (min-width: 596px) {
   .columnar-container .img-container {
     display: flex;
-    min-width: 491px;
-    min-height: 480px;
+  }
+}
+
+@media (min-width: 768px) {
+  .image-overflow .columnar-container .img-container {
+    height: 360px;
+  }
+}
+
+@media (min-width: 992px) {
+  .image-overflow .columnar-container .img-container {
+    height: 430px;
   }
 }
 
 @media (min-width: 1600px) {
-  .columnar-container .img-container {
-    width: 491px;
+  .image-overflow .columnar-container .img-container {
     height: 480px;
   }
 }
