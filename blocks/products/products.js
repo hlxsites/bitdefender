@@ -299,4 +299,24 @@ export default function decorate(block) {
   if (defaultContent) {
     renderNanoBlocks(defaultContent);
   }
+
+  // style the product card if the author has added a featured card inside
+  [...block.querySelectorAll('.product-card .featured')].forEach((featured) => {
+    featured.closest('.product-card').classList.add('featured');
+  });
+
+  // add class to avoid using :has selector
+  block.querySelectorAll('.product-card li').forEach((li) => {
+    if (li.querySelector('del')) {
+      li.classList.add('with-del');
+    } else {
+      li.classList.remove('with-del');
+    }
+  });
+
+  block.querySelectorAll('.product-card ul').forEach((ul) => {
+    if (ul.previousElementSibling?.tagName === 'P') {
+      ul.previousElementSibling.classList.add('ul-header-text');
+    }
+  });
 }
