@@ -2,6 +2,8 @@ import {
   getMetadata, decorateIcons, decorateButtons, decorateTags,
 } from '../../scripts/lib-franklin.js';
 
+import { decorateBlockWithRegionId, decorateLinkWithLinkTrackingId } from '../../scripts/scripts.js';
+
 function createLoginModal() {
   const loginModal = document.querySelector('nav > div:nth-child(4)');
   loginModal.classList.add('login-modal');
@@ -58,6 +60,7 @@ function wrapDivsInMegaMenu() {
   const navSectionsIndex = divs.findIndex((div) => div.classList.contains('nav-sections'));
   const megaMenuDiv = document.createElement('div');
   megaMenuDiv.className = 'mega-menu';
+  decorateBlockWithRegionId(megaMenuDiv, 'Main Menu|Home Solutions');
 
   const otherOptionsDiv = document.createElement('div');
   otherOptionsDiv.className = 'other-options';
@@ -133,9 +136,11 @@ function buildMegaMenu() {
 
 function renderDesktopHeader(block, nav) {
   const navSections = nav.querySelector('.nav-sections');
+  const navBrand = nav.querySelector('.nav-brand');
   const navBrandLinks = nav.querySelectorAll('.nav-brand a');
 
   if (navSections) {
+    decorateBlockWithRegionId(navSections, 'Main Menu|General Links');
     const loginLink = document.querySelector('.nav-sections p:last-child');
     loginLink.addEventListener('click', (e) => {
       e.preventDefault();
@@ -143,7 +148,8 @@ function renderDesktopHeader(block, nav) {
     });
   }
 
-  if (navBrandLinks && navBrandLinks.length > 0) {
+  if (navBrand && navBrandLinks && navBrandLinks.length > 0) {
+    decorateBlockWithRegionId(navBrand, 'Main Menu|Brands');
     const forHomeLink = Array.from(navBrandLinks)[0];
     if (forHomeLink) {
       forHomeLink.classList.add('active');
@@ -257,7 +263,6 @@ function handleMenuClick() {
       const links = div.querySelectorAll('a:not(h2 a)');
 
       // Find all a tags within this div
-      // const links = div.querySelectorAll('a');
       if (links.length > 0) {
         menuOption.subMenu = [];
 
@@ -389,12 +394,9 @@ export default async function decorate(block) {
     });
 
     decorateButtons(nav);
-
     renderMobileHeader(nav);
     renderDesktopHeader(block, nav);
-
     decorateIcons(nav);
-
     decorateTags(nav);
 
     // Select the parent elements
@@ -409,6 +411,7 @@ export default async function decorate(block) {
 
     const container = document.createElement('div');
     container.classList.add('logo-container');
+    decorateBlockWithRegionId(container, 'Main Menu|Logo Container');
     container.appendChild(thirdChild);
 
     if (header.querySelector('p.home-solutions-link-default')) {
@@ -420,6 +423,7 @@ export default async function decorate(block) {
   // assign an aria-label to the a tag inside of .logo
   const logoLink = document.querySelector('.logo a');
   logoLink.setAttribute('aria-label', 'Logo');
+  decorateLinkWithLinkTrackingId(logoLink, 'Bitdefender Logo');
 
   const secondSpan = document.querySelector('.header-wrapper > div > p span:nth-child(2)');
   if (secondSpan) {
