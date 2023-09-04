@@ -62,7 +62,7 @@
 }
 
 .barchart-body > ul > li {
-  font-size: 14px;
+  font-size: var(--body-font-size-xs);
   font-weight: var(--font-weight-bold);
 }
 
