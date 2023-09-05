@@ -237,7 +237,8 @@
   text-decoration: underline;
 }
 
-.product-card .price {
+.product-card .price:last-of-type {
+  font-weight: 700;
   margin-bottom: 15px;
 }
 
