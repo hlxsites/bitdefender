@@ -103,14 +103,21 @@
 }
 
 .product-card h4 {
-  font-weight: var(--body-weight-boldest);
+  font-weight: var(--font-weight-boldest);
   font-size: var(--body-font-size-xs);
+  color: var(--black-color);
 }
 
 .products.compact .product-card h4, .products.plans .product-card h4 {
-  font-weight: var(--body-weight-normal);
+  font-weight: var(--font-weight-regular);
   font-size: var(--body-font-size-s);
   margin: 5px;
+}
+.two-columns .columns .products.plans .product-card h4 {
+  font-size: var(--body-font-size-xs);
+  font-weight: var(--font-weight-boldest);
+  line-height: 1.71;
+  letter-spacing: .07pc;
 }
 
 .product-card h5 {
@@ -263,8 +270,11 @@
 .product-card hr {
   margin: 10px;
   border-bottom: 1px solid #e5e7eb;
+  width: 100%;
 }
-
+.two-columns .columns .product-card hr {
+  border-color: #dedede;
+}
 .product-card .button-container {
   margin: 25px 0 5px;
 }
@@ -277,6 +287,21 @@
   width: 100% !important;
   display: flex;
   justify-content: center;
+}
+main .section.two-columns .right-col .products.plans a.button:any-link {
+  background-color: var(--button-background-color);
+  border: 2px solid var(--button-background-color);
+}
+
+.two-columns .left-col p a.info-button.modal {
+  color: var(--white-color);
+}
+
+.two-columns .left-col p a.info-button.modal::before {
+  content: url(/icons/user-guide-white.svg);
+  display: inline;
+  color: white;
+  padding-right: 8px;
 }
 
 .product-card .button-text {
@@ -335,7 +360,42 @@
   .products.compact, .products.plans {
     --max-columns: 3;
   }
+
+  .wide .products.plans {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    --max-columns: none;
+  }
+
+  .wide .products.plans .product-card {
+    max-width: 380px;
+  }
+
+  .two-columns .products.plans.right-column {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    --max-columns: none;
+  }
+  .two-columns .columns > div {
+    align-items: flex-start;
+  }
+  .two-columns .left-col {
+    flex: 60;
+  }
+  .two-columns .right-col {
+    flex: 40;
+  }
+
+  .two-columns .right-col .products.plans .product-card {
+    max-width: 410px;
+    width: 100%;
+    text-align: center;
+  }
+
 }
+
 
 @media (min-width: 1200px) { /* desktop variation */
   .products:not(.compact) .product-card img {
