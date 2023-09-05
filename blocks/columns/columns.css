@@ -235,6 +235,23 @@
   padding-top: 1px;
 }
 
+.columns.vpn-presentation .button-container, 
+.columns.vpn-presentation .info-button-container{
+  display: inline-block;
+  padding-right: 13px;
+  margin-top: 13px;
+}
+
+.columns.vpn-presentation .left-col {
+  margin-bottom: 40px;
+}
+
+@media (min-width: 992px) {
+  .columns.vpn-presentation .left-col {
+    margin-bottom: 0;
+  }
+}
+
 .section.bullet-points.columns-container ul {
   list-style: disc;
 }
@@ -398,4 +415,27 @@
 
 .columns.highlight-text.black.block > div > div:first-child {
   font-size: var(--heading-font-size-l);
+}
+
+
+main .section.two-columns .right-col .products.plans a.button:any-link {
+  background-color: var(--button-background-color);
+  border: 2px solid var(--button-background-color);
+}
+
+.two-columns .left-col p a.info-button.modal {
+  color: var(--white-color);
+  display: flex;
+  font-weight: var(--font-weight-regular);
+}
+
+.two-columns .left-col p a.info-button.modal:hover {
+  opacity: .8;
+}
+
+
+.two-columns .left-col p a.info-button.modal::before {
+  content: url("/icons/user-guide-white.svg");
+  color: white;
+  padding-right: 8px;
 }

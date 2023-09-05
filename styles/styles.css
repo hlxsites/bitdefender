@@ -894,6 +894,21 @@ main .section.blue {
   padding-bottom: 64px;
 }
 
+main .section.blue a.button.modal {
+  background-color: transparent;
+  border: none;
+  color: var(--white-color);
+  font-weight: var(--font-weight-regular);
+}
+
+main .section.blue a.button.modal:hover {
+  opacity: .8;
+}
+
+main .section.blue a.button.modal::after {
+  content: none;
+}
+
 @media (min-width: 992px) {
   main .section.blue {
     padding-top: 96px;
