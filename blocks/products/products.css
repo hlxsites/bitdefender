@@ -28,6 +28,10 @@
   flex-flow: column;
 }
 
+.product-card > * {
+  flex: 0;
+}
+
 .product-card > *:not(.button-container) {
   flex-grow: 0;
 }
@@ -37,6 +41,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  margin: 25px 0 5px;
 }
 
 .products.compact .product-card, .products.plans .product-card {
@@ -88,10 +93,6 @@
 .product-card ul.variant-selector > p {
   font-size: 9pt;
   padding: 11px 0;
-}
-
-.product-card > * {
-  flex: 0;
 }
 
 .product-card h3 {
@@ -299,10 +300,6 @@
 .product-card hr {
   margin: 10px;
   border-bottom: 1px solid #e5e7eb;
-}
-
-.product-card .button-container {
-  margin: 25px 0 5px;
 }
 
 .product-card .button-container ~ .button-container {
