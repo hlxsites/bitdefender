@@ -113,6 +113,10 @@
   display: block;
 }
 
+.section.bullet-points.columns-container ul {
+  list-style: disc;
+}
+
 @media (min-width: 767px) {
   .columns.benefits > div {
     flex-direction: unset;
