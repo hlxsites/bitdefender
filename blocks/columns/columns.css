@@ -43,7 +43,7 @@
 /* awards styling */
 .columns.awards > div {
   row-gap: 30px;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .text-over-image > div > div:first-child {
@@ -210,7 +210,7 @@
 
 .columns.awards > div img {
   display: block;
-  height: 56px;
+  height: 100%;
   object-fit: contain;
 }
 
