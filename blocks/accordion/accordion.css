@@ -8,7 +8,7 @@
 
 .accordion .accordion-item {
   margin: 16px 0;
-  padding: 18px 20px;
+  padding: 18px 54px;
   border-radius: 10px;
   border-color: rgb(229 231 235);
   border-width: 0;
@@ -44,7 +44,7 @@
   transition: top .3s ease-in-out,transform .3s ease-in-out,-webkit-transform .3s ease-in-out;
 }
 
-.accordion-item .accordion-item-header > :nth-child(1) {
+.accordion-item .accordion-item-header > h3 {
   display: inline-block;
 }
 
@@ -105,37 +105,7 @@
   display: block;
 }
 
-.accordion .accordion-item-header > :nth-child(1) {
-  margin-bottom: 0;
-  font-size: var(--heading-font-size-xs);
-  flex: 1;
-}
-
-.accordion.faq .accordion-item-header > :nth-child(1) {
-  margin-bottom: 15px;
-}
-
-.accordion.terms-of-use .accordion-item-header > :nth-child(1) {
-  font-size: var(--heading-font-size-xxs);
-  margin-bottom: 0;
-}
-
-@media (min-width: 767px) { /* tablet */
-  .accordion .accordion-item {
-    padding: 18px 54px;
-  }
-
-  .accordion .accordion-item-header > :nth-child(1) {
-    font-size: var(--heading-font-size-s);
-  }
-
-  .accordion.terms-of-use .accordion-item-header > :nth-child(1) {
-    font-size: var(--heading-font-size-xs);
-  }
-}
-
 @media (min-width: 992px) { /* desktop */
-
   .accordion .accordion-item-header h3 {
     font-size: var(--heading-font-size-s);
   }
@@ -149,20 +119,12 @@
     padding: 0 var(--section-desktop-padding);
     margin: 0 auto;
   }
-
-  .accordion .accordion-item-header > :nth-child(1) {
-    font-size: var(--heading-font-size-m);
-  }
 }
 
 @media (min-width: 1600px) { /* large desktop */
   .accordion-wrapper {
     max-width: var(--section-large-desktop-max-width);
     padding: 0 var(--section-large-desktop-padding);
-  }
-
-  .accordion .accordion-item-header > :nth-child(1) {
-    font-size: var(--heading-font-size-l);
   }
 }
 
