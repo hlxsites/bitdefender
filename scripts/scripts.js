@@ -381,8 +381,8 @@ function pushPageLoadToDataLayer() {
         domainPeriod: hostname.split('.').length,
       },
     },
-});
-
+  });
+}
 
 /**
  * Loads everything needed to get to LCP.

@@ -113,12 +113,7 @@
   font-size: var(--body-font-size-s);
   margin: 5px;
 }
-.two-columns .columns .products.plans .product-card h4 {
-  font-size: var(--body-font-size-xs);
-  font-weight: var(--font-weight-boldest);
-  line-height: 1.71;
-  letter-spacing: .07pc;
-}
+
 
 .product-card h5 {
   font-weight: normal;
@@ -272,9 +267,11 @@
   border-bottom: 1px solid #e5e7eb;
   width: 100%;
 }
+
 .two-columns .columns .product-card hr {
   border-color: #dedede;
 }
+
 .product-card .button-container {
   margin: 25px 0 5px;
 }
@@ -288,6 +285,7 @@
   display: flex;
   justify-content: center;
 }
+
 main .section.two-columns .right-col .products.plans a.button:any-link {
   background-color: var(--button-background-color);
   border: 2px solid var(--button-background-color);
@@ -298,7 +296,7 @@ main .section.two-columns .right-col .products.plans a.button:any-link {
 }
 
 .two-columns .left-col p a.info-button.modal::before {
-  content: url(/icons/user-guide-white.svg);
+  content: url("/icons/user-guide-white.svg");
   display: inline;
   color: white;
   padding-right: 8px;
@@ -365,6 +363,7 @@ main .section.two-columns .right-col .products.plans a.button:any-link {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+
     --max-columns: none;
   }
 
@@ -376,14 +375,18 @@ main .section.two-columns .right-col .products.plans a.button:any-link {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+
     --max-columns: none;
   }
+
   .two-columns .columns > div {
     align-items: flex-start;
   }
+
   .two-columns .left-col {
     flex: 60;
   }
+
   .two-columns .right-col {
     flex: 40;
   }
@@ -484,6 +487,14 @@ main .section.two-columns .right-col .products.plans a.button:any-link {
   font-weight: var(--font-weight-bold);
 }
 
+.two-columns .columns .products.plans .product-card h4 {
+  font-size: var(--body-font-size-xs);
+  font-weight: var(--font-weight-boldest);
+  line-height: 1.71;
+  letter-spacing: .07pc;
+}
+
+
 .products.compare .product-card hr {
   margin-top: 40px;
   margin-bottom: 50px;
@@ -504,7 +515,7 @@ main .section.two-columns .right-col .products.plans a.button:any-link {
 
 .products.compare .product-card ul li u {
   text-decoration: none;
-  font-size: 20px;
+  font-size: var(--body-font-size-s);
 }
 
 .products.compare .product-card ul li.icon-important::before {
@@ -515,7 +526,7 @@ main .section.two-columns .right-col .products.plans a.button:any-link {
   justify-content: center;
   flex: 0 0 13px;
   left: 0;
-  top: 2px;
+  top: 3px;
   border-radius: 50%;
   border: 2px solid var(--black-color);
   width: 13px;
