@@ -12,6 +12,14 @@
   order: 1;
 }
 
+.columns.highlight-text.black {
+  background-color: var(--black-color);
+  padding: 25px 2pc 20px 30px;
+  text-align: left;
+  position: absolute;
+  width: 100%;
+}
+
 .text-over-image > div > div {
   height: 600px;
   border-radius: 12px;
@@ -20,12 +28,72 @@
   color: var(--white-color);
   padding: 30px;
   justify-content: flex-end;
-  background-size: cover; 
-  background-repeat: no-repeat; 
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .columns.carousel > div {
   flex-direction: row;
+}
+
+.columns.benefits > div {
+  align-items: flex-start;
+}
+
+/* awards styling */
+.columns.awards > div {
+  row-gap: 30px;
+  align-items: flex-start;
+}
+
+.text-over-image > div > div:first-child {
+  font-size: var(--heading-font-size-s);
+  margin-bottom: -10px;
+}
+
+.columns.benefits h3 {
+  font-size: var(--heading-font-size-m);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.25;
+}
+
+.columns.awards > div > div {
+  flex-direction: column;
+  width: 100%;
+  flex: 1;
+  line-height: 1.13;
+  text-align: center;
+  margin: 0 10px;
+}
+
+/* video presentation */
+.columns.video-presentation > div > div {
+  margin: 0 auto;
+}
+
+.columns.carousel > div > div {
+  margin: 10px 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.columns.with-box-shadow > div > div{
+  padding: 0 20px;
+  border-right: none;
+  border-bottom: 2px solid var(--overlay-background-color);
+}
+
+.columns.carousel > div:nth-child(1) {
+  position: relative;
+  left: 0;
+  gap: 0;
+  transition: transform 0.3s ease-in-out;
+  height: 200px;
+}
+
+.columns.bg-image > div > div:first-child {
+  font-size: var(--heading-font-size-xl);
+  font-weight: bold;
 }
 
 .columns img {
@@ -43,6 +111,20 @@
 
 .columns > div > .columns-img-col img {
   display: block;
+}
+
+@media (min-width: 767px) {
+  .columns.benefits > div {
+    flex-direction: unset;
+    gap: 32px;
+  }
+
+  .columns.highlight-text.black {
+    width: 520px;
+    right: 2.5%;
+    top: 15%;
+    border-radius: 5px;
+  }
 }
 
 @media (min-width: 992px) { /* desktop */
@@ -63,6 +145,11 @@
     padding: 0 var(--section-desktop-padding);
     margin: 0 auto;
   }
+
+  .columns.highlight-text.black { 
+    right: 10%;
+    top: 10%;
+  }
 }
 
 @media (min-width: 1600px) { /* large desktop */
@@ -72,67 +159,30 @@
   }
 }
 
-/* Features cards */
+/* Benefits columns (icon, text, description) */
 
-.columns.features > p {
+.columns.benefits > p {
   margin-bottom: 0;
   margin-top: 0;
 }
 
-.columns.features > div {
-  align-items: flex-start;
-}
-
-.columns.features > .icon {
+.columns.benefits > .icon {
   width: unset;
   max-width: 66px;
   margin-bottom: 16px;
 }
 
-.columns.features p {
+.columns.benefits p {
   font-size: var(--body-font-size-s);
   line-height: 1.5;
   letter-spacing: .006em;
   font-weight: var(--font-weight-regular);
 }
 
-.text-over-image > div > div h3 {
-  font-size: var(--heading-font-size-s);
-  margin-bottom: -10px;
-}
-
-.columns.features h3 {
-  font-size: var(--heading-font-size-m);
-  font-weight: var(--font-weight-bold);
-  line-height: 1.25;
-}
-
-@media (min-width: 767px) {
-  .columns.features > div {
-    flex-direction: unset;
-    gap: 32px;
-  }
-}
-
 @media (min-width: 1271px) {
-  .columns.features p {
+  .columns.benefits p {
     font-size: 18px;
   }
-}
-
-/* awards styling */
-.columns.awards > div {
-  row-gap: 30px;
-  align-items: flex-start;
-}
-
-.columns.awards > div > div {
-  flex-direction: column;
-  width: 100%;
-  flex: 1;
-  line-height: 1.13;
-  text-align: center;
-  margin: 0 10px;
 }
 
 /* paragraph with image */
@@ -162,11 +212,6 @@
   display: block;
   height: 56px;
   object-fit: contain;
-}
-
-/* video presentation */
-.columns.video-presentation > div > div {
-  margin: 0 auto;
 }
 
 .columns.video-presentation .button-container {
@@ -226,24 +271,14 @@
   transition: all .4s ease-in-out;
 }
 
-.columns.carousel > div > div {
-  margin: 10px 5px;
-  width: 100%;
-  box-sizing: border-box; 
-}
-
-.columns.carousel > div:nth-child(1) {
-  position: relative;
-  left: 0;
-  gap: 0;
-  transition: transform 0.3s ease-in-out;
-  height: 200px;
+.columns.with-box-shadow > div > div:last-child{
+  border: none;
 }
 
 
 @media (min-width: 676px) {
   .columns.carousel > div > div {
-    transition: transform 0.3s, opacity 0.3s; 
+    transition: transform 0.3s, opacity 0.3s;
   }
 
   .columns.carousel > div:nth-child(1) {
@@ -265,6 +300,12 @@
   .slide-left {
     transform: translateX(-25%);
   }
+
+  .columns.with-box-shadow > div > div{
+    border-bottom: none;
+    border-right: 2px solid var(--overlay-background-color);
+    min-height: 350px;
+  }
 }
 
 .columns.carousel .active-button {
@@ -277,7 +318,7 @@
   text-align: center;
 }
 
-@media (min-width: 768px) { 
+@media (min-width: 768px) {
   .modal-container.get-bitdefender-familypack .columns.block.columns-2-cols > div {
     display: flex;
     flex: 1;
@@ -285,7 +326,7 @@
     order: unset;
     justify-content: center;
     align-items: center;
-  } 
+  }
 }
 
 .modal-container.modal-container.get-bitdefender-familypack .modal-content .section.columns-container {
@@ -297,7 +338,7 @@
   background-image: var(--bg-image-url);
   background-size: cover;
   background-position: center;
-  transition: padding-left 0.3s ease; 
+  transition: padding-left 0.3s ease;
   color: white;
   text-align: center;
   background-color: black;
@@ -306,7 +347,7 @@
 .linear-gradient.columns-container[data-bg-image]{
   background-size: cover;
   background-position: center;
-  transition: padding-left 0.3s ease; 
+  transition: padding-left 0.3s ease;
   color: white;
   background-image: none;
   background-color: black;
@@ -332,11 +373,6 @@
   font-style: bold;
 }
 
-.columns.bg-image > div > div > h3 {
-  font-size: var(--heading-font-size-xl);
-  font-style: bold;
-}
-
 .columns.bg-image .button-container {
   padding: 10px 0 0;
 }
@@ -347,4 +383,15 @@
 
 .columns.bg-image svg {
   filter: invert(1) grayscale(1) brightness(100);
+}
+
+.columns.with-box-shadow {
+  box-shadow: 0 3px 8px 0 rgb(0 0 0 / 20%);
+  border-radius: 5px;
+  padding: 35px 0;
+  color: var(--checkbox-label);
+}
+
+.columns.highlight-text.black.block > div > div:first-child {
+  font-size: var(--heading-font-size-l);
 }

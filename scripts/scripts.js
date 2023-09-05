@@ -28,6 +28,8 @@ export const DEFAULT_LANGUAGE = 'en';
 export const SUPPORTED_COUNTRIES = ['au'];
 export const DEFAULT_COUNTRY = 'au';
 
+export const METADATA_ANAYTICS_TAGS = 'analytics-tags';
+
 /**
  * Creates a meta tag with the given name and value and appends it to the head.
  * @param {String} name The name of the meta tag
@@ -47,6 +49,10 @@ export function getLanguageCountryFromPath() {
   };
 }
 
+/**
+ * Returns the current user operating system based on userAgent
+ * @returns {String}
+ */
 export function getOperatingSystem(userAgent) {
   const systems = [
     ['Windows NT 10.0', 'Windows 10'],
@@ -66,6 +72,54 @@ export function getOperatingSystem(userAgent) {
 }
 
 /**
+ * Returns the value of a query parameter
+ * @returns {String}
+ */
+function getParamValue(param) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(param);
+}
+
+/**
+ * Returns the current user time in the format HH:MM|HH:00-HH:59|dayOfWeek|timezone
+ * @returns {String}
+ */
+function getCurrentTime() {
+  const date = new Date();
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  const dayOfWeek = date.getDay();
+  const timezone = date.getTimezoneOffset();
+  return `${hours}:${minutes}|${hours}:00-${hours}:59|${dayOfWeek}|${timezone}`;
+}
+
+/**
+ * Returns the current GMT date in the format DD/MM/YYYY
+ * @returns {String}
+ */
+function getCurrentDate() {
+  const date = new Date();
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  return `${day}/${month}/${year}`;
+}
+
+/**
+ * Returns the environment name based on the hostname
+ * @returns {String}
+ */
+export function getEnvironment(hostname, country) {
+  if (hostname.includes('hlx.page') || hostname.includes('hlx.live')) {
+    return 'stage';
+  }
+  if (hostname.includes(`.${country}`)) {
+    return 'prod';
+  }
+  return 'dev';
+}
+
+/**
  * Sets the page language.
  * @param {Object} param The language and country
  */
@@ -75,32 +129,34 @@ function setPageLanguage(param) {
   createMetadata('footer', '/footer');
 }
 
-export function pushToDataLayer(data) {
-  if (!data || !data.event) {
+export function pushToDataLayer(event, payload) {
+  if (!event) {
     // eslint-disable-next-line no-console
     console.error('The data layer event is missing');
     return;
   }
-
   if (!window.adobeDataLayer) {
     window.adobeDataLayer = [];
     window.adobeDataLayerInPage = true;
   }
+  window.adobeDataLayer.push({ event, ...payload });
+}
 
-  window.adobeDataLayer.push(data);
+export function getTags(tags) {
+  return tags ? tags.split(':').filter((tag) => !!tag).map((tag) => tag.trim()) : [];
 }
 
 export function trackProduct(product) {
   // eslint-disable-next-line max-len
   const isDuplicate = TRACKED_PRODUCTS.find((p) => p.platform_product_id === product.platform_product_id && p.variation_id === product.variation_id);
-  const isTrackedPage = getMetadata('analytics-tracking') === 'product';
+  const tags = getTags(getMetadata(METADATA_ANAYTICS_TAGS));
+  const isTrackedPage = tags.includes('product') || tags.includes('service');
   if (isTrackedPage && !isDuplicate) TRACKED_PRODUCTS.push(product);
 }
 
 export function pushProductsToDataLayer() {
   if (TRACKED_PRODUCTS.length > 0) {
-    pushToDataLayer({
-      event: 'product loaded',
+    pushToDataLayer('product loaded', {
       product: TRACKED_PRODUCTS
         .map((p) => ({
           info: {
@@ -110,14 +166,24 @@ export function pushProductsToDataLayer() {
             subscription: p.variation.years * 12,
             version: p.variation.years ? 'yearly' : 'monthly',
             basePrice: +p.price,
-            discountValue: Math.round(p.price - p.discount.discounted_price),
-            discountRate: Math.floor(((p.price - p.discount.discounted_price) / p.price) * 100),
+            discountValue: p.discount ? Math.round(p.price - p.discount.discounted_price) : 0,
+            // eslint-disable-next-line max-len
+            discountRate: p.discount ? Math.floor(((p.price - p.discount.discounted_price) / p.price) * 100) : 0,
             currency: p.currency_iso,
-            priceWithTax: +p.discount.discounted_price,
+            priceWithTax: p.discount ? +p.discount.discounted_price : +p.price,
           },
         })),
     });
   }
+}
+
+export function decorateBlockWithRegionId(element, id) {
+  // we could consider to use `element.setAttribute('s-object-region', id);` in the future
+  if (element) element.id = id;
+}
+
+export function decorateLinkWithLinkTrackingId(element, id) {
+  if (element) element.setAttribute('s-object-id', id);
 }
 
 /**
@@ -284,6 +350,40 @@ function buildTwoColumnsSection(main) {
     .forEach(populateColumns);
 }
 
+function pushPageLoadToDataLayer() {
+  const { hostname } = window.location;
+  const languageCountry = getLanguageCountryFromPath(window.location.pathname);
+  const environment = getEnvironment(hostname, languageCountry.country);
+  const tags = getTags(getMetadata(METADATA_ANAYTICS_TAGS));
+  pushToDataLayer('page load started', {
+    pageInstanceID: environment,
+    page: {
+      info: {
+        name: [languageCountry.country, ...tags].join(':'), // e.g. au:consumer:product:internet security
+        section: languageCountry.country || '',
+        subSection: tags[0] || '',
+        subSubSection: tags[1] || '',
+        subSubSubSection: tags[2] || '',
+        destinationURL: window.location.href,
+        queryString: window.location.search,
+        referringURL: getParamValue('ref') || getParamValue('adobe_mc') || document.referrer || '',
+        serverName: 'hlx.live', // indicator for AEM Success Edge
+        language: navigator.language || navigator.userLanguage || languageCountry.language,
+        sysEnv: getOperatingSystem(window.navigator.userAgent),
+      },
+      attributes: {
+        promotionID: getParamValue('pid') || '',
+        internalPromotionID: getParamValue('icid') || '',
+        trackingID: getParamValue('cid') || '',
+        time: getCurrentTime(),
+        date: getCurrentDate(),
+        domain: hostname,
+        domainPeriod: hostname.split('.').length,
+      },
+    },
+});
+
+
 /**
  * Loads everything needed to get to LCP.
  * @param {Element} doc The container element
@@ -343,6 +443,7 @@ function loadDelayed() {
 }
 
 async function loadPage() {
+  pushPageLoadToDataLayer();
   await loadEager(document);
   await loadLazy(document);
   loadDelayed();

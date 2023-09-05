@@ -780,14 +780,21 @@ main .section.cta, .section.columnar {
 .columnar-container {
   padding: 0 20px;
   display: flex;
-  flex-flow: column;
+  flex-direction: column;
   max-width: 1300px;
   margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .image-overflow .columnar-container {
+    flex-direction: row;
+  }
 }
 
 @media (min-width: 992px) {
   .columnar-container {
     padding: 0 50px;
+    flex-direction: row;
   }
 }
 
@@ -798,10 +805,10 @@ main .section.cta, .section.columnar {
 }
 
 .columnar-container .left-col {
-  display: flex;
-  flex-direction: column;
   flex: 1 1 50%;
   justify-items: center;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-around;
 }
@@ -848,7 +855,7 @@ main .section.cta, .section.columnar {
 
 @media(min-width: 992px) {
   .columnar-container {
-    flex-flow: row;
+    flex-direction: row;
   }
 }
 
@@ -857,6 +864,13 @@ main .section.cta, .section.columnar {
 main .section.full-width {
   padding: 0;
   overflow: hidden;
+}
+
+.products-container h5 {
+  font-size: var(--heading-font-size-m);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-dark-gray);
+  margin-bottom: 15px;
 }
 
 main .terms-of-use h5 {
@@ -979,6 +993,10 @@ main .section.blue a.button.secondary::after {
   height: 437px;
 }
 
+.section.wide.light-sky-blue.columns-container.awards {
+  height: auto;
+}
+
 
 .tag {
   margin-left: 5px;
@@ -1009,4 +1027,22 @@ main .section.blue a.button.secondary::after {
 .icon-apple, .icon-android {
   width: 18px;
   transform: translateY(22px);
+}
+
+.section.wide.awards h2 {
+  font-weight: var(--font-weight-bold);
+}
+
+.section.big-image {
+  height: 760px;
+  padding: 0;
+}
+
+.section.big-image .columns-wrapper {
+  padding: 0;
+}
+
+.section.no-padding {
+  padding: 0;
+  padding-bottom: 10px;
 }
