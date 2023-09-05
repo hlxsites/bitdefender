@@ -27,6 +27,39 @@ function customRound(value) {
 }
 
 /**
+ * Convert a product variant returned by the remote service into a model
+ * @param productCode product code
+ * @param variantId variant identifier
+ * @param v variant
+ * @returns a model
+ */
+function toModel(productCode, variantId, v) {
+  return {
+    productCode,
+    variantId,
+    platformProductId: v.platform_product_id,
+    devices: +v.dimension_value,
+    subscription: v.variation.years * 12,
+    version: v.variation.years ? 'yearly' : 'monthly',
+    basePrice: +v.price,
+    actualPrice: v.discount ? +v.discount.discounted_price : +v.price,
+    monthlyBasePrice: customRound(v.price / 12),
+    discountedPrice: v.discount?.discounted_price,
+    discountedMonthlyPrice: v.discount
+      ? customRound(v.discount.discounted_price / 12)
+      : 0,
+    discount: v.discount
+      ? customRound((v.price - v.discount.discounted_price) * 100) / 100
+      : 0,
+    discountRate: v.discount
+      ? Math.floor(((v.price - v.discount.discounted_price) / v.price) * 100)
+      : 0,
+    currency: v.currency_label,
+    url: `https://www.bitdefender.com/site/Store/buy/${productCode}/${v.variation.dimension_value}/${v.variation.years}/`,
+  };
+}
+
+/**
  * Represents the current state of a product card.
  * The state is exposed by the _model_ attribute.
  * Views can react to state change by subscribing with a listener
@@ -37,17 +70,18 @@ class ProductCard {
   constructor(root) {
     this.root = root;
     this.listeners = [];
-    this.model = {
-      code: undefined,
-      variant: undefined,
-      price: '--.--',
-      monthlyPrice: '--.--',
-      discountedPrice: '--.--',
-      discount: '--.--',
-      discountRate: '--',
-      currency: '---',
-      url: '#',
-    };
+    this.model = {};
+    // this.model = {
+    //   code: undefined,
+    //   variant: undefined,
+    //   price: '--.--',
+    //   monthlyPrice: '--.--',
+    //   discountedPrice: '--.--',
+    //   discount: '--.--',
+    //   discountRate: '--',
+    //   currency: '---',
+    //   url: '#',
+    // };
   }
 
   notify() {
@@ -61,31 +95,12 @@ class ProductCard {
   /**
    * Fetch a product variant from the remote service and update the model state
    * @param productCode
-   * @param variantCode
+   * @param variantId
    */
-  async selectProductVariant(productCode, variantCode) {
-    const product = await fetchProduct(productCode, variantCode);
+  async selectProductVariant(productCode, variantId) {
+    const p = await fetchProduct(productCode, variantId);
 
-    const variant = {
-      productCode,
-      variantCode,
-      price: product.price,
-      monthlyPrice: customRound(product.price / 12),
-      discountedPrice: product.discount?.discounted_price,
-      discountedMonthlyPrice: product.discount
-        ? customRound(product.discount.discounted_price / 12)
-        : undefined,
-      discount: product.discount
-        ? customRound((product.price - product.discount.discounted_price) * 100) / 100
-        : undefined,
-      discountRate: product.discount
-        ? customRound((1 - (product.discount.discount_value) / product.price) * 100)
-        : undefined,
-      currency: product.currency_label,
-      url: `https://www.bitdefender.com/site/Store/buy/${productCode}/${product.variation.dimension_value}/${product.variation.years}/`,
-    };
-
-    this.model = variant;
+    this.model = toModel(productCode, variantId, p);
 
     this.notify();
   }
@@ -103,11 +118,11 @@ function renderPlanSelector(mv, plans, defaultSelection) {
   // TODO: Remove unecessary div
   const root = document.createElement('div');
   const ul = document.createElement('ul');
-  ul.classList.add('plan-selector');
+  ul.classList.add('variant-selector');
   root.appendChild(ul);
 
   mv.subscribe(() => {
-    const { model: { productCode: code, variantCode: variant } } = mv;
+    const { model: { productCode: code, variantId: variant } } = mv;
 
     ul.querySelector('.active')?.classList.remove('active');
     const li = ul.querySelector(`[data-product-code="${code}"][data-product-variant="${variant}"]`);
@@ -161,18 +176,16 @@ function renderOldPrice(mv, text = '', monthly = '') {
     {
       class: 'price',
     },
-    `<span class='old-price'>${text} <del>${mv.model.price} ${mv.model.currency}</del>`,
+    `<span class='old-price'>${text} <del>${mv.model.basePrice} ${mv.model.currency}</del>`,
   );
 
   const oldPriceElt = root.querySelector('span');
 
   mv.subscribe(() => {
-    // TODO : Adjust trackproduct
-    // trackProduct(product);
     if (mv.model.discountedPrice) {
       oldPriceElt.innerHTML = monthly.toLowerCase() === 'monthly'
-        ? `${text} <del>${mv.model.monthlyPrice} ${mv.model.currency}<sup>/mo</sup></del>`
-        : `${text} <del>${mv.model.price} ${mv.model.currency}</del>`;
+        ? `${text} <del>${mv.model.monthlyBasePrice} ${mv.model.currency}<sup>/mo</sup></del>`
+        : `${text} <del>${mv.model.basePrice} ${mv.model.currency}</del>`;
       oldPriceElt.style.visibility = 'visible';
     } else {
       oldPriceElt.style.visibility = 'hidden';
@@ -196,25 +209,25 @@ function renderPrice(mv, text = '', monthly = '') {
     {
       class: 'price',
     },
-    `<strong>${mv.model.price}</strong>`,
+    `<strong>${mv.model.basePrice}</strong>`,
   );
 
   const priceElt = root.querySelector('strong');
 
   mv.subscribe(() => {
-    // TODO : Adjust trackproduct
-    // trackProduct(product);
     if (monthly.toLowerCase() === 'monthly') {
       if (mv.model.discountedPrice) {
         priceElt.innerHTML = `${text} ${mv.model.discountedMonthlyPrice} ${mv.model.currency} <sup>/mo</sup>`;
       } else {
-        priceElt.innerHTML = `${text} ${mv.model.monthlyPrice} ${mv.model.currency} <sup>/mo</sup>`;
+        priceElt.innerHTML = `${text} ${mv.model.monthlyBasePrice} ${mv.model.currency} <sup>/mo</sup>`;
       }
     } else if (mv.model.discountedPrice) {
       priceElt.innerHTML = `${text} ${mv.model.discountedPrice} ${mv.model.currency}`;
     } else {
-      priceElt.innerHTML = `${text} ${mv.model.price} ${mv.model.currency}`;
+      priceElt.innerHTML = `${text} ${mv.model.basePrice} ${mv.model.currency}`;
     }
+
+    trackProduct(mv.model);
   });
 
   return root;
@@ -322,9 +335,9 @@ function renderLowestPrice(code, variant) {
   const root = document.createElement('p');
 
   fetchProduct(code, variant).then((product) => {
-    trackProduct(product);
-    // eslint-disable-next-line max-len
-    const price = customRound((product.discount ? product.discount.discount_value : product.price) / 12);
+    const m = toModel(code, variant, product);
+    trackProduct(m);
+    const price = m.actualPrice;
     root.innerHTML = `Start today for as low as  ${price} ${product.currency_label}/mo`;
   });
 
