@@ -41,7 +41,7 @@ function toModel(productCode, variantId, v) {
     devices: +v.variation.dimension_value,
     subscription: v.variation.years * 12,
     version: v.variation.years ? 'yearly' : 'monthly',
-    basePrice: +v.basePrice,
+    basePrice: +v.price,
     actualPrice: v.discount ? +v.discount.discounted_price : +v.price,
     monthlyBasePrice: customRound(v.price / 12),
     discountedPrice: v.discount?.discounted_price,
