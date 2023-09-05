@@ -41,7 +41,6 @@ export default function decorate(block) {
         break;
       default:
         openUrl = null; // Fallback or 'Unknown' case
-        console.warn(`Unknown OS: ${userOS}`);
     }
 
     if (openUrl) {
