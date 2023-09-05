@@ -235,6 +235,10 @@
   padding-top: 1px;
 }
 
+.section.bullet-points.columns-container ul {
+  list-style: disc;
+}
+
 .columns.video-presentation .modal-video-container {
   max-width: 520px;
   max-height: 293px;
