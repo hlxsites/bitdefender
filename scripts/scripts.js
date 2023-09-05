@@ -49,6 +49,10 @@ export function getLanguageCountryFromPath() {
   };
 }
 
+/**
+ * Returns the current user operating system based on userAgent
+ * @returns {String}
+ */
 export function getOperatingSystem(userAgent) {
   const systems = [
     ['Windows NT 10.0', 'Windows 10'],
@@ -65,6 +69,54 @@ export function getOperatingSystem(userAgent) {
   ];
 
   return systems.find(([substr]) => userAgent.includes(substr))?.[1] || 'Unknown';
+}
+
+/**
+ * Returns the value of a query parameter
+ * @returns {String}
+ */
+function getParamValue(param) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(param);
+}
+
+/**
+ * Returns the current user time in the format HH:MM|HH:00-HH:59|dayOfWeek|timezone
+ * @returns {String}
+ */
+function getCurrentTime() {
+  const date = new Date();
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  const dayOfWeek = date.getDay();
+  const timezone = date.getTimezoneOffset();
+  return `${hours}:${minutes}|${hours}:00-${hours}:59|${dayOfWeek}|${timezone}`;
+}
+
+/**
+ * Returns the current GMT date in the format DD/MM/YYYY
+ * @returns {String}
+ */
+function getCurrentDate() {
+  const date = new Date();
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  return `${day}/${month}/${year}`;
+}
+
+/**
+ * Returns the environment name based on the hostname
+ * @returns {String}
+ */
+export function getEnvironment(hostname, country) {
+  if (hostname.includes('hlx.page') || hostname.includes('hlx.live')) {
+    return 'stage';
+  }
+  if (hostname.includes(`.${country}`)) {
+    return 'prod';
+  }
+  return 'dev';
 }
 
 /**
@@ -127,11 +179,11 @@ export function pushProductsToDataLayer() {
 
 export function decorateBlockWithRegionId(element, id) {
   // we could consider to use `element.setAttribute('s-object-region', id);` in the future
-  element.id = id;
+  if (element) element.id = id;
 }
 
 export function decorateLinkWithLinkTrackingId(element, id) {
-  element.setAttribute('s-object-id', id);
+  if (element) element.setAttribute('s-object-id', id);
 }
 
 /**
@@ -278,6 +330,60 @@ function buildCtaSections(main) {
     .forEach(buildColumnar);
 }
 
+function populateColumns(section) {
+  if (section.querySelectorAll('.columns div div').length === 2) {
+    section.querySelector('.columns div div:last-child').classList.add('right-col');
+    section.querySelector('.columns div div:first-child').classList.add('left-col');
+
+    const rightColContainer = section.querySelector('.right-col');
+
+    const rightCol = section.querySelector('.right-column');
+
+    if (rightCol) {
+      rightColContainer.append(rightCol);
+    }
+  }
+}
+
+function buildTwoColumnsSection(main) {
+  main.querySelectorAll('div.section.two-columns')
+    .forEach(populateColumns);
+}
+
+function pushPageLoadToDataLayer() {
+  const { hostname } = window.location;
+  const languageCountry = getLanguageCountryFromPath(window.location.pathname);
+  const environment = getEnvironment(hostname, languageCountry.country);
+  const tags = getTags(getMetadata(METADATA_ANAYTICS_TAGS));
+  pushToDataLayer('page load started', {
+    pageInstanceID: environment,
+    page: {
+      info: {
+        name: [languageCountry.country, ...tags].join(':'), // e.g. au:consumer:product:internet security
+        section: languageCountry.country || '',
+        subSection: tags[0] || '',
+        subSubSection: tags[1] || '',
+        subSubSubSection: tags[2] || '',
+        destinationURL: window.location.href,
+        queryString: window.location.search,
+        referringURL: getParamValue('ref') || getParamValue('adobe_mc') || document.referrer || '',
+        serverName: 'hlx.live', // indicator for AEM Success Edge
+        language: navigator.language || navigator.userLanguage || languageCountry.language,
+        sysEnv: getOperatingSystem(window.navigator.userAgent),
+      },
+      attributes: {
+        promotionID: getParamValue('pid') || '',
+        internalPromotionID: getParamValue('icid') || '',
+        trackingID: getParamValue('cid') || '',
+        time: getCurrentTime(),
+        date: getCurrentDate(),
+        domain: hostname,
+        domainPeriod: hostname.split('.').length,
+      },
+    },
+  });
+}
+
 /**
  * Loads everything needed to get to LCP.
  * @param {Element} doc The container element
@@ -289,6 +395,7 @@ async function loadEager(doc) {
   if (main) {
     decorateMain(main);
     buildCtaSections(main);
+    buildTwoColumnsSection(main);
     detectModalButtons(main);
     document.body.classList.add('appear');
     await waitForLCP(LCP_BLOCKS);
@@ -336,6 +443,7 @@ function loadDelayed() {
 }
 
 async function loadPage() {
+  pushPageLoadToDataLayer();
   await loadEager(document);
   await loadLazy(document);
   loadDelayed();
