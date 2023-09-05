@@ -363,6 +363,7 @@ main .section.two-columns .right-col .products.plans a.button:any-link {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+
     --max-columns: none;
   }
 
@@ -374,6 +375,7 @@ main .section.two-columns .right-col .products.plans a.button:any-link {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+
     --max-columns: none;
   }
 
