@@ -113,10 +113,6 @@
   display: block;
 }
 
-.section.bullet-points.columns-container ul {
-  list-style: disc;
-}
-
 @media (min-width: 767px) {
   .columns.benefits > div {
     flex-direction: unset;
@@ -237,6 +233,10 @@
 
 .columns.video-presentation ul {
   padding-top: 1px;
+}
+
+.section.bullet-points.columns-container ul {
+  list-style: disc;
 }
 
 .columns.video-presentation .modal-video-container {
