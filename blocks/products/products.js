@@ -7,8 +7,32 @@ import {
 
 import { trackProduct } from '../../scripts/scripts.js';
 
+/**
+ * Utility function to round prices and percentages
+ * @param  value value to round
+ * @returns rounded value
+ */
+function customRound(value) {
+  const numValue = parseFloat(value);
 
-// todo change to represent the multiple cards
+  if (Number.isNaN(numValue)) {
+    return value;
+  }
+
+  // Convert to a fixed number of decimal places then back to a number to deal with precision issues
+  const roundedValue = Number(numValue.toFixed(2));
+
+  // If it's a whole number, return it as an integer
+  return (roundedValue % 1 === 0) ? Math.round(roundedValue) : roundedValue;
+}
+
+/**
+ * Represents the current state of a product card.
+ * The state is exposed by the _model_ attribute.
+ * Views can react to state change by subscribing with a listener
+ * This class is also repsonsible for fetching the product variants
+ * from the remote service and presenting them to the view.
+ */
 class ProductCard {
   constructor(root) {
     this.root = root;
@@ -17,6 +41,7 @@ class ProductCard {
       code: undefined,
       variant: undefined,
       price: '--.--',
+      monthlyPrice: '--.--',
       discountedPrice: '--.--',
       discount: '--.--',
       discountRate: '--',
@@ -33,19 +58,28 @@ class ProductCard {
     this.listeners.push(listener);
   }
 
-  async fetchProductVariant(productCode, variantCode) {
+  /**
+   * Fetch a product variant from the remote service and update the model state
+   * @param productCode
+   * @param variantCode
+   */
+  async selectProductVariant(productCode, variantCode) {
     const product = await fetchProduct(productCode, variantCode);
 
     const variant = {
       productCode,
       variantCode,
       price: product.price,
+      monthlyPrice: customRound(product.price / 12),
       discountedPrice: product.discount?.discounted_price,
+      discountedMonthlyPrice: product.discount
+        ? customRound(product.discount.discounted_price / 12)
+        : undefined,
       discount: product.discount
-        ? Math.round((product.price - product.discount.discounted_price ) * 100) / 100
+        ? customRound((product.price - product.discount.discounted_price) * 100) / 100
         : undefined,
       discountRate: product.discount
-        ? Math.round((1 - (product.discount.discount_value) / product.price) * 100)
+        ? customRound((1 - (product.discount.discount_value) / product.price) * 100)
         : undefined,
       currency: product.currency_label,
       url: `https://www.bitdefender.com/site/Store/buy/${productCode}/${product.variation.dimension_value}/${product.variation.years}/`,
@@ -57,6 +91,14 @@ class ProductCard {
   }
 }
 
+/**
+ * Nanoblock representing the plan selectors.
+ * If only one plan is declared, the plan selector will not be visible.
+ * @param mv The modelview holding the state of the view
+ * @param plans The list of plans to display [ labelToDisplay, productCode, variantId, ... ]
+ * @param defaultSelection The default selection.
+ * @returns Root node of the nanoblock
+ */
 function renderPlanSelector(mv, plans, defaultSelection) {
   // TODO: Remove unecessary div
   const root = document.createElement('div');
@@ -91,7 +133,7 @@ function renderPlanSelector(mv, plans, defaultSelection) {
     }
 
     li.addEventListener('click', () => {
-      mv.fetchProductVariant(code, variant);
+      mv.selectProductVariant(code, variant);
     });
 
     // activate default selection
@@ -106,13 +148,13 @@ function renderPlanSelector(mv, plans, defaultSelection) {
 }
 
 /**
- * Render a product price nanoblock
- * @param code Product code
- * @param variant Product variant
- * @param label Label
+ * Nanoblock representing the old product price
+ * @param mv The modelview holding the state of the view
+ * @param text The text located before the price
+ * @param monthly Show the monthly price if equal to 'monthly'
  * @returns Root node of the nanoblock
  */
-function renderOldPrice(mv, text = '',  monthly='') {
+function renderOldPrice(mv, text = '', monthly = '') {
   // TODO simplify CSS
   const root = createTag(
     'div',
@@ -129,7 +171,7 @@ function renderOldPrice(mv, text = '',  monthly='') {
     // trackProduct(product);
     if (mv.model.discountedPrice) {
       oldPriceElt.innerHTML = monthly.toLowerCase() === 'monthly'
-        ? `${text} <del>${Math.round(mv.model.price / 12)} ${mv.model.currency}<sup>/mo</sup></del>`
+        ? `${text} <del>${mv.model.monthlyPrice} ${mv.model.currency}<sup>/mo</sup></del>`
         : `${text} <del>${mv.model.price} ${mv.model.currency}</del>`;
       oldPriceElt.style.visibility = 'visible';
     } else {
@@ -141,10 +183,10 @@ function renderOldPrice(mv, text = '',  monthly='') {
 }
 
 /**
- * Render a product price nanoblock
- * @param code Product code
- * @param variant Product variant
- * @param label Label
+ * Nanoblock representing the new product price
+ * @param mv The modelview holding the state of the view
+ * @param text The text located before the price
+ * @param monthly Show the monthly price if equal to 'monthly'
  * @returns Root node of the nanoblock
  */
 function renderPrice(mv, text = '', monthly = '') {
@@ -162,10 +204,17 @@ function renderPrice(mv, text = '', monthly = '') {
   mv.subscribe(() => {
     // TODO : Adjust trackproduct
     // trackProduct(product);
-    const price = mv.model.discountedPrice ? mv.model.discountedPrice : mv.model.price;
-    priceElt.innerHTML = monthly.toLowerCase() === 'monthly'
-      ? `${text} ${Math.round(price / 12)} ${mv.model.currency}<sup>/mo</sup>`
-      : `${text} ${price} ${mv.model.currency}`;
+    if (monthly.toLowerCase() === 'monthly') {
+      if (mv.model.discountedPrice) {
+        priceElt.innerHTML = `${text} ${mv.model.discountedMonthlyPrice} ${mv.model.currency} <sup>/mo</sup>`;
+      } else {
+        priceElt.innerHTML = `${text} ${mv.model.monthlyPrice} ${mv.model.currency} <sup>/mo</sup>`;
+      }
+    } else if (mv.model.discountedPrice) {
+      priceElt.innerHTML = `${text} ${mv.model.discountedPrice} ${mv.model.currency}`;
+    } else {
+      priceElt.innerHTML = `${text} ${mv.model.price} ${mv.model.currency}`;
+    }
   });
 
   return root;
@@ -173,7 +222,10 @@ function renderPrice(mv, text = '', monthly = '') {
 
 /**
  * Renders the green section on top of the product card highlighting the potential savings
- * @returns the root node of the highilight block
+ * @param mv The modelview holding the state of the view
+ * @param text Text to display
+ * @param percent Show the saving in percentage if equals to `percent`
+ * @returns Root node of the nanoblock
  */
 function renderHighlightSavings(mv, text = 'Save', percent = '') {
   const root = createTag(
@@ -199,6 +251,12 @@ function renderHighlightSavings(mv, text = 'Save', percent = '') {
   return root;
 }
 
+/**
+ * Nanoblock representing a text to highlight in the product card
+ * @param mv The modelview holding the state of the view
+ * @param text Text to display
+ * @returns Root node of the nanoblock
+ */
 function renderHighlight(mv, text) {
   return createTag(
     'div',
@@ -211,9 +269,10 @@ function renderHighlight(mv, text) {
 }
 
 /**
- * Render a Featured nanoblock
+ * Nanoblock representing a text to Featured
+ * @param mv The modelview holding the state of the view
  * @param text Text of the featured nanoblock
- * @returns Root node of the feature nanoblock
+ * @returns Root node of the nanoblock
  */
 function renderFeatured(mv, text) {
   const root = document.createElement('div');
@@ -222,6 +281,13 @@ function renderFeatured(mv, text) {
   return root;
 }
 
+/**
+ * Nanoblock representing a text to Featured and the corresponding savings
+ * @param mv The modelview holding the state of the view
+ * @param text Text of the featured nanoblock
+ * @param percent Show the saving in percentage if equals to `percent`
+ * @returns Root node of the nanoblock
+ */
 function renderFeaturedSavings(mv, text = 'Save', percent = '') {
   const root = createTag(
     'div',
@@ -247,7 +313,7 @@ function renderFeaturedSavings(mv, text = 'Save', percent = '') {
 }
 
 /**
- * Render the lowest product price
+ * Nanoblock representing the lowest product price
  * @param code Product code
  * @param variant Product variant
  * @returns root node of the nanoblock
@@ -265,15 +331,36 @@ function renderLowestPrice(code, variant) {
   return root;
 }
 
+/**
+ * Nanoblock representing the price conditions below the Price
+ * @param mv The modelview holding the state of the view
+ * @param text Conditions
+ * @returns Root node of the nanoblock
+ */
+function renderPriceCondition(mv, text) {
+  return createTag(
+    'div',
+    {
+      class: 'price',
+    },
+    `<em>${text}</em>`,
+  );
+}
+
+// declare nanoblocks
 createNanoBlock('plans', renderPlanSelector);
 createNanoBlock('price', renderPrice);
 createNanoBlock('oldPrice', renderOldPrice);
+createNanoBlock('priceCondition', renderPriceCondition);
 createNanoBlock('featured', renderFeatured);
 createNanoBlock('featuredSavings', renderFeaturedSavings);
 createNanoBlock('highlightSavings', renderHighlightSavings);
 createNanoBlock('highlight', renderHighlight);
 createNanoBlock('lowestPrice', renderLowestPrice);
 
+/**
+ * Main decorate function
+ */
 export default function decorate(block) {
   [...block.children].forEach((row) => {
     [...(row.children)].forEach((col) => {
