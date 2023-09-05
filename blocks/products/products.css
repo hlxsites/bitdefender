@@ -363,19 +363,17 @@ main .section.two-columns .right-col .products.plans a.button:any-link {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-
     --max-columns: none;
   }
 
   .wide .products.plans .product-card {
-    max-width: 380px;
+    max-width: 310px;
   }
 
   .two-columns .products.plans.right-column {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-
     --max-columns: none;
   }
 
