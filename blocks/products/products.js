@@ -19,6 +19,21 @@ const VARIANT_SELECTION_CHANGED = 'variantSelectionChanged';
  * @param label Label
  * @returns Root node of the nanoblock
  */
+
+function customRound(value) {
+  const numValue = parseFloat(value);
+
+  if (Number.isNaN(numValue)) {
+    return value;
+  }
+
+  // Convert to a fixed number of decimal places then back to a number to deal with precision issues
+  const roundedValue = Number(numValue.toFixed(2));
+
+  // If it's a whole number, return it as an integer
+  return (roundedValue % 1 === 0) ? Math.round(roundedValue) : roundedValue;
+}
+
 function renderPrice(code, variant, label) {
   const priceRoot = document.createElement('div');
   priceRoot.classList.add('price');
@@ -36,7 +51,7 @@ function renderPrice(code, variant, label) {
       if (product.discount) {
         // eslint-disable-next-line camelcase
         oldPriceElement.innerText = `${product.price} ${product.currency_label}`;
-        priceElement.innerHTML = `${product.discount.discount_value} ${product.currency_label} <em>${label}</em>`;
+        priceElement.innerHTML = `${customRound(product.discount.discount_value)} ${product.currency_label} <em>${label}</em>`;
       } else {
         priceElement.innerHTML = `${product.price} ${product.currency_label} <em>${label}</em>`;
       }
@@ -60,9 +75,9 @@ function renderProductPrice(product) {
   // eslint-disable-next-line no-else-return
   } else {
     const productDiscount = product.price - product.discount.discounted_price;
-    return `<strong>${product.discount.discount_value} ${product.currency_label}</strong>
-            <span class="old-price">Old Price <del>${product.price} ${product.currency_label}</del></span>
-            <span class="discount">Save ${productDiscount.toFixed(2)} ${product.currency_label}</span>`;
+    return `<strong>${customRound(product.discount.discount_value)} ${product.currency_label}</strong>
+        <span class="old-price">Old Price <del>${customRound(product.price)} ${product.currency_label}</del></span>
+        <span class="discount">Save ${customRound(productDiscount)} ${product.currency_label}</span>`;
   }
 }
 
@@ -90,7 +105,7 @@ function renderLowestPrice(code, variant) {
   fetchProduct(code, variant).then((product) => {
     trackProduct(product);
     // eslint-disable-next-line max-len
-    const price = ((product.discount ? product.discount.discount_value : product.price) / 12).toFixed(2);
+    const price = customRound((product.discount ? product.discount.discount_value : product.price) / 12);
     root.innerHTML = `Start today for as low as  ${price} ${product.currency_label}/mo`;
   });
 
@@ -245,6 +260,27 @@ export default function decorate(block) {
   block.querySelectorAll('.product-card ul').forEach((ul) => {
     if (ul.previousElementSibling?.tagName === 'P') {
       ul.previousElementSibling.classList.add('ul-header-text');
+    }
+  });
+
+  block.querySelectorAll('.product-card ul li u').forEach((li) => {
+    li.parentNode.classList.add('icon-important');
+  });
+
+  const paragraphs = block.querySelectorAll('.product-card.featured p');
+
+  // Iterate through each paragraph
+  paragraphs.forEach((paragraph) => {
+    // Check if the paragraph only contains span elements
+    const containsOnlySpans = Array.from(paragraph.childNodes).every((node) => node.nodeName === 'SPAN');
+
+    // If the paragraph only contains span elements, add a class
+    if (containsOnlySpans) {
+      paragraph.classList.add('os-availability');
+
+      if (paragraph.nextElementSibling.nodeName === 'P') {
+        paragraph.nextElementSibling.classList.add('os-availability-text');
+      }
     }
   });
 }
