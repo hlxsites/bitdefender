@@ -132,7 +132,7 @@
   margin-bottom: 10px;
 }
 
-.products.compact .product-card .featured {
+:is(.products.compact, .products.plans) .product-card .featured {
   align-self: center;
   margin: 10px 0 15px;
 }
@@ -237,7 +237,8 @@
   text-decoration: underline;
 }
 
-.product-card .price {
+.product-card .price:last-of-type {
+  font-weight: 700;
   margin-bottom: 15px;
 }
 
