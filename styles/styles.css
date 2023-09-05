@@ -787,7 +787,7 @@ main .section.cta {
   width: 270px;
 }
 
-main .section.cta.bigger-text h2 {
+main .cta.bigger-text h2 {
   font-size: 34px;
 }
 
