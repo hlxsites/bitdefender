@@ -49,7 +49,6 @@ async function findProductVariant(cachedResponse, variant) {
  * @returns {Promise<*>}
  */
 export async function fetchProduct(code = 'av', variant = '1u-1y') {
-  const cacheKey = `${code}-${variant}`;
   const data = new FormData();
   data.append('data', JSON.stringify({
     ev: 1,
@@ -61,8 +60,8 @@ export async function fetchProduct(code = 'av', variant = '1u-1y') {
     },
   }));
 
-  if (cacheResponse.has(cacheKey)) {
-    return findProductVariant(cacheResponse.get(cacheKey), variant);
+  if (cacheResponse.has(code)) {
+    return findProductVariant(cacheResponse.get(code), variant);
   }
 
   // we don't await the response here, because we want to cache it
@@ -71,10 +70,9 @@ export async function fetchProduct(code = 'av', variant = '1u-1y') {
     body: data,
   });
 
-  cacheResponse.set(cacheKey, response);
+  cacheResponse.set(code, response);
   return findProductVariant(response, variant);
 }
-
 
 const nanoBlocks = new Map();
 
