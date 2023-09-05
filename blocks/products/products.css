@@ -28,6 +28,17 @@
   flex-flow: column;
 }
 
+.product-card > *:not(.button-container) {
+  flex-grow: 0;
+}
+
+.product-card .button-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
 .products.compact .product-card, .products.plans .product-card {
   text-align: center;
 }
