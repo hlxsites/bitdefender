@@ -618,4 +618,8 @@ main .section.two-columns .right-col .products.plans a.button:any-link {
     font-size: 20px;
   }
 
+  .products.compare .product-card ul li u {
+    font-size: 20px;
+  }
+
 }
