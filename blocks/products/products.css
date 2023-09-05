@@ -64,6 +64,7 @@
 .product-card p a {
   text-decoration: underline;
   color: inherit;
+  color: var(--link-color);
 }
 
 .product-card .price ~ p {
@@ -102,7 +103,7 @@
 
 .products.plans h3 {
   font-size: var(--body-font-size-m);
-  font-weight: var(--font-weight-boldest);
+  font-weight: var(--font-weight-bold);
 }
 
 .products .product-card.featured h3 {
