@@ -409,4 +409,25 @@ export default function decorate(block) {
       ul.previousElementSibling.classList.add('ul-header-text');
     }
   });
+
+  block.querySelectorAll('.product-card ul li u').forEach((li) => {
+    li.parentNode.classList.add('icon-important');
+  });
+
+  const paragraphs = block.querySelectorAll('.product-card.featured p');
+
+  // Iterate through each paragraph
+  paragraphs.forEach((paragraph) => {
+    // Check if the paragraph only contains span elements
+    const containsOnlySpans = Array.from(paragraph.childNodes).every((node) => node.nodeName === 'SPAN');
+
+    // If the paragraph only contains span elements, add a class
+    if (containsOnlySpans) {
+      paragraph.classList.add('os-availability');
+
+      if (paragraph.nextElementSibling.nodeName === 'P') {
+        paragraph.nextElementSibling.classList.add('os-availability-text');
+      }
+    }
+  });
 }
