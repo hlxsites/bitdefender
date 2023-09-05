@@ -165,7 +165,7 @@ export function pushProductsToDataLayer() {
             devices: p.devices,
             subscription: p.subscription,
             version: p.version,
-            basePrice: p.price,
+            basePrice: p.basePrice,
             discountValue: p.discount,
             discountRate: p.discountRate,
             currency: p.currency,
