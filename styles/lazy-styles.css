@@ -49,6 +49,7 @@
   box-shadow: 0 3px 8px 0 rgb(0 0 0 / 10%);
   border: 1px solid #707070;
   width: 75%;
+  max-height: 90%;
   overflow: auto;
   opacity: 1;
   animation: fade-in 0.5s ease-in-out forwards;
