@@ -330,6 +330,26 @@ function buildCtaSections(main) {
     .forEach(buildColumnar);
 }
 
+function populateColumns(section) {
+  if (section.querySelectorAll('.columns div div').length === 2) {
+    section.querySelector('.columns div div:last-child').classList.add('right-col');
+    section.querySelector('.columns div div:first-child').classList.add('left-col');
+
+    const rightColContainer = section.querySelector('.right-col');
+
+    const rightCol = section.querySelector('.right-column');
+
+    if (rightCol) {
+      rightColContainer.append(rightCol);
+    }
+  }
+}
+
+function buildTwoColumnsSection(main) {
+  main.querySelectorAll('div.section.two-columns')
+    .forEach(populateColumns);
+}
+
 function pushPageLoadToDataLayer() {
   const { hostname } = window.location;
   const languageCountry = getLanguageCountryFromPath(window.location.pathname);
@@ -375,6 +395,7 @@ async function loadEager(doc) {
   if (main) {
     decorateMain(main);
     buildCtaSections(main);
+    buildTwoColumnsSection(main);
     detectModalButtons(main);
     document.body.classList.add('appear');
     await waitForLCP(LCP_BLOCKS);
