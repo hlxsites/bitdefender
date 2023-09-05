@@ -68,6 +68,10 @@
   margin-bottom: 0;
 }
 
+.products.plans .variant-selector > p {
+  margin-bottom: 15px;
+}
+
 .product-card .price + p
 .product-card ul.variant-selector > p {
   font-size: 9pt;
@@ -124,10 +128,6 @@
 
 .product-card h3 + h4 {
   color: var(--checkbox-label);
-}
-
-.products.plans .variant-selector > p {
-  margin-bottom: 15px;
 }
 
 .products.compact .product-card h4, .products.plans .product-card h4 {
