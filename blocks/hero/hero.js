@@ -85,12 +85,17 @@ export default async function decorate(block) {
 
     renderNanoBlocks(block);
 
-    // move discount bubble inside the button
+    // move discount bubble inside the closest button
     const bubble = block.querySelector('.discount-bubble');
     if (bubble) {
-      const button = bubble.parentElement.querySelector('.button-container');
-      if (button) {
-        button.append(bubble);
+      let sibling = bubble.previousElementSibling;
+
+      while (sibling) {
+        if (sibling.matches('.button-container')) {
+          sibling.append(bubble);
+          break;
+        }
+        sibling = sibling.previousElementSibling;
       }
     }
   }
