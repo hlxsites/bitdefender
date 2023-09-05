@@ -4,10 +4,10 @@ import { getOperatingSystem } from '../../scripts/scripts.js';
 export default function decorate(block) {
   const {
     template,
-    'Open-URL-MacOS': openUrlMacos,
-    'Open-URL-Windows': openUrlWindows,
-    'Open-URL-Android': openUrlAndroid,
-    'Open-URL-IOS': openUrlIos,
+    'open-url-macos': openUrlMacos,
+    'open-url-windows': openUrlWindows,
+    'open-url-android': openUrlAndroid,
+    'open-url-ios': openUrlIos,
   } = readBlockConfig(block);
 
   if (template) {
@@ -41,6 +41,7 @@ export default function decorate(block) {
         break;
       default:
         openUrl = null; // Fallback or 'Unknown' case
+        console.warn(`Unknown OS: ${userOS}`);
     }
 
     if (openUrl) {
