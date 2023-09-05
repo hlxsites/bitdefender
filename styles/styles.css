@@ -775,6 +775,10 @@ main .section.cta {
   background-color: var(--cta-background-light-blue);
 }
 
+.cta .columns {
+  width: 100%;
+}
+
 .cta .columns > div > .columns-img-col {
   order: 1;
 }
@@ -783,7 +787,7 @@ main .section.cta {
   width: 270px;
 }
 
-main .section.cta.image-overflow h2 {
+main .section.cta.bigger-text h2 {
   font-size: 34px;
 }
 
@@ -792,7 +796,7 @@ main .section.cta p {
   line-height: 1.5;
 }
 
-main .section.cta.image-overflow a.button {
+main .section.cta.bigger-text a.button {
   margin-top: 25px;
 }
 
@@ -802,7 +806,7 @@ main .section.cta .right-col {
 }
 
 @media (min-width: 596px) {
-  main .section.cta.image-overflow h2 {
+  main .section.cta.bigger-text h2 {
     font-size: 38px;
   }
 }
@@ -812,7 +816,7 @@ main .section.cta .right-col {
     width: 370px;
   }
 
-  main .section.cta.image-overflow h2 {
+  main .section.cta.bigger-text h2 {
     font-size: 42px;
   }
 }
@@ -828,11 +832,11 @@ main .section.cta .right-col {
     display: flex;
   }
 
-  main .section.cta.image-overflow h2 {
+  main .section.cta.bigger-text h2 {
     font-size: 54px;
   }
 
-  main .section.cta.image-overflow p {
+  main .section.cta.bigger-text p {
     font-size: 18px;
   }
 
@@ -847,13 +851,13 @@ main .section.cta .right-col {
     width: 494px;
   }
 
-  main .section.cta.image-overflow h2 {
+  main .section.cta.bigger-text h2 {
     font-size: 56px;
   }
 }
 
 @media (min-width: 992px) {
-  .cta.image-overflow .full-width {
+  .cta.bigger-text .full-width {
     padding-top: 50px;
     margin-top: 50px;
   }
