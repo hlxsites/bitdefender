@@ -325,7 +325,6 @@ function renderLowestPrice(code, variant, monthly = '') {
 
   fetchProduct(code, variant).then((product) => {
     const m = toModel(code, variant, product);
-    trackProduct(m);
     const isMonthly = monthly.toLowerCase() === 'monthly';
     const price = isMonthly ? customRound(m.actualPrice / 12) : m.actualPrice;
     root.innerHTML = `Start today for as low as  ${price} ${product.currency_label}${isMonthly ? '/mo' : ''}`;
