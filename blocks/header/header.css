@@ -316,6 +316,8 @@ header a.button:hover span.button-text {
   margin-left: 25px;
 }
 
+
+
 .mega-menu > div:first-child {
   display: grid;
   grid-template-rows: auto auto;
@@ -482,7 +484,7 @@ header a.button:hover span.button-text {
 .options-wrapper.show .sub-menu-title {
   font-size: var(--body-font-size-xs);
   font-weight: var(--font-weight-bold);
-  margin-left: 30px;
+  margin-left: 20px;
   padding-left: 20px; 
   position: relative;
 }
@@ -586,6 +588,7 @@ header a.button:hover span.button-text {
     gap: 0;
   }
 
+
   .nav-brand a,
   .nav-sections a {
   color: var(--horizontal-separator-color);
@@ -613,6 +616,16 @@ header a.button:hover span.button-text {
     margin: 0 12px;
   }
 
+  .mega-menu div h2 > a {
+    transition: all 0.2s ease-in-out;
+    border-radius: 3px;
+    text-decoration: none;
+    padding: 7px 10px;
+    color: var(--link-color);
+    font-size: var(--body-font-size-xs);
+    font-weight: var(--font-weight-bold);
+  }
+
   .mega-menu div p a{
     position: relative;
     font-size: var(--body-font-size-xs);
@@ -628,37 +641,52 @@ header a.button:hover span.button-text {
     margin-left: 0;
   }
 
-  .nav-sections a:hover::after,
-  .nav-brand p a.active::after,
-  .nav-brand p a:hover::after{
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 25px;
-    height: 3px;
-    width: 100%;
-    background-color: var(--color-highlight-blue);
-    transition: all 0.2s ease-in-out;
-    animation: animate-bottom-border 0.3s linear forwards;
-  }
-  
-  .nav-sections p:last-child:hover::after {
-    width: 50px;
-  }
+.nav-sections p a::before,
+.nav-brand p a::before {
+  content: "";
+  position: absolute;
+  top: 25px;
+  height: 3px;
+  background: var(--color-highlight-blue);
+  transition: all .3s ease;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left;
+  left: 0;
+}
 
-  .nav-sections p {
-    position: relative;
-  }
-  
-  .nav-sections p::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 16px;
-    width: 2px;
-    background-color: #616161;
-  }
+.nav-sections p a:hover::before,
+.nav-brand p a.active::before,
+.nav-brand p a:hover::before,
+.nav-sections p.clicked a::before {
+  transform: scaleX(1);    
+  transform-origin: left;
+}
+
+/* Other existing styles */
+.mega-menu div h2 > a:hover {
+  background-color: var(--highlight-light-blue);
+}
+
+.nav-sections p:last-child:hover::after {
+  width: 50px;
+}
+
+.nav-sections p,
+.nav-brand p {
+  position: relative;
+}
+
+.nav-sections p::before,
+.nav-brand p:not(:first-child)::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 16px;
+  width: 2px;
+  background-color: #616161;
+}
   
   .logo-container {
     padding: 20px var(--section-desktop-padding);
@@ -738,7 +766,7 @@ header a.button:hover span.button-text {
     font-weight: var(--font-weight-boldest);
     line-height: 18px;
     padding: 7px 10px;
-    margin: 10px 25px 0 19px;
+    margin: 10px 25px 0 15px;
   }
 
   .other-options > div:nth-child(5) {
