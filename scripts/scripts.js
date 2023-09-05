@@ -62,10 +62,12 @@ export function getOperatingSystem(userAgent) {
     ['Windows NT 5.1', 'Windows XP'],
     ['Windows NT 5.0', 'Windows 2000'],
     ['X11', 'X11'],
-    ['Mac', 'MacOS'],
     ['Linux', 'Linux'],
     ['Android', 'Android'],
-    ['like Mac', 'iOS'],
+    ['iPhone', 'iOS'],
+    ['iPod', 'iOS'],
+    ['iPad', 'iOS'],
+    ['Mac', 'MacOS'],
   ];
 
   return systems.find(([substr]) => userAgent.includes(substr))?.[1] || 'Unknown';
