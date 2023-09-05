@@ -336,6 +336,11 @@ main .section.wide {
   padding-right: var(--body-padding);
 }
 
+.products-container h2 {
+  font-weight: var(--font-weight-bolder);
+  font-size: var(--heading-font-size-m);
+}
+
 main .section.wide h2 {
   font-size: var(--heading-font-size-s);
   font-weight: var(--font-weight-boldest);
@@ -871,11 +876,6 @@ main .section.full-width {
   font-weight: var(--font-weight-regular);
   color: var(--color-dark-gray);
   margin-bottom: 15px;
-}
-
-.products-container h2 {
-  font-weight: var(--font-weight-bolder);
-  font-size: var(--heading-font-size-m);
 }
 
 main .terms-of-use h5 {
