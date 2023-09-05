@@ -89,6 +89,10 @@
   margin-bottom: 15px;
 }
 
+.products.compare .product-card p {
+  font-size: var(--body-font-size-xs);
+}
+
 .product-card .price + p
 .product-card ul.variant-selector > p {
   font-size: 9pt;
@@ -516,10 +520,6 @@ main .section.two-columns .right-col .products.plans a.button:any-link {
 
 .products.compare .product-card.featured {
   border: 2px solid #35b245;
-}
-
-.products.compare .product-card p {
-  font-size: var(--body-font-size-xs);
 }
 
 .products.compare .product-card .featured {
