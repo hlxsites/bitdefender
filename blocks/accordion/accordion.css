@@ -27,6 +27,7 @@
   justify-content: space-between;
   align-items: center;
   padding-right: 25px;
+  padding-bottom: 8px;
 }
 
 .accordion-item-header::after {
@@ -50,6 +51,7 @@
 .accordion .accordion-item-header h3 {
   font-size: var(--heading-font-size-xs);
   line-height: 1.25;
+  margin: 0;
 }
 
 .accordion.terms-of-use .accordion-item-header h3 {
