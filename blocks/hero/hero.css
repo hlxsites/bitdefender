@@ -11,7 +11,7 @@
   --hero-font-size-xxs: 16px;
   --hero-font-size-xxxs: 14px;
   --hero-h1-font-size: 32px;
-  --hero-h4-font-size: 24px;
+  --hero-h2-font-size: 24px;
   --hero-botton-border-color: #616161;
   --hero-p-color: #3c3c3c;
 
@@ -160,7 +160,7 @@ main .hero h1 {
 
 }
 
-main .hero h4 {
+main .hero h2 {
   font-size: 18px;
   color: var(--text-color);
   margin: 0 0 9px;
@@ -174,11 +174,11 @@ main .hero.black-background h1 {
 }
 
 main .hero.black-background h1, 
-main .hero.black-background h4 {
+main .hero.black-background h2 {
   color: var(--text-dark-color);
 }
 
-main .hero.black-background h4 {
+main .hero.black-background h2 {
   padding: 0;
   letter-spacing: normal;
   margin: 0 0 9px;
@@ -398,7 +398,7 @@ main .hero .hero-awards li::after {
     --hero-h1-font-size: 42px;
   }
 
-  main .hero h4 {
+  main .hero h2 {
     font-size: 20px;
   }
 
@@ -419,7 +419,7 @@ main .hero .hero-awards li::after {
     width: 60%;
   }
 
-  main .hero h4 {
+  main .hero h2 {
     font-size: 22px;
     margin-bottom: 10px;
   }
@@ -428,7 +428,7 @@ main .hero .hero-awards li::after {
     font-size: 50px;
   }
 
-  main .hero.black-background  h4 {
+  main .hero.black-background  h2 {
     font-size: 22px;
   }
 
@@ -511,11 +511,11 @@ main .hero .hero-awards li::after {
     margin-bottom: 15px;
   }
 
-  main .hero h4 {
+  main .hero h2 {
     font-size: 24px;
   }
 
-  main .hero.black-background h4 {
+  main .hero.black-background h2 {
     font-size: 24px;
   }
 

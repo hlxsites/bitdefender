@@ -336,6 +336,11 @@ main .section.wide {
   padding-right: var(--body-padding);
 }
 
+.products-container h2 {
+  font-weight: var(--font-weight-bolder);
+  font-size: var(--heading-font-size-m);
+}
+
 main .section.wide h2 {
   font-size: var(--heading-font-size-s);
   font-weight: var(--font-weight-boldest);
@@ -968,6 +973,21 @@ main .section.blue button.secondary:hover, main .section.blue button.secondary:f
 
 main .section.blue a.button.secondary::after {
   background-color: var(--link-color);
+}
+
+main .section.blue a.button.modal {
+  background-color: transparent;
+  border: none;
+  color: var(--white-color);
+  font-weight: var(--font-weight-regular);
+}
+
+main .section.blue a.button.modal:hover {
+  opacity: .8;
+}
+
+main .section.blue a.button.modal::after {
+  content: none;
 }
 
 @media (min-width: 992px) {
