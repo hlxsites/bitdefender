@@ -975,6 +975,21 @@ main .section.blue a.button.secondary::after {
   background-color: var(--link-color);
 }
 
+main .section.blue a.button.modal {
+  background-color: transparent;
+  border: none;
+  color: var(--white-color);
+  font-weight: var(--font-weight-regular);
+}
+
+main .section.blue a.button.modal:hover {
+  opacity: .8;
+}
+
+main .section.blue a.button.modal::after {
+  content: none;
+}
+
 @media (min-width: 992px) {
   main .section.circle {
     background-image: url("/icons/blue-circle.svg");
