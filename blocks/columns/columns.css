@@ -277,10 +277,6 @@
   border: none;
 }
 
-.section.wide.light-sky-blue.columns-container {
-  height: auto;
-}
-
 .section.white.columns-container .columns.awards > div {
   flex-direction: unset;
   align-items: center;
