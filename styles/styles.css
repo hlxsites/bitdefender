@@ -42,7 +42,7 @@
   --background-blue: #006eff;
   --dark-blue-tag: #005eff;
   --light-blue-tag: #13b0a7;
-  --green-tag: #2cb43d;
+  --green-tag: #218728;
   --dark-shadow: #0000001a;
   --background-checkmark: #61AF53;
 
@@ -563,7 +563,7 @@ a.button:any-link, input[type="submit"] {
 }
 
 a.info-button.modal {
-  color: var(--background-blue);
+  color: var(--link-color);
 }
 
 a.info-button.modal::before {
@@ -1006,6 +1006,7 @@ main .section.blue a.button.secondary::after {
   line-height: 1;
   border-radius: 3px;
   padding: 2px 4px;
+  text-transform: uppercase;
 }
 
 .tag-dark-blue {
