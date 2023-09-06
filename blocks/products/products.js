@@ -374,8 +374,16 @@ export default function decorate(block) {
       renderNanoBlocks(col, mv);
 
       col.querySelectorAll('.button-container a').forEach((link) => {
-        if (block.querySelector('h3')) {
-          link.setAttribute('aria-label', `${link.innerText} ${block.querySelector('h3').innerText}`);
+        const heading = block.querySelector('h3');
+        if (heading) {
+          // concatenate sibling headings
+          let label = `${link.innerText} ${block.querySelector('h3').innerText}`;
+          let sibling = heading.nextElementSibling;
+          while (sibling && (sibling.nodeName === 'H3' || sibling.nodeName === 'H4')) {
+            label = `${label} ${sibling.innerText}`;
+            sibling = sibling.nextElementSibling;
+          }
+          link.setAttribute('aria-label', label);
         }
       });
 
