@@ -11,7 +11,7 @@ function renderAwardItem(block, award, index) {
   if (award.Logo) {
     const awardsLogo = document.createElement('div');
     awardsLogo.classList.add('award-logo');
-    awardsLogo.append(createOptimizedPicture(award.Logo, award.Title, index === 0));
+    awardsLogo.append(createOptimizedPicture(award.Logo, award.Title, index < 3));
     awardItemContainer.append(awardsLogo);
   }
 
