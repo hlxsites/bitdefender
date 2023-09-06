@@ -4,14 +4,14 @@ let awardsData = [];
 let filteredAwards = [];
 let yearsToFilterBy = [];
 
-function renderAwardItem(block, award) {
+function renderAwardItem(block, award, index) {
   const awardItemContainer = document.createElement('div');
   awardItemContainer.classList.add('award-item-container');
 
   if (award.Logo) {
     const awardsLogo = document.createElement('div');
     awardsLogo.classList.add('award-logo');
-    awardsLogo.append(createOptimizedPicture(award.Logo, award.Title));
+    awardsLogo.append(createOptimizedPicture(award.Logo, award.Title, index === 0));
     awardItemContainer.append(awardsLogo);
   }
 
@@ -49,8 +49,9 @@ function clearAwardsResultsSection(block) {
 
 function renderAwards(block, data) {
   const awardsResultsContainer = block.querySelector('.awards-results-container');
-  data.forEach((award) => {
-    renderAwardItem(awardsResultsContainer, award);
+
+  data.forEach((award, index) => {
+    renderAwardItem(awardsResultsContainer, award, index);
   });
 }
 
