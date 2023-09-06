@@ -155,6 +155,9 @@
   color: var(--checkbox-label);
 }
 
+.products.compare .product-card h3 {
+  margin: 5px;
+}
 
 .product-card h5 {
   font-weight: normal;
@@ -518,13 +521,15 @@
   font-weight: var(--font-weight-bold);
 }
 
-.two-columns .columns .products.plans .product-card h4 {
+.two-columns .columns .products.plans .product-card h3 {
   font-size: var(--body-font-size-xs);
   font-weight: var(--font-weight-boldest);
   line-height: 1.71;
   letter-spacing: .07pc;
+  color: var(--black-color);
+  margin-top: 16px;
+  margin-bottom: 4px;
 }
-
 
 .products.compare .product-card hr {
   margin-top: 40px;
@@ -641,7 +646,8 @@
     z-index: 2;
   }
 
-  .products.compare .product-card h4 {
+  .products.compare .product-card h4,
+  .products.compare .product-card h3 {
     font-size: var(--body-font-size-l);
   }
 
