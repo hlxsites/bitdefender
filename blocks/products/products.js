@@ -373,6 +373,12 @@ export default function decorate(block) {
 
       renderNanoBlocks(col, mv);
 
+      col.querySelectorAll('.button-container a').forEach((link) => {
+        if (block.querySelector('h3')) {
+          link.setAttribute('aria-label', block.querySelector('h3').innerText);
+        }
+      });
+
       // listen to ProductCard change and update the first button accordingly
       mv.subscribe((card) => {
         const link = col.querySelector('.button-container a');
