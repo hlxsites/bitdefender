@@ -389,6 +389,10 @@ main .hero.black-background ul.hero-awards li picture img{
   width: auto;
 }
 
+main .hero .hero-awards li::after {
+  content: none;
+}
+
 @media(min-width: 767px) { /* tablet */
   :root {
     --hero-h1-font-size: 42px;
