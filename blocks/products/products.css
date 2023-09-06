@@ -335,8 +335,8 @@ main .section.two-columns .right-col .products.plans a.button:any-link {
 .product-card ul.variant-selector > li.active {
   opacity: 1;
   color: #fff;
-  background: #006eff;
-  border-color: #006eff;
+  background: #005ed9;
+  border-color: #005ed9;
 }
 
 @media (min-width: 768px) {
