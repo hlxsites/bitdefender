@@ -49,7 +49,6 @@ async function findProductVariant(cachedResponse, variant) {
  * @returns {Promise<*>}
  */
 export async function fetchProduct(code = 'av', variant = '1u-1y') {
-  const cacheKey = `${code}-${variant}`;
   const data = new FormData();
   data.append('data', JSON.stringify({
     ev: 1,
@@ -61,8 +60,8 @@ export async function fetchProduct(code = 'av', variant = '1u-1y') {
     },
   }));
 
-  if (cacheResponse.has(cacheKey)) {
-    return findProductVariant(cacheResponse.get(cacheKey), variant);
+  if (cacheResponse.has(code)) {
+    return findProductVariant(cacheResponse.get(code), variant);
   }
 
   // we don't await the response here, because we want to cache it
@@ -71,7 +70,7 @@ export async function fetchProduct(code = 'av', variant = '1u-1y') {
     body: data,
   });
 
-  cacheResponse.set(cacheKey, response);
+  cacheResponse.set(code, response);
   return findProductVariant(response, variant);
 }
 
@@ -113,18 +112,18 @@ function parseParams(params) {
   segments.forEach((segment) => {
     if (isInArray) {
       if (segment.endsWith(']')) {
-        tempArray.push(segment.slice(0, -1));
+        tempArray.push(segment.slice(0, -1).trim());
         result.push(tempArray);
         tempArray = [];
         isInArray = false;
       } else {
-        tempArray.push(segment);
+        tempArray.push(segment.trim());
       }
     } else if (segment.startsWith('[')) {
       if (segment.endsWith(']')) {
-        result.push(segment.slice(1, -1));
+        result.push(segment.slice(1, -1).trim());
       } else {
-        tempArray.push(segment.slice(1));
+        tempArray.push(segment.slice(1).trim());
         isInArray = true;
       }
     } else {
@@ -139,7 +138,7 @@ function parseParams(params) {
  * Renders nano blocks
  * @param parent The parent element
  */
-export function renderNanoBlocks(parent = document.body) {
+export function renderNanoBlocks(parent = document.body, mv = undefined) {
   const regex = /{([^}]+)}/g;
   findTextNodes(parent).forEach((node) => {
     const text = node.textContent.trim();
@@ -149,7 +148,8 @@ export function renderNanoBlocks(parent = document.body) {
         const [name, ...params] = parseParams(match.slice(1, -1));
         const renderer = nanoBlocks.get(name.toLowerCase());
         if (renderer) {
-          const element = renderer(...params);
+          const element = mv ? renderer(mv, ...params) : renderer(...params);
+          element.classList.add('nanoblock');
           const oldElement = node.parentNode;
           oldElement.parentNode.replaceChild(element, oldElement);
         }

@@ -39,10 +39,10 @@
   --background-color-light-sky-blue: #e4f2ff;
   --icon-color: #205fff;
   --background-light-blue: #d9eeff;
-  --background-blue: #006eff;
+  --background-blue: #005ed9;
   --dark-blue-tag: #005eff;
   --light-blue-tag: #13b0a7;
-  --green-tag: #2cb43d;
+  --green-tag: #218728;
   --dark-shadow: #0000001a;
   --background-checkmark: #61AF53;
 
@@ -563,7 +563,7 @@ a.button:any-link, input[type="submit"] {
 }
 
 a.info-button.modal {
-  color: var(--background-blue);
+  color: var(--link-color);
 }
 
 a.info-button.modal::before {
@@ -997,6 +997,47 @@ main .section.blue a.button.secondary::after {
   height: auto;
 }
 
+.buttons-align-right {
+  text-align: right;
+}
+
+.buttons-align-right > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px !important;
+}
+
+.buttons-align-right > div > :nth-child(1) {
+  flex: 1;
+  margin: 0;
+  text-align: left;
+  font-size: var(--heading-font-size-m) !important;
+  font-weight: var(--font-weight-bold) !important;
+}
+
+.buttons-align-right > div p {
+  padding: 0 0.5rem;
+}
+
+.buttons-align-right > div p .button {
+  border-color: var(--black-color);
+  background-color: transparent;
+  color: var(--black-color);
+}
+
+.buttons-align-right > div p .button::after {
+  background-color: var(--black-color);
+}
+
+.buttons-align-right > div p .button:hover {
+  background-color: var(--black-color);
+  color: var(--white-color)
+}
+
+.buttons-align-right > div p .button:hover::after {
+  background-color: var(--white-color);
+}
 
 .tag {
   margin-left: 5px;
@@ -1006,6 +1047,7 @@ main .section.blue a.button.secondary::after {
   line-height: 1;
   border-radius: 3px;
   padding: 2px 4px;
+  text-transform: uppercase;
 }
 
 .tag-dark-blue {
@@ -1045,4 +1087,14 @@ main .section.blue a.button.secondary::after {
 .section.no-padding {
   padding: 0;
   padding-bottom: 10px;
+}
+
+@media (min-width: 768px) {
+  .buttons-align-right > div {
+    flex-direction: row;
+  }
+
+  .buttons-align-right > div > :nth-child(1) {
+    font-size: var(--heading-font-size-l) !important;
+  }
 }
