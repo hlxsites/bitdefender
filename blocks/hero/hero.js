@@ -72,6 +72,7 @@ createNanoBlock('discount', (code, variant) => {
  */
 export default async function decorate(block) {
   buildHeroBlock(block);
+  // Eager load images to improve LCP
   [...block.querySelectorAll('img')].forEach((el) => el.setAttribute('loading', 'eager'));
 
   // get div class hero-content
