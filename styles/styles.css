@@ -997,6 +997,47 @@ main .section.blue a.button.secondary::after {
   height: auto;
 }
 
+.buttons-align-right {
+  text-align: right;
+}
+
+.buttons-align-right > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px !important;
+}
+
+.buttons-align-right > div > :nth-child(1) {
+  flex: 1;
+  margin: 0;
+  text-align: left;
+  font-size: var(--heading-font-size-m) !important;
+  font-weight: var(--font-weight-bold) !important;
+}
+
+.buttons-align-right > div p {
+  padding: 0 0.5rem;
+}
+
+.buttons-align-right > div p .button {
+  border-color: var(--black-color);
+  background-color: transparent;
+  color: var(--black-color);
+}
+
+.buttons-align-right > div p .button::after {
+  background-color: var(--black-color);
+}
+
+.buttons-align-right > div p .button:hover {
+  background-color: var(--black-color);
+  color: var(--white-color)
+}
+
+.buttons-align-right > div p .button:hover::after {
+  background-color: var(--white-color);
+}
 
 .tag {
   margin-left: 5px;
@@ -1046,4 +1087,14 @@ main .section.blue a.button.secondary::after {
 .section.no-padding {
   padding: 0;
   padding-bottom: 10px;
+}
+
+@media (min-width: 768px) {
+  .buttons-align-right > div {
+    flex-direction: row;
+  }
+
+  .buttons-align-right > div > :nth-child(1) {
+    font-size: var(--heading-font-size-l) !important;
+  }
 }
