@@ -421,8 +421,9 @@ header a.button:hover span.button-text {
   display: block;
   width: 100%;
   height: 3px;
-  background-color:  var(--text-color);
-  transition: all 0.3s ease;
+  background-color: var(--text-color);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  will-change: transform, opacity;
 }
 
 .menu-wrapper {
