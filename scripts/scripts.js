@@ -150,7 +150,7 @@ export function getTags(tags) {
 
 export function trackProduct(product) {
   // eslint-disable-next-line max-len
-  const isDuplicate = TRACKED_PRODUCTS.find((p) => p.platform_product_id === product.platform_product_id && p.variation_id === product.variation_id);
+  const isDuplicate = TRACKED_PRODUCTS.find((p) => p.platformProductId === product.platformProductId && p.variantId === product.variantId);
   const tags = getTags(getMetadata(METADATA_ANAYTICS_TAGS));
   const isTrackedPage = tags.includes('product') || tags.includes('service');
   if (isTrackedPage && !isDuplicate) TRACKED_PRODUCTS.push(product);
@@ -162,17 +162,16 @@ export function pushProductsToDataLayer() {
       product: TRACKED_PRODUCTS
         .map((p) => ({
           info: {
-            ID: p.platform_product_id,
+            ID: p.platformProductId,
             name: getMetadata('breadcrumb-title') || getMetadata('og:title'),
-            devices: +p.variation.dimension_value,
-            subscription: p.variation.years * 12,
-            version: p.variation.years ? 'yearly' : 'monthly',
-            basePrice: +p.price,
-            discountValue: p.discount ? Math.round(p.price - p.discount.discounted_price) : 0,
-            // eslint-disable-next-line max-len
-            discountRate: p.discount ? Math.floor(((p.price - p.discount.discounted_price) / p.price) * 100) : 0,
-            currency: p.currency_iso,
-            priceWithTax: p.discount ? +p.discount.discounted_price : +p.price,
+            devices: p.devices,
+            subscription: p.subscription,
+            version: p.version,
+            basePrice: p.basePrice,
+            discountValue: p.discount,
+            discountRate: p.discountRate,
+            currency: p.currency,
+            priceWithTax: p.actualPrice,
           },
         })),
     });
