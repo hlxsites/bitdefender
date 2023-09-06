@@ -375,7 +375,7 @@ export default function decorate(block) {
 
       col.querySelectorAll('.button-container a').forEach((link) => {
         if (block.querySelector('h3')) {
-          link.setAttribute('aria-label', block.querySelector('h3').innerText);
+          link.setAttribute('aria-label', `${link.innerText} ${block.querySelector('h3').innerText}`);
         }
       });
 
