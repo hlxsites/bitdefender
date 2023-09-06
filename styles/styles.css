@@ -336,6 +336,11 @@ main .section.wide {
   padding-right: var(--body-padding);
 }
 
+.products-container h2 {
+  font-weight: var(--font-weight-bolder);
+  font-size: var(--heading-font-size-m);
+}
+
 main .section.wide h2 {
   font-size: var(--heading-font-size-s);
   font-weight: var(--font-weight-boldest);
@@ -756,106 +761,110 @@ main .video-placeholder .video-placeholder-play::before {
 }
 
 /* Cta section */
-main .section.cta, .section.columnar {
+main .section.cta {
   padding: 0;
   overflow: hidden;
 }
 
-.columnar .full-width {
-  padding-top: 64px;
+.cta .left-col {
+  flex: 0 1 60%;
+}
+
+.cta .right-col {
+  flex: 0 1 40%;
+}
+
+.cta .full-width {
+  padding-top: 80px;
+  margin-top: 64px;
   background-color: var(--cta-background-light-blue);
 }
 
-@media (min-width: 992px) {
-  .columnar .full-width {
-    padding-top: 100px;
-  }
-
-  .columnar.image-overflow .full-width {
-    padding-top: 50px;
-    margin-top: 50px;
-  }
+.cta .columns {
+  width: 100%;
 }
 
-.columnar-container {
-  padding: 0 20px;
+.cta .columns > div > .columns-img-col {
+  order: 1;
+}
+
+.cta .columns-img-col picture {
+  width: 270px;
+}
+
+main .cta.bigger-text h2 {
+  font-size: 34px;
+}
+
+main .section.cta p {
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+main .section.cta.bigger-text a.button {
+  margin-top: 25px;
+}
+
+main .section.cta .right-col {
   display: flex;
-  flex-direction: column;
-  max-width: 1300px;
-  margin: 0 auto;
-}
-
-@media (min-width: 768px) {
-  .image-overflow .columnar-container {
-    flex-direction: row;
-  }
-}
-
-@media (min-width: 992px) {
-  .columnar-container {
-    padding: 0 50px;
-    flex-direction: row;
-  }
-}
-
-@media (min-width: 1600px) {
-  .columnar-container {
-    max-width: 1332px;
-  }
-}
-
-.columnar-container .left-col {
-  flex: 1 1 50%;
-  justify-items: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-}
-
-.columnar-container .right-col {
-  display: flex;
-  flex: 0 1 50%;
-  align-items: center;
-  overflow: visible;
-  flex-direction: column;
-  justify-content: flex-end;
-}
-
-@media (min-width: 992px) {
-  .columnar-container .right-col {
-    flex: 0 1 43%;
-  }
-
-  .image-overflow .columnar-container .img-container {
-    margin-top: -100px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .columnar-container .right-col {
-    flex: 0 1 40%;
-  }
+  justify-content: center;
 }
 
 @media (min-width: 596px) {
-  .columnar-container .img-container {
+  main .section.cta.bigger-text h2 {
+    font-size: 38px;
+  }
+}
+
+@media (min-width: 768px) {
+  .cta .columns-img-col picture {
+    width: 370px;
+  }
+
+  main .section.cta.bigger-text h2 {
+    font-size: 42px;
+  }
+}
+
+@media (min-width: 992px) {
+  .cta .columns-img-col picture {
+    width: 430px;
+  }
+
+  .cta .columns-wrapper {
+    padding-right: 0;
+    padding-left: 50px;
     display: flex;
-    min-width: 491px;
-    min-height: 480px;
+  }
+
+  main .section.cta.bigger-text h2 {
+    font-size: 54px;
+  }
+
+  main .section.cta.bigger-text p {
+    font-size: 18px;
+  }
+
+  main .section.cta .right-col {
+    justify-content: end;
+    align-self: flex-end;
   }
 }
 
 @media (min-width: 1600px) {
-  .columnar-container .img-container {
-    width: 491px;
-    height: 480px;
+  .cta .columns-img-col picture {
+    width: 494px;
+  }
+
+  main .section.cta.bigger-text h2 {
+    font-size: 56px;
   }
 }
 
-@media(min-width: 992px) {
-  .columnar-container {
-    flex-direction: row;
+@media (min-width: 992px) {
+  .cta.bigger-text .full-width {
+    padding-top: 50px;
+    margin-top: 50px;
   }
 }
 
@@ -901,14 +910,13 @@ main .section.blue {
   }
 }
 
-main .section.checked-lists  ul li,
-main .section.columnar  ul li
+main .section.checked-lists  ul li
 {
   position: relative;
+  padding-left: 10px;
 }
 
-main .section.checked-lists  ul li::before,
-main .section.columnar  ul li::before
+main .section.checked-lists  ul li::before
 {
   content: "";
   position: absolute;
@@ -921,8 +929,7 @@ main .section.columnar  ul li::before
   z-index: 1;
 }
 
-main .section.checked-lists ul li::after,
-main .section.columnar ul li::after
+main .section.checked-lists ul li::after
 {
   content: "";
   position: absolute;
@@ -1016,7 +1023,7 @@ main .section.blue a.button.secondary::after {
   font-weight: var(--font-weight-bold) !important;
 }
 
-.buttons-align-right > div p {
+.section .buttons-align-right > div p {
   padding: 0 0.5rem;
 }
 
