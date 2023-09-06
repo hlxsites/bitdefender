@@ -43,8 +43,6 @@
 /* awards styling */
 .columns.awards > div {
   row-gap: 30px;
-  align-items: center;
-  flex-direction: unset;
 }
 
 .text-over-image > div > div:first-child {
@@ -211,7 +209,6 @@
 
 .columns.awards > div img {
   display: block;
-  height: 100%;
   object-fit: contain;
 }
 
@@ -280,6 +277,16 @@
   border: none;
 }
 
+.section.white.columns-container .columns.awards > div {
+  flex-direction: unset;
+  align-items: center;
+}
+
+.section.white.columns-container .columns.awards > div img {
+  display: block;
+  height: 100%;
+  object-fit: contain;
+}
 
 @media (min-width: 676px) {
   .columns.carousel > div > div {
