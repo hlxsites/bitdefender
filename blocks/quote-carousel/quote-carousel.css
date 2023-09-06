@@ -1,5 +1,6 @@
-main .quote-carousel-wrapper {
+main .quote-carousel {
   max-width: 100%;
+  margin: 55px auto 0;
 }
 
 main .quote-carousel .slides-container {
@@ -18,12 +19,21 @@ main .quote-carousel .slides-container {
 }
 
 @media (min-width: 768px) {
+  main .quote-carousel {
+    max-width: 80%;
+  }
+
   main .quote-carousel .slides-container {
     margin-bottom: 60px;
   }
 }
 
 @media (min-width: 992px) {
+  main .quote-carousel {
+    max-width: 90%;
+    margin: 55px 0 0;
+  }
+
   main .quote-carousel .slides-container {
     margin-bottom: 80px;
   }
