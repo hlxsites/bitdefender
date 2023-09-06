@@ -302,53 +302,38 @@ export async function detectModalButtons(main) {
   });
 }
 
-function buildColumnar(section) {
-  const fullWidthContainer = createTag(
-    'div',
-    { class: 'full-width' },
-    `<div class="columnar-container">
-<div class="left-col">
-</div>
-<div class="right-col">
-    <div class="img-container">
-    </img>
-</div>`,
-  );
-
-  // Add last image to right col.
-  const imageContainer = fullWidthContainer.querySelector('.img-container');
-  const images = [...section.querySelectorAll(':scope picture')];
-  if (images.length > 0) {
-    imageContainer.append(images[images.length - 1]);
-  }
-  const leftCol = fullWidthContainer.querySelector('.left-col');
-  [...section.children].forEach((e) => leftCol.append(e));
-  section.append(fullWidthContainer);
-}
-
-function buildCtaSections(main) {
-  main.querySelectorAll('div.section.columnar')
-    .forEach(buildColumnar);
-}
-
 function populateColumns(section) {
   if (section.querySelectorAll('.columns div div').length === 2) {
+    const rightColContainer = section.querySelector('.columns div div:last-child');
+    rightColContainer.classList.add('right-col');
     section.querySelector('.columns div div:last-child').classList.add('right-col');
-    section.querySelector('.columns div div:first-child').classList.add('left-col');
+    const leftColContainer = section.querySelector('.columns div div:first-child');
+    leftColContainer.classList.add('left-col');
 
-    const rightColContainer = section.querySelector('.right-col');
-
-    const rightCol = section.querySelector('.right-column');
-
-    if (rightCol) {
-      rightColContainer.append(rightCol);
-    }
+    section.querySelectorAll('.right-column').forEach((el) => rightColContainer.append(el));
+    section.querySelectorAll('.left-column').forEach((el) => leftColContainer.append(el));
   }
 }
 
 function buildTwoColumnsSection(main) {
   main.querySelectorAll('div.section.two-columns')
     .forEach(populateColumns);
+}
+
+function buildCta(section) {
+  populateColumns(section);
+  const fullWidthContainer = createTag(
+    'div',
+    { class: 'full-width' },
+    '',
+  );
+  [...section.children].forEach((el) => fullWidthContainer.append(el));
+  section.append(fullWidthContainer);
+}
+
+function buildCtaSections(main) {
+  main.querySelectorAll('div.section.cta, div.section.footer-cta')
+    .forEach(buildCta);
 }
 
 function pushPageLoadToDataLayer() {
