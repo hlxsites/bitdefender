@@ -15,6 +15,7 @@ header p {
 .header-wrapper {
   position: sticky;
   top: 0;
+  transition: height 0.3s ease-in-out;
   background-color: var(--white-color);
 }
 
