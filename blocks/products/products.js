@@ -373,11 +373,12 @@ export default function decorate(block) {
 
       renderNanoBlocks(col, mv);
 
-      // listen to ProductCard change and update button accordingly
-      col.querySelectorAll('.button-container').forEach((b) => {
-        mv.subscribe((card) => {
-          b.querySelector('a').href = card.url;
-        });
+      // listen to ProductCard change and update the first button accordingly
+      mv.subscribe((card) => {
+        const link = col.querySelector('.button-container a');
+        if (link) {
+          link.href = card.url;
+        }
       });
     });
     row.remove();
