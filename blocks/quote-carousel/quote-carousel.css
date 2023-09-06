@@ -171,6 +171,8 @@ main .quote-carousel .slides-container {
   border-radius: 50%;
   padding: 0 5px;
   margin: 0;
+  width: 32px;
+  height: 32px;
   font-size: 0;
   overflow: hidden;
 }
@@ -181,6 +183,7 @@ main .quote-carousel .slides-container {
 }
 
 .slides-container .slides-dots li button {
+  position: relative;
   padding: 0;
   background: transparent;
   width: 16px;
@@ -188,6 +191,7 @@ main .quote-carousel .slides-container {
   outline: none;
   cursor: pointer;
   border-radius: 50%;
+  top: 25%;
   text-indent: -9999px;
   border: 1px solid #006eff;
   white-space: nowrap;
