@@ -27,6 +27,7 @@
   justify-content: space-between;
   align-items: center;
   padding-right: 25px;
+  padding-bottom: 8px;
 }
 
 .accordion-item-header::after {
@@ -45,6 +46,16 @@
 
 .accordion-item .accordion-item-header h4 {
   display: inline-block;
+}
+
+.accordion .accordion-item-header h3 {
+  font-size: var(--heading-font-size-xs);
+  line-height: 1.25;
+  margin: 0;
+}
+
+.accordion.terms-of-use .accordion-item-header h3 {
+  font-size: var(--heading-font-size-xxs);
 }
 
 .accordion-item.expanded .accordion-item-header::after {
@@ -95,6 +106,14 @@
 }
 
 @media (min-width: 992px) { /* desktop */
+
+  .accordion .accordion-item-header h3 {
+    font-size: var(--heading-font-size-s);
+  }
+
+  .accordion.terms-of-use .accordion-item-header h3 {
+    font-size: var(--heading-font-size-xs);
+  }
 
   .accordion-wrapper {
     max-width: var(--section-desktop-max-width);
