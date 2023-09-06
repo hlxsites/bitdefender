@@ -377,7 +377,7 @@ export default function decorate(block) {
         const heading = block.querySelector('h3');
         if (heading) {
           // concatenate sibling headings
-          let label = `${link.innerText} ${block.querySelector('h3').innerText}`;
+          let label = `${link.innerText} ${heading.innerText}`;
           let sibling = heading.nextElementSibling;
           while (sibling && (sibling.nodeName === 'H3' || sibling.nodeName === 'H4')) {
             label = `${label} ${sibling.innerText}`;
