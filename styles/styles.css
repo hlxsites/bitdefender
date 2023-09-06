@@ -336,6 +336,11 @@ main .section.wide {
   padding-right: var(--body-padding);
 }
 
+.products-container h2 {
+  font-weight: var(--font-weight-bolder);
+  font-size: var(--heading-font-size-m);
+}
+
 main .section.wide h2 {
   font-size: var(--heading-font-size-s);
   font-weight: var(--font-weight-boldest);
