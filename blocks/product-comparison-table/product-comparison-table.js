@@ -35,14 +35,12 @@ createNanoBlock('price-comparison', (code, variant, label) => {
 
 function handleExpanableRowClick(rows, expandableRowIndex, evt) {
   evt.currentTarget.classList.toggle('expanded');
+  evt.currentTarget.classList.toggle('collapsed');
 
   [...rows].forEach((row, index) => {
-    if (parseInt(row.getAttribute('expandable-row-index'), 10) === expandableRowIndex) {
-      row.classList.toggle('hidden');
-    } else if (row.hasAttribute('expandable-row-index') && !row.classList.contains('hidden')) {
-      row.classList.add('hidden');
-    } else if (row.classList.contains('expanded') && index !== expandableRowIndex) {
+    if (row.classList.contains('expanded') && index !== expandableRowIndex) {
       row.classList.remove('expanded');
+      row.classList.add('collpased')
     }
   });
 }
@@ -52,6 +50,7 @@ function markHiddenRowsUnderExpandableRows(rows, expandableRowsIndexes) {
     return;
   }
   let lastExpandableRow = 0;
+
   rows.forEach((row, rowIndex) => {
     const index = expandableRowsIndexes.indexOf(rowIndex);
     if (index !== -1 || rowIndex === 0) {
@@ -59,8 +58,15 @@ function markHiddenRowsUnderExpandableRows(rows, expandableRowsIndexes) {
       return;
     }
 
-    row.classList.add('hidden');
     row.setAttribute('expandable-row-index', lastExpandableRow);
+  });
+
+  expandableRowsIndexes.forEach((expandableRowIndex) => {
+    const groupOfHiddenRows = [...rows].filter((row) => row.getAttribute('expandable-row-index') === `${expandableRowIndex}`);
+    const hiddenRowsWrapper = document.createElement('div');
+    hiddenRowsWrapper.classList.add('hidden-rows-wrapper');
+    hiddenRowsWrapper.append(...groupOfHiddenRows);
+    rows[expandableRowIndex].append(hiddenRowsWrapper);
   });
 }
 
@@ -70,6 +76,7 @@ function addArrowAndEventToExpandableRows(rows) {
       && row.nextElementSibling !== null
       && !row.nextElementSibling.classList.contains('expandable-row')) {
       row.classList.add('expandable-arrow');
+      row.classList.add('collapsed');
       row.addEventListener('click', handleExpanableRowClick.bind(null, rows, index));
     }
   });
@@ -95,7 +102,6 @@ function addClassesForExpandableRows(rows) {
 function setExpandableRows(block) {
   const rows = block.querySelectorAll('div[role="row"]');
   addClassesForExpandableRows(rows);
-  markHiddenRowsUnderExpandableRows(rows);
 }
 
 function addAccesibilityRoles(block) {
