@@ -300,14 +300,14 @@ div[role="row"].expandable-row div[role="cell"] p:first-of-type {
     
 }
 
-.expandable-row.collapsed .hidden-rows-wrapper {
+.collapsed.hidden-rows-wrapper {
     max-height: 0px;
     transition: max-height .5s ease-in-out;
     overflow: hidden;
     
 }
 
-.expandable-row.expanded .hidden-rows-wrapper {
+.expanded.hidden-rows-wrapper {
     max-height: 9000px;
     transition: max-height 1s ease-in-out;
 }
