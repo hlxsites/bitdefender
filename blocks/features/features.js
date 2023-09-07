@@ -75,9 +75,8 @@ function extractFeatures(col) {
 
     a.addEventListener('click', (event) => {
       event.preventDefault();
-      eventListener(ul);
+      eventListener(ul)(event);
     });
-    // a.addEventListener('click', eventListener(ul));
 
     h4.childNodes.forEach((node) => {
       if (node.nodeType === Node.TEXT_NODE) {
