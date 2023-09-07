@@ -41,7 +41,7 @@ function handleExpanableRowClick(rows, expandableRowIndex, evt) {
   [...rows].forEach((row, index) => {
     if (row.classList.contains('expanded') && index !== expandableRowIndex) {
       row.classList.remove('expanded');
-      row.classList.add('collpased')
+      row.classList.add('collpased');
     }
   });
 }
