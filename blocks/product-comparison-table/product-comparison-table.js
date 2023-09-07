@@ -218,6 +218,23 @@ function addProductPriceBelowSelectedColumn(block) {
   });
 }
 
+function createAriaLabel() {
+  document.querySelectorAll('.product-comparison-header [role="columnheader"]').forEach((col) => {
+    col.querySelectorAll('.button-container a').forEach((link) => {
+      const heading = col.querySelector('h3');
+      if (heading) {
+        let label = `${link.innerText} ${heading.innerText}`;
+        let sibling = heading.nextElementSibling;
+        while (sibling && (sibling.nodeName === 'H3' || sibling.nodeName === 'H4')) {
+          label = `${label} ${sibling.innerText}`;
+          sibling = sibling.nextElementSibling;
+        }
+        link.setAttribute('aria-label', label);
+      }
+    });
+  });
+}
+
 export default function decorate(block) {
   addAccesibilityRoles(block);
   replaceTableTextToProperCheckmars(block);
@@ -228,6 +245,7 @@ export default function decorate(block) {
   if (block.querySelector('div[role="columnheader"] em')) {
     addProductPriceBelowSelectedColumn(block);
   }
+  createAriaLabel();
   extractTextFromStrongTagToParent(block);
   renderNanoBlocks(block);
 }
