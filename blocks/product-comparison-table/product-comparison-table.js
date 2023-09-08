@@ -76,6 +76,7 @@ function addArrowAndEventToExpandableRows(rows) {
   rows.forEach((row, index) => {
     if (row.classList.contains('expandable-row')
       && row.nextElementSibling !== null
+      && row.nextElementSibling.childElementCount > 0
       && !row.nextElementSibling.classList.contains('expandable-row')) {
       row.classList.add('expandable-arrow');
       row.nextElementSibling.classList.add('collapsed');
