@@ -19,13 +19,6 @@ function buildHeroBlock(element) {
     const section = document.querySelector('div.hero');
     const subSection = document.querySelector('div.hero div');
     subSection.classList.add('hero-content');
-    // get number of children in hero-content
-    // const numberOfChildren = subSection.childElementCount;
-
-    // iterate though children and add numbered class to each child
-    // for (let i = 0; i < numberOfChildren; i += 1) {
-    //   subSection.children[i].classList.add(`hero-content-${i}`);
-    // }
 
     const breadcrumb = createTag('div', { class: 'breadcrumb' });
     document.querySelector('div.hero div div:first-child').prepend(breadcrumb);
