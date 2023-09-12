@@ -14,10 +14,12 @@
   --hero-h2-font-size: 24px;
   --hero-botton-border-color: #616161;
   --hero-p-color: #3c3c3c;
+  --small-link-color: #0052BD;
 
   /* breadcrumbs font size */  
   --breadcrumb-text-color-dark: #c5c5c5;
   --breadcrumb-text-color-dark-hover: #616161;
+  
   --breadcrumbs-font-size-s: 12px;
 }
 
@@ -336,6 +338,11 @@ main .hero .hero-content ul li {
   padding: 0 0 0 20px;
   position: relative;
   list-style: none;
+}
+
+main .hero .hero-content ul li a {
+  color: var(--small-link-color);
+  text-decoration: none;
 }
 
 main .hero .hero-content ul li:first-child {
