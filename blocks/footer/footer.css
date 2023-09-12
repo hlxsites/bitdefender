@@ -70,7 +70,7 @@ footer .footer a:hover {
   opacity: 1;
   position: relative;
   margin: 0;
-  transition: all .5s ease-in-out;
+  transition: transform .5s ease-in-out;
   cursor: pointer;
   padding: 0.625rem 1.25rem;
 }
@@ -165,7 +165,7 @@ footer .footer a:hover {
   right: 1.25rem;
   top: 0.75rem;
   left: auto;
-  transition: all .5s ease-in-out;
+  transition: transform .5s ease-in-out;
 }
 
 .footer > div > :nth-child(3) > ul,
@@ -173,7 +173,7 @@ footer .footer a:hover {
   width: 100%;
   max-height: 125rem;
   margin-bottom: 0.625rem;
-  transition: all .5s ease-in-out;
+  transition: transform .5s ease-in-out;
 }
 
 .footer > div > :nth-child(3) > ul li,
