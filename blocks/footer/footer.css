@@ -195,8 +195,22 @@ footer .footer a:hover {
   margin-top: 0.6875rem;
 }
 
-.footer > div > :nth-child(3) > p + ul {
+.footer > div > :nth-child(3) > p + ul,
+.footer > div > :nth-child(4) > p + ul {
   display: none;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out;
+}
+
+.footer > div > :nth-child(3) > p + ul.visible,
+.footer > div > :nth-child(4) > p + ul.visible {
+  display: block;
+}
+
+.footer > div > :nth-child(3) > p + ul.open,
+.footer > div > :nth-child(4) > p + ul.open {
+  max-height: 400px;
 }
 
 .footer > div > :nth-child(3) > p,
