@@ -14,7 +14,7 @@
   --hero-h2-font-size: 24px;
   --hero-botton-border-color: #616161;
   --hero-p-color: #3c3c3c;
-  --small-link-color: #0052BD;
+  --small-link-color: #00439c;
 
   /* breadcrumbs font size */  
   --breadcrumb-text-color-dark: #c5c5c5;
@@ -342,7 +342,6 @@ main .hero .hero-content ul li {
 
 main .hero .hero-content ul li a {
   color: var(--small-link-color);
-  text-decoration: none;
 }
 
 main .hero .hero-content ul li:first-child {
