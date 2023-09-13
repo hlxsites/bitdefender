@@ -336,6 +336,11 @@ main .section.wide {
   padding-right: var(--body-padding);
 }
 
+main .section.no-padding-top-bottom {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
 .products-container h2 {
   font-weight: var(--font-weight-bolder);
   font-size: var(--heading-font-size-m);
@@ -373,6 +378,11 @@ main .section.wide > :only-child {
 main .section.wide .default-content-wrapper {
   text-align: center;
   padding-bottom: 15px;
+}
+
+main .section.no-padding-top-bottom .default-content-wrapper {
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 main .section.center .products {
