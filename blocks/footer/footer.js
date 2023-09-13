@@ -11,6 +11,8 @@ function wrapImgsInLinks(container) {
   });
 }
 
+console.log('1');
+
 function onFooterElementClick(evt) {
   evt.target.classList.toggle('active');
 }
