@@ -47,7 +47,15 @@ footer .footer a:hover {
 }
 
 .footer .deactivated::before {
-  display: none;
+  content: "•";
+  color: #999;
+  font-weight: var(--font-weight-boldest);
+  display: inline-block;
+  width: 1rem;
+  position: absolute;
+  z-index: 1;
+  left: -1rem;
+  top: 0.125rem;
 }
 
 .footer > div {
@@ -223,7 +231,8 @@ footer .footer a:hover {
   padding-bottom: 0.625rem;
 }
 
-.footer > div > :nth-child(4) > p + ul {
+.footer > div > :nth-child(4) > p + ul { 
+  padding: 0 20px;
   display: none;
 }
 
@@ -319,18 +328,6 @@ footer .footer a:hover {
 @media(min-width: 990px) { /* desktop */
   .footer .deactivated {
     position: relative;
-  }
-
-  .footer .deactivated::before {
-    content: "•";
-    color: #999;
-    font-weight: var(--font-weight-boldest);
-    display: inline-block;
-    width: 1rem;
-    position: absolute;
-    top: 0.125rem;
-    left: -0.8125rem;
-    z-index: 1;
   }
 
   .footer > div {
