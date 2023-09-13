@@ -403,6 +403,24 @@ footer .footer a:hover {
     margin-bottom: 0;
   }
 
+  .footer > div > :nth-child(3) ul,
+  .footer > div > :nth-child(4) ul  {
+    display: block !important;
+    margin-bottom: 0;
+  }
+
+  .footer > div > :nth-child(3) > ul {
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-top: 0.9375rem;
+    list-style: none;
+  }
+
+  .footer > div > :nth-child(3) > p {
+    width: 95%;
+  }
+
   .footer > div > :nth-child(2) > ul {
     padding: 0;
     column-count: 1;
@@ -410,6 +428,10 @@ footer .footer a:hover {
     grid-template-columns: 1fr;
     margin-top: 0.9375rem;
     list-style: none;
+  }
+  
+  .footer > div > :nth-child(3) ul {
+    column-count: 2;
   }
 
   .footer > div > :nth-child(2) > ul li,
@@ -434,27 +456,9 @@ footer .footer a:hover {
     padding-bottom: 0;
   }
 
-  .footer > div > :nth-child(3) > ul {
-    padding: 0;
-    display: grid;
-    grid-template-columns: 1fr;
-    margin-top: 0.9375rem;
-    list-style: none;
-  }
-
   .footer > div > :nth-child(3) > p::before,
   .footer > div > :nth-child(4) > p::before {
     display: none;
-  }
-
-  .footer > div > :nth-child(3) ul,
-  .footer > div > :nth-child(4) ul  {
-    display: block !important;
-    margin-bottom: 0;
-  }
-
-  .footer > div > :nth-child(3) ul {
-    column-count: 2;
   }
 
   .footer > div > :nth-child(4) ul {
@@ -530,6 +534,11 @@ footer .footer a:hover {
     font: normal normal normal 13px/18px var(--body-font-family);
     margin-top: 0.875rem;
     margin-bottom: 0;
+  }
+
+  .footer > div > :nth-child(3) > p + ul,
+  .footer > div > :nth-child(4) > p + ul {
+    max-height: 400px;
   }
 
   .footer > div > :nth-child(4) > p.active + ul {
