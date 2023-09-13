@@ -315,9 +315,24 @@ function populateColumns(section) {
   }
 }
 
+function populateHero(section) {
+  if (section.querySelectorAll('.hero div div').length === 2) {
+    const rightColContainer = section.querySelector('.hero div div:last-child');
+    rightColContainer.classList.add('right-col');
+    section.querySelector('.hero div div:last-child').classList.add('right-col');
+    const leftColContainer = section.querySelector('.hero div div:first-child');
+    leftColContainer.classList.add('left-col');
+
+    section.querySelectorAll('.right-column').forEach((el) => rightColContainer.append(el));
+    section.querySelectorAll('.left-column').forEach((el) => leftColContainer.append(el));
+  }
+}
+
 function buildTwoColumnsSection(main) {
-  main.querySelectorAll('div.section.two-columns')
-    .forEach(populateColumns);
+  main.querySelectorAll('div.section.two-columns').forEach((section) => {
+    populateHero(section);
+    populateColumns(section);
+  });
 }
 
 function buildCta(section) {
