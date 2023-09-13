@@ -1,7 +1,8 @@
 name: Testing
 
 env:
- BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+  BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+  BLOCK_NAME: ""
 
 on:
   pull_request:
@@ -21,8 +22,26 @@ jobs:
     - run: npm run lint
       env:
         CI: true
-  ghost_inspector_tests:
+
+  identify_blocks:
+    runs-on: ubuntu-latest
     needs: linting
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Get list of changed blocks
+      run: |
+        changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
+        for file in $changed_files; do
+          if [[ $file == blocks/* ]]; then
+            block_name=$(echo $file | cut -d'/' -f2)
+            echo "Changed block: $block_name"
+            echo "BLOCK_NAME=$block_name" >> $GITHUB_ENV
+          fi
+        done
+
+  ghost_inspector_tests:
+    needs: identify_blocks
     runs-on: ubuntu-latest
     steps:
       - name: execute Ghost Inspector test
