@@ -31,19 +31,20 @@ jobs:
       uses: actions/checkout@v3
       with:
         fetch-depth: 0
-   - name: Get list of changed blocks
-  run: |
-    echo "Before SHA: ${{ github.event.before }}"
-    echo "Current SHA: ${{ github.sha }}"
-    changed_files=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }})
-    echo "Changed files: $changed_files"
-    for file in $changed_files; do
-      if [[ $file == blocks/* ]]; then
-        block_name=$(echo $file | cut -d'/' -f2)
-        echo "Changed block: $block_name"
-        echo "BLOCK_NAME=$block_name" >> $GITHUB_ENV
-      fi
-    done
+    - name: Get list of changed blocks
+      run: |
+        echo "Before SHA: ${{ github.event.before }}"
+        echo "Current SHA: ${{ github.sha }}"
+        changed_files=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }})
+        echo "Changed files: $changed_files"
+        for file in $changed_files; do
+          if [[ $file == blocks/* ]]; then
+            block_name=$(echo $file | cut -d'/' -f2)
+            echo "Changed block: $block_name"
+            echo "BLOCK_NAME=$block_name" >> $GITHUB_ENV
+          fi
+        done
+
   ghost_inspector_tests:
     needs: identify_blocks
     runs-on: ubuntu-latest
