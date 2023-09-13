@@ -232,7 +232,6 @@ footer .footer a:hover {
 }
 
 .footer > div > :nth-child(4) > p + ul { 
-  padding: 0 20px;
   display: none;
 }
 
@@ -535,6 +534,7 @@ footer .footer a:hover {
 
   .footer > div > :nth-child(3) > p + ul,
   .footer > div > :nth-child(4) > p + ul {
+    overflow: visible;
     max-height: 400px;
   }
 
