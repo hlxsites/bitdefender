@@ -560,6 +560,14 @@ export function createOptimizedPicture(src, alt = '', eager = false, breakpoints
   return picture;
 }
 
+export function setImageDimensions(pictureElement, width, height) {
+  const imgTag = pictureElement.querySelector('img');
+  if (imgTag) {
+    imgTag.setAttribute('width', width);
+    imgTag.setAttribute('height', height);
+  }
+}
+
 /**
  * Normalizes all headings within a container element.
  * @param {Element} el The container element
