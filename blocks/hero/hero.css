@@ -180,11 +180,13 @@ main .hero.black-background h1 {
 }
 
 main .hero.black-background h1, 
-main .hero.black-background h2 {
+main .hero.black-background h2,
+main .hero.black-background h4 {
   color: var(--text-dark-color);
 }
 
-main .hero.black-background h2 {
+main .hero.black-background h2,
+main .hero.black-background h4 {
   padding: 0;
   letter-spacing: normal;
   margin: 0 0 9px;

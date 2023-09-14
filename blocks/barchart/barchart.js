@@ -1,4 +1,4 @@
-import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
+import { createOptimizedPicture, setImageDimensions } from '../../scripts/lib-franklin.js';
 
 export default function decorate(block) {
   const ul = document.createElement('ul');
@@ -11,7 +11,11 @@ export default function decorate(block) {
     });
     ul.append(li);
   });
-  ul.querySelectorAll('img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
+  ul.querySelectorAll('img').forEach((img) => {
+    const optimizedPicture = createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]);
+    setImageDimensions(optimizedPicture, '46', '60');
+    img.closest('picture').replaceWith(optimizedPicture);
+  });
   block.textContent = '';
   block.append(ul);
 
