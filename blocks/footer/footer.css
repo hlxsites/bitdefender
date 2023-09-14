@@ -1,6 +1,6 @@
 footer {
   padding: 2.5rem 0 1.5rem;
-  background-color: #000;
+  background-color: red;
   font-size: var(--body-font-size-s);
   max-width: 120rem;
 }
