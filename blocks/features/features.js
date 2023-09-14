@@ -59,6 +59,8 @@ function eventListener(ul) {
   };
 }
 
+console.log('features.js');
+
 function extractFeatures(col) {
   const ul = document.createElement('ul');
   ul.classList.add('features-tabs');
