@@ -12,7 +12,24 @@ function wrapImgsInLinks(container) {
 }
 
 function onFooterElementClick(evt) {
-  evt.target.classList.toggle('active');
+  const header = evt.target;
+  const ul = header.nextElementSibling;
+  header.classList.toggle('active');
+
+  if (ul.classList.contains('open')) {
+    ul.addEventListener('transitionend', function callback() {
+      if (!ul.classList.contains('open')) { // Ensure the ul is still closed
+        ul.classList.remove('visible');
+      }
+      ul.removeEventListener('transitionend', callback);
+    });
+    ul.classList.remove('open');
+  } else {
+    ul.classList.add('visible');
+    setTimeout(() => {
+      ul.classList.add('open');
+    }, 10); // slight delay to allow the browser to apply the "visible" class first
+  }
 }
 
 function disableSelectedCountry(container) {
