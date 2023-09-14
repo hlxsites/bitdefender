@@ -58,6 +58,12 @@ jobs:
           test_id_var="GI_TEST_ID_${block^^}"
           test_id=${!test_id_var}
 
+          # Check if test_id is empty and fail the workflow if so
+          if [ -z "$test_id" ]; then
+            echo "Error: Test ID for block $block is missing!"
+            xit 1
+          fi
+
           block_url="https://${{ env.BRANCH_NAME }}${{ env.BASE_URL }}$block"
           docker run ghostinspector/cli suite execute $test_id \
               --apiKey ${{ secrets.GI_API_KEY }} \

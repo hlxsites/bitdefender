@@ -15,8 +15,6 @@ function onFooterElementClick(evt) {
   evt.target.classList.toggle('active');
 }
 
-console.log('1');
-
 function disableSelectedCountry(container) {
   const listOfCountries = container.querySelectorAll('li');
   listOfCountries.forEach((countryLanguage) => {
