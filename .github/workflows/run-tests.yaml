@@ -2,7 +2,7 @@ name: Testing
 
 env:
   BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
-  BLOCK_NAME: ""
+  BASE_URL: '--bitdefender--hlxsites.hlx.page/sidekick/blocks/'
 
 on:
   pull_request:
@@ -17,7 +17,7 @@ jobs:
     - name: Use node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '16' #required for npm 8 or later.
+        node-version: '16'
     - run: npm install
     - run: npm run lint
       env:
@@ -32,28 +32,40 @@ jobs:
       with:
         fetch-depth: 0
     - name: Get list of changed blocks
+      id: identify-blocks
       run: |
-        echo "Before SHA: ${{ github.event.before }}"
-        echo "Current SHA: ${{ github.sha }}"
+        changed_blocks=""
         changed_files=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }})
         echo "Changed files: $changed_files"
         for file in $changed_files; do
           if [[ $file == blocks/* ]]; then
             block_name=$(echo $file | cut -d'/' -f2)
             echo "Changed block: $block_name"
-            echo "BLOCK_NAME=$block_name" >> $GITHUB_ENV
+            changed_blocks="$changed_blocks $block_name"
           fi
         done
+        echo "CHANGED_BLOCKS=$changed_blocks" >> $GITHUB_ENV
 
   ghost_inspector_tests:
     needs: identify_blocks
     runs-on: ubuntu-latest
     steps:
-      - name: execute Ghost Inspector test
-        uses: docker://ghostinspector/cli
-        with:
-          args: suite execute ${{ secrets.GI_SUITE }} \
-            --apiKey ${{ secrets.GI_API_KEY }} \
-            --branchName ${{ env.BRANCH_NAME }} \
-            --errorOnFail \
-            --errorOnScreenshotFail
+    - name: Setup Block Tests
+      run: |
+        for block in $CHANGED_BLOCKS; do
+          echo "Running Ghost Inspector test for block: $block"
+          # Fetch the test ID for the current block. Assuming secrets are named like "GI_TEST_ID_<BLOCK_NAME>"
+          test_id_var="GI_TEST_ID_${block^^}"
+          test_id=${!test_id_var}
+
+          block_url="https://${{ env.BRANCH_NAME }}${{ env.BASE_URL }}$block"
+          docker run ghostinspector/cli suite execute $test_id \
+              --apiKey ${{ secrets.GI_API_KEY }} \
+              --startUrl $block_url \
+              --errorOnFail \
+              --errorOnScreenshotFail
+        done
+      env:
+        CHANGED_BLOCKS: ${{ env.CHANGED_BLOCKS }}
+
+

@@ -55,8 +55,6 @@ function eventListener(ul) {
           collapseItem(content);
         });
       }
-
-      console.log('2');
     }
   };
 }
