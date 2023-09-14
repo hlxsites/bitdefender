@@ -363,12 +363,13 @@ function renderMobileHeader(nav) {
 }
 
 export default async function decorate(block) {
-  // check if div class has class black-background
   const hero = document.querySelector('.hero');
-  if (!hero) return;
+  const isErrorPage = window.isErrorPage || false;
 
-  if (hero.classList.contains('black-background')) {
-    // add class to header
+  // Check if the page isn't an error page and if the hero doesn't exist
+  if (!hero && !isErrorPage) return;
+
+  if (hero && hero.classList.contains('black-background')) {
     const header = document.querySelector('header');
     header.classList.add('black-background');
   }
