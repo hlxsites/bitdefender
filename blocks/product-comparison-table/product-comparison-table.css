@@ -25,6 +25,7 @@
 
 .product-comparison-table {
     width: 33.9375rem;
+    display: table;
     padding-top: 0.625rem;
     padding-bottom: 0.625rem;
 }

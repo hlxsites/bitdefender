@@ -69,9 +69,14 @@ function extractFeatures(col) {
     ul.appendChild(li);
 
     const a = document.createElement('a');
+    a.setAttribute('href', '#');
 
     // register click event on a tag
-    a.addEventListener('click', eventListener(ul));
+
+    a.addEventListener('click', (event) => {
+      event.preventDefault();
+      eventListener(ul)(event);
+    });
 
     h4.childNodes.forEach((node) => {
       if (node.nodeType === Node.TEXT_NODE) {

@@ -47,7 +47,15 @@ footer .footer a:hover {
 }
 
 .footer .deactivated::before {
-  display: none;
+  content: "•";
+  color: #999;
+  font-weight: var(--font-weight-boldest);
+  display: inline-block;
+  width: 1rem;
+  position: absolute;
+  z-index: 1;
+  left: -1rem;
+  top: 0.125rem;
 }
 
 .footer > div {
@@ -70,7 +78,7 @@ footer .footer a:hover {
   opacity: 1;
   position: relative;
   margin: 0;
-  transition: all .5s ease-in-out;
+  transition: transform .5s ease-in-out;
   cursor: pointer;
   padding: 0.625rem 1.25rem;
 }
@@ -165,7 +173,7 @@ footer .footer a:hover {
   right: 1.25rem;
   top: 0.75rem;
   left: auto;
-  transition: all .5s ease-in-out;
+  transition: transform .5s ease-in-out;
 }
 
 .footer > div > :nth-child(3) > ul,
@@ -173,7 +181,7 @@ footer .footer a:hover {
   width: 100%;
   max-height: 125rem;
   margin-bottom: 0.625rem;
-  transition: all .5s ease-in-out;
+  transition: transform .5s ease-in-out;
 }
 
 .footer > div > :nth-child(3) > ul li,
@@ -195,8 +203,22 @@ footer .footer a:hover {
   margin-top: 0.6875rem;
 }
 
-.footer > div > :nth-child(3) > p + ul {
+.footer > div > :nth-child(3) > p + ul,
+.footer > div > :nth-child(4) > p + ul {
   display: none;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out;
+}
+
+.footer > div > :nth-child(3) > p + ul.visible,
+.footer > div > :nth-child(4) > p + ul.visible {
+  display: block;
+}
+
+.footer > div > :nth-child(3) > p + ul.open,
+.footer > div > :nth-child(4) > p + ul.open {
+  max-height: 400px;
 }
 
 .footer > div > :nth-child(3) > p,
@@ -209,7 +231,7 @@ footer .footer a:hover {
   padding-bottom: 0.625rem;
 }
 
-.footer > div > :nth-child(4) > p + ul {
+.footer > div > :nth-child(4) > p + ul { 
   display: none;
 }
 
@@ -307,18 +329,6 @@ footer .footer a:hover {
     position: relative;
   }
 
-  .footer .deactivated::before {
-    content: "•";
-    color: #999;
-    font-weight: var(--font-weight-boldest);
-    display: inline-block;
-    width: 1rem;
-    position: absolute;
-    top: 0.125rem;
-    left: -0.8125rem;
-    z-index: 1;
-  }
-
   .footer > div {
     grid-template-columns: [first-col] 25% [second-col] 75%;
   }
@@ -389,6 +399,24 @@ footer .footer a:hover {
     margin-bottom: 0;
   }
 
+  .footer > div > :nth-child(3) ul,
+  .footer > div > :nth-child(4) ul  {
+    display: block !important;
+    margin-bottom: 0;
+  }
+
+  .footer > div > :nth-child(3) > ul {
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-top: 0.9375rem;
+    list-style: none;
+  }
+
+  .footer > div > :nth-child(3) > p {
+    width: 95%;
+  }
+
   .footer > div > :nth-child(2) > ul {
     padding: 0;
     column-count: 1;
@@ -396,6 +424,10 @@ footer .footer a:hover {
     grid-template-columns: 1fr;
     margin-top: 0.9375rem;
     list-style: none;
+  }
+  
+  .footer > div > :nth-child(3) ul {
+    column-count: 2;
   }
 
   .footer > div > :nth-child(2) > ul li,
@@ -420,27 +452,9 @@ footer .footer a:hover {
     padding-bottom: 0;
   }
 
-  .footer > div > :nth-child(3) > ul {
-    padding: 0;
-    display: grid;
-    grid-template-columns: 1fr;
-    margin-top: 0.9375rem;
-    list-style: none;
-  }
-
   .footer > div > :nth-child(3) > p::before,
   .footer > div > :nth-child(4) > p::before {
     display: none;
-  }
-
-  .footer > div > :nth-child(3) ul,
-  .footer > div > :nth-child(4) ul  {
-    display: block !important;
-    margin-bottom: 0;
-  }
-
-  .footer > div > :nth-child(3) ul {
-    column-count: 2;
   }
 
   .footer > div > :nth-child(4) ul {
@@ -516,6 +530,12 @@ footer .footer a:hover {
     font: normal normal normal 13px/18px var(--body-font-family);
     margin-top: 0.875rem;
     margin-bottom: 0;
+  }
+
+  .footer > div > :nth-child(3) > p + ul,
+  .footer > div > :nth-child(4) > p + ul {
+    overflow: visible;
+    max-height: 400px;
   }
 
   .footer > div > :nth-child(4) > p.active + ul {
