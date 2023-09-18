@@ -70,7 +70,6 @@
 .product-comparison-header-subtitle {
     font-size: var(--body-font-size-xxs);
     color: var(--product-comparison-text-color);
-    padding: 0 4rem;
     text-align: center;
 }
 
@@ -268,7 +267,7 @@ div[role="row"].expandable-row div[role="cell"] p:first-of-type {
     }
 
     .product-comparison-table {
-        width: unset;
+        width: 100%;
     }
 
     .product-comparison-header {
@@ -311,6 +310,9 @@ div[role="row"].expandable-row div[role="cell"] p:first-of-type {
         font-size: var(--heading-font-size-m);
     }
 
+    .product-comparison-header-subtitle {
+        padding: 0 4rem;
+    }
     
     .product-comparison-table div[role='cell'] {
         display: table-cell;
