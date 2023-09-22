@@ -390,6 +390,7 @@ function pushPageLoadToDataLayer() {
  * @param {Element} doc The container element
  */
 async function loadEager(doc) {
+  createMetadata('referrer', 'no-referrer-when-downgrade');
   setPageLanguage(getLanguageCountryFromPath(window.location.pathname));
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
