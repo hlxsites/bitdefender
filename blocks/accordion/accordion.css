@@ -41,6 +41,8 @@
   height: 10px;
   display: block;
   right: 0;
+  bottom:0;
+  top:0;
   transition: top .3s ease-in-out,transform .3s ease-in-out,-webkit-transform .3s ease-in-out;
 }
 
@@ -63,7 +65,7 @@
   border-color: #006eff;
   border-style: solid;
   border-width: 0 2px 2px 0;
-  top: 40px;
+  top: 6px;
   content: "";
   width: 10px;
   height: 10px;
