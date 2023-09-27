@@ -375,10 +375,11 @@ export default function decorate(block) {
 
       // listen to ProductCard change and update the first button accordingly
       mv.subscribe((card) => {
-        const link = col.querySelector('.button-container a');
-        if (link) {
-          link.href = card.url;
-        }
+        col.querySelectorAll('.button-container a').forEach((link) => {
+          if (link && link.href === 'http://') {
+            link.href = card.url;
+          }
+        });
       });
     });
     row.remove();
