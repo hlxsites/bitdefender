@@ -352,11 +352,11 @@ function buildCtaSections(main) {
 }
 
 function getDomainInfo(hostname) {
-  const domain = hostname.match(/^(?:.*?\.)?([a-zA-Z0-9\_]{3,}\.(?:\w{2,8}|\w{2,4}\.\w{2,4}))$/);
+  const domain = hostname.match(/^(?:.*?\.)?([a-zA-Z0-9\\_]{3,}\.(?:\w{2,8}|\w{2,4}\.\w{2,4}))$/);
   return {
-    domain: domain,
-    domainPartsCount: domain.split('.').length
-  }
+    domain,
+    domainPartsCount: domain.split('.').length,
+  };
 }
 
 function pushPageLoadToDataLayer() {
@@ -387,7 +387,7 @@ function pushPageLoadToDataLayer() {
         trackingID: getParamValue('cid') || '',
         time: getCurrentTime(),
         date: getCurrentDate(),
-        domain: domain,
+        domain,
         domainPeriod: domainPartsCount,
       },
     },
