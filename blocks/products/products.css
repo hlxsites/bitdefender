@@ -26,6 +26,8 @@
   background-color: white;
   display: flex;
   flex-flow: column;
+  max-width: 100%;
+  margin: 15px auto;
 }
 
 .product-card > * {
@@ -329,8 +331,30 @@
   width: 100% !important;
   display: flex;
   justify-content: center;
+  white-space: initial;
+  position: relative;
 }
 
+.product-card a.button::after {
+  margin-left: -15px;
+  position: absolute;
+  top: 9px;
+  right: 0;
+  opacity: 0;
+  will-change: right,opacity;
+}
+
+.product-card a.button:hover::after {
+  opacity: 1;
+  right: 17px;
+}
+
+@media (max-width: 480px) {
+  .product-card a.button::after {
+    top: calc(50% - 10px);
+  }
+  
+}
 
 .product-card .button-text {
   font-weight: 500 !important;
@@ -398,7 +422,8 @@
   }
 
   .wide .products.plans .product-card {
-    max-width: 310px;
+    margin: 9px 6px 0;
+    max-width: 380px;
   }
 
   .two-columns .products.plans.right-column {
