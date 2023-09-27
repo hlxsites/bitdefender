@@ -91,8 +91,9 @@ function getCurrentTime() {
   const hours = date.getHours();
   const minutes = date.getMinutes();
   const dayOfWeek = date.getDay();
-  const timezone = date.getTimezoneOffset();
-  return `${hours}:${minutes}|${hours}:00-${hours}:59|${dayOfWeek}|${timezone}`;
+  const timezone = date.toTimeString().split(' ')[1];
+  const weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  return `${hours}:${minutes}|${hours}:00-${hours}:59|${weekday[dayOfWeek]}|${timezone}`;
 }
 
 /**
@@ -351,8 +352,17 @@ function buildCtaSections(main) {
     .forEach(buildCta);
 }
 
+function getDomainInfo(hostname) {
+  const domain = hostname.match(/^(?:.*?\.)?([a-zA-Z0-9\\_]{3,}(\.|:)?(?:\w{2,8}|\w{2,4}\.\w{2,4}))$/);
+  return {
+    domain: domain[1],
+    domainPartsCount: domain[1].split('.').length,
+  };
+}
+
 function pushPageLoadToDataLayer() {
   const { hostname } = window.location;
+  const { domain, domainPartsCount } = getDomainInfo(hostname);
   const languageCountry = getLanguageCountryFromPath(window.location.pathname);
   const environment = getEnvironment(hostname, languageCountry.country);
   const tags = getTags(getMetadata(METADATA_ANAYTICS_TAGS));
@@ -367,7 +377,7 @@ function pushPageLoadToDataLayer() {
         subSubSubSection: tags[2] || '',
         destinationURL: window.location.href,
         queryString: window.location.search,
-        referringURL: getParamValue('ref') || getParamValue('adobe_mc') || document.referrer || '',
+        referringURL: getParamValue('adobe_mc_ref') || getParamValue('ref') || document.referrer || '',
         serverName: 'hlx.live', // indicator for AEM Success Edge
         language: navigator.language || navigator.userLanguage || languageCountry.language,
         sysEnv: getOperatingSystem(window.navigator.userAgent),
@@ -378,8 +388,8 @@ function pushPageLoadToDataLayer() {
         trackingID: getParamValue('cid') || '',
         time: getCurrentTime(),
         date: getCurrentDate(),
-        domain: hostname,
-        domainPeriod: hostname.split('.').length,
+        domain,
+        domainPeriod: domainPartsCount,
       },
     },
   });
