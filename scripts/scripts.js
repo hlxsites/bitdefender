@@ -91,8 +91,9 @@ function getCurrentTime() {
   const hours = date.getHours();
   const minutes = date.getMinutes();
   const dayOfWeek = date.getDay();
-  const timezone = date.getTimezoneOffset();
-  return `${hours}:${minutes}|${hours}:00-${hours}:59|${dayOfWeek}|${timezone}`;
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;;
+  const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  return `${hours}:${minutes}|${hours}:00-${hours}:59|${weekday[dayOfWeek]}|${timezone}`;
 }
 
 /**
