@@ -373,6 +373,20 @@ export default function decorate(block) {
 
       renderNanoBlocks(col, mv);
 
+      col.querySelectorAll('.button-container a').forEach((link) => {
+        const heading = block.querySelector('h3');
+        if (heading) {
+          // concatenate sibling headings
+          let label = `${link.innerText} ${heading.innerText}`;
+          let sibling = heading.nextElementSibling;
+          while (sibling && (sibling.nodeName === 'H3' || sibling.nodeName === 'H4')) {
+            label = `${label} ${sibling.innerText}`;
+            sibling = sibling.nextElementSibling;
+          }
+          link.setAttribute('aria-label', label);
+        }
+      });
+
       // listen to ProductCard change and update the first button accordingly
       mv.subscribe((card) => {
         const link = col.querySelector('.button-container a');
