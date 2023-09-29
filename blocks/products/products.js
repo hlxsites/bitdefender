@@ -373,12 +373,13 @@ export default function decorate(block) {
 
       renderNanoBlocks(col, mv);
 
-      // listen to ProductCard change and update the first button accordingly
+      // listen to ProductCard change and update the buttons pointing to the store url
       mv.subscribe((card) => {
-        const link = col.querySelector('.button-container a');
-        if (link) {
-          link.href = card.url;
-        }
+        col.querySelectorAll('.button-container a').forEach((link) => {
+          if (link && link.href === 'https://www.bitdefender.com/site/Store/buy/') {
+            link.href = card.url;
+          }
+        });
       });
     });
     row.remove();
