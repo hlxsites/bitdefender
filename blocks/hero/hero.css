@@ -100,7 +100,6 @@ main .hero {
   position: relative;
   padding: 0;
   min-height: 300px;
-
 }
 
 main .hero::after{
@@ -151,7 +150,7 @@ main .hero .hero-content .right-col {
   flex-direction: column;
 }
 
-main .hero.black-background .hero-content{
+main .hero.black-background .hero-content {
   padding: 17px var(--body-padding) 56px;
   display: flex;
   flex-direction: column;
@@ -474,6 +473,7 @@ main .hero .hero-awards li::after {
 
   main .hero .hero-picture picture img {
     display: block;
+    padding-left: 0;
   }
 
   main .hero .hero-content {
@@ -531,6 +531,12 @@ main .hero .hero-awards li::after {
 
 }
 
+@media (min-width: 1300px) {
+  main .hero .hero-picture picture img {
+    padding-left: 20%;
+  }
+}
+
 @media (min-width: 1600px) { /* large desktop */
   
 
@@ -553,6 +559,7 @@ main .hero .hero-awards li::after {
 
   main .hero .hero-picture picture img {
     display: block;
+    padding-left: 25%;
   }
 
   main .hero .discount-bubble {
