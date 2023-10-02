@@ -155,7 +155,7 @@ main .hero.black-background .hero-content{
   padding: 17px var(--body-padding) 56px;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(90deg, #020024 0%, #000 15%, #ffffff00 100%);
+  background: linear-gradient(90deg, #020024 0%, #000 15%, #fff0 100%);
 }
 
 main .hero.comparison .hero-content {
