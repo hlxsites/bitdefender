@@ -112,16 +112,13 @@ main .hero::after{
     background-color: #e4f2ff;
 }
 
-main .hero.black-background::after {
-  background-color: transparent;
-}
-
 main .hero.black-background {
   background-color: var(--dark-background-color);
 }
 
 main .hero.black-background::after {
   content: none;
+  background-color: transparent;
 }
 
 main .hero.comparison {
