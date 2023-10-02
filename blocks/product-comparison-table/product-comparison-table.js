@@ -174,7 +174,7 @@ function buildTableHeader(block) {
 function setBuyButtonsToPrimary(columnHeaders) {
   columnHeaders.forEach((columnHeader) => {
     columnHeader.querySelectorAll('.button-container')
-      .forEach((button) => button.classList.add('red'))
+      .forEach((button) => button.classList.add('red'));
   });
 }
 
