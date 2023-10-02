@@ -121,10 +121,6 @@ main .hero.black-background {
   background-color: var(--dark-background-color);
 }
 
-main .hero.black-background .hero-content {
-  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,0,0,1) 15%, rgba(0,212,255,0) 100%);
-}
-
 main .hero.black-background::after {
   content: none;
 }
@@ -159,7 +155,7 @@ main .hero.black-background .hero-content{
   padding: 17px var(--body-padding) 56px;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,0,0,1) 15%, rgba(0,212,255,0) 100%);
+  background: linear-gradient(90deg, #020024 0%, #000000 15%, #00D4FF 100%);
 }
 
 main .hero.comparison .hero-content {
@@ -223,10 +219,6 @@ main .hero h1 + p {
   line-height: 1.5;
 }
 
-main .hero.black-background h1 + p {
-  color: var(--text-dark-color);
-}
-
 main .hero.comparison p {
   font-size: 18px;
   font-weight: 400;
@@ -236,6 +228,10 @@ main .hero.comparison p {
   letter-spacing: normal;
   color: #fff;
   margin: 24px 0 0;
+}
+
+main .hero.black-background h1 + p {
+  color: var(--text-dark-color);
 }
 
 main .hero p.button-container {
