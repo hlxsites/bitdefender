@@ -113,8 +113,16 @@ main .hero::after{
     background-color: #e4f2ff;
 }
 
+main .hero.hero.black-background::after {
+  background-color: transparent;
+}
+
 main .hero.black-background {
   background-color: var(--dark-background-color);
+}
+
+main .hero.black-background .hero-content {
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,0,0,1) 15%, rgba(0,212,255,0) 100%);
 }
 
 main .hero.black-background::after {
@@ -151,6 +159,7 @@ main .hero.black-background .hero-content{
   padding: 17px var(--body-padding) 56px;
   display: flex;
   flex-direction: column;
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,0,0,1) 15%, rgba(0,212,255,0) 100%);
 }
 
 main .hero.comparison .hero-content {
@@ -214,6 +223,10 @@ main .hero h1 + p {
   line-height: 1.5;
 }
 
+main .hero.black-background h1 + p {
+  color: var(--text-dark-color);
+}
+
 main .hero.comparison p {
   font-size: 18px;
   font-weight: 400;
@@ -248,6 +261,7 @@ main .hero img {
 main .hero .hero-picture picture img {
   position: absolute;
   display: none;
+  padding-left: 200px;
 }
 
 main .hero a.button {

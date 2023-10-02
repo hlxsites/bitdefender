@@ -132,7 +132,8 @@ div[role="cell"] p.button-container a, .product-comparison-header div[role="colu
     background-color: unset;
 }
 
-.product-comparison-header div[role="columnheader"].active p.button-container a {
+.product-comparison-header div[role="columnheader"].active p.button-container a,
+.product-comparison-header div[role="columnheader"] p.button-container.red a {
     background-color: var(--button-background-color);
     border: 2px solid var(--button-background-color);
     color: var(--button-link-color);
@@ -146,7 +147,8 @@ div[role="cell"] p.button-container a.button:hover::after {
     background-color: var(--text-color);
 }
 
-.product-comparison-header div[role="columnheader"].active p.button-container a.button:hover::after {
+.product-comparison-header div[role="columnheader"].active p.button-container a.button:hover::after,
+.product-comparison-header div[role="columnheader"] p.button-container.red a.button:hover::after {
     background-color: var(--button-link-color);
 }
 
