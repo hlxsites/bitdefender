@@ -112,7 +112,7 @@ main .hero::after{
     background-color: #e4f2ff;
 }
 
-main .hero.hero.black-background::after {
+main .hero.black-background::after {
   background-color: transparent;
 }
 
