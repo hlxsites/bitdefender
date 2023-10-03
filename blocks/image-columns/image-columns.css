@@ -20,11 +20,7 @@
   row-gap: 30px;
 }
 
-@media (min-width: 768px) {
-  .thank-you .image-columns > div {
-    flex-direction: row;  
-  }  
-}
+
 
 .image-columns img {
   width: 100%;
@@ -43,6 +39,13 @@
   align-items: center;
   padding-top: 48px;
 }
+
+@media (min-width: 768px) {
+  .thank-you .image-columns > div {
+    flex-direction: row;  
+  }  
+}
+
 
 @media (min-width: 992px) {
   .thank-you .image-columns > div {
