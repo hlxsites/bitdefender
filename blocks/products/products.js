@@ -165,7 +165,7 @@ function renderOldPrice(mv, text = '', monthly = '') {
     {
       class: 'price',
     },
-    `<span class='old-price'>${text} <del>${mv.model.basePrice} ${mv.model.currency}</del>`,
+    `<span class='old-price'>${text} <del>${mv.model.basePrice ?? ''} ${mv.model.currency ?? ''}</del>`,
   );
 
   const oldPriceElt = root.querySelector('span');

@@ -423,6 +423,7 @@
   .wide .products.plans .product-card {
     margin: 9px 6px 0;
     max-width: 380px;
+    min-width: 300px;
   }
 
   .two-columns .products.plans.right-column {
