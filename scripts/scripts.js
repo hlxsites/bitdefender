@@ -362,6 +362,10 @@ function getDomainInfo(hostname) {
 
 function pushPageLoadToDataLayer() {
   const { hostname } = window.location;
+  if (!hostname) {
+    return;
+  }
+
   const { domain, domainPartsCount } = getDomainInfo(hostname);
   const languageCountry = getLanguageCountryFromPath(window.location.pathname);
   const environment = getEnvironment(hostname, languageCountry.country);
