@@ -171,12 +171,20 @@ function buildTableHeader(block) {
   });
 }
 
+function setBuyButtonsToPrimary(columnHeaders) {
+  columnHeaders.forEach((columnHeader) => {
+    columnHeader.querySelectorAll('.button-container')
+      .forEach((button) => button.classList.add('red'));
+  });
+}
+
 function setActiveColumn(block) {
   const columnHeaders = block.querySelectorAll('div[role="columnheader"]');
   const tableActiveColumn = [...columnHeaders]
     .findIndex((header) => header.innerHTML.includes('<strong>'));
 
   if (tableActiveColumn <= 0) {
+    setBuyButtonsToPrimary(columnHeaders);
     return;
   }
 
