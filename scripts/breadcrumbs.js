@@ -86,7 +86,7 @@ export async function loadBreadcrumbs() {
   decorateBlockWithRegionId(breadcrumb, 'Hero|Breadcrumb');
 
   // check if breadcrumb div exists
-  if (breadcrumb !== undefined) {
+  if (breadcrumb !== undefined && breadcrumb !== null) {
     await createBreadcrumbs(breadcrumb);
   }
 }
