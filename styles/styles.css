@@ -423,6 +423,11 @@ main .section.center .products .product-card {
     padding: var(--section-desktop-padding-vertical) 0;
   }
 
+  main .section.no-vertical-padding {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
   .default-content-wrapper {
     max-width: var(--section-desktop-max-width);
     padding: 0 var(--section-desktop-padding);
@@ -434,6 +439,7 @@ main .section.center .products .product-card {
   main .section {
     padding: 60px 0;
   }
+
 }
 
 @media (min-width: 1000px) {

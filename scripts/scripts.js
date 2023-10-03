@@ -406,6 +406,9 @@ function pushPageLoadToDataLayer() {
 async function loadEager(doc) {
   setPageLanguage(getLanguageCountryFromPath(window.location.pathname));
   decorateTemplateAndTheme();
+  if (getMetadata('template') !== '') {
+    loadCSS(`${window.hlx.codeBasePath}/styles/${getMetadata('template')}.css`);
+  }
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
@@ -435,6 +438,7 @@ async function loadLazy(doc) {
   loadFooter(doc.querySelector('footer'));
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
+
   sampleRUM('lazy');
   sampleRUM.observe(main.querySelectorAll('div[data-block-name]'));
   sampleRUM.observe(main.querySelectorAll('picture > img'));
