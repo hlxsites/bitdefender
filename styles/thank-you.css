@@ -37,13 +37,6 @@
   }
 }
 
-.thank-you
-  .product-comparison-header
-  div[role="columnheader"]:not(:first-child) {
-  padding-left: 30px;
-  padding-right: 30px;
-}
-
 @media (min-width: 992px) {
   .thank-you
     .product-comparison-table
@@ -51,6 +44,13 @@
     > h2 {
     font-size: 30px;
     font-weight: var(--font-weight-regular);
+  }
+
+  .thank-you
+    .product-comparison-header
+    div[role="columnheader"]:not(:first-child) {
+    padding-left: 30px;
+    padding-right: 30px;
   }
 }
 
