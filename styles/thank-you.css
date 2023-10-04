@@ -6,6 +6,7 @@
 .thank-you main .hero::after {
   content: none;
 }
+
 .thank-you .default-content-wrapper {
   padding-top: 0;
   padding-bottom: 0;
