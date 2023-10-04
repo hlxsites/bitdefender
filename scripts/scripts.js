@@ -82,6 +82,40 @@ function getParamValue(param) {
   return urlParams.get(param);
 }
 
+export function openUrlForOs(urlMacos, urlWindows, urlAndroid, urlIos) {
+  // Get user's operating system
+  const { userAgent } = navigator;
+  const userOS = getOperatingSystem(userAgent);
+
+  // Open the appropriate URL based on the OS
+  let openUrl;
+  switch (userOS) {
+    case 'MacOS':
+      openUrl = urlMacos;
+      break;
+    case 'Windows 10':
+    case 'Windows 8':
+    case 'Windows 7':
+    case 'Windows Vista':
+    case 'Windows XP':
+    case 'Windows 2000':
+      openUrl = urlWindows;
+      break;
+    case 'Android':
+      openUrl = urlAndroid;
+      break;
+    case 'iOS':
+      openUrl = urlIos;
+      break;
+    default:
+      openUrl = null; // Fallback or 'Unknown' case
+  }
+
+  if (openUrl) {
+    window.open(openUrl, '_self');
+  }
+}
+
 /**
  * Returns the current user time in the format HH:MM|HH:00-HH:59|dayOfWeek|timezone
  * @returns {String}

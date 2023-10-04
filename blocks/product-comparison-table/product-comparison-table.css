@@ -17,6 +17,10 @@
     padding-right: 0;
 }
 
+.column-fixed-width {
+    width: 10.5rem;
+}
+
 .product-comparison-table-wrapper {
     max-width: 100%;
     padding: 0 var(--body-padding);
@@ -24,10 +28,13 @@
 }
 
 .product-comparison-table {
-    width: 33.9375rem;
     display: table;
     padding-top: 0.625rem;
     padding-bottom: 0.625rem;
+}
+
+.product-comparison-table.with-fixed-width {
+    width: 33.9375rem;
 }
 
 .product-comparison-header {
@@ -192,6 +199,14 @@ div[role="row"].expandable-row div[role="cell"] p:first-of-type {
     color: var(--current-price-color);
 }
 
+.column-fixed-width .product-comparison-price .current-price-container {
+    font-size: var(--heading-font-size-xs);
+}
+
+.column-fixed-width .button-container span {
+    font-size: var(--body-font-size-xs);
+}
+
 .product-comparison-header div[role="columnheader"] .per-year-statement {
     font-size: var(--body-font-size-xs);
     color: var(--product-comparison-text-color);
@@ -268,7 +283,7 @@ div[role="row"].expandable-row div[role="cell"] p:first-of-type {
         overflow-y: visible;
     }
 
-    .product-comparison-table {
+    .product-comparison-table.with-fixed-width {
         width: 100%;
     }
 
@@ -278,6 +293,10 @@ div[role="row"].expandable-row div[role="cell"] p:first-of-type {
 
     div[role="row"].expandable-row div[role="cell"] p:first-of-type {
         font-size: var(--body-font-size-xxs);
+    }
+
+    .column-fixed-width .product-comparison-price .current-price-container {
+        font-size: var(--heading-font-size-l);
     }
 }
 

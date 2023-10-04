@@ -42,6 +42,8 @@ function handleExpanableRowClick(rows, expandableRowIndex, evt) {
     if (row.classList.contains('expanded') && index !== expandableRowIndex) {
       row.classList.remove('expanded');
       row.classList.add('collpased');
+      row.nextElementSibling.classList.remove('expanded');
+      row.nextElementSibling.classList.add('collapsed');
     }
   });
 }
@@ -178,8 +180,24 @@ function setBuyButtonsToPrimary(columnHeaders) {
   });
 }
 
+function setColumnsStyle(block) {
+  const columnHeaders = block.querySelectorAll('div[role="columnheader"]');
+  const numberOfProductHeaders = [...columnHeaders]
+    .filter((columnHeader) => [...columnHeader.children].length > 1).length;
+
+  if (numberOfProductHeaders > 2) {
+    block.classList.add('with-fixed-width');
+  } else {
+    [...columnHeaders].forEach((columnHeader, index) => {
+      if (index === 0) return;
+      columnHeader.classList.add('column-fixed-width');
+    });
+  }
+}
+
 function setActiveColumn(block) {
   const columnHeaders = block.querySelectorAll('div[role="columnheader"]');
+
   const tableActiveColumn = [...columnHeaders]
     .findIndex((header) => header.innerHTML.includes('<strong>'));
 
@@ -239,12 +257,14 @@ export default function decorate(block) {
   addAccesibilityRoles(block);
   replaceTableTextToProperCheckmars(block);
   setExpandableRows(block);
+  setColumnsStyle(block);
   setActiveColumn(block);
   setColumnWithPriceDisplayedAlsoBelow(block);
   buildTableHeader(block);
   if (block.querySelector('div[role="columnheader"] em')) {
     addProductPriceBelowSelectedColumn(block);
   }
+
   extractTextFromStrongTagToParent(block);
   renderNanoBlocks(block);
 }
