@@ -3,6 +3,8 @@ import {
   loadScript,
   sampleRUM,
   fetchPlaceholders,
+  readBlockConfig,
+  getMetadata,
 } from './lib-franklin.js';
 
 // eslint-disable-next-line import/no-cycle
@@ -11,6 +13,7 @@ import {
   pushProductsToDataLayer,
   pushToDataLayer,
   getEnvironment,
+  getOperatingSystem,
 } from './scripts.js';
 import { loadBreadcrumbs } from './breadcrumbs.js';
 
@@ -37,3 +40,43 @@ pushToDataLayer('page loaded');
 
 // Load breadcrumbs
 loadBreadcrumbs();
+
+// Get the open URL for the user's OS
+const openUrlMacos = getMetadata('open-url-macos');
+const openUrlWindows = getMetadata('open-url-windows');
+const openUrlAndroid = getMetadata('open-url-android');
+const openUrlIos = getMetadata('open-url-ios');
+
+if (openUrlMacos || openUrlWindows || openUrlAndroid || openUrlIos) {
+  // Get user's operating system
+  const { userAgent } = navigator;
+  const userOS = getOperatingSystem(userAgent);
+
+  // Open the appropriate URL based on the OS
+  let openUrl;
+  switch (userOS) {
+    case 'MacOS':
+      openUrl = openUrlMacos;
+      break;
+    case 'Windows 10':
+    case 'Windows 8':
+    case 'Windows 7':
+    case 'Windows Vista':
+    case 'Windows XP':
+    case 'Windows 2000':
+      openUrl = openUrlWindows;
+      break;
+    case 'Android':
+      openUrl = openUrlAndroid;
+      break;
+    case 'iOS':
+      openUrl = openUrlIos;
+      break;
+    default:
+      openUrl = null; // Fallback or 'Unknown' case
+  }
+
+  if (openUrl) {
+    window.open(openUrl, '_self');
+  }
+}
