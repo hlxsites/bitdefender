@@ -183,7 +183,7 @@ function setBuyButtonsToPrimary(columnHeaders) {
 function setColumnsStyle(block) {
   const columnHeaders = block.querySelectorAll('div[role="columnheader"]');
   const numberOfProductHeaders = [...columnHeaders]
-    .filter((columnHeader) => [...columnHeader.children].length > 1);
+    .filter((columnHeader) => [...columnHeader.children].length > 1).length;
 
   if (numberOfProductHeaders > 2) {
     block.classList.add('with-fixed-width');
