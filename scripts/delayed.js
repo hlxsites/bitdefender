@@ -3,7 +3,6 @@ import {
   loadScript,
   sampleRUM,
   fetchPlaceholders,
-  readBlockConfig,
   getMetadata,
 } from './lib-franklin.js';
 
