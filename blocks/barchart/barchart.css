@@ -7,15 +7,6 @@
   padding: 0;
 }
 
-.barchart-image img{
-  width: 46px;
-  height: auto;
-  max-height: 100%;
-  max-width: none ;
-  display: inline-block;
-  flex-shrink: 0;
-}
-
 .barchart-body li {
   list-style: none;
   margin: 0;
