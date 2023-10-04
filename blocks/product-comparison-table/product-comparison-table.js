@@ -182,7 +182,10 @@ function setBuyButtonsToPrimary(columnHeaders) {
 
 function setColumnsStyle(block) {
   const columnHeaders = block.querySelectorAll('div[role="columnheader"]');
-  if ([...columnHeaders].filter((columnHeader) => [...columnHeader.children].length > 1).length > 2) {
+  const numberOfProductHeaders = [...columnHeaders]
+    .filter((columnHeader) => [...columnHeader.children].length > 1);
+
+  if (numberOfProductHeaders > 2) {
     block.classList.add('with-fixed-width');
   } else {
     [...columnHeaders].forEach((columnHeader, index) => {
@@ -261,6 +264,7 @@ export default function decorate(block) {
   if (block.querySelector('div[role="columnheader"] em')) {
     addProductPriceBelowSelectedColumn(block);
   }
+
   extractTextFromStrongTagToParent(block);
   renderNanoBlocks(block);
 }
