@@ -1,3 +1,11 @@
+.thank-you main .hero {
+  padding-top: 7rem;
+  padding-bottom: 3.5rem;
+}
+
+.thank-you main .hero::after {
+  content: none;
+}
 .thank-you .default-content-wrapper {
   padding-top: 0;
   padding-bottom: 0;
