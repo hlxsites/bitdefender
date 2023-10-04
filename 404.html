@@ -14,7 +14,7 @@
     import { decorateButtons, sampleRUM } from '/solutions/scripts/lib-franklin.js';
   
     window.addEventListener('load', async () => {
-      const response = await fetch('/404.plain.html');
+      const response = await fetch('/solutions/404.plain.html');
       if (response.ok) {
         const htmlContent = await response.text();
         const specialSection = document.querySelector('.link-section');
