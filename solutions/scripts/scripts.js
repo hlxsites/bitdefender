@@ -162,8 +162,8 @@ export function getEnvironment(hostname, country) {
  */
 function setPageLanguage(param) {
   document.documentElement.lang = param.language;
-  createMetadata('nav', '/nav');
-  createMetadata('footer', '/footer');
+  createMetadata('nav', '/solutions/nav');
+  createMetadata('footer', '/solutions/footer');
 }
 
 export function pushToDataLayer(event, payload) {
