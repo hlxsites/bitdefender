@@ -1,10 +1,8 @@
-import { decorateIcons } from '../../scripts/lib-franklin.js';
-
-export default async function decorate(block) {
+export default function decorate(block) {
   const ul = document.createElement('ul');
   [...block.children].forEach((row) => {
     const li = document.createElement('li');
-    li.innerHTML = row.innerHTML;
+    Array.from(row.children).forEach((child) => li.appendChild(child));
     li.children[1]?.classList.add('barchart-body');
     ul.append(li);
   });
@@ -17,7 +15,6 @@ export default async function decorate(block) {
     });
   });
 
-  await decorateIcons(ul);
-
-  block.innerHTML = ul.outerHTML;
+  Array.from(block.children).forEach((child) => child.remove());
+  block.appendChild(ul);
 }
