@@ -182,7 +182,7 @@ export async function decorateIcons(element) {
     if (!ICONS_CACHE[iconName]) {
       ICONS_CACHE[iconName] = true;
       try {
-        const response = await fetch(`${window.location.pathname.split('/')[1]}${window.hlx.codeBasePath}/icons/${iconName}.svg`);
+        const response = await fetch(`/${window.location.pathname.split('/')[1]}${window.hlx.codeBasePath}/icons/${iconName}.svg`);
         if (!response.ok) {
           ICONS_CACHE[iconName] = false;
           return;
