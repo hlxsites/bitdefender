@@ -138,15 +138,20 @@ function parseParams(params) {
  * Renders nano blocks
  * @param parent The parent element
  */
-export function renderNanoBlocks(parent = document.body, mv = undefined) {
+export function renderNanoBlocks(parent = document.body, mv = undefined, index = undefined) {
   const regex = /{([^}]+)}/g;
   findTextNodes(parent).forEach((node) => {
     const text = node.textContent.trim();
     const matches = text.match(regex);
     if (matches) {
       matches.forEach((match) => {
-        const [name, ...params] = parseParams(match.slice(1, -1));
-        const renderer = nanoBlocks.get(name.toLowerCase());
+        const [name] = parseParams(match.slice(1, -1));
+        const datasetValue = getDatasetFromSection(parent);
+        const datasetEntryValue = (index !== undefined ? datasetValue[`${name.toLowerCase()}${index + 1}`] : datasetValue[name.toLowerCase()]) || ''
+        const newMatch = [match, datasetEntryValue.split(',')].join(',').replace(/[{}]/g, '');
+
+        const [newName, ...params] = parseParams(newMatch);
+        const renderer = nanoBlocks.get(newName.toLowerCase());
         if (renderer) {
           const element = mv ? renderer(mv, ...params) : renderer(...params);
           element.classList.add('nanoblock');
@@ -216,4 +221,9 @@ export async function fetchIndex(indexFile, sheet, pageSize = 500) {
   window.index[idxKey] = newIndex;
 
   return newIndex;
+}
+
+export function getDatasetFromSection(block) {
+  const parentSelector = block.closest('.section');
+  return parentSelector.dataset;
 }
