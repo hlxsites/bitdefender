@@ -306,6 +306,31 @@ main .section {
   overflow: hidden;
 }
 
+main .section.margin-0 {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+main .section.link-right a {
+  float: right;
+  display: flex;
+}
+
+main .section.images-floated .default-content-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+main .section.images-floated .default-content-wrapper p {
+  max-width: 140px;
+  margin: 0 5px;
+}
+
+main .section.images-floated .default-content-wrapper p.button-container {
+  width: 100%;
+}
+
 .default-content-wrapper {
   width: 100%;
   margin: 0 auto;
@@ -393,9 +418,124 @@ main .section.center .products .product-card {
   justify-self: center;
 }
 
+main .section.bitdefender-ferrari {
+  padding-bottom: 0;
+}
+
+main .section.bitdefender-ferrari .default-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  max-width: var(--section-large-desktop-max-width);
+}
+
+main .section.bitdefender-ferrari .default-content-wrapper p {
+  margin: 0;
+  padding: 10px;
+  background-color: #e4f2ff;
+  align-self: stretch;
+}
+
+main .section.bitdefender-ferrari .default-content-wrapper p:nth-of-type(1) {
+  width: 100%;
+  order: 3;
+  overflow: hidden;
+}
+
+main .section.bitdefender-ferrari .default-content-wrapper img {
+  width: 100%;
+  align-self: stretch;
+}
+
+main .section.bitdefender-ferrari .default-content-wrapper h2 {
+  order: 0;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e4f2ff;
+  margin-bottom: 0;
+  padding: 10px;
+  font-size: 19px;
+}
+
+main .section.bitdefender-ferrari .default-content-wrapper h2 em {
+  font-style: normal;
+  font-weight: normal;
+  font-size: var(--body-font-size-s);
+  margin-top: 12px;
+  display: block;
+}
+
+main .section.bitdefender-ferrari .default-content-wrapper .button-container {
+  width: 100%;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: right;
+  order: 2;
+  margin-bottom: 10px;
+  background-color: #e4f2ff;
+  margin-bottom: 0;
+  overflow: hidden;
+}
+
+main .section.bitdefender-ferrari .default-content-wrapper .button-container a {
+  background-color: transparent;
+  color: black;
+  border-color: black;
+}
+
+main .section.bitdefender-ferrari .default-content-wrapper .button-container a.button::after {
+  background-color: black;
+}
+
 @media (min-width: 768px) {
   main .section.center .products .product-card {
     min-width: 380px;
+  }
+
+  main .section.images-floated .default-content-wrapper {
+    flex-direction: row;
+  }
+
+  main .section.bitdefender-ferrari .default-content-wrapper {
+    flex-direction: row;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  main .section.bitdefender-ferrari .default-content-wrapper p {
+    padding: 0;
+  }
+
+  main .section.bitdefender-ferrari .default-content-wrapper p:nth-of-type(1) {
+    width: 200px;
+    order: 0;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+
+  main .section.bitdefender-ferrari .default-content-wrapper p:nth-of-type(1) img {
+    margin-right: 10px;
+	  margin-bottom: -10px;
+  }
+
+  main .section.bitdefender-ferrari .default-content-wrapper h2 {
+    width: 435px;
+    font-size: var(--heading-font-size-s);
+	}
+
+  main .section.bitdefender-ferrari .default-content-wrapper .button-container {
+    width: 250px;
+    margin-right: 15px;
+    padding: 0;
+    text-align: center;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
   }
 }
 
@@ -431,8 +571,39 @@ main .section.center .products .product-card {
   .default-content-wrapper {
     max-width: var(--section-desktop-max-width);
     padding: 0 var(--section-desktop-padding);
+    border-radius: 0;
   }
 
+  main .section.bitdefender-ferrari .default-content-wrapper p:nth-of-type(1) {
+    width: 200px;
+  }
+
+  main .section.bitdefender-ferrari .default-content-wrapper h2 {
+    width: 540px;
+    font-size: 19px;
+	}
+}
+
+@media (min-width: 1065px) {
+  main .section.bitdefender-ferrari .default-content-wrapper p:nth-of-type(1) {
+    width: 350px;
+  }
+}
+
+@media (min-width: 1200px) {
+  main .section.bitdefender-ferrari .default-content-wrapper p:nth-of-type(1) {
+    width: 350px;
+  }
+
+  main .section.bitdefender-ferrari .default-content-wrapper h2 {
+    width: 700px;
+	}
+
+  main .section.bitdefender-ferrari .default-content-wrapper .button-container {
+    margin-right: var(--section-desktop-padding);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
 }
 
 @media (min-width: 1400px) {
@@ -603,7 +774,7 @@ p.info-button-container a.info-button.modal:hover {
   color: var(--link-color);
 }
 
-a.button::after, input[type="submit"]::after {
+a.button::after, input[type="submit"]::after, main .section.link-right a::after {
   content: '';
   width: 24px;
   height: 24px;
@@ -665,7 +836,7 @@ a.button:hover.secondary {
   color: var(--white-color)
 }
 
-a.button.modal {
+a.button.modal, main .section.link-right a {
   color: var(--link-color);
   font-weight: var(--font-weight-bold);
   background-color: transparent;
@@ -677,7 +848,7 @@ a.button.modal {
   text-overflow: ellipsis;
 }
 
-a.button.modal::after {
+a.button.modal::after, main .section.link-right a::after {
   background-color: var(--link-color);
   opacity: 1;
   margin: 0;
@@ -692,13 +863,13 @@ a.button:has(.icon)::after {
   opacity: 0;
 }
 
-a.button.modal:hover {
+a.button.modal:hover, main .section.link-right a:hover {
   color: var(--link-hover-color);
   text-decoration: none;
   transform: none;
 }
 
-a.button.modal:hover::after {
+a.button.modal:hover::after, main .section.link-right a:hover::after {
   transform: translateX(3px);
   background-color: var(--link-hover-color);
 }
