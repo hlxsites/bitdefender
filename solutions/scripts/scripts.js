@@ -12,7 +12,6 @@ import {
   loadBlocks,
   loadCSS,
   getMetadata,
-  toClassName,
 } from './lib-franklin.js';
 
 import {
@@ -48,6 +47,11 @@ const hreflangMap = {
   'en-GB': 'https://www.bitdefender.co.uk',
   'x-default': 'https://www.bitdefender.com',
 };
+
+window.hlx.plugins.add('rum-conversion', {
+  load: 'lazy',
+  url: '../plugins/rum-conversion/src/index.js',
+});
 
 /**
  * Creates a meta tag with the given name and value and appends it to the head.
@@ -496,6 +500,7 @@ async function loadLazy(doc) {
   sampleRUM.observe(main.querySelectorAll('div[data-block-name]'));
   sampleRUM.observe(main.querySelectorAll('picture > img'));
 
+
   const context = { getMetadata, toClassName };
   // eslint-disable-next-line import/no-relative-packages
   const { initConversionTracking } = await import('../plugins/rum-conversion/src/index.js');
@@ -516,15 +521,19 @@ async function loadLazy(doc) {
  */
 function loadDelayed() {
   window.setTimeout(() => {
+    window.hlx.plugins.load('delayed');
+    window.hlx.plugins.run('loadDelayed');
+    // load anything that can be postponed to the latest here
     // eslint-disable-next-line import/no-cycle
-    import('./delayed.js');
+    return import('./delayed.js');
   }, 3000);
-  // load anything that can be postponed to the latest here
 }
 
 async function loadPage() {
   pushPageLoadToDataLayer();
+  await window.hlx.plugins.load('eager');
   await loadEager(document);
+  await window.hlx.plugins.load('lazy');
   await loadLazy(document);
   loadDelayed();
 }
