@@ -376,7 +376,7 @@ export default function decorate(block) {
       // listen to ProductCard change and update the buttons pointing to the store url
       mv.subscribe((card) => {
         col.querySelectorAll('.button-container a').forEach((link) => {
-          if (link && link.href === 'https://www.bitdefender.com/site/Store/buy/') {
+          if (link && link.href.startsWith('https://www.bitdefender.com/site/Store/buy/')) {
             link.href = card.url;
           }
         });
