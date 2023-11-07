@@ -500,12 +500,6 @@ async function loadLazy(doc) {
   sampleRUM.observe(main.querySelectorAll('div[data-block-name]'));
   sampleRUM.observe(main.querySelectorAll('picture > img'));
 
-
-  const context = { getMetadata, toClassName };
-  // eslint-disable-next-line import/no-relative-packages
-  const { initConversionTracking } = await import('../plugins/rum-conversion/src/index.js');
-  await initConversionTracking.call(context, document);
-
   Object.entries(hreflangMap).forEach(([key, value]) => {
     const link = document.createElement('link');
     link.setAttribute('rel', 'alternate');
