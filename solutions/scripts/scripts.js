@@ -277,6 +277,30 @@ export default function decorateLinkedPictures(main) {
 }
 
 /**
+ * Decorates links.
+ * @param {Element} block
+ */
+export function decorateLinks(block) {
+  [...block.querySelectorAll('.button-container a')]
+    .filter(({ href }) => !!href)
+    .forEach((link) => {
+      // handling links
+      if (link.getAttribute('href').startsWith('https://www.bitdefender.com.au/site/Store/buy')) {
+        // add adobe_mc parameter to the link
+        const url = new URL(link.href);
+        url.searchParams.set('adobe_mc', 'MCAID%3D%7CMCORGID');
+        link.href = url.href;
+      }
+
+      const url = new URL(link.href);
+      const external = !url.host.match('macktrucks.com') && !url.host.match('.hlx.(page|live)') && !url.host.match('localhost');
+      if (url.host.match('build.macktrucks.com') || url.pathname.endsWith('.pdf') || external) {
+        link.target = '_blank';
+      }
+    });
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -289,6 +313,7 @@ export function decorateMain(main) {
   decorateLinkedPictures(main);
   decorateSections(main);
   decorateBlocks(main);
+  decorateLinks(main);
 }
 
 /**
