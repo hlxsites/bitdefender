@@ -30,6 +30,25 @@ export const DEFAULT_COUNTRY = 'au';
 
 export const METADATA_ANAYTICS_TAGS = 'analytics-tags';
 
+const hreflangMap = {
+  'en-ro': 'https://www.bitdefender.ro',
+  de: 'https://www.bitdefender.de',
+  sv: 'https://www.bitdefender.se',
+  pt: 'https://www.bitdefender.pt',
+  'en-sv': 'https://www.bitdefender.se',
+  'pt-BR': 'https://www.bitdefender.com.br',
+  en: 'https://www.bitdefender.com',
+  it: 'https://www.bitdefender.it',
+  fr: 'https://www.bitdefender.fr',
+  'nl-BE': 'https://www.bitdefender.be',
+  es: 'https://www.bitdefender.es',
+  'en-AU': 'https://www.bitdefender.com.au',
+  ro: 'https://www.bitdefender.ro',
+  nl: 'https://www.bitdefender.nl',
+  'en-GB': 'https://www.bitdefender.co.uk',
+  'x-default': 'https://www.bitdefender.com',
+};
+
 /**
  * Creates a meta tag with the given name and value and appends it to the head.
  * @param {String} name The name of the meta tag
@@ -481,6 +500,14 @@ async function loadLazy(doc) {
   // eslint-disable-next-line import/no-relative-packages
   const { initConversionTracking } = await import('../plugins/rum-conversion/src/index.js');
   await initConversionTracking.call(context, document);
+
+  Object.entries(hreflangMap).forEach(([key, value]) => {
+    const link = document.createElement('link');
+    link.setAttribute('rel', 'alternate');
+    link.setAttribute('hreflang', key);
+    link.setAttribute('href', `${value}${window.location.pathname.replace(/\/us\/en/, '')}`);
+    document.head.appendChild(link);
+  });
 }
 
 /**
