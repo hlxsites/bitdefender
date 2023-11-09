@@ -276,6 +276,25 @@ export default function decorateLinkedPictures(main) {
   });
 }
 
+export function appendAdobeMcLinks(selector) {
+  try {
+    const visitor = Visitor.getInstance('0E920C0F53DA9E9B0A490D45@AdobeOrg', {
+      trackingServer: 'sstats.bitdefender.com',
+      trackingServerSecure: 'sstats.bitdefender.com',
+      marketingCloudServer: 'sstats.bitdefender.com',
+      marketingCloudServerSecure: 'sstats.bitdefender.com',
+    });
+    const wrapperSelector = document.querySelector(selector);
+    const hrefSelector = '[href*=".bitdefender."]';
+    wrapperSelector.querySelectorAll(hrefSelector).forEach((link) => {
+      const destinationURLWithVisitorIDs = visitor.appendVisitorIDsTo(link.href);
+      link.href = destinationURLWithVisitorIDs.replace(/MCAID%3D.*%7CMCORGID/, 'MCAID%3D%7CMCORGID');
+    });
+  } catch (e) {
+    console.error(e);
+  }
+}
+
 /**
  * Decorates links.
  * @param {Element} block
@@ -290,12 +309,6 @@ export function decorateLinks(block) {
         const url = new URL(link.href);
         url.searchParams.set('adobe_mc', 'MCAID%3D%7CMCORGID');
         link.href = url.href;
-      }
-
-      const url = new URL(link.href);
-      const external = !url.host.match('macktrucks.com') && !url.host.match('.hlx.(page|live)') && !url.host.match('localhost');
-      if (url.host.match('build.macktrucks.com') || url.pathname.endsWith('.pdf') || external) {
-        link.target = '_blank';
       }
     });
 }
