@@ -276,7 +276,11 @@ export default function decorateLinkedPictures(main) {
   });
 }
 
-export function appendAdobeMcLinks(selector) {
+/**
+ * Decorete links with adobe_mc parameter.
+ * @param {Element} selector
+ */
+function appendAdobeMcLinks(selector) {
   try {
     const visitor = Visitor.getInstance('0E920C0F53DA9E9B0A490D45@AdobeOrg', {
       trackingServer: 'sstats.bitdefender.com',
@@ -304,12 +308,13 @@ export function decorateLinks(block) {
     .filter(({ href }) => !!href)
     .forEach((link) => {
       // handling links
-      if (link.getAttribute('href').startsWith('https://www.bitdefender.com.au/site/Store/buy')) {
-        // add adobe_mc parameter to the link
-        const url = new URL(link.href);
-        url.searchParams.set('adobe_mc', 'MCAID%3D%7CMCORGID');
-        link.href = url.href;
-      }
+      appendAdobeMcLinks(link);
+      // if (link.getAttribute('href').startsWith('https://www.bitdefender.com.au/site/Store/buy')) {
+      //   // add adobe_mc parameter to the link
+      //   const url = new URL(link.href);
+      //   url.searchParams.set('adobe_mc', 'MCAID%3D%7CMCORGID');
+      //   link.href = url.href;
+      // }
     });
 }
 
@@ -326,7 +331,7 @@ export function decorateMain(main) {
   decorateLinkedPictures(main);
   decorateSections(main);
   decorateBlocks(main);
-  decorateLinks(main);
+  // decorateLinks(main);
 }
 
 /**
@@ -541,6 +546,7 @@ async function loadPage() {
   await window.hlx.plugins.load('lazy');
   await loadLazy(document);
   loadDelayed();
+  decorateLinks(document.querySelector('main'));
 }
 
 loadPage();
