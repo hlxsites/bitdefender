@@ -301,6 +301,7 @@ export default function decorateLinkedPictures(main) {
  */
 function appendAdobeMcLinks(selector) {
   try {
+    // eslint-disable-next-line no-undef
     const visitor = Visitor.getInstance('0E920C0F53DA9E9B0A490D45@AdobeOrg', {
       trackingServer: 'sstats.bitdefender.com',
       trackingServerSecure: 'sstats.bitdefender.com',
@@ -309,33 +310,30 @@ function appendAdobeMcLinks(selector) {
     });
     const wrapperSelector = document.querySelector(selector);
     const hrefSelector = '[href*=".bitdefender."]';
+
     wrapperSelector.querySelectorAll(hrefSelector).forEach((link) => {
       const destinationURLWithVisitorIDs = visitor.appendVisitorIDsTo(link.href);
+
       link.href = destinationURLWithVisitorIDs.replace(/MCAID%3D.*%7CMCORGID/, 'MCAID%3D%7CMCORGID');
     });
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.error(e);
   }
 }
 
-/**
- * Decorates links.
- * @param {Element} block
- */
-export function decorateLinks(block) {
-  [...block.querySelectorAll('.button-container a')]
-    .filter(({ href }) => !!href)
-    .forEach((link) => {
-      // handling links
-      appendAdobeMcLinks(link);
-      // if (link.getAttribute('href').startsWith('https://www.bitdefender.com.au/site/Store/buy')) {
-      //   // add adobe_mc parameter to the link
-      //   const url = new URL(link.href);
-      //   url.searchParams.set('adobe_mc', 'MCAID%3D%7CMCORGID');
-      //   link.href = url.href;
-      // }
-    });
+function checkAEPDataCollection() {
+  // Check if Adobe Experience Platform Data Collection is loaded
+  if (window.adobe && window.adobe.target && window.adobe.target.getOffer) {
+    // Your custom code here
+    appendAdobeMcLinks('main');
+    // Stop checking, as AEP Data Collection is now loaded
+    // eslint-disable-next-line  no-use-before-define
+    clearInterval(checkInterval);
+  }
 }
+
+// Set an interval to check every 100 milliseconds (adjust as needed)
 
 /**
  * Decorates the main element.
@@ -350,7 +348,6 @@ export function decorateMain(main) {
   decorateLinkedPictures(main);
   decorateSections(main);
   decorateBlocks(main);
-  // decorateLinks(main);
 }
 
 /**
@@ -573,7 +570,8 @@ async function loadPage() {
   await window.hlx.plugins.load('lazy');
   await loadLazy(document);
   loadDelayed();
-  decorateLinks(document.querySelector('main'));
 }
 
 loadPage();
+
+const checkInterval = setInterval(checkAEPDataCollection, 100);
