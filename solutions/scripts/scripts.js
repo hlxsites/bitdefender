@@ -28,6 +28,25 @@ export const DEFAULT_COUNTRY = getDefaultLanguage();
 
 export const METADATA_ANAYTICS_TAGS = 'analytics-tags';
 
+const hreflangMap = {
+  'en-ro': 'https://www.bitdefender.ro',
+  de: 'https://www.bitdefender.de',
+  sv: 'https://www.bitdefender.se',
+  pt: 'https://www.bitdefender.pt',
+  'en-sv': 'https://www.bitdefender.se',
+  'pt-BR': 'https://www.bitdefender.com.br',
+  en: 'https://www.bitdefender.com',
+  it: 'https://www.bitdefender.it',
+  fr: 'https://www.bitdefender.fr',
+  'nl-BE': 'https://www.bitdefender.be',
+  es: 'https://www.bitdefender.es',
+  'en-AU': 'https://www.bitdefender.com.au',
+  ro: 'https://www.bitdefender.ro',
+  nl: 'https://www.bitdefender.nl',
+  'en-GB': 'https://www.bitdefender.co.uk',
+  'x-default': 'https://www.bitdefender.com',
+};
+
 window.hlx.plugins.add('rum-conversion', {
   load: 'lazy',
   url: '../plugins/rum-conversion/src/index.js',
@@ -486,6 +505,14 @@ async function loadLazy(doc) {
   sampleRUM('lazy');
   sampleRUM.observe(main.querySelectorAll('div[data-block-name]'));
   sampleRUM.observe(main.querySelectorAll('picture > img'));
+
+  Object.entries(hreflangMap).forEach(([key, value]) => {
+    const link = document.createElement('link');
+    link.setAttribute('rel', 'alternate');
+    link.setAttribute('hreflang', key);
+    link.setAttribute('href', `${value}${window.location.pathname.replace(/\/us\/en/, '')}`);
+    document.head.appendChild(link);
+  });
 }
 
 /**
