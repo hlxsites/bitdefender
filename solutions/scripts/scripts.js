@@ -15,7 +15,7 @@ import {
 } from './lib-franklin.js';
 
 import {
-  createTag, getDefaultLanguage,
+  createTag, getDefaultLanguage, localisationList,
 } from './utils/utils.js';
 
 const LCP_BLOCKS = ['hero']; // add your LCP blocks to the list
@@ -42,8 +42,8 @@ const hreflangMap = {
   es: 'https://www.bitdefender.es',
   'en-AU': 'https://www.bitdefender.com.au',
   ro: 'https://www.bitdefender.ro',
-  nl: 'https://www.bitdefender.nl',
-  'en-GB': 'https://www.bitdefender.co.uk',
+  hk: 'https://www.bitdefender.com/zh-hk',
+  tw: 'https://www.bitdefender.com/zh-tw',
   'x-default': 'https://www.bitdefender.com',
 };
 
@@ -510,7 +510,13 @@ async function loadLazy(doc) {
     const link = document.createElement('link');
     link.setAttribute('rel', 'alternate');
     link.setAttribute('hreflang', key);
-    link.setAttribute('href', `${value}${window.location.pathname.replace(/\/us\/en/, '')}`);
+
+    let href = `${value}${window.location.pathname.replace(/\/us\/en/, '')}`;
+    const foundLanguage = localisationList.find((item) => value.indexOf(`/${item}/`) !== -1 || window.location.pathname.indexOf(`/${item}/`) !== -1);
+
+    href = href.replace(`/${foundLanguage}`, '');
+
+    link.setAttribute('href', href);
     document.head.appendChild(link);
   });
 }
