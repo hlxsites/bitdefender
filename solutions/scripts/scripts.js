@@ -29,6 +29,8 @@ export const DEFAULT_COUNTRY = 'au';
 
 export const METADATA_ANAYTICS_TAGS = 'analytics-tags';
 
+let checkInterval = null;
+
 const hreflangMap = {
   'en-ro': 'https://www.bitdefender.ro',
   de: 'https://www.bitdefender.de',
@@ -333,8 +335,6 @@ function checkAEPDataCollection() {
   }
 }
 
-// Set an interval to check every 100 milliseconds (adjust as needed)
-
 /**
  * Decorates the main element.
  * @param {Element} main The main element
@@ -547,6 +547,8 @@ async function loadLazy(doc) {
     link.setAttribute('href', `${value}${window.location.pathname.replace(/\/us\/en/, '')}`);
     document.head.appendChild(link);
   });
+
+  checkInterval = setInterval(checkAEPDataCollection, 100);
 }
 
 /**
@@ -573,5 +575,3 @@ async function loadPage() {
 }
 
 loadPage();
-
-const checkInterval = setInterval(checkAEPDataCollection, 100);
