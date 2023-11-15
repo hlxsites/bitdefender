@@ -60,5 +60,5 @@ export default async function decorate(block) {
   });
   block.replaceChildren(quoteWrap);
 
-  decorateIcons(block);
+  await decorateIcons(block);
 }
