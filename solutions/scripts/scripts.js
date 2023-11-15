@@ -340,10 +340,10 @@ function checkAEPDataCollection() {
  * @param {Element} main The main element
  */
 // eslint-disable-next-line import/prefer-default-export
-export function decorateMain(main) {
+export async function decorateMain(main) {
   // hopefully forward compatible button decoration
   decorateButtons(main);
-  decorateIcons(main);
+  await decorateIcons(main);
   decorateTags(main);
   decorateLinkedPictures(main);
   decorateSections(main);
@@ -508,7 +508,7 @@ async function loadEager(doc) {
   }
   const main = doc.querySelector('main');
   if (main) {
-    decorateMain(main);
+    await decorateMain(main);
     buildCtaSections(main);
     buildTwoColumnsSection(main);
     detectModalButtons(main);
