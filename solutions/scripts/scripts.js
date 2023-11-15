@@ -468,7 +468,7 @@ async function loadEager(doc) {
   }
   const main = doc.querySelector('main');
   if (main) {
-    await decorateMain(main);
+    decorateMain(main);
     buildCtaSections(main);
     buildTwoColumnsSection(main);
     detectModalButtons(main);
