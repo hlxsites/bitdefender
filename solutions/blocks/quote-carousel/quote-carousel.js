@@ -8,7 +8,7 @@ function createSlide(item, index) {
   const paragraphs = Array.from(item.querySelectorAll('p'));
   const quote = paragraphs.find((paragraph) => {
     const strongOrEm = paragraph.querySelector('strong, em');
-    return !strongOrEm && paragraph.textContent.trim() !== '';
+    return !strongOrEm && paragraph.innerHTML.trim() !== '';
   });
 
   const author = item.querySelector('p > strong');
@@ -30,7 +30,7 @@ function createSlide(item, index) {
         <span class="icon icon-dark-blue-quote"/>
     </div>
     <div class="quote-content">
-        <h4>${quote?.textContent}</h4>
+        <h4>${quote?.innerHTML}</h4>
         <h5>${author?.textContent}</h5>
         <p>${description?.textContent}</p>
     </div>`,

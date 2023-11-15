@@ -29,6 +29,8 @@ export const DEFAULT_COUNTRY = 'au';
 
 export const METADATA_ANAYTICS_TAGS = 'analytics-tags';
 
+let checkInterval = null;
+
 const hreflangMap = {
   'en-ro': 'https://www.bitdefender.ro',
   de: 'https://www.bitdefender.de',
@@ -296,14 +298,52 @@ export default function decorateLinkedPictures(main) {
 }
 
 /**
+ * Decorete links with adobe_mc parameter.
+ * @param {Element} selector
+ */
+function appendAdobeMcLinks(selector) {
+  try {
+    // eslint-disable-next-line no-undef
+    const visitor = Visitor.getInstance('0E920C0F53DA9E9B0A490D45@AdobeOrg', {
+      trackingServer: 'sstats.bitdefender.com',
+      trackingServerSecure: 'sstats.bitdefender.com',
+      marketingCloudServer: 'sstats.bitdefender.com',
+      marketingCloudServerSecure: 'sstats.bitdefender.com',
+    });
+    const wrapperSelector = document.querySelector(selector);
+    const hrefSelector = '[href*=".bitdefender."]';
+
+    wrapperSelector.querySelectorAll(hrefSelector).forEach((link) => {
+      const destinationURLWithVisitorIDs = visitor.appendVisitorIDsTo(link.href);
+
+      link.href = destinationURLWithVisitorIDs.replace(/MCAID%3D.*%7CMCORGID/, 'MCAID%3D%7CMCORGID');
+    });
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error(e);
+  }
+}
+
+function checkAEPDataCollection() {
+  // Check if Adobe Experience Platform Data Collection is loaded
+  if (window.adobe && window.adobe.target && window.adobe.target.getOffer) {
+    // Your custom code here
+    appendAdobeMcLinks('main');
+    // Stop checking, as AEP Data Collection is now loaded
+    // eslint-disable-next-line  no-use-before-define
+    clearInterval(checkInterval);
+  }
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
 // eslint-disable-next-line import/prefer-default-export
-export function decorateMain(main) {
+export async function decorateMain(main) {
   // hopefully forward compatible button decoration
   decorateButtons(main);
-  decorateIcons(main);
+  await decorateIcons(main);
   decorateTags(main);
   decorateLinkedPictures(main);
   decorateSections(main);
@@ -468,7 +508,7 @@ async function loadEager(doc) {
   }
   const main = doc.querySelector('main');
   if (main) {
-    decorateMain(main);
+    await decorateMain(main);
     buildCtaSections(main);
     buildTwoColumnsSection(main);
     detectModalButtons(main);
@@ -507,6 +547,8 @@ async function loadLazy(doc) {
     link.setAttribute('href', `${value}${window.location.pathname.replace(/\/us\/en/, '')}`);
     document.head.appendChild(link);
   });
+
+  checkInterval = setInterval(checkAEPDataCollection, 100);
 }
 
 /**
