@@ -138,5 +138,5 @@ export default async function decorate(block) {
   block.replaceChildren(slidesContainer);
   updateControlsState(block, 0);
   addDotsListeners(dotsControls, slides);
-  await decorateIcons(block);
+  decorateIcons(block);
 }
