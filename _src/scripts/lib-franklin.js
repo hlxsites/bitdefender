@@ -908,7 +908,7 @@ export function setup() {
   window.hlx.plugins = new PluginsRegistry();
   window.hlx.templates = new TemplatesRegistry();
 
-  const scriptEl = document.querySelector('script[src$="/solutions/scripts/scripts.js"]');
+  const scriptEl = document.querySelector('script[src$="/_src/scripts/scripts.js"]');
   if (scriptEl) {
     try {
       [window.hlx.codeBasePath] = new URL(scriptEl.src).pathname.split('/scripts/scripts.js');
