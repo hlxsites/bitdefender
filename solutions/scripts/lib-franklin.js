@@ -248,6 +248,10 @@ async function internalDecorateIcons(element) {
 
 let previousDecoration = Promise.resolve();
 
+/**
+ * Replace icons with inline SVG and prefix with codeBasePath.
+ * @param {Element} [element] Element containing icons
+ */
 export async function decorateIcons(element) {
   previousDecoration = previousDecoration.then(() => internalDecorateIcons(element));
   await previousDecoration;
