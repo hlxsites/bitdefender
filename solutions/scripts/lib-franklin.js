@@ -182,7 +182,7 @@ const ICONS_CACHE = {};
  * Replace icons with inline SVG and prefix with codeBasePath.
  * @param {Element} [element] Element containing icons
  */
-export async function decorateIcons(element) {
+async function internalDecorateIcons(element) {
   // Prepare the inline sprite
   let svgSprite = document.getElementById('franklin-svg-sprite');
   if (!svgSprite) {
@@ -237,7 +237,6 @@ export async function decorateIcons(element) {
     if (spanParent.tagName === 'A' && !spanParent.hasAttribute('aria-label')) {
       spanParent.setAttribute('aria-label', iconName);
     }
-
     // Styled icons need to be inlined as-is, while unstyled ones can leverage the sprite
     if (ICONS_CACHE[iconName] && ICONS_CACHE[iconName].styled) {
       parent.innerHTML = ICONS_CACHE[iconName].html;
@@ -245,6 +244,13 @@ export async function decorateIcons(element) {
       parent.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg"><use href="#icons-sprite-${iconName}"/></svg>`;
     }
   });
+}
+
+let previousDecoration = Promise.resolve();
+
+export async function decorateIcons(element) {
+  previousDecoration = previousDecoration.then(() => internalDecorateIcons(element));
+  await previousDecoration;
 }
 
 export async function decorateTags(element) {

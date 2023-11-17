@@ -8,7 +8,7 @@ function createSlide(item, index) {
   const paragraphs = Array.from(item.querySelectorAll('p'));
   const quote = paragraphs.find((paragraph) => {
     const strongOrEm = paragraph.querySelector('strong, em');
-    return !strongOrEm && paragraph.innerHTML.trim() !== '';
+    return !strongOrEm && paragraph.innerHTML !== '';
   });
 
   const author = item.querySelector('p > strong');
@@ -16,6 +16,7 @@ function createSlide(item, index) {
   if (!quote) {
     return null;
   }
+
   return createTag(
     'div',
     {
@@ -121,8 +122,8 @@ export default async function decorate(block) {
       slides.append(slide);
     }
   });
-  slides.children[0].classList.add('active');
 
+  slides.children[0].classList.add('active');
   const dotsControls = createDotsControls(slides, block);
 
   /* Add carousel action button if it exists */
@@ -138,5 +139,5 @@ export default async function decorate(block) {
   block.replaceChildren(slidesContainer);
   updateControlsState(block, 0);
   addDotsListeners(dotsControls, slides);
-  await decorateIcons(block);
+  decorateIcons(slides);
 }
