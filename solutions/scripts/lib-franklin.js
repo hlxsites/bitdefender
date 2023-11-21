@@ -923,10 +923,6 @@ export function setup() {
 export function decorateCanonical(doc) {
   const linkRelCanonical = doc.head.querySelector('[rel="canonical"]');
   linkRelCanonical.href = linkRelCanonical.href.replace('https://', 'https://www.');
-  const lastChar = linkRelCanonical.href.slice(-1);
-  if (lastChar === '/') {
-    linkRelCanonical.href = linkRelCanonical.href.slice(0, -1);
-  }
 }
 
 /**
