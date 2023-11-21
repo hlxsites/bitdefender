@@ -8,7 +8,7 @@ function createSlide(item, index) {
   const paragraphs = Array.from(item.querySelectorAll('p'));
   const quote = paragraphs.find((paragraph) => {
     const strongOrEm = paragraph.querySelector('strong, em');
-    return !strongOrEm && paragraph.innerHTML !== '';
+    return !strongOrEm && paragraph.textContent.trim() !== '';
   });
 
   const author = item.querySelector('p > strong');
@@ -16,7 +16,6 @@ function createSlide(item, index) {
   if (!quote) {
     return null;
   }
-
   return createTag(
     'div',
     {
@@ -31,9 +30,9 @@ function createSlide(item, index) {
         <span class="icon icon-dark-blue-quote"/>
     </div>
     <div class="quote-content">
-        <h4>${quote?.innerHTML}</h4>
+        <h4>${quote?.textContent}</h4>
         <h5>${author?.textContent}</h5>
-        <p>${description?.innerHTML}</p>
+        <p>${description?.textContent}</p>
     </div>`,
   );
 }
@@ -122,8 +121,8 @@ export default async function decorate(block) {
       slides.append(slide);
     }
   });
-
   slides.children[0].classList.add('active');
+
   const dotsControls = createDotsControls(slides, block);
 
   /* Add carousel action button if it exists */
@@ -139,5 +138,5 @@ export default async function decorate(block) {
   block.replaceChildren(slidesContainer);
   updateControlsState(block, 0);
   addDotsListeners(dotsControls, slides);
-  decorateIcons(block);
+  await decorateIcons(block);
 }
