@@ -12,7 +12,6 @@ import {
   loadBlocks,
   loadCSS,
   getMetadata,
-  decorateCanonical,
 } from './lib-franklin.js';
 
 
@@ -528,7 +527,6 @@ function loadDelayed() {
 async function loadPage() {
   pushPageLoadToDataLayer();
   await window.hlx.plugins.load('eager');
-  decorateCanonical(document);
   await loadEager(document);
   await window.hlx.plugins.load('lazy');
   await loadLazy(document);
