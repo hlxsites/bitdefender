@@ -30,24 +30,24 @@ export const DEFAULT_COUNTRY = 'au';
 
 export const METADATA_ANAYTICS_TAGS = 'analytics-tags';
 
-const hreflangMap = {
-  'en-ro': 'https://www.bitdefender.ro',
-  de: 'https://www.bitdefender.de',
-  sv: 'https://www.bitdefender.se',
-  pt: 'https://www.bitdefender.pt',
-  'en-sv': 'https://www.bitdefender.se',
-  'pt-BR': 'https://www.bitdefender.com.br',
-  en: 'https://www.bitdefender.com',
-  it: 'https://www.bitdefender.it',
-  fr: 'https://www.bitdefender.fr',
-  'nl-BE': 'https://www.bitdefender.be',
-  es: 'https://www.bitdefender.es',
-  'en-AU': 'https://www.bitdefender.com.au',
-  ro: 'https://www.bitdefender.ro',
-  nl: 'https://www.bitdefender.nl',
-  'en-GB': 'https://www.bitdefender.co.uk',
-  'x-default': 'https://www.bitdefender.com',
-};
+const hreflangMap = new Map([
+  ['en-ro', { baseUrl: 'https://www.bitdefender.ro', pageType: 'html' }],
+  ['de', { baseUrl: 'https://www.bitdefender.de', pageType: 'html' }],
+  ['sv', { baseUrl: 'https://www.bitdefender.se', pageType: 'html' }],
+  ['pt', { baseUrl: 'https://www.bitdefender.pt', pageType: 'html' }],
+  ['en-sv', { baseUrl: 'https://www.bitdefender.se', pageType: 'html' }],
+  ['pt-BR', { baseUrl: 'https://www.bitdefender.com.br', pageType: 'html' }],
+  ['en', { baseUrl: 'https://www.bitdefender.com', pageType: 'html' }],
+  ['it', { baseUrl: 'https://www.bitdefender.it', pageType: 'html' }],
+  ['fr', { baseUrl: 'https://www.bitdefender.fr', pageType: 'html' }],
+  ['nl-BE', { baseUrl: 'https://www.bitdefender.br', pageType: 'html' }],
+  ['es', { baseUrl: 'https://www.bitdefender.es', pageType: 'html' }],
+  ['en-AU', { baseUrl: 'https://www.bitdefender.com.au', pageType: '' }],
+  ['ro', { baseUrl: 'https://www.bitdefender.ro', pageType: 'html' }],
+  ['nl', { baseUrl: 'https://www.bitdefender.nl', pageType: 'html' }],
+  ['en-GB', { baseUrl: 'https://www.bitdefender.co.uk', pageType: 'html' }],
+  ['x-default', { baseUrl: 'https://www.bitdefender.com', pageType: 'html' }],
+]);
 
 window.hlx.plugins.add('rum-conversion', {
   load: 'lazy',
@@ -501,11 +501,11 @@ async function loadLazy(doc) {
   sampleRUM.observe(main.querySelectorAll('div[data-block-name]'));
   sampleRUM.observe(main.querySelectorAll('picture > img'));
 
-  Object.entries(hreflangMap).forEach(([key, value]) => {
+  hreflangMap.forEach(({ baseUrl, pageType }, key) => {
     const link = document.createElement('link');
     link.setAttribute('rel', 'alternate');
     link.setAttribute('hreflang', key);
-    link.setAttribute('href', `${value}${window.location.pathname.replace(/\/us\/en/, '')}`);
+    link.setAttribute('href', `${baseUrl}${window.location.pathname.replace(/\/us\/en/, '')}${pageType ? `.${pageType}` : ''}`);
     document.head.appendChild(link);
   });
 }
