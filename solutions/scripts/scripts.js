@@ -46,6 +46,8 @@ const hreflangMap = new Map([
   ['ro', { baseUrl: 'https://www.bitdefender.ro', pageType: 'html' }],
   ['nl', { baseUrl: 'https://www.bitdefender.nl', pageType: 'html' }],
   ['en-GB', { baseUrl: 'https://www.bitdefender.co.uk', pageType: 'html' }],
+  ['zh-hk', { baseUrl: 'https://www.bitdefender.com/zh-hk', pageType: '' }],
+  ['zh-tw', { baseUrl: 'https://www.bitdefender.com/zh-tw', pageType: '' }],
   ['x-default', { baseUrl: 'https://www.bitdefender.com', pageType: 'html' }],
 ]);
 
