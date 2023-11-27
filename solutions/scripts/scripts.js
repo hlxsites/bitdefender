@@ -42,12 +42,12 @@ const hreflangMap = new Map([
   ['fr', { baseUrl: 'https://www.bitdefender.fr', pageType: 'html' }],
   ['nl-BE', { baseUrl: 'https://www.bitdefender.br', pageType: 'html' }],
   ['es', { baseUrl: 'https://www.bitdefender.es', pageType: 'html' }],
-  ['en-AU', { baseUrl: 'https://www.bitdefender.com.au', pageType: '', hasIndexPages: true }],
+  ['en-AU', { baseUrl: 'https://www.bitdefender.com.au', pageType: '' }],
   ['ro', { baseUrl: 'https://www.bitdefender.ro', pageType: 'html' }],
   ['nl', { baseUrl: 'https://www.bitdefender.nl', pageType: 'html' }],
   ['en-GB', { baseUrl: 'https://www.bitdefender.co.uk', pageType: 'html' }],
-  ['zh-hk', { baseUrl: 'https://www.bitdefender.com/zh-hk', pageType: '', hasIndexPages: true }],
-  ['zh-tw', { baseUrl: 'https://www.bitdefender.com/zh-tw', pageType: '', hasIndexPages: true }],
+  ['zh-hk', { baseUrl: 'https://www.bitdefender.com/zh-hk', pageType: '' }],
+  ['zh-tw', { baseUrl: 'https://www.bitdefender.com/zh-tw', pageType: '' }],
   ['x-default', { baseUrl: 'https://www.bitdefender.com', pageType: 'html' }],
 ]);
 
@@ -503,17 +503,16 @@ async function loadLazy(doc) {
   sampleRUM.observe(main.querySelectorAll('div[data-block-name]'));
   sampleRUM.observe(main.querySelectorAll('picture > img'));
 
-  hreflangMap.forEach(({ baseUrl, pageType, hasIndexPages }, key) => {
+  hreflangMap.forEach(({ baseUrl, pageType }, key) => {
     const link = document.createElement('link');
     link.setAttribute('rel', 'alternate');
     link.setAttribute('hreflang', key);
 
-    const suffix = `${pageType ? `.${pageType}` : ''}`;
     const lastCharFromHref = window.location.pathname.slice(-1);
     const isCurrentIndexPage = lastCharFromHref === '/';
+    const suffix = `${pageType && !isCurrentIndexPage ? `.${pageType}` : ''}`;
 
     let href = `${baseUrl}${window.location.pathname.replace(/\/us\/en/, '')}`;
-    href = isCurrentIndexPage && !hasIndexPages ? href.slice(0, -1) : href;
     href = `${href}${suffix}`;
 
     link.setAttribute('href', href);
