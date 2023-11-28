@@ -418,6 +418,7 @@ export default async function decorate(block) {
     if (header.querySelector('p.home-solutions-link-default')) {
       container.appendChild(header.querySelector('p.home-solutions-link-default'));
     }
+    decorateIcons(container);
     header.appendChild(container);
   }
 
