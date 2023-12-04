@@ -929,15 +929,6 @@ export function setup() {
 }
 
 /**
-* canonical links shouldn't contain ".html" ( covered by redirects.xlsx )
- * canonical links shouldn't end with "/"
-* */
-export function decorateCanonical(doc) {
-  const linkRelCanonical = doc.head.querySelector('[rel="canonical"]');
-  linkRelCanonical.href = linkRelCanonical.href.replace('https://', 'https://www.');
-}
-
-/**
  * Auto initializiation.
  */
 function init() {
