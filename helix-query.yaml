@@ -5,7 +5,7 @@ indices:
       - /solutions/**
     exclude:
       - /solutions/fragments/**  
-    target: /query-index.json
+    target: /solutions/query-index.json
     properties:
       title:
         select: head > meta[property="og:title"]
