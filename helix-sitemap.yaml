@@ -1,23 +1,13 @@
 sitemaps:
-   default:
-     origin: https://www.bitdefender.com.au
-     source: /solutions/query-index.json
-     destination: /solutions/sitemap.xml
-     hreflang:
-      - en
-      - en-ro
-      - en-sv
-      - en-au
-      - en-gb
-      - de
-      - sv
-      - pt
-      - pt-br
-      - it
-      - fr
-      - nl-be
-      - es
-      - ro
-      - nl
-      - zh-hk
-      - zh-tw
+  default:
+    origin: https://www.bitdefender.com.au
+    source: /solutions/query-index.json
+    languages:
+      de:
+        destination: /sitemap.xml
+        hreflang: de
+        alternate: https://www.bitdefender.de/{path}.html
+      zh-hk:
+        destination: /sitemap.xml
+        hreflang: zh-hk
+        alternate: https://www.bitdefender.com/zh-hk/{path}
