@@ -81,7 +81,7 @@ function getApplicableOffers(data) {
  * @returns {Promise<any>}
  */
 async function fetchOffers(client, sessionId, useProxy) {
-  const url = `${window.location.protocol}//${window.location.host}${window.location.pathname}}`;
+  const url = `${window.location.protocol}//${window.location.host}`;
 
   console.debug(`Loading offers for client ${client} and url ${url}`); // eslint-disable-line no-console
 
