@@ -3,3 +3,21 @@ sitemaps:
      origin: https://www.bitdefender.com.au
      source: /solutions/query-index.json
      destination: /solutions/sitemap.xml
+     hreflang:
+      - en
+      - en-ro
+      - en-sv
+      - en-au
+      - en-gb
+      - de
+      - sv
+      - pt
+      - pt-br
+      - it
+      - fr
+      - nl-be
+      - es
+      - ro
+      - nl
+      - zh-hk
+      - zh-tw
