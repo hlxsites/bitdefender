@@ -3,7 +3,7 @@
  * @param {string} name The name of the performance mark.
  * @param {any} detail The detail to pass to the performance mark.
  */
-function createPerformanceMark(name, detail = undefined) {
+export function createPerformanceMark(name, detail = undefined) {
   performance.mark(`perf-start-${name}`, detail ? { detail } : undefined);
   // eslint-disable-next-line no-console
   console.debug(`perf-${name} started at ${performance.now()} + ms`);
@@ -13,7 +13,7 @@ function createPerformanceMark(name, detail = undefined) {
  * Measure the time between two performance marks.
  * @param {string} name The name of the performance mark.
  */
-function measurePerformance(name) {
+export function measurePerformance(name) {
   performance.mark(`perf-stop-${name}`);
   const duration = performance.measure(`perf-${name}`, `perf-start-${name}`, `perf-stop-${name}`);
   // eslint-disable-next-line no-console
@@ -21,8 +21,3 @@ function measurePerformance(name) {
   // eslint-disable-next-line no-console
   console.debug(`perf-${name} took ${duration.duration} ms`);
 }
-
-export {
-  createPerformanceMark,
-  measurePerformance,
-};
