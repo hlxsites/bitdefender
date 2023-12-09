@@ -6,8 +6,8 @@ sitemaps:
       de:
         destination: /solutions/sitemap.xml
         hreflang: de
-        alternate: /de/{path}.html
+        alternate: https://www.bitdefender.de/{path}.html
       zh-hk:
         destination: /solutions/sitemap.xml
         hreflang: zh-hk
-        alternate: /zh-hk/{path}
+        alternate: https://www.bitdefender.com/zh-hk/{path}
