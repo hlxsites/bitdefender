@@ -4,10 +4,12 @@ sitemaps:
     source: /solutions/query-index.json
     languages:
       de:
+        source: /query-index.json
         destination: /solutions/sitemap.xml
         hreflang: de
         alternate: https://www.bitdefender.de/{path}.html
       zh-hk:
+        source: /query-index.json
         destination: /solutions/sitemap.xml
         hreflang: zh-hk
         alternate: https://www.bitdefender.com/zh-hk/{path}
