@@ -179,7 +179,7 @@ function displayOffers(section, offers) {
   offers.forEach((offer) => {
     const { type, cssSelector, content } = offer;
     const sel = cssSelector.replaceAll(/#(\d)/g, '\\3$1 ');
-    console.debug(`selector ${sel}`); // eslint-disable-line no-console
+    console.debug(`selector1 ${sel}`); // eslint-disable-line no-console
     const targetElement = section.querySelector(sel);
     if (targetElement) {
       switch (type) {
@@ -217,7 +217,7 @@ function displayOffers(section, offers) {
  */
 function getSectionByElementSelector(selector) {
   const sel = selector.replace(/#(\d)/g, '\\3$1 ');
-  console.debug(`selector ${sel}`); // eslint-disable-line no-console
+  console.debug(`selector2 ${sel}`); // eslint-disable-line no-console
   let section = document.querySelector(sel);
   while (section && !section.classList.contains('section')) {
     section = section.parentNode;
