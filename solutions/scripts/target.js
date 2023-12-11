@@ -218,7 +218,7 @@ function displayOffers(section, offers) {
 function getSectionByElementSelector(selector) {
   const sel = selector.replace(/#(\d)/g, '\\3$1 ');
   console.debug(`selector ${sel}`); // eslint-disable-line no-console
-  let section = document.querySelector();
+  let section = document.querySelector(sel);
   while (section && !section.classList.contains('section')) {
     section = section.parentNode;
   }
