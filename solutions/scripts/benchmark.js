@@ -7,7 +7,7 @@ window.createPerformanceMark = (name, detail = undefined) => {
   performance.mark(`perf-start-${name}`, detail ? { detail } : undefined);
   // eslint-disable-next-line no-console
   console.debug(`perf-${name} started at ${performance.now()} + ms`);
-}
+};
 
 /**
  * Measure the time between two performance marks.
@@ -20,4 +20,4 @@ window.measurePerformance = (name) => {
   console.debug(`perf-${name} stopped at ${performance.now()} ms`);
   // eslint-disable-next-line no-console
   console.debug(`perf-${name} took ${duration.duration} ms`);
-}
+};
