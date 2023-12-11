@@ -254,10 +254,10 @@ export default function loadOffers(client, useProxy) {
 
       offers.forEach((offer) => {
         console.debug('processing offer', offer); // eslint-disable-line no-console
-        const section = getSectionByElementSelector(offer.selector);
+        const section = getSectionByElementSelector(offer.cssSelector);
         if (section) {
           // eslint-disable-next-line no-console
-          console.debug(`hiding section for selector ${offer.selector}`, section);
+          console.debug(`hiding section for selector ${offer.cssSelector}`, section);
           section.style.visibility = 'hidden';
           window?.createPerformanceMark(
             `targeting:rendering-section:${Array.from(section.classList).join('_')}`,
