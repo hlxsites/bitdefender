@@ -178,7 +178,7 @@ function getLoadedSections(main) {
 function displayOffers(section, offers) {
   offers.forEach((offer) => {
     const { type, cssSelector, content } = offer;
-    const targetElement = section.querySelector(cssSelector.replace(/#(\d)/g, '\\3$1 '));
+    const targetElement = section.querySelector(cssSelector.replaceAll(/#(\d)/g, '\\3$1 '));
     if (targetElement) {
       switch (type) {
         case 'insertAfter':
