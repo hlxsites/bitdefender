@@ -216,7 +216,9 @@ function displayOffers(section, offers) {
  * @param selector The element selector.
  */
 function getSectionByElementSelector(selector) {
-  let section = document.querySelector(selector.replace(/#(\d)/g, '\\3$1 '));
+  const sel = selector.replace(/#(\d)/g, '\\3$1 ');
+  console.debug(`selector ${sel}`); // eslint-disable-line no-console
+  let section = document.querySelector();
   while (section && !section.classList.contains('section')) {
     section = section.parentNode;
   }
