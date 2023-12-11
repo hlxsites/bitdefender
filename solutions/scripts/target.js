@@ -2,6 +2,15 @@ const SESSION_COOKIE_NAME = 'sessionId';
 const SESSION_COOKIE_EXPIRATION_DAYS = 7;
 
 /**
+ * Escape a selector.
+ * @param selector
+ * @returns {string}
+ */
+function escapeSelector(selector) {
+  return selector.replaceAll(/#(\d)/g, '#\\3$1 ');
+}
+
+/**
  * Generate a UUID.
  * @returns {string}
  */
@@ -178,9 +187,7 @@ function getLoadedSections(main) {
 function displayOffers(section, offers) {
   offers.forEach((offer) => {
     const { type, cssSelector, content } = offer;
-    const sel = cssSelector.replaceAll(/#(\d)/g, '\\3$1 ');
-    console.debug(`selector1 ${sel}`); // eslint-disable-line no-console
-    const targetElement = section.querySelector(sel);
+    const targetElement = section.querySelector(escapeSelector(cssSelector));
     if (targetElement) {
       switch (type) {
         case 'insertAfter':
@@ -216,9 +223,7 @@ function displayOffers(section, offers) {
  * @param selector The element selector.
  */
 function getSectionByElementSelector(selector) {
-  const sel = selector.replace(/#(\d)/g, '\\3$1 ');
-  console.debug(`selector2 ${sel}`); // eslint-disable-line no-console
-  let section = document.querySelector(sel);
+  let section = document.querySelector(escapeSelector(selector));
   while (section && !section.classList.contains('section')) {
     section = section.parentNode;
   }
@@ -253,11 +258,12 @@ export default function loadOffers(client, useProxy) {
       window?.measurePerformance('targeting:loading-offers');
 
       offers.forEach((offer) => {
+        const { cssSelector } = offer;
         console.debug('processing offer', offer); // eslint-disable-line no-console
-        const section = getSectionByElementSelector(offer.cssSelector);
+        const section = getSectionByElementSelector(cssSelector);
         if (section) {
           // eslint-disable-next-line no-console
-          console.debug(`hiding section for selector ${offer.cssSelector}`, section);
+          console.debug(`hiding section for selector ${cssSelector}`, section);
           section.style.visibility = 'hidden';
           window?.createPerformanceMark(
             `targeting:rendering-section:${Array.from(section.classList).join('_')}`,
