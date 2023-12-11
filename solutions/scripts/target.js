@@ -227,6 +227,12 @@ function getSectionByElementSelector(selector) {
  * @param useProxy Whether to use the proxy.
  */
 export default function loadOffers(client, useProxy) {
+  if (window.location.href.includes('adobe_authoring_enabled')) {
+    // eslint-disable-next-line no-console
+    console.debug('authoring enabled... skipping targeting');
+    return;
+  }
+
   window?.createPerformanceMark('targeting:loading-offers');
 
   const sessionId = getSessionId();
