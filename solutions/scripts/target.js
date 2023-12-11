@@ -179,6 +179,7 @@ function displayOffers(section, offers) {
   offers.forEach((offer) => {
     const { type, cssSelector, content } = offer;
     const sel = cssSelector.replaceAll(/#(\d)/g, '\\3$1 ');
+    console.debug(`processing offer ${sel}`); // eslint-disable-line no-console
     const targetElement = section.querySelector(sel);
     if (targetElement) {
       switch (type) {
