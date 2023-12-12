@@ -1,5 +1,6 @@
 sitemaps:
-  default:
+  bitdefender:
+    default: en-AU
     languages:
       en-AU:
         source: /solutions/query-index.json
