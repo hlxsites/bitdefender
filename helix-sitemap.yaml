@@ -1,14 +1,13 @@
 sitemaps:
   default:
-    default:
-      languages:
-        en-AU:
-          source: /solutions/query-index.json
-          destination: /solutions/sitemap.xml
-          hreflang: en-AU
-          alternate: /{path}
-        en:
-          source: https://www.bitdefender.com/sitemap.xml
-          destination: /solutions/sitemap.xml
-          hreflang: en
-          alternate: /{path}.html
+    languages:
+      en-AU:
+        source: /solutions/query-index.json
+        destination: /solutions/sitemap.xml
+        hreflang: en-AU
+        alternate: /{path}
+      en:
+        source: https://www.bitdefender.com/sitemap.xml
+        destination: /solutions/sitemap.xml
+        hreflang: en
+        alternate: /{path}.html
