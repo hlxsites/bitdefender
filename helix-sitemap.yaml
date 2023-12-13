@@ -10,6 +10,7 @@ sitemaps:
         alternate: /{path}
       en:
         origin: https://www.bitdefender.com
+        source: https://www.bitdefender.com/sitemap.xml
         destination: /solutions/sitemap.xml
         hreflang: en
         alternate: /{path}.html
