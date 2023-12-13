@@ -1,9 +1,0 @@
-sitemaps:
-  bitdefender:
-    languages:
-      en-AU:
-        origin: https://www.bitdefender.com.au
-        source: /solutions/query-index.json
-        destination: /solutions/sitemap.xml
-        hreflang: en-AU
-        alternate: /{path}

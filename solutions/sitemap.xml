@@ -1,0 +1,14 @@
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://www.bitdefender.com.au/solutions/internet-security</loc>
+    <xhtml:link rel="alternate" hreflang="en-AU" href="https://www.bitdefender.com.au/solutions/internet-security" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.bitdefender.com/solutions/internet-security.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.bitdefender.com/solutions/internet-security.html" />
+  </url>
+  <url>
+    <loc>https://www.bitdefender.com.au/solutions/</loc>
+    <xhtml:link rel="alternate" hreflang="en-AU" href="https://www.bitdefender.com.au/solutions/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.bitdefender.com/solutions/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.bitdefender.com/solutions/" />
+  </url>
+</urlset>
