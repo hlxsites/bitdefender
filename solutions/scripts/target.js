@@ -58,21 +58,21 @@ function getSessionId() {
   return newSessionId;
 }
 
-async function getClientHints() {
-  const highEntropyValues = await navigator.userAgentData.getHighEntropyValues([
-    'model', 'platformVersion', 'uaFullVersionList', 'architecture', 'bitness',
-  ]);
-  return {
-    model: highEntropyValues.model,
-    mobile: navigator.userAgentData.mobile,
-    platform: navigator.userAgentData.platform,
-    platformVersion: highEntropyValues.platformVersion,
-    // browserUAWithMajorVersion: navigator.userAgentData.uaList[0].ua,
-    browserUAWithFullVersion: highEntropyValues.uaFullVersionList,
-    architecture: highEntropyValues.architecture,
-    bitness: highEntropyValues.bitness,
-  };
-}
+// async function getClientHints() {
+//   const highEntropyValues = await navigator.userAgentData.getHighEntropyValues([
+//     'model', 'platformVersion', 'uaFullVersionList', 'architecture', 'bitness',
+//   ]);
+//   return {
+//     model: highEntropyValues.model,
+//     mobile: navigator.userAgentData.mobile,
+//     platform: navigator.userAgentData.platform,
+//     platformVersion: highEntropyValues.platformVersion,
+//     // browserUAWithMajorVersion: navigator.userAgentData.uaList[0].ua,
+//     browserUAWithFullVersion: highEntropyValues.uaFullVersionList,
+//     architecture: highEntropyValues.architecture,
+//     bitness: highEntropyValues.bitness,
+//   };
+// }
 
 /**
  * Get all offers from a response.
@@ -115,7 +115,7 @@ async function fetchOffers(client, sessionId, useProxy) {
         url,
       },
       userAgent: navigator.userAgent,
-      clientHints: await getClientHints(),
+      // clientHints: await getClientHints(),
       window: {
         width: window.innerWidth,
         height: window.innerHeight,
