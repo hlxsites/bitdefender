@@ -108,7 +108,7 @@ async function fetchOffers(client, sessionId, useProxy) {
       pageLoad: {},
     },
     qaMode: {
-      evaluateAsTrueAudienceIds: ['829737'],
+      evaluateAsTrueAudienceIds: [829737],
     },
   };
 
