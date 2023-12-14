@@ -107,6 +107,9 @@ async function fetchOffers(client, sessionId, useProxy) {
     execute: {
       pageLoad: {},
     },
+    qaMode: {
+      evaluateAsTrueAudienceIds: ['829737'],
+    },
   };
 
   if (navigator.userAgentData) {
