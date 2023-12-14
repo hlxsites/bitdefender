@@ -98,11 +98,30 @@ async function fetchOffers(client, sessionId, useProxy) {
       address: {
         url,
       },
+      userAgent: navigator.userAgent,
+      window: {
+        width: window.innerWidth,
+        height: window.innerHeight,
+      },
     },
     execute: {
       pageLoad: {},
     },
   };
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition((position) => {
+      payload.context.geo = {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+      };
+      // eslint-disable-next-line no-console
+      console.debug(`Geolocation: ${payload.context.geo.latitude}, ${payload.context.geo.longitude}`);
+    });
+  } else {
+    // eslint-disable-next-line no-console
+    console.debug('Geolocation is not supported by this browser.');
+  }
 
   const options = {
     method: 'POST',
