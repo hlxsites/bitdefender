@@ -123,6 +123,8 @@ async function fetchOffers(client, sessionId, useProxy) {
     console.debug('Geolocation is not supported by this browser.');
   }
 
+  console.debug('payload', payload); // eslint-disable-line no-console
+
   const options = {
     method: 'POST',
     headers: {
