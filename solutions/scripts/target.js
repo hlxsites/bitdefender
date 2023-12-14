@@ -109,6 +109,16 @@ async function fetchOffers(client, sessionId, useProxy) {
     },
   };
 
+  if (navigator.userAgentData) {
+    payload.context.clientHints = await navigator.userAgentData.getHighEntropyValues([
+      'architecture',
+      'model',
+      'platform',
+      'platformVersion',
+      'fullVersionList',
+    ]);
+  }
+
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition((position) => {
       payload.context.geo = {
