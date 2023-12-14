@@ -122,17 +122,10 @@ async function fetchOffers(client, sessionId, useProxy) {
       platform: navigator.userAgentData.platform,
       platformVersion: highEntropyValues.platformVersion,
       // browserUAWithMajorVersion: navigator.userAgentData.uaList[0].ua,
-      // browserUAWithFullVersion: highEntropyValues.uaFullVersionList,
+      browserUAWithFullVersion: highEntropyValues.uaFullVersionList,
       architecture: highEntropyValues.architecture,
       bitness: highEntropyValues.bitness,
     };
-    // payload.context.clientHints = await navigator.userAgentData.getHighEntropyValues([
-    //   'architecture',
-    //   'model',
-    //   'platform',
-    //   'platformVersion',
-    //   'fullVersionList',
-    // ]);
   }
 
   if (navigator.geolocation) {
