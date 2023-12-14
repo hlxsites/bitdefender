@@ -118,8 +118,8 @@ async function fetchOffers(client, sessionId, useProxy) {
       mobile: navigator.userAgentData.mobile,
       platform: navigator.userAgentData.platform,
       platformVersion: highEntropyValues.platformVersion,
-      browserUAWithMajorVersion: navigator.userAgentData.uaList[0].ua,
-      browserUAWithFullVersion: highEntropyValues.uaFullVersionList,
+      // browserUAWithMajorVersion: navigator.userAgentData.uaList[0].ua,
+      // browserUAWithFullVersion: highEntropyValues.uaFullVersionList,
       architecture: highEntropyValues.architecture,
       bitness: highEntropyValues.bitness,
     };
