@@ -57,5 +57,6 @@ try {
   const xml = convert.json2xml(output, options);
   await fs.writeFile(sitemapPath, xml);
 } catch (error) {
+  // eslint-disable-next-line no-console
   console.error(error);
 }
