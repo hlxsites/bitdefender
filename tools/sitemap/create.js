@@ -2,7 +2,8 @@ import fs from 'fs/promises';
 import convert from 'xml-js';
 import path from 'path';
 
-const url = 'https://www.bitdefender.com.au/solutions/query-index.json';
+const QUERY_INDEX_URL = 'https://www.bitdefender.com.au/solutions/query-index.json';
+const LOCALE_URL = 'https://www.bitdefender.com.au';
 
 const hreflangMap = [
   ['en-ro', { baseUrl: 'https://www.bitdefender.ro', pageType: '.html' }],
@@ -26,7 +27,7 @@ const hreflangMap = [
 ];
 
 try {
-  const response = await fetch(url);
+  const response = await fetch(QUERY_INDEX_URL);
   const json = await response.json();
   const sitemapPath = path.join(process.cwd(), '../../solutions/sitemap.xml');
 
@@ -37,7 +38,7 @@ try {
         xmlns: 'http://www.sitemaps.org/schemas/sitemap/0.9',
       },
       url: json?.data.map((row) => ({
-        loc: `https://www.bitdefender.com.au${row.path}`,
+        loc: `${LOCALE_URL}${row.path}`,
         'xhtml:link': Object.keys(hreflangMap).map((key) => {
           const hreflang = hreflangMap[key][0];
           const href = `${hreflangMap[key][1].baseUrl}${row.path}${hreflangMap[key][1].pageType}`;
