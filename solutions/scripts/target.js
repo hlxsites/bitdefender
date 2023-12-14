@@ -58,6 +58,22 @@ function getSessionId() {
   return newSessionId;
 }
 
+async function getClientHints() {
+  const highEntropyValues = await navigator.userAgentData.getHighEntropyValues([
+    'model', 'platformVersion', 'uaFullVersionList', 'architecture', 'bitness',
+  ]);
+  return {
+    model: highEntropyValues.model,
+    mobile: navigator.userAgentData.mobile,
+    platform: navigator.userAgentData.platform,
+    platformVersion: highEntropyValues.platformVersion,
+    // browserUAWithMajorVersion: navigator.userAgentData.uaList[0].ua,
+    browserUAWithFullVersion: highEntropyValues.uaFullVersionList,
+    architecture: highEntropyValues.architecture,
+    bitness: highEntropyValues.bitness,
+  };
+}
+
 /**
  * Get all offers from a response.
  * @param data
@@ -99,6 +115,7 @@ async function fetchOffers(client, sessionId, useProxy) {
         url,
       },
       userAgent: navigator.userAgent,
+      clientHints: await getClientHints(),
       window: {
         width: window.innerWidth,
         height: window.innerHeight,
@@ -107,42 +124,7 @@ async function fetchOffers(client, sessionId, useProxy) {
     execute: {
       pageLoad: {},
     },
-    // qaMode: {
-    //   evaluateAsTrueAudienceIds: [829737],
-    // },
   };
-
-  if (navigator.userAgentData) {
-    const highEntropyValues = await navigator.userAgentData.getHighEntropyValues([
-      'model', 'platformVersion', 'uaFullVersionList', 'architecture', 'bitness',
-    ]);
-    payload.context.clientHints = {
-      model: highEntropyValues.model,
-      mobile: navigator.userAgentData.mobile,
-      platform: navigator.userAgentData.platform,
-      platformVersion: highEntropyValues.platformVersion,
-      // browserUAWithMajorVersion: navigator.userAgentData.uaList[0].ua,
-      browserUAWithFullVersion: highEntropyValues.uaFullVersionList,
-      architecture: highEntropyValues.architecture,
-      bitness: highEntropyValues.bitness,
-    };
-  }
-
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition((position) => {
-      payload.context.geo = {
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude,
-      };
-      // eslint-disable-next-line no-console
-      console.debug(`Geolocation: ${payload.context.geo.latitude}, ${payload.context.geo.longitude}`);
-    });
-  } else {
-    // eslint-disable-next-line no-console
-    console.debug('Geolocation is not supported by this browser.');
-  }
-
-  console.debug('payload', payload); // eslint-disable-line no-console
 
   const options = {
     method: 'POST',
@@ -160,8 +142,6 @@ async function fetchOffers(client, sessionId, useProxy) {
     throw new Error(`Failed to fetch offers: ${response.status} ${response.statusText}`);
   }
   const data = await response.json();
-
-  console.debug('response', data); // eslint-disable-line no-console
 
   return getApplicableOffers(data);
 }
