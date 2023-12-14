@@ -168,6 +168,8 @@ async function fetchOffers(client, sessionId, useProxy) {
   }
   const data = await response.json();
 
+  console.debug('response', data); // eslint-disable-line no-console
+
   return getApplicableOffers(data);
 }
 
