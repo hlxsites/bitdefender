@@ -102,23 +102,8 @@ main .hero {
   min-height: 300px;
 }
 
-main .hero::after {
-    position: absolute;
-    content: "";
-    left: 0;
-    bottom: 0;
-    height: 32px;
-    width: 100%;
-    background-color: #e4f2ff;
-}
-
 main .hero.black-background {
   background-color: var(--dark-background-color);
-}
-
-main .hero.black-background::after {
-  content: none;
-  background-color: transparent;
 }
 
 main .hero.comparison {
