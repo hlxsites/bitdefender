@@ -32,7 +32,7 @@ main .hero .hero-content .breadcrumb {
   min-height: 82px;
 }
 
-main .hero .hero-content .breadcrumb{
+main .hero .hero-content .breadcrumb {
   padding: 12px 0;
   margin-bottom: 12px;
 }
@@ -102,7 +102,7 @@ main .hero {
   min-height: 300px;
 }
 
-main .hero::after{
+main .hero::after {
     position: absolute;
     content: "";
     left: 0;
@@ -419,7 +419,6 @@ main .hero .hero-awards li::after {
   }
 
   main .hero .hero-content .breadcrumb {
-    margin-bottom: 0;
     min-height: 58px;
   }
 
