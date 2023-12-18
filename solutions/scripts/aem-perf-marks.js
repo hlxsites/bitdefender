@@ -49,7 +49,7 @@ function getMarkName(name) {
 
 const observer = new MutationObserver((mutations) => {
   mutations.forEach((mutation) => {
-    const { target } = mutation;
+    const { target, oldValue } = mutation;
     console.debug('MutationObserver', target); // eslint-disable-line no-console
     if (target.dataset.blockStatus) {
       const name = target.dataset.blockName;
@@ -58,10 +58,10 @@ const observer = new MutationObserver((mutations) => {
         const markName = getMarkName(name);
         trackedBlocks.add(markName);
         target.dataset.perfMarkName = markName;
-        console.debug('creating performance mark', markName, status); // eslint-disable-line no-console
+        console.debug('creating performance mark', markName, oldValue, status); // eslint-disable-line no-console
         window.PerfMarks.create(markName);
       } else if (status === 'loaded') {
-        console.debug('measuring performance mark', target.dataset.perfMarkName, status); // eslint-disable-line no-console
+        console.debug('measuring performance mark', target.dataset.perfMarkName, oldValue, status); // eslint-disable-line no-console
         window.PerfMarks.measure(target.dataset.perfMarkName);
       }
     }
