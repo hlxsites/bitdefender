@@ -35,14 +35,15 @@ const config = {
 };
 
 const observer = new MutationObserver((element) => {
-  if (element.dataset.sectionStatus) {
-    const markName = element.classList.join('_');
-    if (element.dataset.sectionStatus === 'initialized') {
-      window.PerfMarks.create(markName, { section: element.id });
-    } else if (element.dataset.sectionStatus === 'loaded') {
-      window.PerfMarks.measure(markName);
-    }
-  }
+  console.debug('MutationObserver', element); // eslint-disable-line no-console
+  // if (element.dataset.sectionStatus) {
+  //   const markName = element.classList.join('_');
+  //   if (element.dataset.sectionStatus === 'initialized') {
+  //     window.PerfMarks.create(markName, { section: element.id });
+  //   } else if (element.dataset.sectionStatus === 'loaded') {
+  //     window.PerfMarks.measure(markName);
+  //   }
+  // }
 });
 
 console.debug('Attaching performance observer...'); // eslint-disable-line no-console
