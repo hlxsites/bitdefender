@@ -30,6 +30,7 @@ window.PerfMarks.measure = (name) => {
 
 const config = {
   attributes: true,
+  subtree: true,
   attributeFilter: ['data-section-status', 'data-block-status'],
 };
 
