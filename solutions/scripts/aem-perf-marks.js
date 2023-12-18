@@ -35,8 +35,6 @@ const config = {
   subtree: true,
 };
 
-// const ids = new Map();
-
 const observer = new MutationObserver((mutations) => {
 
   mutations.forEach((mutation) => {
@@ -45,7 +43,7 @@ const observer = new MutationObserver((mutations) => {
     if (target.dataset.blockStatus) {
       const name = target.dataset.blockName;
       const status = target.dataset.blockStatus;
-      if (status === 'loading') {
+      if (status === 'initialized') {
         console.debug('creating performance mark', name, status); // eslint-disable-line no-console
         window.PerfMarks.create(name);
       } else if (status === 'loaded') {
