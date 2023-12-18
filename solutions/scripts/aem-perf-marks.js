@@ -44,8 +44,10 @@ const observer = new MutationObserver((element) => {
   }
 });
 
+console.debug('Attaching performance observer...'); // eslint-disable-line no-console
 observer.observe(document.body, config);
 
 setTimeout(() => {
+  console.debug('Detaching performance observer...'); // eslint-disable-line no-console
   observer.disconnect();
 }, 10000);
