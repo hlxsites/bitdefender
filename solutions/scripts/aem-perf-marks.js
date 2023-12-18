@@ -45,8 +45,10 @@ const observer = new MutationObserver((mutations) => {
       const name = target.dataset.blockName;
       const status = target.dataset.blockStatus;
       if (status === 'loading') {
+        console.debug('creating performance mark', name); // eslint-disable-line no-console
         window.PerfMarks.create(name);
       } else if (status === 'loaded') {
+        console.debug('measuring performance mark', name); // eslint-disable-line no-console
         window.PerfMarks.measure(name);
       }
     }
