@@ -41,7 +41,7 @@ const observer = new MutationObserver((mutations) => {
     if (target.dataset.sectionStatus || target.dataset.blockStatus) {
       const markName = Array.from(target.classList).join('_');
       const status = target.dataset.sectionStatus || target.dataset.blockStatus;
-      if (status === 'initialized') {
+      if (status === 'loading') {
         window.PerfMarks.create(markName, { section: target.id });
       } else if (status === 'loaded') {
         window.PerfMarks.measure(markName);
