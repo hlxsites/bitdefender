@@ -34,20 +34,26 @@ const config = {
   attributeFilter: ['data-section-status', 'data-block-status'],
 };
 
+const ids = new Map();
+
 const observer = new MutationObserver((mutations) => {
+
   mutations.forEach((mutation) => {
     const { target } = mutation;
-    // console.debug('MutationObserver', target); // eslint-disable-line no-console
+    console.debug('MutationObserver', target); // eslint-disable-line no-console
     if (target.dataset.sectionStatus || target.dataset.blockStatus) {
       const markName = Array.from(target.classList).join('_');
       const status = target.dataset.sectionStatus || target.dataset.blockStatus;
-      if (status === 'loading') {
+      if (status === 'initialized') {
+        ids.set(target, markName);
+        target.dataset.perfMark = markName;
         window.PerfMarks.create(markName, { section: target.id });
       } else if (status === 'loaded') {
-        window.PerfMarks.measure(markName);
+        window.PerfMarks.measure(target.dataset.perfMark);
       }
     }
   });
+
   // if (element.dataset.sectionStatus) {
   //   const markName = element.classList.join('_');
   //   if (element.dataset.sectionStatus === 'initialized') {
