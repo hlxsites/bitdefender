@@ -10,11 +10,6 @@ window.PerfMarks = window.PerfMarks || {};
  * @param {any} detail The detail to pass to the performance mark.
  */
 window.PerfMarks.create = (name, detail = undefined) => {
-  if (performance.getEntriesByName(`perf-${name}`).length > 0) {
-    // eslint-disable-next-line no-console
-    console.debug(`perf-${name} already exists`);
-    return;
-  }
   performance.mark(`perf-start-${name}`, detail ? { detail } : undefined);
   // eslint-disable-next-line no-console
   console.debug(`perf-${name} started at ${performance.now()} + ms`);
@@ -35,8 +30,9 @@ window.PerfMarks.measure = (name) => {
 
 const config = {
   attributes: true,
-  subtree: true,
   attributeFilter: ['data-block-status'],
+  attributeOldValue: true,
+  subtree: true,
 };
 
 // const ids = new Map();
