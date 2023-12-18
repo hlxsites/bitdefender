@@ -1,4 +1,10 @@
 /**
+ * AEM Performance Marks.
+ * @type {*|{}}
+ */
+window.PerfMarks = window.PerfMarks || {};
+
+/**
  * Create a performance mark.
  * @param {string} name The name of the performance mark.
  * @param {any} detail The detail to pass to the performance mark.
