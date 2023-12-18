@@ -34,7 +34,7 @@ const config = {
   attributeFilter: ['data-section-status', 'data-block-status'],
 };
 
-const ids = new Map();
+// const ids = new Map();
 
 const observer = new MutationObserver((mutations) => {
 
@@ -45,10 +45,10 @@ const observer = new MutationObserver((mutations) => {
       const markName = Array.from(target.classList).join('_');
       const status = target.dataset.sectionStatus || target.dataset.blockStatus;
       if (status === 'initialized') {
-        ids.set(target, markName);
+        // ids.set(target, markName);
         target.dataset.perfMark = markName;
         window.PerfMarks.create(markName, { section: target.id });
-      } else if (status === 'loaded') {
+      } else if (status === 'loaded' && target.dataset.perfMark) {
         window.PerfMarks.measure(target.dataset.perfMark);
       }
     }
