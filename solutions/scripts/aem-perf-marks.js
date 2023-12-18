@@ -1,6 +1,6 @@
 /**
  * AEM Performance Marks.
- * @type {*|{}}
+ * @type {object}
  */
 window.PerfMarks = window.PerfMarks || {};
 
