@@ -37,24 +37,16 @@ const config = {
 const observer = new MutationObserver((mutations) => {
   mutations.forEach((mutation) => {
     const { target } = mutation;
-    console.debug('MutationObserver', target); // eslint-disable-line no-console
-
-    // if (target.dataset.sectionStatus) {
-    //   const markName = target.classList.join('_');
-    //   if (target.dataset.sectionStatus === 'initialized') {
-    //     window.PerfMarks.create(markName, { section: target.id });
-    //   } else if (target.dataset.sectionStatus === 'loaded') {
-    //     window.PerfMarks.measure(markName);
-    //   }
-    // }
-    // if (target.dataset.blockStatus) {
-    //   const markName = target.classList.join('_');
-    //   if (target.dataset.blockStatus === 'initialized') {
-    //     window.PerfMarks.create(markName, { block: target.id });
-    //   } else if (target.dataset.blockStatus === 'loaded') {
-    //     window.PerfMarks.measure(markName);
-    //   }
-    // }
+    // console.debug('MutationObserver', target); // eslint-disable-line no-console
+    if (target.dataset.sectionStatus || target.dataset.blockStatus) {
+      const markName = target.classList.join('_');
+      const status = target.dataset.sectionStatus || target.dataset.blockStatus;
+      if (status === 'initialized') {
+        window.PerfMarks.create(markName, { section: target.id });
+      } else if (status === 'loaded') {
+        window.PerfMarks.measure(markName);
+      }
+    }
   });
   // if (element.dataset.sectionStatus) {
   //   const markName = element.classList.join('_');
