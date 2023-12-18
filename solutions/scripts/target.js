@@ -228,7 +228,7 @@ function displayOffers(section, offers) {
           console.warn(`unsupported action type ${type}`); // eslint-disable-line no-console
       }
       console.debug('section has been rendered', section); // eslint-disable-line no-console
-      window?.measurePerformance(
+      window?.PerfMarks.measure(
         `targeting:rendering-section:${Array.from(section.classList).join('_')}`,
       );
     }
@@ -264,7 +264,7 @@ export default function loadOffers(client, useProxy) {
     return;
   }
 
-  window?.createPerformanceMark('targeting:loading-offers');
+  window?.PerfMarks.create('targeting:loading-offers');
 
   const sessionId = getSessionId();
   // eslint-disable-next-line no-console
@@ -277,7 +277,7 @@ export default function loadOffers(client, useProxy) {
   getDecoratedContent()
     .then(async (main) => {
       const offers = await pendingOffers;
-      window?.measurePerformance('targeting:loading-offers');
+      window?.PerfMarks.measure('targeting:loading-offers');
 
       offers.forEach((offer) => {
         const { cssSelector } = offer;
@@ -287,7 +287,7 @@ export default function loadOffers(client, useProxy) {
           // eslint-disable-next-line no-console
           console.debug(`hiding section for selector ${cssSelector}`, section);
           section.style.visibility = 'hidden';
-          window?.createPerformanceMark(
+          window?.PerfMarks.create(
             `targeting:rendering-section:${Array.from(section.classList).join('_')}`,
           );
         }
