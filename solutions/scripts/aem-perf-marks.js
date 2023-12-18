@@ -5,6 +5,12 @@
 window.PerfMarks = window.PerfMarks || {};
 
 /**
+ * Track block loading.
+ * @type {boolean}
+ */
+window.PerfMarks.isTrackingBlockTiming = window.PerfMarks.isTrackingBlockTiming || true;
+
+/**
  * Create a performance mark.
  * @param {string} name The name of the performance mark.
  * @param {any} detail The detail to pass to the performance mark.
@@ -28,31 +34,27 @@ window.PerfMarks.measure = (name) => {
   console.debug(`perf-${name} took ${duration.duration} ms`);
 };
 
-/**
- * Disable measuring of block loading.
- * @type {boolean}
- */
-const trackedBlocks = new Set();
+const markNames = new Set();
 
 /**
  * Get a unique mark name.
- * @param name
+ * @param blockName
  * @returns {string}
  */
-function getMarkName(name) {
-  let markName = name;
+function getMarkName(blockName) {
+  let markName = blockName;
   let i = 0;
-  while (trackedBlocks.has(markName)) {
+  while (markNames.has(markName)) {
     i += 1;
-    markName = `${name}_${i}`;
+    markName = `${blockName}_${i}`;
   }
   return markName;
 }
 
 /**
- * Watch for block loading.
+ * Track block timing.
  */
-function watchBlockLoading() {
+function trackBlockTiming() {
   const config = {
     attributes: true,
     attributeFilter: ['data-block-status'],
@@ -69,7 +71,7 @@ function watchBlockLoading() {
         const status = target.dataset.blockStatus;
         if (status === 'loading' && oldValue) {
           const markName = getMarkName(name);
-          trackedBlocks.add(markName);
+          markNames.add(markName);
           target.dataset.perfMarkName = markName;
           console.debug('creating performance mark', markName, oldValue, status); // eslint-disable-line no-console
           window.PerfMarks.create(markName);
@@ -91,6 +93,6 @@ function watchBlockLoading() {
   }, 10000);
 }
 
-if (window?.PerfMarks.disableMeasuringOfBlockLoading !== true) {
-  watchBlockLoading();
+if (window?.PerfMarks.isTrackingBlockTiming) {
+  trackBlockTiming();
 }
