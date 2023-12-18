@@ -1,0 +1,273 @@
+/* stylelint-disable at-rule-empty-line-before */
+/* stylelint-disable no-duplicate-selectors */
+/* stylelint-disable no-descending-specificity */
+/* stylelint-disable selector-class-pattern */
+/* stylelint-disable rule-empty-line-before */
+.hero-aem-container .hero-aem p:first-of-type {
+    margin: 0;
+    margin-bottom: 5px;
+  }
+  .hero-aem-container .hero-aem h1 {
+    color: #006DFF;
+    font-size: 38px;
+    font-weight: normal;
+    margin-top: 10px;
+    line-height: 1.1;
+  }
+  .hero-aem-container .hero-aem h2 {
+    margin-top: 0;
+    font-size: 24px;
+    font-weight: normal;
+    line-height: 1.1;
+  }
+  .hero-aem-container .hero-aem .hero-aem__mobile-image img {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    width: 100%;
+    height: fit-content;
+    position: relative;
+    top: 6px;
+  }
+  .hero-aem-container .hero-aem .hero-aem__desktop-image {
+    display: none;
+  }
+  .hero-aem-container .hero-aem .hero-aem__card-text {
+    padding: 27px;
+    background-color: #F7F7F7;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+  .hero-aem-container .hero-aem p.button-container {
+    text-align: center;
+  }
+  .hero-aem-container .hero-aem p.button-container .button.primary {
+    width: 100%;
+  }
+  .hero-aem-container .hero-aem .prod-oldprice {
+    font-size: 16px;
+    text-decoration: line-through;
+  }
+  .hero-aem-container .hero-aem .prod-save {
+    color: #1C7928;
+    font-weight: bold;
+  }
+  .hero-aem-container .hero-aem .prod-newprice {
+    font-size: 40px;
+    font-weight: bold;
+  }
+  .hero-aem-container .hero-aem .newprice-container {
+    line-height: 1;
+  }
+  .hero-aem-container .hero-aem .newprice-container sup {
+    position: relative;
+    top: -20px;
+  }
+  .hero-aem-container .aem-two-cards {
+    margin-top: 20px;
+  }
+  .hero-aem-container .aem-two-cards h2 {
+    font-size: 36px;
+    font-weight: bold;
+    line-height: 1.1;
+  }
+  .hero-aem-container .aem-two-cards_card {
+    border-radius: 20px;
+    background-color: #F7F7F7;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+  }
+  .hero-aem-container .aem-two-cards .aem-two-cards_card h2 {
+    color: #006DFF;
+    font-size: 24px;
+    font-weight: normal;
+    margin: 0;
+  }
+  
+  .h-100 {
+    height: 100% !important;
+  }
+
+  .hero-aem-container.we-container {
+    max-width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-aem-container .button.primary {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    -webkit-font-smoothing: antialiased;
+    display: inline-flex;
+    align-items: center;
+    box-sizing: border-box;
+    text-decoration: none;
+    padding: 10px 26px 8px 28px;
+    text-align: center;
+    cursor: pointer;
+    color: #fff;
+    background-color: #eb0000;
+    border: 2px solid #eb0000;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-radius: 8px;
+    height: fit-content;
+  }
+
+  .hero-aem-container .hero-aem p em a {
+    color: black;
+  }
+
+  .hero-aem-container .aem-two-cards p a {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    -webkit-font-smoothing: antialiased;
+    display: inline-flex;
+    align-items: center;
+    box-sizing: border-box;
+    text-decoration: none;
+    padding: 10px 26px 8px 28px;
+    text-align: center;
+    cursor: pointer;
+    color: #fff;
+    background-color: #eb0000;
+    border: 2px solid #eb0000;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-radius: 8px;
+    height: fit-content;
+  }
+
+  .hero-aem-container .aem-two-cards h2 {
+    font-size: 36px;
+    font-weight: bold;
+  }
+  .hero-aem-container .aem-two-cards .aem-two-cards_card h2 {
+    color: #006DFF;
+    font-size: 24px;
+    font-weight: normal;
+    margin: 0;
+  }
+  .hero-aem-container .d-flex {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 1rem;
+    justify-content: space-between;
+  }
+  .hero-aem-container .col-12 {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
+  
+  @media (width >= 768px) {
+    .hero-aem-container .hero-aem {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .hero-aem-container .hero-aem .hero-aem__mobile-image {
+      display: none;
+    }
+    .hero-aem-container .hero-aem .hero-aem__desktop-image {
+      display: block;
+      height: 100%;
+    }
+    .hero-aem-container .hero-aem .hero-aem__desktop-image img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      border-top-right-radius: 20px;
+      border-bottom-right-radius: 20px;
+    }
+    .hero-aem-container .hero-aem .hero-aem__card-text {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      background-color: initial;
+      padding: 0;
+    }
+    .hero-aem-container .hero-aem .hero-aem__card__desktop {
+      background-color: #F7F7F7;
+      border-bottom-left-radius: 20px;
+      border-top-left-radius: 20px;
+    }
+    .hero-aem-container .hero-aem .hero-aem__card__desktop > div {
+      padding: 4%;
+    }
+    .hero-aem-container .hero-aem p.button-container {
+      text-align: left;
+      display: inline-block;
+    }
+    .hero-aem-container .hero-aem p.button-container .button.primary {
+      width: auto;
+    }
+
+    .hero-aem-container .col-md-6 {
+      flex: 0 0 auto;
+      width: 50%;
+    }
+
+    .hero-aem-container .col-md-3 {
+      flex: 0 0 auto;
+      width: 24%;
+    }
+
+    .hero-aem-container .aem-two-cards h2 + p {
+      font-size: 18px;
+    }
+
+    .hero-aem-container .hero-aem p:has(a) {
+      display: inline-block;
+    }
+
+    .hero-aem-container .hero-aem p:has(em) {
+      margin-left: 10px;
+    }
+    .hero-aem-container .aem-two-cards_card p:not(.button-container, :has(a), :has(picture)) {
+      min-height: 90px;
+    }
+  }
+  @media (width >= 992px) {
+    .hero-aem-container.we-container {
+      max-width: 1300px;
+      padding-left: 50px;
+      padding-right: 50px;
+    }
+    .hero-aem-container .aem-two-cards_card p:not(.button-container, :has(a), :has(picture)) {
+      min-height: 165px;
+    }
+
+    .hero-aem-container .col-lg-6 {
+      flex: 0 0 auto;
+      width: 49%;
+    }
+    .hero-aem-container .col-lg-3 {
+      flex: 0 0 auto;
+      width: 24%;
+    }
+  }
+  @media (width >= 1200px) {
+
+    .hero-aem-container .aem-two-cards_card p:not(.button-container, :has(a), :has(picture)) {
+      min-height: 120px;
+    }
+
+    .hero-aem-container.we-container {
+      max-width: 1332px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+  @media (width >= 1600px) {
+    .hero-aem-container.we-container {
+      max-width: 1332px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
