@@ -35,11 +35,11 @@ const config = {
 };
 
 const observer = new MutationObserver((element) => {
-  if (element.getAttribute('data-section-status')) {
+  if (element.dataset.sectionStatus) {
     const markName = element.classList.join('_');
-    if (element.getAttribute('data-section-status') === 'initialized') {
+    if (element.dataset.sectionStatus === 'initialized') {
       window.PerfMarks.create(markName, { section: element.id });
-    } else if (element.getAttribute('data-section-status') === 'loaded') {
+    } else if (element.dataset.sectionStatus === 'loaded') {
       window.PerfMarks.measure(markName);
     }
   }
