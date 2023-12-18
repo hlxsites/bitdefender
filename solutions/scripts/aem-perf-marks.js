@@ -27,3 +27,25 @@ window.PerfMarks.measure = (name) => {
   // eslint-disable-next-line no-console
   console.debug(`perf-${name} took ${duration.duration} ms`);
 };
+
+const config = {
+  attributes: true,
+  attributeFilter: ['data-section-status', 'data-block-status'],
+};
+
+const observer = new MutationObserver((element) => {
+  if (element.dataset.sectionStatus) {
+    const markName = element.classList.join('_');
+    if (element.dataset.sectionStatus === 'initialized') {
+      window.PerfMarks.create(markName, { section: element.id });
+    } else if (element.dataset.sectionStatus === 'loaded') {
+      window.PerfMarks.measure(markName);
+    }
+  }
+});
+
+observer.observe(document.body, config);
+
+setTimeout(() => {
+  observer.disconnect();
+}, 10000);
