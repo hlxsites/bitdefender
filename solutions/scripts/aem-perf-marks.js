@@ -76,6 +76,7 @@ function watchBlockLoading() {
         } else if (status === 'loaded') {
           console.debug('measuring performance mark', target.dataset.perfMarkName, oldValue, status); // eslint-disable-line no-console
           window.PerfMarks.measure(target.dataset.perfMarkName);
+          delete target.dataset.perfMarkName;
         }
       }
     });
