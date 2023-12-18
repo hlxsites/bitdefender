@@ -35,20 +35,34 @@ const config = {
   subtree: true,
 };
 
-const observer = new MutationObserver((mutations) => {
+const trackedBlocks = new Set();
 
+function getMarkName(name) {
+  let markName = name;
+  let i = 0;
+  while (trackedBlocks.has(markName)) {
+    i += 1;
+    markName = `${name}_${i}`;
+  }
+  return markName;
+}
+
+const observer = new MutationObserver((mutations) => {
   mutations.forEach((mutation) => {
     const { target } = mutation;
     console.debug('MutationObserver', target); // eslint-disable-line no-console
     if (target.dataset.blockStatus) {
       const name = target.dataset.blockName;
       const status = target.dataset.blockStatus;
-      if (status === 'initialized') {
-        console.debug('creating performance mark', name, status); // eslint-disable-line no-console
-        window.PerfMarks.create(name);
+      if (status === 'loading') {
+        const markName = getMarkName(name);
+        trackedBlocks.add(markName);
+        target.dataset.perfMarkName = markName;
+        console.debug('creating performance mark', markName, status); // eslint-disable-line no-console
+        window.PerfMarks.create(markName);
       } else if (status === 'loaded') {
-        console.debug('measuring performance mark', name, status); // eslint-disable-line no-console
-        window.PerfMarks.measure(name);
+        console.debug('measuring performance mark', target.dataset.perfMarkName, status); // eslint-disable-line no-console
+        window.PerfMarks.measure(target.dataset.perfMarkName);
       }
     }
   });
