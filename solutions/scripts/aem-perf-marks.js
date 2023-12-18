@@ -28,15 +28,17 @@ window.PerfMarks.measure = (name) => {
   console.debug(`perf-${name} took ${duration.duration} ms`);
 };
 
-const config = {
-  attributes: true,
-  attributeFilter: ['data-block-status'],
-  attributeOldValue: true,
-  subtree: true,
-};
-
+/**
+ * Disable measuring of block loading.
+ * @type {boolean}
+ */
 const trackedBlocks = new Set();
 
+/**
+ * Get a unique mark name.
+ * @param name
+ * @returns {string}
+ */
 function getMarkName(name) {
   let markName = name;
   let i = 0;
@@ -47,40 +49,47 @@ function getMarkName(name) {
   return markName;
 }
 
-const observer = new MutationObserver((mutations) => {
-  mutations.forEach((mutation) => {
-    const { target, oldValue } = mutation;
-    console.debug('MutationObserver', target); // eslint-disable-line no-console
-    if (target.dataset.blockStatus) {
-      const name = target.dataset.blockName;
-      const status = target.dataset.blockStatus;
-      if (status === 'loading') {
-        const markName = getMarkName(name);
-        trackedBlocks.add(markName);
-        target.dataset.perfMarkName = markName;
-        console.debug('creating performance mark', markName, oldValue, status); // eslint-disable-line no-console
-        window.PerfMarks.create(markName);
-      } else if (status === 'loaded') {
-        console.debug('measuring performance mark', target.dataset.perfMarkName, oldValue, status); // eslint-disable-line no-console
-        window.PerfMarks.measure(target.dataset.perfMarkName);
+/**
+ * Watch for block loading.
+ */
+function watchBlockLoading() {
+  const config = {
+    attributes: true,
+    attributeFilter: ['data-block-status'],
+    attributeOldValue: true,
+    subtree: true,
+  };
+
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      const { target, oldValue } = mutation;
+      console.debug('MutationObserver', target); // eslint-disable-line no-console
+      if (target.dataset.blockStatus) {
+        const name = target.dataset.blockName;
+        const status = target.dataset.blockStatus;
+        if (status === 'loading' && oldValue) {
+          const markName = getMarkName(name);
+          trackedBlocks.add(markName);
+          target.dataset.perfMarkName = markName;
+          console.debug('creating performance mark', markName, oldValue, status); // eslint-disable-line no-console
+          window.PerfMarks.create(markName);
+        } else if (status === 'loaded') {
+          console.debug('measuring performance mark', target.dataset.perfMarkName, oldValue, status); // eslint-disable-line no-console
+          window.PerfMarks.measure(target.dataset.perfMarkName);
+        }
       }
-    }
+    });
   });
 
-  // if (element.dataset.sectionStatus) {
-  //   const markName = element.classList.join('_');
-  //   if (element.dataset.sectionStatus === 'initialized') {
-  //     window.PerfMarks.create(markName, { section: element.id });
-  //   } else if (element.dataset.sectionStatus === 'loaded') {
-  //     window.PerfMarks.measure(markName);
-  //   }
-  // }
-});
+  console.debug('Attaching performance observer...'); // eslint-disable-line no-console
+  observer.observe(document.body, config);
 
-console.debug('Attaching performance observer...'); // eslint-disable-line no-console
-observer.observe(document.body, config);
+  setTimeout(() => {
+    console.debug('Detaching performance observer...'); // eslint-disable-line no-console
+    observer.disconnect();
+  }, 10000);
+}
 
-setTimeout(() => {
-  console.debug('Detaching performance observer...'); // eslint-disable-line no-console
-  observer.disconnect();
-}, 10000);
+if (window?.PerfMarks.disableMeasuringOfBlockLoading !== true) {
+  watchBlockLoading();
+}
