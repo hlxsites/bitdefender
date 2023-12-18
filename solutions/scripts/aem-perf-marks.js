@@ -39,7 +39,7 @@ const observer = new MutationObserver((mutations) => {
     const { target } = mutation;
     // console.debug('MutationObserver', target); // eslint-disable-line no-console
     if (target.dataset.sectionStatus || target.dataset.blockStatus) {
-      const markName = target.classList ? target.classList.join('_') : target.id;
+      const markName = Array.from(target.classList).join('_');
       const status = target.dataset.sectionStatus || target.dataset.blockStatus;
       if (status === 'initialized') {
         window.PerfMarks.create(markName, { section: target.id });
