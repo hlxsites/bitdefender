@@ -44,7 +44,7 @@ const observer = new MutationObserver((mutations) => {
     if (target.dataset.blockStatus) {
       const name = target.dataset.blockName;
       const status = target.dataset.blockStatus;
-      if (status === 'initialized') {
+      if (status === 'loading') {
         window.PerfMarks.create(name);
       } else if (status === 'loaded') {
         window.PerfMarks.measure(name);
