@@ -18,6 +18,8 @@ import {
   createTag,
 } from './utils/utils.js';
 
+import loadTargetOffers from './target.js';
+
 const LCP_BLOCKS = ['hero']; // add your LCP blocks to the list
 const TRACKED_PRODUCTS = [];
 
@@ -497,6 +499,7 @@ function loadDelayed() {
 }
 
 async function loadPage() {
+  loadTargetOffers('sitesinternal');
   pushPageLoadToDataLayer();
   await window.hlx.plugins.load('eager');
   await loadEager(document);
