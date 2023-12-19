@@ -29,7 +29,7 @@ window.PerfMarks.create = (name, detail = undefined) => {
 window.PerfMarks.measure = (name, labels = []) => {
   performance.mark(`perf-stop-${name}`);
   const customLabels = labels.map((label) => `[${label}]`).join('');
-  const measureName = `[perf]${customLabels}: ${name}`;
+  const measureName = `[perf]${customLabels} ${name}`;
   const duration = performance.measure(measureName, `perf-start-${name}`, `perf-stop-${name}`);
   // eslint-disable-next-line no-console
   console.debug(`perf-${name} stopped at ${performance.now()} ms`);

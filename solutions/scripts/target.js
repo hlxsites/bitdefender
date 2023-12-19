@@ -229,7 +229,8 @@ function displayOffers(section, offers) {
       }
       console.debug('section has been rendered', section); // eslint-disable-line no-console
       window?.PerfMarks.measure(
-        `targeting:rendering-section:${Array.from(section.classList).join('_')}`,
+        Array.from(section.classList).join('_'),
+        ['targeting', 'rendering-section'],
       );
     }
   });
@@ -264,7 +265,7 @@ export default function loadOffers(client, useProxy) {
     return;
   }
 
-  window?.PerfMarks.create('targeting:loading-offers');
+  window?.PerfMarks.create('loading-offers');
 
   const sessionId = getSessionId();
   // eslint-disable-next-line no-console
@@ -277,7 +278,7 @@ export default function loadOffers(client, useProxy) {
   getDecoratedContent()
     .then(async (main) => {
       const offers = await pendingOffers;
-      window?.PerfMarks.measure('targeting:loading-offers');
+      window?.PerfMarks.measure('loading-offers', ['targeting']);
 
       offers.forEach((offer) => {
         const { cssSelector } = offer;
@@ -288,7 +289,7 @@ export default function loadOffers(client, useProxy) {
           console.debug(`hiding section for selector ${cssSelector}`, section);
           section.style.visibility = 'hidden';
           window?.PerfMarks.create(
-            `targeting:rendering-section:${Array.from(section.classList).join('_')}`,
+            Array.from(section.classList).join('_'),
           );
         }
       });
