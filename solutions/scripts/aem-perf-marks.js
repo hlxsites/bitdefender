@@ -24,9 +24,9 @@ window.PerfMarks.create = (name, detail = undefined) => {
 /**
  * Measure the time between two performance marks.
  * @param {string} name The name of the performance mark.
- * @param {string[]} customLabels Custom labels.
+ * @param {string[]} labels The labels to add to the performance mark.
  */
-window.PerfMarks.measure = (name, labels) => {
+window.PerfMarks.measure = (name, labels = []) => {
   performance.mark(`perf-stop-${name}`);
   const customLabels = labels.map((label) => `[${label}]`).join('');
   const measureName = `[perf]${customLabels}: ${name}`;
