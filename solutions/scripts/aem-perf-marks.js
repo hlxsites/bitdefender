@@ -24,10 +24,13 @@ window.PerfMarks.create = (name, detail = undefined) => {
 /**
  * Measure the time between two performance marks.
  * @param {string} name The name of the performance mark.
+ * @param {string[]} customLabels Custom labels.
  */
-window.PerfMarks.measure = (name) => {
+window.PerfMarks.measure = (name, labels) => {
   performance.mark(`perf-stop-${name}`);
-  const duration = performance.measure(`[perf] ${name}`, `perf-start-${name}`, `perf-stop-${name}`);
+  const customLabels = labels.map((label) => `[${label}]`).join('');
+  const measureName = `[perf]${customLabels}: ${name}`;
+  const duration = performance.measure(measureName, `perf-start-${name}`, `perf-stop-${name}`);
   // eslint-disable-next-line no-console
   console.debug(`perf-${name} stopped at ${performance.now()} ms`);
   // eslint-disable-next-line no-console
