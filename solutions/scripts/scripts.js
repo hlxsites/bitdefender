@@ -36,9 +36,8 @@ window.hlx.plugins.add('rum-conversion', {
 });
 
 window.hlx.plugins.add('experimentation', {
-  condition: () => getMetadata('experiment')
-    || Object.keys(getAllMetadata('campaign')).length
-    || Object.keys(getAllMetadata('audience')).length,
+  condition: () => getMetadata('experiment'),
+  options: {},
   url: '../plugins/experimentation/src/index.js',
 });
 
