@@ -451,6 +451,9 @@ function pushPageLoadToDataLayer() {
 async function loadEager(doc) {
   setPageLanguage(getLanguageCountryFromPath(window.location.pathname));
   decorateTemplateAndTheme();
+
+  await window.hlx.plugins.run('loadEager');
+
   if (getMetadata('template') !== '') {
     loadCSS(`${window.hlx.codeBasePath}/styles/${getMetadata('template')}.css`);
   }
@@ -483,6 +486,8 @@ async function loadLazy(doc) {
   loadFooter(doc.querySelector('footer'));
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
+
+  window.hlx.plugins.run('loadLazy');
 
   sampleRUM('lazy');
   sampleRUM.observe(main.querySelectorAll('div[data-block-name]'));
