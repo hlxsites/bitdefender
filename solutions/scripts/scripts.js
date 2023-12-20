@@ -12,6 +12,7 @@ import {
   loadBlocks,
   loadCSS,
   getMetadata,
+  getAllMetadata,
 } from './lib-franklin.js';
 
 import {
@@ -32,6 +33,13 @@ export const METADATA_ANAYTICS_TAGS = 'analytics-tags';
 window.hlx.plugins.add('rum-conversion', {
   load: 'lazy',
   url: '../plugins/rum-conversion/src/index.js',
+});
+
+window.hlx.plugins.add('experimentation', {
+  condition: () => getMetadata('experiment')
+    || Object.keys(getAllMetadata('campaign')).length
+    || Object.keys(getAllMetadata('audience')).length,
+  url: '../plugins/experimentation/src/index.js',
 });
 
 /**
