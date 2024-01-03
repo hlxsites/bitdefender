@@ -194,8 +194,18 @@ export function getTags(tags) {
   return tags ? tags.split(':').filter((tag) => !!tag).map((tag) => tag.trim()) : [];
 }
 
+export function getExperimentDetails() {
+  if (!window.hlx || !window.hlx.experiment) {
+    return null;
+  }
+  const { id: experimentId, selectedVariant: experimentVariant } = window.hlx.experiment;
+  return { experimentId, experimentVariant };
+}
+
 export function trackProduct(product) {
   // eslint-disable-next-line max-len
+  const exp = getExperimentDetails();
+  console.log('experiment details', exp);
   const isDuplicate = TRACKED_PRODUCTS.find((p) => p.platformProductId === product.platformProductId && p.variantId === product.variantId);
   const tags = getTags(getMetadata(METADATA_ANAYTICS_TAGS));
   const isTrackedPage = tags.includes('product') || tags.includes('service');
