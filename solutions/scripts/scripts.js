@@ -468,6 +468,8 @@ async function loadEager(doc) {
 
   await window.hlx.plugins.run('loadEager');
 
+  pushPageLoadToDataLayer();
+
   if (getMetadata('template') !== '') {
     loadCSS(`${window.hlx.codeBasePath}/styles/${getMetadata('template')}.css`);
   }
@@ -524,7 +526,6 @@ function loadDelayed() {
 
 async function loadPage() {
   await window.hlx.plugins.load('eager');
-  pushPageLoadToDataLayer();
   await loadEager(document);
   await window.hlx.plugins.load('lazy');
   await loadLazy(document);
