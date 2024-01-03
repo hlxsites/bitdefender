@@ -531,4 +531,7 @@ async function loadPage() {
   loadDelayed();
 }
 
-loadPage();
+loadPage().catch((e) => {
+  // eslint-disable-next-line no-console
+  console.error(e);
+});
