@@ -12,7 +12,6 @@ import {
   loadBlocks,
   loadCSS,
   getMetadata,
-  getAllMetadata,
 } from './lib-franklin.js';
 
 import {
@@ -200,7 +199,7 @@ export function pushToDataLayer(event, payload) {
   window.adobeDataLayer.push({
     event,
     ...payload,
-    ...(experimentDetails && { experimentDetails })
+    ...(experimentDetails && { experimentDetails }),
   });
 }
 
@@ -532,7 +531,4 @@ async function loadPage() {
   loadDelayed();
 }
 
-loadPage().catch((e) => {
-  // eslint-disable-next-line no-console
-  console.error(e);
-});
+loadPage();
