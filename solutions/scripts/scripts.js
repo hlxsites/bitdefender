@@ -199,7 +199,7 @@ export function pushToDataLayer(event, payload) {
   window.adobeDataLayer.push({
     event,
     ...payload,
-    ...(experimentDetails && { experimentDetails }),
+    // ...(experimentDetails && { experimentDetails }),
   });
 }
 
