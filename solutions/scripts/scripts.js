@@ -204,8 +204,6 @@ export function getExperimentDetails() {
 
 export function trackProduct(product) {
   // eslint-disable-next-line max-len
-  const exp = getExperimentDetails();
-  console.log('experiment details', exp);
   const isDuplicate = TRACKED_PRODUCTS.find((p) => p.platformProductId === product.platformProductId && p.variantId === product.variantId);
   const tags = getTags(getMetadata(METADATA_ANAYTICS_TAGS));
   const isTrackedPage = tags.includes('product') || tags.includes('service');
@@ -214,7 +212,10 @@ export function trackProduct(product) {
 
 export function pushProductsToDataLayer() {
   if (TRACKED_PRODUCTS.length > 0) {
+    const experimentDetails = getExperimentDetails();
+    console.log('experiment details', experimentDetails);
     pushToDataLayer('product loaded', {
+      ...(experimentDetails && { experimentDetails }),
       product: TRACKED_PRODUCTS
         .map((p) => ({
           info: {
