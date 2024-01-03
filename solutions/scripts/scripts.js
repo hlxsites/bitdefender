@@ -523,8 +523,8 @@ function loadDelayed() {
 }
 
 async function loadPage() {
-  pushPageLoadToDataLayer();
   await window.hlx.plugins.load('eager');
+  pushPageLoadToDataLayer();
   await loadEager(document);
   await window.hlx.plugins.load('lazy');
   await loadLazy(document);
