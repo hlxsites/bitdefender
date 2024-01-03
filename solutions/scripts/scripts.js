@@ -177,6 +177,14 @@ function setPageLanguage(param) {
   createMetadata('footer', '/solutions/footer');
 }
 
+export function getExperimentDetails() {
+  if (!window.hlx || !window.hlx.experiment) {
+    return null;
+  }
+  const { id: experimentId, selectedVariant: experimentVariant } = window.hlx.experiment;
+  return { experimentId, experimentVariant };
+}
+
 export function pushToDataLayer(event, payload) {
   if (!event) {
     // eslint-disable-next-line no-console
@@ -187,19 +195,17 @@ export function pushToDataLayer(event, payload) {
     window.adobeDataLayer = [];
     window.adobeDataLayerInPage = true;
   }
-  window.adobeDataLayer.push({ event, ...payload });
+  const experimentDetails = getExperimentDetails();
+  console.log('experiment details', experimentDetails);
+  window.adobeDataLayer.push({
+    event,
+    ...payload,
+    ...(experimentDetails && { experimentDetails })
+  });
 }
 
 export function getTags(tags) {
   return tags ? tags.split(':').filter((tag) => !!tag).map((tag) => tag.trim()) : [];
-}
-
-export function getExperimentDetails() {
-  if (!window.hlx || !window.hlx.experiment) {
-    return null;
-  }
-  const { id: experimentId, selectedVariant: experimentVariant } = window.hlx.experiment;
-  return { experimentId, experimentVariant };
 }
 
 export function trackProduct(product) {
@@ -212,10 +218,7 @@ export function trackProduct(product) {
 
 export function pushProductsToDataLayer() {
   if (TRACKED_PRODUCTS.length > 0) {
-    const experimentDetails = getExperimentDetails();
-    console.log('experiment details', experimentDetails);
     pushToDataLayer('product loaded', {
-      // ...(experimentDetails && { experimentDetails }),
       product: TRACKED_PRODUCTS
         .map((p) => ({
           info: {
