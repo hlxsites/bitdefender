@@ -212,8 +212,8 @@ export function trackProduct(product) {
 
 export function pushProductsToDataLayer() {
   if (TRACKED_PRODUCTS.length > 0) {
-    // const experimentDetails = getExperimentDetails();
-    // console.log('experiment details', experimentDetails);
+    const experimentDetails = getExperimentDetails();
+    console.log('experiment details', experimentDetails);
     pushToDataLayer('product loaded', {
       // ...(experimentDetails && { experimentDetails }),
       product: TRACKED_PRODUCTS
