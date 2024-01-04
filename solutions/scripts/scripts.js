@@ -176,14 +176,6 @@ function setPageLanguage(param) {
   createMetadata('footer', '/solutions/footer');
 }
 
-export function getExperimentDetails() {
-  if (!window.hlx || !window.hlx.experiment) {
-    return null;
-  }
-  const { id: experimentId, selectedVariant: experimentVariant } = window.hlx.experiment;
-  return { experimentId, experimentVariant };
-}
-
 export function pushToDataLayer(event, payload) {
   if (!event) {
     // eslint-disable-next-line no-console
@@ -194,13 +186,7 @@ export function pushToDataLayer(event, payload) {
     window.adobeDataLayer = [];
     window.adobeDataLayerInPage = true;
   }
-  const experimentDetails = getExperimentDetails();
-  console.log('experiment details', experimentDetails);
-  window.adobeDataLayer.push({
-    event,
-    ...payload,
-    ...(experimentDetails && { experimentDetails }),
-  });
+  window.adobeDataLayer.push({ event, ...payload });
 }
 
 export function getTags(tags) {
@@ -418,6 +404,14 @@ function getDomainInfo(hostname) {
   };
 }
 
+function getExperimentDetails() {
+  if (!window.hlx || !window.hlx.experiment) {
+    return null;
+  }
+  const { id: experimentId, selectedVariant: experimentVariant } = window.hlx.experiment;
+  return { experimentId, experimentVariant };
+}
+
 function pushPageLoadToDataLayer() {
   const { hostname } = window.location;
   if (!hostname) {
@@ -428,6 +422,10 @@ function pushPageLoadToDataLayer() {
   const languageCountry = getLanguageCountryFromPath(window.location.pathname);
   const environment = getEnvironment(hostname, languageCountry.country);
   const tags = getTags(getMetadata(METADATA_ANAYTICS_TAGS));
+
+  const experimentDetails = getExperimentDetails();
+  console.log('experiment details', experimentDetails);
+
   pushToDataLayer('page load started', {
     pageInstanceID: environment,
     page: {
@@ -443,6 +441,7 @@ function pushPageLoadToDataLayer() {
         serverName: 'hlx.live', // indicator for AEM Success Edge
         language: navigator.language || navigator.userLanguage || languageCountry.language,
         sysEnv: getOperatingSystem(window.navigator.userAgent),
+        ...(experimentDetails && { experimentDetails }),
       },
       attributes: {
         promotionID: getParamValue('pid') || '',
