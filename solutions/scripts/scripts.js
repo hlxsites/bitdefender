@@ -424,7 +424,6 @@ function pushPageLoadToDataLayer() {
   const tags = getTags(getMetadata(METADATA_ANAYTICS_TAGS));
 
   const experimentDetails = getExperimentDetails();
-  console.log('experiment details', experimentDetails);
 
   pushToDataLayer('page load started', {
     pageInstanceID: environment,
