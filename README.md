@@ -2,8 +2,8 @@
 Your project's description...
 
 ## Environments
-- Preview: https://experimentation--bitdefender--hlxsites.hlx.page/
-- Live: https://experimentation--bitdefender--hlxsites.hlx.live/
+- Preview: https://main--bitdefender--hlxsites.hlx.page/
+- Live: https://main--bitdefender--hlxsites.hlx.live/
 
 ## Installation
 
