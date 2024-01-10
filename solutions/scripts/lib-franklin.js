@@ -18,8 +18,14 @@ export const STICKY_NAVIGATION_DATASET_KEY = 'stickyNavName';
  * log RUM if part of the sample.
  * @param {string} checkpoint identifies the checkpoint in funnel
  * @param {Object} data additional data for RUM sample
+ * @param {string} data.source DOM node that is the source of a checkpoint event
+ * identified by #id or .classname
+ * @param {string} data.target subject of the checkpoint event,
+ * for instance the href of a link, or a search term
  */
 export function sampleRUM(checkpoint, data = {}) {
+  const SESSION_STORAGE_KEY = 'aem-rum';
+  sampleRUM.baseURL = sampleRUM.baseURL || new URL(window.RUM_BASE == null ? 'https://rum.hlx.page' : window.RUM_BASE, window.location);
   sampleRUM.defer = sampleRUM.defer || [];
   const defer = (fnname) => {
     sampleRUM[fnname] = sampleRUM[fnname]
@@ -43,24 +49,33 @@ export function sampleRUM(checkpoint, data = {}) {
       const usp = new URLSearchParams(window.location.search);
       const weight = (usp.get('rum') === 'on') ? 1 : 100; // with parameter, weight is 1. Defaults to 100.
       // eslint-disable-next-line no-bitwise
-      const hashCode = (s) => s.split('').reduce((a, b) => (((a << 5) - a) + b.charCodeAt(0)) | 0, 0);
-      const id = `${hashCode(window.location.href)}-${new Date().getTime()}-${Math.random().toString(16).substr(2, 14)}`;
+      const id = Array.from({ length: 75 }, (_, i) => String.fromCharCode(48 + i)).filter((a) => /\d|[A-Z]/i.test(a)).filter(() => Math.random() * 75 > 70).join('');
       const random = Math.random();
       const isSelected = (random * weight < 1);
+      const firstReadTime = window.performance ? window.performance.timeOrigin : Date.now();
       const urlSanitizers = {
         full: () => window.location.href,
         origin: () => window.location.origin,
         path: () => window.location.href.replace(/\?.*$/, ''),
       };
+      // eslint-disable-next-line max-len
+      const rumSessionStorage = sessionStorage.getItem(SESSION_STORAGE_KEY) ? JSON.parse(sessionStorage.getItem(SESSION_STORAGE_KEY)) : {};
       // eslint-disable-next-line object-curly-newline, max-len
-      window.hlx.rum = { weight, id, random, isSelected, sampleRUM, sanitizeURL: urlSanitizers[window.hlx.RUM_MASK_URL || 'path'] };
+      rumSessionStorage.pages = (rumSessionStorage.pages ? rumSessionStorage.pages : 0) + 1 + /* noise */ (Math.floor(Math.random() * 20) - 10);
+      sessionStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(rumSessionStorage));
+      window.hlx.rum = {
+        weight, id, random, isSelected, firstReadTime, sampleRUM, sanitizeURL: urlSanitizers[window.hlx.RUM_MASK_URL || 'path'], rumSessionStorage,
+      };
     }
-    const { weight, id } = window.hlx.rum;
+    const { weight, id, firstReadTime } = window.hlx.rum;
     if (window.hlx && window.hlx.rum && window.hlx.rum.isSelected) {
+      const knownProperties = ['weight', 'id', 'referer', 'checkpoint', 't', 'source', 'target', 'cwv', 'CLS', 'FID', 'LCP', 'INP', 'TTFB'];
       const sendPing = (pdata = data) => {
+        // eslint-disable-next-line max-len
+        const t = Math.round(window.performance ? window.performance.now() : (Date.now() - firstReadTime));
         // eslint-disable-next-line object-curly-newline, max-len, no-use-before-define
-        const body = JSON.stringify({ weight, id, referer: window.hlx.rum.sanitizeURL(), checkpoint, ...data });
-        const url = `https://rum.hlx.page/.rum/${weight}`;
+        const body = JSON.stringify({ weight, id, referer: window.hlx.rum.sanitizeURL(), checkpoint, t, ...data }, knownProperties);
+        const url = new URL(`.rum/${weight}`, sampleRUM.baseURL).href;
         // eslint-disable-next-line no-unused-expressions
         navigator.sendBeacon(url, body);
         // eslint-disable-next-line no-console
@@ -71,7 +86,6 @@ export function sampleRUM(checkpoint, data = {}) {
         lazy: () => {
           // use classic script to avoid CORS issues
           const script = document.createElement('script');
-          script.src = 'https://rum.hlx.page/.rum/@adobe/helix-rum-enhancer@^1/src/index.js';
           document.head.appendChild(script);
           return true;
         },
