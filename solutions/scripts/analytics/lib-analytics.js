@@ -150,7 +150,7 @@ export async function analyticsSetConsent(approved) {
  * @param additionalXdmFields
  * @returns {Promise<*>}
  */
-export async function analyticsTrackPageViews(document, additionalXdmFields = {}) {
+export async function analyticsTrackPageViews(document /* , additionalXdmFields = {} */) {
   const xdmData = {
     eventType: 'web.webpagedetails.pageViews',
     web: {
@@ -161,9 +161,9 @@ export async function analyticsTrackPageViews(document, additionalXdmFields = {}
         name: `${document.title}`,
       },
     },
-    [CUSTOM_SCHEMA_NAMESPACE]: {
-      ...additionalXdmFields,
-    },
+    // [CUSTOM_SCHEMA_NAMESPACE]: {
+    //   ...additionalXdmFields,
+    // },
   };
 
   return sendAnalyticsEvent(xdmData);
