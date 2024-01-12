@@ -113,6 +113,10 @@ async function sendAnalyticsEvent(xdmData) {
     console.warn('alloy not initialized, cannot send analytics event');
     return Promise.resolve();
   }
+
+  // eslint-disable-next-line no-console
+  console.debug(`sendAnalyticsEvent complete: ${JSON.stringify(xdmData)}`);
+
   // eslint-disable-next-line no-undef
   return alloy('sendEvent', {
     documentUnloading: true,
