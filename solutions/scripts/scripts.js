@@ -17,6 +17,7 @@ import {
 import {
   createTag,
 } from './utils/utils.js';
+import { setupAnalyticsTrackingWithAlloy } from './analytics/lib-analytics.js';
 
 const LCP_BLOCKS = ['hero']; // add your LCP blocks to the list
 const TRACKED_PRODUCTS = [];
@@ -502,7 +503,9 @@ async function loadPage() {
   await loadEager(document);
   await window.hlx.plugins.load('lazy');
   await loadLazy(document);
+  const setupAnalytics = setupAnalyticsTrackingWithAlloy(document);
   loadDelayed();
+  await setupAnalytics;
 }
 
 loadPage();

@@ -48,8 +48,8 @@ function getAlloyInitScript() {
  */
 function getDatastreamConfiguration() {
   return {
-    edgeConfigId: 'caad777c-c410-4ceb-8b36-167f1cecc3de',
-    orgId: '908936ED5D35CC220A495CD4@AdobeOrg',
+    edgeConfigId: '7275417f-3870-465c-af3e-84f8f4670b3c',
+    orgId: '0E920C0F53DA9E9B0A490D45@AdobeOrg',
   };
 }
 
@@ -59,10 +59,10 @@ function getDatastreamConfiguration() {
  * @param options event in the XDM schema format
  */
 function enhanceAnalyticsEvent(options) {
-  const experiment = getExperimentDetails();
+  // const experiment = getExperimentDetails();
   options.xdm[CUSTOM_SCHEMA_NAMESPACE] = {
     ...options.xdm[CUSTOM_SCHEMA_NAMESPACE],
-    ...(experiment && { experiment }), // add experiment details, if existing, to all events
+    // ...(experiment && { experiment }), // add experiment details, if existing, to all events
   };
   console.debug(`enhanceAnalyticsEvent complete: ${JSON.stringify(options)}`);
 }
