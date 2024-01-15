@@ -25,14 +25,9 @@
 /* breadcrumbs */
 
 main .hero .hero-content .breadcrumb {
-  padding: 14px 0 20px;
-  margin-bottom: 20px;
   font-weight: var(--font-weight-bold);
   color: #dedede;
   min-height: 82px;
-}
-
-main .hero .hero-content .breadcrumb {
   padding: 12px 0;
   margin-bottom: 12px;
 }
@@ -121,7 +116,7 @@ main .hero .hero-picture {
 main .hero .hero-content {
   display: flex;
   flex-direction: column;
-  padding: 15px var(--body-padding) 65px;
+  padding: 17px var(--body-padding) 56px;
   margin: 0 auto;
   position: relative;
 }
@@ -129,12 +124,6 @@ main .hero .hero-content {
 main .hero .hero-content .right-col {
   display: flex;
   justify-content: center;
-  flex-direction: column;
-}
-
-main .hero .hero-content {
-  padding: 17px var(--body-padding) 56px;
-  display: flex;
   flex-direction: column;
 }
 
@@ -150,9 +139,8 @@ main .hero.comparison .hero-content {
 }
 
 main .hero h1 {
-  font-size: var(--hero-font-size-xl);
-  margin: 0;
-
+  font-size: var(--hero-h1-font-size);
+  margin: 0 0 25px;
 }
 
 main .hero h2 {
@@ -163,22 +151,17 @@ main .hero h2 {
   letter-spacing: .003em;
 }
 
-main .hero h1 {
-  font-size: var(--hero-h1-font-size);
-  margin: 0 0 25px;
+main .hero h2,
+main .hero h4 {
+  padding: 0;
+  letter-spacing: normal;
+  margin: 0 0 9px;
 }
 
 main .hero.black-background h1,
 main .hero.black-background h2,
 main .hero.black-background h4 {
   color: var(--text-dark-color);
-}
-
-main .hero h2,
-main .hero h4 {
-  padding: 0;
-  letter-spacing: normal;
-  margin: 0 0 9px;
 }
 
 main .hero.comparison h1 {
@@ -415,10 +398,6 @@ main .hero .hero-awards li::after {
 
 @media (min-width: 990px) { /* desktop */
 
-  main .hero .hero-content > div {
-    width: 60%;
-  }
-
   main .hero .hero-content > div.left-col {
     width: 50%;
   }
@@ -435,10 +414,6 @@ main .hero .hero-awards li::after {
 
   main .hero h1 {
     font-size: 50px;
-  }
-
-  main .hero  h2 {
-    font-size: 22px;
   }
 
   main .hero .hero-picture {
@@ -460,20 +435,12 @@ main .hero .hero-awards li::after {
   }
 
   main .hero .hero-content {
-    min-height: 725px;
-    flex-direction: row;
     max-width: var(--section-desktop-max-width);
-    padding: 112px var(--section-desktop-padding) 54px var(--section-desktop-padding)
-  }
-
-  main .hero .hero-content {
-    max-width: var(--section-desktop-max-width);
-    padding-left: var(--section-desktop-padding);
-    padding-right: var(--section-desktop-padding);
+    min-height: unset;
+    padding: 112px var(--section-desktop-padding) 54px var(--section-desktop-padding);
     padding-top: 115px;
     display: flex;
     flex-direction: row;
-    min-height: unset;
   }
 
   main .hero a.button.primary {
@@ -532,10 +499,6 @@ main .hero .hero-awards li::after {
     font-size: 24px;
   }
 
-  main .hero h2 {
-    font-size: 24px;
-  }
-
   main .hero h1 {
     font-size: 56px;
   }
@@ -564,11 +527,4 @@ main .hero .hero-awards li::after {
     padding-left: var(--section-large-desktop-padding);
     padding-right: var(--section-large-desktop-padding);
   }
-
-  main .hero .hero-content {
-    max-width: var(--section-large-desktop-max-width);
-    padding-left: var(--section-large-desktop-padding);
-    padding-right: var(--section-large-desktop-padding);
-  }
-
 }
