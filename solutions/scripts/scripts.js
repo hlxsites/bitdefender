@@ -29,6 +29,12 @@ export const DEFAULT_COUNTRY = 'au';
 
 export const METADATA_ANAYTICS_TAGS = 'analytics-tags';
 
+const AUDIENCES = {
+  mobile: () => window.innerWidth < 600,
+  desktop: () => window.innerWidth >= 600,
+  // define your custom audiences here as needed
+};
+
 window.hlx.plugins.add('rum-conversion', {
   load: 'lazy',
   url: '../plugins/rum-conversion/src/index.js',
@@ -37,7 +43,10 @@ window.hlx.plugins.add('rum-conversion', {
 window.hlx.plugins.add('experimentation', {
   condition: () => getMetadata('experiment'),
   options: {
+    audiences: AUDIENCES,
     prodHost: 'bitdefender.com.au/solutions/',
+    isProd: () => window.location.hostname.endsWith('hlx.page')
+    || window.location.hostname === ('localhost'),
   },
   url: '../plugins/experimentation/src/index.js',
 });
@@ -410,6 +419,7 @@ function getExperimentDetails() {
   if (!window.hlx || !window.hlx.experiment) {
     return null;
   }
+
   const { id: experimentId, selectedVariant: experimentVariant } = window.hlx.experiment;
   return { experimentId, experimentVariant };
 }
@@ -419,7 +429,6 @@ function pushPageLoadToDataLayer() {
   if (!hostname) {
     return;
   }
-
   const { domain, domainPartsCount } = getDomainInfo(hostname);
   const languageCountry = getLanguageCountryFromPath(window.location.pathname);
   const environment = getEnvironment(hostname, languageCountry.country);
