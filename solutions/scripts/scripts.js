@@ -37,7 +37,7 @@ window.hlx.plugins.add('rum-conversion', {
 window.hlx.plugins.add('experimentation', {
   condition: () => getMetadata('experiment'),
   options: {
-    prodHost: 'bitdefender.com.au',
+    prodHost: 'bitdefender.com.au/solutions/',
   },
   url: '../plugins/experimentation/src/index.js',
 });
