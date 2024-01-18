@@ -38,8 +38,6 @@ window.hlx.plugins.add('experimentation', {
   condition: () => getMetadata('experiment'),
   options: {
     prodHost: 'www.bitdefender.com.au',
-    isProd: () => window.location.hostname.endsWith('hlx.page')
-    || window.location.hostname === ('localhost'),
   },
   url: '../plugins/experimentation/src/index.js',
 });
