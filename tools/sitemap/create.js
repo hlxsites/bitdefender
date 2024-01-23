@@ -55,7 +55,7 @@ try {
   };
 
   const options = { compact: true, ignoreComment: true, spaces: 4 };
-  const xml = convert.json2xml(output, options);
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n${convert.json2xml(output, options)}`;
   await fs.writeFile(sitemapPath, xml);
 } catch (error) {
   // eslint-disable-next-line no-console
