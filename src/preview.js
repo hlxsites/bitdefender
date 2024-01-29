@@ -175,14 +175,14 @@ async function fetchRumData(experiment, options) {
 
   // the query is a bit slow, so I'm only fetching the results when the popup is opened
   const resultsURL = new URL('https://helix-pages.anywhere.run/helix-services/run-query@v3/rum-experiments');
-  resultsURL.searchParams.set(options.experimentsQueryParameter, experiment);
-  resultsURL.searchParams.set('domainKey', options.domainKey);
   // restrict results to the production host, this also reduces query cost
   if (typeof options.isProd === 'function' && options.isProd()) {
-    resultsURL.searchParams.set('domain', window.location.host);
+    resultsURL.searchParams.set('url', window.location.host);
   } else if (options.prodHost) {
-    resultsURL.searchParams.set('domain', options.prodHost);
+    resultsURL.searchParams.set('url', options.prodHost);
   }
+  resultsURL.searchParams.set('domainkey', options.domainKey);
+  resultsURL.searchParams.set('experiment', experiment);
 
   const response = await fetch(resultsURL.href);
   if (!response.ok) {
@@ -190,7 +190,8 @@ async function fetchRumData(experiment, options) {
   }
 
   const { results } = await response.json();
-  if (!results.length) {
+  const { data } = results;
+  if (!data.length) {
     return null;
   }
 
@@ -200,7 +201,7 @@ async function fetchRumData(experiment, options) {
     return o;
   }, {});
 
-  const variantsAsNums = results.map(numberify);
+  const variantsAsNums = data.map(numberify);
   const totals = Object.entries(
     variantsAsNums.reduce((o, v) => {
       Object.entries(v).forEach(([k, val]) => {
