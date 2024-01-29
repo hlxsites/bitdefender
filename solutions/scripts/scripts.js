@@ -36,7 +36,9 @@ window.hlx.plugins.add('rum-conversion', {
 
 window.hlx.plugins.add('experimentation', {
   condition: () => getMetadata('experiment'),
-  options: {},
+  options: {
+    prodHost: 'www.bitdefender.com.au',
+  },
   url: '../plugins/experimentation/src/index.js',
 });
 
@@ -408,6 +410,7 @@ function getExperimentDetails() {
   if (!window.hlx || !window.hlx.experiment) {
     return null;
   }
+
   const { id: experimentId, selectedVariant: experimentVariant } = window.hlx.experiment;
   return { experimentId, experimentVariant };
 }
@@ -417,7 +420,6 @@ function pushPageLoadToDataLayer() {
   if (!hostname) {
     return;
   }
-
   const { domain, domainPartsCount } = getDomainInfo(hostname);
   const languageCountry = getLanguageCountryFromPath(window.location.pathname);
   const environment = getEnvironment(hostname, languageCountry.country);
