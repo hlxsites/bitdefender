@@ -33,7 +33,6 @@ switch (ENVIRONMENT) {
   default:
     loadScript(LAUNCH_URL + launchDevScript); break;
 }
-
 pushProductsToDataLayer();
 pushToDataLayer('page loaded');
 
