@@ -134,7 +134,7 @@ async function sendAnalyticsEvent(xdmData, data) {
 export async function analyticsSetConsent(approved) {
   // eslint-disable-next-line no-undef
   if (!alloy) {
-    //console.warn('alloy not initialized, cannot set consent');
+    // console.warn('alloy not initialized, cannot set consent');
     return Promise.resolve();
   }
   // eslint-disable-next-line no-undef
