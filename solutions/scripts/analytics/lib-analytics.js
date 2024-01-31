@@ -171,10 +171,13 @@ export async function analyticsTrackPageViews(document /* , additionalXdmFields 
     // },
   };
 
-  const state = window.adobeDataLayer ? window.adobeDataLayer.getState() : {};
-  console.debug(`analyticsTrackPageViews complete: ${JSON.stringify(xdmData)}`);
-
-  return sendAnalyticsEvent(xdmData, state);
+  return new Promise((resolve) => {
+    window.adobeDataLayer.push((dl) => {
+      const state = dl.getState();
+      console.debug(`analyticsTrackPageViews complete: ${JSON.stringify(xdmData)}`);
+      resolve(sendAnalyticsEvent(xdmData, state));
+    });
+  });
 }
 
 /**
