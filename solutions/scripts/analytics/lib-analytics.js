@@ -174,7 +174,7 @@ export async function analyticsTrackPageViews(document /* , additionalXdmFields 
   return new Promise((resolve) => {
     window.adobeDataLayer.push((dl) => {
       const state = dl.getState();
-      console.debug(`analyticsTrackPageViews complete: ${JSON.stringify(xdmData)}`);
+      console.debug(`analyticsTrackPageViews complete: ${JSON.stringify(state)}`);
       resolve(sendAnalyticsEvent(xdmData, state));
     });
   });
