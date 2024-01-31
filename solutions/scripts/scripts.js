@@ -40,6 +40,14 @@ window.hlx.plugins.add('rum-conversion', {
   url: '../plugins/rum-conversion/src/index.js',
 });
 
+window.hlx.plugins.add('experimentation', {
+  condition: () => getMetadata('experiment'),
+  options: {
+    prodHost: 'www.bitdefender.com.au',
+  },
+  url: '../plugins/experimentation/src/index.js',
+});
+
 /**
  * Creates a meta tag with the given name and value and appends it to the head.
  * @param {String} name The name of the meta tag
@@ -404,16 +412,27 @@ function getDomainInfo(hostname) {
   };
 }
 
+function getExperimentDetails() {
+  if (!window.hlx || !window.hlx.experiment) {
+    return null;
+  }
+
+  const { id: experimentId, selectedVariant: experimentVariant } = window.hlx.experiment;
+  return { experimentId, experimentVariant };
+}
+
 function pushPageLoadToDataLayer() {
   const { hostname } = window.location;
   if (!hostname) {
     return;
   }
-
   const { domain, domainPartsCount } = getDomainInfo(hostname);
   const languageCountry = getLanguageCountryFromPath(window.location.pathname);
   const environment = getEnvironment(hostname, languageCountry.country);
   const tags = getTags(getMetadata(METADATA_ANAYTICS_TAGS));
+
+  const experimentDetails = getExperimentDetails();
+
   pushToDataLayer('page load started', {
     pageInstanceID: environment,
     page: {
@@ -429,6 +448,7 @@ function pushPageLoadToDataLayer() {
         serverName: 'hlx.live', // indicator for AEM Success Edge
         language: navigator.language || navigator.userLanguage || languageCountry.language,
         sysEnv: getOperatingSystem(window.navigator.userAgent),
+        ...(experimentDetails && { experimentDetails }),
       },
       attributes: {
         promotionID: getParamValue('pid') || '',
@@ -450,6 +470,11 @@ function pushPageLoadToDataLayer() {
 async function loadEager(doc) {
   setPageLanguage(getLanguageCountryFromPath(window.location.pathname));
   decorateTemplateAndTheme();
+
+  await window.hlx.plugins.run('loadEager');
+
+  pushPageLoadToDataLayer();
+
   if (getMetadata('template') !== '') {
     loadCSS(`${window.hlx.codeBasePath}/styles/${getMetadata('template')}.css`);
   }
@@ -484,6 +509,8 @@ async function loadLazy(doc) {
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
 
+  window.hlx.plugins.run('loadLazy');
+
   sampleRUM('lazy');
   sampleRUM.observe(main.querySelectorAll('div[data-block-name]'));
   sampleRUM.observe(main.querySelectorAll('picture > img'));
@@ -504,7 +531,6 @@ function loadDelayed() {
 }
 
 async function loadPage() {
-  pushPageLoadToDataLayer();
   await window.hlx.plugins.load('eager');
   await loadEager(document);
   await window.hlx.plugins.load('lazy');
