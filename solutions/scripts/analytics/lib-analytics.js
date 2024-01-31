@@ -64,7 +64,7 @@ function enhanceAnalyticsEvent(options) {
     ...options.xdm[CUSTOM_SCHEMA_NAMESPACE],
     // ...(experiment && { experiment }), // add experiment details, if existing, to all events
   };
-  //console.debug(`enhanceAnalyticsEvent complete: ${JSON.stringify(options)}`);
+  // console.debug(`enhanceAnalyticsEvent complete: ${JSON.stringify(options)}`);
 }
 
 /**
@@ -110,7 +110,7 @@ function createInlineScript(document, element, innerHTML, type) {
 async function sendAnalyticsEvent(xdmData, data) {
   // eslint-disable-next-line no-undef
   if (!alloy) {
-    //console.warn('alloy not initialized, cannot send analytics event');
+    // console.warn('alloy not initialized, cannot send analytics event');
     return Promise.resolve();
   }
 
@@ -174,7 +174,7 @@ export async function analyticsTrackPageViews(document /* , additionalXdmFields 
   return new Promise((resolve) => {
     window.adobeDataLayer.push((dl) => {
       const state = dl.getState();
-      //console.debug(`analyticsTrackPageViews complete: ${JSON.stringify(state)}`);
+      // console.debug(`analyticsTrackPageViews complete: ${JSON.stringify(state)}`);
       resolve(sendAnalyticsEvent(xdmData, state));
     });
   });
@@ -196,7 +196,7 @@ export async function initAnalyticsTrackingQueue() {
 export async function setupAnalyticsTrackingWithAlloy(document) {
   // eslint-disable-next-line no-undef
   if (!alloy) {
-    //console.warn('alloy not initialized, cannot configure');
+    // console.warn('alloy not initialized, cannot configure');
     return;
   }
   // eslint-disable-next-line no-undef
