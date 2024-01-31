@@ -2,4 +2,4 @@ helix-importer-ui
 tools/sitemap
 solutions/scripts/analytics/adobe-client-data-layer.min.js
 solutions/plugins/experimentation
-solutions/scripts/analytics/analytis/alloy.js
+solutions/scripts/analytics/alloy.js
