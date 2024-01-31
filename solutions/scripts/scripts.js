@@ -509,7 +509,6 @@ async function loadPage() {
   await loadEager(document);
   await window.hlx.plugins.load('lazy');
   await loadLazy(document);
-  import('./analytics/adobe-client-data-layer.min.js');
   const setupAnalytics = setupAnalyticsTrackingWithAlloy(document);
   loadDelayed();
   await setupAnalytics;

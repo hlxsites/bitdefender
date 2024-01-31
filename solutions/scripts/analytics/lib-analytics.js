@@ -107,7 +107,7 @@ function createInlineScript(document, element, innerHTML, type) {
  * @param xdmData - the xdm data object
  * @returns {Promise<*>}
  */
-async function sendAnalyticsEvent(xdmData) {
+async function sendAnalyticsEvent(xdmData, data) {
   // eslint-disable-next-line no-undef
   if (!alloy) {
     console.warn('alloy not initialized, cannot send analytics event');
@@ -121,6 +121,7 @@ async function sendAnalyticsEvent(xdmData) {
   return alloy('sendEvent', {
     documentUnloading: true,
     xdm: xdmData,
+    data,
   });
 }
 
@@ -170,7 +171,10 @@ export async function analyticsTrackPageViews(document /* , additionalXdmFields 
     // },
   };
 
-  return sendAnalyticsEvent(xdmData);
+  const state = window.adobeDataLayer ? window.adobeDataLayer.getState() : {};
+  console.debug(`analyticsTrackPageViews complete: ${JSON.stringify(xdmData)}`);
+
+  return sendAnalyticsEvent(xdmData, state);
 }
 
 /**
@@ -199,7 +203,9 @@ export async function setupAnalyticsTrackingWithAlloy(document) {
   // loads, for e.g. for page views
   const pageViewPromise = analyticsTrackPageViews(document); // track page view early
 
+  await import('./adobe-client-data-layer.min.js');
   await import('./alloy.min.js');
+
   await Promise.all([configurePromise, pageViewPromise]);
 }
 
