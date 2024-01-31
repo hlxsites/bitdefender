@@ -21,8 +21,7 @@ sampleRUM('cwv');
 
 const LANGUAGE_COUNTRY = getLanguageCountryFromPath(window.location.pathname);
 const LAUNCH_URL = 'https://assets.adobedtm.com';
-const ENVIRONMENT = getEnvironment(window.location.hostname, LANGUAGE_COUNTRY.country);
-
+/* const ENVIRONMENT = getEnvironment(window.location.hostname, LANGUAGE_COUNTRY.country);
 // Load Adobe Experience platform data collection (Launch) script
 const { launchProdScript, launchStageScript, launchDevScript } = await fetchPlaceholders();
 switch (ENVIRONMENT) {
@@ -32,7 +31,8 @@ switch (ENVIRONMENT) {
     loadScript(LAUNCH_URL + launchStageScript); break;
   default:
     loadScript(LAUNCH_URL + launchDevScript); break;
-}
+} */
+loadScript('https://assets.adobedtm.com/8a93f8486ba4/e7dc9e6549e5/launch-aef7ddf31563-development.min.js');
 pushProductsToDataLayer();
 pushToDataLayer('page loaded');
 

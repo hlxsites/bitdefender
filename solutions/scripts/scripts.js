@@ -21,6 +21,7 @@ import {
 import {
   initAnalyticsTrackingQueue,
   setupAnalyticsTrackingWithAlloy,
+  analyticsTrackPageViews,
 } from './analytics/lib-analytics.js';
 
 const LCP_BLOCKS = ['hero']; // add your LCP blocks to the list
