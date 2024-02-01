@@ -165,6 +165,9 @@ function getCurrentDate() {
  * @returns {String}
  */
 export function getEnvironment(hostname, country) {
+  if (hostname.startsWith('pull_433')) {
+    return 'dev';
+  }
   if (hostname.includes('hlx.page') || hostname.includes('hlx.live')) {
     return 'stage';
   }
