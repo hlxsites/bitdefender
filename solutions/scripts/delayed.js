@@ -2,13 +2,13 @@
 import {
   loadScript,
   sampleRUM,
-  fetchPlaceholders,
+  // fetchPlaceholders,
   getMetadata,
 } from './lib-franklin.js';
 
 // eslint-disable-next-line import/no-cycle
 import {
-  //getLanguageCountryFromPath,
+  getLanguageCountryFromPath,
   pushProductsToDataLayer,
   pushToDataLayer,
   getEnvironment,
