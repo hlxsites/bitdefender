@@ -2,7 +2,7 @@
 import {
   loadScript,
   sampleRUM,
-  // fetchPlaceholders,
+  fetchPlaceholders,
   getMetadata,
 } from './lib-franklin.js';
 
