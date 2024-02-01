@@ -8,7 +8,7 @@ import {
 
 // eslint-disable-next-line import/no-cycle
 import {
-  // getLanguageCountryFromPath,
+  //getLanguageCountryFromPath,
   pushProductsToDataLayer,
   pushToDataLayer,
   getEnvironment,
@@ -20,20 +20,20 @@ import { loadBreadcrumbs } from './breadcrumbs.js';
 sampleRUM('cwv');
 
 const LANGUAGE_COUNTRY = getLanguageCountryFromPath(window.location.pathname);
-const LAUNCH_URL = 'https://assets.adobedtm.com';
+// const LAUNCH_URL = 'https://assets.adobedtm.com'; */
 const ENVIRONMENT = getEnvironment(window.location.hostname, LANGUAGE_COUNTRY.country);
 // Load Adobe Experience platform data collection (Launch) script
-const { launchProdScript, launchStageScript, launchDevScript } = await fetchPlaceholders();
+// const { launchProdScript, launchStageScript, launchDevScript } = await fetchPlaceholders();
 switch (ENVIRONMENT) {
   case 'prod':
-    loadScript(LAUNCH_URL + launchProdScript); break;
+    loadScript('https://assets.adobedtm.com/8a93f8486ba4/e7dc9e6549e5/launch-42a4d88f6f31.min.js'); break;
   case 'stage':
-    loadScript(LAUNCH_URL + launchStageScript); break;
+    loadScript('https://assets.adobedtm.com/8a93f8486ba4/e7dc9e6549e5/launch-d0a308d8ad78-staging.min.js'); break;
   case 'dev':
-      loadScript('https://assets.adobedtm.com/8a93f8486ba4/e7dc9e6549e5/launch-aef7ddf31563-development.min.js'); break;
+    loadScript('https://assets.adobedtm.com/8a93f8486ba4/e7dc9e6549e5/launch-aef7ddf31563-development.min.js'); break;
   default:
     loadScript('https://assets.adobedtm.com/8a93f8486ba4/e7dc9e6549e5/launch-aef7ddf31563-development.min.js'); break;
-} 
+}
 
 pushProductsToDataLayer();
 pushToDataLayer('page loaded');
