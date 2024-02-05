@@ -42,6 +42,19 @@ window.hlx.plugins.add('experimentation', {
   url: '../plugins/experimentation/src/index.js',
 });
 
+const targetPromise = (async () => {
+  const resp = await fetch(/* some target service*/);
+  return resp.json();
+})();
+
+const AUDIENCES = {
+  mobile: () => window.innerWidth < 600,
+  desktop: () => window.innerWidth >= 600,
+  us: async () => (await geoPromise).region === 'us',
+  eu: async () => (await geoPromise).region === 'eu',
+  targetOffer: async () => { (await targetPromise).offer }
+}
+
 /**
  * Creates a meta tag with the given name and value and appends it to the head.
  * @param {String} name The name of the meta tag
