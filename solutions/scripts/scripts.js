@@ -31,7 +31,7 @@ export const METADATA_ANAYTICS_TAGS = 'analytics-tags';
 
 const targetPromise = (async () => {
   const randomString = Math.random().toString(36).substring(7);
-  const resp = await fetch(`https://sitesinternal.tt.omtrdc.net/rest/v1/delivery?client=sitesinternal&sessionId=${randomString}`, {
+  const resp = await fetch(`/rest/v1/delivery?client=sitesinternal&sessionId=${randomString}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
