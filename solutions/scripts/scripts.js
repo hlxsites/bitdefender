@@ -29,31 +29,56 @@ export const DEFAULT_COUNTRY = 'au';
 
 export const METADATA_ANAYTICS_TAGS = 'analytics-tags';
 
+const targetPromise = (async () => {
+  const randomString = Math.random().toString(36).substring(7);
+  const resp = await fetch(`https://sitesinternal.tt.omtrdc.net/rest/v1/delivery?client=sitesinternal&sessionId=${randomString}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      context: {
+        channel: 'web',
+      },
+      execute: {
+        pageLoad: {},
+        mboxes: [
+          {
+            name: 'Experiment 1',
+            index: 0,
+          },
+        ],
+      },
+    }),
+  });
+  const payload = await resp.json();
+  console.log(JSON.stringify(payload.execute.mboxes, null, 2));
+  const mbox = payload.execute.mboxes.find((mbox) => mbox.name === 'Experiment 1');
+  console.log(`Mbox: ${JSON.stringify(mbox, null, 2)}`);
+  const { audience } = mbox?.options[0].content || false;
+  console.log(`Audience: ${audience}`);
+  return audience;
+})();
+
+const AUDIENCES = {
+  challenger1: targetPromise.then((audience) => {
+    console.log(audience === 'challenger1');
+    return audience === 'challenger1';
+  }),
+};
+
 window.hlx.plugins.add('rum-conversion', {
   load: 'lazy',
   url: '../plugins/rum-conversion/src/index.js',
 });
 
 window.hlx.plugins.add('experimentation', {
-  condition: () => getMetadata('experiment'),
   options: {
     prodHost: 'www.bitdefender.com.au',
+    audiences: AUDIENCES,
   },
   url: '../plugins/experimentation/src/index.js',
 });
-
-const targetPromise = (async () => {
-  const resp = await fetch(/* some target service*/);
-  return resp.json();
-})();
-
-const AUDIENCES = {
-  mobile: () => window.innerWidth < 600,
-  desktop: () => window.innerWidth >= 600,
-  us: async () => (await geoPromise).region === 'us',
-  eu: async () => (await geoPromise).region === 'eu',
-  targetOffer: async () => { (await targetPromise).offer }
-}
 
 /**
  * Creates a meta tag with the given name and value and appends it to the head.
