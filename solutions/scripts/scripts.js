@@ -29,9 +29,9 @@ export const DEFAULT_COUNTRY = 'au';
 
 export const METADATA_ANAYTICS_TAGS = 'analytics-tags';
 
-const targetLocation = getMetadata('target-location');
 
 const targetPromise = (async () => {
+  const targetLocation = getMetadata('target-location');
   const randomString = Math.random().toString(36).substring(7);
   const resp = await fetch(`/rest/v1/delivery?client=sitesinternal&sessionId=${randomString}`, {
     method: 'POST',
