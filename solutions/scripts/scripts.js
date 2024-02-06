@@ -29,6 +29,8 @@ export const DEFAULT_COUNTRY = 'au';
 
 export const METADATA_ANAYTICS_TAGS = 'analytics-tags';
 
+const targetLocation = getMetadata('target-location');
+
 const targetPromise = (async () => {
   const randomString = Math.random().toString(36).substring(7);
   const resp = await fetch(`/rest/v1/delivery?client=sitesinternal&sessionId=${randomString}`, {
@@ -44,7 +46,7 @@ const targetPromise = (async () => {
         pageLoad: {},
         mboxes: [
           {
-            name: 'Experiment 1',
+            name: targetLocation,
             index: 0,
           },
         ],
@@ -53,7 +55,6 @@ const targetPromise = (async () => {
   });
   const payload = await resp.json();
   console.log(JSON.stringify(payload.execute.mboxes, null, 2));
-  const targetLocation = getMetadata('target-location');
   const mbox = payload.execute.mboxes.find((mbox) => mbox.name === targetLocation);
   console.log(`Mbox: ${JSON.stringify(mbox, null, 2)}`);
   const { audience } = mbox?.options[0].content || false;
