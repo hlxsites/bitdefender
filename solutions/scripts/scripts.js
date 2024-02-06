@@ -61,7 +61,7 @@ const targetPromise = (async () => {
 })();
 
 const AUDIENCES = {
-  challenger1: targetPromise.then((audience) => {
+  challenger1: () => targetPromise.then((audience) => {
     console.log(audience === 'challenger1');
     return audience === 'challenger1';
   }),
