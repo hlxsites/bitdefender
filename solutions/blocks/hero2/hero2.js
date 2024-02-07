@@ -24,7 +24,7 @@ function buildHeroBlock(element) {
     document.querySelector('div.hero2 div div:first-child').prepend(breadcrumb);
 
     const pictureEl = document.createElement('div');
-    pictureEl.classList.add('hero-picture');
+    pictureEl.classList.add('hero2-picture');
     pictureEl.append(picture);
 
     section.prepend(pictureEl);
@@ -77,7 +77,7 @@ export default async function decorate(block) {
     const ulsWithPicture = Array.from(document.querySelectorAll('ul')).filter((ul) => ul.querySelector('picture'));
 
     // Apply a CSS class to each selected <ul> element
-    ulsWithPicture.forEach((ul) => ul.classList.add('hero-awards'));
+    ulsWithPicture.forEach((ul) => ul.classList.add('hero2-awards'));
 
     renderNanoBlocks(block);
 
