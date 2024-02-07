@@ -16,12 +16,12 @@ function buildHeroBlock(element) {
   const pictureParent = picture ? picture.parentNode : false;
   // eslint-disable-next-line no-bitwise
   if (h1 && picture && (h1.compareDocumentPosition(picture) & Node.DOCUMENT_POSITION_PRECEDING)) {
-    const section = document.querySelector('div.hero');
-    const subSection = document.querySelector('div.hero div');
+    const section = document.querySelector('div.hero2');
+    const subSection = document.querySelector('div.hero2 div');
     subSection.classList.add('hero-content');
 
     const breadcrumb = createTag('div', { class: 'breadcrumb' });
-    document.querySelector('div.hero div div:first-child').prepend(breadcrumb);
+    document.querySelector('div.hero2 div div:first-child').prepend(breadcrumb);
 
     const pictureEl = document.createElement('div');
     pictureEl.classList.add('hero-picture');
@@ -70,7 +70,7 @@ export default async function decorate(block) {
   [...block.querySelectorAll('img')].forEach((el) => el.setAttribute('loading', 'eager'));
 
   // get div class hero-content
-  const elementHeroContent = block.querySelector('.hero div.hero-content div');
+  const elementHeroContent = block.querySelector('.hero2 div.hero2-content div');
 
   if (elementHeroContent !== null) {
     // Select  <ul> elements that contain a <picture> tag

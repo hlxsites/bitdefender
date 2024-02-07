@@ -114,7 +114,7 @@ main .hero .hero-picture {
   right: 0;
 }
 
-main .hero .hero-content {
+main .hero2 .hero2-content {
   display: flex;
   flex-direction: column;
   padding: 17px var(--body-padding) 56px;
@@ -122,29 +122,29 @@ main .hero .hero-content {
   position: relative;
 }
 
-main .hero .hero-content .right-col {
+main .hero2 .hero2-content .right-col {
   display: flex;
   justify-content: center;
   flex-direction: column;
 }
 
-main .hero.black-background .hero-content {
+main .hero2.black-background .hero2-content {
   background: linear-gradient(90deg, #000 0%, #000 15%, #fff0 100%);
 }
 
-main .hero.comparison .hero-content {
+main .hero2.comparison .hero2-content {
   height: 100%;
   padding: 40px;
   justify-content: center;
   flex-direction: column;
 }
 
-main .hero h1 {
+main .hero2 h1 {
   font-size: var(--hero-h1-font-size);
   margin: 0 0 25px;
 }
 
-main .hero h2 {
+main .hero2 h2 {
   font-size: 18px;
   color: var(--text-color);
   margin: 0 0 9px;
@@ -152,24 +152,24 @@ main .hero h2 {
   letter-spacing: .003em;
 }
 
-main .hero h2,
-main .hero h4 {
+main .hero2 h2,
+main .hero2 h4 {
   padding: 0;
   letter-spacing: normal;
   margin: 0 0 9px;
 }
 
-main .hero.black-background h1,
-main .hero.black-background h2,
-main .hero.black-background h4 {
+main .hero2.black-background h1,
+main .hero2.black-background h2,
+main .hero2.black-background h4 {
   color: var(--text-dark-color);
 }
 
-main .hero.comparison h1 {
+main .hero2.comparison h1 {
   font-weight: var(--font-weight-regular);
 }
 
-main .hero p {
+main .hero2 p {
   color: var(--hero-p-color);
   font-size: var(--hero-font-size-xxxs);
   font-weight: var(--font-weight-regular);
@@ -179,7 +179,7 @@ main .hero p {
   margin: 0;
 }
 
-main .hero h1 + p {
+main .hero2 h1 + p {
   margin: 8px 0 0;
   color: #616161;
   font-size: var(--hero-font-size-xxs);
@@ -187,7 +187,7 @@ main .hero h1 + p {
   line-height: 1.5;
 }
 
-main .hero.comparison p {
+main .hero2.comparison p {
   font-size: 18px;
   font-weight: 400;
   font-stretch: normal;
@@ -198,11 +198,11 @@ main .hero.comparison p {
   margin: 24px 0 0;
 }
 
-main .hero.black-background h1 + p {
+main .hero2.black-background h1 + p {
   color: var(--text-dark-color);
 }
 
-main .hero p.button-container {
+main .hero2 p.button-container {
   margin: 0;
   padding: 10px 0;
   display: flex;
@@ -212,40 +212,40 @@ main .hero p.button-container {
   gap: 2px;
 }
 
-main .hero p.button-container.discount-bubble-container{
+main .hero2 p.button-container.discount-bubble-container{
   padding-top: 0;
 }
 
-main .hero img {
+main .hero2 img {
   object-fit: cover;
   width: 100%;
   height: 100%;
 }
 
-main .hero .hero-picture picture img {
+main .hero2 .hero2-picture picture img {
   position: absolute;
   display: none;
   padding-left: 200px;
 }
 
-main .hero a.button {
+main .hero2 a.button {
   margin: 8px 13px 0 0;
 }
 
-main .hero a.button.modal {
+main .hero2 a.button.modal {
   padding: 0 28px 0 0;
   min-width: unset;
 }
 
 @media (min-width: 1400px){
-  main .hero a.button {
+  main .hero2 a.button {
     min-width: 360px;
     justify-content: center;
     align-items: center;
   }
 }
 
-main .hero a.button span.button-text {
+main .hero2 a.button span.button-text {
   transition: all .25s cubic-bezier(.4,0,.2,1);
   display: inline-block;
   position: relative;
@@ -254,7 +254,7 @@ main .hero a.button span.button-text {
 }
 
 
-main .hero .discount-bubble {
+main .hero2 .discount-bubble {
   background: #2cb43d;
   border-radius: 50%;
   width: 72px;
@@ -270,7 +270,7 @@ main .hero .discount-bubble {
   position: relative;
 }
 
-main .hero .discount-bubble .discount-bubble-0 {
+main .hero2 .discount-bubble .discount-bubble-0 {
   font-size: 24px;
   color: #fff;
   font-weight: var(--font-weight-boldest);
@@ -279,7 +279,7 @@ main .hero .discount-bubble .discount-bubble-0 {
   padding-top: 12px;
 }
 
-main .hero .discount-bubble .discount-bubble-1 {
+main .hero2 .discount-bubble .discount-bubble-1 {
   font-size: 11px;
   color: #fff;
   line-height: 1.71;
@@ -288,7 +288,7 @@ main .hero .discount-bubble .discount-bubble-1 {
   text-decoration: none;
 }
 
-main .hero .wrapper-plan-discount {
+main .hero2 .wrapper-plan-discount {
   margin: 0 0 10px;
   display: -webkit-box;
   display: flex;
@@ -298,14 +298,14 @@ main .hero .wrapper-plan-discount {
   align-items: center
 }
 
-main .hero .hero-content ul {
+main .hero2 .hero2-content ul {
   margin: 20px 0 0;
   padding: 0;
   text-align: left;
   list-style-type: none;
 }
 
-main .hero .hero-content ul li {
+main .hero2 .hero2-content ul li {
   font-size: var(--hero-font-size-xxxs);
   font-weight: var(--font-weight-regular);
   letter-spacing: 0.096px;
@@ -317,11 +317,11 @@ main .hero .hero-content ul li {
   list-style: none;
 }
 
-main .hero .hero-content ul li:first-child {
+main .hero2 .hero2-content ul li:first-child {
   margin: 9px 0 0;
 }
 
-main .hero ul li::before {
+main .hero2 ul li::before {
   content: "";
   position: absolute;
   left: 0;
@@ -333,7 +333,7 @@ main .hero ul li::before {
   z-index: 1;
 }
 
-main .hero ul li::after {
+main .hero2 ul li::after {
   content: "";
   position: absolute;
   left: 5px;
@@ -346,7 +346,7 @@ main .hero ul li::after {
   z-index: 2;
 }
 
-main .hero ul.hero-awards {
+main .hero2 ul.hero2-awards {
   display: flex;
   flex-flow: row wrap;
   align-items: center;
@@ -356,7 +356,7 @@ main .hero ul.hero-awards {
   text-align: left;
 }
 
-main .hero .hero-content ul.hero-awards li {
+main .hero2 .hero2-content ul.hero2-awards li {
   display: block;
   min-height: 20px;
   margin: 0 20px 30px 0;
@@ -364,17 +364,17 @@ main .hero .hero-content ul.hero-awards li {
   width: auto;
 }
 
-main .hero ul.hero-awards li::before {
+main .hero2 ul.hero2-awards li::before {
   content: none;
 }
 
-main .hero ul.hero-awards li picture img {
+main .hero2 ul.hero2-awards li picture img {
   display: block;
   height: 80px;
   width: auto;
 }
 
-main .hero .hero-awards li::after {
+main .hero2 .hero2-awards li::after {
   content: none;
 }
 
@@ -383,15 +383,15 @@ main .hero .hero-awards li::after {
     --hero-h1-font-size: 42px;
   }
 
-  main .hero h2 {
+  main .hero2 h2 {
     font-size: 20px;
   }
 
-  main .hero .hero-content .breadcrumb {
+  main .hero2 .hero2-content .breadcrumb {
     min-height: 58px;
   }
 
-  main .hero .hero-content .breadcrumb a::after {
+  main .hero2 .hero2-content .breadcrumb a::after {
     margin: 0 9px;
   }
 
@@ -399,25 +399,25 @@ main .hero .hero-awards li::after {
 
 @media (min-width: 990px) { /* desktop */
 
-  main .hero .hero-content > div.left-col {
+  main .hero2 .hero2-content > div.left-col {
     width: 50%;
   }
 
-  main .hero .hero-content > div.right-col {
+  main .hero2 .hero2-content > div.right-col {
     width: 50%;
     padding-left: 1.25rem;
   }
 
-  main .hero h2 {
+  main .hero2 h2 {
     font-size: 22px;
     margin-bottom: 10px;
   }
 
-  main .hero h1 {
+  main .hero2 h1 {
     font-size: 50px;
   }
 
-  main .hero .hero-picture {
+  main .hero2 .hero2-picture {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -425,17 +425,17 @@ main .hero .hero-awards li::after {
     right: 0;
   }
 
-  main .hero p {
+  main .hero2 p {
     font-size: 14px;
     margin: 0;
   }
 
-  main .hero .hero-picture picture img {
+  main .hero2 .hero2-picture picture img {
     display: block;
     padding-left: 0;
   }
 
-  main .hero .hero-content {
+  main .hero2 .hero2-content {
     max-width: var(--section-desktop-max-width);
     min-height: unset;
     padding: 112px var(--section-desktop-padding) 54px var(--section-desktop-padding);
@@ -444,26 +444,26 @@ main .hero .hero-awards li::after {
     flex-direction: row;
   }
 
-  main .hero a.button.primary {
+  main .hero2 a.button.primary {
     min-width: 360px;
   }
 
-  main .hero .hero-content > div {
+  main .hero2 .hero2-content > div {
     width: 60%;
     padding: 0 20px 0 0;
   }
 
-  main .hero.comparison .hero-content > div {
+  main .hero2.comparison .hero2-content > div {
     width: 65%;
     padding: 40px 0 0;
   }
 
-  main .hero .hero-content .breadcrumb a {
+  main .hero2 .hero2-content .breadcrumb a {
     line-height: 1;
     letter-spacing: .96px;
   }
 
-  main .hero ul.hero-awards {
+  main .hero2 ul.hero2-awards {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -472,7 +472,7 @@ main .hero .hero-awards li::after {
     padding: 40px 0 0;
   }
 
-  main .hero ul.hero-awards li {
+  main .hero2 ul.hero2-awards li {
     display: block;
     min-height: 20px;
     margin: 9px 20px 0 0;
@@ -483,7 +483,7 @@ main .hero .hero-awards li::after {
 }
 
 @media (min-width: 1300px) {
-  main .hero .hero-picture picture img {
+  main .hero2 .hero2-picture picture img {
     padding-left: 20%;
   }
 }
@@ -491,38 +491,38 @@ main .hero .hero-awards li::after {
 @media (min-width: 1600px) { /* large desktop */
 
 
-  main .hero .hero-content .breadcrumb {
+  main .hero2 .hero2-content .breadcrumb {
     padding: 9px 0;
     margin-bottom: 15px;
   }
 
-  main .hero h2 {
+  main .hero2 h2 {
     font-size: 24px;
   }
 
-  main .hero h1 {
+  main .hero2 h1 {
     font-size: 56px;
   }
 
-  main .hero .hero-picture picture img {
+  main .hero2 .hero2-picture picture img {
     display: block;
     padding-left: 25%;
   }
 
-  main .hero .discount-bubble {
+  main .hero2 .discount-bubble {
     width: 83px;
     height: 83px;
   }
 
-  main .hero .discount-bubble .discount-bubble-0 {
+  main .hero2 .discount-bubble .discount-bubble-0 {
     font-size: 32px;
   }
 
-  main .hero .discount-bubble .discount-bubble-1 {
+  main .hero2 .discount-bubble .discount-bubble-1 {
     font-size: 14px;
   }
 
-  main .hero .hero-content {
+  main .hero2 .hero2-content {
     min-height: 725px;
     max-width: var(--section-large-desktop-max-width);
     padding-left: var(--section-large-desktop-padding);
