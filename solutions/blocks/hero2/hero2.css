@@ -32,7 +32,7 @@ main .hero2 .hero2-content .breadcrumb {
   margin-bottom: 12px;
 }
 
-main .hero .hero-content .breadcrumb a {
+main .hero2 .hero2-content .breadcrumb a {
   font-size: var(--breadcrumbs-font-size-s);
   font-weight: var(--font-weight-bold);
   color: var(--breadcrumb-text-color-dark-hover);
@@ -41,13 +41,13 @@ main .hero .hero-content .breadcrumb a {
   letter-spacing: .96px;
 }
 
-main .hero .hero-content .breadcrumb a:last-child {
+main .hero2 .hero2-content .breadcrumb a:last-child {
   padding: 0;
   margin: 0;
   pointer-events: none;
 }
 
-main .hero .hero-content .breadcrumb a::after {
+main .hero2 .hero2-content .breadcrumb a::after {
   content: "/";
   display: inline-block;
   color: var(--color-dark-gray);
@@ -55,57 +55,57 @@ main .hero .hero-content .breadcrumb a::after {
   font-size: 9pt;
 }
 
-main .hero .hero-content .breadcrumb a:hover {
+main .hero2 .hero2-content .breadcrumb a:hover {
   color: var(--text-color);
 }
 
-main .hero.black-background .hero-content .breadcrumb a {
+main .hero2.black-background .hero2-content .breadcrumb a {
   color: var(--breadcrumb-text-color-dark);
   text-decoration: none;
 }
 
-main .hero.black-background .hero-content .breadcrumb a::after {
+main .hero2.black-background .hero2-content .breadcrumb a::after {
   color: #dedede;
 }
 
-main .hero.black-background .hero-content .breadcrumb a:hover {
+main .hero2.black-background .hero2-content .breadcrumb a:hover {
   color: var(--breadcrumb-text-color-dark-hover);
 }
 
 /* hero */
 
-main .hero-container > div {
+main .hero2-container > div {
   max-width: unset;
 }
 
-main .hero-container {
+main .hero2-container {
   padding: 0;
   margin: 0 auto;
 }
 
-main .hero .hero-content > div {
+main .hero2 .hero2-content > div {
   width: 100%;
 }
 
-main .hero-container .hero-wrapper {
+main .hero2-container .hero2-wrapper {
   padding: 0;
 }
 
-main .hero {
+main .hero2 {
   position: relative;
   padding: 0;
   min-height: 300px;
 }
 
-main .hero.black-background {
+main .hero2.black-background {
   background-color: var(--dark-background-color);
 }
 
-main .hero.comparison {
+main .hero2.comparison {
   height: 600px;
 }
 
-main .hero .hero-picture {
+main .hero2 .hero2-picture {
   border: 1px solid #000;
   position: absolute;
   top: 0;
