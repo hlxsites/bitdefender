@@ -29,7 +29,6 @@ export const DEFAULT_COUNTRY = 'au';
 
 export const METADATA_ANAYTICS_TAGS = 'analytics-tags';
 
-
 const targetPromise = (async () => {
   const targetLocation = getMetadata('target-location');
   const randomString = Math.random().toString(36).substring(7);
@@ -54,19 +53,14 @@ const targetPromise = (async () => {
     }),
   });
   const payload = await resp.json();
-  console.log(JSON.stringify(payload.execute.mboxes, null, 2));
   const mbox = payload.execute.mboxes.find((mbox) => mbox.name === targetLocation);
-  console.log(`Mbox: ${JSON.stringify(mbox, null, 2)}`);
-  const { audience } = mbox?.options[0].content || false;
-  console.log(`Audience: ${audience}`);
+  const { audience } = mbox?.options[0].content ?? { audience: 'default' };
+  console.log(`Resolved target audience: ${audience}`);
   return audience;
 })();
 
 const AUDIENCES = {
-  challenger1: () => targetPromise.then((audience) => {
-    console.log(audience === 'challenger1');
-    return audience === 'challenger1';
-  }),
+  challenger1: () => targetPromise.then((audience) => audience === 'challenger1'),
 };
 
 window.hlx.plugins.add('rum-conversion', {
