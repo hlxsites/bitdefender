@@ -29,15 +29,49 @@ export const DEFAULT_COUNTRY = 'au';
 
 export const METADATA_ANAYTICS_TAGS = 'analytics-tags';
 
+const targetPromise = (async () => {
+  const targetLocation = getMetadata('target-location');
+  const randomString = Math.random().toString(36).substring(7);
+  const resp = await fetch(`/rest/v1/delivery?client=sitesinternal&sessionId=${randomString}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      context: {
+        channel: 'web',
+      },
+      execute: {
+        pageLoad: {},
+        mboxes: [
+          {
+            name: targetLocation,
+            index: 0,
+          },
+        ],
+      },
+    }),
+  });
+  const payload = await resp.json();
+  const mbox = payload.execute.mboxes.find((mbox) => mbox.name === targetLocation);
+  const { audience } = mbox?.options[0].content ?? { audience: 'default' };
+  console.log(`Resolved target audience: ${audience}`);
+  return audience;
+})();
+
+const AUDIENCES = {
+  challenger1: () => targetPromise.then((audience) => audience === 'challenger1'),
+};
+
 window.hlx.plugins.add('rum-conversion', {
   load: 'lazy',
   url: '../plugins/rum-conversion/src/index.js',
 });
 
 window.hlx.plugins.add('experimentation', {
-  condition: () => getMetadata('experiment'),
   options: {
     prodHost: 'www.bitdefender.com.au',
+    audiences: AUDIENCES,
   },
   url: '../plugins/experimentation/src/index.js',
 });
