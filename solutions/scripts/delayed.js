@@ -16,6 +16,8 @@ import {
 } from './scripts.js';
 import { loadBreadcrumbs } from './breadcrumbs.js';
 
+import { loadOneTrust } from './analytics/onetrust.js';
+
 // Core Web Vitals RUM collection
 sampleRUM('cwv');
 
@@ -33,6 +35,8 @@ switch (ENVIRONMENT) {
   default:
     loadScript(LAUNCH_URL + launchDevScript); break;
 }
+
+loadOneTrust();
 
 pushProductsToDataLayer();
 pushToDataLayer('page loaded');
