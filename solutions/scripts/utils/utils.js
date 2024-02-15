@@ -238,6 +238,7 @@ export function appendAdobeMcLinks(selector) {
       link.href = destinationURLWithVisitorIDs.replace(/MCAID%3D.*%7CMCORGID/, 'MCAID%3D%7CMCORGID');
     });
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.error(e);
   }
 }
