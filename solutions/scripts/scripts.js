@@ -24,6 +24,8 @@ import {
   // analyticsTrackPageViews,
 } from './analytics/lib-analytics.js';
 
+import loadOneTrust from './analytics/onetrust.js';
+
 const LCP_BLOCKS = ['hero']; // add your LCP blocks to the list
 const TRACKED_PRODUCTS = [];
 
@@ -539,6 +541,7 @@ async function loadPage() {
   await window.hlx.plugins.load('lazy');
   await loadLazy(document);
   const setupAnalytics = setupAnalyticsTrackingWithAlloy(document);
+  loadOneTrust();
   loadDelayed();
   await setupAnalytics;
 }
