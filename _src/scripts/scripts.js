@@ -184,17 +184,31 @@ export function getDomain() {
   return window.location.pathname.split('/').filter(item => item)[0];
 }
 
+export function getLocalizedResourceUrl(resourceName) {
+  const { pathname } = window.location;
+  const lastCharFromUrl = pathname.charAt(pathname.length - 1);
+  const lpIsInFolder = lastCharFromUrl === '/';
+
+  let pathnameAsArray = pathname.split('/');
+
+  if (lpIsInFolder) {
+    return `${pathnameAsArray.join('/')}${resourceName}`;
+  }
+
+  const basePathIndex = pathname.startsWith('/pages/') ? 3 : 2;
+  pathnameAsArray = pathnameAsArray.slice(0, basePathIndex + 1); // "/consumer/en";
+
+  return `${pathnameAsArray.join('/')}/${resourceName}`;
+}
+
 /**
  * Sets the page language.
  * @param {Object} param The language and country
  */
 function setPageLanguage(param) {
   document.documentElement.lang = param.language;
-  const pages = window.location.pathname.split('/').filter(item => item);
-  const domain = pages[0];
-  const basePath = pages.length > 1 ? `${domain}/solutions` : domain;
-  createMetadata('nav', `/${basePath}/nav`);
-  createMetadata('footer', `/${basePath}/footer`);
+  createMetadata('nav', `${getLocalizedResourceUrl('nav')}`);
+  createMetadata('footer', `${getLocalizedResourceUrl('footer')}`);
 }
 
 export function pushToDataLayer(event, payload) {
