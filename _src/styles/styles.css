@@ -159,8 +159,6 @@ body {
   line-height: 1.5;
   display: none;
   -webkit-font-smoothing: antialiased;
-  max-width: 1920px;
-  margin: 0 auto;
 }
 
 h1, h2, h3,
@@ -549,7 +547,7 @@ main .section.bitdefender-ferrari .default-content-wrapper .button-container a.b
     right: 0;
   }
 
-  header, main, footer {
+  main {
     max-width: var(--body-max-width);
     margin: 0 auto;
   }
