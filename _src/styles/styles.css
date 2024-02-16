@@ -547,11 +547,6 @@ main .section.bitdefender-ferrari .default-content-wrapper .button-container a.b
     right: 0;
   }
 
-  main {
-    max-width: var(--body-max-width);
-    margin: 0 auto;
-  }
-
   main div.section.wide > * { /* apply to all children wrapper */
     max-width: calc(var(--section-desktop-max-width) - 2 * var(--section-desktop-padding));
     padding-top: 1px; /* hack to handle margin of child paragraphs */
