@@ -1,0 +1,25 @@
+@charset "UTF-8";
+.section.carousel-container {
+  background-color: black;
+  color: white;
+  padding: 10px 0;
+}
+
+.carousel-container .logo {
+  width: 90px;
+  margin: 0 1em;
+}
+
+.carousel-container .logo img {
+  height: auto;
+  max-width: unset;
+  width: 90px;
+}
+
+@media (width >= 768px) {
+
+}
+
+@media screen and (width >= 991px) {
+
+}

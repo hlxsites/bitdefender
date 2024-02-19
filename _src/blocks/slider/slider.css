@@ -1,0 +1,21 @@
+@charset "UTF-8";
+.section.slider-container {
+  color: white;
+  padding: 10px 0;
+}
+
+.slider-container .logo {
+
+}
+
+.slider-container .logo img {
+
+}
+
+@media (width >= 768px) {
+
+}
+
+@media screen and (width >= 991px) {
+
+}

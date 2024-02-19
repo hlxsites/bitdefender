@@ -48,9 +48,12 @@ function showSlides(carousel, slideNumber) {
     const columnWidthPx = containerWidth / itemsToShow;
 
     for (let i = start; i < end && i < childDivs.length; i += 1) {
-      childDivs[i].style.opacity = '1';
-      childDivs[i].style.position = 'relative';
-      childDivs[i].style.width = `${columnWidthPx}px`;
+      if (childDivs[i]) {
+        childDivs[i].style.opacity = '1';
+        childDivs[i].style.position = 'relative';
+        childDivs[i].style.width = `${columnWidthPx}px`;
+      }
+
     }
   }
 
