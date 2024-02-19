@@ -41,7 +41,8 @@ try {
         loc: `${LOCALE_URL}${row.path}`,
         'xhtml:link': Object.keys(hreflangMap).map((key) => {
           const hreflang = hreflangMap[key][0];
-          const href = `${hreflangMap[key][1].baseUrl}${row.path}${hreflangMap[key][1].pageType}`;
+          const pathCount = row.path.split('/').filter(String).length;
+          const href = `${hreflangMap[key][1].baseUrl}${row.path}${pathCount > 1 ? hreflangMap[key][1].pageType : ''}`;
           return {
             _attributes: {
               rel: 'alternate',
