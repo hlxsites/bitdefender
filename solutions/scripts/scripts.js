@@ -313,7 +313,7 @@ function addHreflangTags() {
 
   Object.keys(HREFLANG_MAP).forEach((key) => {
     const hreflang = HREFLANG_MAP[key][0];
-    const href = `${HREFLANG_MAP[key][1].baseUrl}${path}${pathCount > 1 ? HREFLANG_MAP[key][1].pageType: ''}`;
+    const href = `${HREFLANG_MAP[key][1].baseUrl}${path}${pathCount > 1 ? HREFLANG_MAP[key][1].pageType : ''}`;
     const ln = document.createElement('link');
     ln.setAttribute('rel', 'alternate');
     ln.setAttribute('hreflang', hreflang);
