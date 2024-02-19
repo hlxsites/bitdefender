@@ -1,74 +1,88 @@
+:root {
+    --blue: #006dff;
+    --red: #ff2800;
+    --dark: #010f10;
+    --dark2: #0c0f14;
+    --darker: #06080a;
+    --font-ibm: "IBM Plex Sans", sans-serif;
+  }
+
 /* tipography */
-.section.trusted_lp .banner h2 {
-    font: normal normal bold 40px/45px "IBM Plex Sans", sans-serif;
-    text-align: left;
+.trusted_lp {
+    color: white;
 }
 
 .trusted_lp h1 {
-    font: normal normal bold 96px/82px "IBM Plex Sans", sans-serif;
+    font: normal normal bold 96px/82px var(--font-ibm);
     text-align: left;
 }
 
 .trusted_lp h2 {
-    font: normal normal bold 64px/61px "IBM Plex Sans", sans-serif;
+    font: normal normal bold 64px/61px var(--font-ibm);
     text-align: left;
 }
 
 .trusted_lp h3 {
-    font: normal normal bold 40px/45px "IBM Plex Sans", sans-serif;
+    font: normal normal bold 40px/45px var(--font-ibm);
     text-align: left;
 }
 
 .trusted_lp p {
-    font: normal normal normal 24px/32px "IBM Plex Sans", sans-serif;
+    font: normal normal normal 24px/32px var(--font-ibm);
     text-align: left;
 }
 
 .d-flex {
     display: flex;
-  }
+}
 
-  .justify-between {
+.justify-between {
     justify-content: space-between;
-  }
+}
 
-  .align-center {
+.align-center {
     align-items: center;
-  }
+}
 
-  .d-flex div {
+.d-flex div {
     flex: 1;
-  }
+}
 
-  .blue_bck {
-    background-color: #006dff;
-    color: white;
-  }
+.blue_bck {
+    background-color: var(--blue);
+}
+
+.red_bck {
+    background-color: var(--red);
+}
+
+.dark_bck {
+    background-color: var(--dark);
+}
+
+.dark2_bck {
+    background-color: var(--dark2);
+}
+
+.darker_bck {
+    background-color: var(--darker);
+}
 
 @media (width >= 768px) {
-    .section.trusted_lp .banner h2 {
-        font: normal normal bold 40px/45px "IBM Plex Sans", sans-serif;
-        text-align: left;
-    }
-
     .trusted_lp h1 {
         font: normal normal bold 96px/82px "IBM Plex Sans", sans-serif;
-        text-align: left;
     }
 
     .trusted_lp h2 {
         font: normal normal bold 64px/61px "IBM Plex Sans", sans-serif;
-        text-align: left;
     }
 
     .trusted_lp h3 {
         font: normal normal bold 40px/45px "IBM Plex Sans", sans-serif;
-        text-align: left;
     }
 
     .trusted_lp p {
         font: normal normal normal 24px/32px "IBM Plex Sans", sans-serif;
-        text-align: left;
     }
 }
 

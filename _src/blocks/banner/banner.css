@@ -104,3 +104,10 @@
   font-size: 15px;
   font-style: unset;
 }
+
+@media (width >= 768px) {
+  .section.trusted_lp .banner h2 {
+    font: normal normal bold 40px/45px "IBM Plex Sans", sans-serif;
+    text-align: left;
+  }
+  }
