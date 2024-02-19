@@ -29,6 +29,27 @@ export const DEFAULT_COUNTRY = 'au';
 
 export const METADATA_ANAYTICS_TAGS = 'analytics-tags';
 
+const HREFLANG_MAP = [
+  ['en-ro', { baseUrl: 'https://www.bitdefender.ro', pageType: '.html' }],
+  ['de', { baseUrl: 'https://www.bitdefender.de', pageType: '.html' }],
+  ['sv', { baseUrl: 'https://www.bitdefender.se', pageType: '.html' }],
+  ['pt', { baseUrl: 'https://www.bitdefender.pt', pageType: '.html' }],
+  ['en-sv', { baseUrl: 'https://www.bitdefender.se', pageType: '.html' }],
+  ['pt-BR', { baseUrl: 'https://www.bitdefender.com.br', pageType: '.html' }],
+  ['en', { baseUrl: 'https://www.bitdefender.com', pageType: '.html' }],
+  ['it', { baseUrl: 'https://www.bitdefender.it', pageType: '.html' }],
+  ['fr', { baseUrl: 'https://www.bitdefender.fr', pageType: '.html' }],
+  ['nl-BE', { baseUrl: 'https://www.bitdefender.br', pageType: '.html' }],
+  ['es', { baseUrl: 'https://www.bitdefender.es', pageType: '.html' }],
+  ['en-AU', { baseUrl: 'https://www.bitdefender.com.au', pageType: '' }],
+  ['ro', { baseUrl: 'https://www.bitdefender.ro', pageType: '.html' }],
+  ['nl', { baseUrl: 'https://www.bitdefender.nl', pageType: '.html' }],
+  ['en-GB', { baseUrl: 'https://www.bitdefender.co.uk', pageType: '.html' }],
+  ['zh-hk', { baseUrl: 'https://www.bitdefender.com/zh-hk', pageType: '' }],
+  ['zh-tw', { baseUrl: 'https://www.bitdefender.com/zh-tw', pageType: '' }],
+  ['x-default', { baseUrl: 'https://www.bitdefender.com', pageType: '.html' }],
+];
+
 window.hlx.plugins.add('rum-conversion', {
   load: 'lazy',
   url: '../plugins/rum-conversion/src/index.js',
@@ -284,6 +305,23 @@ export default function decorateLinkedPictures(main) {
   });
 }
 
+function addHreflangTags() {
+  if (document.querySelectorAll('head link[hreflang]').length > 0) return;
+
+  const path = window.location.pathname;
+  const pathCount = path.split('/').filter(String).length;
+
+  Object.keys(HREFLANG_MAP).forEach((key) => {
+    const hreflang = HREFLANG_MAP[key][0];
+    const href = `${HREFLANG_MAP[key][1].baseUrl}${path}${pathCount > 1 ? HREFLANG_MAP[key][1].pageType: ''}`;
+    const ln = document.createElement('link');
+    ln.setAttribute('rel', 'alternate');
+    ln.setAttribute('hreflang', hreflang);
+    ln.setAttribute('href', href);
+    document.querySelector('head').appendChild(ln);
+  });
+}
+
 /**
  * Decorates the main element.
  * @param {Element} main The main element
@@ -297,6 +335,7 @@ export function decorateMain(main) {
   decorateLinkedPictures(main);
   decorateSections(main);
   decorateBlocks(main);
+  addHreflangTags();
 }
 
 /**
