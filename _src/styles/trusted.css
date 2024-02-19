@@ -33,6 +33,10 @@
     text-align: left;
 }
 
+.trusted_lp u {
+    text-decoration: none;
+}
+
 .d-flex {
     display: flex;
 }

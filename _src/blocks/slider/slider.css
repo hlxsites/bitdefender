@@ -1,15 +1,14 @@
 @charset "UTF-8";
 .section.slider-container {
-  color: white;
   padding: 10px 0;
 }
 
-.slider-container .logo {
-
+.slider-container .slider > div {
+  flex: 1;
 }
 
-.slider-container .logo img {
-
+.slider-container .slider .slider-text img {
+  width: 275px;
 }
 
 @media (width >= 768px) {
