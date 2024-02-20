@@ -5,15 +5,29 @@
   padding: 10px 0;
 }
 
-.carousel-container .logo {
-  width: 90px;
+.carousel-container .carousel-item {
   margin: 0 1em;
 }
 
-.carousel-container .logo img {
+.carousel-container .carousel-item img {
   height: auto;
   max-width: unset;
   width: 90px;
+}
+
+#carousel-box {
+  width: 100%;
+  overflow: hidden;
+}
+
+#carousel {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item {
+  flex: 0 0 auto;
+  box-sizing: border-box;
 }
 
 @media (width >= 768px) {

@@ -11,10 +11,20 @@
   width: 275px;
 }
 
-@media (width >= 768px) {
-
+.slider-container .container-fluid .slider-item {
+  overflow-x: hidden;
+  display: flex;
 }
 
-@media screen and (width >= 991px) {
+.slider-container .slider-item {
+  min-width: 50vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4ch;
+}
+
+@media (width >= 768px) {
 
 }

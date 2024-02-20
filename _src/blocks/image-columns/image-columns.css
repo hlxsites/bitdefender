@@ -39,6 +39,10 @@
   flex: 0 1 45%;
 }
 
+.image-columns > div > .image-columns-txt-col {
+  flex: 0 1 25%;
+}
+
 .image-columns > div > .image-columns-img-col .img-container {
   max-width: 645px;
   width: 100%;
@@ -146,11 +150,5 @@
 @media (min-width: 1600px) { /* large desktop */
   .image-columns-wrapper {
     max-width: var(--section-large-desktop-max-width);
-  }
-}
-
-@media (width >= 768px) {
-  .image-columns-container.hide_img .img-container img {
-    display: none;
   }
 }

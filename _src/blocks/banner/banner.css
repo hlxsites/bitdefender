@@ -9,36 +9,6 @@
   width: 100%;
 }
 
-.section.banner-container .banner .button-container {
-  display: none;
-}
-
-.section.banner-container .banner ul {
-  padding-left: 0;
-}
-
-.section.banner-container .banner ul li {
-  list-style-type: none;
-  padding-left: 0;
-  font-size: var(--body-font-size-xs);
-  line-height: 20px;
-  color: #000;
-  text-align: left;
-  margin-top: 6px;
-  display: flex;
-  align-items: flex-start;
-}
-
-.section.banner-container .banner ul li::before {
-  content: "•";
-  color: #4CA154;
-  font-weight: bold;
-  display: inline-block;
-  margin-left: 0;
-  margin-right: 10px;
-  font-size: 35px;
-}
-
 @media screen and (width >= 991px) {
   .section.banner-container .banner .button-container {
     display: block;
@@ -47,62 +17,32 @@
     width: initial;
   }
 }
-@media screen and (width <= 991px) {
-  .banner-container.bckimg-full-right {
-    background-position: right -19rem top !important;
-  }
-}
+
 @media screen and (width <= 768px) {
-  .section.banner-container .banner {
-    padding: 1em 0;
-    margin-bottom: 1rem !important;
-  }
-  .section.normal-padding-mobile .banner {
-    padding-bottom: 1rem;
-  }
-  .section.banner-container .banner h1 {
-    margin-top: 0;
-    font-size: 30px;
-    text-align: left;
-  }
-  .section.banner-container .banner h2 {
-    margin-bottom: 0;
-    font-size: var(--body-font-size-m);
-  }
-  .section.banner-container .banner p {
-    font-size: 13px;
-    line-height: 18px;
-  }
-  .section.banner-container .banner ul li {
-    font-size: 11px;
-    line-height: 16px;
-  }
-  .section.banner-container.block-hide-mobile {
-    display: none !important;
-  }
   .section.banner-container.hide-mobile {
     background-image: unset !important;
     background-color: #000;
   }
+
   .section.banner-container.hide-mobile .bck-img {
     display: none;
   }
-}
 
-.banner a.button {
-  border: 1px solid white;
-  color: white;
-  font-weight: 500;
-  background-color: transparent;
-  border-radius: 5px;
-  padding: 5px 3px 5px 16px;
+  .section.banner-container em {
+    position: unset;
+    bottom: 10px;
+    font-size: 12px;
+    line-height: 15px!important;
+    font-style: unset;
+    display: block;
+  }
 }
 
 .banner em {
-  position: absolute;
-  bottom: 10px;
-  font-size: 15px;
+  font-size: 12px;
+  line-height: 15px;
   font-style: unset;
+  display: block;
 }
 
 @media (width >= 768px) {
@@ -110,4 +50,28 @@
     font: normal normal bold 40px/45px "IBM Plex Sans", sans-serif;
     text-align: left;
   }
+
+  .section.trusted_lp .banner .banner-left {
+    padding-right: 5em;
   }
+
+  .section.trusted_lp .banner .banner-right {
+    padding-left: 5em;
+  }
+
+  .section.trusted_lp.content_right_diff .banner .banner-right img {
+    margin-left: -5em;
+  }
+}
+
+@media (width <= 767px) {
+  .hide_bck_mobile {
+    background-image: unset!important;
+  }
+
+  .banner em {
+    position: absolute;
+    bottom: 10px;
+    font-size: 15px;
+  }
+}

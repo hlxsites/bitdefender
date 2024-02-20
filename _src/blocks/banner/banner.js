@@ -7,7 +7,7 @@ export default function decorate(block) {
   const {
     contentSize, background_color, background_hide, banner_hide, text_color, underlinedInclinedTextColor, textAlignVertical, imageAlign, padding_top, padding_bottom, margin_top, margin_bottom, image_cover
   } = metaData;
-  const [contentEl, pictureEl, contentRightEl] = [...block.children];
+  const [contentEl, pictureEl, contentRightEl, pictureMobileEl] = [...block.children];
 
   if (image_cover) {
     parentBlock.classList.add(`bckimg-${image_cover}`);
@@ -18,7 +18,7 @@ export default function decorate(block) {
     const aliasTr = table.querySelector('tr'); // 1st tr shoudlk have an identifier alias
   });
 
-  if (background_color) parentBlockStyle.backgroundColor = background_color;
+  if (background_color) block.closest('div.section').style.backgroundColor = background_color;
   if (text_color) blockStyle.color = text_color;
   if (underlinedInclinedTextColor) {
     block.querySelectorAll('em u').forEach((element) => {
@@ -35,58 +35,36 @@ export default function decorate(block) {
   if (background_hide) parentBlock.classList.add(`hide-${background_hide}`);
   if (banner_hide) parentBlock.classList.add(`block-hide-${banner_hide}`);
 
-  if (image_cover && image_cover === 'small') {
-    blockStyle.background = `url(${pictureEl.querySelector('img').getAttribute('src').split('?')[0]}) no-repeat 0 0 / cover ${background_color || '#000'}`;
-    block.innerHTML = `
-    <div class="container-fluid">
-        <div class="row d-none d-flex">
-          <div class="col-5 ps-4">${contentEl.innerHTML}</div>
-        </div>
-        <div class="row d-lg-none justify-content-center">
-          <div class="col-12 col-md-7 text-center">${contentEl.innerHTML}</div>
-          <div class="col-12 p-0 text-center bck-img">
-            ${pictureEl.innerHTML}
-          </div>
-        </div>
-      </div>
-    `;
-  } else if (image_cover) {
-    parentBlockStyle.background = `url(${pictureEl.querySelector('img').getAttribute('src').split('?')[0]}) no-repeat top center / 100% ${background_color || '#000'}`;
+  if (image_cover) {
+    parentBlockStyle.backgroundImage = `url(${pictureEl.querySelector('img').getAttribute('src').split('?')[0]})`;
+    parentBlockStyle.backgroundRepeat = 'no-repeat';
+    parentBlockStyle.backgroundPosition = 'right 0';
+    parentBlockStyle.backgroundColor = background_color || '#000';
 
-    if (image_cover === 'full-left') {
-      parentBlockStyle.background = `url(${pictureEl.querySelector('img').getAttribute('src').split('?')[0]}) no-repeat top left / auto 100% ${background_color || '#000'}`;
-    } else if (image_cover === 'full-center') {
-      parentBlockStyle.background = `url(${pictureEl.querySelector('img').getAttribute('src').split('?')[0]}) no-repeat top center / auto 100% ${background_color || '#000'}`;
-    } else if (image_cover === 'full-right') {
-      parentBlockStyle.background = `url(${pictureEl.querySelector('img').getAttribute('src').split('?')[0]}) no-repeat top right / auto 100% ${background_color || '#000'}`;
+    if (image_cover === 'full-left-50') {
+      parentBlockStyle.backgroundPosition = 'left 0';
+      parentBlockStyle.backgroundSize = '50% auto';
     }
 
-    block.innerHTML = `
-    <div class="container-fluid">
-      <div class="row d-flex ${contentRightEl ? 'justify-content-center' : ''}">
-        <div class="col-12 col-md-${contentSize === 'half' ? '6' : '7'}">${contentEl.innerHTML}</div>
-        ${contentRightEl ? `<div class="col-12 col-md-${contentSize === 'half' ? '6' : '5'}">${contentRightEl.innerHTML}</div>` : ''}
-      </div>
-      </div>
-    `;
-  } else {
-    block.innerHTML = `
-    <div class="container-fluid">
-        <div class="row d-none d-flex">
-          <div class="col-5 ps-4">${contentEl.innerHTML}</div>
-          <div class="col-7 img-right bck-img">
-            ${pictureEl.innerHTML}
-          </div>
-        </div>
-        <div class="row d-lg-none justify-content-center">
-          <div class="col-12 p-0 text-center bck-img">
-            ${pictureEl.innerHTML}
-          </div>
-          <div class="col-12 col-md-7 text-center">${contentEl.innerHTML}</div>
-        </div>
-      </div>
-    `;
+    if (image_cover === 'full-right-50') {
+      parentBlockStyle.backgroundPosition = 'right 0';
+      parentBlockStyle.backgroundSize = '50% auto';
+    }
   }
+
+  block.innerHTML = `
+  <div class="d-flex align-end">
+      <div class="banner-left">
+        ${contentEl.innerHTML}
+      </div>
+      <div class="banner-right">
+        <div class="text-right">${contentRightEl.innerHTML}</div>
+        <div class="only-mobile">
+          ${pictureMobileEl.innerHTML}
+        </div>
+      </div>
+    </div>
+  `;
 
   if (textAlignVertical) {
     block.querySelector('.row').classList.add(`align-items-${textAlignVertical}`);
@@ -94,5 +72,20 @@ export default function decorate(block) {
 
   if (imageAlign) {
     block.querySelector('.img-right').style.textAlign = imageAlign;
+  }
+
+  // creating scroll down icon:
+  const mouseScrollDiv = `<div id="mouse-scroll">
+    <div class="mouse">
+      <div class="mouse-in"></div>
+    </div>
+    <div>
+        <span class="down-arrow down-arrow-1"></span>
+        <span class="down-arrow down-arrow-2"></span>
+    </div>
+  </div>`;
+
+  if (!block.querySelector('#mouse-scroll')) {
+    block.innerHTML += mouseScrollDiv;
   }
 }
