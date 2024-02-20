@@ -40,6 +40,11 @@
     text-align: left;
 }
 
+.trusted_lp h4 {
+    font: normal normal normal 18px/20px var(--font-ibm);
+    text-align: left;
+}
+
 .trusted_lp p {
     font: normal normal normal 16px/22px var(--font-ibm);
     text-align: left;
@@ -54,7 +59,7 @@
 }
 
 .trusted_lp .d-flex {
-    display: block;
+    flex-direction: column;
 }
 
 .trusted_lp .justify-between {
@@ -114,9 +119,57 @@
     padding: 5px 3px 5px 16px;
 }
 
+.trusted_lp.video_up {
+    z-index: 999;
+    position: relative;
+    margin-top: -15em;
+    background: linear-gradient(to bottom, transparent 31%,var(--dark2) 31%);
+}
+
+.trusted_lp.apartnership_box .d-flex > div:nth-of-type(2) {
+    flex: 0;
+    margin-left: 0;
+}
+
+.trusted_lp.has_quotes .d-flex > div:nth-of-type(2) {
+    margin-left: 0;
+}
+
+.trusted_lp.has_quotes p {
+    margin: 0;
+}
+
+.trusted_lp.has_quotes em {
+    font-style: normal;
+}
+
+.trusted_lp.has_quotes blockquote {
+    margin: 0;
+}
+
+.trusted_lp.has_quotes blockquote::before, .trusted_lp.has_quotes blockquote::after {
+    content: "";
+    height: 40px;
+    width: 100%;
+    display: block;
+}
+
+.trusted_lp.has_quotes blockquote::before {
+    margin-bottom: 1em;
+    background: url('../icons/quote_top.png') no-repeat 0 0 transparent;
+    background-size: auto 100%;
+}
+
+.trusted_lp.has_quotes blockquote::after {
+    margin-top: 1em;
+    background: url('../icons/quote_top.png') no-repeat 0 0 transparent;
+    background-position: right;
+    background-size: auto 100%;
+}
+
 /* mouse-scroll */
 .trusted_lp #mouse-scroll {
-    display: block;
+    display: none;
 }
 
 .trusted_lp #mouse-scroll {
@@ -250,12 +303,17 @@
         font: normal normal bold 40px/45px "IBM Plex Sans", sans-serif;
     }
 
+    .trusted_lp h4 {
+        font: normal normal normal 35px/38px "IBM Plex Sans", sans-serif;
+    }
+
     .trusted_lp p {
         font: normal normal normal 24px/32px "IBM Plex Sans", sans-serif;
     }
 
     .trusted_lp .d-flex {
         display: flex;
+        flex-direction: row;
     }
 
     .trusted_lp .only-desktop {
@@ -265,10 +323,31 @@
     .trusted_lp .only-mobile {
         display: none;
     }
+
+    .trusted_lp #mouse-scroll {
+        display: block;
+    }
+
+    .trusted_lp.apartnership_box .d-flex > div:nth-of-type(2) {
+        margin-left: 14em;
+    }
+
+    .trusted_lp.has_quotes .d-flex > div:nth-of-type(2) {
+        margin-left: 6em;
+    }
+
+    .trusted_lp.has_quotes blockquote::before, .trusted_lp.has_quotes blockquote::after {
+        height: 60px;
+    }
 }
 
 @media (width <= 768px) {
     .trusted_lp .default-content-wrapper {
         padding: 1em!important;
+    }
+
+    .trusted_lp.top_banner .default-content-wrapper {
+        padding-bottom: 0!important;
+
     }
 }

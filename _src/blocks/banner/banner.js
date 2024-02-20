@@ -39,6 +39,7 @@ export default function decorate(block) {
     parentBlockStyle.backgroundImage = `url(${pictureEl.querySelector('img').getAttribute('src').split('?')[0]})`;
     parentBlockStyle.backgroundRepeat = 'no-repeat';
     parentBlockStyle.backgroundPosition = 'right 0';
+    parentBlockStyle.backgroundSize = 'auto 100%';
     parentBlockStyle.backgroundColor = background_color || '#000';
 
     if (image_cover === 'full-left-50') {
