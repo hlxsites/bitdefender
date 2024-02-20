@@ -13,6 +13,18 @@
     font-family: "IBM Plex Sans", sans-serif;
 }
 
+.trusted_lp div[data-align="right"] {
+    text-align: right;
+}
+
+.trusted_lp div[data-align="left"] {
+    text-align: left;
+}
+
+.trusted_lp div[data-align="center"] {
+    text-align: center;
+}
+
 .trusted_lp h1 {
     font: normal normal bold 44px/42px var(--font-ibm);
     text-align: left;
@@ -35,6 +47,10 @@
 
 .trusted_lp u {
     text-decoration: none;
+}
+
+.trusted_lp.blue_tag u {
+    color: var(--blue);
 }
 
 .trusted_lp .d-flex {
@@ -106,7 +122,7 @@
 .trusted_lp #mouse-scroll {
     position: fixed;
     margin: auto;
-    left: 20%;
+    left: 10%;
     top: 17em;
     -webkit-transform: translateX(-20%);
     z-index: 9999;

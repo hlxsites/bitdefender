@@ -29,7 +29,7 @@ export default function decorate(block) {
   `;
 
   parentBlock.addEventListener("wheel", (evt) => {
-    evt.preventDefault();
+    // evt.preventDefault();
     parentBlock.scrollLeft += evt.deltaY;
     console.log(evt.deltaY)
   });
