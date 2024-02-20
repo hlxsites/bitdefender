@@ -1,6 +1,7 @@
 export default function decorate(block) {
   block.classList.add('default-content-wrapper');
   const parentBlock = block.closest('.section');
+  parentBlock.id = 'TrustedAlways';
   const parentBlockStyle = parentBlock.style;
   const blockStyle = block.style;
   const metaData = parentBlock.dataset;

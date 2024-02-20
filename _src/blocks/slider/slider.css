@@ -1,6 +1,7 @@
 @charset "UTF-8";
 .section.slider-container {
   padding: 10px 0;
+  height: 100vh;
 }
 
 .slider-container .slider > div {
@@ -25,6 +26,4 @@
   font-size: 4ch;
 }
 
-@media (width >= 768px) {
-
-}
+@media (width >= 768px) {}
