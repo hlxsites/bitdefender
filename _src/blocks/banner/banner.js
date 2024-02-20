@@ -51,6 +51,11 @@ export default function decorate(block) {
       parentBlockStyle.backgroundPosition = 'right 0';
       parentBlockStyle.backgroundSize = '50% 100%';
     }
+
+    if (image_cover === 'full-right-52') {
+      parentBlockStyle.backgroundPosition = 'right 0';
+      parentBlockStyle.backgroundSize = '52% 100%';
+    }
   }
 
   block.innerHTML = `

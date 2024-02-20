@@ -39,7 +39,7 @@
 }
 
 .trusted .section .banner em {
-  font-size: 12px;
+  font-size: 15px;
   line-height: 15px;
   font-style: unset;
   display: block;
@@ -66,16 +66,15 @@
   .trusted .section.content_right_diff .banner .banner-right img {
     margin-left: -5em;
   }
+
+  .trusted .section .banner em {
+    position: absolute;
+    bottom: 10px;
+  }
 }
 
 @media (width <= 767px) {
   .hide_bck_mobile {
     background-image: unset!important;
-  }
-
-  .banner em {
-    position: absolute;
-    bottom: 10px;
-    font-size: 15px;
   }
 }
