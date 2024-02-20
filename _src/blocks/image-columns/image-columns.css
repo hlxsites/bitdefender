@@ -95,7 +95,7 @@
   margin-top: 0;
 }
 
-.image-columns.trusted_lp > div > .image-columns-txt-col {
+.image-columns.trusted > div > .image-columns-txt-col {
   flex: 0 1 25%;
 }
 

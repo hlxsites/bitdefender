@@ -485,9 +485,11 @@ function pushPageLoadToDataLayer() {
 async function loadEager(doc) {
   setPageLanguage(getLanguageCountryFromPath(window.location.pathname));
   decorateTemplateAndTheme();
-  if (getMetadata('template') !== '') {
-    loadCSS(`${window.hlx.codeBasePath}/scripts/template-factories/${getMetadata('template')}.css`);
-    loadScript(`${window.hlx.codeBasePath}/scripts/template-factories/${getMetadata('template')}.js`, {
+  const templateMetadata = getMetadata('template');
+  const hasTemplate = getMetadata('template') !== '';
+  if (hasTemplate) {
+    loadCSS(`${window.hlx.codeBasePath}/scripts/template-factories/${templateMetadata}.css`);
+    loadScript(`${window.hlx.codeBasePath}/scripts/template-factories/${templateMetadata}.js`, {
       type: 'module',
     });
   }
