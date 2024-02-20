@@ -11,7 +11,7 @@ import {
   waitForLCP,
   loadBlocks,
   loadCSS,
-  getMetadata,
+  getMetadata, loadScript,
 } from './lib-franklin.js';
 
 import {
@@ -486,7 +486,10 @@ async function loadEager(doc) {
   setPageLanguage(getLanguageCountryFromPath(window.location.pathname));
   decorateTemplateAndTheme();
   if (getMetadata('template') !== '') {
-    loadCSS(`${window.hlx.codeBasePath}/styles/${getMetadata('template')}.css`);
+    loadCSS(`${window.hlx.codeBasePath}/scripts/template-factories/${getMetadata('template')}.css`);
+    loadScript(`${window.hlx.codeBasePath}/scripts/template-factories/${getMetadata('template')}.js`, {
+      type: 'module',
+    });
   }
   const main = doc.querySelector('main');
   if (main) {
