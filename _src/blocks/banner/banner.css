@@ -38,7 +38,7 @@
   }
 }
 
-.banner em {
+.section.trusted_lp.banner em {
   font-size: 12px;
   line-height: 15px;
   font-style: unset;
@@ -46,13 +46,17 @@
 }
 
 @media (width >= 768px) {
-  .section.trusted_lp .banner h2 {
+  .section.trusted_lp.top_banner .banner h2 {
     font: normal normal bold 40px/45px "IBM Plex Sans", sans-serif;
     text-align: left;
   }
 
   .section.trusted_lp .banner .banner-left {
     padding-right: 5em;
+  }
+
+  .section.trusted_lp.top_banner .banner .banner-left {
+    padding-right: 0;
   }
 
   .section.trusted_lp .banner .banner-right {

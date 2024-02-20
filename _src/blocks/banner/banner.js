@@ -30,7 +30,7 @@ export default function decorate(block) {
   if (padding_top) blockStyle.paddingTop = `${padding_top}rem`;
   if (padding_bottom) blockStyle.paddingBottom = `${padding_bottom}rem`;
   if (margin_top) blockStyle.marginTop = `${margin_top}rem`;
-  if (margin_bottom) blockStyle.marginBottom = `${margimargin_bottomnBottom}rem`;
+  if (margin_bottom) blockStyle.marginBottom = `${margin_bottom}rem`;
 
   if (background_hide) parentBlock.classList.add(`hide-${background_hide}`);
   if (banner_hide) parentBlock.classList.add(`block-hide-${banner_hide}`);
@@ -39,16 +39,17 @@ export default function decorate(block) {
     parentBlockStyle.backgroundImage = `url(${pictureEl.querySelector('img').getAttribute('src').split('?')[0]})`;
     parentBlockStyle.backgroundRepeat = 'no-repeat';
     parentBlockStyle.backgroundPosition = 'right 0';
+    parentBlockStyle.backgroundSize = 'auto 100%';
     parentBlockStyle.backgroundColor = background_color || '#000';
 
     if (image_cover === 'full-left-50') {
       parentBlockStyle.backgroundPosition = 'left 0';
-      parentBlockStyle.backgroundSize = '50% auto';
+      parentBlockStyle.backgroundSize = '50% 100%';
     }
 
     if (image_cover === 'full-right-50') {
       parentBlockStyle.backgroundPosition = 'right 0';
-      parentBlockStyle.backgroundSize = '50% auto';
+      parentBlockStyle.backgroundSize = '50% 100%';
     }
   }
 
