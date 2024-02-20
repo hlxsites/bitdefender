@@ -15,6 +15,7 @@ import {
 } from './lib-franklin.js';
 
 import {
+  adobeMcAppendVisitorId,
   createTag,
 } from './utils/utils.js';
 
@@ -41,6 +42,8 @@ window.hlx.plugins.add('experimentation', {
   },
   url: '../plugins/experimentation/src/index.js',
 });
+
+window.ADOBE_MC_EVENT_LOADED = false;
 
 /**
  * Creates a meta tag with the given name and value and appends it to the head.
@@ -528,6 +531,7 @@ async function loadPage() {
   await loadEager(document);
   await window.hlx.plugins.load('lazy');
   await loadLazy(document);
+  adobeMcAppendVisitorId('main');
   loadDelayed();
 }
 
