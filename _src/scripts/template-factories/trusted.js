@@ -9,6 +9,14 @@ const particleIdSelector = 'particles-js';
 const particleDiv = document.createElement('div');
 particleDiv.setAttribute('id', particleIdSelector);
 
+const headerHeight = 40;
+const carouselHeight = 116;
+const bannerHeight = 674;
+const sliderHeight = window.innerHeight;
+
+const initialHeight = headerHeight + bannerHeight + carouselHeight + sliderHeight;
+particleDiv.style.height = `${initialHeight}px`;
+
 document.body.prepend(particleDiv);
 
 window.particlesJS(particleIdSelector, {
@@ -121,3 +129,11 @@ window.particlesJS(particleIdSelector, {
   },
   retina_detect: true,
 });
+
+function rearangeParticles() {
+  window.dispatchEvent(new Event('resize'));
+}
+setTimeout(() => {
+  particleDiv.style = null;
+  rearangeParticles();
+}, 1000);
