@@ -38,7 +38,7 @@
   }
 }
 
-.section.trusted.banner em {
+.trusted .section .banner em {
   font-size: 12px;
   line-height: 15px;
   font-style: unset;
@@ -46,24 +46,24 @@
 }
 
 @media (width >= 768px) {
-  .section.trusted.top_banner .banner h2 {
+  .trusted .section.top_banner .banner h2 {
     font: normal normal bold 40px/45px "IBM Plex Sans", sans-serif;
     text-align: left;
   }
 
-  .section.trusted .banner .banner-left {
+  .trusted.section .banner .banner-left {
     padding-right: 5em;
   }
 
-  .section.trusted.top_banner .banner .banner-left {
+  .trusted .section.top_banner .banner .banner-left {
     padding-right: 0;
   }
 
-  .section.trusted .banner .banner-right {
+  .trusted .section .banner .banner-right {
     padding-left: 5em;
   }
 
-  .section.trusted.content_right_diff .banner .banner-right img {
+  .trusted .section.content_right_diff .banner .banner-right img {
     margin-left: -5em;
   }
 }
