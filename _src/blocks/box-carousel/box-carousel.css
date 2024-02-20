@@ -1,8 +1,5 @@
-main {
+.box-carousel-container {
     background: black;
-}
-
-.box-carousel-container .box-carousel {
 }
 
 .box-carousel-container .carousel-header {
@@ -17,55 +14,43 @@ main {
 
 .box-carousel-container .carousel-header .left-arrow,
 .box-carousel-container .carousel-header .right-arrow {
-    /*font-size: 40px;*/
     color: white;
 }
 
-.box-carousel-container .carousel-header .left-arrow {
-    /*margin-left: 40%;*/
-}
-
-.box-carousel-container .carousel-header .right-arrow {
-    /*margin-left: 50px;*/
-}
-
-.carousel-container {
-    /*overflow: hidden;*/
-    width: 100%; /* Container width */
+.box-carousel-container .carousel-container {
+    width: 100%;
     position: relative;
-    display: flex; /* To center the carousel item */
-    /*justify-content: center; !* Center carousel item *!*/
+    display: flex;
 }
 
-.carousel {
+.box-carousel-container .carousel {
     display: flex;
     transition: transform 150ms cubic-bezier(0.165, 0.84, 0.44, 1) 0s;
 }
 
-.carousel-item {
+.box-carousel-container .carousel-item {
     width: 290px; /* Square dimensions */
     height: 290px; /* Square dimensions */
     margin: 10px; /* Space between items */
     box-sizing: border-box;
     padding: 20px;
-    // background-color: #0044CC; /* Example blue color */
-    border: 3px solid #006dff; /* Blue border */
+    border: 3px solid #006dff;
     border-radius: 15px;
     color: white;
-    font-size: 1em; /* Adjust font size as needed */
+    font-size: 1em;
 }
 
-.carousel-item:first-child {
+.box-carousel-container .carousel-item:first-child {
     margin-left: 0;
 }
 
-.carousel-item.active {
+.box-carousel-container .carousel-item.active {
     background: #006dff;
     box-shadow: 0px 0px 20px 0px #006dff;
     color: black;
 }
 
-.carousel-item .title {
+.box-carousel-container .carousel-item .title {
     font: normal normal bold 40px/45px "IBM Plex Sans", sans-serif;
     overflow: hidden;
     display: -webkit-box;
@@ -75,7 +60,7 @@ main {
     margin: 15px 0;
 }
 
-.carousel-item .subtitle {
+.box-carousel-container .carousel-item .subtitle {
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -83,24 +68,24 @@ main {
     -webkit-box-orient: vertical;
 }
 
-.left-arrow svg {
+.box-carousel-container .left-arrow svg {
     transform: rotate(180deg);
 }
 
-.arrow {
+.box-carousel-container .arrow {
     width: 100px;
 }
 
-.arrow svg {
+.box-carousel-container .arrow svg {
     width: 100%;
     height: 50px;
 }
 
-.arrow svg path {
+.box-carousel-container .arrow svg path {
     fill: white;
 }
 
-.arrow.disabled svg path {
+.box-carousel-container .arrow.disabled svg path {
     fill: #a5a5a5;
 }
 
