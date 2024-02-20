@@ -149,9 +149,9 @@ export function getMetadata(name) {
 export function toClassName(name) {
   return typeof name === 'string'
     ? name.toLowerCase()
-      .replace(/[^\w\u4e00-\u9fa5]/g, '-')  // Include Chinese characters in the regular expression
-      .replace(/-+/g, '-')  // Replace consecutive hyphens with a single hyphen
-      .replace(/^-|-$/g, '')  // Remove leading and trailing hyphens
+      .replace(/[^\w\u4e00-\u9fa5]/g, '-') // Include Chinese characters in the regular expression
+      .replace(/-+/g, '-') // Replace consecutive hyphens with a single hyphen
+      .replace(/^-|-$/g, '') // Remove leading and trailing hyphens
     : '';
 }
 
@@ -202,7 +202,7 @@ export async function decorateIcons(element) {
     if (!ICONS_CACHE[iconName]) {
       ICONS_CACHE[iconName] = true;
       try {
-        const dynamicIconsSharepointPath = `/${window.location.pathname.split('/')[1]}/solutions/icons/`;
+        const dynamicIconsSharepointPath = `/${window.location.pathname.split('/')[1]}/icons/`;
         const response = await fetch(`${dynamicIconsSharepointPath}${iconName}.svg`);
         if (!response.ok) {
           ICONS_CACHE[iconName] = false;
