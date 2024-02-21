@@ -1,15 +1,18 @@
 :root {
+    --white: #fff;
     --blue: #006dff;
     --red: #ff2800;
     --dark: #010f10;
     --dark2: #0c0f14;
     --darker: #06080a;
     --font-ibm: "IBM Plex Sans", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 /* tipography */
 .trusted {
-    color: white;
+    color: var(--white);
     font-family: "IBM Plex Sans", sans-serif;
     position: relative;
 }
@@ -26,12 +29,12 @@
     text-align: center;
 }
 
-.trusted h1 {
+.trusted h1, .trusted main .hero h1 {
     font: normal normal bold 44px/42px var(--font-ibm);
     text-align: left;
 }
 
-.trusted h2 {
+.trusted h2, .trusted main .hero h2 {
     font: normal normal bold 31px/33px var(--font-ibm);
     text-align: left;
 }
@@ -46,7 +49,7 @@
     text-align: left;
 }
 
-.trusted p {
+.trusted p, .trusted main .hero p {
     font: normal normal normal 16px/22px var(--font-ibm);
     text-align: left;
 }
@@ -113,8 +116,8 @@
 
 .trusted a.button.primary,
 .trusted button.primary {
-    border: 1px solid white;
-    color: white;
+    border: 1px solid var(--white);
+    color: var(--white);
     font-weight: 500;
     background-color: transparent;
     border-radius: 5px;
@@ -218,7 +221,7 @@ main .section.link-right a {
     -webkit-transform: none;
     -ms-transform: none;
     transform: none;
-    border: 2px solid #ffffff;
+    border: 2px solid var(--white);
     top: 170px;
     margin-bottom: 9px;
 }
@@ -257,7 +260,7 @@ main .section.link-right a {
     border-radius: 5px;
     margin: 5px auto;
     background: transparent;
-    border: 1px solid white;
+    border: 1px solid var(--white);
 }
 
 .trusted #mouse-scroll .mouse-in {
@@ -269,6 +272,52 @@ main .section.link-right a {
     display: block;
     vertical-align: bottom;
 }
+
+/* ---- hero banner ---- */
+.trusted main .hero::after {
+    display: none;
+}
+
+.trusted main .hero a.button.primary {
+    min-width: auto;
+    padding: 5px 10px 5px 25px;
+}
+
+.trusted main .hero h1, .trusted main .hero h2, .trusted main .hero p {
+    color: var(--white);
+}
+
+.trusted main .hero em {
+    font-size: 15px;
+    line-height: 15px;
+    font-style: unset;
+    display: block;
+}
+
+.trusted main .hero .hero-picture {
+    height: 100%;
+}
+
+@media (min-width: 1600px) {
+    .trusted main .hero .hero-picture picture img {
+        display: block;
+        padding-left: 10%;
+    }
+}
+
+@media (min-width: 1300px) {
+    .trusted main .hero .hero-picture picture img {
+        padding-left: 20%;
+    }
+}
+
+@media (min-width: 990px) {
+    .trusted main .hero .hero-picture picture img {
+        display: block;
+        padding-left: 0;
+    }
+}
+
 
 /* ---- particles.js container ---- */
 
@@ -320,12 +369,16 @@ main .section.link-right a {
 }
 
 @media (width >= 768px) {
-    .trusted h1 {
+    .trusted h1, .trusted main .hero h1 {
         font: normal normal bold 96px/82px "IBM Plex Sans", sans-serif;
     }
 
     .trusted h2 {
         font: normal normal bold 64px/61px "IBM Plex Sans", sans-serif;
+    }
+
+    .trusted main .hero h2 {
+        font: normal normal bold 40px/45px "IBM Plex Sans", sans-serif;
     }
 
     .trusted h3 {
@@ -336,7 +389,7 @@ main .section.link-right a {
         font: normal normal normal 35px/38px "IBM Plex Sans", sans-serif;
     }
 
-    .trusted p {
+    .trusted p, .trusted main .hero p {
         font: normal normal normal 24px/32px "IBM Plex Sans", sans-serif;
     }
 
@@ -367,6 +420,19 @@ main .section.link-right a {
 
     .trusted .has_quotes blockquote::before, .trusted .has_quotes blockquote::after {
         height: 60px;
+    }
+
+    .trusted main .hero .hero-content {
+        min-height: auto;
+    }
+
+    .trusted main .hero .hero-content > div {
+        width: 45%;
+    }
+
+    .trusted main .hero em {
+        position: absolute;
+        bottom: 10px;
     }
 }
 
