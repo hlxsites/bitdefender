@@ -95,6 +95,36 @@
   --cta-background-light-blue: var(--background-light-blue)
 }
 
+body [data-mobile-detector] {
+    display: block;
+}
+
+body [data-tablet-detector] {
+    display: none;
+}
+
+body [data-desktop-detector] {
+    display: none;
+}
+
+@media (width >= 768px) {
+    body [data-mobile-detector] {
+        display: none;
+    }
+}
+
+@media (width >= 768px) {
+    body [data-tablet-detector] {
+        display: block;
+    }
+}
+
+@media (width >= 992px) {
+    body [data-desktop-detector] {
+        display: block;
+    }
+}
+
 /* fallback font for Roboto (normal - 400) */
 @font-face {
   font-family: "roboto-normal-400-fallback";
@@ -537,7 +567,7 @@ main .section.bitdefender-ferrari .default-content-wrapper .button-container a.b
   }
 }
 
-@media (min-width: 992px) { /* desktop */
+@media screen and (min-width: 992px) { /* desktop */
   header {
     height: var(--nav-height-desktop);
     position: absolute;

@@ -54,6 +54,17 @@ window.hlx.plugins.add('rum-conversion', {
   url: '../plugins/rum-conversion/src/index.js',
 });
 
+function initMobileDetector(viewport) {
+  const mobileDetectorDiv = document.createElement('div');
+  mobileDetectorDiv.setAttribute(`data-${viewport}-detector`, '');
+  document.body.prepend(mobileDetectorDiv);
+}
+
+export function isView(viewport) {
+  const element = document.querySelectorAll(`[data-${viewport}-detector]`)[0];
+  return !!(element && getComputedStyle(element).display !== 'none');
+}
+
 /**
  * Creates a meta tag with the given name and value and appends it to the head.
  * @param {String} name The name of the meta tag
@@ -576,5 +587,9 @@ async function loadPage() {
   await loadLazy(document);
   loadDelayed();
 }
+
+initMobileDetector('mobile');
+initMobileDetector('tablet');
+initMobileDetector('desktop');
 
 loadPage();
