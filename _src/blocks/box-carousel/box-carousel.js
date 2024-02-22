@@ -59,7 +59,7 @@ export default async function decorate(block) {
 
   decorateIcons(block);
 
-  const carousel = block.querySelector('.marquee');
+  const carousel = block.querySelector('.carousel');
 
   function isFirstIndex() {
     return currentSlideIndex === 0;
@@ -91,7 +91,7 @@ export default async function decorate(block) {
   }
 
   function updateActiveCard(slideIndex) {
-    block.querySelector('.marquee-item.active').classList.remove('active');
+    block.querySelector('.carousel-item.active').classList.remove('active');
     block.querySelector(`.carousel-item:nth-child(${slideIndex + 1})`).classList.add('active');
   }
 

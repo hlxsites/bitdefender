@@ -29,9 +29,9 @@
 }
 
 .box-carousel-container .carousel-item {
-    width: 290px; /* Square dimensions */
-    height: 290px; /* Square dimensions */
-    margin: 10px; /* Space between items */
+    width: 220px;
+    height: 220px;
+    margin: 10px;
     box-sizing: border-box;
     padding: 20px;
     border: 3px solid #006dff;
@@ -46,21 +46,23 @@
 
 .box-carousel-container .carousel-item.active {
     background: #006dff;
-    box-shadow: 0px 0px 20px 0px #006dff;
-    color: black;
+    box-shadow: 0 3px 24px 0 #006dff;
 }
 
 .box-carousel-container .carousel-item .title {
-    font: normal normal bold 40px/45px "IBM Plex Sans", sans-serif;
+    font: normal normal bold 32px/82px IBM Plex Sans;
+    letter-spacing: 0;
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 1;
     line-clamp: 1;
     -webkit-box-orient: vertical;
-    margin: 15px 0;
+    margin: 8px 0;
 }
 
 .box-carousel-container .carousel-item .subtitle {
+    font: normal normal normal 12px/15px IBM Plex Sans;
+    letter-spacing: 0;
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -89,6 +91,12 @@
     fill: #a5a5a5;
 }
 
+.box-carousel-container .carousel-item .icon {
+    width: 45px;
+    height: 45px;
+    margin: 0;
+}
+
 @media screen and (min-width: 768px) {
     .box-carousel-container .carousel-header {
         justify-content: flex-start;
@@ -97,5 +105,10 @@
 
     .box-carousel-container .carousel-header .left-arrow {
         margin-left: auto;
+    }
+
+    .box-carousel-container .carousel-item {
+        width: 300px;
+        height: 300px;
     }
 }
