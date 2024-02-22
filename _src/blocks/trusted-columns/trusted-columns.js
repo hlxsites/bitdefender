@@ -19,21 +19,21 @@ export default async function decorate(block) {
                 ${pictureEl ? pictureEl.outerHTML : ''}
               </div>
 
-              ${isMobileView ? `<div class="default-content-wrapper d-flex">
+              ${isMobileView ? `<div class="default-content-wrapper d-flex${richTextEls.length ? ' col-text' : ''}">
                 ${richTextEls.map((item) => item.outerHTML).join('')}
               </div>` : ''}
             </div>`;
         }).join('')}
       </div>
 
-        ${!isMobileView ? `<div class="centered-wrapper default-content-wrapper d-flex">
-          ${cols.map((col) => {
-            const richTextEls = [...col.children];
-            richTextEls.shift();
+      ${!isMobileView ? `<div class="centered-wrapper default-content-wrapper d-flex">
+        ${cols.map((col) => {
+          const richTextEls = [...col.children];
+          richTextEls.shift();
 
-            return `<div class="col${richTextEls.length ? ' col-text' : ''}">${richTextEls.map((item) => item.outerHTML).join('')}</div> `;
-          }).join('')}
-        </div>` : ''}
+          return `<div class="col${richTextEls.length ? ' col-text' : ''}">${richTextEls.map((item) => item.outerHTML).join('')}</div> `;
+        }).join('')}
+      </div>` : ''}
     </div>
   `;
 
