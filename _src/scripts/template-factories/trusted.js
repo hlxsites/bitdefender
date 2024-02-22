@@ -1,139 +1,54 @@
-import { loadScript } from '../lib-franklin.js';
-
-await loadScript(`${window.hlx.codeBasePath}/scripts/vendor/particles.js`, {
-  type: 'module',
-});
+import { tsParticles } from 'https://cdn.jsdelivr.net/npm/@tsparticles/engine@3.1.0/+esm';
+import { loadAll } from 'https://cdn.jsdelivr.net/npm/@tsparticles/all@3.1.0/+esm';
 
 const particleIdSelector = 'particles-js';
 
 const particleDiv = document.createElement('div');
 particleDiv.setAttribute('id', particleIdSelector);
 
-const headerHeight = 40;
-const carouselHeight = 116;
-const bannerHeight = 674;
-const sliderHeight = window.innerHeight;
-
-const initialHeight = headerHeight + bannerHeight + carouselHeight + sliderHeight;
-// particleDiv.style.height = `${initialHeight}px`;
-
 document.body.prepend(particleDiv);
 
-window.particlesJS(particleIdSelector, {
+async function loadParticles(options) {
+  await loadAll(tsParticles);
+
+  await tsParticles.load({ id: particleIdSelector, options });
+}
+
+const configs = {
   particles: {
     number: {
-      value: 60,
-      density: {
-        enable: true,
-        value_area: 800,
-      },
+      value: 100,
     },
     color: {
       value: '#ffffff',
     },
+    links: {
+      enable: true,
+      distance: 200,
+    },
     shape: {
       type: 'circle',
-      stroke: {
-        width: 0,
-        color: '#000000',
-      },
-      polygon: {
-        nb_sides: 5,
-      },
-      image: {
-        src: 'img/github.svg',
-        width: 100,
-        height: 100,
-      },
     },
     opacity: {
-      value: 0.5,
-      random: false,
-      anim: {
-        enable: false,
-        speed: 1,
-        opacity_min: 0.1,
-        sync: false,
-      },
+      value: 1,
     },
     size: {
-      value: 3,
-      random: true,
-      anim: {
-        enable: false,
-        speed: 20,
-        size_min: 0.1,
-        sync: false,
+      value: {
+        min: 4,
+        max: 6,
       },
-    },
-    line_linked: {
-      enable: true,
-      distance: 150,
-      color: '#ffffff',
-      opacity: 0.4,
-      width: 1,
     },
     move: {
       enable: true,
-      speed: 6,
-      direction: 'none',
-      random: false,
-      straight: false,
-      out_mode: 'out',
-      bounce: false,
-      attract: {
-        enable: false,
-        rotateX: 600,
-        rotateY: 1200,
-      },
+      speed: 2,
     },
   },
-  interactivity: {
-    detect_on: 'canvas',
-    events: {
-      onhover: {
-        enable: true,
-        mode: 'grab',
-      },
-      onclick: {
-        enable: true,
-        mode: 'push',
-      },
-      resize: true,
-    },
-    modes: {
-      grab: {
-        distance: 140,
-        line_linked: {
-          opacity: 1,
-        },
-      },
-      bubble: {
-        distance: 400,
-        size: 40,
-        duration: 2,
-        opacity: 8,
-        speed: 3,
-      },
-      repulse: {
-        distance: 200,
-        duration: 0.4,
-      },
-      push: {
-        particles_nb: 4,
-      },
-      remove: {
-        particles_nb: 2,
-      },
-    },
+  background: {
+    color: '#016DFF',
   },
-  retina_detect: true,
-});
+  poisson: {
+    enable: true,
+  },
+};
 
-function rearangeParticles() {
-  window.dispatchEvent(new Event('resize'));
-}
-setTimeout(() => {
-  // particleDiv.style = null;
-  rearangeParticles();
-}, 1000);
+loadParticles(configs);

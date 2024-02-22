@@ -60,6 +60,5 @@ export default async function decorate(block) {
 
   render();
 
-  // Optionally, update on window resize
   window.addEventListener('resize', debounce(render, 250));
 }
