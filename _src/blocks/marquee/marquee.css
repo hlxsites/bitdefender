@@ -1,0 +1,25 @@
+.marquee-container .marquee {
+  /*   overflow: hidden; */
+}
+
+.marquee-container .marquee-content {
+  display: flex;
+  animation: scrolling 10s linear infinite;
+  --translateX: 100%;
+}
+
+.marquee-container .marquee-item {
+  flex: 0 0 200px;
+  margin: 0 20px;
+}
+
+.marquee-container .marquee-item img {
+  display: block;
+  width: 100%;
+  object-fit: contain;
+}
+
+@keyframes scrolling {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(var(--translateX) * -1)); }
+}

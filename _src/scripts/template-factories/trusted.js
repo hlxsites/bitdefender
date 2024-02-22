@@ -15,7 +15,7 @@ const bannerHeight = 674;
 const sliderHeight = window.innerHeight;
 
 const initialHeight = headerHeight + bannerHeight + carouselHeight + sliderHeight;
-particleDiv.style.height = `${initialHeight}px`;
+// particleDiv.style.height = `${initialHeight}px`;
 
 document.body.prepend(particleDiv);
 
@@ -134,6 +134,6 @@ function rearangeParticles() {
   window.dispatchEvent(new Event('resize'));
 }
 setTimeout(() => {
-  particleDiv.style = null;
+  // particleDiv.style = null;
   rearangeParticles();
 }, 1000);

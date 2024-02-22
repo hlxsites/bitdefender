@@ -1,3 +1,5 @@
+import { debounce } from '../../scripts/utils/utils.js';
+
 function getItemsToShow() {
   if (window.innerWidth <= 676) {
     return 1; // Show 1 item for mobile screens
@@ -13,7 +15,7 @@ function countSlides(carouselContent) {
 }
 
 function showSlides(carousel, slideNumber) {
-  const carouselContent = carousel.querySelector('.columns.carousel > div:nth-child(1)');
+  const carouselContent = carousel.querySelector('.columns.marquee > div:nth-child(1)');
 
   function handleSlideDisplay(childDivs) {
     // Hide all elements
@@ -53,7 +55,6 @@ function showSlides(carousel, slideNumber) {
         childDivs[i].style.position = 'relative';
         childDivs[i].style.width = `${columnWidthPx}px`;
       }
-
     }
   }
 
@@ -76,7 +77,7 @@ function setActiveButton(button, buttonsWrapper, carousel) {
   const activeButtonIndex = getButtonIndex(activeButton);
   const clickedButtonIndex = getButtonIndex(button);
 
-  const carouselContent = carousel.querySelector('.columns.carousel > div:nth-child(1)');
+  const carouselContent = carousel.querySelector('.columns.marquee > div:nth-child(1)');
 
   // Clear any previous slide classes
   carouselContent.classList.remove('slide-left');
@@ -97,7 +98,7 @@ function setActiveButton(button, buttonsWrapper, carousel) {
 
 function createNavigationButtons(numberOfSlides, carousel) {
   const buttonsWrapper = document.createElement('div');
-  buttonsWrapper.className = 'carousel-buttons';
+  buttonsWrapper.className = 'marquee-buttons';
 
   for (let i = 0; i < numberOfSlides; i += 1) {
     const button = document.createElement('button');
@@ -125,7 +126,7 @@ function createNavigationButtons(numberOfSlides, carousel) {
 }
 
 function setupCarousel(carousel, resetSlidePosition = false) {
-  const carouselContent = carousel.querySelector('.columns.carousel > div');
+  const carouselContent = carousel.querySelector('.columns.marquee > div');
 
   // Remove the slide-left class if necessary
   if (resetSlidePosition) {
@@ -133,7 +134,7 @@ function setupCarousel(carousel, resetSlidePosition = false) {
   }
 
   // Remove existing navigation buttons
-  const existingButtonsWrapper = carousel.querySelector('.carousel-buttons');
+  const existingButtonsWrapper = carousel.querySelector('.marquee-buttons');
   if (existingButtonsWrapper) {
     existingButtonsWrapper.remove();
   }
@@ -143,18 +144,6 @@ function setupCarousel(carousel, resetSlidePosition = false) {
 
   carousel.appendChild(buttonsWrapper);
   hideExcessElements(carousel);
-}
-
-function debounce(func, wait) {
-  let timeout;
-  return function executedFunction(...args) {
-    const later = () => {
-      clearTimeout(timeout);
-      func(...args);
-    };
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  };
 }
 
 function setImageAsBackgroundImage() {
@@ -199,14 +188,14 @@ export default function decorate(block) {
     setImageAsBackgroundImage();
   }
 
-  // If it has the carousel class, then setup the carousel
-  if (block.classList.contains('carousel')) {
+  // If it has the marquee class, then setup the marquee
+  if (block.classList.contains('marquee')) {
     setupCarousel(block);
   }
 
   window.addEventListener('resize', debounce(() => {
-    // Check if the block still has the carousel class before resetting
-    if (block.classList.contains('carousel')) {
+    // Check if the block still has the marquee class before resetting
+    if (block.classList.contains('marquee')) {
       setupCarousel(block, true); // Pass true to reset the slide position
     }
   }, 250));
