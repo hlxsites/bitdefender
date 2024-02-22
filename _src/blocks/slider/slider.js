@@ -21,7 +21,7 @@ export default function decorate(block) {
     <div class="container-fluid d-flex justify-between align-center">
       ${allSliders.length ? allSliders.map(item => {
         const [ sliderText, sliderImage ] = [...item.children];
-        return `<div class="slider-item">
+        return `<div class="slider-item d-flex">
           <div class="slider-text">${sliderText.innerHTML}</div>
           <div class="slider-image">${sliderImage.innerHTML}</div>
         </div>`;
@@ -30,66 +30,74 @@ export default function decorate(block) {
   `;
 
   const items = parentBlock.getElementsByClassName("slider-item");
-  let allItemsSeen = false;
+let allItemsSeen = false;
 
-parentBlock.addEventListener("wheel", handleWheel);
+// Check if the parentBlock is fully in the viewport
+const observer = new IntersectionObserver((entries) => {
+  const parentBlockInViewport = entries[0].isIntersecting;
+
+  if (parentBlockInViewport) {
+    // If the parentBlock is in the viewport, attach the wheel event listener
+    parentBlock.addEventListener("wheel", handleWheel);
+    // Stop observing once the block is in view
+    observer.disconnect();
+  }
+});
+
+// Start observing the parentBlock
+observer.observe(parentBlock);
 
 function handleWheel(evt) {
-    if (!allItemsSeen) {
-        evt.preventDefault();
-        const delta = evt.deltaY || evt.deltaX;
+  if (!allItemsSeen) {
+    evt.preventDefault();
+    const delta = evt.deltaY || evt.deltaX;
 
-        if (delta !== 0) {
-            parentBlock.scrollLeft += delta;
-        }
-
-        // Check if all items have been seen
-        const firstItem = items[0];
-        const lastItem = items[items.length - 1];
-        const parentLeft = parentBlock.getBoundingClientRect().left;
-        const parentRight = parentBlock.getBoundingClientRect().right;
-
-        if (delta > 0 && lastItem.getBoundingClientRect().right <= parentRight) {
-            // Scrolling down and all items have been seen
-            allItemsSeen = true;
-            removePreventDefault();
-        } else if (delta < 0 && firstItem.getBoundingClientRect().left >= parentLeft) {
-            // Scrolling up and reached the first item
-            allItemsSeen = true;
-            removePreventDefault();
-        }
+    if (delta !== 0) {
+      parentBlock.scrollLeft += delta;
     }
+
+    // Check if all items have been seen
+    const firstItem = items[0];
+    const lastItem = items[items.length - 1];
+    const parentLeft = parentBlock.getBoundingClientRect().left;
+    const parentRight = parentBlock.getBoundingClientRect().right;
+
+    if (delta > 0 && lastItem.getBoundingClientRect().right <= parentRight) {
+      // Scrolling down and all items have been seen
+      allItemsSeen = true;
+      removePreventDefault();
+    } else if (delta < 0 && firstItem.getBoundingClientRect().left >= parentLeft) {
+      // Scrolling up and reached the first item
+      allItemsSeen = true;
+      removePreventDefault();
+    }
+  }
 }
 
 function removePreventDefault() {
-    // Remove the event listener to stop preventing default behavior
-    parentBlock.removeEventListener("wheel", handleWheel);
-    // Enable scrolling again when scrolling back up or down
-    parentBlock.addEventListener("wheel", handleRevertScroll);
+  // Remove the event listener to stop preventing default behavior
+  parentBlock.removeEventListener("wheel", handleWheel);
+  // Enable scrolling again when scrolling back up or down
+  parentBlock.addEventListener("wheel", handleRevertScroll);
 
-    function handleRevertScroll(evt) {
-        const delta = evt.deltaY || evt.deltaX;
+  function handleRevertScroll(evt) {
+    const delta = evt.deltaY || evt.deltaX;
 
-        if (delta !== 0) {
-            parentBlock.scrollLeft += delta;
+    if (delta !== 0) {
+      parentBlock.scrollLeft += delta;
 
-            // Check if scrolling down and all items have been seen
-            if (delta > 0 && allItemsSeen) {
-                allItemsSeen = false;
-                // Reattach the original event listener
-                parentBlock.addEventListener("wheel", handleWheel);
-                // Remove the revert scroll event listener
-                parentBlock.removeEventListener("wheel", handleRevertScroll);
-            } else if (delta < 0 && allItemsSeen) {
-                allItemsSeen = false;
-                // Reattach the original event listener
-                parentBlock.addEventListener("wheel", handleWheel);
-                // Remove the revert scroll event listener
-                parentBlock.removeEventListener("wheel", handleRevertScroll);
-            }
-        }
+      // Check if scrolling down or up and all items have been seen
+      if ((delta > 0 || delta < 0) && allItemsSeen) {
+        allItemsSeen = false;
+        // Reattach the original event listener
+        parentBlock.addEventListener("wheel", handleWheel);
+        // Remove the revert scroll event listener
+        parentBlock.removeEventListener("wheel", handleRevertScroll);
+      }
     }
+  }
 }
+
 
   /* parentBlock.addEventListener("wheel", (evt) => {
     evt.preventDefault();
