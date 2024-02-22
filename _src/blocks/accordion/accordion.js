@@ -28,6 +28,7 @@ function handleAccordionItemClick(item, items) {
 }
 
 export default function decorate(block) {
+  console.log(block);
   const items = Array.from(block.querySelectorAll(':scope > div'));
   items.forEach((item) => {
     item.classList.add('accordion-item');
