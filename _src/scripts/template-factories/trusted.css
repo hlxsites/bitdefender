@@ -1,6 +1,7 @@
 :root {
     --white: #fff;
     --blue: #006dff;
+    --teal: #20E7FF;
     --red: #ff2800;
     --dark: #010f10;
     --dark2: #0c0f14;
@@ -59,7 +60,7 @@
 }
 
 .trusted .blue_tag u {
-    color: var(--blue);
+    color: var(--teal);
 }
 
 .trusted .d-flex {
@@ -160,27 +161,29 @@ main .section.link-right a {
     font-style: normal;
 }
 
+.trusted .has_quotes blockquote p::before, .trusted .has_quotes blockquote p::after {
+    display: none;
+}
+
 .trusted .has_quotes blockquote {
     margin: 0;
+    text-indent: 0;
+}
+
+.trusted .has_quotes blockquote em {
+    font-style: italic;
 }
 
 .trusted .has_quotes blockquote::before, .trusted .has_quotes blockquote::after {
     content: "";
-    height: 40px;
+    height: 28px;
     width: 100%;
     display: block;
 }
 
 .trusted .has_quotes blockquote::before {
     margin-bottom: 1em;
-    background: url('../../icons/quote_top.png') no-repeat 0 0 transparent;
-    background-size: auto 100%;
-}
-
-.trusted .has_quotes blockquote::after {
-    margin-top: 1em;
-    background: url('../../icons/quote_top.png') no-repeat 0 0 transparent;
-    background-position: right;
+    background: url('../../icons/quotes-top.png') no-repeat 0 0 transparent;
     background-size: auto 100%;
 }
 
@@ -406,7 +409,7 @@ main .section.link-right a {
     }
 
     .trusted h3 {
-        font: normal normal bold 40px/45px "IBM Plex Sans", sans-serif;
+        font: normal normal normal 40px/45px "IBM Plex Sans", sans-serif;
     }
 
     .trusted h4 {
@@ -443,7 +446,7 @@ main .section.link-right a {
     }
 
     .trusted .has_quotes blockquote::before, .trusted .has_quotes blockquote::after {
-        height: 60px;
+        height: 49px;
     }
 
     .trusted main .hero .hero-content {
@@ -457,6 +460,10 @@ main .section.link-right a {
     .trusted main .hero em {
         position: absolute;
         bottom: 10px;
+    }
+
+    .trusted .has_quotes blockquote {
+        width: 410px;
     }
 }
 
