@@ -1,0 +1,6 @@
+
+#tsparticles {
+    width: 100%;
+    height: 400px;
+    position: relative; /* This is important if you want to overlay other elements on top of the particles */
+}
