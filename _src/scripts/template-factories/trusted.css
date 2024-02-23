@@ -42,12 +42,12 @@
 }
 
 .trusted h2 {
-    font: normal normal bold 32px/32px var(--font-ibm);
+    font: normal normal bold 32px/37px var(--font-ibm);
     text-align: left;
 }
 
 .trusted h3 {
-    font: normal normal bold 20px/24px var(--font-ibm);
+    font: normal normal normal 20px/27px var(--font-ibm);
     text-align: left;
 }
 
@@ -57,14 +57,18 @@
 }
 
 .trusted p, .trusted main .hero p {
-    font: normal normal normal 12px/15px var(--font-ibm);
+    font: normal normal normal 14px/18px var(--font-ibm);
     text-align: left;
+}
+
+.trusted p strong {
+    font-weight: 600;
 }
 
 .trusted u {
     text-decoration: none;
     color: var(--teal);
-    font: normal normal normal 14px/82px var(--font-ibm);
+    font: normal normal normal 14px/18px var(--font-ibm);
 }
 
 .trusted .d-flex {
@@ -119,16 +123,19 @@
     display: block;
 }
 
-.trusted a.button.primary,
-.trusted button.primary {
+.trusted a.button.primary, .trusted button.primary {
     border: 1px solid var(--white);
     color: var(--white);
     background-color: transparent;
     border-radius: 10px;
-    min-width: 195px !important;
-    padding: 10px 10px;
+    min-width: 100%;
+    padding: 10px;
     margin: 1.5em 0 2em;
     font: normal normal bold 16px / 18px Arial;
+}
+
+.trusted a.button.primary span, .trusted button.primary span {
+    margin: 0 auto;
 }
 
 .trusted main a.button:any-link:not(.modal):not(.primary) {
@@ -279,6 +286,10 @@ main .section.link-right a {
     color: var(--white);
 }
 
+.trusted main .hero .hero-content .breadcrumb a:last-of-type:after {
+    display: none;
+}
+
 .trusted .other-options > div > h2 {
     color: var(--black);
 }
@@ -308,17 +319,6 @@ main .section.link-right a {
     padding-bottom: 12em;
 }
 
-/*.trusted .blue_red_section::before {
-    content: "";
-    position: absolute;
-    width: 200%;
-    height: 100%;
-    background-color: red;
-    transform: rotate(25deg);
-    transform-origin: top left;
-    right: 0;
-}*/
-
 .trusted .blue_red_section .default-content-wrapper {
     display: flex;
     align-items: center;
@@ -337,6 +337,15 @@ main .section.link-right a {
 
 .trusted main .hero .hero-content {
     padding: 1em var(--body-padding);
+}
+
+.trusted .default-header {
+    padding-bottom: 0;
+    padding-top: 0;
+}
+
+.trusted .default-header p {
+    margin: 0;
 }
 
 /* ---- particles.js container ---- */
@@ -437,6 +446,14 @@ main .section.link-right a {
         font: normal normal normal 24px/32px var(--font-ibm);
     }
 
+    .trusted main .hero .hero-content .breadcrumb {
+        margin-top: 6em;
+    }
+
+    .trusted .logo-container {
+        padding-left: 1em !important;
+    }
+
     .trusted .d-flex {
         display: flex;
         flex-direction: row;
@@ -450,8 +467,16 @@ main .section.link-right a {
         display: none;
     }
 
+    .trusted u {
+        font: normal normal normal 24px/24px var(--font-ibm);
+    }
+
     .trusted #mouse-scroll {
         display: block;
+    }
+
+    .trusted a.button.primary, .trusted button.primary {
+        min-width: 190px!important;
     }
 
     .trusted .apartnership_box .d-flex > div:nth-of-type(2) {
@@ -490,17 +515,6 @@ main .section.link-right a {
 }
 
 @media (width <= 768px) {
-    .trusted main .hero a.button.primary {
-        width: 100%;
-    }
-
-    .trusted main .hero a.button span.button-text {
-        text-align: center;
-        display: block;
-        width: 100%;
-        font: normal normal bold 16px/18px Arial;
-    }
-
     .trusted .default-content-wrapper {
         padding: 1em!important;
     }
