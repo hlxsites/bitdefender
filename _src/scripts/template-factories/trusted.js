@@ -29,7 +29,7 @@ setTimeout(async () => {
     const configs = {
       particles: {
         number: {
-          value: 100,
+          value: 200,
         },
         color: {
           value: '#ffffff',
@@ -42,12 +42,12 @@ setTimeout(async () => {
           type: 'circle',
         },
         opacity: {
-          value: 1,
+          value: 0.6,
         },
         size: {
           value: {
-            min: 4,
-            max: 6,
+            min: 2,
+            max: 4,
           },
         },
         move: {
