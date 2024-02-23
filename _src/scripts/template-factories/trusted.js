@@ -29,7 +29,7 @@ setTimeout(async () => {
     const configs = {
       particles: {
         number: {
-          value: 200,
+          value: 130,
         },
         color: {
           value: '#ffffff',

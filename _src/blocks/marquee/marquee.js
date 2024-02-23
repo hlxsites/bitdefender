@@ -7,7 +7,7 @@ export default async function decorate(block) {
     DESKTOP: 200 + 20 * 2,
   };
 
-  const SPEED_ANIMATION = 0.8;
+  const SPEED_ANIMATION = 0.2;
 
   const initialSlideList = [...block.children];
 
