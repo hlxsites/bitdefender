@@ -1,139 +1,93 @@
-import { loadScript } from '../lib-franklin.js';
+import { isView } from '../scripts.js';
+import { debounce } from '../utils/utils.js';
 
-await loadScript(`${window.hlx.codeBasePath}/scripts/vendor/particles.js`, {
-  type: 'module',
-});
+// init logic to avoid big layout shifts
+setTimeout(async () => {
+  let tsParticles;
+  let loadAll;
+  async function init() {
+    if (isView('mobile')) {
+      return;
+    }
 
-const particleIdSelector = 'particles-js';
+    tsParticles = (await import('https://cdn.jsdelivr.net/npm/@tsparticles/engine@3.1.0/+esm')).tsParticles;
+    loadAll = (await import('https://cdn.jsdelivr.net/npm/@tsparticles/all@3.1.0/+esm')).loadAll;
 
-const particleDiv = document.createElement('div');
-particleDiv.setAttribute('id', particleIdSelector);
+    const particleIdSelector = 'particles-js';
 
-const headerHeight = 40;
-const carouselHeight = 116;
-const bannerHeight = 674;
-const sliderHeight = window.innerHeight;
+    const particleDiv = document.createElement('div');
+    particleDiv.setAttribute('id', particleIdSelector);
 
-const initialHeight = headerHeight + bannerHeight + carouselHeight + sliderHeight;
-particleDiv.style.height = `${initialHeight}px`;
+    document.body.prepend(particleDiv);
 
-document.body.prepend(particleDiv);
+    async function loadParticles(options) {
+      await loadAll(tsParticles);
 
-window.particlesJS(particleIdSelector, {
-  particles: {
-    number: {
-      value: 60,
-      density: {
-        enable: true,
-        value_area: 800,
-      },
-    },
-    color: {
-      value: '#ffffff',
-    },
-    shape: {
-      type: 'circle',
-      stroke: {
-        width: 0,
-        color: '#000000',
-      },
-      polygon: {
-        nb_sides: 5,
-      },
-      image: {
-        src: 'img/github.svg',
-        width: 100,
-        height: 100,
-      },
-    },
-    opacity: {
-      value: 0.5,
-      random: false,
-      anim: {
-        enable: false,
-        speed: 1,
-        opacity_min: 0.1,
-        sync: false,
-      },
-    },
-    size: {
-      value: 3,
-      random: true,
-      anim: {
-        enable: false,
-        speed: 20,
-        size_min: 0.1,
-        sync: false,
-      },
-    },
-    line_linked: {
-      enable: true,
-      distance: 150,
-      color: '#ffffff',
-      opacity: 0.4,
-      width: 1,
-    },
-    move: {
-      enable: true,
-      speed: 6,
-      direction: 'none',
-      random: false,
-      straight: false,
-      out_mode: 'out',
-      bounce: false,
-      attract: {
-        enable: false,
-        rotateX: 600,
-        rotateY: 1200,
-      },
-    },
-  },
-  interactivity: {
-    detect_on: 'canvas',
-    events: {
-      onhover: {
-        enable: true,
-        mode: 'grab',
-      },
-      onclick: {
-        enable: true,
-        mode: 'push',
-      },
-      resize: true,
-    },
-    modes: {
-      grab: {
-        distance: 140,
-        line_linked: {
-          opacity: 1,
+      await tsParticles.load({ id: particleIdSelector, options });
+    }
+
+    const configs = {
+      particles: {
+        number: {
+          value: 100,
+        },
+        color: {
+          value: '#ffffff',
+        },
+        links: {
+          enable: true,
+          distance: 200,
+        },
+        shape: {
+          type: 'circle',
+        },
+        opacity: {
+          value: 1,
+        },
+        size: {
+          value: {
+            min: 4,
+            max: 6,
+          },
+        },
+        move: {
+          enable: true,
+          speed: 2,
         },
       },
-      bubble: {
-        distance: 400,
-        size: 40,
-        duration: 2,
-        opacity: 8,
-        speed: 3,
+      background: {
+        color: '#016DFF',
       },
-      repulse: {
-        distance: 200,
-        duration: 0.4,
+      poisson: {
+        enable: true,
       },
-      push: {
-        particles_nb: 4,
-      },
-      remove: {
-        particles_nb: 2,
-      },
-    },
-  },
-  retina_detect: true,
-});
+    };
 
-function rearangeParticles() {
-  window.dispatchEvent(new Event('resize'));
-}
-setTimeout(() => {
-  particleDiv.style = null;
-  rearangeParticles();
-}, 1000);
+    loadParticles(configs);
+  }
+
+  async function checkForMobile() {
+    const isMobileView = isView('mobile');
+    if (isMobileView && (!tsParticles && !loadAll)) {
+      return;
+    }
+
+    if (isMobileView && tsParticles) {
+      const particles = tsParticles.domItem(0);
+      particles.pause();
+      return;
+    }
+
+    if (!isMobileView && (!tsParticles && !loadAll)) {
+      await init();
+      return;
+    }
+
+    const particles = tsParticles.domItem(0);
+    particles.play();
+  }
+
+  await init();
+
+  window.addEventListener('resize', debounce(checkForMobile, 250));
+}, 3000);

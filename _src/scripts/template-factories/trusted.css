@@ -17,6 +17,7 @@
     color: var(--white);
     font-family: var(--font-ibm);
     position: relative;
+    background: var(--blue);
 }
 
 .trusted div[data-align="right"] {

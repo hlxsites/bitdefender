@@ -1,8 +1,8 @@
 import { createTag } from '../../scripts/utils/utils.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
-const SLIDE_PREFIX = 'carousel-slide-';
-const CONTROL_PREFIX = 'carousel-control-';
+const SLIDE_PREFIX = 'marquee-slide-';
+const CONTROL_PREFIX = 'marquee-control-';
 
 function createSlide(item, index) {
   const paragraphs = Array.from(item.querySelectorAll('p'));
@@ -125,7 +125,7 @@ export default async function decorate(block) {
 
   const dotsControls = createDotsControls(slides, block);
 
-  /* Add carousel action button if it exists */
+  /* Add marquee action button if it exists */
   const controlsElements = [dotsControls];
   const button = block.querySelector('.button-container');
   if (button) {
