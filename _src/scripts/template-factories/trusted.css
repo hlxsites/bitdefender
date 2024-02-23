@@ -16,6 +16,7 @@
     color: var(--white);
     font-family: "IBM Plex Sans", sans-serif;
     position: relative;
+    background: var(--blue);
 }
 
 .trusted div[data-align="right"] {
