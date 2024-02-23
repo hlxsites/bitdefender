@@ -3,6 +3,7 @@
     --blue: #006dff;
     --teal: #20E7FF;
     --red: #ff2800;
+    --black: #000;
     --dark: #010f10;
     --dark2: #0c0f14;
     --darker: #06080a;
@@ -14,7 +15,7 @@
 /* tipography */
 .trusted {
     color: var(--white);
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: var(--font-ibm);
     position: relative;
 }
 
@@ -31,12 +32,16 @@
 }
 
 .trusted h1, .trusted main .hero h1 {
-    font: normal normal bold 44px/42px var(--font-ibm);
+    font: normal normal bold 48px/42px var(--font-ibm);
     text-align: left;
 }
 
-.trusted h2, .trusted main .hero h2 {
-    font: normal normal bold 31px/33px var(--font-ibm);
+.trusted main .hero h2 {
+    font: normal normal bold 20px/24px var(--font-ibm);
+}
+
+.trusted h2 {
+    font: normal normal bold 32px/32px var(--font-ibm);
     text-align: left;
 }
 
@@ -51,16 +56,14 @@
 }
 
 .trusted p, .trusted main .hero p {
-    font: normal normal normal 16px/22px var(--font-ibm);
+    font: normal normal normal 12px/15px var(--font-ibm);
     text-align: left;
 }
 
 .trusted u {
     text-decoration: none;
-}
-
-.trusted .blue_tag u {
     color: var(--teal);
+    font: normal normal normal 14px/82px var(--font-ibm);
 }
 
 .trusted .d-flex {
@@ -119,13 +122,15 @@
 .trusted button.primary {
     border: 1px solid var(--white);
     color: var(--white);
-    font-weight: 500;
     background-color: transparent;
-    border-radius: 5px;
-    padding: 5px 3px 5px 16px;
+    border-radius: 10px;
+    min-width: 195px !important;
+    padding: 10px 10px;
+    margin: 1.5em 0 2em;
+    font: normal normal bold 16px / 18px Arial;
 }
 
-.trusted a.button:any-link:not(.modal):not(.primary) {
+.trusted main a.button:any-link:not(.modal):not(.primary) {
     background-color: var(--blue);
     border: 2px solid var(--blue);
 }
@@ -183,7 +188,7 @@ main .section.link-right a {
 
 .trusted .has_quotes blockquote::before {
     margin-bottom: 1em;
-    background: url('../../icons/quotes-top.png') no-repeat 0 0 transparent;
+    background: url('../../icons/quot.png') no-repeat 0 0 transparent;
     background-size: auto 100%;
 }
 
@@ -268,14 +273,18 @@ main .section.link-right a {
     vertical-align: bottom;
 }
 
+/* ---- nav ---- */
+.trusted header .icon, .trusted .logo-container p, .trusted main .hero .hero-content .breadcrumb a, .trusted main .hero .hero-content .breadcrumb a::after {
+    color: var(--white);
+}
+
+.trusted .other-options > div > h2 {
+    color: var(--black);
+}
+
 /* ---- hero banner ---- */
 .trusted main .hero::after {
     display: none;
-}
-
-.trusted main .hero a.button.primary {
-    min-width: auto;
-    padding: 5px 10px 5px 25px;
 }
 
 .trusted main .hero h1, .trusted main .hero h2, .trusted main .hero p {
@@ -320,34 +329,16 @@ main .section.link-right a {
     margin: 0em 2em;
 }
 
-@media (min-width: 1600px) {
-    .trusted main .hero .hero-picture picture img {
-        display: block;
-        padding-left: 10%;
-    }
+.trusted .hero-container .default-content-wrapper {
+    display: block;
+    padding: 0 !important;
 }
 
-@media (min-width: 1300px) {
-    .trusted main .hero .hero-picture picture img {
-        padding-left: 20%;
-    }
+.trusted main .hero .hero-content {
+    padding: 1em var(--body-padding);
 }
-
-@media (min-width: 990px) {
-    .trusted main .hero .hero-picture picture img {
-        display: block;
-        padding-left: 0;
-    }
-
-    .trusted .blue_red_section .default-content-wrapper img {
-        width: 280px;
-        margin: 1em 2em;
-    }
-}
-
 
 /* ---- particles.js container ---- */
-
 .trusted #particles-js {
     position: absolute;
     width: 100%;
@@ -395,29 +386,54 @@ main .section.link-right a {
     }
 }
 
+@media (min-width: 1600px) {
+    .trusted main .hero .hero-picture picture img {
+        display: block;
+        padding-left: 10%;
+    }
+}
+
+@media (min-width: 1300px) {
+    .trusted main .hero .hero-picture picture img {
+        padding-left: 20%;
+    }
+}
+
+@media (min-width: 990px) {
+    .trusted main .hero .hero-picture picture img {
+        display: block;
+        padding-left: 0;
+    }
+
+    .trusted .blue_red_section .default-content-wrapper img {
+        width: 280px;
+        margin: 1em 2em;
+    }
+}
+
 @media (width >= 768px) {
     .trusted h1, .trusted main .hero h1 {
-        font: normal normal bold 96px/82px "IBM Plex Sans", sans-serif;
+        font: normal normal bold 96px/82px var(--font-ibm);
     }
 
     .trusted h2 {
-        font: normal normal bold 64px/61px "IBM Plex Sans", sans-serif;
+        font: normal normal bold 64px/61px var(--font-ibm);
     }
 
     .trusted main .hero h2 {
-        font: normal normal bold 40px/45px "IBM Plex Sans", sans-serif;
+        font: normal normal bold 40px/45px var(--font-ibm);
     }
 
     .trusted h3 {
-        font: normal normal normal 40px/45px "IBM Plex Sans", sans-serif;
+        font: normal normal normal 40px/45px var(--font-ibm);
     }
 
     .trusted h4 {
-        font: normal normal normal 35px/38px "IBM Plex Sans", sans-serif;
+        font: normal normal normal 35px/38px var(--font-ibm);
     }
 
     .trusted p, .trusted main .hero p {
-        font: normal normal normal 24px/32px "IBM Plex Sans", sans-serif;
+        font: normal normal normal 24px/32px var(--font-ibm);
     }
 
     .trusted .d-flex {
@@ -446,7 +462,7 @@ main .section.link-right a {
     }
 
     .trusted .has_quotes blockquote::before, .trusted .has_quotes blockquote::after {
-        height: 49px;
+        height: 50px;
     }
 
     .trusted main .hero .hero-content {
@@ -457,9 +473,14 @@ main .section.link-right a {
         width: 45%;
     }
 
+    .trusted .hero-container .default-content-wrapper {
+        display: none;
+    }
+
     .trusted main .hero em {
         position: absolute;
         bottom: 10px;
+        font: normal normal 600 18px/23px var(--font-ibm);
     }
 
     .trusted .has_quotes blockquote {
@@ -468,12 +489,39 @@ main .section.link-right a {
 }
 
 @media (width <= 768px) {
+    .trusted main .hero a.button.primary {
+        width: 100%;
+    }
+
+    .trusted main .hero a.button span.button-text {
+        text-align: center;
+        display: block;
+        width: 100%;
+        font: normal normal bold 16px/18px Arial;
+    }
+
     .trusted .default-content-wrapper {
         padding: 1em!important;
     }
 
     .trusted .top_banner .default-content-wrapper {
         padding-bottom: 0!important;
+        width: 100%;
+        overflow: hidden;
+    }
 
+    .trusted main .hero em {
+        display: none;
+    }
+
+    .trusted .top_banner .default-content-wrapper em {
+        display: block;
+        font: normal normal 600 12px/15px var(--font-ibm);
+        padding: 1em var(--body-padding);
+    }
+
+    .trusted main .hero .hero-content .breadcrumb {
+        padding: 14px 0;
+        margin-bottom: 0;
     }
 }
