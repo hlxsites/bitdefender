@@ -1,7 +1,8 @@
 import { isView } from '../scripts.js';
 import { debounce } from '../utils/utils.js';
 
-(async () => {
+// init logic to avoid big layout shifts
+setTimeout(async () => {
   let tsParticles;
   let loadAll;
   async function init() {
@@ -89,4 +90,4 @@ import { debounce } from '../utils/utils.js';
   await init();
 
   window.addEventListener('resize', debounce(checkForMobile, 250));
-})();
+}, 3000);
