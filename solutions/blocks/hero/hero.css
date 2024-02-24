@@ -158,6 +158,10 @@ main .hero h4 {
   margin: 0 0 9px;
 }
 
+main .hero.new-hero-exp01 h4 {
+  font-size: 16px;
+  line-height: 28px;
+}
 main .hero.black-background h1,
 main .hero.black-background h2,
 main .hero.black-background h4 {
@@ -178,12 +182,9 @@ main .hero p {
   margin: 0;
 }
 
-main .hero h1 + p {
-  margin: 8px 0 0;
-  color: #616161;
-  font-size: var(--hero-font-size-xxs);
-  font-weight: var(--font-weight-bold);
-  line-height: 1.5;
+main .hero.new-hero-exp01 h1 + p {
+  font-size: 24px;
+  line-height: 28px;
 }
 
 main .hero.comparison p {
@@ -242,6 +243,11 @@ main .hero a.button.modal {
     justify-content: center;
     align-items: center;
   }
+
+  main .hero.new-hero-exp01 a.button {
+    min-width: 146px;
+    padding: 10px 23px 8px 23px;
+  }
 }
 
 main .hero a.button span.button-text {
@@ -251,7 +257,6 @@ main .hero a.button span.button-text {
   font-size: var(--hero-font-size-xs);
   font-weight: var(--font-weight-bold);
 }
-
 
 main .hero .discount-bubble {
   background: #2cb43d;
@@ -428,7 +433,19 @@ main .hero .hero-awards li::after {
     font-size: 14px;
     margin: 0;
   }
+  main .hero.new-hero-exp01 p {
+    font-size: 16px;
+    line-height: 18px;
+  }
 
+  main .hero.new-hero-exp01 p em a {
+    font-size: 16px;
+    line-height: 18px;
+    color: #000000;
+    font-style: normal;
+    text-decoration: underline;
+    
+  }
   main .hero .hero-picture picture img {
     display: block;
     padding-left: 0;
@@ -449,6 +466,11 @@ main .hero .hero-awards li::after {
 
   main .hero .hero-content > div {
     width: 60%;
+    padding: 0 20px 0 0;
+  }
+
+  main .hero.new-hero-exp01 .hero-content > div {
+    width: 48%;
     padding: 0 20px 0 0;
   }
 
@@ -502,10 +524,25 @@ main .hero .hero-awards li::after {
   main .hero h1 {
     font-size: 56px;
   }
+  main .hero.new-hero-exp01 h1 {
+    color: #006DFF;
+    font-size: 40px;
+  }
+
+  main .hero.new-hero-exp01 h1 strong {
+    font-weight: var(--font-weight-regular);
+
+  }
 
   main .hero .hero-picture picture img {
     display: block;
     padding-left: 25%;
+  }
+
+  main .hero.new-hero-exp01 .hero-picture picture img {
+    display: block;
+    padding-left: 0;
+    object-fit: fill;
   }
 
   main .hero .discount-bubble {
@@ -521,10 +558,22 @@ main .hero .hero-awards li::after {
     font-size: 14px;
   }
 
-  main .hero .hero-content {
-    min-height: 725px;
+  main .hero.new-hero-exp01 .hero-content {
+    min-height: 498px;
     max-width: var(--section-large-desktop-max-width);
     padding-left: var(--section-large-desktop-padding);
     padding-right: var(--section-large-desktop-padding);
   }
+  
+}
+
+
+main .hero.new-hero-exp01 .nanoblock span.old-price del {
+  font-size: 16px;
+  line-height: 18px;
+}
+
+main .hero.new-hero-exp01 .nanoblock strong {
+  font-size: 40px;
+  line-height: 45px;
 }
