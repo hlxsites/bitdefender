@@ -1,7 +1,8 @@
-import { debounce } from '../../scripts/utils/utils.js';
+import {debounce, getDatasetFromSection} from '../../scripts/utils/utils.js';
 import { isView } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
+  const defaultBackgroundColor = '#004299';
   const SLIDE_SIZE_ENUM = {
     MOBILE: 100 + 20 * 2,
     DESKTOP: 200 + 20 * 2,
@@ -58,6 +59,10 @@ export default async function decorate(block) {
   }
 
   function render() {
+    const blockDataset = getDatasetFromSection(block);
+    const { background_color: backgroundColor } = blockDataset;
+    block.style.background = backgroundColor || defaultBackgroundColor;
+
     const { duplicatedSlides, slidesToShift } = calculateSlideListBasedOnScreenWidth();
 
     block.innerHTML = `
