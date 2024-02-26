@@ -1,3 +1,9 @@
+.marquee-container .marquee.block {
+  background: #004299;
+  height: 150px;
+  display: flex;
+}
+
 .marquee-container .marquee-content {
   display: flex;
   animation: scrolling 10s linear infinite;
@@ -24,5 +30,9 @@
   .marquee-container .marquee-item {
     flex: 0 0 200px;
     margin: 0 20px;
+  }
+
+  .marquee-container .marquee.block {
+    height: 250px;
   }
 }

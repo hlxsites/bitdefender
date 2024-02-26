@@ -15,7 +15,7 @@
   --hero-botton-border-color: #616161;
   --hero-p-color: #3c3c3c;
 
-  /* breadcrumbs font size */  
+  /* breadcrumbs font size */
   --breadcrumb-text-color-dark: #c5c5c5;
   --breadcrumb-text-color-dark-hover: #616161;
   --breadcrumbs-font-size-s: 12px;
@@ -82,7 +82,7 @@ main .hero.black-background .hero-content .breadcrumb a:hover {
 main .hero-container > div {
   max-width: unset;
 }
-  
+
 main .hero-container {
   padding: 0;
   margin: 0 auto;
@@ -177,10 +177,10 @@ main .hero h2 {
 
 main .hero.black-background h1 {
   font-size: var(--hero-h1-font-size);
-  margin: 0 0 25px; 
+  margin: 0 0 25px;
 }
 
-main .hero.black-background h1, 
+main .hero.black-background h1,
 main .hero.black-background h2,
 main .hero.black-background h4 {
   color: var(--text-dark-color);
@@ -257,7 +257,7 @@ main .hero .hero-picture picture img {
 
 main .hero a.button {
   margin: 8px 13px 0 0;
-} 
+}
 
 main .hero a.button.modal {
   padding: 0 28px 0 0;
@@ -348,7 +348,7 @@ main .hero .hero-content ul li {
 main .hero .hero-content ul li:first-child {
   margin: 9px 0 0;
 }
-  
+
 main .hero ul li::before {
   content: "";
   position: absolute;
@@ -406,6 +406,12 @@ main .hero .hero-awards li::after {
   content: none;
 }
 
+
+.hero .mobile-picture-wrapper {
+  height: 280px;
+  margin-top: -25px;
+}
+
 @media(min-width: 767px) { /* tablet */
   :root {
     --hero-h1-font-size: 42px;
@@ -424,6 +430,9 @@ main .hero .hero-awards li::after {
     margin: 0 9px;
   }
 
+  div.hero div:nth-child(3) {
+    display: none;
+  }
 }
 
 @media (min-width: 990px) { /* desktop */
@@ -507,7 +516,7 @@ main .hero .hero-awards li::after {
     line-height: 1;
     letter-spacing: .96px;
   }
-  
+
   main .hero.black-background ul.hero-awards {
     display: flex;
     flex-direction: row;
@@ -534,7 +543,7 @@ main .hero .hero-awards li::after {
 }
 
 @media (min-width: 1600px) { /* large desktop */
-  
+
 
   main .hero.black-background .hero-content .breadcrumb {
     padding: 9px 0;
@@ -583,5 +592,5 @@ main .hero .hero-awards li::after {
     padding-left: var(--section-large-desktop-padding);
     padding-right: var(--section-large-desktop-padding);
   }
- 
+
 }

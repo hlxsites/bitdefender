@@ -1,5 +1,4 @@
 export default async function decorate(block) {
-  console.log(block);
   const [richTextEl, firstPictureEl, secondPictureEl] = [...block.children];
 
   block.innerHTML = `

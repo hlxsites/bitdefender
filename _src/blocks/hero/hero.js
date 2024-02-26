@@ -5,6 +5,7 @@ import {
   renderNanoBlocks,
   fetchProduct,
 } from '../../scripts/utils/utils.js';
+import { isView } from '../../scripts/scripts.js';
 
 /**
  * Builds hero block and prepends to main in a new section.
@@ -20,7 +21,7 @@ function buildHeroBlock(element) {
     const subSection = document.querySelector('div.hero div');
     subSection.classList.add('hero-content');
 
-    const isHomePage = window.location.pathname.split('/').filter(item => item).length === 1;
+    const isHomePage = window.location.pathname.split('/').filter((item) => item).length === 1;
 
     if (!isHomePage) {
       const breadcrumb = createTag('div', { class: 'breadcrumb' });
@@ -32,6 +33,16 @@ function buildHeroBlock(element) {
     pictureEl.append(picture);
 
     section.prepend(pictureEl);
+
+    const isMobileView = isView('mobile');
+    // eslint-disable-next-line max-len
+    const mobilePictureWrapper = !section.lastElementChild.classList.value && section.lastElementChild;
+    if (isMobileView && mobilePictureWrapper) {
+      mobilePictureWrapper.classList.add('mobile-picture-wrapper', 'img-container');
+      mobilePictureWrapper.replaceChild(mobilePictureWrapper.querySelector('picture'), mobilePictureWrapper.firstElementChild);
+    } else if (!isMobileView && mobilePictureWrapper) {
+      section.removeChild(mobilePictureWrapper);
+    }
 
     pictureParent.remove();
   }
