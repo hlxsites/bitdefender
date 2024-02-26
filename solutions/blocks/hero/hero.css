@@ -143,6 +143,9 @@ main .hero h1 {
   margin: 0 0 25px;
 }
 
+main .hero.new-hero-exp01 h1 {
+  margin: 0 0 10px;
+}
 main .hero h2 {
   font-size: 18px;
   color: var(--text-color);
@@ -161,6 +164,7 @@ main .hero h4 {
 main .hero.new-hero-exp01 h4 {
   font-size: 16px;
   line-height: 28px;
+  margin: 31px 0 14px 0;
 }
 main .hero.black-background h1,
 main .hero.black-background h2,
@@ -185,6 +189,7 @@ main .hero p {
 main .hero.new-hero-exp01 h1 + p {
   font-size: 24px;
   line-height: 28px;
+  margin: 0 0 10px;
 }
 
 main .hero.comparison p {
@@ -246,8 +251,10 @@ main .hero a.button.modal {
 
   main .hero.new-hero-exp01 a.button {
     min-width: 146px;
-    padding: 10px 23px 8px 23px;
+    padding: 9px 23px 9px 23px;
+    margin: 8px 39px 0 0;
   }
+
 }
 
 main .hero a.button span.button-text {
@@ -436,6 +443,7 @@ main .hero .hero-awards li::after {
   main .hero.new-hero-exp01 p {
     font-size: 16px;
     line-height: 18px;
+    margin: 6px 0 0 0;
   }
 
   main .hero.new-hero-exp01 p em a {
@@ -576,4 +584,11 @@ main .hero.new-hero-exp01 .nanoblock span.old-price del {
 main .hero.new-hero-exp01 .nanoblock strong {
   font-size: 40px;
   line-height: 45px;
+}
+
+main .hero.new-hero-exp01 .nanoblock em {
+  font-size: 12px;
+  line-height: 14px;
+  position: relative;
+  top: -21px;
 }
