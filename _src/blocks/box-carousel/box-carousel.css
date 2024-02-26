@@ -46,7 +46,14 @@
 
 .box-carousel-container .carousel-item.active {
     background: #006dff;
-    box-shadow: 0 3px 24px 0 #006dff;
+    box-shadow: 0px 3px 12px 1px rgba(0,0,0,1),
+    0px 0px 100px 0px rgba(0,110,255,1);
+}
+
+.box-carousel-container .carousel-item:hover {
+    background: #006dff;
+    box-shadow: 0px 3px 12px 1px rgba(0,0,0,1),
+    0px 0px 100px 0px rgba(0,110,255,1);
 }
 
 .box-carousel-container .carousel-item .title {
@@ -110,5 +117,13 @@
     .box-carousel-container .carousel-item {
         width: 300px;
         height: 300px;
+    }
+
+    .box-carousel-container .carousel-item .title {
+        font: normal normal bold 64px/82px IBM Plex Sans;
+    }
+
+    .box-carousel-container .carousel-item .subtitle {
+        font: normal normal normal 18px/23px IBM Plex Sans;
     }
 }

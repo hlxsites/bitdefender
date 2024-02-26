@@ -153,7 +153,7 @@ main .section.link-right a {
 .trusted .video_up {
     z-index: 999;
     position: relative;
-    margin-top: -15em;
+    margin-top: -19.5em;
     background: linear-gradient(to bottom, transparent 31%,var(--dark2) 31%);
 }
 
@@ -314,26 +314,10 @@ main .section.link-right a {
     height: 100%;
 }
 
-.trusted .blue_red_section {
-    background: linear-gradient(to right, transparent 50%, var(--red) 50%);
-    padding-bottom: 12em;
-}
-
-.trusted .blue_red_section .default-content-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.trusted .blue_red_section .default-content-wrapper img {
-    width: 150px;
-    margin: 0em 2em;
-}
-
-.trusted .hero-container .default-content-wrapper {
-    display: block;
-    padding: 0 !important;
-}
+/*.trusted .hero-container .default-content-wrapper {*/
+/*    display: block;*/
+/*    padding: 0 !important;*/
+/*}*/
 
 .trusted main .hero .hero-content {
     padding: 1em var(--body-padding);
@@ -413,11 +397,6 @@ main .section.link-right a {
     .trusted main .hero .hero-picture picture img {
         display: block;
         padding-left: 0;
-    }
-
-    .trusted .blue_red_section .default-content-wrapper img {
-        width: 280px;
-        margin: 1em 2em;
     }
 }
 
@@ -499,9 +478,9 @@ main .section.link-right a {
         width: 45%;
     }
 
-    .trusted .hero-container .default-content-wrapper {
-        display: none;
-    }
+    /*.trusted .hero-container .default-content-wrapper {*/
+    /*    display: none;*/
+    /*}*/
 
     .trusted main .hero em {
         position: absolute;
@@ -511,6 +490,10 @@ main .section.link-right a {
 
     .trusted .has_quotes blockquote {
         width: 410px;
+    }
+
+    .trusted .video_up {
+        margin-top: -12.5em;
     }
 }
 
@@ -529,11 +512,11 @@ main .section.link-right a {
         display: none;
     }
 
-    .trusted .top_banner .default-content-wrapper em {
-        display: block;
-        font: normal normal 600 12px/15px var(--font-ibm);
-        padding: 1em var(--body-padding);
-    }
+    /*.trusted .top_banner .default-content-wrapper em {*/
+    /*    display: block;*/
+    /*    font: normal normal 600 12px/15px var(--font-ibm);*/
+    /*    padding: 1em var(--body-padding);*/
+    /*}*/
 
     .trusted main .hero .hero-content .breadcrumb {
         padding: 14px 0;
