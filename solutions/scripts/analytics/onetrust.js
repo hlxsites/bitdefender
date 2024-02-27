@@ -34,7 +34,7 @@ function initOneTrust() {
   /* Waits for OneTrust fully loaded to run initialization */
   let tries = 0;
   const interval = setInterval(() => {
-    console.log("optanon es "+window.OptanonActiveGroups);
+    //console.log("optanon is "+window.OptanonActiveGroups);
     tries += 1;
     if (window.Optanon && window.OptanonActiveGroups) {
       clearInterval(interval);
