@@ -1,6 +1,5 @@
 /* eslint-disable prefer-const */
 /* eslint-disable camelcase */
-import { isView } from '../../scripts/scripts.js';
 
 function debounce(func, wait) {
   let timeout;
@@ -14,8 +13,14 @@ function debounce(func, wait) {
   };
 }
 
+function isView(viewport) {
+  const element = document.querySelectorAll(`[data-${viewport}-detector]`)[0];
+  return !!(element && getComputedStyle(element).display !== 'none');
+}
+
 let tsParticles;
 let loadAll;
+
 async function init(block) {
   if (isView('mobile')) {
     return;
@@ -72,6 +77,7 @@ async function init(block) {
     poisson: {
       enable: true,
     },
+    fullScreen: { enable: false },
   };
 
   loadParticles(configs);
