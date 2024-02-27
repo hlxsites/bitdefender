@@ -11,6 +11,7 @@
     a {
         color: white;
         transition: all 1s ease;
+        text-decoration: underline;
     }
 
     transition: all 1s ease;
