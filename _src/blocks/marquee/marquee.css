@@ -1,3 +1,7 @@
+.marquee-container.section {
+  padding-top: 0;
+}
+
 .marquee-container .marquee.block {
   height: 150px;
   display: flex;
