@@ -10,7 +10,10 @@
 
     a {
         color: white;
+        transition: all 1s ease;
     }
+
+    transition: all 1s ease;
 }
 
 @media screen and (min-width: 991px) {
