@@ -7,8 +7,10 @@ export default function decorate(block) {
     elementLink.style.color = '#006EFF';
   }, 2000);
 
-  window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
-    bubbles: true,
-    composed: true,
-  });
+  setTimeout(() => {
+    window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
+      bubbles: true,
+      composed: true,
+    });
+  }, 700);
 }
