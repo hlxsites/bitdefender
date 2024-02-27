@@ -2,10 +2,6 @@
 import { loadScript } from '../lib-franklin.js';
 import { analyticsSetConsent } from './lib-analytics.js';
 
-const ONE_TRUST_ID = '2e112ba7-dfdc-491a-8b9a-c862b3140402'; // Set site provided OneTrust Id on here
-
-
-
 /**
  * Runs initialization setup
  */
@@ -58,7 +54,8 @@ function initOneTrust() {
  * Whenever the user changes the cookie preferences, the page is reloaded
  * @param {Function} callback executed when user selects consent
  */
-export default function loadOneTrust() {
+export default function loadOneTrust(ONE_TRUST_ID) {
+    console.log('one trust idd '+ONE_TRUST_ID);
   const dataAttrs = {
     'data-domain-script': `${ONE_TRUST_ID}`,
     'data-dlayer-name': 'adobeDataLayer',

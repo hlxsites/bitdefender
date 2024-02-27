@@ -37,6 +37,8 @@ export const DEFAULT_COUNTRY = 'au';
 
 export const METADATA_ANAYTICS_TAGS = 'analytics-tags';
 
+const ONE_TRUST_ID = '2e112ba7-dfdc-491a-8b9a-c862b3140402';
+
 window.hlx.plugins.add('rum-conversion', {
   load: 'lazy',
   url: '../plugins/rum-conversion/src/index.js',
@@ -541,7 +543,7 @@ async function loadPage() {
   await window.hlx.plugins.load('lazy');
   await loadLazy(document);
   const setupAnalytics = setupAnalyticsTrackingWithAlloy(document);
-  loadOneTrust();
+  loadOneTrust(ONE_TRUST_ID);
   loadDelayed();
   await setupAnalytics;
 }
