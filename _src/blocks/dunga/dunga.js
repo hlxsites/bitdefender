@@ -4,7 +4,7 @@ export default function decorate(block) {
       bubbles: true,
       composed: true,
     });
-  }, 500);
+  }, 1000);
 
   setTimeout(() => {
     const element = block.querySelector('.dunga');
