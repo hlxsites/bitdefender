@@ -10,5 +10,5 @@ export default function decorate(block) {
     element.style.backgroundColor = '#E4F2FF';
     element.style.color = '#006EFF';
     elementLink.style.color = '#006EFF';
-  }, 1500);
+  }, 2000);
 }
