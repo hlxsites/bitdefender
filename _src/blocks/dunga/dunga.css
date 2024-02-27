@@ -1,8 +1,10 @@
 .dunga {
     text-align: center;
-    background-color: #006DFF;
+    background-color: #006EFF;
     color: white;
     display: flex;
+    line-height: 1.2;
+    padding: 8px 0;
     align-items: center;
 
     a {
