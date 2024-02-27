@@ -146,6 +146,7 @@ main .hero h1 {
 main .hero.new-hero-exp01 h1 {
   margin: 0 0 10px;
 }
+
 main .hero h2 {
   font-size: 18px;
   color: var(--text-color);
@@ -164,8 +165,9 @@ main .hero h4 {
 main .hero.new-hero-exp01 h4 {
   font-size: 16px;
   line-height: 28px;
-  margin: 31px 0 14px 0;
+  margin: 31px 0 14px;
 }
+
 main .hero.black-background h1,
 main .hero.black-background h2,
 main .hero.black-background h4 {
@@ -186,12 +188,6 @@ main .hero p {
   margin: 0;
 }
 
-main .hero.new-hero-exp01 h1 + p {
-  font-size: 24px;
-  line-height: 28px;
-  margin: 0 0 10px;
-}
-
 main .hero.comparison p {
   font-size: 18px;
   font-weight: 400;
@@ -201,6 +197,12 @@ main .hero.comparison p {
   letter-spacing: normal;
   color: #fff;
   margin: 24px 0 0;
+}
+
+main .hero.new-hero-exp01 h1 + p {
+  font-size: 24px;
+  line-height: 28px;
+  margin: 0 0 10px;
 }
 
 main .hero.black-background h1 + p {
@@ -251,7 +253,7 @@ main .hero a.button.modal {
 
   main .hero.new-hero-exp01 a.button {
     min-width: 146px;
-    padding: 9px 23px 9px 23px;
+    padding: 9px 23px;
     margin: 8px 39px 0 0;
   }
 
@@ -440,20 +442,22 @@ main .hero .hero-awards li::after {
     font-size: 14px;
     margin: 0;
   }
+
   main .hero.new-hero-exp01 p {
     font-size: 16px;
     line-height: 18px;
-    margin: 6px 0 0 0;
+    margin: 6px 0 0;
   }
 
   main .hero.new-hero-exp01 p em a {
     font-size: 16px;
     line-height: 18px;
-    color: #000000;
+    color: #000;
     font-style: normal;
     text-decoration: underline;
     
   }
+
   main .hero .hero-picture picture img {
     display: block;
     padding-left: 0;
@@ -532,6 +536,7 @@ main .hero .hero-awards li::after {
   main .hero h1 {
     font-size: 56px;
   }
+
   main .hero.new-hero-exp01 h1 {
     color: #006DFF;
     font-size: 40px;
