@@ -1,0 +1,17 @@
+.dunga {
+    text-align: center;
+    background-color: #006DFF;
+    color: white;
+    display: flex;
+    align-items: center;
+
+    a {
+        color: white;
+    }
+}
+
+@media screen and (min-width: 991px) {
+    .dunga {
+        height: 44px;
+    }
+}
