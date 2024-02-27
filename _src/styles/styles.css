@@ -323,7 +323,7 @@ body.no-scroll {
   overflow: hidden;
 }
 
-header.header-wrapper {
+header {
   height: var(--nav-height);
 }
 
@@ -568,7 +568,7 @@ main .section.bitdefender-ferrari .default-content-wrapper .button-container a.b
 }
 
 @media screen and (min-width: 992px) { /* desktop */
-  header.header-wrapper {
+  header {
     height: var(--nav-height-desktop);
     position: absolute;
     z-index: 999;
@@ -637,7 +637,7 @@ main .section.bitdefender-ferrari .default-content-wrapper .button-container a.b
 }
 
 @media (min-width: 1000px) {
-  header.header-wrapper {
+  header {
     height: var(--nav-height-desktop);
   }
 }
