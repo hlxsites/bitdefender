@@ -1,4 +1,9 @@
 export default function decorate(block) {
+  window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
+    bubbles: true,
+    composed: true,
+  });
+
   setTimeout(() => {
     const element = document.querySelector('.dunga');
     const elementLink = document.querySelector('.dunga a');
