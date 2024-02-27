@@ -1,27 +1,35 @@
 /* eslint-disable prefer-const */
 /* eslint-disable camelcase */
-// import '../../../node_modules/particles.js/particles';
-// import { tsParticles } from "../../../node_modules/@tsparticles/engine/tsparticles.engine.js";
-import { tsParticles } from 'https://cdn.jsdelivr.net/npm/@tsparticles/engine@3.1.0/+esm';
-import { loadAll } from 'https://cdn.jsdelivr.net/npm/@tsparticles/all@3.1.0/+esm';
+import { isView } from '../../scripts/scripts.js';
+import { debounce } from '../../scripts/utils/utils.js';
 
-async function loadParticles(options) {
-  await loadAll(tsParticles);
+let tsParticles;
+let loadAll;
+async function init(block) {
+  if (isView('mobile')) {
+    return;
+  }
 
-  await tsParticles.load({ id: 'tsparticles', options });
-}
+  tsParticles = (await import('https://cdn.jsdelivr.net/npm/@tsparticles/engine@3.1.0/+esm')).tsParticles;
+  loadAll = (await import('https://cdn.jsdelivr.net/npm/@tsparticles/all@3.1.0/+esm')).loadAll;
 
-export default async function decorate(block) {
-  console.log('Particle background block');
+  const particleIdSelector = 'particles-js';
 
-  const canvas = document.createElement('div');
-  canvas.setAttribute('id', 'tsparticles');
-  block.append(canvas);
+  const particleDiv = document.createElement('div');
+  particleDiv.setAttribute('id', particleIdSelector);
+
+  block.prepend(particleDiv);
+
+  async function loadParticles(options) {
+    await loadAll(tsParticles);
+
+    await tsParticles.load({ id: particleIdSelector, options });
+  }
 
   const configs = {
     particles: {
       number: {
-        value: 100,
+        value: 130,
       },
       color: {
         value: '#ffffff',
@@ -34,12 +42,12 @@ export default async function decorate(block) {
         type: 'circle',
       },
       opacity: {
-        value: 1,
+        value: 0.6,
       },
       size: {
         value: {
-          min: 4,
-          max: 6,
+          min: 2,
+          max: 4,
         },
       },
       move: {
@@ -56,4 +64,33 @@ export default async function decorate(block) {
   };
 
   loadParticles(configs);
+}
+
+async function checkForMobile() {
+  const isMobileView = isView('mobile');
+  if (isMobileView && (!tsParticles && !loadAll)) {
+    return;
+  }
+
+  if (isMobileView && tsParticles) {
+    const particles = tsParticles.domItem(0);
+    particles.pause();
+    return;
+  }
+
+  if (!isMobileView && (!tsParticles && !loadAll)) {
+    await init();
+    return;
+  }
+
+  const particles = tsParticles.domItem(0);
+  particles.play();
+}
+
+export default async function decorate(block) {
+  console.log('Particle background block');
+
+  await init(block);
+
+  window.addEventListener('resize', debounce(checkForMobile, 250));
 }
