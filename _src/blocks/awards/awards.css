@@ -1,0 +1,133 @@
+@media (min-width: 1199px) {
+  .clasa-generala {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 32px;
+    padding-bottom: 24px;
+  }
+
+  div[data-align="center"][data-valign="middle"] img {
+    width: 80px;
+  }
+
+  .awards-container .block.clasa-generala > div {
+    text-align: center;
+    display: flex;
+    align-items: center;
+  }
+
+  .clasa-generala > div:nth-child(1) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 55%;
+  }
+  .clasa-generala > div:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50% !important;
+  }
+  .clasa-generala > div:nth-child(3) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 70%;
+  }
+
+  h3 {
+    font-size: 32px !important;
+  }
+
+  h4 {
+    font: normal normal normal 18px/21px Arial;
+    font-size: 18px;
+  }
+}
+@media (min-width: 990px) {
+  .clasa-generala > div:nth-child(3) {
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    width: 90%;
+  }
+  .awards-wrapper .awards > div:nth-child(3) > div[data-valign="middle"] {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .clasa-generala > div:nth-child(1) img {
+    width: 80px !important;
+  }
+  main .section.wide img {
+    height: auto;
+    object-fit: contain;
+    width: 80%;
+  }
+}
+
+@media (min-width: 768px) {
+}
+.clasa-parinte {
+  display: flex;
+  justify-content: center;
+}
+
+.awards-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.awards-container .block.clasa-generala {
+  background-color: #edf9ff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+}
+
+.clasa-generala {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 32px;
+  padding-bottom: 24px;
+  width: 100%;
+}
+
+.awards-container .block.clasa-generala > div {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  width: 80%;
+}
+
+h3 {
+  font-size: 30px;
+}
+
+h4 {
+  margin-bottom: 16px;
+  font-weight: normal;
+}
+.clasa-generala > div:nth-child(1) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 55%;
+}
+.clasa-generala > div:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+}
+.clasa-generala > div:nth-child(3) {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 70%;
+}
