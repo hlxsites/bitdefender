@@ -1,5 +1,6 @@
 .dunga {
     text-align: center;
+    justify-content: center;
     background-color: #006EFF;
     color: white;
     display: flex;
