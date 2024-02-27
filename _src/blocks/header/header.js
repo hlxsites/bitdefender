@@ -33,7 +33,7 @@ function handleLoginClick() {
 }
 
 function appendUlToP() {
-  const divs = document.querySelectorAll('.mega-menu-franklin > div');
+  const divs = document.querySelectorAll('.mega-menu > div');
 
   divs.forEach((div) => {
     const uls = div.querySelectorAll('ul');
@@ -59,7 +59,7 @@ function wrapDivsInMegaMenu() {
   const divs = Array.from(nav.children).filter((node) => node.tagName.toLowerCase() === 'div');
   const navSectionsIndex = divs.findIndex((div) => div.classList.contains('nav-sections'));
   const megaMenuDiv = document.createElement('div');
-  megaMenuDiv.className = 'mega-menu-franklin';
+  megaMenuDiv.className = 'mega-menu';
   decorateBlockWithRegionId(megaMenuDiv, 'Main Menu|Home Solutions');
 
   const otherOptionsDiv = document.createElement('div');
@@ -95,7 +95,7 @@ function wrapDivsInMegaMenu() {
     otherOptionsDiv.appendChild(bottomLinks.firstElementChild);
   }
 
-  const loginModal = document.querySelector('.mega-menu-franklin > div:first-child');
+  const loginModal = document.querySelector('.mega-menu > div:first-child');
   nav.appendChild(loginModal);
 }
 
@@ -173,7 +173,7 @@ function renderDesktopHeader(block, nav) {
   const bottomLinks = document.querySelector('.bottom-links');
   bottomLinks.removeChild(bottomLinks.lastElementChild);
 
-  const megaMenu = document.querySelector('.mega-menu-franklin');
+  const megaMenu = document.querySelector('.mega-menu');
   let isOverHomeSolutions = false;
   let isOverMegaMenu = false;
 
@@ -242,8 +242,8 @@ function handleMenuClick() {
     }
   });
 
-  // Select the first child of mega-menu-franklin and all div children of other-options
-  const megaMenuFirstChild = document.querySelector('.mega-menu-franklin').firstElementChild;
+  // Select the first child of mega-menu and all div children of other-options
+  const megaMenuFirstChild = document.querySelector('.mega-menu').firstElementChild;
 
   const otherOptionsChildren = Array.from(document.querySelector('.other-options').children);
   const navDivs = [megaMenuFirstChild].concat(otherOptionsChildren);
@@ -383,32 +383,6 @@ export default async function decorate(block) {
 
   if (resp.ok) {
     const html = await resp.text();
-
-    if (html.includes('aem-banner')) {
-      const aemHeaderFetch = await fetch('https://www.bitdefender.com/content/experience-fragments/bitdefender/language_master/en/header-navigation/mega-menu/master/jcr:content/root/mega_menu.styled.html');
-      const aemHeaderHtml = await aemHeaderFetch.text();
-      const nav = document.createElement('div');
-      nav.classList.add('mega-menu');
-      nav.innerHTML = aemHeaderHtml;
-
-      const cssFile = nav.querySelector('link[rel="stylesheet"]');
-      cssFile.href = `https://www.bitdefender.com${cssFile.getAttribute('href')}`;
-
-      const scriptFile = nav.querySelector('script');
-      const newScriptFile = document.createElement('script');
-      newScriptFile.src = `https://www.bitdefender.com${scriptFile.getAttribute('src')}`;
-      nav.appendChild(newScriptFile);
-
-      const navHeader = nav.querySelector('header');
-      navHeader.style.height = 'auto';
-
-      const body = document.querySelector('body');
-      body.style.maxWidth = 'initial';
-
-      const header = document.querySelector('header');
-      header.replaceWith(nav);
-      return;
-    }
 
     const nav = document.createElement('nav');
     nav.id = 'nav';
