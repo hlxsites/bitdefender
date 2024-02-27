@@ -1,7 +1,18 @@
 /* eslint-disable prefer-const */
 /* eslint-disable camelcase */
 import { isView } from '../../scripts/scripts.js';
-import { debounce } from '../../scripts/utils/utils.js';
+
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
 
 let tsParticles;
 let loadAll;
