@@ -1,3 +1,7 @@
+.big-teaser-section-container.section {
+    padding: 0;
+}
+
 .big-teaser-section-container {
     background: var(--dark);
 }
