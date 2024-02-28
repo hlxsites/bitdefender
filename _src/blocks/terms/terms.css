@@ -29,3 +29,9 @@
     font-weight: bold;
     margin-top: 15px;
 }
+
+@media (max-width: 991px) { /* mobile/tablet */
+    .terms-wrapper {
+        padding: var(--body-padding);
+    }
+}
