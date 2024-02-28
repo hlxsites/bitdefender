@@ -22,7 +22,7 @@ export default async function decorate(block) {
     };
 
     const currentViewportSlideSize = getCurrentViewportSlideSize();
-    const { clientWidth } = block;
+    const clientWidth = window.innerWidth;
     const spaceToFillMore = clientWidth - initialSlideList.length * currentViewportSlideSize; // ok
     if (spaceToFillMore < 0) {
       result.duplicatedSlides = initialSlideList.concat(initialSlideList);
