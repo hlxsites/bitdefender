@@ -40,7 +40,7 @@ const HREFLANG_MAP = [
   ['en', { baseUrl: 'https://www.bitdefender.com', pageType: '.html' }],
   ['it', { baseUrl: 'https://www.bitdefender.it', pageType: '.html' }],
   ['fr', { baseUrl: 'https://www.bitdefender.fr', pageType: '.html' }],
-  ['nl-BE', { baseUrl: 'https://www.bitdefender.br', pageType: '.html' }],
+  ['nl-BE', { baseUrl: 'https://www.bitdefender.be', pageType: '.html' }],
   ['es', { baseUrl: 'https://www.bitdefender.es', pageType: '.html' }],
   ['en-AU', { baseUrl: 'https://www.bitdefender.com.au', pageType: '' }],
   ['ro', { baseUrl: 'https://www.bitdefender.ro', pageType: '.html' }],
