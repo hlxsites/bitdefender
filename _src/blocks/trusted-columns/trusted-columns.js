@@ -11,7 +11,11 @@ export default async function decorate(block) {
         ${cols.map((col) => {
           const pictureEl = col.querySelector('picture');
           const richTextEls = [...col.children];
-          richTextEls.shift();
+          if (richTextEls.length === 1) {
+            richTextEls.shift();
+          }
+
+          
 
           return `
             <div class="col">
@@ -28,8 +32,12 @@ export default async function decorate(block) {
 
       ${!isMobileView ? `<div class="centered-wrapper default-content-wrapper d-flex">
         ${cols.map((col) => {
+
           const richTextEls = [...col.children];
-          richTextEls.shift();
+      if (richTextEls.length === 1) {
+        richTextEls.shift();
+      }
+
 
           return `<div class="col${richTextEls.length ? ' col-text' : ''}">${richTextEls.map((item) => item.outerHTML).join('')}</div> `;
         }).join('')}

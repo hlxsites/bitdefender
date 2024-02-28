@@ -3,6 +3,16 @@
 }
 
 @media (min-width: 768px) {
+    .trusted-columns-container .col-text h2,
+    .trusted-columns-container .col-text h3 {
+        font: normal normal bold 32px/32px IBM Plex Sans;
+    }
+
+    .trusted-columns-container .col-text p,
+    .trusted-columns-container .col-text div {
+        font: normal normal normal 14px/18px IBM Plex Sans;
+    }
+
     .trusted-columns-container .container {
         display: flex;
         height: 700px;
@@ -30,6 +40,6 @@
     }
 
     .trusted-columns-container .centered-wrapper {
-        gap: 30px;
+        gap: 60px;
     }
 }

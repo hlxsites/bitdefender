@@ -1,19 +1,19 @@
-import {debounce, getDatasetFromSection} from '../../scripts/utils/utils.js';
+import { debounce, getDatasetFromSection } from '../../scripts/utils/utils.js';
 import { isView } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
   const defaultBackgroundColor = '#004299';
   const SLIDE_SIZE_ENUM = {
-    MOBILE: 100 + 20 * 2,
-    DESKTOP: 200 + 20 * 2,
+    MOBILE: 85 + 20 * 2,
+    TABLET_UP: 85 + 20 * 2,
   };
 
-  const SPEED_ANIMATION = 0.2;
+  const SPEED_ANIMATION = 0.6;
 
-  const initialSlideList = [...block.children];
+  const [title, ...initialSlideList] = [...block.children];
 
   function getCurrentViewportSlideSize() {
-    return isView('mobile') ? SLIDE_SIZE_ENUM.MOBILE : SLIDE_SIZE_ENUM.DESKTOP;
+    return isView('mobile') ? SLIDE_SIZE_ENUM.MOBILE : SLIDE_SIZE_ENUM.TABLET_UP;
   }
   function calculateSlideListBasedOnScreenWidth() {
     const result = {
@@ -66,8 +66,11 @@ export default async function decorate(block) {
     const { duplicatedSlides, slidesToShift } = calculateSlideListBasedOnScreenWidth();
 
     block.innerHTML = `
-      <div class="marquee-content">
-          ${duplicatedSlides.map((slide) => `<div class="marquee-item img-container">${slide.querySelector('picture').outerHTML}</div>`).join('')}
+      <div class="default-content-wrapper"><div class="title">${title.textContent}</div></div>
+      <div class="outer-wrapper">
+          <div class="marquee-content">
+              ${duplicatedSlides.map((slide) => `<div class="marquee-item img-container">${slide.querySelector('picture').outerHTML}</div>`).join('')}
+          </div>
       </div>
   `;
 
