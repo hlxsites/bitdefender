@@ -1,4 +1,4 @@
-.dunga {
+.news-bar {
     text-align: center;
     justify-content: center;
     background-color: #006EFF;
@@ -18,7 +18,7 @@
 }
 
 @media screen and (min-width: 991px) {
-    .dunga {
+    .news-bar {
         height: 44px;
     }
 }
