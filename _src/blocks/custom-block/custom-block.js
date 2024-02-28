@@ -1,15 +1,17 @@
 export default function decorate(block) {
-  const buttonEl = block.children[0].children[0].lastElementChild;
-  const newDiv = document.createElement('div');
-  newDiv.append(buttonEl);
-  block.append(newDiv);
-
   const parentBlockStyle = block.closest('.section').style;
   const blockStyle = block.style;
   const metaData = block.closest('.section').dataset;
   const {
-    background_color, text_color, padding_top, padding_bottom, margin_top, margin_bottom,
+    has_button, background_color, text_color, padding_top, padding_bottom, margin_top, margin_bottom,
   } = metaData;
+
+  if(has_button) {
+    const buttonEl = block.children[0].children[0].lastElementChild;
+    const newDiv = document.createElement('div');
+    newDiv.append(buttonEl);
+    block.append(newDiv);
+  }
 
   if (background_color) parentBlockStyle.backgroundColor = background_color;
   if (text_color) blockStyle.color = text_color;
