@@ -107,9 +107,12 @@ async function checkForMobile() {
 }
 
 export default async function decorate(block) {
-  console.log('Particle background block');
-
   await init(block);
 
   window.addEventListener('resize', debounce(checkForMobile, 250));
+
+  window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
+    bubbles: true,
+    composed: true, // This allows the event to cross the shadow DOM boundary
+  });
 }
