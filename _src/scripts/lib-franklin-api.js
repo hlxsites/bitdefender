@@ -48,7 +48,7 @@ export async function loadComponent(offer, block, options, selector)  {
   newDiv.innerHTML += html;
   updateLinkSources(newDiv, `${origin}${offerFolder}/`);
   await js.default(newDiv, {...options, metadata: parseMetadata(newDiv)});
-
+  console.log(newDiv);
   shadowRoot.appendChild(newDiv);
   newDiv.style.display = "block";
   return container;
