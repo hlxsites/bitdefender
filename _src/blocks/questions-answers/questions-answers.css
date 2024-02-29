@@ -1,0 +1,104 @@
+.questions-answers-wrapper {
+    padding: var(--body-padding);
+}
+
+@media (min-width: 992px) { /* desktop */
+    .questions-answers-wrapper {
+        max-width: var(--section-desktop-max-width);
+        padding: 0 var(--section-desktop-padding);
+        margin: 0 auto;
+    }
+}
+
+@media (min-width: 1600px) { /* large desktop */
+    .questions-answers-wrapper {
+        max-width: var(--section-large-desktop-max-width);
+        padding: 0 var(--section-large-desktop-padding);
+    }
+}
+
+.questions-answers h4 {
+    text-align: center;
+    font: normal normal bold 32px/28px var(--body-font-family);
+    margin-bottom: 32px;
+}
+
+  
+.questions-answers {
+    cursor: pointer;
+}
+
+.questions-answers .default-content-wrapper p {
+    font: italic normal normal 14px/16px var(--body-font-family);
+}
+
+.questions-answers .questions-answers-item {
+    margin: 16px 0;
+    padding: 17px 16px 17px 40px;
+    background-color: #F4F8FF;
+    border-radius: 10px;
+    border-color: rgb(229 231 235);
+    border-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+.questions-answers .questions-answers-item.expanded {
+    box-shadow: 0 3px 8px 0 rgb(0 0 0 / 10%);
+}
+
+.questions-answers-item .question {
+    position: relative;
+    font: normal normal bold 18px/21px var(--body-font-family);
+    color: #000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 25px;
+}
+
+.questions-answers-item .question::after {
+    position: absolute;
+    font: normal normal normal 24px/21px var(--body-font-family);
+    content: "+";
+    width: 10px;
+    height: 10px;
+    display: block;
+    left: -22px;
+    bottom:0;
+    top:0;
+    color: #006EFF;
+}
+
+.questions-answers-item.expanded .question {
+    color: #006EFF;
+}
+
+.questions-answers-item.expanded .question::after {
+    font: normal normal normal 24px/21px var(--body-font-family);
+    top: -10px;
+    content: "_";
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    color: #006EFF;
+}
+
+.questions-answers-item .answer {
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+}
+.questions-answers-item .answer p {
+    font: normal normal normal 14px/16px var(--body-font-family);
+}
+
+.questions-answers-item.expanded .answer {
+    opacity: 1;
+    height: auto;
+    transition: all 0.3s ease-in-out;
+}
+
+ .accordion-item.accordion-item-open .answer {
+    display: block;
+}
