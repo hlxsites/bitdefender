@@ -112,11 +112,6 @@ export default async function decorate(block) {
 
   // window.addEventListener('resize', debounce(checkForMobile, 50));
 
-  let test = document.querySelectorAll('#ts-particles');
-  console.log(test);
-  let test2 = block.querySelectorAll('#ts-particles');
-  console.log(test2);
-  test2[0].replaceWith(test2[1]);
   window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
     bubbles: true,
     composed: true, // This allows the event to cross the shadow DOM boundary

@@ -43,9 +43,13 @@ export async function loadComponent(offer, block, options, selector)  {
     import(`${origin}/_src/blocks/${block}/${block}.js`)
   ])
 
-  shadowRoot.innerHTML +=  html;
-  updateLinkSources(shadowRoot, `${origin}${offerFolder}/`);
-  await js.default(shadowRoot, {...options, metadata: parseMetadata(shadowRoot)});
+  const newDiv = document.createElement('div');
+  newDiv.style.display = "none";
+  newDiv.innerHTML += html;
+  updateLinkSources(newDiv, `${origin}${offerFolder}/`);
+  await js.default(newDiv, {...options, metadata: parseMetadata(newDiv)});
 
+  shadowRoot.appendChild(newDiv);
+  newDiv.style.display = "block";
   return container;
 }
