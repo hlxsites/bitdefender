@@ -1,30 +1,30 @@
 /* eslint-disable prefer-const */
 /* eslint-disable camelcase */
 
-// function debounce(func, wait) {
-//   let timeout;
-//   return function executedFunction(...args) {
-//     const later = () => {
-//       clearTimeout(timeout);
-//       func(...args);
-//     };
-//     clearTimeout(timeout);
-//     timeout = setTimeout(later, wait);
-//   };
-// }
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
 
-// function isView(viewport) {
-//   const element = document.querySelectorAll(`[data-${viewport}-detector]`)[0];
-//   return !!(element && getComputedStyle(element).display !== 'none');
-// }
+function isView(viewport) {
+  const element = document.querySelectorAll(`[data-${viewport}-detector]`)[0];
+  return !!(element && getComputedStyle(element).display !== 'none');
+}
 
 let tsParticles;
 let loadAll;
 
 async function init(block) {
-  // if (isView('mobile')) {
-  //   return;
-  // }
+  if (isView('mobile')) {
+    return;
+  }
 
   // eslint-disable-next-line import/no-unresolved
   tsParticles = (await import('https://cdn.jsdelivr.net/npm/@tsparticles/engine@3.1.0/+esm')).tsParticles;
@@ -39,7 +39,7 @@ async function init(block) {
   block.parentElement.classList.add('we-container');
   const particleBackground = block.parentElement.querySelector('.particle-background');
   particleBackground.prepend(particleDiv);
-  // block.children[0].setAttribute('id', particleIdSelector);
+
   async function loadParticles(options) {
     await loadAll(tsParticles);
 
@@ -87,31 +87,31 @@ async function init(block) {
   await loadParticles(configs);
 }
 
-// async function checkForMobile() {
-//   const isMobileView = isView('mobile');
-//   if (isMobileView && (!tsParticles && !loadAll)) {
-//     return;
-//   }
+async function checkForMobile() {
+  const isMobileView = isView('mobile');
+  if (isMobileView && (!tsParticles && !loadAll)) {
+    return;
+  }
 
-//   if (isMobileView && tsParticles) {
-//     const particles = tsParticles.domItem(0);
-//     particles.pause();
-//     return;
-//   }
+  if (isMobileView && tsParticles) {
+    const particles = tsParticles.domItem(0);
+    particles.pause();
+    return;
+  }
 
-//   if (!isMobileView && (!tsParticles && !loadAll)) {
-//     await init();
-//     return;
-//   }
+  if (!isMobileView && (!tsParticles && !loadAll)) {
+    await init();
+    return;
+  }
 
-//   const particles = tsParticles.domItem(0);
-//   particles.play();
-// }
+  const particles = tsParticles.domItem(0);
+  particles.play();
+}
 
 export default async function decorate(block) {
   await init(block);
 
-  // window.addEventListener('resize', debounce(checkForMobile, 50));
+  window.addEventListener('resize', debounce(checkForMobile, 50));
 
   window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
     bubbles: true,
