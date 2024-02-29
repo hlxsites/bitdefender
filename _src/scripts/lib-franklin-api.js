@@ -43,6 +43,8 @@ export async function loadComponent(offer, block, options, selector)  {
     import(`${origin}/_src/blocks/${block}/${block}.js`)
   ])
 
+  // create a new div to load the component outside the shadowRoot
+  // in order to corretly run the javascript
   const newDiv = document.createElement('div');
   newDiv.style.display = "none";
   newDiv.innerHTML += html;
