@@ -28,6 +28,7 @@ async function init(block) {
 
   // eslint-disable-next-line import/no-unresolved
   tsParticles = (await import('https://cdn.jsdelivr.net/npm/@tsparticles/engine@3.1.0/+esm')).tsParticles;
+  console.log(tsParticles);
   // eslint-disable-next-line import/no-unresolved
   loadAll = (await import('https://cdn.jsdelivr.net/npm/@tsparticles/all@3.1.0/+esm')).loadAll;
 
@@ -109,7 +110,7 @@ async function checkForMobile() {
 export default async function decorate(block) {
   await init(block);
 
-  window.addEventListener('resize', debounce(checkForMobile, 250));
+  window.addEventListener('resize', debounce(checkForMobile, 50));
 
   window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
     bubbles: true,
