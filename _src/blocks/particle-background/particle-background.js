@@ -112,7 +112,7 @@ export default async function decorate(block) {
 
   // window.addEventListener('resize', debounce(checkForMobile, 50));
 
-  let test = block.querySelectorAll('#ts-particles');
+  let test = document.querySelectorAll('#ts-particles');
   console.log(test);
   test[0].replaceWith(test[1]);
   window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
