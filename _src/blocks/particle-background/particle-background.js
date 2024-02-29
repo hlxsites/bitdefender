@@ -35,7 +35,7 @@ async function init(block) {
 
   const particleDiv = document.createElement('div');
   particleDiv.setAttribute('id', particleIdSelector);
-  const particleBackground = block.querySelector('.particle-background');
+  const particleBackground = block.parentElement.querySelector('.particle-background');
   particleBackground.prepend(particleDiv);
   // block.children[0].setAttribute('id', particleIdSelector);
   async function loadParticles(options) {
@@ -82,7 +82,6 @@ async function init(block) {
     fullScreen: { enable: false },
   };
 
-  console.log(document.getElementById(particleIdSelector));
   await loadParticles(configs);
 }
 
