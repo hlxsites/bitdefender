@@ -50,7 +50,7 @@ export async function loadComponent(offer, block, options, selector)  {
   document.body.appendChild(newDiv);
   await js.default(newDiv, {...options, metadata: parseMetadata(newDiv)});
   console.log(newDiv);
-  // shadowRoot.appendChild(newDiv);
+  shadowRoot.appendChild(newDiv);
   newDiv.style.display = "block";
   return container;
 }
