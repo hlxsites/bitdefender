@@ -39,7 +39,6 @@ async function init(block) {
   const particleBackground = block.querySelector('.particle-background');
   particleBackground.prepend(particleDiv);
   // block.children[0].setAttribute('id', particleIdSelector);
-  console.log(block);
   async function loadParticles(options) {
     await loadAll(tsParticles);
 
@@ -113,6 +112,9 @@ export default async function decorate(block) {
 
   // window.addEventListener('resize', debounce(checkForMobile, 50));
 
+  let test = block.querySelectorAll('#ts-particles');
+  console.log(test);
+  test[0].replaceWith(test[1]);
   window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
     bubbles: true,
     composed: true, // This allows the event to cross the shadow DOM boundary
