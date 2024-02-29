@@ -39,7 +39,7 @@ async function init(block) {
   const particleBackground = block.querySelector('.particle-background');
   particleBackground.prepend(particleDiv);
   // block.children[0].setAttribute('id', particleIdSelector);
-
+  console.log(block);
   async function loadParticles(options) {
     await loadAll(tsParticles);
 
