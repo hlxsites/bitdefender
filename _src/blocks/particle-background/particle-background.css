@@ -11,6 +11,15 @@
     text-align: center;
     overflow: hidden;
     max-width: 1332px;
+    z-index: 1;
+}
+
+.we-container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    max-width: 1332px;
+    position: relative;
 }
 
 .particle-background #ts-particles {
@@ -21,5 +30,5 @@
     right: 0;
     padding: 0;
     margin: 0;
-    z-index: -1;
+    z-index: 0;
 }

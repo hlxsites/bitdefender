@@ -35,6 +35,8 @@ async function init(block) {
 
   const particleDiv = document.createElement('div');
   particleDiv.setAttribute('id', particleIdSelector);
+
+  block.parentElement.classList.add('we-container');
   const particleBackground = block.parentElement.querySelector('.particle-background');
   particleBackground.prepend(particleDiv);
   // block.children[0].setAttribute('id', particleIdSelector);
