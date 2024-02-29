@@ -28,7 +28,6 @@ async function init(block) {
 
   // eslint-disable-next-line import/no-unresolved
   tsParticles = (await import('https://cdn.jsdelivr.net/npm/@tsparticles/engine@3.1.0/+esm')).tsParticles;
-  console.log(tsParticles);
   // eslint-disable-next-line import/no-unresolved
   loadAll = (await import('https://cdn.jsdelivr.net/npm/@tsparticles/all@3.1.0/+esm')).loadAll;
 
@@ -83,6 +82,7 @@ async function init(block) {
     fullScreen: { enable: false },
   };
 
+  console.log(document.getElementById(particleIdSelector));
   loadParticles(configs);
 }
 
