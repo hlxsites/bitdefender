@@ -83,7 +83,7 @@ async function init(block) {
   };
 
   console.log(document.getElementById(particleIdSelector));
-  loadParticles(configs);
+  await loadParticles(configs);
 }
 
 // async function checkForMobile() {
