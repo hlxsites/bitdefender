@@ -49,7 +49,7 @@ async function init(block) {
   const configs = {
     particles: {
       number: {
-        value: 50,
+        value: 30,
       },
       color: {
         value: '#ffffff',
