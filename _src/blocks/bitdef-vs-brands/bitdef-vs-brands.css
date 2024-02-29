@@ -1,0 +1,144 @@
+.bitdef-vs-brands {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.heading-container {
+  text-align: center;
+  width: 410px;
+}
+
+.new-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.bitdef-vs-brands-wrapper h2 {
+  margin-top: 72px;
+  margin-bottom: 57px;
+  font-size: 32px;
+}
+.bitdef-vs-brands-wrapper h3 {
+  margin-bottom: 6px;
+  font-size: 24px;
+}
+.bitdef-vs-brands-wrapper .row-2 {
+  margin-bottom: 22px;
+  font-size: 14px;
+}
+
+.bitdef-vs-brands-wrapper .table-container {
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-radius: 16px;
+  width: 410px;
+  margin-bottom: 50px;
+}
+
+.bitdef-vs-brands-wrapper table .blue-background p {
+  background-color: #005bd5;
+  color: white;
+  padding: 9px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+.bitdef-vs-brands-wrapper table .grey-background p {
+  background-color: #dedede;
+  padding: 9px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+.bitdef-vs-brands-wrapper table .blue-background p:nth-child(1) {
+  width: 100%;
+  border-radius: 8px 0px 0px 8px;
+}
+.bitdef-vs-brands-wrapper table .blue-background p:nth-child(2) {
+  border-radius: 0px 8px 8px 0px;
+}
+.bitdef-vs-brands-wrapper table .grey-background p:nth-child(1) {
+  width: 100%;
+  border-radius: 8px 0px 0px 8px;
+}
+.bitdef-vs-brands-wrapper table .grey-background p:nth-child(2) {
+  border-radius: 0px 8px 8px 0px;
+}
+.bitdef-vs-brands-wrapper table .same-line {
+  display: flex;
+}
+
+.bitdef-vs-brands-wrapper table .same-line:nth-child(1) {
+  margin-right: auto;
+}
+.bitdef-vs-brands-wrapper table .same-line {
+  animation: increaseWidth 1s forwards;
+  width: 0;
+}
+
+.same-line {
+  animation: none; /* Initially disable animation */
+}
+.same-line.animate {
+  animation: increaseWidth 1s forwards;
+}
+
+@keyframes increaseWidth-row1 {
+  from {
+    width: 0;
+  }
+  to {
+    width: 95%;
+  }
+}
+
+/* Keyframes for the second row animation */
+@keyframes increaseWidth-row2 {
+  from {
+    width: 0;
+  }
+  to {
+    width: 90%;
+  }
+}
+
+/* Keyframes for the third row animation */
+@keyframes increaseWidth-row3 {
+  from {
+    width: 0;
+  }
+  to {
+    width: 85%;
+  }
+}
+
+/* Apply different animations to each row */
+.bitdef-vs-brands-wrapper table .row-3 .same-line.animate-row1 {
+  animation: increaseWidth-row1 1s forwards;
+}
+
+.bitdef-vs-brands-wrapper table .row-4 .same-line.animate-row2 {
+  animation: increaseWidth-row2 1s forwards;
+}
+
+.bitdef-vs-brands-wrapper table .row-5 .same-line.animate-row3 {
+  animation: increaseWidth-row3 1s forwards;
+}
+
+.bitdef-vs-brands-wrapper img {
+  max-width: 32px; /* Adjust as needed */
+  height: auto; /* Maintain aspect ratio */
+}
+
+@media (min-width: 768px) {
+  .heading-container {
+    width: 610px;
+  }
+}
+
+@media (min-width: 990px) {
+  .new-container {
+    flex-direction: row;
+    gap: 3%;
+    justify-content: center;
+  }
+}
