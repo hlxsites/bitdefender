@@ -10,6 +10,7 @@
     color: white;
     text-align: center;
     overflow: hidden;
+    max-width: 1332px;
 }
 
 .particle-background #ts-particles {
