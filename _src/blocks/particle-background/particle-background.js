@@ -111,7 +111,7 @@ async function checkForMobile() {
 export default async function decorate(block) {
   await init(block);
 
-  window.addEventListener('resize', debounce(checkForMobile, 50));
+  window.addEventListener('resize', debounce(checkForMobile, 250));
 
   window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
     bubbles: true,
