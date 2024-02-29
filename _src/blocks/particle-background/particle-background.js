@@ -26,15 +26,17 @@ async function init(block) {
     return;
   }
 
+  // eslint-disable-next-line import/no-unresolved
   tsParticles = (await import('https://cdn.jsdelivr.net/npm/@tsparticles/engine@3.1.0/+esm')).tsParticles;
+  // eslint-disable-next-line import/no-unresolved
   loadAll = (await import('https://cdn.jsdelivr.net/npm/@tsparticles/all@3.1.0/+esm')).loadAll;
 
-  const particleIdSelector = 'particles-js';
+  const particleIdSelector = 'ts-particles';
 
   const particleDiv = document.createElement('div');
   particleDiv.setAttribute('id', particleIdSelector);
-
   block.prepend(particleDiv);
+  // block.children[0].setAttribute('id', particleIdSelector);
 
   async function loadParticles(options) {
     await loadAll(tsParticles);
@@ -45,7 +47,7 @@ async function init(block) {
   const configs = {
     particles: {
       number: {
-        value: 130,
+        value: 50,
       },
       color: {
         value: '#ffffff',
