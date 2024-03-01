@@ -13,7 +13,7 @@ export default async function decorate(block) {
 
   block.innerHTML = `
     <div class="carousel-header">
-      <h2 class="title">${titleEl.textContent}</h2>
+      <h2 class="title">${titleEl.innerHTML}</h2>
       <a href class="arrow disabled left-arrow">
         <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 752 752" preserveAspectRatio="xMidYMid meet">
           <g transform="translate(0,752) scale(0.1,-0.1)">
