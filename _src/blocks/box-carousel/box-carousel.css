@@ -12,6 +12,16 @@
     color: black;
 }
 
+.box-carousel-container .carousel-header .title h2,
+.box-carousel-container .carousel-header .title h3,
+.box-carousel-container .carousel-header .title h4 {
+    font: normal normal 600 20px/37px IBM Plex Sans;
+}
+
+.box-carousel-container .carousel-header .title p {
+    margin: 0 0 16px;
+}
+
 .box-carousel-container .carousel-header .left-arrow,
 .box-carousel-container .carousel-header .right-arrow {
     color: black;
@@ -129,5 +139,11 @@
 
     .box-carousel-container .carousel-item .subtitle {
         font: normal normal normal 18px/23px IBM Plex Sans;
+    }
+
+    .box-carousel-container .carousel-header .title h2,
+    .box-carousel-container .carousel-header .title h3,
+    .box-carousel-container .carousel-header .title h4 {
+        font: normal normal 600 40px/48px IBM Plex Sans;
     }
 }
