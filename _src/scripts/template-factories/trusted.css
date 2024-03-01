@@ -437,6 +437,17 @@ main .section.link-right a {
 .trusted .section.small-text p{
 }
 
+.trusted .columns-container a:not(.button):any-link {
+    color: white;
+    text-decoration: underline;
+}
+
+.trusted .columns-container.bg-white a:not(.button):any-link,
+.trusted .columns-container.trusted-bg-1 a:not(.button):any-link{
+    color: black;
+    text-decoration: underline;
+}
+
 @-webkit-keyframes animated-mouse {
     0% {
         opacity: 1;
