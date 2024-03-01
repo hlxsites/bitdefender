@@ -42,8 +42,8 @@ export default async function decorate(block) {
     
     <div class="carousel-container">
         <div class="carousel">
-          ${slides.map((slide, idx) => `
-            <div class="carousel-item ${idx === 0 ? 'active' : ''}">
+          ${slides.map((slide) => `
+            <div class="carousel-item">
                 ${slide.children[0].children[0].innerHTML}
                 <div class="title">
                     ${slide.children[0].children[1].textContent}
@@ -90,11 +90,6 @@ export default async function decorate(block) {
     }
   }
 
-  function updateActiveCard(slideIndex) {
-    block.querySelector('.carousel-item.active').classList.remove('active');
-    block.querySelector(`.carousel-item:nth-child(${slideIndex + 1})`).classList.add('active');
-  }
-
   block.querySelector('.left-arrow').addEventListener('click', (e) => {
     e.preventDefault();
     if (isFirstIndex()) {
@@ -103,7 +98,6 @@ export default async function decorate(block) {
     currentSlideIndex -= 1;
     scrollCarousel(currentSlideIndex);
     updateDisabledArrow(currentSlideIndex);
-    updateActiveCard(currentSlideIndex);
   });
 
   block.querySelector('.right-arrow').addEventListener('click', (e) => {
@@ -114,6 +108,5 @@ export default async function decorate(block) {
     currentSlideIndex += 1;
     scrollCarousel(currentSlideIndex);
     updateDisabledArrow(currentSlideIndex);
-    updateActiveCard(currentSlideIndex);
   });
 }

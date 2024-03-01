@@ -1,5 +1,5 @@
 .box-carousel-container {
-    background: black;
+    background: white;
 }
 
 .box-carousel-container .carousel-header {
@@ -9,12 +9,12 @@
 }
 
 .box-carousel-container .carousel-header .title {
-    color: white;
+    color: black;
 }
 
 .box-carousel-container .carousel-header .left-arrow,
 .box-carousel-container .carousel-header .right-arrow {
-    color: white;
+    color: black;
 }
 
 .box-carousel-container .carousel-container {
@@ -36,24 +36,24 @@
     padding: 20px;
     border: 3px solid #006dff;
     border-radius: 15px;
-    color: white;
+    color: black;
     font-size: 1em;
+    background: #eaf2ff;
 }
 
 .box-carousel-container .carousel-item:first-child {
     margin-left: 0;
 }
 
-.box-carousel-container .carousel-item.active {
+.box-carousel-container .carousel-item:hover {
+    color: white;
     background: #006dff;
     box-shadow: 0px 3px 12px 1px rgba(0,0,0,1),
     0px 0px 100px 0px rgba(0,110,255,1);
 }
 
-.box-carousel-container .carousel-item:hover {
-    background: #006dff;
-    box-shadow: 0px 3px 12px 1px rgba(0,0,0,1),
-    0px 0px 100px 0px rgba(0,110,255,1);
+.box-carousel-container .carousel-item:hover svg path {
+    fill: white !important;
 }
 
 .box-carousel-container .carousel-item .title {
@@ -103,6 +103,11 @@
     height: 45px;
     margin: 0;
 }
+
+.box-carousel-container svg path {
+    fill: var(--blue) !important;
+}
+
 
 @media screen and (min-width: 768px) {
     .box-carousel-container .carousel-header {
