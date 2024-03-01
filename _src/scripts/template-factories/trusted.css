@@ -158,6 +158,17 @@ main .section.link-right a {
     background: linear-gradient(to bottom, transparent 31%,var(--dark2) 31%);
 }
 
+.trusted .section.apartnership_box h2,
+.trusted .section.apartnership_box h3,
+.trusted .section.apartnership_box h4 {
+    font: normal normal 600 20px/24px IBM Plex Sans;
+}
+
+.trusted .section.apartnership_box p,
+.trusted .section.apartnership_box div {
+    font: normal normal normal 14px/18px IBM Plex Sans;
+}
+
 .trusted .apartnership_box .d-flex > div:nth-of-type(2) {
     flex: 0;
     margin-left: 0;
@@ -526,6 +537,25 @@ main .section.link-right a {
         font: normal normal normal 18px/27px IBM Plex Sans;
     }
     /* end columns with logos */
+
+    .trusted .section.apartnership_box .default-content-wrapper {
+        width: 50%;
+    }
+
+    .trusted .section.apartnership_box .default-content-wrapper > * {
+       text-align: center;
+    }
+
+    .trusted .section.apartnership_box h2,
+    .trusted .section.apartnership_box h3,
+    .trusted .section.apartnership_box h4 {
+        font: normal normal 600 40px/52px IBM Plex Sans;
+    }
+
+    .trusted .section.apartnership_box p,
+    .trusted .section.apartnership_box div {
+        font: normal normal normal 24px/32px IBM Plex Sans;
+    }
 
     .trusted main .hero .hero-picture picture img {
         display: block;
