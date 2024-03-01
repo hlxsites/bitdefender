@@ -14,7 +14,7 @@
  * Customer's XDM schema namespace
  * @type {string}
  */
-const CUSTOM_SCHEMA_NAMESPACE = '_sitesinternal';
+const CUSTOM_SCHEMA_NAMESPACE = '_bitdefender';
 
 /**
  * Returns experiment id and variant running
@@ -64,7 +64,7 @@ function enhanceAnalyticsEvent(options) {
     ...options.xdm[CUSTOM_SCHEMA_NAMESPACE],
     // ...(experiment && { experiment }), // add experiment details, if existing, to all events
   };
-  console.debug(`enhanceAnalyticsEvent complete: ${JSON.stringify(options)}`);
+  // console.debug(`enhanceAnalyticsEvent complete: ${JSON.stringify(options)}`);
 }
 
 /**
@@ -107,10 +107,10 @@ function createInlineScript(document, element, innerHTML, type) {
  * @param xdmData - the xdm data object
  * @returns {Promise<*>}
  */
-async function sendAnalyticsEvent(xdmData) {
+async function sendAnalyticsEvent(xdmData, data) {
   // eslint-disable-next-line no-undef
   if (!alloy) {
-    console.warn('alloy not initialized, cannot send analytics event');
+    // console.warn('alloy not initialized, cannot send analytics event');
     return Promise.resolve();
   }
 
@@ -121,6 +121,7 @@ async function sendAnalyticsEvent(xdmData) {
   return alloy('sendEvent', {
     documentUnloading: true,
     xdm: xdmData,
+    data,
   });
 }
 
@@ -133,7 +134,7 @@ async function sendAnalyticsEvent(xdmData) {
 export async function analyticsSetConsent(approved) {
   // eslint-disable-next-line no-undef
   if (!alloy) {
-    console.warn('alloy not initialized, cannot set consent');
+    // console.warn('alloy not initialized, cannot set consent');
     return Promise.resolve();
   }
   // eslint-disable-next-line no-undef
@@ -170,7 +171,13 @@ export async function analyticsTrackPageViews(document /* , additionalXdmFields 
     // },
   };
 
-  return sendAnalyticsEvent(xdmData);
+  return new Promise((resolve) => {
+    window.adobeDataLayer.push((dl) => {
+      const state = dl.getState();
+      // console.debug(`analyticsTrackPageViews complete: ${JSON.stringify(state)}`);
+      resolve(sendAnalyticsEvent(xdmData, state));
+    });
+  });
 }
 
 /**
@@ -189,7 +196,7 @@ export async function initAnalyticsTrackingQueue() {
 export async function setupAnalyticsTrackingWithAlloy(document) {
   // eslint-disable-next-line no-undef
   if (!alloy) {
-    console.warn('alloy not initialized, cannot configure');
+    // console.warn('alloy not initialized, cannot configure');
     return;
   }
   // eslint-disable-next-line no-undef
@@ -199,7 +206,9 @@ export async function setupAnalyticsTrackingWithAlloy(document) {
   // loads, for e.g. for page views
   const pageViewPromise = analyticsTrackPageViews(document); // track page view early
 
+  await import('./adobe-client-data-layer.min.js');
   await import('./alloy.min.js');
+
   await Promise.all([configurePromise, pageViewPromise]);
 }
 

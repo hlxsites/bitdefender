@@ -3,6 +3,7 @@ import {
 } from '../../scripts/lib-franklin.js';
 
 import { decorateBlockWithRegionId, decorateLinkWithLinkTrackingId } from '../../scripts/scripts.js';
+import { adobeMcAppendVisitorId } from '../../scripts/utils/utils.js';
 
 function createLoginModal() {
   const loginModal = document.querySelector('nav > div:nth-child(4)');
@@ -445,4 +446,6 @@ export default async function decorate(block) {
       }
     }
   });
+
+  adobeMcAppendVisitorId('header');
 }
