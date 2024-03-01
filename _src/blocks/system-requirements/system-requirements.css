@@ -27,6 +27,7 @@
 .system-requirements {
     background-color: #f2f2f2;
 }
+
 .system-requirements-userguides {
     background-color: #f2f2f2;
 }
@@ -86,6 +87,7 @@
     overflow: hidden;
     transition: all 0.3s ease-in-out;
 }
+
 .system-requirements-item .requirement p {
     font: normal normal normal 12px/14px var(--body-font-family);
 }
@@ -102,12 +104,13 @@
 
 .system-requirements .default-content-wrapper p a {
     font: normal normal normal 12px/14px var(--body-font-family);
-    padding: 14px 51px 14px 0px;
+    padding: 14px 51px 14px 0;
     color: #006EFF;
-    border: 0px;
+    border: 0;
     display: inline-block;
     position: relative;
 }
+
 .system-requirements .default-content-wrapper p a::before {
     content: url("/_src/icons/book-sharp-regular.svg");
     margin-right: 10px;
@@ -118,6 +121,7 @@
     position: relative;
     top: 3px;
 }
+
 .system-requirements .default-content-wrapper p a:hover {
     color: #006EFF;
     text-decoration: underline;

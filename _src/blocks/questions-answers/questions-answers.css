@@ -38,6 +38,7 @@
     flex-direction: column;
     cursor: pointer;
 }
+
 .questions-answers .questions-answers-item.expanded {
     box-shadow: 0 3px 8px 0 rgb(0 0 0 / 10%);
 }
@@ -86,6 +87,7 @@
     overflow: hidden;
     transition: all 0.3s ease-in-out;
 }
+
 .questions-answers-item .answer p {
     font: normal normal normal 14px/16px var(--body-font-family);
 }
