@@ -67,8 +67,9 @@
 
 .trusted u {
     text-decoration: none;
-    color: var(--teal);
-    font: normal normal normal 14px/18px var(--font-ibm);
+    font: normal normal 600 14px/18px IBM Plex Sans;
+    letter-spacing: 0px;
+    color: #006EFF;
 }
 
 .trusted .d-flex {
@@ -365,6 +366,24 @@ main .section.link-right a {
 }
 /* end awards band */
 
+/* override columns bg */
+.trusted .section.columns-container.trusted-bg-1 {
+    background: #EFF6FF 0% 0% no-repeat padding-box;
+    color: black;
+}
+
+.trusted .section.columns-container.trusted-bg-1 h2,
+.trusted .section.columns-container.trusted-bg-1 h3,
+.trusted .section.columns-container.trusted-bg-1 h4 {
+    font: normal normal 600 20px/24px IBM Plex Sans;
+}
+
+.trusted .section.columns-container.trusted-bg-1 p,
+.trusted .section.columns-container.trusted-bg-1 div {
+    font: normal normal normal 14px/21px IBM Plex Sans;
+}
+/* end override columns */
+
 @-webkit-keyframes animated-mouse {
     0% {
         opacity: 1;
@@ -427,6 +446,23 @@ main .section.link-right a {
         height: calc(100% - 30px);
     }
     /* end awards band */
+
+    /* columns bg-1 override */
+    .trusted .section.columns-container.trusted-bg-1 h2,
+    .trusted .section.columns-container.trusted-bg-1 h3,
+    .trusted .section.columns-container.trusted-bg-1 h4 {
+        font: normal normal 600 40px/48px IBM Plex Sans;
+    }
+
+    .trusted .section.columns-container.trusted-bg-1 p,
+    .trusted .section.columns-container.trusted-bg-1 div{
+        font: normal normal normal 18px/27px IBM Plex Sans;
+    }
+
+    .trusted .section.columns-container.trusted-bg-1 .columns > div  {
+        align-items: flex-start;
+    }
+    /* end columns bg-1 override */
 
     .trusted main .hero .hero-picture picture img {
         display: block;
