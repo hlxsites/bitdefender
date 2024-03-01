@@ -135,6 +135,7 @@
     }
 
     .dual-teaser-container .col-container span.icon {
+        display: block;
         position: absolute;
         width: 90px;
         height: 90px;
