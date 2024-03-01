@@ -519,9 +519,9 @@ main .section.link-right a {
         align-items: flex-start;
     }
 
-    /*.trusted .section.columns-container.trusted-bg-1 .columns > div:not(.columns-img-col)  {*/
-    /*    padding-top: 46px;*/
-    /*}*/
+    .trusted .section.columns-container.trusted-bg-1 .columns > div > div:nth-child(2) {
+        padding: 46px 0 30px;
+    }
     /* end columns bg-1 override */
 
     /* columns with logos */
