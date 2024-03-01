@@ -337,9 +337,13 @@ main .section.link-right a {
 }
 
 /* awards band */
+.trusted .section.static-awards {
+    background: white;
+    padding: 0;
+}
+
 .trusted .section.static-awards .default-content-wrapper {
     height: 120px;
-    background: white;
     display: flex;
     flex-wrap: wrap;
     column-gap: 33px;
