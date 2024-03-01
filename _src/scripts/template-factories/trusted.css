@@ -384,6 +384,41 @@ main .section.link-right a {
 }
 /* end override columns */
 
+/* columns with logos */
+.trusted .section.columns-container.bg-white  {
+    background: white;
+    color: black;
+}
+
+.trusted .section.columns-container .columns-img-col {
+    display: none;
+}
+
+.trusted .section.columns-container .columns > div > div:not(.columns-img-col) {
+    display: flex;
+    flex-direction: column;
+}
+
+.trusted .section.columns-container .columns > div > div:not(.columns-img-col) p:last-child {
+    order: -1;
+}
+
+.trusted .section.columns-container .columns > div > div:not(.columns-img-col) img {
+    width: unset;
+}
+
+.trusted .section.columns-container h2,
+.trusted .section.columns-container h3,
+.trusted .section.columns-container h4 {
+    font: normal normal 600 20px/24px IBM Plex Sans;
+}
+
+.trusted .section.columns-container p,
+.trusted .section.columns-container div {
+    font: normal normal normal 14px/21px IBM Plex Sans;
+}
+/* end columns with logos */
+
 @-webkit-keyframes animated-mouse {
     0% {
         opacity: 1;
@@ -463,10 +498,31 @@ main .section.link-right a {
         align-items: flex-start;
     }
 
-    .trusted .section.columns-container.trusted-bg-1 .columns > div:nth-child(2)  {
+    .trusted .section.columns-container.trusted-bg-1 .columns > div:not(.columns-img-col)  {
         padding-top: 46px;
     }
     /* end columns bg-1 override */
+
+    /* columns with logos */
+    .trusted .section.columns-container .columns-img-col {
+        display: block;
+    }
+
+    .trusted .section.columns-container .columns > div > div:not(.columns-img-col) p:last-child {
+        order: initial;
+    }
+
+    .trusted .section.columns-container h2,
+    .trusted .section.columns-container h3,
+    .trusted .section.columns-container h4 {
+        font: normal normal 600 40px/48px IBM Plex Sans;
+    }
+
+    .trusted .section.columns-container p,
+    .trusted .section.columns-container div {
+        font: normal normal normal 18px/27px IBM Plex Sans;
+    }
+    /* end columns with logos */
 
     .trusted main .hero .hero-picture picture img {
         display: block;
