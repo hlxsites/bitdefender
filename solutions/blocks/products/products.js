@@ -66,7 +66,7 @@ function toModel(productCode, variantId, v) {
  * This class is also repsonsible for fetching the product variants
  * from the remote service and presenting them to the view.
  */
-class ProductCard {
+export class ProductCard {
   constructor(root) {
     this.root = root;
     this.listeners = [];
@@ -368,11 +368,8 @@ export default function decorate(block) {
     [...(row.children)].forEach((col) => {
       col.classList.add('product-card');
       block.appendChild(col);
-
       const mv = new ProductCard(col);
-
       renderNanoBlocks(col, mv);
-
       // listen to ProductCard change and update the buttons pointing to the store url
       mv.subscribe((card) => {
         col.querySelectorAll('.button-container a').forEach((link) => {

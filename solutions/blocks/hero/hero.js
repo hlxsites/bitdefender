@@ -5,7 +5,8 @@ import {
   renderNanoBlocks,
   fetchProduct,
 } from '../../scripts/utils/utils.js';
-
+import { trackProduct } from '../../scripts/scripts.js';
+import { ProductCard } from '../products/products.js';
 /**
  * Builds hero block and prepends to main in a new section.
  * @param {Element} element The container element
@@ -61,6 +62,79 @@ createNanoBlock('discount', (code, variant) => {
 });
 
 /**
+ * Nanoblock representing the new product price
+ * @param mv The modelview holding the state of the view
+ * @param text The text located before the price
+ * @param monthly Show the monthly price if equal to 'monthly'
+ * @returns Root node of the nanoblock
+ */
+function renderPrice(mv, text = '', monthly = '') {
+  // TODO simplify CSS
+  const root = createTag(
+    'div',
+    {
+      class: 'price',
+    },
+    `<strong>${mv.model.basePrice}</strong>`,
+  );
+
+  const priceElt = root.querySelector('strong');
+
+  mv.subscribe(() => {
+    if (monthly.toLowerCase() === 'monthly') {
+      if (mv.model.discountedPrice) {
+        priceElt.innerHTML = `${text} ${mv.model.discountedMonthlyPrice} ${mv.model.currency} <sup>/mo</sup>`;
+      } else {
+        priceElt.innerHTML = `${text} ${mv.model.monthlyBasePrice} ${mv.model.currency} <sup>/mo</sup>`;
+      }
+    } else if (mv.model.discountedPrice) {
+      priceElt.innerHTML = `${text} ${mv.model.discountedPrice} ${mv.model.currency}`;
+    } else {
+      priceElt.innerHTML = `${text} ${mv.model.basePrice} ${mv.model.currency}`;
+    }
+
+    trackProduct(mv.model);
+  });
+
+  return root;
+}
+
+/**
+ * Nanoblock representing the old product price
+ * @param mv The modelview holding the state of the view
+ * @param text The text located before the price
+ * @param monthly Show the monthly price if equal to 'monthly'
+ * @returns Root node of the nanoblock
+ */
+function renderOldPrice(mv, text = '', monthly = '') {
+  // TODO simplify CSS
+  const root = createTag(
+    'div',
+    {
+      class: 'price',
+    },
+    `<span class='old-price'>${text} <del>${mv.model.basePrice ?? ''} ${mv.model.currency ?? ''}</del>`,
+  );
+
+  const oldPriceElt = root.querySelector('span');
+
+  mv.subscribe(() => {
+    if (mv.model.discountedPrice) {
+      oldPriceElt.innerHTML = monthly.toLowerCase() === 'monthly'
+        ? `${text} <del>${mv.model.monthlyBasePrice} ${mv.model.currency}<sup>/mo</sup></del>`
+        : `${text} <del>${mv.model.basePrice} ${mv.model.currency}</del>`;
+      oldPriceElt.style.visibility = 'visible';
+    } else {
+      oldPriceElt.style.visibility = 'hidden';
+    }
+  });
+
+  return root;
+}
+createNanoBlock('price', renderPrice);
+createNanoBlock('oldPrice', renderOldPrice);
+
+/**
  * decorates hero block
  * @param {Element} block The hero block element
  */
@@ -78,6 +152,41 @@ export default async function decorate(block) {
 
     // Apply a CSS class to each selected <ul> element
     ulsWithPicture.forEach((ul) => ul.classList.add('hero-awards'));
+
+    [...block.children].forEach((row) => {
+      if (row.classList.contains('hero-content')) {
+        [...(row.children)].forEach((col) => {
+          // col.classList.add('product-card');
+          // block.appendChild(col);
+          // checl if the column has a hero class name
+
+          const mv = new ProductCard(col);
+          renderNanoBlocks(col, mv);
+
+          // get the parent node of the em
+          const emParent = row.querySelector('.price.nanoblock em');
+          emParent.prepend(' / ');
+
+          // get the parent node of the strong
+          const strongParent = row.querySelector('.price.nanoblock strong').parentNode;
+
+          if (strongParent) {
+            emParent.parentElement.remove();
+            strongParent.appendChild(emParent);
+          }
+
+          // listen to ProductCard change and update the buttons pointing to the store url
+          mv.subscribe((card) => {
+            col.querySelectorAll('.button-container a').forEach((link) => {
+              if (link && link.href.startsWith('https://www.bitdefender.com.au/site/Store/buy')) {
+                link.href = card.url;
+              }
+            });
+          });
+        });
+      }
+      // row.remove();
+    });
 
     renderNanoBlocks(block);
 
