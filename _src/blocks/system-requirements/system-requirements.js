@@ -30,12 +30,12 @@ function expandItem(item) {
   export default function decorate(block) {
     const items = Array.from(block.querySelectorAll(':scope > div'));
     items.forEach((item) => {
-      item.classList.add('questions-answers-item');
+      item.classList.add('system-requirements-item');
       const [header, content] = item.children;
-      header.classList.add('question');
+      header.classList.add('system');
   
       if (content) {
-        content.classList.add('answer');
+        content.classList.add('requirement');
         // check if .accordion-item-content has a <p>
         const p = content.querySelector('p');
         // if it doesn't, add a <p> and move the content inside
@@ -57,4 +57,7 @@ function expandItem(item) {
     if (block.classList.contains('first-open')) {
       items[0].classList.add('expanded');
     }
+
+    const paragraph = document.querySelector('.system-requirements .default-content-wrapper p');
+    paragraph.innerHTML = paragraph.innerHTML.replace(/\|/g, '');
   }

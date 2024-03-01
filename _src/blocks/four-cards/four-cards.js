@@ -1,3 +1,5 @@
+import { decorateIcons } from '../../scripts/lib-franklin.js';
+
 export default function decorate(block) {
     const ul = document.createElement('ul');
   [...block.children].forEach((row) => {
@@ -9,4 +11,5 @@ export default function decorate(block) {
   
   block.textContent = '';
   block.append(ul);
+  decorateIcons(block);
 }

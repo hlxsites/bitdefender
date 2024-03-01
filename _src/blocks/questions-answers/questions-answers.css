@@ -23,24 +23,20 @@
     margin-bottom: 32px;
 }
 
-  
-.questions-answers {
-    cursor: pointer;
-}
-
 .questions-answers .default-content-wrapper p {
     font: italic normal normal 14px/16px var(--body-font-family);
 }
 
 .questions-answers .questions-answers-item {
     margin: 16px 0;
-    padding: 17px 16px 17px 40px;
+    padding: 16px 16px 16px 40px;
     background-color: #F4F8FF;
     border-radius: 10px;
     border-color: rgb(229 231 235);
     border-width: 0;
     display: flex;
     flex-direction: column;
+    cursor: pointer;
 }
 .questions-answers .questions-answers-item.expanded {
     box-shadow: 0 3px 8px 0 rgb(0 0 0 / 10%);
@@ -56,31 +52,32 @@
     padding-right: 25px;
 }
 
-.questions-answers-item .question::after {
+.questions-answers-item .question::before {
     position: absolute;
-    font: normal normal normal 24px/21px var(--body-font-family);
-    content: "+";
-    width: 10px;
-    height: 10px;
+    font: normal normal normal 24px/11px var(--body-font-family);
+    content: url("/_src/icons/plus-sharp-regular.svg");
+    width: 14px;
+    height: 16px;
     display: block;
-    left: -22px;
+    left: -24px;
     bottom:0;
-    top:0;
-    color: #006EFF;
+    top:3px;
+    margin-right: 10px;
+    filter: invert(25%) sepia(100%) saturate(10000%) hue-rotate(200deg) brightness(100%) contrast(100%);
 }
 
 .questions-answers-item.expanded .question {
     color: #006EFF;
 }
 
-.questions-answers-item.expanded .question::after {
-    font: normal normal normal 24px/21px var(--body-font-family);
-    top: -10px;
-    content: "_";
-    width: 10px;
-    height: 10px;
+.questions-answers-item.expanded .question::before {
+    font: normal normal normal 24px/11px var(--body-font-family);
+    top: 3px;
+    content: url("/_src/icons/minus-sharp-regular.svg");
+    width: 14px;
+    height: 16px;
     display: inline-block;
-    color: #006EFF;
+    filter: invert(25%) sepia(100%) saturate(10000%) hue-rotate(200deg) brightness(100%) contrast(100%);
 }
 
 .questions-answers-item .answer {
@@ -99,6 +96,6 @@
     transition: all 0.3s ease-in-out;
 }
 
- .accordion-item.accordion-item-open .answer {
+.questions-answers-item.questions-answers-item-open .answer {
     display: block;
 }
