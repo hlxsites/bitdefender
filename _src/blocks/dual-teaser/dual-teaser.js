@@ -1,9 +1,12 @@
+import { decorateIcons } from '../../scripts/lib-franklin.js';
+
 export default async function decorate(block) {
-  const cols = [...block.children[0].children];
+  const cols = [...block.children[1].children];
+  const middleSvgIcon = block.children[0].querySelector('span');
 
   block.innerHTML = `
     <div class="default-content-wrapper">
-        ${cols.map((col) => {
+        ${cols.map((col, idx) => {
     const pictureEl = col.querySelector('picture');
     const richTextEls = [...col.children];
     richTextEls.shift();
@@ -21,8 +24,11 @@ export default async function decorate(block) {
                     ${buttonEl.outerHTML}
                 </div>
             </div>
+            ${idx === 1 ? middleSvgIcon.outerHTML : ''}
         </div>
     `;
   }).join('')}   
   `;
+
+  decorateIcons(block);
 }
