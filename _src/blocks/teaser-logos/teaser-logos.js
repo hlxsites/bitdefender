@@ -8,6 +8,11 @@ export default async function decorate(block) {
 
   block.innerHTML = `
     <div class="main-wrapper">
+        ${boxes.map(() => `
+          <div class="col"></div>
+        `).join('')}
+    </div>
+    <div class="default-content-wrapper">
         ${boxes.map((box) => `
           <div class="col"><div class="img-wrapper">${box.innerHTML}</div></div>
         `).join('')}
