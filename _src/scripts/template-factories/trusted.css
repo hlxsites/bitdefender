@@ -504,6 +504,9 @@ main .section.link-right a {
     /* end columns bg-1 override */
 
     /* columns with logos */
+    .trusted .section.columns-container {
+        padding: 0;
+    }
     .trusted .section.columns-container .columns-img-col {
         display: block;
     }
