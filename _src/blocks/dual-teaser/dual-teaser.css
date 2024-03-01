@@ -76,14 +76,6 @@
     justify-content: center;
 }
 
-.dual-teaser-container .col-container .offer {
-   margin: 0 0 20px 5px;
-}
-
-.dual-teaser-container .col-container .offer p {
-    margin: 0;
-}
-
 @media (min-width: 768px) {
     .dual-teaser-container .default-content-wrapper {
         width: 100%;
@@ -128,10 +120,5 @@
     .dual-teaser-container .col-container .box h5 {
         font: normal normal normal 40px/52px IBM Plex Sans;
         margin-bottom: 16px;
-    }
-
-    .dual-teaser-container .col-container .offer p {
-        font: normal normal normal 18px/23px IBM Plex Sans;
-        margin-left: 30px;
     }
 }

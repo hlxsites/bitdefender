@@ -7,7 +7,7 @@ export default async function decorate(block) {
     const pictureEl = col.querySelector('picture');
     const richTextEls = [...col.children];
     richTextEls.shift();
-    const [titleEl, subtitleEl, buttonEl, offerEl] = richTextEls;
+    const [titleEl, subtitleEl, buttonEl] = richTextEls;
 
     return `
         <div class="col-container">
@@ -21,8 +21,6 @@ export default async function decorate(block) {
                     ${buttonEl.outerHTML}
                 </div>
             </div>
-            
-            <div class="offer">${offerEl.outerHTML}</div>
         </div>
     `;
   }).join('')}   
