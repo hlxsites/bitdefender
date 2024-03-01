@@ -1,5 +1,27 @@
+import { getDatasetFromSection } from '../../scripts/utils/utils.js';
+
 export default async function decorate(block) {
-  const [richTextEl, firstPictureEl, secondPictureEl] = [...block.children];
+  const [richTextEl, imageOnTopEl] = [...block.children];
+
+  const blockDataset = getDatasetFromSection(block);
+  const { desktopPicture, mobilePicture } = blockDataset;
+
+  const picture = document.createElement('picture');
+  const img = document.createElement('img');
+  img.setAttribute('src', `${mobilePicture}?format=webply&optimize=medium`);
+  img.setAttribute('alt', 'picture');
+
+
+  const desktopSource = document.createElement('source');
+  desktopSource.setAttribute('media', '(min-width: 768px)');
+  desktopSource.setAttribute('type', 'image/webp');
+  desktopSource.setAttribute('srcset', `${desktopPicture}?format=webply&optimize=medium`);
+
+  // const mobileSource = document.createElement('source');
+
+  picture.prepend(img);
+  picture.prepend(desktopSource);
+  // picture.prepend(mobileSource);
 
   block.innerHTML = `
     <div class="wrapper default-content-wrapper">
@@ -8,11 +30,11 @@ export default async function decorate(block) {
     
     <div class="imgs-wrapper">
         <div class="main-img img-container">
-            ${firstPictureEl.querySelector('picture').innerHTML}
+            ${picture.outerHTML}
         </div>
         
         <div class="second-img img-container">
-            ${secondPictureEl.querySelector('picture').innerHTML}
+            ${imageOnTopEl.querySelector('picture').innerHTML}
         </div>
     </div>
   `;
