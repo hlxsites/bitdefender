@@ -104,6 +104,10 @@
     background-color: var(--red);
 }
 
+.trusted .black_bck {
+    background-color: var(--black);
+}
+
 .trusted .dark_bck {
     background-color: var(--dark);
 }
@@ -122,17 +126,6 @@
 
 .trusted .only-mobile {
     display: block;
-}
-
-.trusted a.button.primary, .trusted button.primary {
-    border: 1px solid var(--white);
-    color: var(--white);
-    background-color: transparent;
-    border-radius: 10px;
-    min-width: 100%;
-    padding: 10px;
-    margin: 1.5em 0 2em;
-    font: normal normal bold 16px / 18px Arial;
 }
 
 .trusted a.button.primary span, .trusted button.primary span {
@@ -155,7 +148,12 @@ main .section.link-right a {
     z-index: 999;
     position: relative;
     margin-top: -19.5em;
-    background: linear-gradient(to bottom, transparent 31%,var(--dark2) 31%);
+    background: linear-gradient(to bottom, transparent 31%, #EFF6FF 31%);
+}
+
+.trusted .section.apartnership_box {
+    background: #EFF6FF;
+    color: black;
 }
 
 .trusted .section.apartnership_box h2,
@@ -436,6 +434,9 @@ main .section.link-right a {
 }
 /* end particle band section */
 
+.trusted .section.small-text p{
+}
+
 @-webkit-keyframes animated-mouse {
     0% {
         opacity: 1;
@@ -584,6 +585,11 @@ main .section.link-right a {
         margin: 0
     }
     /* end particle band section */
+
+    .trusted .section.small-text p {
+        font: normal normal var(--font-weight-bold) 13px/1 IBM Plex Sans;
+        line-height: 1;
+    }
 
     .trusted main .hero .hero-picture picture img {
         display: block;
