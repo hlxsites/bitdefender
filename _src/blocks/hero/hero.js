@@ -5,7 +5,6 @@ import {
   renderNanoBlocks,
   fetchProduct,
 } from '../../scripts/utils/utils.js';
-import { isView } from '../../scripts/scripts.js';
 
 /**
  * Builds hero block and prepends to main in a new section.
@@ -33,16 +32,6 @@ function buildHeroBlock(element) {
     pictureEl.append(picture);
 
     section.prepend(pictureEl);
-
-    const isMobileView = isView('mobile');
-    // eslint-disable-next-line max-len
-    const mobilePictureWrapper = !section.lastElementChild.classList.value && section.lastElementChild;
-    if (isMobileView && mobilePictureWrapper) {
-      mobilePictureWrapper.classList.add('mobile-picture-wrapper', 'img-container');
-      mobilePictureWrapper.replaceChild(mobilePictureWrapper.querySelector('picture'), mobilePictureWrapper.firstElementChild);
-    } else if (!isMobileView && mobilePictureWrapper) {
-      section.removeChild(mobilePictureWrapper);
-    }
 
     pictureParent.remove();
   }

@@ -11,17 +11,13 @@ export default async function decorate(block) {
   img.setAttribute('src', `${mobilePicture}?format=webply&optimize=medium`);
   img.setAttribute('alt', 'picture');
 
-
   const desktopSource = document.createElement('source');
   desktopSource.setAttribute('media', '(min-width: 768px)');
   desktopSource.setAttribute('type', 'image/webp');
   desktopSource.setAttribute('srcset', `${desktopPicture}?format=webply&optimize=medium`);
 
-  // const mobileSource = document.createElement('source');
-
   picture.prepend(img);
   picture.prepend(desktopSource);
-  // picture.prepend(mobileSource);
 
   block.innerHTML = `
     <div class="wrapper default-content-wrapper">

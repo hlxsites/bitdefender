@@ -392,12 +392,9 @@ export default async function decorate(block) {
       nav.innerHTML = aemHeaderHtml;
 
       const cssFile = nav.querySelector('link[rel="stylesheet"]');
-      // cssFile.href = `https://www.bitdefender.com${cssFile.getAttribute('href')}`;
       cssFile.href = '/_src/scripts/vendor/mega-menu/mega-menu.css';
 
-      const scriptFile = nav.querySelector('script');
       const newScriptFile = document.createElement('script');
-      // newScriptFile.src = `https://www.bitdefender.com${scriptFile.getAttribute('src')}`;
       newScriptFile.src = '/_src/scripts/vendor/mega-menu/mega-menu.js';
       nav.appendChild(newScriptFile);
 
