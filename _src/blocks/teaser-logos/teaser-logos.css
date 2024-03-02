@@ -27,6 +27,7 @@
 
 .teaser-logos-container .main-wrapper .col {
     --backgroundColor: var(--red);
+
     background: var(--backgroundColor);
 }
 

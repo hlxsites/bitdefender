@@ -30,12 +30,12 @@
 .big-teaser-section-container h2,
 .big-teaser-section-container h3,
 .big-teaser-section-container h4 {
-    font: normal normal 600 20px/24px IBM Plex Sans;
+    font: normal normal 600 20px/24px "IBM Plex Sans";
 }
 
 .big-teaser-section-container p,
 .big-teaser-section-container div {
-    font: normal normal normal 14px/21px IBM Plex Sans;
+    font: normal normal normal 14px/21px "IBM Plex Sans";
 }
 
 @media screen and (min-width: 768px) {
@@ -54,12 +54,12 @@
     .big-teaser-section-container h2,
     .big-teaser-section-container h3,
     .big-teaser-section-container h4 {
-        font: normal normal 600 40px/48px IBM Plex Sans;
+        font: normal normal 600 40px/48px "IBM Plex Sans";
     }
 
     .big-teaser-section-container p,
     .big-teaser-section-container div {
-        font: normal normal normal 18px/27px IBM Plex Sans;
+        font: normal normal normal 18px/27px "IBM Plex Sans";
     }
 
     .big-teaser-section-container .wrapper {

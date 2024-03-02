@@ -11,7 +11,7 @@ import {
   waitForLCP,
   loadBlocks,
   loadCSS,
-  getMetadata, loadScript,
+  getMetadata,
 } from './lib-franklin.js';
 
 import {

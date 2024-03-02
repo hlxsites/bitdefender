@@ -15,7 +15,7 @@
 .box-carousel-container .carousel-header .title h2,
 .box-carousel-container .carousel-header .title h3,
 .box-carousel-container .carousel-header .title h4 {
-    font: normal normal 600 20px/37px IBM Plex Sans;
+    font: normal normal 600 20px/37px "IBM Plex Sans";
 }
 
 .box-carousel-container .carousel-header .title p {
@@ -58,7 +58,7 @@
 .box-carousel-container .carousel-item:hover {
     color: white;
     background: #006dff;
-    box-shadow: 0px 3px 40px #006EFFF2;
+    box-shadow: 0 3px 40px #006EFFF2;
 }
 
 .box-carousel-container .carousel-item:hover svg path {
@@ -66,7 +66,7 @@
 }
 
 .box-carousel-container .carousel-item .title {
-    font: normal normal bold 32px/82px IBM Plex Sans;
+    font: normal normal bold 32px/82px "IBM Plex Sans";
     letter-spacing: 0;
     overflow: hidden;
     display: -webkit-box;
@@ -77,7 +77,7 @@
 }
 
 .box-carousel-container .carousel-item .subtitle {
-    font: normal normal normal 12px/15px IBM Plex Sans;
+    font: normal normal normal 12px/15px "IBM Plex Sans";
     letter-spacing: 0;
     overflow: hidden;
     display: -webkit-box;
@@ -134,16 +134,16 @@
     }
 
     .box-carousel-container .carousel-item .title {
-        font: normal normal bold 64px/82px IBM Plex Sans;
+        font: normal normal bold 64px/82px "IBM Plex Sans";
     }
 
     .box-carousel-container .carousel-item .subtitle {
-        font: normal normal normal 18px/23px IBM Plex Sans;
+        font: normal normal normal 18px/23px "IBM Plex Sans";
     }
 
     .box-carousel-container .carousel-header .title h2,
     .box-carousel-container .carousel-header .title h3,
     .box-carousel-container .carousel-header .title h4 {
-        font: normal normal 600 40px/48px IBM Plex Sans;
+        font: normal normal 600 40px/48px "IBM Plex Sans";
     }
 }
