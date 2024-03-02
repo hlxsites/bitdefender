@@ -64,7 +64,7 @@
 
     .big-teaser-section-container .wrapper {
         position: relative;
-        height: 750px;
+        min-height: 550px;
         display: flex;
         align-items: center;
     }
