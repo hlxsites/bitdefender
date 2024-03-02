@@ -6,7 +6,6 @@ export default async function decorate(block) {
 
   const carouselItemStyle = {
     margin: 20,
-    width: 220,
   };
 
   block.classList.add('default-content-wrapper');
@@ -70,7 +69,8 @@ export default async function decorate(block) {
   }
 
   function scrollCarousel(offset) {
-    carousel.style.transform = `translateX(${-1 * offset * (carouselItemStyle.width + carouselItemStyle.margin)}px)`;
+    const carouselItem = block.querySelector('.carousel-item');
+    carousel.style.transform = `translateX(${-1 * offset * (carouselItem.offsetWidth + carouselItemStyle.margin)}px)`;
   }
 
   function updateDisabledArrow() {
