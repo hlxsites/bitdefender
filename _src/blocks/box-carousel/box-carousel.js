@@ -6,7 +6,7 @@ export default async function decorate(block) {
 
   const carouselItemStyle = {
     margin: 20,
-    width: 290,
+    width: 220,
   };
 
   block.classList.add('default-content-wrapper');
