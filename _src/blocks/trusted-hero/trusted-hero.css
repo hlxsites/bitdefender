@@ -114,6 +114,7 @@
     .trusted-hero-container .video-wrapper .gradient-2,
     .trusted-hero-container .video-wrapper .gradient-3 {
         top: unset;
+        left: -1px;
         border-width: 670px 100px 0 0;
     }
 
