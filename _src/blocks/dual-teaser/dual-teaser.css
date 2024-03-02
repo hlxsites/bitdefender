@@ -50,6 +50,7 @@
     padding: 10px;
     background: #003b89a3 0 0 no-repeat padding-box;;
     backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
     display: flex;
     flex-direction: column;
 }
