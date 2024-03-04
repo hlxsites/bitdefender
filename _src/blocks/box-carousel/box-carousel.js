@@ -67,9 +67,9 @@ export default async function decorate(block) {
   function renderArrows() {
     block.classList.remove('scrollable');
 
-    const cardsNotFullyVisible = window.innerWidth < slides.length * 290 + 100;
-    if (isView('desktop') && cardsNotFullyVisible) {
-      return `
+    if (isView('desktop')) {
+      const cardsNotFullyVisible = window.innerWidth < slides.length * 290 + 100;
+      return cardsNotFullyVisible ? `
       <a href class="arrow disabled left-arrow">
         <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 752 752" preserveAspectRatio="xMidYMid meet">
           <g transform="translate(0,752) scale(0.1,-0.1)">
@@ -94,14 +94,10 @@ export default async function decorate(block) {
           </g>
         </svg>
       </a>
-    `;
+    ` : '';
     }
 
-    if (isView('tablet') || isView('mobile')) {
-      block.classList.add('scrollable');
-      return '';
-    }
-
+    block.classList.add('scrollable');
     return '';
   }
 
