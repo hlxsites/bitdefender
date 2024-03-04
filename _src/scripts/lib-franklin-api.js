@@ -43,15 +43,22 @@ export async function loadComponent(offer, block, options, selector)  {
     import(`${origin}/_src/blocks/${block}/${block}.js`)
   ])
 
-  // create a new div to load the component outside the shadowRoot
-  // in order to corretly run the javascript
-  const newDiv = document.createElement('div');
-  newDiv.style.display = "none";
-  newDiv.innerHTML += html;
-  updateLinkSources(newDiv, `${origin}${offerFolder}/`);
-  document.body.appendChild(newDiv);
-  await js.default(newDiv, {...options, metadata: parseMetadata(newDiv)});
-  shadowRoot.appendChild(newDiv);
-  newDiv.style.display = "block";
+  // If the block is a particle background, 
+  // a new div is created and appended to the body so the external library can work
+  if (block === "particle-background") {
+    const newDiv = document.createElement('div');
+    newDiv.style.display = "none";
+    newDiv.innerHTML += html;
+    updateLinkSources(newDiv, `${origin}${offerFolder}/`);
+    document.body.appendChild(newDiv);
+    await js.default(newDiv, {...options, metadata: parseMetadata(newDiv)});
+    shadowRoot.appendChild(newDiv);
+    newDiv.style.display = "block";
+  } else {
+    shadowRoot.innerHTML +=  html;
+    updateLinkSources(shadowRoot, `${origin}${offerFolder}/`);
+    await js.default(shadowRoot, {...options, metadata: parseMetadata(shadowRoot)});
+  }
+
   return container;
 }
