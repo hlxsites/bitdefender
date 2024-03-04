@@ -413,7 +413,7 @@ main .section.link-right a {
 }
 
 .trusted .section.columns-container .columns > div > div:not(.columns-img-col) img {
-    width: 100px;
+    width: 160px;
 }
 
 .trusted .section.columns-container h2,
