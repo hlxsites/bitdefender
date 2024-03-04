@@ -367,7 +367,7 @@ export default async function decorate(block) {
   const isErrorPage = window.isErrorPage || false;
 
   // Check if the page isn't an error page and if the hero doesn't exist
-  if (!hero && !isErrorPage) return;
+  // if (!hero && !isErrorPage) return;
 
   if (hero && hero.classList.contains('black-background')) {
     const header = document.querySelector('header');
