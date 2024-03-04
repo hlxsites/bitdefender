@@ -450,6 +450,13 @@ main .section.link-right a {
     text-decoration: underline;
 }
 
+.trusted header,
+.trusted main,
+.trusted footer {
+    max-width: unset;
+    margin: unset;
+}
+
 @-webkit-keyframes animated-mouse {
     0% {
         opacity: 1;

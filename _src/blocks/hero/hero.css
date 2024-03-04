@@ -406,12 +406,6 @@ main .hero .hero-awards li::after {
   content: none;
 }
 
-
-.hero .mobile-picture-wrapper {
-  height: 280px;
-  margin-top: -25px;
-}
-
 @media(min-width: 767px) { /* tablet */
   :root {
     --hero-h1-font-size: 42px;
@@ -428,10 +422,6 @@ main .hero .hero-awards li::after {
 
   main .hero .hero-content .breadcrumb a::after {
     margin: 0 9px;
-  }
-
-  div.hero div:nth-child(3) {
-    display: none;
   }
 }
 

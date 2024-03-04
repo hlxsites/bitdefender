@@ -516,6 +516,11 @@ main .section.bitdefender-ferrari .default-content-wrapper .button-container a.b
   background-color: black;
 }
 
+header, main, footer {
+    max-width: var(--body-max-width);
+    margin: 0 auto;
+}
+
 @media (min-width: 768px) {
   main .section.center .products .product-card {
     min-width: 380px;
