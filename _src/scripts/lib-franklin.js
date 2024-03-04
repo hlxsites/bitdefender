@@ -300,9 +300,8 @@ export async function fetchPlaceholders(prefix = 'default') {
   const loaded = window.placeholders[`${prefix}-loaded`];
   if (!loaded) {
     window.placeholders[`${prefix}-loaded`] = new Promise((resolve, reject) => {
-      const pages = window.location.pathname.split('/').filter((item) => item);
-      const [locale] = pages;
-      fetch(`/${locale}${prefix === 'default' ? '' : prefix}/placeholders.json`)
+      const secondRootFolder = window.location.pathname.split('/').filter((item) => item).filter((item, idx) => idx < 2).join('/');
+      fetch(`${secondRootFolder}/placeholders.json`)
         .then((resp) => {
           if (resp.ok) {
             return resp.json();
