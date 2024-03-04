@@ -53,6 +53,8 @@
     -webkit-backdrop-filter: blur(30px);
     display: flex;
     flex-direction: column;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 
 .dual-teaser-container .col-container .box h2,
@@ -114,6 +116,8 @@
     .dual-teaser-container .col-container .box {
         padding: 33px 7% 33px 33px;
         height: 245px;
+        border-bottom-right-radius: unset;
+        border-bottom-left-radius: unset;
     }
 
     .dual-teaser-container .col-container .box a {
