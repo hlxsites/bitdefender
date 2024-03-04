@@ -362,7 +362,7 @@ main .section.link-right a {
 
 .trusted .section.static-awards .default-content-wrapper > * {
     margin: 0;
-    width: calc((100% - 66px) / 3);
+    width: calc((100% - 99px) / 4);
     height: calc((100% / 2) - 16px);
 }
 
