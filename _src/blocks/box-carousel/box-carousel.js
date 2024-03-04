@@ -1,4 +1,6 @@
 import { decorateIcons } from '../../scripts/lib-franklin.js';
+import { debounce } from '../../scripts/utils/utils.js';
+import { isView } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
   const [titleEl, ...slides] = [...block.children];
@@ -8,11 +10,66 @@ export default async function decorate(block) {
     margin: 20,
   };
 
-  block.classList.add('default-content-wrapper');
+  function isFirstIndex() {
+    return currentSlideIndex === 0;
+  }
 
-  block.innerHTML = `
-    <div class="carousel-header">
-      <div class="title">${titleEl.children[0].innerHTML}</div>
+  function isLastIndex() {
+    return currentSlideIndex === slides.length;
+  }
+
+  function scrollCarousel(offset, carousel) {
+    const carouselItem = block.querySelector('.carousel-item');
+    carousel.style.transform = `translateX(${-1 * offset * (carouselItem.offsetWidth + carouselItemStyle.margin)}px)`;
+  }
+
+  function getCarousel() {
+    return block.querySelector('.carousel');
+  }
+
+  function updateDisabledArrow() {
+    const leftArrowEl = block.querySelector('.left-arrow');
+    const rightArrowEl = block.querySelector('.right-arrow');
+
+    leftArrowEl.classList.remove('disabled');
+    rightArrowEl.classList.remove('disabled');
+
+    if (isLastIndex()) {
+      block.querySelector('.right-arrow').classList.add('disabled');
+      return;
+    }
+
+    if (isFirstIndex()) {
+      block.querySelector('.left-arrow').classList.add('disabled');
+    }
+  }
+
+  function leftArrowHandler(e) {
+    e.preventDefault();
+    if (isFirstIndex()) {
+      return;
+    }
+    currentSlideIndex -= 1;
+    scrollCarousel(currentSlideIndex, getCarousel());
+    updateDisabledArrow(currentSlideIndex);
+  }
+
+  function rightArrowHandler(e) {
+    e.preventDefault();
+    if (isLastIndex()) {
+      return;
+    }
+    currentSlideIndex += 1;
+    scrollCarousel(currentSlideIndex, getCarousel());
+    updateDisabledArrow(currentSlideIndex);
+  }
+
+  function renderArrows() {
+    block.classList.remove('scrollable');
+
+    const cardsNotFullyVisible = window.innerWidth < slides.length * 290 + 100;
+    if (isView('desktop') && cardsNotFullyVisible) {
+      return `
       <a href class="arrow disabled left-arrow">
         <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 752 752" preserveAspectRatio="xMidYMid meet">
           <g transform="translate(0,752) scale(0.1,-0.1)">
@@ -37,6 +94,24 @@ export default async function decorate(block) {
           </g>
         </svg>
       </a>
+    `;
+    }
+
+    if (isView('tablet') || isView('mobile')) {
+      block.classList.add('scrollable');
+      return '';
+    }
+
+    return '';
+  }
+
+  function render() {
+    block.classList.add('default-content-wrapper');
+
+    block.innerHTML = `
+    <div class="carousel-header">
+      <div class="title">${titleEl.children[0].innerHTML}</div>
+      ${renderArrows()}
     </div>
     
     <div class="carousel-container">
@@ -56,57 +131,21 @@ export default async function decorate(block) {
     </div>
   `;
 
-  decorateIcons(block);
+    decorateIcons(block);
 
-  const carousel = block.querySelector('.carousel');
-
-  function isFirstIndex() {
-    return currentSlideIndex === 0;
-  }
-
-  function isLastIndex() {
-    return currentSlideIndex === slides.length;
-  }
-
-  function scrollCarousel(offset) {
-    const carouselItem = block.querySelector('.carousel-item');
-    carousel.style.transform = `translateX(${-1 * offset * (carouselItem.offsetWidth + carouselItemStyle.margin)}px)`;
-  }
-
-  function updateDisabledArrow() {
     const leftArrowEl = block.querySelector('.left-arrow');
     const rightArrowEl = block.querySelector('.right-arrow');
 
-    leftArrowEl.classList.remove('disabled');
-    rightArrowEl.classList.remove('disabled');
+    if (leftArrowEl && rightArrowEl) {
+      leftArrowEl.removeEventListener('click', leftArrowHandler);
+      rightArrowEl.removeEventListener('click', rightArrowHandler);
 
-    if (isLastIndex()) {
-      block.querySelector('.right-arrow').classList.add('disabled');
-      return;
-    }
-
-    if (isFirstIndex()) {
-      block.querySelector('.left-arrow').classList.add('disabled');
+      leftArrowEl.addEventListener('click', leftArrowHandler);
+      rightArrowEl.addEventListener('click', rightArrowHandler);
     }
   }
 
-  block.querySelector('.left-arrow').addEventListener('click', (e) => {
-    e.preventDefault();
-    if (isFirstIndex()) {
-      return;
-    }
-    currentSlideIndex -= 1;
-    scrollCarousel(currentSlideIndex);
-    updateDisabledArrow(currentSlideIndex);
-  });
+  render();
 
-  block.querySelector('.right-arrow').addEventListener('click', (e) => {
-    e.preventDefault();
-    if (isLastIndex()) {
-      return;
-    }
-    currentSlideIndex += 1;
-    scrollCarousel(currentSlideIndex);
-    updateDisabledArrow(currentSlideIndex);
-  });
+  window.addEventListener('resize', debounce(render, 250));
 }

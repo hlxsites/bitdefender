@@ -38,6 +38,14 @@
     transition: transform 150ms cubic-bezier(0.165, 0.84, 0.44, 1) 0s;
 }
 
+.box-carousel-container .block.scrollable .carousel {
+    overflow: auto;
+}
+
+.box-carousel-container .block.scrollable .carousel::-webkit-scrollbar {
+    display: none;
+}
+
 .box-carousel-container .carousel-item {
     width: 220px;
     height: 220px;
@@ -49,20 +57,11 @@
     color: black;
     font-size: 1em;
     background: #eaf2ff;
+    flex-shrink: 0;
 }
 
 .box-carousel-container .carousel-item:first-child {
     margin-left: 0;
-}
-
-.box-carousel-container .carousel-item:hover {
-    color: white;
-    background: #006dff;
-    box-shadow: 0 3px 40px #006EFFF2;
-}
-
-.box-carousel-container .carousel-item:hover svg path {
-    fill: white !important;
 }
 
 .box-carousel-container .carousel-item .title {
@@ -129,8 +128,8 @@
     }
 
     .box-carousel-container .carousel-item {
-        width: 300px;
-        height: 300px;
+        width: 290px;
+        height: 290px;
     }
 
     .box-carousel-container .carousel-item .title {
@@ -145,5 +144,17 @@
     .box-carousel-container .carousel-header .title h3,
     .box-carousel-container .carousel-header .title h4 {
         font: normal normal 600 40px/48px "IBM Plex Sans";
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .box-carousel-container .carousel-item:hover {
+        color: white;
+        background: #006dff;
+        box-shadow: 0 3px 40px #006EFFF2;
+    }
+
+    .box-carousel-container .carousel-item:hover svg path {
+        fill: white !important;
     }
 }
