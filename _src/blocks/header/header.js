@@ -387,25 +387,37 @@ export default async function decorate(block) {
     if (html.includes('aem-banner')) {
       const aemHeaderFetch = await fetch('https://www.bitdefender.com/content/experience-fragments/bitdefender/language_master/en/header-navigation/mega-menu/master/jcr:content/root/mega_menu.styled.html');
       const aemHeaderHtml = await aemHeaderFetch.text();
-      const nav = document.createElement('div');
-      nav.classList.add('mega-menu');
-      nav.innerHTML = aemHeaderHtml;
 
-      const cssFile = nav.querySelector('link[rel="stylesheet"]');
-      cssFile.href = '/_src/scripts/vendor/mega-menu/mega-menu.css';
+      const nav = document.createElement('div');
+      const shadowRoot = nav.attachShadow({ mode: 'open' });
+
+      const contentDiv = document.createElement('div');
+      contentDiv.innerHTML = aemHeaderHtml;
+      shadowRoot.appendChild(contentDiv);
+
+      const cssFile = shadowRoot.querySelector('link[rel="stylesheet"]');
+      if (cssFile) {
+        cssFile.href = '/_src/scripts/vendor/mega-menu/mega-menu.css';
+      }
 
       const newScriptFile = document.createElement('script');
       newScriptFile.src = '/_src/scripts/vendor/mega-menu/mega-menu.js';
-      nav.appendChild(newScriptFile);
+      shadowRoot.appendChild(newScriptFile);
 
-      const navHeader = nav.querySelector('header');
-      navHeader.style.height = 'auto';
+      const navHeader = shadowRoot.querySelector('header');
+      if (navHeader) {
+        navHeader.style.height = 'auto';
+      }
 
       const body = document.querySelector('body');
       body.style.maxWidth = 'initial';
 
       const header = document.querySelector('header');
-      header.replaceWith(nav);
+      if (header) {
+        header.remove();
+      }
+
+      document.querySelector('body').prepend(nav);
       return;
     }
 
