@@ -33,7 +33,7 @@ function handleLoginClick() {
 }
 
 function appendUlToP() {
-  const divs = document.querySelectorAll('.mega-menu > div');
+  const divs = document.querySelectorAll('.mega-menu-websites > div');
 
   divs.forEach((div) => {
     const uls = div.querySelectorAll('ul');
@@ -59,7 +59,7 @@ function wrapDivsInMegaMenu() {
   const divs = Array.from(nav.children).filter((node) => node.tagName.toLowerCase() === 'div');
   const navSectionsIndex = divs.findIndex((div) => div.classList.contains('nav-sections'));
   const megaMenuDiv = document.createElement('div');
-  megaMenuDiv.className = 'mega-menu';
+  megaMenuDiv.className = 'mega-menu-websites';
   decorateBlockWithRegionId(megaMenuDiv, 'Main Menu|Home Solutions');
 
   const otherOptionsDiv = document.createElement('div');
@@ -95,7 +95,7 @@ function wrapDivsInMegaMenu() {
     otherOptionsDiv.appendChild(bottomLinks.firstElementChild);
   }
 
-  const loginModal = document.querySelector('.mega-menu > div:first-child');
+  const loginModal = document.querySelector('.mega-menu-websites > div:first-child');
   nav.appendChild(loginModal);
 }
 
@@ -173,20 +173,20 @@ function renderDesktopHeader(block, nav) {
   const bottomLinks = document.querySelector('.bottom-links');
   bottomLinks.removeChild(bottomLinks.lastElementChild);
 
-  const megaMenu = document.querySelector('.mega-menu');
+  const megaMenu = document.querySelector('.mega-menu-websites');
   let isOverHomeSolutions = false;
   let isOverMegaMenu = false;
 
   const showMegaMenu = () => {
     megaMenu.style.display = 'flex';
     setTimeout(() => {
-      megaMenu.classList.add('mega-menu-show');
+      megaMenu.classList.add('mega-menu-websites-show');
     }, 10);
   };
 
   const hideMegaMenu = () => {
     if (!isOverHomeSolutions && !isOverMegaMenu) {
-      megaMenu.classList.remove('mega-menu-show');
+      megaMenu.classList.remove('mega-menu-websites-show');
       homeSolutions.classList.remove('home-solutions-link-hover');
     }
   };
@@ -243,7 +243,7 @@ function handleMenuClick() {
   });
 
   // Select the first child of mega-menu and all div children of other-options
-  const megaMenuFirstChild = document.querySelector('.mega-menu').firstElementChild;
+  const megaMenuFirstChild = document.querySelector('.mega-menu-websites').firstElementChild;
 
   const otherOptionsChildren = Array.from(document.querySelector('.other-options').children);
   const navDivs = [megaMenuFirstChild].concat(otherOptionsChildren);
@@ -367,7 +367,7 @@ export default async function decorate(block) {
   const isErrorPage = window.isErrorPage || false;
 
   // Check if the page isn't an error page and if the hero doesn't exist
-  if (!hero && !isErrorPage) return;
+  // if (!hero && !isErrorPage) return;
 
   if (hero && hero.classList.contains('black-background')) {
     const header = document.querySelector('header');
@@ -383,6 +383,49 @@ export default async function decorate(block) {
 
   if (resp.ok) {
     const html = await resp.text();
+
+    if (html.includes('aem-banner')) {
+      const aemHeaderFetch = await fetch('https://www.bitdefender.com/content/experience-fragments/bitdefender/language_master/en/header-navigation/mega-menu/master/jcr:content/root/mega_menu.styled.html');
+      const aemHeaderHtml = await aemHeaderFetch.text();
+
+      const nav = document.createElement('div');
+      const shadowRoot = nav.attachShadow({ mode: 'open' });
+
+      const contentDiv = document.createElement('div');
+      contentDiv.classList.add('mega-menu');
+      contentDiv.innerHTML = aemHeaderHtml;
+      shadowRoot.appendChild(contentDiv);
+
+      const cssFile = shadowRoot.querySelector('link[rel="stylesheet"]');
+      if (cssFile) {
+        cssFile.href = '/_src/scripts/vendor/mega-menu/mega-menu.css';
+      }
+
+      const newScriptFile = document.createElement('script');
+      newScriptFile.src = '/_src/scripts/vendor/mega-menu/mega-menu.js';
+
+      const shadowRootScriptTag = shadowRoot.querySelector('script');
+      if (shadowRootScriptTag) {
+        shadowRootScriptTag.replaceWith(newScriptFile);
+      }
+      // shadowRoot.appendChild(newScriptFile);
+
+      const navHeader = shadowRoot.querySelector('header');
+      if (navHeader) {
+        navHeader.style.height = 'auto';
+      }
+
+      const body = document.querySelector('body');
+      body.style.maxWidth = 'initial';
+
+      const header = document.querySelector('header');
+      if (header) {
+        header.remove();
+      }
+
+      document.querySelector('body').prepend(nav);
+      return;
+    }
 
     const nav = document.createElement('nav');
     nav.id = 'nav';

@@ -54,6 +54,17 @@ window.hlx.plugins.add('rum-conversion', {
   url: '../plugins/rum-conversion/src/index.js',
 });
 
+function initMobileDetector(viewport) {
+  const mobileDetectorDiv = document.createElement('div');
+  mobileDetectorDiv.setAttribute(`data-${viewport}-detector`, '');
+  document.body.prepend(mobileDetectorDiv);
+}
+
+export function isView(viewport) {
+  const element = document.querySelectorAll(`[data-${viewport}-detector]`)[0];
+  return !!(element && getComputedStyle(element).display !== 'none');
+}
+
 /**
  * Creates a meta tag with the given name and value and appends it to the head.
  * @param {String} name The name of the meta tag
@@ -184,17 +195,31 @@ export function getDomain() {
   return window.location.pathname.split('/').filter((item) => item)[0];
 }
 
+export function getLocalizedResourceUrl(resourceName) {
+  const { pathname } = window.location;
+  const lastCharFromUrl = pathname.charAt(pathname.length - 1);
+  const lpIsInFolder = lastCharFromUrl === '/';
+
+  let pathnameAsArray = pathname.split('/');
+
+  if (lpIsInFolder) {
+    return `${pathnameAsArray.join('/')}${resourceName}`;
+  }
+
+  const basePathIndex = pathname.startsWith('/pages/') ? 3 : 2;
+  pathnameAsArray = pathnameAsArray.slice(0, basePathIndex + 1); // "/consumer/en";
+
+  return `${pathnameAsArray.join('/')}/${resourceName}`;
+}
+
 /**
  * Sets the page language.
  * @param {Object} param The language and country
  */
 function setPageLanguage(param) {
   document.documentElement.lang = param.language;
-  const pages = window.location.pathname.split('/').filter((item) => item);
-  const domain = pages[0];
-  const basePath = pages.length > 1 ? `${domain}/solutions` : domain;
-  createMetadata('nav', `/${basePath}/nav`);
-  createMetadata('footer', `/${basePath}/footer`);
+  createMetadata('nav', `${getLocalizedResourceUrl('nav')}`);
+  createMetadata('footer', `${getLocalizedResourceUrl('footer')}`);
 }
 
 export function pushToDataLayer(event, payload) {
@@ -471,8 +496,13 @@ function pushPageLoadToDataLayer() {
 async function loadEager(doc) {
   setPageLanguage(getLanguageCountryFromPath(window.location.pathname));
   decorateTemplateAndTheme();
-  if (getMetadata('template') !== '') {
-    loadCSS(`${window.hlx.codeBasePath}/styles/${getMetadata('template')}.css`);
+  const templateMetadata = getMetadata('template');
+  const hasTemplate = getMetadata('template') !== '';
+  if (hasTemplate) {
+    loadCSS(`${window.hlx.codeBasePath}/scripts/template-factories/${templateMetadata}.css`);
+    // loadScript(`${window.hlx.codeBasePath}/scripts/template-factories/${templateMetadata}.js`, {
+    //   type: 'module',
+    // });
   }
   const main = doc.querySelector('main');
   if (main) {
@@ -558,5 +588,9 @@ async function loadPage() {
   await loadLazy(document);
   loadDelayed();
 }
+
+initMobileDetector('mobile');
+initMobileDetector('tablet');
+initMobileDetector('desktop');
 
 loadPage();

@@ -2,7 +2,6 @@ footer {
   padding: 2.5rem 0 1.5rem;
   background-color: #000;
   font-size: var(--body-font-size-s);
-  max-width: 120rem;
 }
 
 footer .footer a {
@@ -231,7 +230,7 @@ footer .footer a:hover {
   padding-bottom: 0.625rem;
 }
 
-.footer > div > :nth-child(4) > p + ul { 
+.footer > div > :nth-child(4) > p + ul {
   display: none;
 }
 
@@ -307,8 +306,6 @@ footer .footer a:hover {
 @media(min-width: 767px) { /* tablet */
   footer {
     padding: 3.625rem 0 2.6875rem;
-    margin: 0 auto;
-    max-width: 120rem;
   }
 
   .footer > div > :nth-child(1) > ul li > a {
@@ -425,7 +422,7 @@ footer .footer a:hover {
     margin-top: 0.9375rem;
     list-style: none;
   }
-  
+
   .footer > div > :nth-child(3) ul {
     column-count: 2;
   }

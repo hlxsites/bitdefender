@@ -1,0 +1,160 @@
+.box-carousel-container {
+    background: #EFF6FF;
+}
+
+.box-carousel-container .carousel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.box-carousel-container .carousel-header .title {
+    color: black;
+}
+
+.box-carousel-container .carousel-header .title h2,
+.box-carousel-container .carousel-header .title h3,
+.box-carousel-container .carousel-header .title h4 {
+    font: normal normal 600 20px/24px "IBM Plex Sans";
+}
+
+.box-carousel-container .carousel-header .title p {
+    margin: 0 0 16px;
+}
+
+.box-carousel-container .carousel-header .left-arrow,
+.box-carousel-container .carousel-header .right-arrow {
+    color: black;
+}
+
+.box-carousel-container .carousel-container {
+    width: 100%;
+    position: relative;
+    display: flex;
+}
+
+.box-carousel-container .carousel {
+    display: flex;
+    transition: transform 150ms cubic-bezier(0.165, 0.84, 0.44, 1) 0s;
+}
+
+.box-carousel-container .block.scrollable .carousel {
+    overflow: auto;
+}
+
+.box-carousel-container .block.scrollable .carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.box-carousel-container .carousel-item {
+    width: 220px;
+    height: 220px;
+    margin: 10px;
+    box-sizing: border-box;
+    padding: 20px;
+    border: 3px solid #006dff;
+    border-radius: 15px;
+    color: black;
+    font-size: 1em;
+    background: #eaf2ff;
+    flex-shrink: 0;
+}
+
+.box-carousel-container .carousel-item:first-child {
+    margin-left: 0;
+}
+
+.box-carousel-container .carousel-item .title {
+    font: normal normal bold 32px/82px "IBM Plex Sans";
+    letter-spacing: 0;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+    margin: 8px 0;
+}
+
+.box-carousel-container .carousel-item .subtitle {
+    font: normal normal normal 12px/15px "IBM Plex Sans";
+    letter-spacing: 0;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.box-carousel-container .left-arrow svg {
+    transform: rotate(180deg);
+}
+
+.box-carousel-container .arrow {
+    width: 100px;
+}
+
+.box-carousel-container .arrow svg {
+    width: 100%;
+    height: 50px;
+}
+
+.box-carousel-container .arrow svg path {
+    fill: white;
+}
+
+.box-carousel-container .arrow.disabled svg path {
+    fill: #a5a5a5;
+}
+
+.box-carousel-container .carousel-item .icon {
+    width: 45px;
+    height: 45px;
+    margin: 0;
+}
+
+.box-carousel-container svg path {
+    fill: var(--blue) !important;
+}
+
+
+@media screen and (min-width: 768px) {
+    .box-carousel-container .carousel-header {
+        justify-content: flex-start;
+        margin-bottom: 20px;
+    }
+
+    .box-carousel-container .carousel-header .left-arrow {
+        margin-left: auto;
+    }
+
+    .box-carousel-container .carousel-item {
+        width: 290px;
+        height: 290px;
+    }
+
+    .box-carousel-container .carousel-item .title {
+        font: normal normal bold 64px/82px "IBM Plex Sans";
+    }
+
+    .box-carousel-container .carousel-item .subtitle {
+        font: normal normal normal 18px/23px "IBM Plex Sans";
+    }
+
+    .box-carousel-container .carousel-header .title h2,
+    .box-carousel-container .carousel-header .title h3,
+    .box-carousel-container .carousel-header .title h4 {
+        font: normal normal 600 40px/48px "IBM Plex Sans";
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .box-carousel-container .carousel-item:hover {
+        color: white;
+        background: #006dff;
+        box-shadow: 0 3px 40px #006EFFF2;
+    }
+
+    .box-carousel-container .carousel-item:hover svg path {
+        fill: white !important;
+    }
+}

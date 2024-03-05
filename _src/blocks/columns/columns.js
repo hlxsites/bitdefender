@@ -1,3 +1,5 @@
+import { debounce } from '../../scripts/utils/utils.js';
+
 function getItemsToShow() {
   if (window.innerWidth <= 676) {
     return 1; // Show 1 item for mobile screens
@@ -48,9 +50,11 @@ function showSlides(carousel, slideNumber) {
     const columnWidthPx = containerWidth / itemsToShow;
 
     for (let i = start; i < end && i < childDivs.length; i += 1) {
-      childDivs[i].style.opacity = '1';
-      childDivs[i].style.position = 'relative';
-      childDivs[i].style.width = `${columnWidthPx}px`;
+      if (childDivs[i]) {
+        childDivs[i].style.opacity = '1';
+        childDivs[i].style.position = 'relative';
+        childDivs[i].style.width = `${columnWidthPx}px`;
+      }
     }
   }
 
@@ -140,18 +144,6 @@ function setupCarousel(carousel, resetSlidePosition = false) {
 
   carousel.appendChild(buttonsWrapper);
   hideExcessElements(carousel);
-}
-
-function debounce(func, wait) {
-  let timeout;
-  return function executedFunction(...args) {
-    const later = () => {
-      clearTimeout(timeout);
-      func(...args);
-    };
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  };
 }
 
 function setImageAsBackgroundImage() {
