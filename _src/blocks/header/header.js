@@ -392,6 +392,7 @@ export default async function decorate(block) {
       const shadowRoot = nav.attachShadow({ mode: 'open' });
 
       const contentDiv = document.createElement('div');
+      contentDiv.classList.add('mega-menu');
       contentDiv.innerHTML = aemHeaderHtml;
       shadowRoot.appendChild(contentDiv);
 
@@ -402,7 +403,12 @@ export default async function decorate(block) {
 
       const newScriptFile = document.createElement('script');
       newScriptFile.src = '/_src/scripts/vendor/mega-menu/mega-menu.js';
-      shadowRoot.appendChild(newScriptFile);
+
+      const shadowRootScriptTag = shadowRoot.querySelector('script');
+      if (shadowRootScriptTag) {
+        shadowRootScriptTag.replaceWith(newScriptFile);
+      }
+      // shadowRoot.appendChild(newScriptFile);
 
       const navHeader = shadowRoot.querySelector('header');
       if (navHeader) {

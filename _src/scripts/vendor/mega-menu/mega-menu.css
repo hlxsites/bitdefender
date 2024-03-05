@@ -1356,7 +1356,7 @@ ol,ul {
     padding-left: 15px
 }
 
-.mega-menu li {
+li {
     font-size: 16px;
     line-height: 1.63;
     margin-bottom: 14px;
@@ -3915,8 +3915,7 @@ input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-sea
 
 .mega-menu__container {
     background: #fff;
-    position: relative;
-    border-bottom: solid;
+    position: relative
 }
 
 @media(min-width: 992px) {
@@ -3933,7 +3932,7 @@ input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-sea
     pointer-events: none;
     position: absolute;
     width: 100%;
-    z-index: 5;
+    z-index: 2
 }
 
 .mega-menu__content {
@@ -4054,8 +4053,7 @@ input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-sea
         min-height: 100vh;
         position: absolute;
         top: 100%;
-        width: 100%;
-        z-index: 5;
+        width: 100%
     }
 }
 
@@ -4122,7 +4120,7 @@ input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-sea
     }
 }
 
-.mega-menu__item, .mega-menu__right-item {
+.mega-menu__item,.mega-menu__right-item {
     margin: 0 20px
 }
 
@@ -4208,7 +4206,7 @@ input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-sea
     left: 0;
     position: absolute;
     width: 100%;
-    z-index: 5;
+    z-index: 1
 }
 
 @media(max-width: 991px) {
