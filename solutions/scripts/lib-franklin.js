@@ -124,7 +124,7 @@ export async function loadCSS(href) {
  * @param {Object} attrs additional optional attributes
  */
 
-export async function loadScript(src, attrs) {
+export async function loadScript(src, attrs = null) {
   return new Promise((resolve, reject) => {
     if (!document.querySelector(`head > script[src="${src}"]`)) {
       const script = document.createElement('script');

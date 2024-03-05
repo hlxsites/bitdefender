@@ -14,7 +14,7 @@
  * Customer's XDM schema namespace
  * @type {string}
  */
-const CUSTOM_SCHEMA_NAMESPACE = '_sitesinternal';
+const CUSTOM_SCHEMA_NAMESPACE = '_bitdefender';
 
 /**
  * Returns experiment id and variant running

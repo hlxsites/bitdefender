@@ -15,7 +15,7 @@ const hreflangMap = [
   ['en', { baseUrl: 'https://www.bitdefender.com', pageType: '.html' }],
   ['it', { baseUrl: 'https://www.bitdefender.it', pageType: '.html' }],
   ['fr', { baseUrl: 'https://www.bitdefender.fr', pageType: '.html' }],
-  ['nl-BE', { baseUrl: 'https://www.bitdefender.br', pageType: '.html' }],
+  ['nl-BE', { baseUrl: 'https://www.bitdefender.be', pageType: '.html' }],
   ['es', { baseUrl: 'https://www.bitdefender.es', pageType: '.html' }],
   ['en-AU', { baseUrl: 'https://www.bitdefender.com.au', pageType: '' }],
   ['ro', { baseUrl: 'https://www.bitdefender.ro', pageType: '.html' }],
@@ -41,7 +41,8 @@ try {
         loc: `${LOCALE_URL}${row.path}`,
         'xhtml:link': Object.keys(hreflangMap).map((key) => {
           const hreflang = hreflangMap[key][0];
-          const href = `${hreflangMap[key][1].baseUrl}${row.path}${hreflangMap[key][1].pageType}`;
+          const pathCount = row.path.split('/').filter(String).length;
+          const href = `${hreflangMap[key][1].baseUrl}${row.path}${pathCount > 1 ? hreflangMap[key][1].pageType : ''}`;
           return {
             _attributes: {
               rel: 'alternate',
