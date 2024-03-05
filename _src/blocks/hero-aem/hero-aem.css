@@ -1,8 +1,4 @@
-/* stylelint-disable at-rule-empty-line-before */
-/* stylelint-disable no-duplicate-selectors */
-/* stylelint-disable no-descending-specificity */
-/* stylelint-disable selector-class-pattern */
-/* stylelint-disable rule-empty-line-before */
+/* stylelint-disable */
 .hero-aem-container .hero-aem p:first-of-type {
     margin: 0;
     margin-bottom: 5px;
@@ -37,6 +33,32 @@
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
   }
+
+  .hero-aem-container .hero-aem .hero-aem__card-text picture img {
+    width: auto;
+    max-height: 60px;
+  }
+
+  .hero-aem-container .hero-aem .hero-aem__card-text p:has(picture) {
+    text-align: center;
+  }
+
+  .hero-aem-container .hero-aem .hero-aem__breadcrumb {
+    border-spacing: 0;
+    font-size: 12px;
+    margin-bottom: 5px;
+    align-self: flex-start;
+  }
+
+  .hero-aem-container .hero-aem .hero-aem__breadcrumb a {
+    color: #202020;
+    text-decoration: none;
+  }
+
+  .hero-aem-container .hero-aem .hero-aem__breadcrumb a:hover {
+    text-decoration: underline;
+  }
+
   .hero-aem-container .hero-aem p.button-container {
     text-align: center;
   }
@@ -122,8 +144,94 @@
     height: fit-content;
   }
 
+  .hero-aem-container .button.free-download {
+    color: #005ed9;
+    font-weight: 500;
+    background-color: transparent;
+    border: none;
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-decoration: none;
+  }
+
+  .hero-aem-container .button.free-download:hover {
+    color: #0A53C5;
+    transform: translateX(10px);
+  }
+
+  .hero-aem-container .button.free-download::after {
+    content: '\2192';
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    transition: all .2s cubic-bezier(.4,0,.2,1);
+    transform: translateX(0);
+    margin-left: 2px;
+  }
+
+  .hero-aem-container .button.free-download:hover::after {
+    transform: translateX(5px);
+  }
+
+  /* this would ideally be the sales tax included text */
+  .hero-aem__card-text p:last-child {
+    font-size: 14px;
+  }
+
+  .hero-aem__card-text p:last-child a {
+    color: inherit;
+
+  }
+
   .hero-aem-container .hero-aem p em a {
-    color: black;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    -webkit-font-smoothing: antialiased;
+    display: inline-flex;
+    align-items: center;
+    box-sizing: border-box;
+    text-decoration: none;
+    padding: 10px 26px 8px 28px;
+    text-align: center;
+    cursor: pointer;
+    color: #006DFF;
+    background-color: transparent;
+    border: 2px solid #006DFF;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-radius: 8px;
+    height: fit-content;
+    transition: all .2s cubic-bezier(.4,0,.2,1);
+  }
+
+  .hero-aem-container .hero-aem p em a:hover {
+    color: white;
+    background-color: #006DFF;
+  }
+
+  .hero-aem-container .hero-aem p em a:active {
+    background-color: #0D499B;
+  }
+
+  .hero-aem__pill {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.1;
+    color: #fff;
+    background-color: #006DFF;
+    border-radius: 20px;
+    padding: 5px 13px;
+    display: inline-block;
+    margin-right: 10px;
+  }
+
+  .hero-aem__underPriceText {
+    font-size: 14px;
   }
 
   .hero-aem-container .aem-two-cards p a {
@@ -196,7 +304,19 @@
     .hero-aem-container .hero-aem .hero-aem__desktop-image {
       display: block;
       height: 100%;
+      position: relative;
     }
+
+    .hero-aem-container .hero-aem .hero-aem__desktop-image::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: linear-gradient(to left, rgba(247, 247, 247, 0), #F7F7F7);
+    }
+
     .hero-aem-container .hero-aem .hero-aem__desktop-image img {
       height: 100%;
       width: 100%;
@@ -210,10 +330,20 @@
       background-color: initial;
       padding: 0;
     }
+
+    .hero-aem-container .hero-aem .hero-aem__card-text p:has(picture) {
+      text-align: left;
+    }
+
     .hero-aem-container .hero-aem .hero-aem__card__desktop {
       background-color: #F7F7F7;
       border-bottom-left-radius: 20px;
       border-top-left-radius: 20px;
+    }
+
+    .hero-aem-container .hero-aem .hero-aem__card__desktop--center {
+      display: flex;
+      align-items: center;
     }
     .hero-aem-container .hero-aem .hero-aem__card__desktop > div {
       padding: 4%;
