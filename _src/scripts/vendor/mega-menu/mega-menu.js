@@ -373,7 +373,8 @@ function initMegaMenu (container) {
   addQuickLinksToMobile();
 }
 
-const megamenuEl = document.querySelector('.mega-menu__container');
+const shadowRoot = document.querySelector('body > div:first-child').shadowRoot;
+const megamenuEl = shadowRoot.querySelector('.mega-menu__container');
 
 if (megamenuEl) {
   new initMegaMenu(megamenuEl);
