@@ -3572,6 +3572,7 @@ export default async function decorate(block) {
       const shadowRoot = nav.attachShadow({ mode: 'open' });
 
       const contentDiv = document.createElement('div');
+      contentDiv.classList.add('mega-menu');
       contentDiv.innerHTML = aemHeaderHtml;
       shadowRoot.appendChild(contentDiv);
 
