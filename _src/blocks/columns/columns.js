@@ -1,4 +1,4 @@
-import { debounce } from '../../scripts/utils/utils.js';
+import {debounce, getDatasetFromSection} from '../../scripts/utils/utils.js';
 
 function getItemsToShow() {
   if (window.innerWidth <= 676) {
@@ -167,6 +167,8 @@ function setImageAsBackgroundImage() {
 }
 
 export default function decorate(block) {
+  const blockDataset = getDatasetFromSection(block);
+  const {linksOpenInNewTab} = blockDataset;
   const cols = [...block.firstElementChild.children];
   block.classList.add(`columns-${cols.length}-cols`);
 
@@ -183,6 +185,13 @@ export default function decorate(block) {
       }
     });
   });
+
+  if (linksOpenInNewTab === 'true') {
+    block.querySelectorAll('.button-container > a').forEach((anchorEl) => {
+      anchorEl.target = '_blank';
+      anchorEl.rel = 'noopener noreferrer';
+    });
+  }
 
   if (block.classList.contains('text-over-image')) {
     setImageAsBackgroundImage();
