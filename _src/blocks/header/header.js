@@ -364,7 +364,9 @@ function renderMobileHeader(nav) {
 
 export default async function decorate(block) {
   const hero = document.querySelector('.hero');
-  const isErrorPage = window.isErrorPage || false;
+
+  // commented out because it's not being used, might be used in the future
+  // const isErrorPage = window.isErrorPage || false;
 
   // Check if the page isn't an error page and if the hero doesn't exist
   // if (!hero && !isErrorPage) return;

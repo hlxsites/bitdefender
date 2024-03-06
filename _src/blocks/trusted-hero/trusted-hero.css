@@ -8,18 +8,18 @@
 }
 
 .trusted-hero-container h1 {
-    font: normal normal bold 48px/42px "IBM Plex Sans";
+    font: normal normal bold 48px/42px "IBM Plex Sans", sans-serif;
 }
 
 .trusted-hero-container h2,
 .trusted-hero-container h3,
 .trusted-hero-container h4 {
-    font: normal normal bold 20px/24px "IBM Plex Sans";
+    font: normal normal bold 20px/24px "IBM Plex Sans", sans-serif;
 }
 
 .trusted-hero-container p,
 .trusted-hero-container div {
-    font: normal normal normal 14px/18px "IBM Plex Sans";
+    font: normal normal normal 14px/18px "IBM Plex Sans", sans-serif;
 }
 
 .trusted-hero-container .rte-wrapper {
@@ -72,18 +72,18 @@
 
 @media (min-width: 992px) {
     .trusted-hero-container h1 {
-        font: normal normal bold 96px/82px "IBM Plex Sans";
+        font: normal normal bold 96px/82px "IBM Plex Sans", sans-serif;
     }
 
     .trusted-hero-container h2,
     .trusted-hero-container h3,
     .trusted-hero-container h4 {
-        font: normal normal bold 40px/52px "IBM Plex Sans";
+        font: normal normal bold 40px/52px "IBM Plex Sans", sans-serif;
     }
 
     .trusted-hero-container p,
     .trusted-hero-container div {
-        font: normal normal normal 18px/23px "IBM Plex Sans";
+        font: normal normal normal 18px/23px "IBM Plex Sans", sans-serif;
     }
 
     .trusted-hero-container {

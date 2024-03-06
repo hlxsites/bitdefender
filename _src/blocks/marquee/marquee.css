@@ -1,3 +1,4 @@
+/* stylelint-disable custom-property-pattern */
 .marquee-container.section {
   padding: 0;
   position: relative;
@@ -13,7 +14,7 @@
 }
 
 .marquee-container .title {
-  font: normal normal 600 12px/15px "IBM Plex Sans";
+  font: normal normal 600 12px/15px "IBM Plex Sans", sans-serif;
   letter-spacing: 0;
 }
 
@@ -54,7 +55,7 @@
   }
 
   .marquee-container .title {
-    font: normal normal 600 18px/23px "IBM Plex Sans";
+    font: normal normal 600 18px/23px "IBM Plex Sans", sans-serif;
     position: absolute;
     top: -45px;
     z-index: 1;
