@@ -316,8 +316,6 @@ export default function decorateLinkedPictures(main) {
         if (a && link.startsWith('https://')) {
           a.innerHTML = '';
           a.className = 'linked-image';
-          a.target = '_blank';
-          a.rel = 'noopener noreferrer';
           const pictureParent = picture.parentNode;
           a.append(picture);
           if (pictureParent.children.length === 0) {
