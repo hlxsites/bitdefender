@@ -1,17 +1,25 @@
 // import { productAliases } from '../../scripts/scripts.js';
 // import { updateProductsList } from '../../scripts/utils.js';
 
-export default function decorate(block) {
-  const metaData = block.closest('.section').dataset;
+export default function decorate(block, options) {
   const {
     products, priceType,
-  } = metaData;
+  } = options ? options.metadata : block.closest('.section').dataset;
+
+  console.log(block);
+  const aemContainer = block.children[1];
+  console.log(aemContainer);
+  aemContainer.classList.add('hero-aem-container');
+  aemContainer.classList.add('we-container');
+  const underShadow = aemContainer.children[0];
+  console.log(underShadow);
 
   const productsAsList = products && products.split(',');
   if (productsAsList.length) {
     // productsAsList.forEach((prod) => updateProductsList(prod));
 
-    [...block.children].forEach((prod, key) => {
+    [...underShadow.children].forEach((prod, key) => {
+      console.log('prod', prod, key);
       const [greenTag, title, blueTag, subtitle, saveOldPrice, price, billed, buyLink, undeBuyLink, benefitsLists] = [...prod.querySelectorAll('tr')];
       // const [prodName, prodUsers, prodYears] = productsAsList[key].split('/');
       const onSelectorClass = `tsmd-10-1`;
@@ -19,6 +27,7 @@ export default function decorate(block) {
       [...block.children][key].innerHTML = '';
 
       const featuresSet = benefitsLists.querySelectorAll('table');
+      console.log('featuresSet', featuresSet);
       const featureList = Array.from(featuresSet).map((table) => {
         const trList = Array.from(table.querySelectorAll('tr'));
 

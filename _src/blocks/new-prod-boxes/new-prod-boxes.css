@@ -163,14 +163,14 @@
 .new-prod-boxes-container .block .prod_box .inner_prod_box .benefitsLists ul li:first-of-type.has_arrow::before {
   content: "";
   margin: 0 5px 20px 0;
-  background: url("../../icons/arrow-left-blue.png") no-repeat center transparent;
+  background: url("bitdefender.com/pages/icons/arrow-left-blue.png") no-repeat center transparent;
   width: 20px;
   height: 20px;
   background-size: 15px 12px;
   float: left;
 }
 .new-prod-boxes-container .block .prod_box .inner_prod_box .benefitsLists ul li:first-of-type.has_arrow_right .arrow-right {
-  background: url("../../icons/arrow-right-solid.svg") no-repeat center transparent;
+  background: url("bitdefender.com/pages/icons/arrow-right-solid.svg") no-repeat center transparent;
   width: 20px;
   height: 20px;
   background-size: 15px 12px;
@@ -183,7 +183,7 @@
   line-height: 17px;
   margin-bottom: 8px;
   list-style-type: none;
-  background: url("../../images/icons/ok.png") top 2px left no-repeat transparent;
+  background: url("https://bitdefender.com/pages/images/icons/ok.png") top 2px left no-repeat transparent;
   padding-left: 22px;
   background-size: 13px;
   position: relative;
@@ -219,7 +219,7 @@
   color: white;
   border-radius: 20px;
   padding: 2px 21px 2px 7px;
-  background: url("../../images/icons/individual.svg") center right 6px no-repeat #026DFF;
+  background: url("bitdefender.com/pages/images/icons/individual.svg") center right 6px no-repeat #026DFF;
   background-size: auto 12px;
 }
 .new-prod-boxes-container .block .prod_box .inner_prod_box .benefitsLists ul:nth-of-type(2) {
