@@ -23,13 +23,12 @@
 }
 
 .trusted-hero-container .rte-wrapper {
-    padding: 30px;
     position: relative;
     z-index: 4;
 }
 
 .trusted-hero-container .video-wrapper {
-    height: 200px;
+    height: 300px;
     position: relative;
 }
 
