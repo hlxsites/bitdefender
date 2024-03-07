@@ -70,6 +70,21 @@
     order: -1;
 }
 
+.trusted-hero-container a.button:any-link:not(.modal):not(.primary) {
+    border: solid white 2px !important;
+    width: 100%;
+    justify-content: center;
+}
+
+@media (min-width: 768px) {
+    .trusted-hero-container a.button:any-link:not(.modal):not(.primary) {
+        width: unset;
+        justify-content: unset;
+        display: inline-flex;
+        margin-right: 15px;
+    }
+}
+
 @media (min-width: 992px) {
     .trusted-hero-container h1 {
         font: normal normal bold 96px/82px "IBM Plex Sans", sans-serif;
