@@ -3,6 +3,16 @@
   flex-direction: column;
   align-items: center;
 }
+.tabs-component-container h3 {
+  font: normal normal bold 24px/28px Arial;
+}
+.tabs-component-container p {
+  font: normal normal normal 16px/24px Arial;
+}
+.tabs-component-container span {
+  font: normal normal bold 16px/18px Arial;
+}
+
 .tabs-component-container .title-class div {
   max-width: 630px;
   text-align: center;

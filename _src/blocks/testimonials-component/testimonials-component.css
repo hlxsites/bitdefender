@@ -4,6 +4,11 @@
   align-items: center;
   font: italic normal normal 14px/19px Arial;
 }
+
+.testimonials-component-container h2 {
+  font: normal normal bold 32px/37px Arial;
+}
+
 .testimonials-component-container .testimonials-component {
   display: flex;
   flex-direction: column;
