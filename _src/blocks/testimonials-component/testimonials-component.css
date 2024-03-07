@@ -27,11 +27,8 @@
 .testimonials-component-container .review-container {
   display: flex;
   align-items: flex-start;
+  flex: 1;
   gap: 2%;
-}
-
-.testimonials-component-container .review-container {
-  display: flex;
   background: #edf9ff;
   padding: 26px 23px;
   border-radius: 16px;

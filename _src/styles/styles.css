@@ -611,6 +611,10 @@ main .section.bitdefender-ferrari .default-content-wrapper .button-container a.b
     padding: 60px 0;
   }
 
+  main .section.less-padding {
+    padding: 1em 0;
+  }
+
 }
 
 @media (min-width: 1000px) {
