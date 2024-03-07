@@ -68,4 +68,8 @@ export default function decorate(block) {
   sections.forEach((section) => {
     observer.observe(section);
   });
+  window.dispatchEvent(new CustomEvent("shadowDomLoaded"), {
+    bubbles: true,
+    composed: true, // This allows the event to cross the shadow DOM boundary
+  });
 }
