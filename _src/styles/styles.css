@@ -634,6 +634,10 @@ header, main, footer {
     padding: 60px 0;
   }
 
+  main .section.less-padding {
+    padding: 1em 0;
+  }
+
 }
 
 @media (min-width: 1000px) {
