@@ -38,6 +38,9 @@
   padding: 26px 23px;
   border-radius: 16px;
 }
+.testimonials-component-container.grey-bck .review-container {
+  background-color: #F6F6F6;;
+}
 .testimonials-component-container hr {
   margin-left: 0;
   width: 24px;
@@ -50,6 +53,10 @@
 .testimonials-component-container .review p {
   width: 90%;
   margin-top: 0px;
+}
+.testimonials-component-container.grey-bck .review p {
+  font-size: 14px;
+  font-style: normal;
 }
 .testimonials-component-container .hide {
   display: none;
