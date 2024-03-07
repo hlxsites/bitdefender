@@ -144,7 +144,7 @@
   }
 
   .awards-component h3 {
-    font-size: 32px !important;
+    font: normal normal bold 32px/38px Arial;
   }
 
   .awards-component h4 {
