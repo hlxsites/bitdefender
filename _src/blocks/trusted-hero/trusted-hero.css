@@ -70,14 +70,14 @@
     order: -1;
 }
 
-.trusted-hero-container a.button:any-link:not(.modal):not(.primary) {
+.trusted-hero-container a.button:any-link:not(.modal, .primary) {
     border: solid white 2px !important;
     width: 100%;
     justify-content: center;
 }
 
 @media (min-width: 768px) {
-    .trusted-hero-container a.button:any-link:not(.modal):not(.primary) {
+    .trusted-hero-container a.button:any-link:not(.modal, .primary) {
         width: unset;
         justify-content: unset;
         display: inline-flex;

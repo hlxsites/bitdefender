@@ -67,9 +67,6 @@
     display: flex;
     flex-direction: column;
     padding-left: 40px;
-}
-
-.box-carousel-container.testimonials .carousel-item {
     border: white;
     background: white;
     position: relative;
@@ -96,11 +93,11 @@
     line-clamp: 6;
 }
 
-.box-carousel-container.testimonials .carousel-item:before {
+.box-carousel-container.testimonials .carousel-item::before {
     content: '';
     position: absolute;
     display: block;
-    background: url(../../icons/quote-left.svg) no-repeat;
+    background: url("../../icons/quote-left.svg") no-repeat;
     background-size: cover;
     width: 20px;
     height: 20px;
@@ -124,7 +121,7 @@
     position: relative;
 }
 
-.box-carousel-container.testimonials .carousel-item .subtitle-secondary:before {
+.box-carousel-container.testimonials .carousel-item .subtitle-secondary::before {
     content: '';
     display: block;
     position: absolute;
