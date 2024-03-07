@@ -61,6 +61,19 @@
     flex-shrink: 0;
 }
 
+.box-carousel-container.testimonials .carousel-item {
+    width: 300px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 40px;
+}
+
+.box-carousel-container.testimonials .carousel-item {
+    border: white;
+    background: white;
+}
+
 .box-carousel-container .carousel-item:first-child {
     margin-left: 0;
 }
@@ -76,6 +89,28 @@
     margin: 8px 0;
 }
 
+.box-carousel-container.testimonials .carousel-item {
+    position: relative;
+}
+
+.box-carousel-container.testimonials .carousel-item .title {
+    font: italic normal normal 14px/21px "IBM Plex Sans", sans-serif;
+    -webkit-line-clamp: 6;
+    line-clamp: 6;
+}
+
+.box-carousel-container.testimonials .carousel-item:before {
+    content: '';
+    position: absolute;
+    display: block;
+    background: url(../../icons/quote-left.svg) no-repeat;
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+    top: 85px;
+    left: 15px;
+}
+
 .box-carousel-container .carousel-item .subtitle {
     font: normal normal normal 12px/15px "IBM Plex Sans", sans-serif;
     letter-spacing: 0;
@@ -84,6 +119,22 @@
     -webkit-line-clamp: 3;
     line-clamp: 3;
     -webkit-box-orient: vertical;
+}
+
+.box-carousel-container.testimonials .carousel-item .subtitle-secondary {
+    font: normal normal bold 14px/21px "IBM Plex Sans", sans-serif;
+    margin-top: auto;
+    position: relative;
+}
+
+.box-carousel-container.testimonials .carousel-item .subtitle-secondary:before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 40px;
+    height: 1px;
+    background: black;
+    top: -5px;
 }
 
 .box-carousel-container .left-arrow svg {
@@ -117,6 +168,15 @@
     fill: var(--blue) !important;
 }
 
+.box-carousel-container.testimonials .img-container {
+    height: 60px;
+    width: 100%;
+}
+
+.box-carousel-container.testimonials .img-container img {
+    object-fit: contain;
+}
+
 
 @media screen and (min-width: 768px) {
     .box-carousel-container .carousel-header {
@@ -141,6 +201,10 @@
         font: normal normal normal 18px/23px "IBM Plex Sans", sans-serif;
     }
 
+    .box-carousel-container.testimonials .carousel-item .subtitle {
+        font: normal normal normal 12px/15px "IBM Plex Sans", sans-serif;
+    }
+
     .box-carousel-container .carousel-header .title h2,
     .box-carousel-container .carousel-header .title h3,
     .box-carousel-container .carousel-header .title h4 {
@@ -149,7 +213,7 @@
 }
 
 @media screen and (min-width: 992px) {
-    .box-carousel-container .carousel-item:hover {
+    .box-carousel-container:not(.testimonials) .carousel-item:hover {
         color: white;
         background: #006dff;
         box-shadow: 0 3px 40px #006EFFF2;

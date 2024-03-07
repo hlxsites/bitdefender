@@ -6,6 +6,8 @@ export default async function decorate(block) {
   const [titleEl, ...slides] = [...block.children];
   let currentSlideIndex = 0;
 
+  const isTestimonials = block.closest('.section').classList.contains('testimonials');
+
   const carouselItemStyle = {
     margin: 20,
   };
@@ -114,13 +116,29 @@ export default async function decorate(block) {
         <div class="carousel">
           ${slides.map((slide) => `
             <div class="carousel-item">
-                ${slide.children[0].children[0].innerHTML}
+                ${isTestimonials ? `
+                  <div class="img-container">
+                    ${slide.children[0].children[0].innerHTML}
+                  </div>
+                ` : slide.children[0].children[0].innerHTML}
+                
                 <div class="title">
                     ${slide.children[0].children[1].textContent}
                 </div>
-                <div class="subtitle">
+                
+                ${isTestimonials ? `
+                  <div class="subtitle-secondary">
                     ${slide.children[0].children[2].innerHTML}
-                </div>
+                  </div>
+                  
+                  <div class="subtitle">
+                    ${slide.children[0].children[3].innerHTML}
+                  </div>
+                ` : `
+                   <div class="subtitle">
+                      ${slide.children[0].children[2].innerHTML}
+                   </div>
+                `}
             </div>
           `).join('')}
         </div>
