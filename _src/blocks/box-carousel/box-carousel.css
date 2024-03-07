@@ -72,6 +72,7 @@
 .box-carousel-container.testimonials .carousel-item {
     border: white;
     background: white;
+    position: relative;
 }
 
 .box-carousel-container .carousel-item:first-child {
@@ -87,10 +88,6 @@
     line-clamp: 1;
     -webkit-box-orient: vertical;
     margin: 8px 0;
-}
-
-.box-carousel-container.testimonials .carousel-item {
-    position: relative;
 }
 
 .box-carousel-container.testimonials .carousel-item .title {
