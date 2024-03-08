@@ -38,4 +38,9 @@ export default async function decorate(block) {
         ${rte.innerHTML}
     </div>
   `;
+
+  block.querySelectorAll('.button-container > a').forEach((anchorEl) => {
+    anchorEl.target = '_blank';
+    anchorEl.rel = 'noopener noreferrer';
+  });
 }
