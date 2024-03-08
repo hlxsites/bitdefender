@@ -1,3 +1,4 @@
+/* stylelint-disable no-descending-specificity */
 .dual-teaser-container.section {
     background: transparent linear-gradient(180deg, #006EFF 0%, #000 100%) 0 0 no-repeat padding-box;
     overflow: unset;
@@ -48,9 +49,9 @@
 .dual-teaser-container .col-container .box {
     height: 190px;
     padding: 10px;
-    background: #003b89a3 0 0 no-repeat padding-box;;
+    background: #003b89a3 0 0 no-repeat padding-box;
     backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
+    backdrop-filter: blur(30px);
     display: flex;
     flex-direction: column;
     border-bottom-right-radius: 10px;
@@ -61,13 +62,13 @@
 .dual-teaser-container .col-container .box h3,
 .dual-teaser-container .col-container .box h4,
 .dual-teaser-container .col-container .box h5 {
-    font: normal normal normal 20px/27px "IBM Plex Sans";
+    font: normal normal normal 20px/27px "IBM Plex Sans", sans-serif;
     letter-spacing: 0;
 }
 
 .dual-teaser-container .col-container .box p,
 .dual-teaser-container .col-container .box div {
-    font: normal normal normal 14px/18px "IBM Plex Sans";
+    font: normal normal normal 14px/18px "IBM Plex Sans", sans-serif;
     letter-spacing: 0;
     margin: 0;
 }
@@ -126,7 +127,7 @@
 
     .dual-teaser-container .col-container .box p,
     .dual-teaser-container .col-container .box div {
-        font: normal normal normal 18px/23px "IBM Plex Sans";
+        font: normal normal normal 18px/23px "IBM Plex Sans", sans-serif;
         letter-spacing: 0;
     }
 
@@ -134,7 +135,7 @@
     .dual-teaser-container .col-container .box h3,
     .dual-teaser-container .col-container .box h4,
     .dual-teaser-container .col-container .box h5 {
-        font: normal normal normal 40px/52px "IBM Plex Sans";
+        font: normal normal normal 40px/52px "IBM Plex Sans", sans-serif;
         margin-bottom: 16px;
     }
 

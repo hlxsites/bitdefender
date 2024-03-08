@@ -362,7 +362,7 @@ main .section.link-right a {
 
 .trusted .section.static-awards .default-content-wrapper > * {
     margin: 0;
-    width: calc((100% - 99px) / 4);
+    width: calc((100% - 66px) / 3);
     height: calc((100% / 2) - 16px);
 }
 
@@ -408,10 +408,6 @@ main .section.link-right a {
     flex-direction: column;
 }
 
-.trusted .section.columns-container .columns > div > div:not(.columns-img-col) p:last-child {
-    order: -1;
-}
-
 .trusted .section.columns-container .columns > div > div:not(.columns-img-col) img {
     width: 160px;
 }
@@ -448,6 +444,24 @@ main .section.link-right a {
 .trusted .columns-container.trusted-bg-1 a:not(.button):any-link{
     color: black;
     text-decoration: underline;
+}
+
+.trusted .columns-container a.button:any-link:not(.modal):not(.primary) {
+    border: solid white 2px;
+    width: 100%;
+    justify-content: center;
+}
+
+.trusted .columns-container.bg-white a.button:any-link:not(.modal):not(.primary) {
+    border: solid black 2px;
+    background: white;
+    color: black;
+    width: 100%;
+    justify-content: center;
+}
+
+.trusted .columns-container.bg-white a.button:any-link:not(.modal):not(.primary)::after {
+    background: black;
 }
 
 .trusted header,
@@ -706,6 +720,12 @@ main .section.link-right a {
 
     .trusted .video_up {
         margin-top: -240px;
+    }
+
+    .trusted .columns-container a.button:any-link:not(.modal):not(.primary),
+    .trusted .columns-container.bg-white a.button:any-link:not(.modal):not(.primary) {
+        width: unset;
+        justify-content: unset;
     }
 }
 

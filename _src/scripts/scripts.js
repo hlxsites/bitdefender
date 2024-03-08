@@ -284,7 +284,10 @@ export function decorateLinkWithLinkTrackingId(element, id) {
  */
 export default function decorateLinkedPictures(main) {
   main.querySelectorAll('picture').forEach((picture) => {
-    if (!picture.closest('div.block')) {
+    // this condition checks if the picture is part of some content block ( rte )
+    // and not a direct element in some DIV block
+    // that could have different behaviour for some blocks (ex: columns )
+    if (!picture.closest('div.block') && picture.parentElement.tagName !== 'DIV') {
       const next = picture.parentNode.nextElementSibling;
       if (next) {
         const a = next.querySelector('a');
