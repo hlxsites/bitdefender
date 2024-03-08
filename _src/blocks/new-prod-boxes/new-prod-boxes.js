@@ -1,33 +1,69 @@
-// import { productAliases } from '../../scripts/scripts.js';
-// import { updateProductsList } from '../../scripts/utils.js';
+/* eslint-disable prefer-const */
+/* eslint-disable no-undef */
+/* eslint-disable max-len */
+async function createPricesElement(storeOBJ, conditionText, saveText, prodName, prodUsers, prodYears, buylink) {
+  const storeProduct = await storeOBJ.getProducts([new ProductInfo(prodName, 'consumer')]);
+  const storeOption = storeProduct[prodName].getOption(prodUsers, prodYears);
+  const price = storeOption.getPrice();
+  const discountedPrice = storeOption.getDiscountedPrice();
+  const discount = storeOption.getDiscount('valueWithCurrency');
+  const buyLink = await storeOption.getStoreUrl();
+  window.adobeDataLayer.push({
+    event: 'product loaded',
+    product: [{
+      info: {
+        ID: storeOption.getAvangateId(),
+        name: storeOption.getName(),
+        devices: storeOption.getDevices(),
+        subscription: storeOption.getSubscription('months'),
+        version: storeOption.getSubscription('months') === 1 ? 'monthly' : 'yearly',
+        basePrice: storeOption.getPrice('value'),
+        discountValue: storeOption.getDiscount('value'),
+        discountRate: storeOption.getDiscount('percentage'),
+        currency: storeOption.getCurrency(),
+        priceWithTax: storeOption.getDiscountedPrice('value') || storeOption.getPrice('value'),
+      },
+    }],
+  });
+  const priceElement = document.createElement('div');
+  priceElement.classList.add('hero-aem__prices');
+  priceElement.innerHTML = `
+    <div class="hero-aem__price mt-3">
+      <div>
+          <span class="prod-oldprice">${price}</span>
+          <span class="prod-save">${saveText} ${discount}<span class="save"></span></span>
+      </div>
+      <div class="newprice-container mt-2">
+        <span class="prod-newprice">${discountedPrice}</span>
+        <sup>${conditionText}</sup>
+      </div>
+    </div>`;
+  buylink.href = buyLink;
+  return priceElement;
+}
 
 export default function decorate(block, options) {
   const {
     products, priceType,
   } = options ? options.metadata : block.closest('.section').dataset;
 
-  console.log(block);
   const aemContainer = block.children[1];
-  console.log(aemContainer);
-  aemContainer.classList.add('hero-aem-container');
+  aemContainer.classList.add('new-prod-boxes-container');
   aemContainer.classList.add('we-container');
   const underShadow = aemContainer.children[0];
-  console.log(underShadow);
+  underShadow.classList.add('block');
 
   const productsAsList = products && products.split(',');
   if (productsAsList.length) {
     // productsAsList.forEach((prod) => updateProductsList(prod));
 
-    [...underShadow.children].forEach((prod, key) => {
-      console.log('prod', prod, key);
+    [...underShadow.children].forEach(async (prod, key) => {
       const [greenTag, title, blueTag, subtitle, saveOldPrice, price, billed, buyLink, undeBuyLink, benefitsLists] = [...prod.querySelectorAll('tr')];
       // const [prodName, prodUsers, prodYears] = productsAsList[key].split('/');
-      const onSelectorClass = `tsmd-10-1`;
-
-      [...block.children][key].innerHTML = '';
+      const onSelectorClass = 'tsmd-10-1';
+      const [prodName, prodUsers, prodYears] = productsAsList[key].split('/');
 
       const featuresSet = benefitsLists.querySelectorAll('table');
-      console.log('featuresSet', featuresSet);
       const featureList = Array.from(featuresSet).map((table) => {
         const trList = Array.from(table.querySelectorAll('tr'));
 
@@ -70,7 +106,13 @@ export default function decorate(block, options) {
         title.innerHTML = `<a href="#" title="${title.innerText}" class="buylink-${onSelectorClass} await-loader prodload prodload-${onSelectorClass}">${title.querySelector('tr a').innerHTML}</a>`;
       }
 
-      block.innerHTML += `
+      const buyLinkSelector = prod.querySelector('a[href*="#buylink"]');
+      buyLinkSelector.classList.add('button', 'primary');
+      let priceElement = await createPricesElement(options.store, '1 year', 'Save', prodName, prodUsers, prodYears, buyLinkSelector)
+        .then((pricesBox) => {
+          console.log(pricesBox);
+          // buyLink.parentNode.parentNode.insertBefore(pricesBox, buyLink.parentNode);
+          prod.outerHTML = `
         <div class="prod_box${greenTag.innerText.trim() && ' hasGreenTag'}">
           <div class="inner_prod_box">
             ${greenTag.innerText.trim() ? `<div class="greenTag2">${greenTag.innerText.trim()}</div>` : ''}
@@ -79,34 +121,28 @@ export default function decorate(block, options) {
             ${subtitle.innerText.trim() ? `<p class="subtitle${subtitle.innerText.trim().split(/\s+/).length > 5 ? ' fixed_height' : ''}">${subtitle.innerText.trim()}</p>` : ''}
             <hr />
 
-            ${saveOldPrice.innerText.trim() && `<div class="save_price_box await-loader prodload prodload-${onSelectorClass}"">
-              <span class="prod-oldprice oldprice-${onSelectorClass}"></span>
-              <strong class="prod-percent">
-                ${Array.from(saveOldPrice.querySelectorAll('td'))[1].innerText.replace('0%', `<span class="percent-${onSelectorClass}"></span>`)}
-              </strong>
-            </div>`}
-
-            ${price.innerText.trim() && `<div class="prices_box await-loader prodload prodload-${onSelectorClass}">
-              <span class="prod-newprice newprice-${onSelectorClass}${priceType ? `-${priceType}` : ''}"></span>
-              <sup>${price.innerText.trim().replace('0', '')}<sup>
-            </div>`}
+            ${pricesBox.outerHTML}
 
             ${billed ? `<div class="billed">${billed.innerHTML.replace('0', `<span class="newprice-${onSelectorClass}"></span>`)}</div>` : ''}
 
-            ${buyLink.innerText.trim() && `<div class="buy-btn">
-              <a class="red-buy-button buylink-${onSelectorClass} await-loader prodload prodload-${onSelectorClass}" href="#" title="Bitdefender ${buyLink.innerText.trim()}">${buyLink.innerText.trim()}</a>
-            </div>`}
+            ${buyLink.outerHTML}
 
             ${undeBuyLink.innerText.trim() ? `<div class="undeBuyLink">${undeBuyLink.innerText.trim()}</div>` : ''}
             <hr />
             ${benefitsLists.innerText.trim() ? `<div class="benefitsLists">${featureList}</div>` : ''}
           </div>
         </div>`;
+        });
     });
   } else {
-    block.innerHTML = `
+    underShadow.innerHTML = `
     <div class="container-fluid">
       add some products
     </div>`;
   }
+
+  window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
+    bubbles: true,
+    composed: true, // This allows the event to cross the shadow DOM boundary
+  });
 }

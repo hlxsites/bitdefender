@@ -2,6 +2,15 @@
 .new-prod-boxes-container {
   padding-bottom: 0;
 }
+
+.new-prod-boxes-container.we-container {
+  max-width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-top: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
 .new-prod-boxes-container .block {
   margin: 0 auto;
   padding: 0 15px;
@@ -14,7 +23,6 @@
 }
 .new-prod-boxes-container .block .prod_box .inner_prod_box {
   position: relative;
-  width: 100%;
   height: 100%;
   background-color: #F6F6F6;
   border-radius: 20px;
@@ -163,14 +171,14 @@
 .new-prod-boxes-container .block .prod_box .inner_prod_box .benefitsLists ul li:first-of-type.has_arrow::before {
   content: "";
   margin: 0 5px 20px 0;
-  background: url("bitdefender.com/pages/icons/arrow-left-blue.png") no-repeat center transparent;
+  background: url("https://bitdefender.com/pages/icons/arrow-left-blue.png") no-repeat center transparent;
   width: 20px;
   height: 20px;
   background-size: 15px 12px;
   float: left;
 }
 .new-prod-boxes-container .block .prod_box .inner_prod_box .benefitsLists ul li:first-of-type.has_arrow_right .arrow-right {
-  background: url("bitdefender.com/pages/icons/arrow-right-solid.svg") no-repeat center transparent;
+  background: url("https://bitdefender.com/pages/icons/arrow-right-solid.svg") no-repeat center transparent;
   width: 20px;
   height: 20px;
   background-size: 15px 12px;
@@ -219,7 +227,7 @@
   color: white;
   border-radius: 20px;
   padding: 2px 21px 2px 7px;
-  background: url("bitdefender.com/pages/images/icons/individual.svg") center right 6px no-repeat #026DFF;
+  background: url("https://bitdefender.com/pages/images/icons/individual.svg") center right 6px no-repeat #026DFF;
   background-size: auto 12px;
 }
 .new-prod-boxes-container .block .prod_box .inner_prod_box .benefitsLists ul:nth-of-type(2) {
@@ -232,15 +240,107 @@
   box-shadow: 0 3px 7px 0 #C1C1C1;
 }
 
+.new-prod-boxes-container .prod-oldprice {
+  font-size: 16px;
+  text-decoration: line-through;
+}
+.new-prod-boxes-container .prod-save {
+  color: #1C7928;
+  font-weight: bold;
+}
+.new-prod-boxes-container .prod-newprice {
+  font-size: 40px;
+  font-weight: bold;
+}
+.new-prod-boxes-container .newprice-container {
+  line-height: 1;
+}
+.new-prod-boxes-container .newprice-container sup {
+  position: relative;
+  top: -20px;
+}
+
+.new-prod-boxes-container .button.primary {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  -webkit-font-smoothing: antialiased;
+  display: block;
+  align-items: center;
+  box-sizing: border-box;
+  text-decoration: none;
+  padding: 10px 26px 8px 28px;
+  text-align: center;
+  cursor: pointer;
+  color: #fff;
+  background-color: #eb0000;
+  border: 2px solid #eb0000;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-radius: 8px;
+  height: fit-content;
+}
+
+.new-prod-boxes-container p em a {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  -webkit-font-smoothing: antialiased;
+  display: block;
+  align-items: center;
+  box-sizing: border-box;
+  text-decoration: none;
+  padding: 10px 26px 8px 28px;
+  text-align: center;
+  cursor: pointer;
+  color: #006EFF;
+  background-color: transparent;
+  border: 2px solid #006EFF;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-radius: 8px;
+  height: fit-content;
+}
+
 @media (width >= 768px) {
   .new-prod-boxes-container .block {
     flex-direction: row;
-    padding: 0;
+    padding: 60px 0;
   }
   .new-prod-boxes-container .block .prod_box.hasGreenTag {
     margin-top: 1em;
   }
   .new-prod-boxes-container .block .prod_box .inner_prod_box {
-    width: 92%;
+    width: 74%;
+  }
+}
+
+@media (width >= 992px) {
+  .new-prod-boxes-container.we-container {
+    max-width: 1300px;
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+}
+
+@media (width >= 1200px) {
+  .new-prod-boxes-container.we-container {
+    max-width: 1332px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .new-prod-boxes-container .block .prod_box .inner_prod_box {
+    width: 84%;
+  }
+}
+
+@media (width >= 1600px) {
+  .new-prod-boxes-container.we-container {
+    max-width: 1332px;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 }
