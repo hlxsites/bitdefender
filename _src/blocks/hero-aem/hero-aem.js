@@ -28,6 +28,7 @@ async function createPricesElement(storeOBJ, conditionText, saveText, prodName, 
   const priceElement = document.createElement('div');
   priceElement.classList.add('hero-aem__prices');
   priceElement.innerHTML = `
+    <p class="hero-aem__pill">Yearly - individual</p>
     <div class="hero-aem__price mt-3">
       <div>
           <span class="prod-oldprice">${price}</span>
@@ -35,9 +36,10 @@ async function createPricesElement(storeOBJ, conditionText, saveText, prodName, 
       </div>
       <div class="newprice-container mt-2">
         <span class="prod-newprice">${discountedPrice}</span>
-        <sup>${conditionText}</sup>
+        <sup>${conditionText || ''}</sup>
       </div>
-    </div>`;
+    </div>
+    <p class="hero-aem__underPriceText">Protection for 5 PCs, Macs, tablets, or smartphones. Windows® | macOS® | Android™ | iOS®</p>`;
   buylink.href = buyLink;
   return priceElement;
 }
@@ -62,11 +64,63 @@ function createCardElementContainer(elements, mobileImage) {
   return cardElementContainer;
 }
 
+function getOperatingSystem(userAgent) {
+  const systems = [
+    ['Windows NT 10.0', 'Windows 10'],
+    ['Windows NT 6.2', 'Windows 8'],
+    ['Windows NT 6.1', 'Windows 7'],
+    ['Windows NT 6.0', 'Windows Vista'],
+    ['Windows NT 5.1', 'Windows XP'],
+    ['Windows NT 5.0', 'Windows 2000'],
+    ['X11', 'X11'],
+    ['Linux', 'Linux'],
+    ['Android', 'Android'],
+    ['iPhone', 'iOS'],
+    ['iPod', 'iOS'],
+    ['iPad', 'iOS'],
+    ['Mac', 'MacOS'],
+  ];
+
+  return systems.find(([substr]) => userAgent.includes(substr))?.[1] || 'Unknown';
+}
+
+function openUrlForOs(urlMacos, urlWindows, urlAndroid, urlIos, selector) {
+  // Get user's operating system
+  const { userAgent } = navigator;
+  const userOS = getOperatingSystem(userAgent);
+  // Open the appropriate URL based on the OS
+  let openUrl;
+  switch (userOS) {
+    case 'MacOS':
+      openUrl = urlMacos;
+      break;
+    case 'Windows 10':
+    case 'Windows 8':
+    case 'Windows 7':
+    case 'Windows Vista':
+    case 'Windows XP':
+    case 'Windows 2000':
+      openUrl = urlWindows;
+      break;
+    case 'Android':
+      openUrl = urlAndroid;
+      break;
+    case 'iOS':
+      openUrl = urlIos;
+      break;
+    default:
+      openUrl = null; // Fallback or 'Unknown' case
+  }
+  if (openUrl) {
+    selector.href = openUrl;
+  }
+}
+
 export default function decorate(block, options) {
   const {
-    product, conditionText, saveText,
+    product, conditionText, saveText, MacOS, Windows, Android, IOS,
+    alignContent,
   } = options.metadata;
-
   const aemContainer = block.children[1];
   aemContainer.classList.add('hero-aem-container');
   aemContainer.classList.add('we-container');
@@ -75,6 +129,9 @@ export default function decorate(block, options) {
 
   // Configuration for new elements
   richText.classList.add('hero-aem__card__desktop', 'col-md-6');
+  if (alignContent === 'center') {
+    richText.classList.add('hero-aem__card__desktop--center');
+  }
   mainDesktopImage.classList.add('col-md-6');
   mainDesktopImage.children[0].classList.add('h-100');
 
@@ -109,17 +166,34 @@ export default function decorate(block, options) {
   } else {
     // If there is no product, just add the button class and dispatch the event
     const simpleLink = block.querySelector('.hero-aem__card-text a');
-    simpleLink.classList.add('button', 'primary');
+    if (simpleLink) {
+      simpleLink.classList.add('button', 'primary');
+    }
     window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
       bubbles: true,
       composed: true, // This allows the event to cross the shadow DOM boundary
     });
   }
 
-  columnsCard = [...columnsCard.children];
-  const cardElement = document.createElement('div');
-  cardElement.classList.add('aem-two-cards');
-  cardElement.innerHTML = `
+  let breadcrumbTable = block.querySelector('table');
+
+  if (breadcrumbTable && breadcrumbTable.textContent.includes('breadcrumb')) {
+    breadcrumbTable.classList.add('hero-aem__breadcrumb');
+    // delete the first row
+    breadcrumbTable.deleteRow(0);
+  }
+
+  let freeDownloadButton = block.querySelector('a[href*="#free-download"]');
+  if (freeDownloadButton) {
+    freeDownloadButton.classList.add('button', 'free-download');
+    openUrlForOs(MacOS, Windows, Android, IOS, freeDownloadButton);
+  }
+
+  if (columnsCard) {
+    columnsCard = [...columnsCard.children];
+    const cardElement = document.createElement('div');
+    cardElement.classList.add('aem-two-cards');
+    cardElement.innerHTML = `
     <div class="row justify-space-between">
       <div class="col-lg-6">
         ${richTextCard.innerHTML}
@@ -132,7 +206,8 @@ export default function decorate(block, options) {
         </div>`).join('')}
     </div>
   `;
-  aemContainer.appendChild(cardElement);
-  richTextCard.innerHTML = '';
-  columnsCard.forEach((col) => col.remove());
+    aemContainer.appendChild(cardElement);
+    richTextCard.innerHTML = '';
+    columnsCard.forEach((col) => col.remove());
+  }
 }
