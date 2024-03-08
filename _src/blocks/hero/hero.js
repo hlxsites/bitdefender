@@ -10,7 +10,7 @@ import {
  * Builds hero block and prepends to main in a new section.
  * @param {Element} element The container element
  */
-function buildHeroBlock(element) {
+function buildHeroBlock(element, type) {
   const h1 = element.querySelector('h1');
   const picture = element.querySelector('picture');
   const pictureParent = picture ? picture.parentNode : false;
@@ -28,9 +28,8 @@ function buildHeroBlock(element) {
     }
 
     const pictureEl = document.createElement('div');
-    pictureEl.classList.add('hero-picture');
+    pictureEl.classList.add('hero-picture', type === 'block-width' ? 'hero-content' : '');
     pictureEl.append(picture);
-
     section.prepend(pictureEl);
 
     pictureParent.remove();
@@ -69,7 +68,9 @@ createNanoBlock('discount', (code, variant) => {
  * @param {Element} block The hero block element
  */
 export default async function decorate(block) {
-  buildHeroBlock(block);
+  const blockParent = block.closest('.section');
+  const type = blockParent.dataset.type || '';
+  buildHeroBlock(block, type);
   // Eager load images to improve LCP
   [...block.querySelectorAll('img')].forEach((el) => el.setAttribute('loading', 'eager'));
 

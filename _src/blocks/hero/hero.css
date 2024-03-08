@@ -102,7 +102,7 @@ main .hero {
   min-height: 300px;
 }
 
-main .hero::after{
+main .hero::after {
     position: absolute;
     content: "";
     left: 0;
@@ -112,8 +112,30 @@ main .hero::after{
     background-color: #e4f2ff;
 }
 
+main .hero.new2024design::after {
+  display: none;
+}
+
 main .hero.black-background {
   background-color: var(--dark-background-color);
+}
+
+main .hero.new2024design * {
+  font-weight: normal;
+  font-family: "IBM Plex Sans", sans-serif;
+  color: white;
+}
+
+main .hero.new2024design .hero-picture {
+  display: none;
+}
+
+main .hero.new2024design .hero-picture:last-of-type {
+  display: none;
+}
+
+main .hero.new2024design strong {
+  font-weight: 600;
 }
 
 main .hero.black-background::after {
@@ -141,6 +163,30 @@ main .hero .hero-content {
   position: relative;
 }
 
+main .hero.new2024design .hero-content:last-of-type {
+  padding: 0 2em;
+}
+
+main .hero.new2024design .hero-picture {
+  display: none;
+}
+
+main .hero.new2024design h1 {
+  font-size: var(--hero-font-size-l);
+  margin: 0;
+}
+
+main .hero .hero-content.hero-content {
+  padding: 0;
+  min-height: 0;
+}
+
+main .hero .hero-content.hero-content img {
+  padding: 0;
+  border-radius: 10px;
+  object-fit: contain;
+}
+
 main .hero .hero-content .right-col {
   display: flex;
   justify-content: center;
@@ -164,7 +210,6 @@ main .hero.comparison .hero-content {
 main .hero h1 {
   font-size: var(--hero-font-size-xl);
   margin: 0;
-
 }
 
 main .hero h2 {
@@ -240,7 +285,7 @@ main .hero p.button-container {
   gap: 2px;
 }
 
-main .hero p.button-container.discount-bubble-container{
+main .hero p.button-container.discount-bubble-container {
   padding-top: 0;
 }
 
@@ -264,7 +309,7 @@ main .hero a.button.modal {
   min-width: unset;
 }
 
-@media (min-width: 1400px){
+@media (min-width: 1400px) {
   main .hero a.button {
     min-width: 360px;
     justify-content: center;
@@ -279,7 +324,6 @@ main .hero a.button span.button-text {
   font-size: var(--hero-font-size-xs);
   font-weight: var(--font-weight-bold);
 }
-
 
 main .hero .discount-bubble {
   background: #2cb43d;
@@ -396,7 +440,7 @@ main .hero.black-background ul.hero-awards li::before {
   content: none;
 }
 
-main .hero.black-background ul.hero-awards li picture img{
+main .hero.black-background ul.hero-awards li picture img {
   display: block;
   height: 80px;
   width: auto;
@@ -406,9 +450,29 @@ main .hero .hero-awards li::after {
   content: none;
 }
 
+@media(max-width: 989px) {
+  main .hero.new2024design {
+    background-color: #006FFF;
+  }
+
+  main .hero.new2024design .hero-picture {
+    display: none;
+  }
+}
+
 @media(min-width: 767px) { /* tablet */
   :root {
     --hero-h1-font-size: 42px;
+  }
+
+  main .hero.new2024design h1 {
+    font-size: var(--hero-font-size-xl);
+    margin: 0;
+  }
+
+  main .hero.new2024design * {
+    color: white;
+    background-color: transparent;
   }
 
   main .hero h2 {
@@ -426,9 +490,18 @@ main .hero .hero-awards li::after {
 }
 
 @media (min-width: 990px) { /* desktop */
-
   main .hero .hero-content > div {
     width: 60%;
+  }
+
+  main .hero.new2024design .hero-content:last-of-type {
+    min-height: 430px;
+    padding: 2em;
+  }
+
+  main .hero.new2024design .hero-picture {
+    display: block;
+    height: 430px;
   }
 
   main .hero .hero-content > div.left-col {
