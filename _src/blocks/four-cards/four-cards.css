@@ -1,0 +1,117 @@
+@media (min-width: 992px) { /* desktop */
+    .four-cards-wrapper {
+        max-width: var(--section-desktop-max-width);
+        padding: 0 var(--section-desktop-padding);
+        margin: 0 auto;
+    }
+}
+
+@media (min-width: 1600px) { /* large desktop */
+    .four-cards-wrapper {
+        max-width: var(--section-large-desktop-max-width);
+        padding: 0 var(--section-large-desktop-padding);
+    }
+}
+
+.four-cards h3 {
+    font: normal normal bold 32px/37px var(--body-font-family);
+    text-align: center;
+    margin-bottom: 56px;
+}
+
+.four-cards > ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    grid-gap: 24px;
+  }
+  
+  .four-cards > ul > li {
+    display: inline-block;
+    background-color: #f6f6f6;
+    padding: 24px;
+    margin: 0;
+    border-radius: 20px;
+    text-align: left;
+    font: normal normal normal 16px/24px var(--body-font-family);
+  }
+
+  .four-cards .default-content-wrapper {
+    text-align: center;
+  }
+
+  .four-cards a.button {
+    font: normal normal bold 16px/20px var(--body-font-family);
+    margin-top: 48px;
+    padding: 14px 28px;
+    color: #006EFF;
+    background: white;
+    border: 2px solid #006EFF;
+    border-radius: 10px;
+    display: inline-block;
+    position: relative;
+    min-width: 180px;
+  }
+
+  .four-cards a.button:focus {
+    outline: 2px solid #48C1FF;
+    border-radius: 13px;
+    outline-offset: 2px;
+  }
+
+  .four-cards a.button:hover {
+    margin-top: 48px;
+    padding: 14px 28px;
+    background: #006EFF;
+    color: #fff;
+  }
+
+  .four-cards a.button:active {
+    background: #0D499B;
+    order: 2px solid #0D499B;
+  }
+
+  .four-cards a.button:disabled {
+    background: white;
+    order: 2px solid #B7B7B7;
+    color: #B7B7B7;
+  }
+
+  .four-cards a.button span.button-text {
+    transition: none;
+  }
+
+  .four-cards a.button:hover span.button-text {
+    transform: none;
+  }
+
+  .four-cards a.button::after {
+    content: '';
+    width: 0;
+    height: 0;
+    margin: 0;
+    transition: none;
+  }
+
+  .four-cards .icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 16px;
+  }
+
+@media (max-width: 991px) { /* mobile/tablet */
+    .four-cards-wrapper {
+        padding: var(--body-padding);
+    }
+
+    .four-cards > ul {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        grid-gap: 14px;
+    }
+
+    .four-cards > ul > li {
+        margin: 0;
+    }
+}

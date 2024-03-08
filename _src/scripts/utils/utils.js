@@ -3,7 +3,7 @@ export const localisationList = ['zh-hk', 'zh-tw', 'en-us'];
 export function getDefaultLanguage() {
   const currentPathUrl = window.location.pathname;
   const foundLanguage = localisationList.find((item) => currentPathUrl.indexOf(`/${item}/`) !== -1);
-  return foundLanguage?.replace('zh-', '') || 'site';
+  return foundLanguage?.replace('zh-', '').replace('en-', '') || 'site';
 }
 
 const cacheResponse = new Map();
@@ -248,4 +248,16 @@ export async function fetchIndex(indexFile, sheet, pageSize = 500) {
 export function getDatasetFromSection(block) {
   const parentSelector = block.closest('.section');
   return parentSelector.dataset;
+}
+
+export function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
 }

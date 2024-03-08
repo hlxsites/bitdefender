@@ -1,3 +1,5 @@
+import { debounce, getDatasetFromSection } from '../../scripts/utils/utils.js';
+
 function getItemsToShow() {
   if (window.innerWidth <= 676) {
     return 1; // Show 1 item for mobile screens
@@ -48,9 +50,11 @@ function showSlides(carousel, slideNumber) {
     const columnWidthPx = containerWidth / itemsToShow;
 
     for (let i = start; i < end && i < childDivs.length; i += 1) {
-      childDivs[i].style.opacity = '1';
-      childDivs[i].style.position = 'relative';
-      childDivs[i].style.width = `${columnWidthPx}px`;
+      if (childDivs[i]) {
+        childDivs[i].style.opacity = '1';
+        childDivs[i].style.position = 'relative';
+        childDivs[i].style.width = `${columnWidthPx}px`;
+      }
     }
   }
 
@@ -142,18 +146,6 @@ function setupCarousel(carousel, resetSlidePosition = false) {
   hideExcessElements(carousel);
 }
 
-function debounce(func, wait) {
-  let timeout;
-  return function executedFunction(...args) {
-    const later = () => {
-      clearTimeout(timeout);
-      func(...args);
-    };
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  };
-}
-
 function setImageAsBackgroundImage() {
   const columns = document.querySelectorAll('.columns.text-over-image > div > div');
 
@@ -175,6 +167,8 @@ function setImageAsBackgroundImage() {
 }
 
 export default function decorate(block) {
+  const blockDataset = getDatasetFromSection(block);
+  const { linksOpenInNewTab } = blockDataset;
   const cols = [...block.firstElementChild.children];
   block.classList.add(`columns-${cols.length}-cols`);
 
@@ -191,6 +185,13 @@ export default function decorate(block) {
       }
     });
   });
+
+  if (linksOpenInNewTab === 'true') {
+    block.querySelectorAll('.button-container > a').forEach((anchorEl) => {
+      anchorEl.target = '_blank';
+      anchorEl.rel = 'noopener noreferrer';
+    });
+  }
 
   if (block.classList.contains('text-over-image')) {
     setImageAsBackgroundImage();
