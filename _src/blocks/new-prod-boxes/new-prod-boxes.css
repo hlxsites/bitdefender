@@ -1,6 +1,7 @@
 /* stylelint-disable  */
 .new-prod-boxes-container {
   padding-bottom: 0;
+  font-family: 'Arial', sans-serif;
 }
 
 .new-prod-boxes-container.we-container {
@@ -66,7 +67,7 @@
   background-color: #026DFF;
   display: inline-block;
   border-radius: 20px;
-  padding: 1px 12px;
+  padding: 6px 16px;
 }
 .new-prod-boxes-container .block .prod_box .inner_prod_box .blueTag div {
   display: flex;
@@ -191,7 +192,7 @@
   line-height: 17px;
   margin-bottom: 8px;
   list-style-type: none;
-  background: url("https://bitdefender.com/pages/images/icons/ok.png") top 2px left no-repeat transparent;
+  background: url("https://bitdefender.com/icons/circle-check-sharp-solid.svg") top 2px left no-repeat transparent;
   padding-left: 22px;
   background-size: 13px;
   position: relative;
@@ -282,6 +283,17 @@
   height: fit-content;
 }
 
+.new-prod-boxes-container .button.primary:hover {
+  color: white;
+  background-color: #B10304;
+  border-color: #B10304;
+}
+
+.new-prod-boxes-container .button.primary:active {
+  background-color: #920A0A;
+  border-color: #920A0A;
+}
+
 .new-prod-boxes-container p em a {
   font-size: 16px;
   font-style: normal;
@@ -302,6 +314,22 @@
   text-overflow: ellipsis;
   border-radius: 8px;
   height: fit-content;
+}
+
+.new-prod-boxes-container p em a:hover {
+  color: white;
+  background-color: #006DFF;
+}
+
+.new-prod-boxes-container p em a:active {
+  background-color: #0D499B;
+}
+
+.new-prod-boxes-container .icon svg {
+  width: 12px;
+  height: 14px;
+  padding-right: 2px;
+  fill: #fff;
 }
 
 @media (width >= 768px) {

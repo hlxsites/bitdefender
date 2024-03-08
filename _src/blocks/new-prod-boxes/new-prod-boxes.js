@@ -35,7 +35,7 @@ async function createPricesElement(storeOBJ, conditionText, saveText, prodName, 
       </div>
       <div class="newprice-container mt-2">
         <span class="prod-newprice">${discountedPrice}</span>
-        <sup>${conditionText}</sup>
+        <sup>${conditionText || ''}</sup>
       </div>
     </div>`;
   buylink.href = buyLink;
@@ -83,6 +83,19 @@ export default function decorate(block, options) {
           }
 
           // &lt reffers to '<' character
+          if (firstTdContent.indexOf('?pill') !== -1) {
+            let pillText = firstTdContent.match(/\?pill (\w+)/);
+            console.log('pillText', pillText, typeof pillText);
+            firstTdContent = firstTdContent.replace('&lt;-', '');
+          }
+
+          // &lt reffers to '<' character
+          if (firstTdContent.indexOf('&lt;pill') !== -1 || firstTdContent.indexOf('&lt;') !== -1) {
+            liClass += ' has_arrow';
+            firstTdContent = firstTdContent.replace('&lt;-', '');
+          }
+
+          // &lt reffers to '<' character
           if (firstTdContent.indexOf('&lt;-') !== -1 || firstTdContent.indexOf('&lt;') !== -1) {
             liClass += ' has_arrow';
             firstTdContent = firstTdContent.replace('&lt;-', '');
@@ -108,7 +121,7 @@ export default function decorate(block, options) {
 
       const buyLinkSelector = prod.querySelector('a[href*="#buylink"]');
       buyLinkSelector.classList.add('button', 'primary');
-      let priceElement = await createPricesElement(options.store, '1 year', 'Save', prodName, prodUsers, prodYears, buyLinkSelector)
+      await createPricesElement(options.store, '', 'Save', prodName, prodUsers, prodYears, buyLinkSelector)
         .then((pricesBox) => {
           console.log(pricesBox);
           // buyLink.parentNode.parentNode.insertBefore(pricesBox, buyLink.parentNode);
