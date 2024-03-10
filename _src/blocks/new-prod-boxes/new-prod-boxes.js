@@ -46,12 +46,24 @@ export default function decorate(block, options) {
   const {
     products, priceType,
   } = options ? options.metadata : block.closest('.section').dataset;
-
+  console.log('my block', block);
   const aemContainer = block.children[1];
   aemContainer.classList.add('new-prod-boxes-container');
   aemContainer.classList.add('we-container');
-  const underShadow = aemContainer.children[0];
+  const underShadow = aemContainer.children[1];
   underShadow.classList.add('block');
+
+  let switchBox = document.createElement('div');
+  switchBox.classList.add('switchBox');
+  switchBox.innerHTML = `
+  <label class="switch">
+    <input type="checkbox">
+    <span class="slider round">
+      <span class="label on">Individual</span>
+      <span class="label off">Family</span>
+    </span>
+  </label>
+`;
 
   const productsAsList = products && products.split(',');
   if (productsAsList.length) {
@@ -62,17 +74,13 @@ export default function decorate(block, options) {
       // const [prodName, prodUsers, prodYears] = productsAsList[key].split('/');
       const onSelectorClass = 'tsmd-10-1';
       const [prodName, prodUsers, prodYears] = productsAsList[key].split('/');
-
       const featuresSet = benefitsLists.querySelectorAll('table');
       const featureList = Array.from(featuresSet).map((table) => {
         const trList = Array.from(table.querySelectorAll('tr'));
-
         const liString = trList.map((tr) => {
           const tdList = Array.from(tr.querySelectorAll('td'));
-
           // Extract the content of the first <td> to be placed outside the <li>
           let firstTdContent = tdList.length > 0 && tdList[0].textContent.trim() !== '' ? `${tdList[0].innerHTML}` : '';
-
           // Extract the content of the second <td> (if present) inside a <span>
           const secondTdContent = tdList.length > 1 && tdList[1].textContent.trim() !== '' ? `<span>${tdList[1].innerHTML}</span>` : '';
 
@@ -82,13 +90,15 @@ export default function decorate(block, options) {
             liClass += 'd-none';
           }
 
-          // &lt reffers to '<' character
           if (firstTdContent.indexOf('?pill') !== -1) {
             let pillText = firstTdContent.match(/\?pill (\w+)/);
-            console.log('pillText', pillText, typeof pillText);
-            firstTdContent = firstTdContent.replace('&lt;-', '');
+            if (pillText) {
+              const pillElement = document.createElement('span');
+              pillElement.classList.add('blue-pill');
+              pillElement.innerHTML = `${pillText[1]}`;
+              firstTdContent = firstTdContent.replace(pillText[0], pillElement.outerHTML);
+            }
           }
-
           // &lt reffers to '<' character
           if (firstTdContent.indexOf('&lt;pill') !== -1 || firstTdContent.indexOf('&lt;') !== -1) {
             liClass += ' has_arrow';
@@ -153,6 +163,9 @@ export default function decorate(block, options) {
       add some products
     </div>`;
   }
+
+  underShadow.parentNode.insertBefore(switchBox, underShadow);
+
 
   window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
     bubbles: true,
