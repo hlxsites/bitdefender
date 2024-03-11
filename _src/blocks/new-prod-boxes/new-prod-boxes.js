@@ -59,9 +59,10 @@ export default function decorate(block, options) {
   <label class="switch">
     <input type="checkbox">
     <span class="slider round">
-      <span class="label on">Individual</span>
-      <span class="label off">Family</span>
+      
     </span>
+    <span class="label on">Individual</span>
+    <span class="label off">Family</span>
   </label>
 `;
 
