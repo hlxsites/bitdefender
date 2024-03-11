@@ -27,7 +27,7 @@
 }
 .new-prod-boxes-container .new-prod-boxes .prod_box {
   flex: 1;
-  max-width: 300px;
+  max-width: 400px;
   margin: 0 14px;
 }
 .new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box {

@@ -47,24 +47,30 @@ export default function decorate(block, options) {
     products, priceType,
   } = options ? options.metadata : block.closest('.section').dataset;
   console.log('my block', block);
-  const aemContainer = block.children[1];
-  aemContainer.classList.add('new-prod-boxes-container');
-  aemContainer.classList.add('we-container');
-  const underShadow = aemContainer.children[1];
-  underShadow.classList.add('block');
 
-  let switchBox = document.createElement('div');
-  switchBox.classList.add('switchBox');
-  switchBox.innerHTML = `
-  <label class="switch">
-    <input type="checkbox">
-    <span class="slider round">
-      
-    </span>
-    <span class="label on">Individual</span>
-    <span class="label off">Family</span>
-  </label>
-`;
+  let underShadow = block;
+  // if options exists, this means the component is being called from aem
+  if (options) {
+    const aemContainer = block.children[1];
+    aemContainer.classList.add('new-prod-boxes-container');
+    aemContainer.classList.add('we-container');
+    // eslint-disable-next-line prefer-destructuring
+    underShadow = aemContainer.children[1];
+    underShadow.classList.add('block');
+  }
+
+  //   let switchBox = document.createElement('div');
+  //   switchBox.classList.add('switchBox');
+  //   switchBox.innerHTML = `
+  //   <label class="switch">
+  //     <input type="checkbox">
+  //     <span class="slider round">
+
+  //     </span>
+  //     <span class="label on">Individual</span>
+  //     <span class="label off">Family</span>
+  //   </label>
+  // `;
 
   const productsAsList = products && products.split(',');
   if (productsAsList.length) {
@@ -127,16 +133,21 @@ export default function decorate(block, options) {
       });
 
       if (title.innerHTML.indexOf('href') !== -1) {
+        console.log('title', title.innerHTML);
         title.innerHTML = `<a href="#" title="${title.innerText}" class="buylink-${onSelectorClass} await-loader prodload prodload-${onSelectorClass}">${title.querySelector('tr a').innerHTML}</a>`;
       }
 
       const buyLinkSelector = prod.querySelector('a[href*="#buylink"]');
-      buyLinkSelector.classList.add('button', 'primary');
-      await createPricesElement(options.store, '', 'Save', prodName, prodUsers, prodYears, buyLinkSelector)
-        .then((pricesBox) => {
-          console.log(pricesBox);
-          // buyLink.parentNode.parentNode.insertBefore(pricesBox, buyLink.parentNode);
-          prod.outerHTML = `
+      if (buyLinkSelector) {
+        buyLinkSelector.classList.add('button', 'primary');
+      }
+
+      if (options) {
+        await createPricesElement(options.store, '', 'Save', prodName, prodUsers, prodYears, buyLinkSelector)
+          .then((pricesBox) => {
+            console.log(pricesBox);
+            // buyLink.parentNode.parentNode.insertBefore(pricesBox, buyLink.parentNode);
+            prod.outerHTML = `
         <div class="prod_box${greenTag.innerText.trim() && ' hasGreenTag'}">
           <div class="inner_prod_box">
             ${greenTag.innerText.trim() ? `<div class="greenTag2">${greenTag.innerText.trim()}</div>` : ''}
@@ -156,7 +167,35 @@ export default function decorate(block, options) {
             ${benefitsLists.innerText.trim() ? `<div class="benefitsLists">${featureList}</div>` : ''}
           </div>
         </div>`;
-        });
+          });
+      } else {
+        fetchProduct()
+          .then((product) => {
+            console.log(product);
+          })
+          .catch((err) => {
+            // eslint-disable-next-line no-console
+            console.error(err);
+          });
+        prod.outerHTML = `
+        <div class="prod_box${greenTag.innerText.trim() && ' hasGreenTag'}">
+          <div class="inner_prod_box">
+            ${greenTag.innerText.trim() ? `<div class="greenTag2">${greenTag.innerText.trim()}</div>` : ''}
+            ${title.innerText.trim() ? `<h2>${title.innerHTML}</h2>` : ''}
+            ${blueTag.innerText.trim() ? `<div class="blueTag"><div>${blueTag.innerHTML.trim()}</div></div>` : ''}
+            ${subtitle.innerText.trim() ? `<p class="subtitle${subtitle.innerText.trim().split(/\s+/).length > 5 ? ' fixed_height' : ''}">${subtitle.innerText.trim()}</p>` : ''}
+            <hr />
+
+            ${billed ? `<div class="billed">${billed.innerHTML.replace('0', `<span class="newprice-${onSelectorClass}"></span>`)}</div>` : ''}
+
+            ${buyLink.outerHTML}
+
+            ${undeBuyLink.innerText.trim() ? `<div class="undeBuyLink">${undeBuyLink.innerText.trim()}</div>` : ''}
+            <hr />
+            ${benefitsLists.innerText.trim() ? `<div class="benefitsLists">${featureList}</div>` : ''}
+          </div>
+        </div>`;
+      }
     });
   } else {
     underShadow.innerHTML = `
@@ -165,8 +204,7 @@ export default function decorate(block, options) {
     </div>`;
   }
 
-  underShadow.parentNode.insertBefore(switchBox, underShadow);
-
+  // underShadow.parentNode.insertBefore(switchBox, underShadow);
 
   window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
     bubbles: true,
