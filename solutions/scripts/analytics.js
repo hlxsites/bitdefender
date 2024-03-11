@@ -206,8 +206,8 @@ export async function setupAnalyticsTrackingWithAlloy(document) {
   // loads, for e.g. for page views
   const pageViewPromise = analyticsTrackPageViews(document); // track page view early
 
-  await import('./adobe-client-data-layer.min.js');
-  await import('./alloy.min.js');
+  await import('../vendor/adobe/adobe-client-data-layer.min.js');
+  await import('../vendor/adobe/alloy.min.js');
 
   await Promise.all([configurePromise, pageViewPromise]);
 }

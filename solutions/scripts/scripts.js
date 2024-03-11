@@ -12,20 +12,19 @@ import {
   loadBlocks,
   loadCSS,
   getMetadata,
-} from './lib-franklin.js';
+} from './aem.js';
 
 import {
   adobeMcAppendVisitorId,
   createTag,
-} from './utils/utils.js';
+} from './utils.js';
 
 import {
   initAnalyticsTrackingQueue,
   setupAnalyticsTrackingWithAlloy,
-  // analyticsTrackPageViews,
-} from './analytics/lib-analytics.js';
+} from './analytics.js';
 
-import loadOneTrust from './analytics/onetrust.js';
+import loadOneTrust from './onetrust.js';
 
 const LCP_BLOCKS = ['hero']; // add your LCP blocks to the list
 const TRACKED_PRODUCTS = [];
@@ -193,7 +192,7 @@ function getCurrentDate() {
  * @returns {String}
  */
 export function getEnvironment(hostname, country) {
-  if (hostname.startsWith('pull_433')) {
+  if (hostname.startsWith('websdk')) {
     return 'dev';
   }
   if (hostname.includes('hlx.page') || hostname.includes('hlx.live')) {

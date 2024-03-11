@@ -4,7 +4,7 @@ import {
   sampleRUM,
   fetchPlaceholders,
   getMetadata,
-} from './lib-franklin.js';
+} from './aem.js';
 
 // eslint-disable-next-line import/no-cycle
 import {
@@ -15,7 +15,7 @@ import {
   openUrlForOs,
 } from './scripts.js';
 import { loadBreadcrumbs } from './breadcrumbs.js';
-import { onAdobeMcLoaded } from './utils/utils.js';
+import { onAdobeMcLoaded } from './utils.js';
 
 // Core Web Vitals RUM collection
 sampleRUM('cwv');

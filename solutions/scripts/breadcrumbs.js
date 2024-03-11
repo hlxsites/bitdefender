@@ -2,7 +2,7 @@ import {
   createTag,
   fetchIndex,
   fixExcelFilterZeroes,
-} from './utils/utils.js';
+} from './utils.js';
 
 // eslint-disable-next-line import/no-cycle
 import { decorateBlockWithRegionId } from './scripts.js';
