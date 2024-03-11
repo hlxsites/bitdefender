@@ -3,28 +3,33 @@
   flex-direction: column;
   align-items: center;
 }
+
 .tabs-component-container h3 {
-  font: normal normal bold 24px/28px Arial;
+  font: normal normal bold 24px/28px Arial, sans-serif;
 }
+
 .tabs-component-container p {
-  font: normal normal normal 16px/24px Arial;
+  font: normal normal normal 16px/24px Arial, sans-serif;
 }
+
 .tabs-component-container span {
-  font: normal normal bold 16px/18px Arial;
+  font: normal normal bold 16px/18px Arial, sans-serif;
 }
 
 .tabs-component-container .title-class div {
   max-width: 630px;
   text-align: center;
   margin-bottom: 27px;
-  font: normal normal bold 32px/37px Arial;
+  font: normal normal bold 32px/37px Arial, sans-serif;
 }
+
 .tabs-component-container .subtitle-class div {
   max-width: 630px;
   text-align: center;
   margin-bottom: 67px;
-  font: normal normal normal 18px/26px Arial;
+  font: normal normal normal 18px/26px Arial, sans-serif;
 }
+
 .tabs-component-container .tabs-container {
   display: flex;
   justify-content: center;
@@ -33,101 +38,117 @@
   margin-bottom: 40px;
   flex-wrap: wrap;
 }
-.tabs-component-container .tabs-container button {
-  margin-bottom: 10px;
-}
+
 .tabs-component-container .card-container {
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
   gap: 3%;
 }
+
 .tabs-component-container .hide {
   display: none;
 }
+
 .tabs-component-container .tabs-container button {
   background-color: white;
-  border: 0px;
-  font-size: 18px;
-  font: normal normal bold 18px/21px Arial;
+  border: 0;
+  font: normal normal bold 18px/21px Arial, sans-serif;
   padding: 9px;
+  margin-bottom: 10px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
+
 .tabs-component-container .tabs-container button.selected {
   border-bottom: #006dff solid 4px;
 }
+
 .tabs-component-container .left {
   width: 80%;
 }
+
 .tabs-component-container .left img {
   border-radius: 20px;
 }
+
 .tabs-component-container .right {
   width: 80%;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
+
 .tabs-component-container .right p {
   font-size: 16px;
 }
+
 .tabs-component-container .tabs-container button picture img {
   width: 50px;
 }
-.tabs-component-container .tabs-container button {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
+
 .tabs-component-container button strong {
   display: none;
 }
+
 .tabs-component-container .tabs-container picture {
   display: flex;
   align-items: center;
 }
+
 .tabs-component-container {
   align-items: normal !important;
 }
+
 .tabs-component-container a {
   color: #006dff !important;
   background-color: #fff !important;
-  border: 0px !important;
+  border: 0 !important;
 }
+
 .tabs-component-container a::after {
   background-color: #006dff !important;
   opacity: 1;
-  margin-left: 0px;
+  margin-left: 0;
 }
+
 @media (min-width: 768px) {
   .tabs-component-container .tabs-container {
     flex-wrap: nowrap;
   }
+
   .tabs-component-container .left {
     width: 60%;
   }
+
   .tabs-component-container .right {
     width: 60%;
   }
 }
+
 @media (min-width: 990px) {
   .tabs-component-container .card-container {
     flex-direction: row;
+    width: 830px;
   }
+
   .tabs-component-container button strong {
     display: block;
   }
+
   .tabs-component-container .tabs-container button picture img {
     width: 30px;
   }
+
   .tabs-component-container .left {
     width: 50%;
   }
+
   .tabs-component-container .right {
     width: 50%;
   }
-  .tabs-component-container .card-container {
-    width: 830px;
-  }
+
   .tabs-component-container .tabs-container {
     gap: 5%;
   }

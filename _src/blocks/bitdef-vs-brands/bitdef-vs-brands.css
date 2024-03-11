@@ -1,3 +1,4 @@
+/* stylelint-disable no-descending-specificity */
 .bitdef-vs-brands {
   display: flex;
   flex-direction: column;
@@ -14,15 +15,18 @@
   flex-direction: column;
   align-items: center;
 }
+
 .bitdef-vs-brands-wrapper h2 {
   margin-top: 72px;
   margin-bottom: 57px;
-  font: normal normal bold 32px/37px Arial;
+  font: normal normal bold 32px/37px Arial, sans-serif;
 }
+
 .bitdef-vs-brands-wrapper h3 {
   margin-bottom: 6px;
-  font: normal normal bold 24px Arial;
+  font: normal normal bold 24px Arial, sans-serif;
 }
+
 .bitdef-vs-brands-wrapper .row-2 {
   margin-bottom: 22px;
   font-size: 14px;
@@ -42,82 +46,90 @@
   padding: 9px;
   margin-top: 8px;
   margin-bottom: 8px;
-  font: normal normal bold 14px/14px Arial;
+  font: normal normal bold 14px/14px Arial, sans-serif;
 }
+
 .bitdef-vs-brands-wrapper table .grey-background p {
   background-color: #dedede;
   padding: 9px;
   margin-top: 8px;
   margin-bottom: 8px;
-  font: normal normal normal 14px/14px Arial;
+  font: normal normal normal 14px/14px Arial, sans-serif;
 }
+
 .bitdef-vs-brands-wrapper table .blue-background p:nth-child(1) {
   width: 100%;
-  border-radius: 8px 0px 0px 8px;
+  border-radius: 8px 0 0 8px;
 }
+
 .bitdef-vs-brands-wrapper table .blue-background p:nth-child(2) {
-  border-radius: 0px 8px 8px 0px;
+  border-radius: 0 8px 8px 0;
 }
+
 .bitdef-vs-brands-wrapper table .grey-background p:nth-child(1) {
   width: 100%;
-  border-radius: 8px 0px 0px 8px;
+  border-radius: 8px 0 0 8px;
 }
+
 .bitdef-vs-brands-wrapper table .grey-background p:nth-child(2) {
-  border-radius: 0px 8px 8px 0px;
+  border-radius: 0 8px 8px 0;
 }
+
 .bitdef-vs-brands-wrapper table .same-line {
   display: flex;
+  animation: increaseWidth 1s forwards;
+  width: 0;
 }
 
 .bitdef-vs-brands-wrapper table .same-line:nth-child(1) {
   margin-right: auto;
 }
-.bitdef-vs-brands-wrapper table .same-line {
-  animation: increaseWidth 1s forwards;
-  width: 0;
-}
 
 .bitdef-vs-brands-wrapper .same-line {
   animation: none;
 }
+
 .bitdef-vs-brands-wrapper .same-line.animate {
   animation: increaseWidth 1s forwards;
 }
 
 .bitdef-vs-brands .row-2 > .column-0 {
   padding-bottom: 14px;
-  font: normal normal normal 14px/18px Arial;
+  font: normal normal normal 14px/18px Arial, sans-serif;
 }
 
 .bitdef-vs-brands .row-6 > .column-0 {
   padding-top: 14px;
-  font: normal normal normal 12px/14px Arial;
+  font: normal normal normal 12px/14px Arial, sans-serif;
 }
 
-@keyframes increaseWidth-row1 {
+@keyframes increase-width-row1 {
   from {
     width: 0;
   }
+
   to {
     width: 95%;
   }
 }
 
 /* Keyframes for the second row animation */
-@keyframes increaseWidth-row2 {
+@keyframes increase-width-row2 {
   from {
     width: 0;
   }
+
   to {
     width: 90%;
   }
 }
 
 /* Keyframes for the third row animation */
-@keyframes increaseWidth-row3 {
+@keyframes increase-width-row3 {
   from {
     width: 0;
   }
+
   to {
     width: 85%;
   }
@@ -125,15 +137,15 @@
 
 /* Apply different animations to each row */
 .bitdef-vs-brands-wrapper table .row-3 .same-line.animate-row1 {
-  animation: increaseWidth-row1 1s forwards;
+  animation: increase-width-row1 1s forwards;
 }
 
 .bitdef-vs-brands-wrapper table .row-4 .same-line.animate-row2 {
-  animation: increaseWidth-row2 1s forwards;
+  animation: increase-width-row2 1s forwards;
 }
 
 .bitdef-vs-brands-wrapper table .row-5 .same-line.animate-row3 {
-  animation: increaseWidth-row3 1s forwards;
+  animation: increase-width-row3 1s forwards;
 }
 
 .bitdef-vs-brands-wrapper img {
@@ -145,11 +157,13 @@
   .bitdef-vs-brands-wrapper .heading-container {
     width: 610px;
   }
+
   .bitdef-vs-brands-wrapper .new-container {
     flex-direction: row;
     gap: 3%;
     justify-content: center;
   }
+
   .bitdef-vs-brands-wrapper .table-container {
     width: 340px;
   }
@@ -161,6 +175,7 @@
     gap: 3%;
     justify-content: center;
   }
+
   .bitdef-vs-brands-wrapper .table-container {
     width: 410px;
   }

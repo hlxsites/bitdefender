@@ -1,3 +1,5 @@
+/* stylelint-disable no-descending-specificity */
+
   /* block specific CSS goes here */
 :root {
   /* hero font size */
@@ -165,10 +167,6 @@ main .hero .hero-content {
 
 main .hero.new2024design .hero-content:last-of-type {
   padding: 0 2em;
-}
-
-main .hero.new2024design .hero-picture {
-  display: none;
 }
 
 main .hero.new2024design h1 {
