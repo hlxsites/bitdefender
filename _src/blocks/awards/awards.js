@@ -1,5 +1,6 @@
+// eslint-disable-next-line no-unused-vars
 export default function decorate(block) {
-  window.dispatchEvent(new CustomEvent("shadowDomLoaded"), {
+  window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
     bubbles: true,
     composed: true, // This allows the event to cross the shadow DOM boundary
   });
