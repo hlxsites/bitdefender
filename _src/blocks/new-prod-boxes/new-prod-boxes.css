@@ -2,7 +2,7 @@
 .new-prod-boxes-container {
   padding-bottom: 0;
   font-family: 'Arial', sans-serif;
-  margin: clamp(20px, 25px, 30px) 0;
+  margin: clamp(10px, 25px, 15px) 0;
 }
 
 .new-prod-boxes-container.we-container {
