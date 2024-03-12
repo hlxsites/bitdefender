@@ -1,5 +1,6 @@
 /* eslint-disable prefer-const */
 /* eslint-disable no-undef */
+
 /* eslint-disable max-len */
 async function createPricesElement(storeOBJ, conditionText, saveText, prodName, prodUsers, prodYears, buylink) {
   const storeProduct = await storeOBJ.getProducts([new ProductInfo(prodName, 'consumer')]);
@@ -142,59 +143,85 @@ export default function decorate(block, options) {
         buyLinkSelector.classList.add('button', 'primary');
       }
 
+      // create the prices element based on where the component is being called from, aem of www-websites
       if (options) {
         await createPricesElement(options.store, '', 'Save', prodName, prodUsers, prodYears, buyLinkSelector)
           .then((pricesBox) => {
             console.log(pricesBox);
             // buyLink.parentNode.parentNode.insertBefore(pricesBox, buyLink.parentNode);
             prod.outerHTML = `
-        <div class="prod_box${greenTag.innerText.trim() && ' hasGreenTag'}">
-          <div class="inner_prod_box">
-            ${greenTag.innerText.trim() ? `<div class="greenTag2">${greenTag.innerText.trim()}</div>` : ''}
-            ${title.innerText.trim() ? `<h2>${title.innerHTML}</h2>` : ''}
-            ${blueTag.innerText.trim() ? `<div class="blueTag"><div>${blueTag.innerHTML.trim()}</div></div>` : ''}
-            ${subtitle.innerText.trim() ? `<p class="subtitle${subtitle.innerText.trim().split(/\s+/).length > 5 ? ' fixed_height' : ''}">${subtitle.innerText.trim()}</p>` : ''}
-            <hr />
+              <div class="prod_box${greenTag.innerText.trim() && ' hasGreenTag'}">
+                <div class="inner_prod_box">
+                  ${greenTag.innerText.trim() ? `<div class="greenTag2">${greenTag.innerText.trim()}</div>` : ''}
+                  ${title.innerText.trim() ? `<h2>${title.innerHTML}</h2>` : ''}
+                  ${blueTag.innerText.trim() ? `<div class="blueTag"><div>${blueTag.innerHTML.trim()}</div></div>` : ''}
+                  ${subtitle.innerText.trim() ? `<p class="subtitle${subtitle.innerText.trim().split(/\s+/).length > 5 ? ' fixed_height' : ''}">${subtitle.innerText.trim()}</p>` : ''}
+                  <hr />
 
-            ${pricesBox.outerHTML}
+                  ${pricesBox.outerHTML}
 
-            ${billed ? `<div class="billed">${billed.innerHTML.replace('0', `<span class="newprice-${onSelectorClass}"></span>`)}</div>` : ''}
+                  ${billed ? `<div class="billed">${billed.innerHTML.replace('0', `<span class="newprice-${onSelectorClass}"></span>`)}</div>` : ''}
 
-            ${buyLink.outerHTML}
+                  ${buyLink.outerHTML}
 
-            ${undeBuyLink.innerText.trim() ? `<div class="undeBuyLink">${undeBuyLink.innerText.trim()}</div>` : ''}
-            <hr />
-            ${benefitsLists.innerText.trim() ? `<div class="benefitsLists">${featureList}</div>` : ''}
-          </div>
-        </div>`;
+                  ${undeBuyLink.innerText.trim() ? `<div class="undeBuyLink">${undeBuyLink.innerText.trim()}</div>` : ''}
+                  <hr />
+                  ${benefitsLists.innerText.trim() ? `<div class="benefitsLists">${featureList}</div>` : ''}
+                </div>
+              </div>`;
           });
       } else {
+        const { fetchProduct } = await import('../../scripts/utils/utils.js');
+        let oldPrice;
+        let newPrice;
+        let discountPercentage;
         fetchProduct()
           .then((product) => {
-            console.log(product);
+            discountPercentage = Math.round(
+              (1 - (product.discount.discounted_price) / product.price) * 100,
+            );
+            oldPrice = product.price;
+            newPrice = product.discount.discounted_price;
+            let currencyLabel = product.currency_label;
+            const priceElement = document.createElement('div');
+            priceElement.classList.add('hero-aem__prices');
+            priceElement.innerHTML = `
+              <div class="hero-aem__price mt-3">
+                <div>
+                    <span class="prod-oldprice">${oldPrice}${currencyLabel}</span>
+                    <span class="prod-save">Save ${discountPercentage}%<span class="save"></span></span>
+                </div>
+                <div class="newprice-container mt-2">
+                  <span class="prod-newprice">${newPrice}${currencyLabel}</span>
+                  
+                </div>
+              </div>`;
+            buyLink.querySelector('a').classList.add('button', 'primary', 'no-arrow');
+
+            prod.outerHTML = `
+              <div class="prod_box${greenTag.innerText.trim() && ' hasGreenTag'}">
+                <div class="inner_prod_box">
+                  ${greenTag.innerText.trim() ? `<div class="greenTag2">${greenTag.innerText.trim()}</div>` : ''}
+                  ${title.innerText.trim() ? `<h2>${title.innerHTML}</h2>` : ''}
+                  ${blueTag.innerText.trim() ? `<div class="blueTag"><div>${blueTag.innerHTML.trim()}</div></div>` : ''}
+                  ${subtitle.innerText.trim() ? `<p class="subtitle${subtitle.innerText.trim().split(/\s+/).length > 5 ? ' fixed_height' : ''}">${subtitle.innerText.trim()}</p>` : ''}
+                  <hr />
+
+                  ${priceElement.outerHTML}
+                  ${billed ? `<div class="billed">${billed.innerHTML.replace('0', `<span class="newprice-${onSelectorClass}"></span>`)}</div>` : ''}
+
+                  ${buyLink.innerHTML}
+
+                  ${undeBuyLink.innerText.trim() ? `<div class="undeBuyLink">${undeBuyLink.innerText.trim()}</div>` : ''}
+                  <hr />
+                  ${benefitsLists.innerText.trim() ? `<div class="benefitsLists">${featureList}</div>` : ''}
+                </div>
+              </div>`;
           })
           .catch((err) => {
             // eslint-disable-next-line no-console
             console.error(err);
           });
-        prod.outerHTML = `
-        <div class="prod_box${greenTag.innerText.trim() && ' hasGreenTag'}">
-          <div class="inner_prod_box">
-            ${greenTag.innerText.trim() ? `<div class="greenTag2">${greenTag.innerText.trim()}</div>` : ''}
-            ${title.innerText.trim() ? `<h2>${title.innerHTML}</h2>` : ''}
-            ${blueTag.innerText.trim() ? `<div class="blueTag"><div>${blueTag.innerHTML.trim()}</div></div>` : ''}
-            ${subtitle.innerText.trim() ? `<p class="subtitle${subtitle.innerText.trim().split(/\s+/).length > 5 ? ' fixed_height' : ''}">${subtitle.innerText.trim()}</p>` : ''}
-            <hr />
-
-            ${billed ? `<div class="billed">${billed.innerHTML.replace('0', `<span class="newprice-${onSelectorClass}"></span>`)}</div>` : ''}
-
-            ${buyLink.outerHTML}
-
-            ${undeBuyLink.innerText.trim() ? `<div class="undeBuyLink">${undeBuyLink.innerText.trim()}</div>` : ''}
-            <hr />
-            ${benefitsLists.innerText.trim() ? `<div class="benefitsLists">${featureList}</div>` : ''}
-          </div>
-        </div>`;
       }
     });
   } else {
