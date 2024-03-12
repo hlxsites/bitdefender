@@ -45,6 +45,7 @@ async function createPricesElement(storeOBJ, conditionText, saveText, prodName, 
 
 export default function decorate(block, options) {
   const {
+    // eslint-disable-next-line no-unused-vars
     products, priceType,
   } = options ? options.metadata : block.closest('.section').dataset;
   console.log('my block', block);
@@ -175,7 +176,7 @@ export default function decorate(block, options) {
         let oldPrice;
         let newPrice;
         let discountPercentage;
-        fetchProduct()
+        fetchProduct(prodName, `${prodUsers}u-${prodYears}y`)
           .then((product) => {
             discountPercentage = Math.round(
               (1 - (product.discount.discounted_price) / product.price) * 100,

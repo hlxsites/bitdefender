@@ -458,6 +458,12 @@ main .hero .hero-awards li::after {
   }
 }
 
+@media(max-width: 767px) { /* tablet */
+  main .hero.new2024design .breadcrumb {
+    display: none;
+  }
+}
+
 @media(min-width: 767px) { /* tablet */
   :root {
     --hero-h1-font-size: 42px;
