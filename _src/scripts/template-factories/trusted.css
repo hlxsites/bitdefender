@@ -367,6 +367,11 @@ main .section.link-right a {
     height: calc((100% / 2) - 16px);
 }
 
+.trusted .section.static-awards .default-content-wrapper > *:nth-child(3) img,
+.trusted .section.static-awards .default-content-wrapper > *:nth-child(6) img {
+    transform: scale(1.5);
+}
+
 .trusted .section.static-awards .default-content-wrapper > *:first-child,
 .trusted .section.static-awards .default-content-wrapper > *:first-child > a {
     position: absolute;
@@ -640,6 +645,11 @@ main .section.link-right a {
     .trusted main .hero .hero-picture picture img {
         display: block;
         padding-left: 0;
+    }
+
+    .trusted .section.static-awards .default-content-wrapper > *:nth-child(3) img,
+    .trusted .section.static-awards .default-content-wrapper > *:nth-child(6) img {
+        transform: scale(2);
     }
 }
 
