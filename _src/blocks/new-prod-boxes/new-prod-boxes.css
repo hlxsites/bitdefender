@@ -13,6 +13,10 @@
   margin-left: auto;
   margin-right: auto;
 }
+
+.new-prod-boxes-container .default-content-wrapper p:has(> a) {
+  text-align: center;
+}
 .new-prod-boxes-container>h2 {
   text-align: center;
   font-size: 32px;
