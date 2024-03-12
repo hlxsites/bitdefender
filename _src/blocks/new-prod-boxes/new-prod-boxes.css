@@ -1,0 +1,469 @@
+/* stylelint-disable  */
+.new-prod-boxes-container {
+  padding-bottom: 0;
+  font-family: 'Arial', sans-serif;
+}
+
+.new-prod-boxes-container.we-container {
+  max-width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-top: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.new-prod-boxes-container>h2 {
+  text-align: center;
+  font-size: 32px;
+  max-width: 450px;
+  margin: auto;
+}
+.new-prod-boxes-container .new-prod-boxes {
+  margin: 0 auto;
+  padding: 0 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.new-prod-boxes-container .new-prod-boxes .prod_box {
+  flex: 1;
+  max-width: 400px;
+  margin: 0 14px;
+}
+.new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box {
+  position: relative;
+  height: 100%;
+  background-color: #F6F6F6;
+  border-radius: 20px;
+  padding: 25px;
+  margin: 0 auto;
+}
+.new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .greenTag2 {
+  height: 37px;
+  width: 100%;
+  font-size: var(--body-font-size-xs);
+  font-family: Arial, sans-serif;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  background-color: #1C7928;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding-top: 7px;
+  margin-top: -64px;
+  margin-bottom: 37px;
+}
+.new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box h2 {
+  font-weight: bold;
+  font-size: 22px;
+  line-height: 26px;
+  font-family: Arial, sans-serif;
+  margin-top: 10px;
+}
+.new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box h2 a {
+  transition: all 0.5s ease;
+}
+.new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box h2 a:hover {
+  text-decoration: none;
+  transition: all 0.5s ease;
+}
+.new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .blueTag {
+  font-size: var(--body-font-size-xs);
+  font-family: Arial, sans-serif;
+  color: white;
+  text-align: center;
+  background-color: #026DFF;
+  display: inline-block;
+  border-radius: 20px;
+  padding: 6px 16px;
+}
+.new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .blueTag div {
+  display: flex;
+}
+.new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .blueTag img {
+  height: 14px;
+  margin-right: 5px;
+  margin-top: -5px;
+}
+.new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .subtitle {
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+  margin-bottom: 0;
+  line-height: 1.25;
+}
+.new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .subtitle.fixed_height {
+  min-height: 80px;
+}
+.new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box hr {
+  border: 1px solid #D1D1D1;
+  margin: 10px 0;
+}
+.new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .save_price_box {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .save_price_box .prod-oldprice {
+  font-size: var(--heading-font-size-xs);
+  line-height: var(--heading-font-size-xs);
+  text-decoration: line-through;
+  margin-right: 10px;
+}
+.new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .save_price_box .prod-percent {
+  font-size: 13px;
+  line-height: 15px;
+  color: white;
+  background-color: #68BA68;
+  border-radius: 11px;
+  padding: 4px 10px;
+}
+.new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .prices_box {
+  display: flex;
+  justify-content: left;
+}
+.new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .prices_box .prod-newprice {
+  font-size: var(--heading-font-size-xl);
+  line-height: var(--heading-font-size-xl);
+}
+.new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .prices_box sup {
+  margin: 15px 0 0 5px;
+  font-size: var(--heading-font-size-s);
+  line-height: var(--heading-font-size-s);
+}
+.new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .billed {
+  font-size: 12px;
+  font-family: Arial, sans-serif;
+  line-height: 13px;
+  margin: 7px 0;
+}
+.new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .buy-btn a.red-buy-button {
+  width: 100%;
+  text-transform: none;
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: 500 !important;
+  padding: 10px 1% !important;
+}
+.new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .undeBuyLink {
+  font-size: 12px;
+  font-family: Arial, sans-serif;
+  line-height: 13px;
+  margin: 7px 0;
+}
+.new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .benefitsLists {
+  font-family: Arial, sans-serif;
+  color: transparent;
+}
+.new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .benefitsLists p {
+  margin: 0;
+}
+.new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .benefitsLists u {
+  font-size: var(--body-font-size-xs);
+  text-decoration: none;
+}
+.new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .benefitsLists ul {
+  margin: 0;
+  margin-bottom: -5px;
+  padding: 0;
+  color: black;
+}
+.new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .benefitsLists ul li:first-of-type {
+  font-size: 16px;
+  line-height: 18px;
+  text-decoration: none;
+  list-style-type: none;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  margin-bottom: 1.5rem;
+}
+.new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .benefitsLists ul li:first-of-type.has_arrow::before {
+  content: "";
+  margin: 0 5px 20px 0;
+  background: url("https://bitdefender.com/pages/icons/arrow-left-blue.png") no-repeat center transparent;
+  width: 20px;
+  height: 20px;
+  background-size: 15px 12px;
+  float: left;
+}
+.new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .benefitsLists ul li:first-of-type.has_arrow_right .arrow-right {
+  background: url("https://bitdefender.com/icons/arrow-right-solid.svg") no-repeat center transparent;
+  width: 20px;
+  height: 20px;
+  background-size: 15px 12px;
+  position: relative;
+  top: 4px;
+  display: inline-flex;
+}
+.new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .benefitsLists ul li:not(:first-of-type) {
+  font-size: 14px;
+  line-height: 17px;
+  margin-bottom: 8px;
+  list-style-type: none;
+  background: url("https://bitdefender.com/icons/circle-check-sharp-solid.svg") top 2px left no-repeat transparent;
+  padding-left: 22px;
+  background-size: 13px;
+  position: relative;
+}
+.new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .benefitsLists ul li:not(:first-of-type) > span:last-of-type {
+  position: absolute;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 28px;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+  font-size: 12px;
+  box-shadow: 4px 4px 7px -8px #000;
+  display: none;
+}
+.new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .benefitsLists ul li:not(:first-of-type) > span:last-of-type::before {
+  content: "";
+  position: absolute;
+  left: 17px;
+  bottom: -20px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: white transparent transparent;
+}
+.new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .benefitsLists ul li:not(:first-of-type):hover > span:last-of-type {
+  display: block;
+}
+.new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .benefitsLists ul li:not(:first-of-type) u {
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  border-radius: 20px;
+  padding: 2px 21px 2px 7px;
+  background: url("https://bitdefender.com/pages/images/icons/individual.svg") center right 6px no-repeat #026DFF;
+  background-size: auto 12px;
+}
+.new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .benefitsLists ul:nth-of-type(2) {
+  min-height: 5em;
+}
+/* .new-prod-boxes-container .new-prod-boxes .prod_box.hasGreenTag {
+  margin-top: 3em;
+} */
+.new-prod-boxes-container .new-prod-boxes .prod_box.hasGreenTag .inner_prod_box {
+  box-shadow: 0 3px 7px 0 #C1C1C1;
+}
+
+.new-prod-boxes-container .prod-oldprice {
+  font-size: 16px;
+  text-decoration: line-through;
+}
+.new-prod-boxes-container .prod-save {
+  color: #1C7928;
+  font-weight: bold;
+}
+.new-prod-boxes-container .prod-newprice {
+  font-size: 40px;
+  font-weight: bold;
+}
+.new-prod-boxes-container .newprice-container {
+  line-height: 1;
+}
+.new-prod-boxes-container .newprice-container sup {
+  position: relative;
+  top: -20px;
+}
+
+.new-prod-boxes-container .button.primary {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  -webkit-font-smoothing: antialiased;
+  display: block;
+  align-items: center;
+  box-sizing: border-box;
+  text-decoration: none;
+  padding: 10px 26px 8px 28px;
+  text-align: center;
+  cursor: pointer;
+  color: #fff;
+  background-color: #eb0000;
+  border: 2px solid #eb0000;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-radius: 8px;
+  height: fit-content;
+}
+
+.new-prod-boxes-container .button.primary.no-arrow::after {
+  content: none;
+}
+
+.new-prod-boxes-container .button.primary:hover {
+  color: white;
+  background-color: #B10304;
+  border-color: #B10304;
+}
+
+.new-prod-boxes-container .button.primary:active {
+  background-color: #920A0A;
+  border-color: #920A0A;
+}
+
+.new-prod-boxes-container p em a {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  -webkit-font-smoothing: antialiased;
+  display: block;
+  align-items: center;
+  box-sizing: border-box;
+  text-decoration: none;
+  padding: 10px 26px 8px 28px;
+  text-align: center;
+  cursor: pointer;
+  color: #006EFF;
+  background-color: transparent;
+  border: 2px solid #006EFF;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-radius: 8px;
+  height: fit-content;
+}
+
+.new-prod-boxes-container p em a:hover {
+  color: white;
+  background-color: #006DFF;
+}
+
+.new-prod-boxes-container p em a:active {
+  background-color: #0D499B;
+}
+
+.new-prod-boxes-container .icon svg {
+  width: 12px;
+  height: 14px;
+  padding-right: 2px;
+  fill: #fff;
+}
+
+.new-prod-boxes-container .blue-pill {
+  background-color: #026DFF;
+  padding: 2.5px 6.7px;
+  border-radius: 20px;
+  color: white;
+  font-style: normal;
+  font-size: 11px;
+  letter-spacing: 0px;
+  font-weight: bold;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.new-prod-boxes-container .blue-pill::after {
+  background: url("https://bitdefender.com/icons/user-sharp-solid.svg") no-repeat center transparent;
+  filter: invert(1);
+  content: '';
+  width: 8px;
+  height: 9px;
+  background-size: 8px 9px;
+  position: relative;
+  display: inline-flex;
+}
+
+.switchBox {
+  text-align: center;
+}
+
+.switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 302px;
+  height: 44px;
+  background-color: #016DFF;
+  border-radius: 22px;
+}
+
+.switch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  content: "";
+  height: 40px;
+  width: 150px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  border-radius: 20px;
+  transition: all 0.4s;
+}
+
+.switch input:checked + .slider {
+  transform: translateX(149px);
+}
+
+.label {
+  font-family: Arial, Helvetica, sans-serif;
+  width: 50%;
+  text-align: center;
+  font-weight: bold;
+  line-height: 34px;
+  font-size: 16px;
+  color: white;
+  transition: color 0.4s;
+}
+
+.label.on {
+  right: 0;
+  color: black;
+}
+
+.switch input:checked + .slider .label.on {
+  color: white;
+}
+
+.switch input:checked + .slider .label {
+  color: black;
+}
+
+@media (width >= 768px) {
+  .new-prod-boxes-container .new-prod-boxes {
+    flex-direction: row;
+    padding: 60px 0;
+  }
+  /* .new-prod-boxes-container .new-prod-boxes .prod_box.hasGreenTag {
+    margin-top: 1em;
+  } */
+  .new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box {
+    width: 74%;
+  }
+}
+
+@media (width >= 992px) {
+  .new-prod-boxes-container.we-container {
+    max-width: 1300px;
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+}
+
+@media (width >= 1200px) {
+  .new-prod-boxes-container.we-container {
+    max-width: 1332px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box {
+    width: 84%;
+  }
+}
+
+@media (width >= 1600px) {
+  .new-prod-boxes-container.we-container {
+    max-width: 1332px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
