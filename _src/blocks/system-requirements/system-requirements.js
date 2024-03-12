@@ -37,14 +37,14 @@ export default function decorate(block) {
     if (content) {
       content.classList.add('requirement');
       // check if .accordion-item-content has a <p>
-      const p = content.querySelector('p');
-      // if it doesn't, add a <p> and move the content inside
-      if (!p) {
-        const newP = document.createElement('p');
-        newP.innerHTML = content.innerHTML;
-        content.innerHTML = '';
-        content.appendChild(newP);
-      }
+      // const p = content.querySelector('ul li p');
+      // // if it doesn't, add a <p> and move the content inside
+      // if (!p) {
+      //   const newP = document.createElement('p');
+      //   newP.innerHTML = content.querySelector('ul li').innerHTML;
+      //   content.querySelector('ul li').innerHTML = '';
+      //   content.querySelector('ul li').appendChild(newP);
+      // }
     }
 
     if ([...block.classList].includes('action-only-on-header')) {
