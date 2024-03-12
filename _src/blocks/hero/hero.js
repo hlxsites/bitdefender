@@ -28,7 +28,10 @@ function buildHeroBlock(element, type) {
     }
 
     const pictureEl = document.createElement('div');
-    pictureEl.classList.add('hero-picture', type === 'block-width' ? 'hero-content' : '');
+    pictureEl.classList.add('hero-picture');
+    if (type === 'block-width') {
+      pictureEl.classList.add('hero-content');
+    }
     pictureEl.append(picture);
     section.prepend(pictureEl);
 
