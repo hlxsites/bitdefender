@@ -48,7 +48,6 @@ export default function decorate(block, options) {
     // eslint-disable-next-line no-unused-vars
     products, priceType,
   } = options ? options.metadata : block.closest('.section').dataset;
-  console.log('my block', block);
 
   let underShadow = block;
   // if options exists, this means the component is being called from aem
@@ -79,6 +78,7 @@ export default function decorate(block, options) {
     // productsAsList.forEach((prod) => updateProductsList(prod));
 
     [...underShadow.children].forEach(async (prod, key) => {
+      // eslint-disable-next-line no-unused-vars
       const [greenTag, title, blueTag, subtitle, saveOldPrice, price, billed, buyLink, undeBuyLink, benefitsLists] = [...prod.querySelectorAll('tr')];
       // const [prodName, prodUsers, prodYears] = productsAsList[key].split('/');
       const onSelectorClass = 'tsmd-10-1';
@@ -135,7 +135,6 @@ export default function decorate(block, options) {
       });
 
       if (title.innerHTML.indexOf('href') !== -1) {
-        console.log('title', title.innerHTML);
         title.innerHTML = `<a href="#" title="${title.innerText}" class="buylink-${onSelectorClass} await-loader prodload prodload-${onSelectorClass}">${title.querySelector('tr a').innerHTML}</a>`;
       }
 
@@ -148,7 +147,6 @@ export default function decorate(block, options) {
       if (options) {
         await createPricesElement(options.store, '', 'Save', prodName, prodUsers, prodYears, buyLinkSelector)
           .then((pricesBox) => {
-            console.log(pricesBox);
             // buyLink.parentNode.parentNode.insertBefore(pricesBox, buyLink.parentNode);
             prod.outerHTML = `
               <div class="prod_box${greenTag.innerText.trim() && ' hasGreenTag'}">

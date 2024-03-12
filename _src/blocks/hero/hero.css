@@ -128,10 +128,6 @@ main .hero.new2024design * {
   color: white;
 }
 
-main .hero.new2024design .hero-picture {
-  display: none;
-}
-
 main .hero.new2024design .hero-picture:last-of-type {
   display: none;
 }
