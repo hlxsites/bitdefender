@@ -88,8 +88,30 @@
     transition: all 0.3s ease-in-out;
 }
 
-.system-requirements-item .requirement p {
+.system-requirements-item .requirement > ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-gap: 24px;
+}
+
+.system-requirements-item .requirement > ul > li {
     font: normal normal normal 12px/14px var(--body-font-family);
+    list-style: none;
+    display: inline-block;
+    padding-left: 0;
+}
+
+.system-requirements-item .requirement > ul > li > br {
+    display: block;
+    margin-bottom: 14px;
+    content: " ";
+}
+
+.system-requirements-item .requirement > ul > li > br:first-of-type {
+    margin: 0;
 }
 
 .system-requirements-item.expanded .requirement {
