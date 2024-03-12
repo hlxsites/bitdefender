@@ -39,7 +39,6 @@ async function decorateIcons(element) {
     svgSprite = div.firstElementChild;
     element.append(div.firstElementChild);
   }
-  console.log('decorateIcons', element, svgSprite)
 
   // Download all new icons
   const icons = [...element.querySelectorAll('span.icon')];
@@ -60,7 +59,6 @@ async function decorateIcons(element) {
         }
         // Styled icons don't play nice with the sprite approach because of shadow dom isolation
         const svg = await response.text();
-        console.log('svg', svg)
         if (svg.match(/(<style | class=)/)) {
           ICONS_CACHE[iconName] = { styled: true, html: svg };
         } else {
@@ -96,7 +94,6 @@ async function decorateIcons(element) {
       parent.innerHTML = ICONS_CACHE[iconName].html;
     } else {
       parent.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg"><use href="#icons-sprite-${iconName}"/></svg>`;
-      console.log('unstyled', parent.innerHTML)
     }
   });
 }
