@@ -93,7 +93,7 @@
   margin-top: -5px;
 }
 .new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .subtitle {
-  font-size: 14px;
+  font-size: clamp(10px, 14px, 14px);
   font-family: Arial, sans-serif;
   margin-bottom: 0;
   line-height: 1.25;
@@ -443,9 +443,7 @@
   /* .new-prod-boxes-container .new-prod-boxes .prod_box.hasGreenTag {
     margin-top: 1em;
   } */
-  .new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box {
-    width: 74%;
-  }
+  
 }
 
 @media (width >= 992px) {
@@ -453,6 +451,10 @@
     max-width: 1300px;
     padding-left: 50px;
     padding-right: 50px;
+  }
+
+  .new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box {
+    width: 74%;
   }
 }
 
