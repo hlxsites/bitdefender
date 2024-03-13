@@ -17,6 +17,11 @@
     }
 }
 
+.money-back.block {
+  background-color: #EDF9FF;
+  border-radius: 20px;
+}
+
 .money-back h3 {
     font: normal normal bold 32px/37px var(--body-font-family);
     text-align: center;
@@ -27,22 +32,32 @@
     list-style: none;
     margin: 0;
     padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
+    display: inline-block;
   }
 
-  .money-back > ul > li {
+.money-back > ul > li {
     display: inline-block;
     padding: 8px;
     margin: 0 37px;
     text-align: center;
     width: 268px;
     vertical-align: top;
+    font: normal normal normal 14px/16px var(--body-font-family);
+  }
+
+  .money-back > ul > li h6 {
+    font: normal normal bold 18px/16px var(--body-font-family);
   }
 
   .money-back > ul > li p {
+    font: normal normal normal 14px/16px var(--body-font-family);
+  }
+
+  .money-back > ul > li p:first-of-type {
+    margin-bottom: 0px;
+  }
+
+  .money-back > ul > li a {
     font: normal normal normal 14px/16px var(--body-font-family);
     margin-bottom: 0;
   }
