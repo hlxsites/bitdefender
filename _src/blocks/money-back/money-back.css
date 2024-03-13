@@ -54,7 +54,7 @@
   }
 
   .money-back > ul > li p:first-of-type {
-    margin-bottom: 0px;
+    margin-bottom: 0;
   }
 
   .money-back > ul > li a {
