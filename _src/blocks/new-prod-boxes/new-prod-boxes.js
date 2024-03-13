@@ -174,6 +174,28 @@ export default function decorate(block, options) {
         let oldPrice;
         let newPrice;
         let discountPercentage;
+        let priceElement = document.createElement('div');
+        buyLink.querySelector('a').classList.add('button', 'primary', 'no-arrow');
+
+        underShadow.children[key].outerHTML = `
+          <div class="prod_box${greenTag.innerText.trim() && ' hasGreenTag'}">
+            <div class="inner_prod_box">
+              ${greenTag.innerText.trim() ? `<div class="greenTag2">${greenTag.innerText.trim()}</div>` : ''}
+              ${title.innerText.trim() ? `<h2>${title.innerHTML}</h2>` : ''}
+              ${blueTag.innerText.trim() ? `<div class="blueTag"><div>${blueTag.innerHTML.trim()}</div></div>` : ''}
+              ${subtitle.innerText.trim() ? `<p class="subtitle${subtitle.innerText.trim().split(/\s+/).length > 5 ? ' fixed_height' : ''}">${subtitle.innerText.trim()}</p>` : ''}
+              <hr />
+      
+              <div class="price_box"></div>
+              ${billed ? `<div class="billed">${billed.innerHTML.replace('0', `<span class="newprice-${onSelectorClass}"></span>`)}</div>` : ''}
+      
+              ${buyLink.innerHTML}
+      
+              ${undeBuyLink.innerText.trim() ? `<div class="undeBuyLink">${undeBuyLink.innerText.trim()}</div>` : ''}
+              <hr />
+              ${benefitsLists.innerText.trim() ? `<div class="benefitsLists">${featureList}</div>` : ''}
+            </div>
+          </div>`;
         fetchProduct(prodName, `${prodUsers}u-${prodYears}y`)
           .then((product) => {
             discountPercentage = Math.round(
@@ -182,7 +204,6 @@ export default function decorate(block, options) {
             oldPrice = product.price;
             newPrice = product.discount.discounted_price;
             let currencyLabel = product.currency_label;
-            const priceElement = document.createElement('div');
             priceElement.classList.add('hero-aem__prices');
             priceElement.innerHTML = `
               <div class="hero-aem__price mt-3">
@@ -195,27 +216,7 @@ export default function decorate(block, options) {
                   
                 </div>
               </div>`;
-            buyLink.querySelector('a').classList.add('button', 'primary', 'no-arrow');
-
-            prod.outerHTML = `
-              <div class="prod_box${greenTag.innerText.trim() && ' hasGreenTag'}">
-                <div class="inner_prod_box">
-                  ${greenTag.innerText.trim() ? `<div class="greenTag2">${greenTag.innerText.trim()}</div>` : ''}
-                  ${title.innerText.trim() ? `<h2>${title.innerHTML}</h2>` : ''}
-                  ${blueTag.innerText.trim() ? `<div class="blueTag"><div>${blueTag.innerHTML.trim()}</div></div>` : ''}
-                  ${subtitle.innerText.trim() ? `<p class="subtitle${subtitle.innerText.trim().split(/\s+/).length > 5 ? ' fixed_height' : ''}">${subtitle.innerText.trim()}</p>` : ''}
-                  <hr />
-
-                  ${priceElement.outerHTML}
-                  ${billed ? `<div class="billed">${billed.innerHTML.replace('0', `<span class="newprice-${onSelectorClass}"></span>`)}</div>` : ''}
-
-                  ${buyLink.innerHTML}
-
-                  ${undeBuyLink.innerText.trim() ? `<div class="undeBuyLink">${undeBuyLink.innerText.trim()}</div>` : ''}
-                  <hr />
-                  ${benefitsLists.innerText.trim() ? `<div class="benefitsLists">${featureList}</div>` : ''}
-                </div>
-              </div>`;
+            underShadow.children[key].querySelector('.price_box').appendChild(priceElement);
           })
           .catch((err) => {
             // eslint-disable-next-line no-console
