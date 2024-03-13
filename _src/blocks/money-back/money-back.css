@@ -27,9 +27,12 @@
     list-style: none;
     margin: 0;
     padding: 0;
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
   }
-  
+
   .money-back > ul > li {
     display: inline-block;
     padding: 8px;
@@ -95,6 +98,12 @@
     fill: #006EFF;
   }
 
+  .money-back img {
+    height: 55px;
+    margin-bottom: 9px;
+    fill: #006EFF;
+  }
+
 @media (max-width: 991px) { /* mobile/tablet */
     .money-back-wrapper {
         padding: var(--body-padding);
@@ -103,6 +112,7 @@
     .money-back > ul {
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         grid-gap: 14px;
+        flex-direction: column;
     }
 
     .money-back > ul > li {

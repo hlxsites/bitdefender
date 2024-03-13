@@ -30,7 +30,6 @@ function buildHeroBlock(element) {
     const pictureEl = document.createElement('div');
     pictureEl.classList.add('hero-picture');
     pictureEl.append(picture);
-
     section.prepend(pictureEl);
 
     pictureParent.remove();
