@@ -46,7 +46,7 @@ async function createPricesElement(storeOBJ, conditionText, saveText, prodName, 
 export default function decorate(block, options) {
   const {
     // eslint-disable-next-line no-unused-vars
-    products, priceType, pid
+    products, priceType, pid,
   } = options ? options.metadata : block.closest('.section').dataset;
 
   let underShadow = block;
