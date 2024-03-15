@@ -84,7 +84,6 @@
 
 .tabs-component-container .card-container a:hover {
   color: #0A53C5;
-  transform: translateX(10px);
 }
 
 .tabs-component-container .card-container a::after {
@@ -148,7 +147,6 @@
 }
 
 .tabs-component-container a::after {
-  background-color: #006dff !important;
   opacity: 1;
   margin-left: 0;
 }
