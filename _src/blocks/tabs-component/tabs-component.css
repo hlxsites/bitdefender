@@ -72,6 +72,11 @@
   align-items: center;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
+.tabs-component-container .card-container a {
+  overflow: visible;
+}
+
 .tabs-component-container .card-container a:hover {
   color: #0A53C5;
   transform: translateX(10px);
