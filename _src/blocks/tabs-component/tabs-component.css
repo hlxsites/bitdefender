@@ -61,7 +61,7 @@
   align-items: center;
 }
 
-.tabs-component-container .tabs-container button.button-text {
+.tabs-component-container .tabs-container button a {
   background-color: white;
   border: 0;
   font: normal normal bold 18px/21px Arial, sans-serif;
@@ -72,12 +72,12 @@
   align-items: center;
 }
 
-.tabs-component-container .tabs-container button.button-text:hover {
+.tabs-component-container .tabs-container button a:hover {
   color: #0A53C5;
   transform: translateX(10px);
 }
 
-.tabs-component-container .tabs-container button.button-text::after {
+.tabs-component-container .tabs-container button a::after {
   content: '\2192';
   width: 24px;
   height: 24px;
@@ -87,7 +87,7 @@
   margin-left: 2px;
 }
 
-.tabs-component-container .tabs-container button.button-text:hover::after {
+.tabs-component-container .tabs-container button a:hover::after {
   transform: translateX(5px);
 }
 
