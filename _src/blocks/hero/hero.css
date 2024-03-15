@@ -136,6 +136,14 @@ main .hero.new2024design strong {
   font-weight: 600;
 }
 
+main .hero-container.breadcrumb-hidden .breadcrumb a {
+  color: transparent;
+}
+
+main .hero-container.breadcrumb-hidden .breadcrumb a::after {
+  color: transparent;
+}
+
 main .hero.black-background::after {
   content: none;
   background-color: transparent;
