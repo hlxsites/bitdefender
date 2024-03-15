@@ -61,6 +61,36 @@
   align-items: center;
 }
 
+.tabs-component-container .tabs-container button.button-text {
+  background-color: white;
+  border: 0;
+  font: normal normal bold 18px/21px Arial, sans-serif;
+  padding: 9px;
+  margin-bottom: 10px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.tabs-component-container .tabs-container button.button-text:hover {
+  color: #0A53C5;
+  transform: translateX(10px);
+}
+
+.tabs-component-container .tabs-container button.button-text::after {
+  content: '\2192';
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  transition: all .2s cubic-bezier(.4,0,.2,1);
+  transform: translateX(0);
+  margin-left: 2px;
+}
+
+.tabs-component-container .tabs-container button.button-text:hover::after {
+  transform: translateX(5px);
+}
+
 .tabs-component-container .tabs-container button.selected {
   border-bottom: #006dff solid 4px;
 }
