@@ -75,6 +75,11 @@
 /* stylelint-disable-next-line no-descending-specificity */
 .tabs-component-container .card-container a {
   overflow: visible;
+  padding-left: 0 !important;
+}
+
+.tabs-component-container .card-container a .button-text {
+  transform: unset;
 }
 
 .tabs-component-container .card-container a:hover {
