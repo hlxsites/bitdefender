@@ -72,12 +72,12 @@
   align-items: center;
 }
 
-.tabs-component-container .tabs-container button a:hover {
+.tabs-component-container .tabs-container a:hover {
   color: #0A53C5;
   transform: translateX(10px);
 }
 
-.tabs-component-container .tabs-container button a::after {
+.tabs-component-container .tabs-container a::after {
   content: '\2192';
   width: 24px;
   height: 24px;
@@ -87,7 +87,7 @@
   margin-left: 2px;
 }
 
-.tabs-component-container .tabs-container button a:hover::after {
+.tabs-component-container .tabs-container a:hover::after {
   transform: translateX(5px);
 }
 
