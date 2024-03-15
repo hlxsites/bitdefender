@@ -10,7 +10,7 @@ export default function decorate(block) {
   tabsTitle.classList.add('tabs-container');
 
   // Get the container for the buttons
-  const container = document.querySelector('.tabs-container');
+  const container = block.querySelector('.tabs-container');
 
   // Check if the container exists
   if (container) {
