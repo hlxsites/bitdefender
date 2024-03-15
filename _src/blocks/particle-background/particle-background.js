@@ -1,6 +1,7 @@
 /* eslint-disable prefer-const */
 /* eslint-disable camelcase */
 
+// eslint-disable-next-line no-unused-vars
 function debounce(func, wait) {
   let timeout;
   return function executedFunction(...args) {
@@ -83,6 +84,7 @@ async function init(block) {
   await loadParticles(configs);
 }
 
+// eslint-disable-next-line no-unused-vars
 async function checkForMobile() {
   const isMobileView = isView('mobile');
   if (isMobileView && (!tsParticles && !loadAll)) {
