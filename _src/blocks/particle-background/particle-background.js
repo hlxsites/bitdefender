@@ -1,6 +1,7 @@
 /* eslint-disable prefer-const */
 /* eslint-disable camelcase */
 
+// eslint-disable-next-line no-unused-vars
 function debounce(func, wait) {
   let timeout;
   return function executedFunction(...args) {
@@ -22,10 +23,6 @@ let tsParticles;
 let loadAll;
 
 async function init(block) {
-  if (isView('mobile')) {
-    return;
-  }
-
   // eslint-disable-next-line import/no-unresolved
   tsParticles = (await import('https://cdn.jsdelivr.net/npm/@tsparticles/engine@3.1.0/+esm')).tsParticles;
   // eslint-disable-next-line import/no-unresolved
@@ -87,6 +84,7 @@ async function init(block) {
   await loadParticles(configs);
 }
 
+// eslint-disable-next-line no-unused-vars
 async function checkForMobile() {
   const isMobileView = isView('mobile');
   if (isMobileView && (!tsParticles && !loadAll)) {
@@ -111,7 +109,8 @@ async function checkForMobile() {
 export default async function decorate(block) {
   await init(block);
 
-  window.addEventListener('resize', debounce(checkForMobile, 250));
+  // uncomment this line if you want the bubbles to stop moving on mobile
+  // window.addEventListener('resize', debounce(checkForMobile, 250));
 
   window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
     bubbles: true,
