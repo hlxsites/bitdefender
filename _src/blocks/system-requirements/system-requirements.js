@@ -58,7 +58,7 @@ export default function decorate(block) {
     items[0].classList.add('expanded');
   }
 
-  const paragraph = document.querySelector('.system-requirements .default-content-wrapper p');
+  const paragraph = block.querySelector('.system-requirements .default-content-wrapper p');
   paragraph.innerHTML = paragraph.innerHTML.replace(/\|/g, '');
 
   window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
