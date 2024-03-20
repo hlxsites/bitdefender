@@ -1,6 +1,6 @@
 /* eslint-disable default-case */
 import { loadScript } from './aem.js';
-import { analyticsSetConsent } from './analytics.js';
+import { setConsent } from './analytics.js';
 
 /**
  * Runs initialization setup
@@ -11,7 +11,7 @@ function setup() {
   if (isConsentDone) {
     // Runs the callback only when user has selected the consent.
     if (window.Optanon && window.OptanonActiveGroups.includes('C0002')) {
-      analyticsSetConsent(true);
+      setConsent(true);
     }
   }
   // Setups OneTrust OnConsentChanged callback
@@ -19,9 +19,9 @@ function setup() {
     if (event && Array.isArray(event.detail)) {
       // window.location.reload();
       if (window.Optanon && window.OptanonActiveGroups.includes('C0002')) {
-        analyticsSetConsent(true);
+        setConsent(true);
       } else {
-        analyticsSetConsent(false);
+        setConsent(false);
         // console.log("we set the content to false");
       }
       // eslint-disable-next-line no-undef
@@ -33,7 +33,7 @@ function setup() {
 function initOneTrust() {
   /* Waits for OneTrust fully loaded to run initialization */
   let tries = 0;
-  const interval = setInterval(() => {
+  let interval = setInterval(() => {
     // console.log("optanon is "+window.OptanonActiveGroups);
     tries += 1;
     if (window.Optanon && window.OptanonActiveGroups) {
