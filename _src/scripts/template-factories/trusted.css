@@ -624,10 +624,11 @@ main .section.link-right a {
     .trusted .section.particle-band {
         display: block;
         padding: 0;
-        background: #EFF6FF;
+        background: url("/_src/icons/particle-band.svg") no-repeat #EFF6FF;
+        height: 50px;
     }
 
-    .trusted .section.particle-band .default-content-wrapper{
+    .trusted .section.particle-band .default-content-wrapper {
         width: 100%;
         max-width: 100%;
         padding: 0;

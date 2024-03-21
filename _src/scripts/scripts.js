@@ -596,6 +596,12 @@ async function loadLazy(doc) {
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
 
+  const templateMetadata = getMetadata('template');
+  const hasTemplate = getMetadata('template') !== '';
+  if (hasTemplate) {
+    loadCSS(`${window.hlx.codeBasePath}/scripts/template-factories/${templateMetadata}-lazy.css`);
+  }
+
   loadTrackers();
 
   sampleRUM('lazy');
