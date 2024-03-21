@@ -9,58 +9,46 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-export async function setConsent(approved) {
+export async function updateUserConsentStatus(isConsentGiven) {
   // eslint-disable-next-line no-undef
   if (!alloy) {
-    // console.warn('alloy not initialized, cannot set consent');
+    // eslint-disable-next-line no-console
+    console.warn('Alloy is not initialized, cannot update consent status');
     return Promise.resolve();
   }
-  // eslint-disable-next-line no-undef
-  return alloy('setConsent', {
+
+  const consentObject = {
     consent: [{
       standard: 'Adobe',
       version: '1.0',
       value: {
-        general: approved ? 'in' : 'out',
+        general: isConsentGiven ? 'in' : 'out',
       },
     }],
-  });
+  };
+
+  // eslint-disable-next-line no-undef
+  return alloy('setConsent', consentObject);
 }
 
-async function sendEvent(xdm, data) {
+async function trackAnalyticsEvent(xdmObject, eventData) {
   // eslint-disable-next-line no-undef
   if (!alloy) {
-    // console.warn('alloy not initialized, cannot send analytics event');
+    // eslint-disable-next-line no-console
+    console.warn('Alloy is not initialized, cannot send analytics event');
     return Promise.resolve();
   }
 
   // eslint-disable-next-line no-undef
   return alloy('sendEvent', {
     documentUnloading: true,
-    xdm,
-    data,
+    xdm: xdmObject,
+    data: eventData,
   });
 }
 
-function getAlloyInitScript() {
-  return `!function(n,o){o.forEach(function(o){n[o]||((n.__alloyNS=n.__alloyNS||[]).push(o),n[o]=
-  function(){var u=arguments;return new Promise(function(i,l){n[o].q.push([i,l,u])})},n[o].q=[])})}(window,["alloy"]);`;
-}
-
-function createInlineScript(document, element, innerHTML, type) {
-  const script = document.createElement('script');
-  script.type = type;
-  script.innerHTML = innerHTML;
-  element.appendChild(script);
-  return script;
-}
-
-export async function initAnalyticsTrackingQueue() {
-  createInlineScript(document, document.body, getAlloyInitScript(), 'text/javascript');
-}
-
-function getAlloyConfiguration(document, datastreamConfig) {
-  const { hostname } = document.location;
+function generateAlloyConfigObject(targetDocument, datastreamConfig) {
+  const { hostname } = targetDocument.location;
   return {
     debugEnabled: hostname.startsWith('localhost') || hostname.includes('--'),
     clickCollectionEnabled: true,
@@ -69,10 +57,26 @@ function getAlloyConfiguration(document, datastreamConfig) {
   };
 }
 
-export async function setupAnalyticsTracking(document, datastreamConfig) {
+function generateAlloyInitializationScript() {
+  return `!function(n,o){o.forEach(function(o){n[o]||((n.__alloyNS=n.__alloyNS||[]).push(o),n[o]=
+  function(){var u=arguments;return new Promise(function(i,l){n[o].q.push([i,l,u])})},n[o].q=[])})}(window,["alloy"]);`;
+}
+
+function injectScriptIntoDocument(targetDocument, targetElement, scriptContent, scriptType = 'text/javascript') {
+  const script = targetDocument.createElement('script');
+  script.type = scriptType;
+  script.innerHTML = scriptContent;
+  targetElement.appendChild(script);
+  return script;
+}
+
+export async function loadAnalytics(targetDocument, datastreamConfig) {
+  injectScriptIntoDocument(document, document.body, generateAlloyInitializationScript());
+
   // eslint-disable-next-line no-undef
   if (!alloy) {
-    console.warn('alloy not initialized, cannot configure');
+    // eslint-disable-next-line no-console
+    console.warn('Alloy is not initialized, cannot setup analytics tracking');
     return;
   }
 
@@ -80,15 +84,17 @@ export async function setupAnalyticsTracking(document, datastreamConfig) {
   import('../vendor/adobe/alloy.min.js');
 
   // eslint-disable-next-line no-undef
-  alloy('configure', getAlloyConfiguration(document, datastreamConfig));
+  alloy('configure', generateAlloyConfigObject(targetDocument, datastreamConfig));
 
-  if (!window.adobeDataLayer) {
+  // Setup Adobe Data Layer if not already present
+  if (typeof window.adobeDataLayer === 'undefined') {
     window.adobeDataLayer = [];
   }
-  window.adobeDataLayer.push((dl) => {
-    dl.addEventListener('adobeDataLayer:event', (event) => {
-      console.log('event', JSON.stringify(event));
-      sendEvent(event.eventInfo);
+
+  window.adobeDataLayer.push((dataLayer) => {
+    dataLayer.addEventListener('adobeDataLayer:event', (event) => {
+      console.log('Event tracked:', JSON.stringify(event));
+      trackAnalyticsEvent(event.eventInfo);
     });
   });
 }

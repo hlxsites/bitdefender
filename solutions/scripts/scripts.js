@@ -19,10 +19,7 @@ import {
   createTag,
 } from './utils.js';
 
-import {
-  initAnalyticsTrackingQueue,
-  setupAnalyticsTracking,
-} from './analytics.js';
+import { loadAnalytics } from './analytics.js';
 
 import loadOneTrust from './onetrust.js';
 
@@ -525,7 +522,6 @@ async function loadEager(doc) {
   }
   const main = doc.querySelector('main');
   if (main) {
-    await initAnalyticsTrackingQueue();
     decorateMain(main);
     buildCtaSections(main);
     buildTwoColumnsSection(main);
@@ -581,7 +577,7 @@ async function loadPage() {
   await window.hlx.plugins.load('lazy');
   await loadLazy(document);
 
-  const setupAnalytics = setupAnalyticsTracking(document, {
+  const setupAnalytics = loadAnalytics(document, {
     edgeConfigId: '7275417f-3870-465c-af3e-84f8f4670b3c',
     orgId: '0E920C0F53DA9E9B0A490D45@AdobeOrg',
   });

@@ -1,68 +1,58 @@
-/* eslint-disable default-case */
 import { loadScript } from './aem.js';
-import { setConsent } from './analytics.js';
+import { updateUserConsentStatus } from './analytics.js';
 
-/**
- * Runs initialization setup
- */
-function setup() {
-  // Consent preferences are selected when cookie OptanonAlertBoxClosed is present
-  const isConsentDone = document.cookie.match(/(?:^|;\s*)OptanonAlertBoxClosed=([^;]*)/);
-  if (isConsentDone) {
-    // Runs the callback only when user has selected the consent.
-    if (window.Optanon && window.OptanonActiveGroups.includes('C0002')) {
-      setConsent(true);
+const CHECK_INTERVAL = 100;
+const MAX_TRIES = 50;
+
+function handleConsentChange(event) {
+  if (event && Array.isArray(event.detail) && window.Optanon) {
+    const hasConsent = window.OptanonActiveGroups.includes('C0002');
+    updateUserConsentStatus(hasConsent);
+    if (!window.adobeDataLayer) {
+      window.adobeDataLayer = [];
     }
+    window.adobeDataLayer.push({ event: 'OneTrustOnConsentChanged' });
   }
-  // Setups OneTrust OnConsentChanged callback
-  window.Optanon.OnConsentChanged((event) => {
-    if (event && Array.isArray(event.detail)) {
-      // window.location.reload();
-      if (window.Optanon && window.OptanonActiveGroups.includes('C0002')) {
-        setConsent(true);
-      } else {
-        setConsent(false);
-        // console.log("we set the content to false");
-      }
-      // eslint-disable-next-line no-undef
-      adobeDataLayer.push({ event: 'OneTrustOnConsentChanged' });
-    }
-  });
 }
 
-function initOneTrust() {
-  /* Waits for OneTrust fully loaded to run initialization */
+function checkAndSetInitialConsent() {
+  const isConsentDone = document.cookie.match(/(?:^|;\s*)OptanonAlertBoxClosed=([^;]*)/);
+  if (isConsentDone && window.Optanon && window.OptanonActiveGroups.includes('C0002')) {
+    updateUserConsentStatus(true);
+  }
+}
+
+function initializeConsentProcessing() {
+  checkAndSetInitialConsent();
+  window.Optanon.OnConsentChanged(handleConsentChange);
+}
+
+function waitForOneTrustAndInitialize() {
   let tries = 0;
-  let interval = setInterval(() => {
-    // console.log("optanon is "+window.OptanonActiveGroups);
-    tries += 1;
+
+  const interval = setInterval(() => {
     if (window.Optanon && window.OptanonActiveGroups) {
       clearInterval(interval);
-      setup();
-    } else if (tries > 10) {
+      initializeConsentProcessing();
+    } else if (tries >= MAX_TRIES) {
+      // eslint-disable-next-line no-console
+      console.error('OneTrust not available');
       clearInterval(interval);
-      interval = null;
     }
-  }, 500);
+    tries += 1;
+  }, CHECK_INTERVAL);
 }
 
-/**
- * Loads OneTrust cookie consent and when user selects its preferences
- * it executes the callback passed as parameter
- * Whenever the user changes the cookie preferences, the page is reloaded
- * @param {Function} callback executed when user selects consent
- */
-export default function loadOneTrust(ONE_TRUST_ID) {
-  console.log(`one trust idd ${ONE_TRUST_ID}`);
-  const dataAttrs = {
-    'data-domain-script': `${ONE_TRUST_ID}`,
+export default function loadOneTrust(domainID) {
+  // eslint-disable-next-line no-console
+  console.log(`Loading OneTrust with ID: ${domainID}`);
+  const attrs = {
+    'data-domain-script': `${domainID}`,
     'data-dlayer-name': 'adobeDataLayer',
   };
-  loadScript('/solutions/scripts/onetrust/consent/2e112ba7-dfdc-491a-8b9a-c862b3140402/otSDKStub.js', {
+  loadScript('/solutions/vendor/onetrust/consent/2e112ba7-dfdc-491a-8b9a-c862b3140402/otSDKStub.js', {
     type: 'text/javascript',
     charset: 'UTF-8',
-    ...dataAttrs,
-  }).then(() => {
-    initOneTrust();
-  });
+    ...attrs,
+  }).then(waitForOneTrustAndInitialize);
 }
