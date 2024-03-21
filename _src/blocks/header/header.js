@@ -363,7 +363,6 @@ function renderMobileHeader(nav) {
 }
 
 export default async function decorate(block) {
-  return;
   const hero = document.querySelector('.hero');
 
   // commented out because it's not being used, might be used in the future
