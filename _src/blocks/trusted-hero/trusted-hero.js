@@ -10,12 +10,19 @@ export default async function decorate(block) {
   const { videoPlayerSettings, videoPlayerPoster } = blockDataset;
 
   function appendPreloadedVideo() {
-    const linkElement = document.createElement('link');
-    linkElement.rel = 'preload';
-    linkElement.as = 'video';
-    linkElement.href = videoUrl;
-    linkElement.type = `video/${videoFormat}`;
-    document.head.prepend(linkElement);
+    const linkVideoEl = document.createElement('link');
+    const linkVideoPosterEl = document.createElement('link');
+    linkVideoEl.rel = 'preload';
+    linkVideoEl.as = 'video';
+    linkVideoEl.href = videoUrl;
+    linkVideoEl.type = `video/${videoFormat}`;
+
+    linkVideoPosterEl.rel = 'preload';
+    linkVideoPosterEl.as = 'image';
+    linkVideoPosterEl.href = videoPlayerPoster;
+
+    document.head.prepend(linkVideoPosterEl);
+    document.head.prepend(linkVideoEl);
   }
 
   appendPreloadedVideo();
