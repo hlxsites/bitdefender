@@ -1339,46 +1339,7 @@ main .section.blue a.button.modal::after {
   }
 }
 
-/* //todo remove those from testing */
 header,
 body > div:first-child {
-    /*display: none !important;*/
     height: 64px;
 }
-
-/*.section.static-awards {*/
-/*    display: none !important;*/
-/*}*/
-
-/*.section.particle-band {*/
-/*    display: none !important;*/
-/*}*/
-
-/*.section.columns-container {*/
-/*    display: none !important;*/
-/*}*/
-/*.section.box-carousel-container {*/
-/*    display: none !important;*/
-/*}*/
-/*.section.big-teaser-section-container {*/
-/*    display: none !important;*/
-/*}*/
-/*.section.teaser-logos-container {*/
-/*    display: none !important;*/
-/*}*/
-/*.section.video-container {*/
-/*    display: none !important;*/
-/*}*/
-/*.section.apartnership_box {*/
-/*    display: none !important;*/
-/*}*/
-/*.section.dual-teaser-container {*/
-/*    display: none !important;*/
-/*}*/
-/*.section.black_bck.small-text {*/
-/*    display: none !important;*/
-/*}*/
-
-/*footer {*/
-/*    display: none !important;*/
-/*}*/
