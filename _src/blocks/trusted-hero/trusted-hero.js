@@ -9,6 +9,17 @@ export default async function decorate(block) {
   const blockDataset = getDatasetFromSection(block);
   const { videoPlayerSettings, videoPlayerPoster } = blockDataset;
 
+  function appendPreloadedVideo() {
+    const linkElement = document.createElement('link');
+    linkElement.rel = 'preload';
+    linkElement.as = 'video';
+    linkElement.href = videoUrl;
+    linkElement.type = `video/${videoFormat}`;
+    document.head.prepend(linkElement);
+  }
+
+  appendPreloadedVideo();
+
   const formattedVideoSettings = videoPlayerSettings
     .split(',')
     .map((item) => {
