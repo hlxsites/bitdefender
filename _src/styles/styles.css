@@ -1342,7 +1342,8 @@ main .section.blue a.button.modal::after {
 /* //todo remove those from testing */
 header,
 body > div:first-child {
-    display: none !important;
+    /*display: none !important;*/
+    height: 64px;
 }
 
 /*.section.static-awards {*/
