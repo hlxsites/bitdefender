@@ -1340,7 +1340,8 @@ main .section.blue a.button.modal::after {
 }
 
 /* //todo remove those from testing */
-header {
+header,
+body > div:first-child {
     display: none !important;
 }
 
