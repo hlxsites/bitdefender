@@ -11,11 +11,12 @@ import {
   waitForLCP,
   loadBlocks,
   loadCSS,
-  getMetadata,
+  getMetadata, loadScript,
 } from './lib-franklin.js';
 
 import {
-  createTag, getDefaultLanguage, localisationList,
+  adobeMcAppendVisitorId,
+  createTag, getDefaultLanguage, GLOBAL_EVENTS, localisationList,
 } from './utils/utils.js';
 
 const LCP_BLOCKS = ['hero']; // add your LCP blocks to the list
@@ -543,6 +544,39 @@ export function generateHrefLang() {
   });
 }
 
+export async function loadTrackers() {
+  const isPageNotInDraftsFolder = window.location.pathname.indexOf('/drafts/') === -1;
+
+  const onAdobeMcLoaded = () => {
+    document.dispatchEvent(new Event(GLOBAL_EVENTS.ADOBE_MC_LOADED));
+    window.ADOBE_MC_EVENT_LOADED = true;
+  };
+
+  if (isPageNotInDraftsFolder) {
+    const LANGUAGE_COUNTRY = getLanguageCountryFromPath(window.location.pathname);
+    const LAUNCH_URL = 'https://assets.adobedtm.com';
+    const ENVIRONMENT = getEnvironment(window.location.hostname, LANGUAGE_COUNTRY.country);
+
+    // Load Adobe Experience platform data collection (Launch) script
+    // const { launchProdScript, launchStageScript, launchDevScript } = await fetchPlaceholders();
+
+    const ADOBE_MC_URL_ENV_MAP = new Map([
+      ['prod', '8a93f8486ba4/5492896ad67e/launch-b1f76be4d2ee.min.js'],
+      ['stage', '8a93f8486ba4/5492896ad67e/launch-3e7065dd10db-staging.min.js'],
+      ['dev', '8a93f8486ba4/5492896ad67e/launch-fbd6d02d30e8-development.min.js'],
+    ]);
+
+    const adobeMcScriptUrl = `${LAUNCH_URL}/${ADOBE_MC_URL_ENV_MAP.get(ENVIRONMENT)}`;
+    await loadScript(adobeMcScriptUrl);
+
+    onAdobeMcLoaded();
+
+    await loadScript('https://www.googletagmanager.com/gtm.js?id=GTM-PLJJB3');
+  } else {
+    onAdobeMcLoaded();
+  }
+}
+
 /**
  * Loads everything that doesn't need to be delayed.
  * @param {Element} doc The container element
@@ -561,6 +595,8 @@ async function loadLazy(doc) {
   loadFooter(doc.querySelector('footer'));
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
+
+  loadTrackers();
 
   sampleRUM('lazy');
   sampleRUM.observe(main.querySelectorAll('div[data-block-name]'));
@@ -589,6 +625,7 @@ async function loadPage() {
   await loadEager(document);
   await window.hlx.plugins.load('lazy');
   await loadLazy(document);
+  adobeMcAppendVisitorId('main');
   loadDelayed();
 }
 

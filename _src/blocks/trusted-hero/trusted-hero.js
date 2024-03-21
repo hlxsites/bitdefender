@@ -1,4 +1,4 @@
-import { getDatasetFromSection } from '../../scripts/utils/utils.js';
+import { adobeMcAppendVisitorId, getDatasetFromSection } from '../../scripts/utils/utils.js';
 
 export default async function decorate(block) {
   const [rte, videoUrlEl] = [...block.children];
@@ -43,4 +43,6 @@ export default async function decorate(block) {
     anchorEl.target = '_blank';
     anchorEl.rel = 'noopener noreferrer';
   });
+
+  adobeMcAppendVisitorId('header');
 }
