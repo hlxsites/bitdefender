@@ -269,3 +269,40 @@ export function debounce(func, wait) {
     timeout = setTimeout(later, wait);
   };
 }
+
+export function appendAdobeMcLinks(selector) {
+  try {
+    const visitor = window.Visitor.getInstance('0E920C0F53DA9E9B0A490D45@AdobeOrg', {
+      trackingServer: 'sstats.bitdefender.com',
+      trackingServerSecure: 'sstats.bitdefender.com',
+      marketingCloudServer: 'sstats.bitdefender.com',
+      marketingCloudServerSecure: 'sstats.bitdefender.com',
+    });
+    const wrapperSelector = document.querySelector(selector);
+    const hrefSelector = '[href*=".bitdefender."]';
+    wrapperSelector.querySelectorAll(hrefSelector).forEach((link) => {
+      const destinationURLWithVisitorIDs = visitor.appendVisitorIDsTo(link.href);
+      link.href = destinationURLWithVisitorIDs.replace(/MCAID%3D.*%7CMCORGID/, 'MCAID%3D%7CMCORGID');
+    });
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error(e);
+  }
+}
+
+export function adobeMcAppendVisitorId(selector) {
+  // https://experienceleague.adobe.com/docs/id-service/using/id-service-api/methods/appendvisitorid.html?lang=en
+
+  if (window.ADOBE_MC_EVENT_LOADED) {
+    appendAdobeMcLinks(selector);
+  } else {
+    document.addEventListener(GLOBAL_EVENTS.ADOBE_MC_LOADED, () => {
+      appendAdobeMcLinks(selector);
+    });
+  }
+}
+
+export const GLOBAL_EVENTS = {
+  ADOBE_MC_LOADED: 'adobe_mc::loaded',
+  PAGE_LOADED: 'page::loaded',
+};

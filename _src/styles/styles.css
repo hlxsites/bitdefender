@@ -1338,3 +1338,8 @@ main .section.blue a.button.modal::after {
     font-size: var(--heading-font-size-l) !important;
   }
 }
+
+header,
+body > div:first-child {
+    height: 64px;
+}

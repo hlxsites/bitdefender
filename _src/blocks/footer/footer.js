@@ -1,4 +1,5 @@
 import { decorateIcons, getMetadata } from '../../scripts/lib-franklin.js';
+import { adobeMcAppendVisitorId } from '../../scripts/utils/utils.js';
 
 function wrapImgsInLinks(container) {
   const pictures = container.querySelectorAll('picture');
@@ -70,5 +71,7 @@ export default async function decorate(block) {
     disableSelectedCountry(sectionsData[3]);
     decorateIcons(footer);
     block.append(footer);
+
+    adobeMcAppendVisitorId('footer');
   }
 }

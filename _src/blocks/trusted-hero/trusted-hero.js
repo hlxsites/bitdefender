@@ -1,4 +1,4 @@
-import { getDatasetFromSection } from '../../scripts/utils/utils.js';
+import { adobeMcAppendVisitorId, getDatasetFromSection } from '../../scripts/utils/utils.js';
 
 export default async function decorate(block) {
   const [rte, videoUrlEl] = [...block.children];
@@ -8,6 +8,24 @@ export default async function decorate(block) {
 
   const blockDataset = getDatasetFromSection(block);
   const { videoPlayerSettings, videoPlayerPoster } = blockDataset;
+
+  function appendPreloadedVideo() {
+    const linkVideoEl = document.createElement('link');
+    const linkVideoPosterEl = document.createElement('link');
+    linkVideoEl.rel = 'preload';
+    linkVideoEl.as = 'video';
+    linkVideoEl.href = videoUrl;
+    linkVideoEl.type = `video/${videoFormat}`;
+
+    linkVideoPosterEl.rel = 'preload';
+    linkVideoPosterEl.as = 'image';
+    linkVideoPosterEl.href = videoPlayerPoster;
+
+    document.head.prepend(linkVideoPosterEl);
+    document.head.prepend(linkVideoEl);
+  }
+
+  appendPreloadedVideo();
 
   const formattedVideoSettings = videoPlayerSettings
     .split(',')
@@ -43,4 +61,6 @@ export default async function decorate(block) {
     anchorEl.target = '_blank';
     anchorEl.rel = 'noopener noreferrer';
   });
+
+  adobeMcAppendVisitorId('header');
 }
