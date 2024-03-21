@@ -1,5 +1,5 @@
-import { createTag } from '../../scripts/utils/utils.js';
-import { decorateIcons } from '../../scripts/lib-franklin.js';
+import { createTag } from '../../scripts/utils.js';
+import { decorateIcons } from '../../scripts/aem.js';
 
 function createQuote(item) {
   const paragraphs = Array.from(item.querySelectorAll('p'));

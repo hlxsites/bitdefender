@@ -1,5 +1,5 @@
-import { createTag } from '../../scripts/utils/utils.js';
-import { decorateIcons } from '../../scripts/lib-franklin.js';
+import { createTag } from '../../scripts/utils.js';
+import { decorateIcons } from '../../scripts/aem.js';
 
 const SLIDE_PREFIX = 'carousel-slide-';
 const CONTROL_PREFIX = 'carousel-control-';

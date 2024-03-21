@@ -1,4 +1,4 @@
-import { STICKY_NAVIGATION_DATASET_KEY } from '../../scripts/lib-franklin.js';
+import { STICKY_NAVIGATION_DATASET_KEY } from '../../scripts/aem.js';
 
 function scrollToAnchorWithOffset(anchorId) {
   const anchorElement = document.getElementById(anchorId);
