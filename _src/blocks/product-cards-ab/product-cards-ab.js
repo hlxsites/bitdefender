@@ -9,12 +9,21 @@ export default function decorate(block, options) {
     // eslint-disable-next-line no-unused-vars
     pid,
   } = options ? options.metadata : block.closest('.section').dataset;
-  const firstRow = block.firstElementChild;
-  const lastRow = block.lastElementChild;
+  let underShadow = block;
+  if (options) {
+    const aemContainer = block.children[1];
+    aemContainer.classList.add('product-cards-ab-container');
+    aemContainer.classList.add('we-container');
+    // eslint-disable-next-line prefer-destructuring
+    underShadow = aemContainer.children[1];
+    underShadow.classList.add('block');
+  }
+  const firstRow = underShadow.firstElementChild;
+  const lastRow = underShadow.lastElementChild;
   /* eslint-disable-next-line prefer-destructuring */
-  const parentNode = block.parentNode; // Get the parent of the block
+  const parentNode = underShadow.parentNode; // Get the parent of the block
   if (firstRow && parentNode) {
-    parentNode.insertBefore(firstRow, block); // Insert the first row before the block
+    parentNode.insertBefore(firstRow, underShadow); // Insert the first row before the block
   }
   if (lastRow && parentNode) {
     parentNode.appendChild(lastRow); // Insert the last row after the block
@@ -159,12 +168,12 @@ export default function decorate(block, options) {
     });
   }
 
-  const elementsToRemove = block.querySelectorAll('.product_area');
+  const elementsToRemove = underShadow.querySelectorAll('.product_area');
   elementsToRemove.forEach((element) => {
     element.remove();
   });
 
-  decorateIcons(block);
+  decorateIcons(underShadow);
   window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
     bubbles: true,
     composed: true, // This allows the event to cross the shadow DOM boundary
