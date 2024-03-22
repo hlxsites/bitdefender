@@ -19,7 +19,7 @@ export default function decorate(block, options) {
   if (lastRow && parentNode) {
     parentNode.appendChild(lastRow); // Insert the last row after the block
   }
-  const productCardsElement = document.querySelector('.product-cards-ab.block'); // Get the container element
+  const productCardsElement = parentNode.querySelector('.product-cards-ab.block'); // Get the container element
   const tables = productCardsElement.querySelectorAll('table'); // Find all tables within the container
 
   /* eslint-disable no-restricted-syntax */
@@ -105,7 +105,7 @@ export default function decorate(block, options) {
           tabContent.appendChild(tab);
 
           // add discount value to component title
-          const discountXX = document.querySelector('.product-cards-ab-wrapper h3 strong em');
+          const discountXX = parentNode.querySelector('.product-cards-ab-wrapper h3 strong em');
           const xx = document.createElement('em');
           xx.innerHTML = `${discountPercentage}%`;
           discountXX.replaceWith(xx);
@@ -134,7 +134,7 @@ export default function decorate(block, options) {
 
                 // Show the selected tab panel
                 const tabId = buttonTab.getAttribute('data-tab');
-                const selectedPanel = document.getElementById(tabId);
+                const selectedPanel = parentNode.querySelector(`#${tabId}`);
                 if (selectedPanel) {
                   selectedPanel.style.display = 'block';
                   // replace href with correct buy link
@@ -159,7 +159,7 @@ export default function decorate(block, options) {
     });
   }
 
-  const elementsToRemove = document.querySelectorAll('.product_area');
+  const elementsToRemove = block.querySelectorAll('.product_area');
   elementsToRemove.forEach((element) => {
     element.remove();
   });
