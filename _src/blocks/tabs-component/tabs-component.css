@@ -52,6 +52,7 @@
 
 .tabs-component-container .tabs-container button {
   background-color: white;
+  color: black;
   border: 0;
   font: normal normal bold 18px/21px Arial, sans-serif;
   padding: 9px;
@@ -59,6 +60,56 @@
   display: flex;
   gap: 10px;
   align-items: center;
+}
+
+.tabs-component-container a {
+  color: #006dff !important;
+  background-color: #fff !important;
+  border: 0 !important;
+}
+
+.tabs-component-container a::after {
+  opacity: 1;
+  margin-left: 0;
+}
+
+.tabs-component-container .tabs-container button a {
+  background-color: white;
+  border: 0;
+  font: normal normal bold 18px/21px Arial, sans-serif;
+  padding: 9px;
+  margin-bottom: 10px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.tabs-component-container .card-container a {
+  overflow: visible;
+  padding-left: 0 !important;
+}
+
+.tabs-component-container .card-container a .button-text {
+  transform: unset;
+}
+
+.tabs-component-container .card-container a:hover {
+  color: #0A53C5;
+}
+
+.tabs-component-container .card-container a::after {
+  content: '\2192';
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  transition: all .2s cubic-bezier(.4,0,.2,1);
+  transform: translateX(0);
+  margin-left: 2px;
+}
+
+.tabs-component-container .card-container a:hover::after {
+  transform: translateX(5px);
 }
 
 .tabs-component-container .tabs-container button.selected {
@@ -99,18 +150,6 @@
 
 .tabs-component-container {
   align-items: normal !important;
-}
-
-.tabs-component-container a {
-  color: #006dff !important;
-  background-color: #fff !important;
-  border: 0 !important;
-}
-
-.tabs-component-container a::after {
-  background-color: #006dff !important;
-  opacity: 1;
-  margin-left: 0;
 }
 
 @media (min-width: 768px) {
