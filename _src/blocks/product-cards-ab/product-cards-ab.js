@@ -1,4 +1,4 @@
-import { decorateIcons } from '../../scripts/lib-franklin.js';
+// import { decorateIcons } from '../../scripts/lib-franklin.js';
 // import { fetchProduct } from '../../scripts/utils/utils.js';
 
 /* eslint-disable prefer-const */
@@ -9,26 +9,22 @@ export default function decorate(block, options) {
     // eslint-disable-next-line no-unused-vars
     pid,
   } = options ? options.metadata : block.closest('.section').dataset;
-  let underShadow = block;
   if (options) {
-    const aemContainer = block.children[1];
-    aemContainer.classList.add('product-cards-ab-container');
-    aemContainer.classList.add('we-container');
-    // eslint-disable-next-line prefer-destructuring
-    underShadow = aemContainer.children[1];
-    underShadow.classList.add('block');
+    block = block.querySelector('.block');
+    let blockParent = block.closest('.section');
+    blockParent.classList.add('we-container');
   }
-  const firstRow = underShadow.firstElementChild;
-  const lastRow = underShadow.lastElementChild;
+  const firstRow = block.firstElementChild;
+  const lastRow = block.lastElementChild;
   /* eslint-disable-next-line prefer-destructuring */
-  const parentNode = underShadow.parentNode; // Get the parent of the block
+  const parentNode = block.parentNode; // Get the parent of the block
   if (firstRow && parentNode) {
-    parentNode.insertBefore(firstRow, underShadow); // Insert the first row before the block
+    parentNode.insertBefore(firstRow, block); // Insert the first row before the block
   }
   if (lastRow && parentNode) {
     parentNode.appendChild(lastRow); // Insert the last row after the block
   }
-  const productCardsElement = parentNode.querySelector('.product-cards-ab.block'); // Get the container element
+  const productCardsElement = parentNode.querySelector('.product-cards-ab'); // Get the container element
   const tables = productCardsElement.querySelectorAll('table'); // Find all tables within the container
 
   /* eslint-disable no-restricted-syntax */
@@ -97,6 +93,7 @@ export default function decorate(block, options) {
 
       fetchProduct(prodName, `${prodUsers}u-${prodYears}y`, pid)
         .then((product) => {
+          console.log(product);
           discountPercentage = Math.round(
             (1 - (product.discount.discounted_price) / product.price) * 100,
           );
@@ -114,7 +111,7 @@ export default function decorate(block, options) {
           tabContent.appendChild(tab);
 
           // add discount value to component title
-          const discountXX = parentNode.querySelector('.product-cards-ab-wrapper h3 strong em');
+          const discountXX = parentNode.querySelector('.product-cards-ab-container h3 strong em');
           const xx = document.createElement('em');
           xx.innerHTML = `${discountPercentage}%`;
           discountXX.replaceWith(xx);
@@ -168,12 +165,12 @@ export default function decorate(block, options) {
     });
   }
 
-  const elementsToRemove = underShadow.querySelectorAll('.product_area');
+  const elementsToRemove = block.querySelectorAll('.product_area');
   elementsToRemove.forEach((element) => {
     element.remove();
   });
 
-  decorateIcons(underShadow);
+  // decorateIcons(underShadow);
   window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
     bubbles: true,
     composed: true, // This allows the event to cross the shadow DOM boundary

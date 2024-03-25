@@ -39,7 +39,7 @@ async function decorateIcons(element) {
     svgSprite = div.firstElementChild;
     element.append(div.firstElementChild);
   }
-
+  console.log("element " , element)
   // Download all new icons
   const icons = [...element.querySelectorAll('span.icon')];
   await Promise.all(icons.map(async (span) => {
@@ -50,7 +50,7 @@ async function decorateIcons(element) {
         let dynamicIconsSharepointPath = '/icons/';
         // check for localhost
         if (window.location.hostname === 'localhost') {
-          dynamicIconsSharepointPath = 'https://www.bitdefender.com/icons/';
+          dynamicIconsSharepointPath = 'https://www.bitdefender.com/common/icons/';
         }
         const response = await fetch(`${dynamicIconsSharepointPath}${iconName}.svg`);
         if (!response.ok) {
@@ -87,15 +87,50 @@ async function decorateIcons(element) {
   svgSprite.innerHTML += symbols;
 
   icons.forEach((span) => {
+    console.log(span)
     const iconName = Array.from(span.classList).find((c) => c.startsWith('icon-')).substring(5);
     const parent = span.firstElementChild?.tagName === 'A' ? span.firstElementChild : span;
     // Styled icons need to be inlined as-is, while unstyled ones can leverage the sprite
     if (ICONS_CACHE[iconName].styled) {
+      console.log("styled ", span);
+      console.log(parent);
       parent.innerHTML = ICONS_CACHE[iconName].html;
     } else {
+      console.log("unstyled ", span);
       parent.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg"><use href="#icons-sprite-${iconName}"/></svg>`;
     }
   });
+}
+
+function decorateSections(main) {
+  main.querySelectorAll(':scope > div').forEach((section) => {
+    const wrappers = [];
+    let defaultContent = false;
+    [...section.children].forEach((e) => {
+      if (e.tagName === 'DIV' || !defaultContent) {
+        const wrapper = document.createElement('div');
+        wrappers.push(wrapper);
+        defaultContent = e.tagName !== 'DIV';
+        if (defaultContent) wrapper.classList.add('default-content-wrapper');
+      }
+      wrappers[wrappers.length - 1].append(e);
+    });
+    wrappers.forEach((wrapper) => section.append(wrapper));
+    section.classList.add('section');
+  });
+}
+
+function decorateBlock(block) {
+  const shortBlockName = block.classList[0];
+  if (shortBlockName) {
+    block.classList.add('block');
+    block.dataset.blockName = shortBlockName;
+    block.dataset.blockStatus = 'initialized';
+    const blockWrapper = block.parentElement;
+    blockWrapper.classList.add(`${shortBlockName}-wrapper`);
+    const section = block.closest('.section');
+    if (section) section.classList.add(`${shortBlockName}-container`);
+  }
 }
 
 export async function loadComponent(offer, block, options, selector)  {
@@ -111,7 +146,6 @@ export async function loadComponent(offer, block, options, selector)  {
     fetch(offer).then(r => r.text()),
     import(`${origin}/_src/blocks/${block}/${block}.js`)
   ])
-
   // If the block is a particle background, 
   // a new div is created and appended to the body so the external library can work
   if (block === "particle-background") {
@@ -124,10 +158,29 @@ export async function loadComponent(offer, block, options, selector)  {
     shadowRoot.appendChild(newDiv);
     newDiv.style.display = "block";
   } else {
-    shadowRoot.innerHTML +=  html;
-    decorateIcons(shadowRoot);
+    // console.log(html);
+    let franklinHtmlStructure = `
+    <div class="section ${block} ${block}-container">
+        <div class="${block}-wrapper"
+          ${html}
+        </div>
+    </div>
+    `
+    let x = document.createElement('div')
+    x.innerHTML = html;
+    // decorateSections(x);
+    console.log("this is x " ,x)
+    decorateSections(x);
+    decorateBlock(x.querySelector(`.${block}`));
+    console.log("x after ", x);
+    shadowRoot.innerHTML +=  x.innerHTML;
+    await console.log("shadow before ", shadowRoot);
+    // decorateSections(shadowRoot);
+    // await console.log("shadow after ", shadowRoot);
+    // decorateBlock(shadowRoot.querySelector(`.${block}`));
     updateLinkSources(shadowRoot, `${origin}${offerFolder}/`);
-    await js.default(shadowRoot, {...options, metadata: parseMetadata(shadowRoot)});
+    await js.default(shadowRoot.querySelector('.section'), {...options, metadata: parseMetadata(shadowRoot)});
+    decorateIcons(shadowRoot);
   }
 
   return container;
