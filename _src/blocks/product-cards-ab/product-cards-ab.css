@@ -252,3 +252,27 @@
     font: normal normal bold 40px/45px var(--body-font-family);
     color: #006DFF;
 }
+
+@media (width >= 992px) {
+    .product-cards-ab-container.we-container {
+      max-width: 1300px;
+      padding-left: 50px;
+      padding-right: 50px;
+    }
+  }
+
+@media (width >= 1200px) {
+    .product-cards-ab-container.we-container {
+      max-width: 1332px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+
+@media (width >= 1600px) {
+    .product-cards-ab-container.we-container {
+      max-width: 1332px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
