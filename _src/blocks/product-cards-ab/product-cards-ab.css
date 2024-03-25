@@ -252,13 +252,13 @@
     color: #006DFF;
 }
 
-@media (width >= 992px) {
+@media (max-width: 992px) {
     .product-cards-ab-container.we-container {
         padding:0 20px
     }
 }
 
-@media (width >= 1600px) {
+@media (max-width: 1600px) {
     .product-cards-ab-container.we-container {
         max-width:1300px;
         padding: 0 50px;
