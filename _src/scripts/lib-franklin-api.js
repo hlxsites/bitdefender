@@ -158,26 +158,14 @@ export async function loadComponent(offer, block, options, selector)  {
     shadowRoot.appendChild(newDiv);
     newDiv.style.display = "block";
   } else {
-    // console.log(html);
-    let franklinHtmlStructure = `
-    <div class="section ${block} ${block}-container">
-        <div class="${block}-wrapper"
-          ${html}
-        </div>
-    </div>
-    `
-    let x = document.createElement('div')
-    x.innerHTML = html;
-    // decorateSections(x);
-    console.log("this is x " ,x)
-    decorateSections(x);
-    decorateBlock(x.querySelector(`.${block}`));
-    console.log("x after ", x);
-    shadowRoot.innerHTML +=  x.innerHTML;
-    await console.log("shadow before ", shadowRoot);
-    // decorateSections(shadowRoot);
-    // await console.log("shadow after ", shadowRoot);
-    // decorateBlock(shadowRoot.querySelector(`.${block}`));
+    // in order to have a structure as close as possible as in franklin
+    // when we import in aem, we also decorate the sections and the block
+    // the functions are taken from lib-franklin.js
+    let franklinHTMLStructure = document.createElement('div')
+    franklinHTMLStructure.innerHTML = html;
+    decorateSections(franklinHTMLStructure);
+    decorateBlock(franklinHTMLStructure.querySelector(`.${block}`));
+    shadowRoot.innerHTML +=  franklinHTMLStructure.innerHTML;
     updateLinkSources(shadowRoot, `${origin}${offerFolder}/`);
     await js.default(shadowRoot.querySelector('.section'), {...options, metadata: parseMetadata(shadowRoot)});
     decorateIcons(shadowRoot);
