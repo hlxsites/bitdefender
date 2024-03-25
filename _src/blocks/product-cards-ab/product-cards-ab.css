@@ -18,6 +18,15 @@
     border-radius: 20px;
 }
 
+.product-cards-ab-container.we-container {
+    max-width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .default-content-wrapper > h2 {
     font: normal normal bold 28px/32px var(--body-font-family);
     text-align: center;
