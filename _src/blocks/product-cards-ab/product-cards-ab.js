@@ -6,10 +6,10 @@
 /* eslint-disable max-len */
 export default function decorate(block, options) {
   const {
-    // eslint-disable-next-line no-unused-vars
     pid,
   } = options ? options.metadata : block.closest('.section').dataset;
   if (options) {
+    // eslint-disable-next-line no-param-reassign
     block = block.querySelector('.block');
     let blockParent = block.closest('.section');
     blockParent.classList.add('we-container');
@@ -93,7 +93,6 @@ export default function decorate(block, options) {
 
       fetchProduct(prodName, `${prodUsers}u-${prodYears}y`, pid)
         .then((product) => {
-          console.log(product);
           discountPercentage = Math.round(
             (1 - (product.discount.discounted_price) / product.price) * 100,
           );
