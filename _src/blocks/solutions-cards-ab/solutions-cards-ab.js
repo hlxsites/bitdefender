@@ -1,6 +1,3 @@
-import { decorateIcons } from '../../scripts/lib-franklin.js';
-// import { fetchProduct } from '../../scripts/utils/utils.js';
-
 /* eslint-disable prefer-const */
 /* eslint-disable no-undef */
 /* eslint-disable max-len */
@@ -9,6 +6,14 @@ export default function decorate(block, options) {
     // eslint-disable-next-line no-unused-vars
     pid,
   } = options ? options.metadata : block.closest('.section').dataset;
+
+  if (options) {
+    // eslint-disable-next-line no-param-reassign
+    block = block.querySelector('.block');
+    let blockParent = block.closest('.section');
+    blockParent.classList.add('we-container');
+  }
+
   const firstRow = block.firstElementChild;
   const lastRow = block.lastElementChild;
   /* eslint-disable-next-line prefer-destructuring */
@@ -116,7 +121,6 @@ export default function decorate(block, options) {
     element.remove();
   });
 
-  decorateIcons(block);
   window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
     bubbles: true,
     composed: true, // This allows the event to cross the shadow DOM boundary

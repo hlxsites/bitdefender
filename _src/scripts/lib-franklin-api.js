@@ -46,7 +46,7 @@ async function decorateIcons(element) {
     if (!ICONS_CACHE[iconName]) {
       ICONS_CACHE[iconName] = true;
       try {
-        let dynamicIconsSharepointPath = '/icons/';
+        let dynamicIconsSharepointPath = 'https://www.bitdefender.com/common/icons/';
         // check for localhost
         if (window.location.hostname === 'localhost') {
           dynamicIconsSharepointPath = 'https://www.bitdefender.com/common/icons/';
