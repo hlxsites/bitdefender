@@ -334,14 +334,14 @@
     
     .product-cards-ab-container.we-container {
         max-width:1200px;
-        padding: 0 50px;
+        padding: 0 50px 64px 50px;
     }
 }
 
 @media (max-width: 992px) {
     
     .product-cards-ab-container.we-container {
-        padding:0 20px;
+        padding:0 20px 64px 20px;
     }
 }
 
