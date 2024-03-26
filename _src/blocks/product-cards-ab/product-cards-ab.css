@@ -90,10 +90,9 @@
 
 .we-container {
     margin: 0 auto;
-    max-width: 1332px;
+    max-width: 1292px;
     padding: 0 20px;
     position: relative;
-    width: 100%
 }
 
 .product-cards-ab-container .icon svg {
@@ -330,15 +329,15 @@
     color: #006DFF;
 }
 
+@media (max-width: 1600px) {
+    .we-container {
+        max-width:1200px;
+        padding: 0 50px;
+    }
+}
+
 @media (max-width: 992px) {
     .we-container {
         padding:0 20px
     }
 }
-
-@media (max-width: 1600px) {
-    .we-container {
-        max-width:1300px;
-        padding: 0 50px;
-    }
-  }
