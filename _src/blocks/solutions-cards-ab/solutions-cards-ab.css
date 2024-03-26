@@ -93,6 +93,7 @@
 .solutions-cards-ab-container.we-container {
     margin: 0 auto;
     max-width: 1292px;
+    padding: 0 5px;
     position: relative;
 }
 
@@ -339,3 +340,15 @@
         padding: 0 50px;
     }
 }
+
+@media (max-width: 370px) {
+
+    .solutions-cards-ab.block > div {
+        padding: 14px;
+    }
+
+    .solutions-cards-ab.block {
+        grid-template-columns: 1fr;
+    }
+}
+
