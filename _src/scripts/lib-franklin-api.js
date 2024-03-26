@@ -39,7 +39,6 @@ async function decorateIcons(element) {
     svgSprite = div.firstElementChild;
     element.append(div.firstElementChild);
   }
-  console.log("element " , element)
   // Download all new icons
   const icons = [...element.querySelectorAll('span.icon')];
   await Promise.all(icons.map(async (span) => {
