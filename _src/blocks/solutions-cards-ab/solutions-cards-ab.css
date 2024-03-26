@@ -329,7 +329,6 @@
 }
 
 @media (max-width: 1600px) {
-    
     .solutions-cards-ab-container.we-container {
         max-width:1200px;
         padding: 0 50px;
@@ -337,14 +336,12 @@
 }
 
 @media (max-width: 992px) {
-    
     .solutions-cards-ab-container.we-container {
         padding:0 20px;
     }
 }
 
 @media (max-width: 370px) {
-
     .solutions-cards-ab.block > div {
         padding: 14px;
     }
