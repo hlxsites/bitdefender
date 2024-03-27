@@ -6,7 +6,7 @@
 /* eslint-disable max-len */
 export default function decorate(block, options) {
   const {
-    pid,
+    pid, offtext, yearly, monthly,
   } = options ? options.metadata : block.closest('.section').dataset;
   if (options) {
     // eslint-disable-next-line no-param-reassign
@@ -102,7 +102,7 @@ export default function decorate(block, options) {
           tab.innerHTML = `
             <div>
                 <span class="prod-oldprice">${currencyLabel}${oldPrice}</span>
-                <span class="prod-save">${discountPercentage}% OFF</span>
+                <span class="prod-save">${discountPercentage}% ${offtext}</span>
             </div>
             <div>
               <span class="prod-newprice">${currencyLabel}${newPrice}</span>
@@ -150,8 +150,8 @@ export default function decorate(block, options) {
 
               // Simulate click on the first tab button
               if (tabButton.length > 0) {
-                tabButton[0].textContent = 'Yearly';
-                tabButton[1].textContent = 'Monthly';
+                tabButton[0].textContent = yearly;
+                tabButton[1].textContent = monthly;
                 tabButton[0].click();
               }
             });

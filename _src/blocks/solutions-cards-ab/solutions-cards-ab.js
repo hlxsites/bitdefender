@@ -4,7 +4,7 @@
 export default function decorate(block, options) {
   const {
     // eslint-disable-next-line no-unused-vars
-    pid,
+    pid, offtext,
   } = options ? options.metadata : block.closest('.section').dataset;
 
   if (options) {
@@ -92,7 +92,7 @@ export default function decorate(block, options) {
           tab.innerHTML = `
             <div>
                 <span class="prod-oldprice">${currencyLabel}${oldPrice}</span>
-                <span class="prod-save">${discountPercentage}% OFF</span>
+                <span class="prod-save">${discountPercentage}% ${offtext}</span>
             </div>
             <div>
               <span class="prod-newprice">${currencyLabel}${newPrice}</span>

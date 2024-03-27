@@ -78,6 +78,18 @@ export async function fetchProduct(code = 'av', variant = '1u-1y', pid = null) {
     },
   }));
 
+  if (siteName === 'uk') {
+    const newData = JSON.parse(data.get('data'));
+    newData.config.force_region = '3';
+    data.set('data', JSON.stringify(newData));
+  }
+
+  if (siteName === 'fr') {
+    const newData = JSON.parse(data.get('data'));
+    newData.config.force_region = '14';
+    data.set('data', JSON.stringify(newData));
+  }
+
   if ((siteName === 'hk' || siteName === 'tw')) {
     // append force_region for hk and tw
     const newData = JSON.parse(data.get('data'));
