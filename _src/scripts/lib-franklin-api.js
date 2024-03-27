@@ -39,7 +39,6 @@ async function decorateIcons(element) {
     svgSprite = div.firstElementChild;
     element.append(div.firstElementChild);
   }
-
   // Download all new icons
   const icons = [...element.querySelectorAll('span.icon')];
   await Promise.all(icons.map(async (span) => {
@@ -47,10 +46,10 @@ async function decorateIcons(element) {
     if (!ICONS_CACHE[iconName]) {
       ICONS_CACHE[iconName] = true;
       try {
-        let dynamicIconsSharepointPath = '/icons/';
+        let dynamicIconsSharepointPath = 'https://www.bitdefender.com/common/icons/';
         // check for localhost
         if (window.location.hostname === 'localhost') {
-          dynamicIconsSharepointPath = 'https://www.bitdefender.com/icons/';
+          dynamicIconsSharepointPath = 'https://www.bitdefender.com/common/icons/';
         }
         const response = await fetch(`${dynamicIconsSharepointPath}${iconName}.svg`);
         if (!response.ok) {
@@ -98,6 +97,37 @@ async function decorateIcons(element) {
   });
 }
 
+function decorateSections(main) {
+  main.querySelectorAll(':scope > div').forEach((section) => {
+    const wrappers = [];
+    let defaultContent = false;
+    [...section.children].forEach((e) => {
+      if (e.tagName === 'DIV' || !defaultContent) {
+        const wrapper = document.createElement('div');
+        wrappers.push(wrapper);
+        defaultContent = e.tagName !== 'DIV';
+        if (defaultContent) wrapper.classList.add('default-content-wrapper');
+      }
+      wrappers[wrappers.length - 1].append(e);
+    });
+    wrappers.forEach((wrapper) => section.append(wrapper));
+    section.classList.add('section');
+  });
+}
+
+function decorateBlock(block) {
+  const shortBlockName = block.classList[0];
+  if (shortBlockName) {
+    block.classList.add('block');
+    block.dataset.blockName = shortBlockName;
+    block.dataset.blockStatus = 'initialized';
+    const blockWrapper = block.parentElement;
+    blockWrapper.classList.add(`${shortBlockName}-wrapper`);
+    const section = block.closest('.section');
+    if (section) section.classList.add(`${shortBlockName}-container`);
+  }
+}
+
 export async function loadComponent(offer, block, options, selector)  {
   const offerURL = new URL(offer);
   const origin = offerURL.origin;
@@ -111,7 +141,6 @@ export async function loadComponent(offer, block, options, selector)  {
     fetch(offer).then(r => r.text()),
     import(`${origin}/_src/blocks/${block}/${block}.js`)
   ])
-
   // If the block is a particle background, 
   // a new div is created and appended to the body so the external library can work
   if (block === "particle-background") {
@@ -124,10 +153,17 @@ export async function loadComponent(offer, block, options, selector)  {
     shadowRoot.appendChild(newDiv);
     newDiv.style.display = "block";
   } else {
-    shadowRoot.innerHTML +=  html;
-    decorateIcons(shadowRoot);
+    // in order to have a structure as close as possible as in franklin
+    // when we import in aem, we also decorate the sections and the block
+    // the functions are taken from lib-franklin.js
+    let franklinHTMLStructure = document.createElement('div')
+    franklinHTMLStructure.innerHTML = html;
+    decorateSections(franklinHTMLStructure);
+    decorateBlock(franklinHTMLStructure.querySelector(`.${block}`));
+    shadowRoot.innerHTML +=  franklinHTMLStructure.innerHTML;
     updateLinkSources(shadowRoot, `${origin}${offerFolder}/`);
-    await js.default(shadowRoot, {...options, metadata: parseMetadata(shadowRoot)});
+    await js.default(shadowRoot.querySelector('.section'), {...options, metadata: parseMetadata(shadowRoot)});
+    decorateIcons(shadowRoot);
   }
 
   return container;
