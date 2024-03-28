@@ -168,7 +168,7 @@ export default function decorate(block, options) {
         if (options) {
           const storeProduct = await options.store.getProducts([new ProductInfo(prodName, 'consumer')]);
           const storeOption = storeProduct[prodName].getOption(prodUsers, prodYears);
-          if (!storeOption.getName.includes('Monthly')) {
+          if (!storeOption.getName().includes('Monthly')) {
             adobeDataLayerArray.push({
               info: {
                 ID: storeOption.getAvangateId(),
