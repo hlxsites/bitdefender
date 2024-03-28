@@ -200,11 +200,14 @@ export default function decorate(block, options) {
   });
 
   if (options) {
-    window.addEventListener(window.codeBaseFinishedRunning, () => {
-      window.adobeDataLayer.push({
-        event: 'product loaded',
-        product: adobeDataLayerArray,
-      });
+    window.adobeDataLayer.push({
+      event: 'product loaded',
+      product: 0,
+    });
+
+    window.adobeDataLayer.push({
+      event: 'product loaded',
+      product: adobeDataLayerArray,
     });
   }
 }
