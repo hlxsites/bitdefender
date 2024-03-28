@@ -202,14 +202,9 @@ export default function decorate(block, options) {
   if (options) {
     window.addEventListener(window.codeBaseFinishedRunning, () => {
       window.adobeDataLayer.push({
-        product: null,
+        event: 'product loaded',
+        product: adobeDataLayerArray,
       });
-      setTimeout(() => {
-        window.adobeDataLayer.push({
-          event: 'product loaded',
-          product: adobeDataLayerArray,
-        });
-      }, 1000);
     });
   }
 }
