@@ -61,8 +61,8 @@ async function findProductVariant(cachedResponse, variant) {
 export async function fetchProduct(code = 'av', variant = '1u-1y', pid = null) {
   const data = new FormData();
   // extract pid from url
+  const url = new URL(window.location.href);
   if (!pid) {
-    const url = new URL(window.location.href);
     // eslint-disable-next-line no-param-reassign
     pid = url.searchParams.get('pid');
   }
@@ -77,6 +77,30 @@ export async function fetchProduct(code = 'av', variant = '1u-1y', pid = null) {
       },
     },
   }));
+
+  if (url.hostname.includes('bitdefender.co.uk')) {
+    const newData = JSON.parse(data.get('data'));
+    newData.config.force_region = '3';
+    data.set('data', JSON.stringify(newData));
+  }
+
+  if (url.hostname.includes('bitdefender.fr')) {
+    const newData = JSON.parse(data.get('data'));
+    newData.config.force_region = '14';
+    data.set('data', JSON.stringify(newData));
+  }
+
+  if (siteName === 'uk') {
+    const newData = JSON.parse(data.get('data'));
+    newData.config.force_region = '3';
+    data.set('data', JSON.stringify(newData));
+  }
+
+  if (siteName === 'fr') {
+    const newData = JSON.parse(data.get('data'));
+    newData.config.force_region = '14';
+    data.set('data', JSON.stringify(newData));
+  }
 
   if ((siteName === 'hk' || siteName === 'tw')) {
     // append force_region for hk and tw

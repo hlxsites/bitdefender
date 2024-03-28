@@ -1,10 +1,11 @@
 /* eslint-disable prefer-const */
 /* eslint-disable no-undef */
 /* eslint-disable max-len */
+let adobeDataLayerArray = [];
 export default function decorate(block, options) {
   const {
     // eslint-disable-next-line no-unused-vars
-    pid,
+    pid, offtext,
   } = options ? options.metadata : block.closest('.section').dataset;
 
   if (options) {
@@ -63,6 +64,7 @@ export default function decorate(block, options) {
     const productsAsList = productArea.split(',');
     const tabContent = productInfoDiv.querySelector('.price-area');
 
+    // eslint-disable-next-line no-loop-func
     productsAsList.forEach(async (prod) => {
       const [prodName, prodUsers, prodYears] = prod.split('/');
       const { fetchProduct } = await import('../../scripts/utils/utils.js');
@@ -92,7 +94,7 @@ export default function decorate(block, options) {
           tab.innerHTML = `
             <div>
                 <span class="prod-oldprice">${currencyLabel}${oldPrice}</span>
-                <span class="prod-save">${discountPercentage}% OFF</span>
+                <span class="prod-save">${discountPercentage}% ${offtext}</span>
             </div>
             <div>
               <span class="prod-newprice">${currencyLabel}${newPrice}</span>
@@ -113,6 +115,27 @@ export default function decorate(block, options) {
           // eslint-disable-next-line no-console
           console.error(err);
         });
+
+      if (options) {
+        const storeProduct = await options.store.getProducts([new ProductInfo(prodName, 'consumer')]);
+        const storeOption = storeProduct[prodName].getOption(prodUsers, prodYears);
+        if (!storeOption.getName().includes('Monthly')) {
+          adobeDataLayerArray.push({
+            info: {
+              ID: storeOption.getAvangateId(),
+              name: storeOption.getName(),
+              devices: storeOption.getDevices(),
+              subscription: storeOption.getSubscription('months'),
+              version: storeOption.getSubscription('months') === 1 ? 'monthly' : 'yearly',
+              basePrice: storeOption.getPrice('value'),
+              discountValue: storeOption.getDiscount('value'),
+              discountRate: storeOption.getDiscount('percentage'),
+              currency: storeOption.getCurrency(),
+              priceWithTax: storeOption.getDiscountedPrice('value') || storeOption.getPrice('value'),
+            },
+          });
+        }
+      }
     });
   }
 
@@ -120,6 +143,21 @@ export default function decorate(block, options) {
   elementsToRemove.forEach((element) => {
     element.remove();
   });
+
+  if (options) {
+    const allProducts = window.adobeDataLayer.find((productEvent) => productEvent.event === 'product all');
+    if (allProducts) {
+      const allProductsJson = JSON.parse(JSON.stringify(allProducts));
+      allProductsJson.all = allProductsJson.all.filter((product) => product.info.name !== 'Bitdefender Premium Security' && product.info.name !== 'Bitdefender Premium Security Plus');
+      allProductsJson.all = allProductsJson.all.concat(adobeDataLayerArray);
+
+      window.adobeDataLayer.push({
+        all: null,
+      });
+
+      window.adobeDataLayer.push(allProductsJson);
+    }
+  }
 
   window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
     bubbles: true,
