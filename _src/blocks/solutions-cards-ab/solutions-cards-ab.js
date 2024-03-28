@@ -145,7 +145,6 @@ export default function decorate(block, options) {
   });
 
   if (options) {
-
     const allProducts = window.adobeDataLayer.find((productEvent) => productEvent.event === 'product all');
     if (allProducts) {
       const allProductsJson = JSON.parse(JSON.stringify(allProducts));
@@ -157,7 +156,6 @@ export default function decorate(block, options) {
       });
 
       window.adobeDataLayer.push(allProductsJson);
-      }
     }
   }
 
