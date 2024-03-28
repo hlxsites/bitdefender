@@ -193,19 +193,23 @@ export default function decorate(block, options) {
     element.remove();
   });
 
-  window.adobeDataLayer.push({
-    event: 'product loaded',
-    product: null,
-  });
-
-  window.adobeDataLayer.push({
-    event: 'product loaded',
-    product: adobeDataLayerArray,
-  });
-
   // decorateIcons(underShadow);
   window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
     bubbles: true,
     composed: true, // This allows the event to cross the shadow DOM boundary
   });
+
+  if (options) {
+    window.addEventListener(window.codeBaseFinishedRunning, () => {
+      window.adobeDataLayer.push({
+        event: 'product loaded',
+        product: null,
+      });
+
+      window.adobeDataLayer.push({
+        event: 'product loaded',
+        product: adobeDataLayerArray,
+      });
+    });
+  }
 }
