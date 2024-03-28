@@ -1,6 +1,7 @@
 /* eslint-disable prefer-const */
 /* eslint-disable no-undef */
 /* eslint-disable max-len */
+let adobeDataLayerArray = [];
 export default function decorate(block, options) {
   const {
     // eslint-disable-next-line no-unused-vars
@@ -63,6 +64,7 @@ export default function decorate(block, options) {
     const productsAsList = productArea.split(',');
     const tabContent = productInfoDiv.querySelector('.price-area');
 
+    // eslint-disable-next-line no-loop-func
     productsAsList.forEach(async (prod) => {
       const [prodName, prodUsers, prodYears] = prod.split('/');
       const { fetchProduct } = await import('../../scripts/utils/utils.js');
@@ -113,6 +115,27 @@ export default function decorate(block, options) {
           // eslint-disable-next-line no-console
           console.error(err);
         });
+
+      if (options) {
+        const storeProduct = await options.store.getProducts([new ProductInfo(prodName, 'consumer')]);
+        const storeOption = storeProduct[prodName].getOption(prodUsers, prodYears);
+        if (!storeOption.getName().includes('Monthly')) {
+          adobeDataLayerArray.push({
+            info: {
+              ID: storeOption.getAvangateId(),
+              name: storeOption.getName(),
+              devices: storeOption.getDevices(),
+              subscription: storeOption.getSubscription('months'),
+              version: storeOption.getSubscription('months') === 1 ? 'monthly' : 'yearly',
+              basePrice: storeOption.getPrice('value'),
+              discountValue: storeOption.getDiscount('value'),
+              discountRate: storeOption.getDiscount('percentage'),
+              currency: storeOption.getCurrency(),
+              priceWithTax: storeOption.getDiscountedPrice('value') || storeOption.getPrice('value'),
+            },
+          });
+        }
+      }
     });
   }
 
@@ -125,4 +148,16 @@ export default function decorate(block, options) {
     bubbles: true,
     composed: true, // This allows the event to cross the shadow DOM boundary
   });
+
+  if (options) {
+    window.adobeDataLayer.push({
+      event: 'product loaded',
+      product: 0,
+    });
+
+    window.adobeDataLayer.push({
+      event: 'product loaded',
+      product: adobeDataLayerArray,
+    });
+  }
 }
