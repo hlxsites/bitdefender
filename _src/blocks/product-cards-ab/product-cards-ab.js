@@ -5,6 +5,8 @@
 /* eslint-disable prefer-const */
 /* eslint-disable no-undef */
 /* eslint-disable max-len */
+
+let adobeDataLayerArray = [];
 export default function decorate(block, options) {
   const {
     pid, offtext, yearly, monthly,
@@ -166,23 +168,22 @@ export default function decorate(block, options) {
         if (options) {
           const storeProduct = await options.store.getProducts([new ProductInfo(prodName, 'consumer')]);
           const storeOption = storeProduct[prodName].getOption(prodUsers, prodYears);
-            window.adobeDataLayer.push({
-              event: 'product loaded',
-              product: [{
-                info: {
-                  ID: storeOption.getAvangateId(),
-                  name: storeOption.getName(),
-                  devices: storeOption.getDevices(),
-                  subscription: storeOption.getSubscription('months'),
-                  version: storeOption.getSubscription('months') === 1 ? 'monthly' : 'yearly',
-                  basePrice: storeOption.getPrice('value'),
-                  discountValue: storeOption.getDiscount('value'),
-                  discountRate: storeOption.getDiscount('percentage'),
-                  currency: storeOption.getCurrency(),
-                  priceWithTax: storeOption.getDiscountedPrice('value') || storeOption.getPrice('value'),
-                },
-              }],
+          if (!storeOption.getName.includes('Monthly')) {
+            adobeDataLayerArray.push({
+              info: {
+                ID: storeOption.getAvangateId(),
+                name: storeOption.getName(),
+                devices: storeOption.getDevices(),
+                subscription: storeOption.getSubscription('months'),
+                version: storeOption.getSubscription('months') === 1 ? 'monthly' : 'yearly',
+                basePrice: storeOption.getPrice('value'),
+                discountValue: storeOption.getDiscount('value'),
+                discountRate: storeOption.getDiscount('percentage'),
+                currency: storeOption.getCurrency(),
+                priceWithTax: storeOption.getDiscountedPrice('value') || storeOption.getPrice('value'),
+              },
             });
+          }
         }
     });
   }
@@ -190,6 +191,16 @@ export default function decorate(block, options) {
   const elementsToRemove = block.querySelectorAll('.product_area');
   elementsToRemove.forEach((element) => {
     element.remove();
+  });
+
+  window.adobeDataLayer.push({
+    event: 'product loaded',
+    product: null,
+  });
+
+  window.adobeDataLayer.push({
+    event: 'product loaded',
+    product: adobeDataLayerArray,
   });
 
   // decorateIcons(underShadow);
