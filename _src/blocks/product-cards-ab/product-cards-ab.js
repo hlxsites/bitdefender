@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 // import { decorateIcons } from '../../scripts/lib-franklin.js';
 // import { fetchProduct } from '../../scripts/utils/utils.js';
 
@@ -65,6 +66,7 @@ export default function decorate(block, options) {
     const tabButtons = productInfoDiv.querySelector('.price-area .tab-buttons');
     const tabContent = productInfoDiv.querySelector('.price-area .tab-content');
 
+    // eslint-disable-next-line no-loop-func
     productsAsList.forEach(async (prod) => {
       const [prodName, prodUsers, prodYears] = prod.split('/');
 
@@ -76,7 +78,6 @@ export default function decorate(block, options) {
       tabButtons.appendChild(button);
 
       const { fetchProduct } = await import('../../scripts/utils/utils.js');
-
       let oldPrice;
       let newPrice;
       let discountPercentage;
@@ -154,6 +155,11 @@ export default function decorate(block, options) {
                 tabButton[1].textContent = monthly;
                 tabButton[0].click();
               }
+
+              window.adobeDataLayer.push({
+                event: 'product loaded',
+                product: null,
+              });
             });
           }, 500);
         })
@@ -161,6 +167,28 @@ export default function decorate(block, options) {
           // eslint-disable-next-line no-console
           console.error(err);
         });
+
+        if (options) {
+          const storeProduct = await options.store.getProducts([new ProductInfo(prodName, 'consumer')]);
+          const storeOption = storeProduct[prodName].getOption(prodUsers, prodYears);
+            window.adobeDataLayer.push({
+              event: 'product loaded',
+              product: [{
+                info: {
+                  ID: storeOption.getAvangateId(),
+                  name: storeOption.getName(),
+                  devices: storeOption.getDevices(),
+                  subscription: storeOption.getSubscription('months'),
+                  version: storeOption.getSubscription('months') === 1 ? 'monthly' : 'yearly',
+                  basePrice: storeOption.getPrice('value'),
+                  discountValue: storeOption.getDiscount('value'),
+                  discountRate: storeOption.getDiscount('percentage'),
+                  currency: storeOption.getCurrency(),
+                  priceWithTax: storeOption.getDiscountedPrice('value') || storeOption.getPrice('value'),
+                },
+              }],
+            });
+        }
     });
   }
 
