@@ -150,14 +150,15 @@ export default function decorate(block, options) {
   });
 
   if (options) {
-    window.adobeDataLayer.push({
-      event: 'product loaded',
-      product: 0,
-    });
+    const allProducts = window.adobeDataLayer.find((productEvent) => productEvent.event === 'product all');
+    const allProductsJson = JSON.parse(JSON.stringify(allProducts));
+    allProductsJson.all = allProductsJson.all.filter((product) => product.info.name !== 'Bitdefender Premium Security' && product.info.name !== 'Bitdefender Premium Security Plus');
+    allProductsJson.all = allProductsJson.all.concat(adobeDataLayerArray);
 
     window.adobeDataLayer.push({
-      event: 'product loaded',
-      product: adobeDataLayerArray,
+      all: null,
     });
+
+    window.adobeDataLayer.push(allProductsJson);
   }
 }
