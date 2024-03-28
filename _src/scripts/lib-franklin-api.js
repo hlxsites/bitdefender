@@ -47,10 +47,10 @@ async function decorateIcons(element) {
       ICONS_CACHE[iconName] = true;
       try {
         let dynamicIconsSharepointPath = 'https://www.bitdefender.com/common/icons/';
-        if (window.location.hostname.includes('www.bitdefender.co.uk')) {
+        if (window.location.hostname.includes('bitdefender.co.uk')) {
           dynamicIconsSharepointPath = 'https://www.bitdefender.co.uk/content/dam/franklin/';
         }
-        if (window.location.hostname.includes('www.bitdefender.fr')) {
+        if (window.location.hostname.includes('bitdefender.fr')) {
           dynamicIconsSharepointPath = 'https://www.bitdefender.fr/content/dam/franklin/';
         }
         // check for localhost
