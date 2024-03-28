@@ -155,11 +155,6 @@ export default function decorate(block, options) {
                 tabButton[1].textContent = monthly;
                 tabButton[0].click();
               }
-
-              window.adobeDataLayer.push({
-                event: 'product loaded',
-                product: null,
-              });
             });
           }, 500);
         })
