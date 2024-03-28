@@ -175,3 +175,5 @@ export default function decorate(block, options) {
     composed: true, // This allows the event to cross the shadow DOM boundary
   });
 }
+
+// pr for the hotfix that will surely come tomorrow
