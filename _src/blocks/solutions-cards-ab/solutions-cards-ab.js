@@ -144,11 +144,6 @@ export default function decorate(block, options) {
     element.remove();
   });
 
-  window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
-    bubbles: true,
-    composed: true, // This allows the event to cross the shadow DOM boundary
-  });
-
   if (options) {
     const allProducts = window.adobeDataLayer.find((productEvent) => productEvent.event === 'product all');
     const allProductsJson = JSON.parse(JSON.stringify(allProducts));
@@ -161,4 +156,9 @@ export default function decorate(block, options) {
 
     window.adobeDataLayer.push(allProductsJson);
   }
+
+  window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
+    bubbles: true,
+    composed: true, // This allows the event to cross the shadow DOM boundary
+  });
 }
