@@ -95,91 +95,94 @@ export default async function decorate(block, options) {
       const tab = document.createElement('div');
       tab.classList.add('tab-panel');
       tab.setAttribute('id', `${prodName}`);
-
       const product = await fetchProduct(prodName, `${prodUsers}u-${prodYears}y`, pid);
-      discountPercentage = Math.round(
-        (1 - (product.discount.discounted_price) / product.price) * 100,
-      );
-      oldPrice = product.price;
-      newPrice = product.discount.discounted_price;
-      let currencyLabel = product.currency_label;
-      tab.innerHTML = `
-        <div>
-            <span class="prod-oldprice">${currencyLabel}${oldPrice}</span>
-            <span class="prod-save">${discountPercentage}% ${offtext}</span>
-        </div>
-        <div>
-          <span class="prod-newprice">${currencyLabel}${newPrice}</span>
-        </div>`;
-      tabContent.appendChild(tab);
+      try {
+        discountPercentage = Math.round(
+          (1 - (product.discount.discounted_price) / product.price) * 100,
+        );
+        oldPrice = product.price;
+        newPrice = product.discount.discounted_price;
+        let currencyLabel = product.currency_label;
+        tab.innerHTML = `
+          <div>
+              <span class="prod-oldprice">${currencyLabel}${oldPrice}</span>
+              <span class="prod-save">${discountPercentage}% ${offtext}</span>
+          </div>
+          <div>
+            <span class="prod-newprice">${currencyLabel}${newPrice}</span>
+          </div>`;
+        tabContent.appendChild(tab);
+        // add discount value to component title, only if it's not a monthly subscription
+        // this is due to an a/b test and should be removed after the test is finished
+        if (discountPercentage > globalDiscountPercentage && prodName !== 'psm' && prodName !== 'pspm') {
+          globalDiscountPercentage = discountPercentage;
+        }
 
-      // add discount value to component title
-      if (discountPercentage > globalDiscountPercentage) {
-        globalDiscountPercentage = discountPercentage;
-      }
+        // tabbed code
+        setTimeout(() => {
+          const tabButton = productInfoDiv.querySelectorAll('.tab-button');
+          const tabPanel = productInfoDiv.querySelectorAll('.tab-panel');
+          const buybutton = productInfoDiv.querySelector('.buy-button');
+          // console.log(tabPanel);
 
-      // tabbed code
-      setTimeout(() => {
-        const tabButton = productInfoDiv.querySelectorAll('.tab-button');
-        const tabPanel = productInfoDiv.querySelectorAll('.tab-panel');
-        const buybutton = productInfoDiv.querySelector('.buy-button');
-        // console.log(tabPanel);
+          tabButton.forEach((buttonTab) => {
+            buttonTab.addEventListener('click', () => {
+              // Remove "active" class from all tab buttons
+              tabButton.forEach((tabB) => {
+                tabB.classList.remove('active');
+              });
 
-        tabButton.forEach((buttonTab) => {
-          buttonTab.addEventListener('click', () => {
-            // Remove "active" class from all tab buttons
-            tabButton.forEach((tabB) => {
-              tabB.classList.remove('active');
+              // Add "active" class to the clicked tab button
+              buttonTab.classList.add('active');
+
+              // Hide all tab panels
+              tabPanel.forEach((panel) => {
+                panel.style.display = 'none';
+              });
+
+              // Show the selected tab panel
+              const tabId = buttonTab.getAttribute('data-tab');
+              const selectedPanel = parentNode.querySelector(`#${tabId}`);
+              if (selectedPanel) {
+                selectedPanel.style.display = 'block';
+                // replace href with correct buy link
+                const dataProdLink = buttonTab.dataset.prodlink;
+                buybutton.href = `/site/Store/buy/${dataProdLink}/${pidLink}`;
+              }
             });
 
-            // Add "active" class to the clicked tab button
-            buttonTab.classList.add('active');
-
-            // Hide all tab panels
-            tabPanel.forEach((panel) => {
-              panel.style.display = 'none';
-            });
-
-            // Show the selected tab panel
-            const tabId = buttonTab.getAttribute('data-tab');
-            const selectedPanel = parentNode.querySelector(`#${tabId}`);
-            if (selectedPanel) {
-              selectedPanel.style.display = 'block';
-              // replace href with correct buy link
-              const dataProdLink = buttonTab.dataset.prodlink;
-              buybutton.href = `/site/Store/buy/${dataProdLink}/${pidLink}`;
+            // Simulate click on the first tab button
+            if (tabButton.length > 0) {
+              tabButton[0].textContent = yearly;
+              tabButton[1].textContent = monthly;
+              tabButton[0].click();
             }
           });
+        }, 500);
+      } catch (error) {
+        console.error(error);
+      }
 
-          // Simulate click on the first tab button
-          if (tabButton.length > 0) {
-            tabButton[0].textContent = yearly;
-            tabButton[1].textContent = monthly;
-            tabButton[0].click();
-          }
-        });
-      }, 500);
-
-        if (options) {
-          const storeProduct = await options.store.getProducts([new ProductInfo(prodName, 'consumer')]);
-          const storeOption = storeProduct[prodName].getOption(prodUsers, prodYears);
-          if (!storeOption.getName().includes('Monthly')) {
-            adobeDataLayerArray.push({
-              info: {
-                ID: storeOption.getAvangateId(),
-                name: storeOption.getName(),
-                devices: storeOption.getDevices(),
-                subscription: storeOption.getSubscription('months'),
-                version: storeOption.getSubscription('months') === 1 ? 'monthly' : 'yearly',
-                basePrice: storeOption.getPrice('value'),
-                discountValue: storeOption.getDiscount('value'),
-                discountRate: storeOption.getDiscount('percentage'),
-                currency: storeOption.getCurrency(),
-                priceWithTax: storeOption.getDiscountedPrice('value') || storeOption.getPrice('value'),
-              },
-            });
-          }
+      if (options) {
+        const storeProduct = await options.store.getProducts([new ProductInfo(prodName, 'consumer')]);
+        const storeOption = storeProduct[prodName].getOption(prodUsers, prodYears);
+        if (!storeOption.getName().includes('Monthly')) {
+          adobeDataLayerArray.push({
+            info: {
+              ID: storeOption.getAvangateId(),
+              name: storeOption.getName(),
+              devices: storeOption.getDevices(),
+              subscription: storeOption.getSubscription('months'),
+              version: storeOption.getSubscription('months') === 1 ? 'monthly' : 'yearly',
+              basePrice: storeOption.getPrice('value'),
+              discountValue: storeOption.getDiscount('value'),
+              discountRate: storeOption.getDiscount('percentage'),
+              currency: storeOption.getCurrency(),
+              priceWithTax: storeOption.getDiscountedPrice('value') || storeOption.getPrice('value'),
+            },
+          });
         }
+      }
     }));
   }
 
