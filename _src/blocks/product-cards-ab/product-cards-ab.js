@@ -196,17 +196,6 @@ export default function decorate(block, options) {
   if (options) {
     window.addEventListener('codeBaseFinishedRunning', () => {
       window.adobeDataLayer.push({
-        product: null,
-      });
-
-      for (let i = 0; i < 20000; i += 1) {
-        window.adobeDataLayer.push({
-          event: 'product loaded',
-          product: adobeDataLayerArray,
-        });
-      }
-
-      window.adobeDataLayer.push({
         event: 'product loaded',
         product: adobeDataLayerArray,
       });
