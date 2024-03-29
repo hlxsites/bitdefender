@@ -96,76 +96,69 @@ export default async function decorate(block, options) {
       tab.classList.add('tab-panel');
       tab.setAttribute('id', `${prodName}`);
 
-      fetchProduct(prodName, `${prodUsers}u-${prodYears}y`, pid)
-        .then((product) => {
-          discountPercentage = Math.round(
-            (1 - (product.discount.discounted_price) / product.price) * 100,
-          );
-          oldPrice = product.price;
-          newPrice = product.discount.discounted_price;
-          let currencyLabel = product.currency_label;
-          tab.innerHTML = `
-            <div>
-                <span class="prod-oldprice">${currencyLabel}${oldPrice}</span>
-                <span class="prod-save">${discountPercentage}% ${offtext}</span>
-            </div>
-            <div>
-              <span class="prod-newprice">${currencyLabel}${newPrice}</span>
-            </div>`;
-          tabContent.appendChild(tab);
+      const product = await fetchProduct(prodName, `${prodUsers}u-${prodYears}y`, pid);
+      discountPercentage = Math.round(
+        (1 - (product.discount.discounted_price) / product.price) * 100,
+      );
+      oldPrice = product.price;
+      newPrice = product.discount.discounted_price;
+      let currencyLabel = product.currency_label;
+      tab.innerHTML = `
+        <div>
+            <span class="prod-oldprice">${currencyLabel}${oldPrice}</span>
+            <span class="prod-save">${discountPercentage}% ${offtext}</span>
+        </div>
+        <div>
+          <span class="prod-newprice">${currencyLabel}${newPrice}</span>
+        </div>`;
+      tabContent.appendChild(tab);
 
-          // add discount value to component title
+      // add discount value to component title
+      if (discountPercentage > globalDiscountPercentage) {
+        globalDiscountPercentage = discountPercentage;
+      }
 
-          if (discountPercentage > globalDiscountPercentage) {
-            globalDiscountPercentage = discountPercentage;
-          }
+      // tabbed code
+      setTimeout(() => {
+        const tabButton = productInfoDiv.querySelectorAll('.tab-button');
+        const tabPanel = productInfoDiv.querySelectorAll('.tab-panel');
+        const buybutton = productInfoDiv.querySelector('.buy-button');
+        // console.log(tabPanel);
 
-          // tabbed code
-          setTimeout(() => {
-            const tabButton = productInfoDiv.querySelectorAll('.tab-button');
-            const tabPanel = productInfoDiv.querySelectorAll('.tab-panel');
-            const buybutton = productInfoDiv.querySelector('.buy-button');
-            // console.log(tabPanel);
-
-            tabButton.forEach((buttonTab) => {
-              buttonTab.addEventListener('click', () => {
-                // Remove "active" class from all tab buttons
-                tabButton.forEach((tabB) => {
-                  tabB.classList.remove('active');
-                });
-
-                // Add "active" class to the clicked tab button
-                buttonTab.classList.add('active');
-
-                // Hide all tab panels
-                tabPanel.forEach((panel) => {
-                  panel.style.display = 'none';
-                });
-
-                // Show the selected tab panel
-                const tabId = buttonTab.getAttribute('data-tab');
-                const selectedPanel = parentNode.querySelector(`#${tabId}`);
-                if (selectedPanel) {
-                  selectedPanel.style.display = 'block';
-                  // replace href with correct buy link
-                  const dataProdLink = buttonTab.dataset.prodlink;
-                  buybutton.href = `/site/Store/buy/${dataProdLink}/${pidLink}`;
-                }
-              });
-
-              // Simulate click on the first tab button
-              if (tabButton.length > 0) {
-                tabButton[0].textContent = yearly;
-                tabButton[1].textContent = monthly;
-                tabButton[0].click();
-              }
+        tabButton.forEach((buttonTab) => {
+          buttonTab.addEventListener('click', () => {
+            // Remove "active" class from all tab buttons
+            tabButton.forEach((tabB) => {
+              tabB.classList.remove('active');
             });
-          }, 500);
-        })
-        .catch((err) => {
-          // eslint-disable-next-line no-console
-          console.error(err);
+
+            // Add "active" class to the clicked tab button
+            buttonTab.classList.add('active');
+
+            // Hide all tab panels
+            tabPanel.forEach((panel) => {
+              panel.style.display = 'none';
+            });
+
+            // Show the selected tab panel
+            const tabId = buttonTab.getAttribute('data-tab');
+            const selectedPanel = parentNode.querySelector(`#${tabId}`);
+            if (selectedPanel) {
+              selectedPanel.style.display = 'block';
+              // replace href with correct buy link
+              const dataProdLink = buttonTab.dataset.prodlink;
+              buybutton.href = `/site/Store/buy/${dataProdLink}/${pidLink}`;
+            }
+          });
+
+          // Simulate click on the first tab button
+          if (tabButton.length > 0) {
+            tabButton[0].textContent = yearly;
+            tabButton[1].textContent = monthly;
+            tabButton[0].click();
+          }
         });
+      }, 500);
 
         if (options) {
           const storeProduct = await options.store.getProducts([new ProductInfo(prodName, 'consumer')]);
