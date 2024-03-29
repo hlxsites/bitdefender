@@ -123,7 +123,6 @@ export default async function decorate(block, options) {
           const tabButton = productInfoDiv.querySelectorAll('.tab-button');
           const tabPanel = productInfoDiv.querySelectorAll('.tab-panel');
           const buybutton = productInfoDiv.querySelector('.buy-button');
-          // console.log(tabPanel);
 
           tabButton.forEach((buttonTab) => {
             buttonTab.addEventListener('click', () => {
@@ -160,6 +159,7 @@ export default async function decorate(block, options) {
           });
         }, 500);
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error(error);
       }
 
