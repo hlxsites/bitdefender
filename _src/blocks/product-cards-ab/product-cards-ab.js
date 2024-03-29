@@ -199,7 +199,7 @@ export default function decorate(block, options) {
         product: null,
       });
 
-      for (let i = 0; i < 100000; i += 1) {
+      for (let i = 0; i < 20000; i += 1) {
         window.adobeDataLayer.push({
           event: 'product loaded',
           product: adobeDataLayerArray,
