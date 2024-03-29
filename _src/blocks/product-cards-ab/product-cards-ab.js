@@ -193,23 +193,22 @@ export default function decorate(block, options) {
     element.remove();
   });
 
-  // decorateIcons(underShadow);
+  if (options) {
+    window.addEventListener('codeBaseFinishedRunning', () => {
+      window.adobeDataLayer.push({
+        event: 'product loaded',
+        product: 0,
+      });
+
+      window.adobeDataLayer.push({
+        event: 'product loaded',
+        product: adobeDataLayerArray,
+      });
+    });
+  }
+
   window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
     bubbles: true,
     composed: true, // This allows the event to cross the shadow DOM boundary
   });
-
-  if (options) {
-    window.adobeDataLayer.push({
-      event: 'product loaded',
-      product: 0,
-    });
-
-    window.adobeDataLayer.push({
-      event: 'product loaded',
-      product: adobeDataLayerArray,
-    });
-  }
 }
-
-// pr for the hotfix that will surely come tomorrow
