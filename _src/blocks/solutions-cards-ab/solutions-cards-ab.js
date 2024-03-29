@@ -140,18 +140,20 @@ export default async function decorate(block, options) {
   });
 
   if (options) {
-    const allProducts = window.adobeDataLayer.find((productEvent) => productEvent.event === 'product all');
-    if (allProducts) {
-      const allProductsJson = JSON.parse(JSON.stringify(allProducts));
-      allProductsJson.all = allProductsJson.all.filter((product) => product.info.name !== 'Bitdefender Premium Security' && product.info.name !== 'Bitdefender Premium Security Plus');
-      allProductsJson.all = allProductsJson.all.concat(adobeDataLayerArray);
+    window.addEventListener('codeBaseFinishedRunning', () => {
+      const allProducts = window.adobeDataLayer.find((productEvent) => productEvent.event === 'product all');
+      if (allProducts) {
+        const allProductsJson = JSON.parse(JSON.stringify(allProducts));
+        allProductsJson.all = allProductsJson.all.filter((product) => product.info.name !== 'Bitdefender Premium Security' && product.info.name !== 'Bitdefender Premium Security Plus');
+        allProductsJson.all = allProductsJson.all.concat(adobeDataLayerArray);
 
-      window.adobeDataLayer.push({
-        all: null,
-      });
+        window.adobeDataLayer.push({
+          all: null,
+        });
 
-      window.adobeDataLayer.push(allProductsJson);
-    }
+        window.adobeDataLayer.push(allProductsJson);
+      }
+    });
   }
 
   const discountXX = parentNode.querySelector('.solutions-cards-ab-wrapper h3 strong em');
