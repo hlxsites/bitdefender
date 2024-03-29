@@ -200,7 +200,8 @@ export default function decorate(block, options) {
       });
 
       window.adobeDataLayer.push({
-        product: null,
+        event: 'product loaded',
+        product: adobeDataLayerArray,
       });
 
       window.adobeDataLayer.push({
