@@ -196,7 +196,7 @@ export default function decorate(block, options) {
   if (options) {
     window.addEventListener('codeBaseFinishedRunning', () => {
       window.adobeDataLayer.push({
-        product: 0,
+        product: null,
       });
 
       window.adobeDataLayer.push({
