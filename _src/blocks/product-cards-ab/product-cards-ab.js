@@ -7,7 +7,7 @@
 /* eslint-disable max-len */
 
 let adobeDataLayerArray = [];
-export default function decorate(block, options) {
+export default async function decorate(block, options) {
   const {
     pid, offtext, yearly, monthly,
   } = options ? options.metadata : block.closest('.section').dataset;
@@ -68,8 +68,8 @@ export default function decorate(block, options) {
     const tabButtons = productInfoDiv.querySelector('.price-area .tab-buttons');
     const tabContent = productInfoDiv.querySelector('.price-area .tab-content');
 
-    // eslint-disable-next-line no-loop-func
-    productsAsList.forEach(async (prod) => {
+    // eslint-disable-next-line no-loop-func, no-await-in-loop
+    await Promise.all(productsAsList.map(async (prod) => {
       const [prodName, prodUsers, prodYears] = prod.split('/');
 
       const button = document.createElement('button');
@@ -185,7 +185,8 @@ export default function decorate(block, options) {
             });
           }
         }
-    });
+    }));
+    
   }
 
   const elementsToRemove = block.querySelectorAll('.product_area');
