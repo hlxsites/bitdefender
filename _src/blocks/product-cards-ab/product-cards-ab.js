@@ -30,6 +30,8 @@ export default async function decorate(block, options) {
   const productCardsElement = parentNode.querySelector('.product-cards-ab'); // Get the container element
   const tables = productCardsElement.querySelectorAll('table'); // Find all tables within the container
 
+  let globalDiscountPercentage = 0;
+
   /* eslint-disable no-restricted-syntax */
   for (const table of tables) {
     // Create a new div to replace the table
@@ -113,10 +115,10 @@ export default async function decorate(block, options) {
           tabContent.appendChild(tab);
 
           // add discount value to component title
-          const discountXX = parentNode.querySelector('.product-cards-ab-container h3 strong em');
-          const xx = document.createElement('em');
-          xx.innerHTML = `${discountPercentage}%`;
-          discountXX.replaceWith(xx);
+
+          if (discountPercentage > globalDiscountPercentage) {
+            globalDiscountPercentage = discountPercentage;
+          }
 
           // tabbed code
           setTimeout(() => {
@@ -186,8 +188,12 @@ export default async function decorate(block, options) {
           }
         }
     }));
-    
   }
+
+  const discountXX = parentNode.querySelector('.product-cards-ab-container h3 strong em');
+  const xx = document.createElement('em');
+  xx.innerHTML = `${globalDiscountPercentage}%`;
+  discountXX.replaceWith(xx);
 
   const elementsToRemove = block.querySelectorAll('.product_area');
   elementsToRemove.forEach((element) => {
