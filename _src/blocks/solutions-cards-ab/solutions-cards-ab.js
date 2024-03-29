@@ -156,7 +156,7 @@ export default async function decorate(block, options) {
 
   const discountXX = parentNode.querySelector('.solutions-cards-ab-wrapper h3 strong em');
   const xx = document.createElement('em');
-  xx.innerHTML = `${discountPercentage}%`;
+  xx.innerHTML = `${globalDiscountPercentage}%`;
   discountXX.replaceWith(xx);
 
   window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
