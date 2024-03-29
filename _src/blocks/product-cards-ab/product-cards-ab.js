@@ -199,12 +199,14 @@ export default function decorate(block, options) {
         product: null,
       });
 
-      setTimeout(() => {
-        window.adobeDataLayer.push({
-          event: 'product loaded',
-          product: adobeDataLayerArray,
-        });
-      }, 1000);
+      window.adobeDataLayer.push({
+        product: null,
+      });
+
+      window.adobeDataLayer.push({
+        event: 'product loaded',
+        product: adobeDataLayerArray,
+      });
     });
   }
 
