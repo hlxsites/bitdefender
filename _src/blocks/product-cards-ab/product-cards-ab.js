@@ -7,7 +7,7 @@
 /* eslint-disable max-len */
 
 let adobeDataLayerArray = [];
-export default function decorate(block, options) {
+export default async function decorate(block, options) {
   const {
     pid, offtext, yearly, monthly,
   } = options ? options.metadata : block.closest('.section').dataset;
@@ -29,6 +29,8 @@ export default function decorate(block, options) {
   }
   const productCardsElement = parentNode.querySelector('.product-cards-ab'); // Get the container element
   const tables = productCardsElement.querySelectorAll('table'); // Find all tables within the container
+
+  let globalDiscountPercentage = 0;
 
   /* eslint-disable no-restricted-syntax */
   for (const table of tables) {
@@ -68,8 +70,8 @@ export default function decorate(block, options) {
     const tabButtons = productInfoDiv.querySelector('.price-area .tab-buttons');
     const tabContent = productInfoDiv.querySelector('.price-area .tab-content');
 
-    // eslint-disable-next-line no-loop-func
-    productsAsList.forEach(async (prod) => {
+    // eslint-disable-next-line no-loop-func, no-await-in-loop
+    await Promise.all(productsAsList.map(async (prod) => {
       const [prodName, prodUsers, prodYears] = prod.split('/');
 
       const button = document.createElement('button');
@@ -93,121 +95,123 @@ export default function decorate(block, options) {
       const tab = document.createElement('div');
       tab.classList.add('tab-panel');
       tab.setAttribute('id', `${prodName}`);
+      const product = await fetchProduct(prodName, `${prodUsers}u-${prodYears}y`, pid);
+      try {
+        discountPercentage = Math.round(
+          (1 - (product.discount.discounted_price) / product.price) * 100,
+        );
+        oldPrice = product.price;
+        newPrice = product.discount.discounted_price;
+        let currencyLabel = product.currency_label;
+        tab.innerHTML = `
+          <div>
+              <span class="prod-oldprice">${currencyLabel}${oldPrice}</span>
+              <span class="prod-save">${discountPercentage}% ${offtext}</span>
+          </div>
+          <div>
+            <span class="prod-newprice">${currencyLabel}${newPrice}</span>
+          </div>`;
+        tabContent.appendChild(tab);
+        // add discount value to component title, only if it's not a monthly subscription
+        // this is due to an a/b test and should be removed after the test is finished
+        if (discountPercentage > globalDiscountPercentage && prodName !== 'psm' && prodName !== 'pspm') {
+          globalDiscountPercentage = discountPercentage;
+        }
 
-      fetchProduct(prodName, `${prodUsers}u-${prodYears}y`, pid)
-        .then((product) => {
-          discountPercentage = Math.round(
-            (1 - (product.discount.discounted_price) / product.price) * 100,
-          );
-          oldPrice = product.price;
-          newPrice = product.discount.discounted_price;
-          let currencyLabel = product.currency_label;
-          tab.innerHTML = `
-            <div>
-                <span class="prod-oldprice">${currencyLabel}${oldPrice}</span>
-                <span class="prod-save">${discountPercentage}% ${offtext}</span>
-            </div>
-            <div>
-              <span class="prod-newprice">${currencyLabel}${newPrice}</span>
-            </div>`;
-          tabContent.appendChild(tab);
+        // tabbed code
+        setTimeout(() => {
+          const tabButton = productInfoDiv.querySelectorAll('.tab-button');
+          const tabPanel = productInfoDiv.querySelectorAll('.tab-panel');
+          const buybutton = productInfoDiv.querySelector('.buy-button');
 
-          // add discount value to component title
-          const discountXX = parentNode.querySelector('.product-cards-ab-container h3 strong em');
-          const xx = document.createElement('em');
-          xx.innerHTML = `${discountPercentage}%`;
-          discountXX.replaceWith(xx);
-
-          // tabbed code
-          setTimeout(() => {
-            const tabButton = productInfoDiv.querySelectorAll('.tab-button');
-            const tabPanel = productInfoDiv.querySelectorAll('.tab-panel');
-            const buybutton = productInfoDiv.querySelector('.buy-button');
-            // console.log(tabPanel);
-
-            tabButton.forEach((buttonTab) => {
-              buttonTab.addEventListener('click', () => {
-                // Remove "active" class from all tab buttons
-                tabButton.forEach((tabB) => {
-                  tabB.classList.remove('active');
-                });
-
-                // Add "active" class to the clicked tab button
-                buttonTab.classList.add('active');
-
-                // Hide all tab panels
-                tabPanel.forEach((panel) => {
-                  panel.style.display = 'none';
-                });
-
-                // Show the selected tab panel
-                const tabId = buttonTab.getAttribute('data-tab');
-                const selectedPanel = parentNode.querySelector(`#${tabId}`);
-                if (selectedPanel) {
-                  selectedPanel.style.display = 'block';
-                  // replace href with correct buy link
-                  const dataProdLink = buttonTab.dataset.prodlink;
-                  buybutton.href = `/site/Store/buy/${dataProdLink}/${pidLink}`;
-                }
+          tabButton.forEach((buttonTab) => {
+            buttonTab.addEventListener('click', () => {
+              // Remove "active" class from all tab buttons
+              tabButton.forEach((tabB) => {
+                tabB.classList.remove('active');
               });
 
-              // Simulate click on the first tab button
-              if (tabButton.length > 0) {
-                tabButton[0].textContent = yearly;
-                tabButton[1].textContent = monthly;
-                tabButton[0].click();
+              // Add "active" class to the clicked tab button
+              buttonTab.classList.add('active');
+
+              // Hide all tab panels
+              tabPanel.forEach((panel) => {
+                panel.style.display = 'none';
+              });
+
+              // Show the selected tab panel
+              const tabId = buttonTab.getAttribute('data-tab');
+              const selectedPanel = parentNode.querySelector(`#${tabId}`);
+              if (selectedPanel) {
+                selectedPanel.style.display = 'block';
+                // replace href with correct buy link
+                const dataProdLink = buttonTab.dataset.prodlink;
+                buybutton.href = `/site/Store/buy/${dataProdLink}/${pidLink}`;
               }
             });
-          }, 500);
-        })
-        .catch((err) => {
-          // eslint-disable-next-line no-console
-          console.error(err);
-        });
 
-        if (options) {
-          const storeProduct = await options.store.getProducts([new ProductInfo(prodName, 'consumer')]);
-          const storeOption = storeProduct[prodName].getOption(prodUsers, prodYears);
-          if (!storeOption.getName().includes('Monthly')) {
-            adobeDataLayerArray.push({
-              info: {
-                ID: storeOption.getAvangateId(),
-                name: storeOption.getName(),
-                devices: storeOption.getDevices(),
-                subscription: storeOption.getSubscription('months'),
-                version: storeOption.getSubscription('months') === 1 ? 'monthly' : 'yearly',
-                basePrice: storeOption.getPrice('value'),
-                discountValue: storeOption.getDiscount('value'),
-                discountRate: storeOption.getDiscount('percentage'),
-                currency: storeOption.getCurrency(),
-                priceWithTax: storeOption.getDiscountedPrice('value') || storeOption.getPrice('value'),
-              },
-            });
-          }
+            // Simulate click on the first tab button
+            if (tabButton.length > 0) {
+              tabButton[0].textContent = yearly;
+              tabButton[1].textContent = monthly;
+              tabButton[0].click();
+            }
+          });
+        }, 500);
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error(error);
+      }
+
+      if (options) {
+        const storeProduct = await options.store.getProducts([new ProductInfo(prodName, 'consumer')]);
+        const storeOption = storeProduct[prodName].getOption(prodUsers, prodYears);
+        if (!storeOption.getName().includes('Monthly')) {
+          adobeDataLayerArray.push({
+            info: {
+              ID: storeOption.getAvangateId(),
+              name: storeOption.getName(),
+              devices: storeOption.getDevices(),
+              subscription: storeOption.getSubscription('months'),
+              version: storeOption.getSubscription('months') === 1 ? 'monthly' : 'yearly',
+              basePrice: storeOption.getPrice('value'),
+              discountValue: storeOption.getDiscount('value'),
+              discountRate: storeOption.getDiscount('percentage'),
+              currency: storeOption.getCurrency(),
+              priceWithTax: storeOption.getDiscountedPrice('value') || storeOption.getPrice('value'),
+            },
+          });
         }
-    });
+      }
+    }));
   }
+
+  const discountXX = parentNode.querySelector('.product-cards-ab-container h3 strong em');
+  const xx = document.createElement('em');
+  xx.innerHTML = `${globalDiscountPercentage}%`;
+  discountXX.replaceWith(xx);
 
   const elementsToRemove = block.querySelectorAll('.product_area');
   elementsToRemove.forEach((element) => {
     element.remove();
   });
 
-  // decorateIcons(underShadow);
+  if (options) {
+    window.addEventListener('codeBaseFinishedRunning', () => {
+      window.adobeDataLayer.push({
+        event: 'product loaded',
+        product: null,
+      });
+
+      window.adobeDataLayer.push({
+        event: 'product loaded',
+        product: adobeDataLayerArray,
+      });
+    });
+  }
+
   window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
     bubbles: true,
     composed: true, // This allows the event to cross the shadow DOM boundary
   });
-
-  if (options) {
-    window.adobeDataLayer.push({
-      event: 'product loaded',
-      product: 0,
-    });
-
-    window.adobeDataLayer.push({
-      event: 'product loaded',
-      product: adobeDataLayerArray,
-    });
-  }
 }

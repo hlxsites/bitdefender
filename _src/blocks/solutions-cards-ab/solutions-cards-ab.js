@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable max-len */
 let adobeDataLayerArray = [];
-export default function decorate(block, options) {
+export default async function decorate(block, options) {
   const {
     // eslint-disable-next-line no-unused-vars
     pid, offtext,
@@ -27,6 +27,8 @@ export default function decorate(block, options) {
   }
   const productCardsElement = parentNode.querySelector('.solutions-cards-ab.block'); // Get the container element
   const tables = productCardsElement.querySelectorAll('table'); // Find all tables within the container
+
+  let globalDiscountPercentage = 0;
 
   /* eslint-disable no-restricted-syntax */
   for (const table of tables) {
@@ -64,8 +66,8 @@ export default function decorate(block, options) {
     const productsAsList = productArea.split(',');
     const tabContent = productInfoDiv.querySelector('.price-area');
 
-    // eslint-disable-next-line no-loop-func
-    productsAsList.forEach(async (prod) => {
+    // eslint-disable-next-line no-loop-func, no-await-in-loop
+    await Promise.all(productsAsList.map(async (prod) => {
       const [prodName, prodUsers, prodYears] = prod.split('/');
       const { fetchProduct } = await import('../../scripts/utils/utils.js');
 
@@ -83,15 +85,14 @@ export default function decorate(block, options) {
       tab.classList.add('tab-panel');
       tab.setAttribute('id', `${prodName}`);
 
-      fetchProduct(prodName, `${prodUsers}u-${prodYears}y`, pid)
-        .then((product) => {
-          discountPercentage = Math.round(
-            (1 - (product.discount.discounted_price) / product.price) * 100,
-          );
-          oldPrice = product.price;
-          newPrice = product.discount.discounted_price;
-          let currencyLabel = product.currency_label;
-          tab.innerHTML = `
+      const product = await fetchProduct(prodName, `${prodUsers}u-${prodYears}y`, pid);
+      discountPercentage = Math.round(
+        (1 - (product.discount.discounted_price) / product.price) * 100,
+      );
+      oldPrice = product.price;
+      newPrice = product.discount.discounted_price;
+      let currencyLabel = product.currency_label;
+      tab.innerHTML = `
             <div>
                 <span class="prod-oldprice">${currencyLabel}${oldPrice}</span>
                 <span class="prod-save">${discountPercentage}% ${offtext}</span>
@@ -99,22 +100,16 @@ export default function decorate(block, options) {
             <div>
               <span class="prod-newprice">${currencyLabel}${newPrice}</span>
             </div>`;
-          tabContent.appendChild(tab);
+      tabContent.appendChild(tab);
 
-          // add discount value to component title
-          const discountXX = parentNode.querySelector('.solutions-cards-ab-wrapper h3 strong em');
-          const xx = document.createElement('em');
-          xx.innerHTML = `${discountPercentage}%`;
-          discountXX.replaceWith(xx);
+      // add discount value to component title
+      if (discountPercentage > globalDiscountPercentage) {
+        globalDiscountPercentage = discountPercentage;
+      }
 
-          // replace href with correct buy link
-          const buybutton = productInfoDiv.querySelector('.buy-button');
-          buybutton.href = `/site/Store/buy/${prodName}/${prodUsers}/${prodYears}/${pidLink}`;
-        })
-        .catch((err) => {
-          // eslint-disable-next-line no-console
-          console.error(err);
-        });
+      // replace href with correct buy link
+      const buybutton = productInfoDiv.querySelector('.buy-button');
+      buybutton.href = `/site/Store/buy/${prodName}/${prodUsers}/${prodYears}/${pidLink}`;
 
       if (options) {
         const storeProduct = await options.store.getProducts([new ProductInfo(prodName, 'consumer')]);
@@ -136,7 +131,7 @@ export default function decorate(block, options) {
           });
         }
       }
-    });
+    }));
   }
 
   const elementsToRemove = block.querySelectorAll('.product_area');
@@ -145,19 +140,26 @@ export default function decorate(block, options) {
   });
 
   if (options) {
-    const allProducts = window.adobeDataLayer.find((productEvent) => productEvent.event === 'product all');
-    if (allProducts) {
-      const allProductsJson = JSON.parse(JSON.stringify(allProducts));
-      allProductsJson.all = allProductsJson.all.filter((product) => product.info.name !== 'Bitdefender Premium Security' && product.info.name !== 'Bitdefender Premium Security Plus');
-      allProductsJson.all = allProductsJson.all.concat(adobeDataLayerArray);
+    window.addEventListener('codeBaseFinishedRunning', () => {
+      const allProducts = window.adobeDataLayer.find((productEvent) => productEvent.event === 'product all');
+      if (allProducts) {
+        const allProductsJson = JSON.parse(JSON.stringify(allProducts));
+        allProductsJson.all = allProductsJson.all.filter((product) => product.info.name !== 'Bitdefender Premium Security' && product.info.name !== 'Bitdefender Premium Security Plus');
+        allProductsJson.all = allProductsJson.all.concat(adobeDataLayerArray);
 
-      window.adobeDataLayer.push({
-        all: null,
-      });
+        window.adobeDataLayer.push({
+          all: null,
+        });
 
-      window.adobeDataLayer.push(allProductsJson);
-    }
+        window.adobeDataLayer.push(allProductsJson);
+      }
+    });
   }
+
+  const discountXX = parentNode.querySelector('.solutions-cards-ab-wrapper h3 strong em');
+  const xx = document.createElement('em');
+  xx.innerHTML = `${globalDiscountPercentage}%`;
+  discountXX.replaceWith(xx);
 
   window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
     bubbles: true,
