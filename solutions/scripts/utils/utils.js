@@ -48,14 +48,21 @@ async function findProductVariant(cachedResponse, variant) {
  * @param variant The product variant
  * @returns {Promise<*>}
  */
-export async function fetchProduct(code = 'av', variant = '1u-1y') {
+export async function fetchProduct(code = 'av', variant = '1u-1y', pid = null) {
   const data = new FormData();
+  // extract pid from url
+  if (!pid) {
+    const url = new URL(window.location.href);
+    // eslint-disable-next-line no-param-reassign
+    pid = url.searchParams.get('pid');
+  }
+
   data.append('data', JSON.stringify({
     ev: 1,
     product_id: code,
     config: {
       extra_params: {
-        pid: null,
+        pid,
       },
     },
   }));
