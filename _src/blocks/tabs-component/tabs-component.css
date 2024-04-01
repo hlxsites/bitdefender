@@ -95,8 +95,10 @@
 }
 .tabs-component-container a::after {
   background-color: #006dff !important;
-  opacity: 1;
-  margin-left: 0px;
+
+}
+.tabs-component-container .card-container a::after {
+
 }
 @media (min-width: 768px) {
   .tabs-component-container .tabs-container {
