@@ -99,7 +99,15 @@
 }
 
 .tabs-component-container .card-container a::after {
-  background-color:#006dff;
+  content: '\2192';
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  transition: all .2s cubic-bezier(.4,0,.2,1);
+  transform: translateX(0);
+  margin-left: 2px;
+  -webkit-mask: none !important;
+    mask: none !important;
 }
 
 .tabs-component-container .card-container a:hover::after {
