@@ -387,7 +387,12 @@ export default async function decorate(block) {
     const html = await resp.text();
 
     if (html.includes('aem-banner')) {
-      const domain = getDomain().split('-').join('_');
+      let domain = getDomain();
+      if (domain === 'en-us') {
+        domain = 'en';
+      } else {
+        domain = domain.split('-').join('_');
+      }
       const aemHeaderFetch = await fetch(`https://www.bitdefender.com/content/experience-fragments/bitdefender/language_master/${domain}/header-navigation/mega-menu/master/jcr:content/root/mega_menu.styled.html`);
       const aemHeaderHtml = await aemHeaderFetch.text();
 
