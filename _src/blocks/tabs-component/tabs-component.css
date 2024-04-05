@@ -4,6 +4,22 @@
   align-items: center;
 }
 
+.tabs-component-container.we-container {
+  max-width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-top: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tabs-component-container .icon svg {
+  width: 12px;
+  height: 14px;
+  padding-right: 2px;
+  fill: #fff;
+}
+
 .tabs-component-container h3 {
   font: normal normal bold 24px/28px Arial, sans-serif;
 }
@@ -122,6 +138,9 @@
 
 .tabs-component-container .left img {
   border-radius: 20px;
+  width: auto;
+  max-width: 100%;
+  height: auto;
 }
 
 .tabs-component-container .right {
@@ -137,6 +156,7 @@
 
 .tabs-component-container .tabs-container button picture img {
   width: 50px;
+  height: auto;
 }
 
 .tabs-component-container button strong {
@@ -166,7 +186,7 @@
   }
 }
 
-@media (min-width: 990px) {
+@media (min-width: 992px) {
   .tabs-component-container .card-container {
     flex-direction: row;
     width: 830px;
@@ -190,5 +210,27 @@
 
   .tabs-component-container .tabs-container {
     gap: 5%;
+  }
+
+  .tabs-component-container.we-container {
+    max-width: 1300px;
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+}
+
+@media (width >= 1200px) {
+  .tabs-component-container.we-container {
+    max-width: 1332px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media (width >= 1600px) {
+  .tabs-component-container.we-container {
+    max-width: 1332px;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 }

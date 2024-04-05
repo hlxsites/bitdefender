@@ -1,6 +1,13 @@
 // eslint-disable-next-line no-unused-vars
-export default function decorate(block) {
-  const tables = document.querySelectorAll('.bitdef-vs-brands-wrapper table');
+export default function decorate(block, options) {
+  if (options) {
+    // eslint-disable-next-line no-param-reassign
+    block = block.querySelector('.block');
+    const blockParent = block.closest('.section');
+    blockParent.classList.add('we-container');
+  }
+
+  const tables = block.querySelectorAll('.bitdef-vs-brands-wrapper table');
 
   tables.forEach((table) => {
     const parentDiv = table.closest('div');
@@ -24,7 +31,7 @@ export default function decorate(block) {
     });
   });
   // Select the first div within the .bitdef-vs-brands container
-  const firstDiv = document.querySelector('.bitdef-vs-brands > div');
+  const firstDiv = block.querySelector('.bitdef-vs-brands > div');
 
   // Add class 'heading-container' to the first div
   firstDiv.classList.add('heading-container');
@@ -39,13 +46,13 @@ export default function decorate(block) {
   }
 
   // Insert the new container after the first div
-  const bitdefContainer = document.querySelector('.bitdef-vs-brands');
+  const bitdefContainer = block;
   bitdefContainer.insertBefore(newContainerDiv, firstDiv.nextSibling);
 
   // Animation
-  const sections = document.querySelectorAll('.bitdef-vs-brands');
+  const section = block;
 
-  const options = {
+  const threshold = {
     threshold: 0.5, // Trigger animation when 50% of the section is visible
   };
 
@@ -66,11 +73,9 @@ export default function decorate(block) {
         entry.target.dataset.animationTriggered = true;
       }
     });
-  }), options);
+  }), threshold);
 
-  sections.forEach((section) => {
-    observer.observe(section);
-  });
+  observer.observe(section);
   window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
     bubbles: true,
     composed: true, // This allows the event to cross the shadow DOM boundary

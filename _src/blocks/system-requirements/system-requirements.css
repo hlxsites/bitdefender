@@ -148,3 +148,34 @@
     color: #006EFF;
     text-decoration: underline;
 }
+
+.system-requirements-container.we-container {
+    max-width: 1332px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 0 auto;
+}
+
+@media (width >= 992) {
+    .system-requirements-container.we-container {
+        max-width: 1300px;
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+}
+
+@media (width >= 1200px) {
+    .system-requirements-container.we-container {
+      max-width: 1332px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+}
+  
+@media (width >= 1600px) {
+    .system-requirements-container.we-container {
+        max-width: 1332px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}

@@ -1,4 +1,11 @@
-export default function decorate(block) {
+export default function decorate(block, options) {
+  if (options) {
+    // eslint-disable-next-line no-param-reassign
+    block = block.querySelector('.block');
+    const blockParent = block.closest('.section');
+    blockParent.classList.add('we-container');
+  }
+
   const parentSelector = block.closest('.section');
   // eslint-disable-next-line no-unused-vars
   const metaData = parentSelector.dataset;
@@ -23,14 +30,14 @@ export default function decorate(block) {
       button.innerHTML = div.innerHTML; // Use innerHTML instead of textContent
       button.addEventListener('click', () => {
         // Remove 'selected' class from all buttons
-        const buttons = document.querySelectorAll('.tabs-container button');
+        const buttons = block.querySelectorAll('.tabs-container button');
         buttons.forEach((btn) => btn.classList.remove('selected'));
 
         // Add 'selected' class to the clicked button
         button.classList.add('selected');
 
         // Hide all card-container elements
-        const cardContainers = document.querySelectorAll('.card-container');
+        const cardContainers = block.querySelectorAll('.card-container');
         cardContainers.forEach((card) => card.classList.add('hide'));
 
         // Show the corresponding card-container element based on the index

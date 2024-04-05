@@ -121,11 +121,14 @@ export default function decorate(block, options) {
     product, conditionText, saveText, MacOS, Windows, Android, IOS,
     alignContent,
   } = options.metadata;
-  const aemContainer = block.children[1];
-  aemContainer.classList.add('hero-aem-container');
-  aemContainer.classList.add('we-container');
-  const underShadow = aemContainer.children[0];
-  let [richText, mainDesktopImage, richTextCard, columnsCard] = underShadow.children;
+
+  if (options) {
+    // eslint-disable-next-line no-param-reassign
+    block = block.querySelector('.block');
+    let blockParent = block.closest('.section');
+    blockParent.classList.add('we-container');
+  }
+  let [richText, mainDesktopImage, richTextCard, columnsCard] = block.children;
 
   // Configuration for new elements
   richText.classList.add('hero-aem__card__desktop', 'col-md-6');
@@ -139,7 +142,7 @@ export default function decorate(block, options) {
   mobileImage.classList.add('hero-aem__mobile-image');
 
   // Get all the siblings after h1
-  const cardElements = Array.from(underShadow.querySelectorAll('h1 ~ *'));
+  const cardElements = Array.from(block.querySelectorAll('h1 ~ *'));
   // Put the siblings in a new div and append it to the block
   const cardElementContainer = createCardElementContainer(cardElements, mobileImage);
 
