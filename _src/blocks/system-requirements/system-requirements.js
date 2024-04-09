@@ -31,8 +31,8 @@ export default function decorate(block, options) {
   if (options) {
     // eslint-disable-next-line no-param-reassign
     block = block.querySelector('.block');
-    const blockParent = block.closest('.section');
-    blockParent.classList.add('we-container');
+    // const blockParent = block.closest('.section');
+    // blockParent.classList.add('we-container');
   }
 
   const items = Array.from(block.querySelectorAll(':scope > div'));

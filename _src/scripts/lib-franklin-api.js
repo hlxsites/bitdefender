@@ -136,103 +136,6 @@ function decorateBlock(block) {
   }
 }
 
-/**
- *
- * @param {String} path The path to the modal
- * @param {String} template The template to use for the modal styling
- * @returns {Promise<Element>}
- * @example
- */
-export async function createModal(path, template) {
-  const modalContainer = document.createElement('div');
-  modalContainer.classList.add('modal-container');
-
-  const modalContent = document.createElement('div');
-  modalContent.classList.add('modal-content');
-
-  // fetch modal content
-  console.log(path);
-  const resp = await fetch(`${path}.plain.html`);
-
-  if (!resp.ok) {
-    // eslint-disable-next-line no-console
-    console.error(`modal url cannot be loaded: ${path}`);
-    return modalContainer;
-  }
-
-  const html = await resp.text();
-  console.log(html);
-  modalContent.innerHTML = html;
-
-  // decorateMain(modalContent);
-  // await loadBlock(modalContent);
-  modalContainer.append(modalContent);
-
-  // add class to modal container for opportunity to add custom modal styling
-  if (template) modalContainer.classList.add(template);
-
-  const closeModal = () => modalContainer.remove();
-  const close = document.createElement('div');
-  close.classList.add('modal-close');
-  close.addEventListener('click', closeModal);
-  modalContent.append(close);
-  return modalContainer;
-}
-
-function decorateLinkedPictures(main) {
-  console.log(main);
-  console.log(main.querySelectorAll('picture'));
-  main.querySelectorAll('picture').forEach((picture) => {
-    // this condition checks if the picture is part of some content block ( rte )
-    // and not a direct element in some DIV block
-    // that could have different behaviour for some blocks (ex: columns )
-    console.log(picture.closest('div.block'))
-    console.log(picture.parentElement.tagName);
-    if (picture.closest('div.block') && picture.parentElement.tagName !== 'DIV') {
-      const next = picture.parentNode.nextElementSibling;
-      console.log("next ", next);
-      if (next) {
-        const a = next.querySelector('a');
-        const link = a?.textContent;
-        /* Modal video */
-        if (a && link.startsWith('https://') && link.includes('fragments')) {
-          a.innerHTML = '';
-          a.className = 'video-placeholder';
-          a.appendChild(picture);
-          const overlayPlayButton = document.createElement('span');
-          overlayPlayButton.className = 'video-placeholder-play';
-          a.appendChild(overlayPlayButton);
-          a.addEventListener('click', async (event) => {
-            event.preventDefault();
-            // eslint-disable-next-line no-use-before-define
-            const modalContainer = await createModal(link, 'video-modal');
-            document.body.append(modalContainer);
-          });
-          const up = a.parentElement;
-          if (up.childNodes.length === 1 && (up.tagName === 'P' || up.tagName === 'DIV')) {
-            up.classList.add('modal-video-container');
-          }
-          return;
-        }
-        // Basic linked image
-        if (a && link.startsWith('https://')) {
-          a.innerHTML = '';
-          a.className = 'linked-image';
-          const pictureParent = picture.parentNode;
-          a.append(picture);
-          if (pictureParent.children.length === 0) {
-            pictureParent.parentNode.removeChild(pictureParent);
-          }
-          const up = a.parentElement;
-          if (up.childNodes.length === 1 && (up.tagName === 'P' || up.tagName === 'DIV')) {
-            up.classList.add('linked-image-container');
-          }
-        }
-      }
-    }
-  });
-}
-
 export async function loadComponent(offer, block, options, selector)  {
   const offerURL = new URL(offer);
   const origin = offerURL.origin;
@@ -252,6 +155,8 @@ export async function loadComponent(offer, block, options, selector)  {
     const newDiv = document.createElement('div');
     newDiv.style.display = "none";
     newDiv.innerHTML += html;
+    decorateSections(newDiv);
+    decorateBlock(newDiv.querySelector(`.${block}`));
     updateLinkSources(newDiv, `${origin}${offerFolder}/`);
     document.body.appendChild(newDiv);
     await js.default(newDiv, {...options, metadata: parseMetadata(newDiv)});
@@ -269,7 +174,6 @@ export async function loadComponent(offer, block, options, selector)  {
     updateLinkSources(shadowRoot, `${origin}${offerFolder}/`);
     await js.default(shadowRoot.querySelector('.section'), {...options, metadata: parseMetadata(shadowRoot)});
     decorateIcons(shadowRoot);
-    decorateLinkedPictures(shadowRoot);
   }
 
   return container;

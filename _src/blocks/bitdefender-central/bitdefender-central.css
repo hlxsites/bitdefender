@@ -86,7 +86,7 @@
 
 .bitdefender-central.block > div {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
+  grid-template-columns: 1fr;
   grid-gap: 32px;
 }
 
@@ -102,15 +102,15 @@
 .bitdefender-central.block > div > div {
   background-color: #F8F8F8;
   border-radius: 20px;
-  width: 600px;
   padding: 24px;
 }
 
 .bitdefender-central.block > div > div:last-of-type {
   background-color: transparent;
   border-radius: 20px;
-  width: 648px;
   padding: 0;
+  display: flex;
+  align-items: stretch;
 }
 
 .bitdefender-central.block > div > div:last-of-type p {
@@ -127,7 +127,7 @@
 
 .bitdefender-central.block > div > div:first-of-type h3 {
   font: normal normal bold 32px/38px var(--body-font-family);
-  margin-bottom: 0;
+  margin: 0;
 }
 
 .bitdefender-central.block > div > div:first-of-type > p:nth-of-type(2) {
@@ -151,63 +151,65 @@
   border-radius: 10px;
   display: inline-block;
   position: relative;
-  min-width: 180px;
+  min-width: 120px;
+  text-decoration: none;
+  text-align: center;
 }
 
-.bitdefender-central.block > div > div:first-of-type a.blue {
+.bitdefender-central.block > div > div:first-of-type p.button-container a.blue {
   background-color: #006EFF;
   color: white;
 }
 
-.bitdefender-central.block > div > div:first-of-type a:focus {
+.bitdefender-central.block > div > div:first-of-type p.button-container a:focus {
   outline: 2px solid #48C1FF;
   border-radius: 13px;
   outline-offset: 2px;
 }
 
-.bitdefender-central.block > div > div:first-of-type a:hover {
+.bitdefender-central.block > div > div:first-of-type p.button-container a:hover {
   padding: 14px 28px;
   background: #006EFF;
   color: #fff;
 }
 
-.bitdefender-central.block > div > div:first-of-type a.blue:hover {
+.bitdefender-central.block > div > div:first-of-type p.button-container a.blue:hover {
   background-color: #0A53C5;
   border: 2px solid #0A53C5;
   color: white;
 }
 
-.bitdefender-central.block > div > div:first-of-type a:active {
+.bitdefender-central.block > div > div:first-of-type p.button-container a:active {
   background: #0D499B;
   order: 2px solid #0D499B;
 }
 
-.bitdefender-central.block > div > div:first-of-type a.blue:active {
+.bitdefender-central.block > div > div:first-of-type p.button-container a.blue:active {
   background: #0A53C5;
   order: 2px solid #0A53C5;
 }
 
-.bitdefender-central.block > div > div:first-of-type a:disabled {
+.bitdefender-central.block > div > div:first-of-type p.button-container a:disabled {
   background: transparent;
   order: 2px solid #B7B7B7;
   color: #B7B7B7;
 }
 
-.bitdefender-central.block > div > div:first-of-type a.blue:disabled {
+.bitdefender-central.block > div > div:first-of-type p.button-container a.blue:disabled {
   background: #E7E7E7;
   order: 2px solid #B7B7B7;
   color: #B7B7B7;
 }
 
-.bitdefender-central.block > div > div:first-of-type a span {
+.bitdefender-central.block > div > div:first-of-type p.button-container a span {
   transition: none;
 }
 
-.bitdefender-central.block > div > div:first-of-type a:hover span {
+.bitdefender-central.block > div > div:first-of-type p.button-container a:hover span {
   transform: none;
 }
 
-.bitdefender-central.block > div > div:first-of-type a::after {
+.bitdefender-central.block > div > div:first-of-type p.button-container a::after {
   content: '';
   width: 0;
   height: 0;
@@ -227,6 +229,18 @@
   margin: 0;
   padding: 7px 0 0;
   font: normal normal normal 16px/18px var(--body-font-family);
+}
+
+.bitdefender-central.block a.video-placeholder img {
+  object-fit: cover;
+  height: 100%;
+  border-radius: 20px;
+}
+
+.bitdefender-central.block img {
+  max-width: 100%;
+  width: auto;
+  height: auto;
 }
 
 .bitdefender-central.block > div > div:first-of-type ul li::before {
@@ -262,7 +276,8 @@
 
 a.video-placeholder {
   position: relative;
-  display: inline-block;
+  align-items: stretch;
+  display: flex;
   color: var(--button-link-color);
 }
 
@@ -313,19 +328,23 @@ a.video-placeholder {
   z-index: 999;
 }
 
+.modal-video-container {
+  display: flex;
+}
+
 .modal-container .modal-content {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #fff;
-  padding: 20px 30px 30px;
+  background-color: transparent;
+  /* padding: 20px 30px 30px; */
   border-radius: 8px;
-  box-shadow: 0 3px 8px 0 rgb(0 0 0 / 10%);
-  border: 1px solid #707070;
-  width: 75%;
+  /* box-shadow: 0 3px 8px 0 rgb(0 0 0 / 10%); */
+  /* border: 1px solid #707070; */
+  /* width: 75%; */
   max-height: 90%;
-  overflow: auto;
+  overflow: visible;
   opacity: 1;
   animation: fade-in 0.5s ease-in-out forwards;
 }
@@ -342,8 +361,8 @@ a.video-placeholder {
     padding: 1px 1px 0 0;
     border-radius: 50%;
     position: absolute;
-    top: 25px;
-    right: 27px;
+    top: -20px;
+    right: -14px;
     cursor: pointer;
     transition: all .3s ease-in-out;
     outline: none;
@@ -426,6 +445,10 @@ a.video-placeholder {
     padding-right: 50px;
   }
 
+  .bitdefender-central.block > div {
+    grid-template-columns: 1fr 1fr;
+  }
+
   .video-placeholder .video-placeholder-play {
     width: 2rem;
     height: 2rem;
@@ -440,10 +463,10 @@ a.video-placeholder {
     border-left: 0.7rem solid;
   }
 
-  .modal-container .modal-content {
+  /* .modal-container .modal-content {
     padding: 52px 62px 54px 55px;
     max-width: 660px;
-  }
+  } */
 
   .modal-container .modal-content .columns-wrapper {
     padding-left: 0;
@@ -456,12 +479,6 @@ a.video-placeholder {
     max-width: 1332px;
     padding-left: 20px;
     padding-right: 20px;
-  }
-}
-
-@media (max-width: 1271px) {
-  .bitdefender-central.block > div > div:last-of-type {
-    width: 600px;
   }
 }
 

@@ -22,7 +22,7 @@ function isView(viewport) {
 let tsParticles;
 let loadAll;
 
-async function init(block) {
+async function init(block, aemOptions) {
   // eslint-disable-next-line import/no-unresolved
   tsParticles = (await import('https://cdn.jsdelivr.net/npm/@tsparticles/engine@3.1.0/+esm')).tsParticles;
   // eslint-disable-next-line import/no-unresolved
@@ -33,7 +33,15 @@ async function init(block) {
   const particleDiv = document.createElement('div');
   particleDiv.setAttribute('id', particleIdSelector);
 
-  block.parentElement.classList.add('we-container');
+  if (aemOptions) {
+    // eslint-disable-next-line no-param-reassign
+    block = block.querySelector('.block');
+    const blockParent = block.closest('.section');
+    blockParent.classList.add('we-container');
+  } else {
+    block.parentElement.classList.add('we-container');
+  }
+
   const particleBackground = block.parentElement.querySelector('.particle-background');
   particleBackground.prepend(particleDiv);
 
@@ -43,7 +51,7 @@ async function init(block) {
     await tsParticles.load({ id: particleIdSelector, options });
   }
 
-  const configs = {
+  const options = {
     particles: {
       number: {
         value: 20,
@@ -81,7 +89,7 @@ async function init(block) {
     fullScreen: { enable: false },
   };
 
-  await loadParticles(configs);
+  await loadParticles(options);
 }
 
 // eslint-disable-next-line no-unused-vars
@@ -106,8 +114,8 @@ async function checkForMobile() {
   particles.play();
 }
 
-export default async function decorate(block) {
-  await init(block);
+export default async function decorate(block, options) {
+  await init(block, options);
 
   // uncomment this line if you want the bubbles to stop moving on mobile
   // window.addEventListener('resize', debounce(checkForMobile, 250));
