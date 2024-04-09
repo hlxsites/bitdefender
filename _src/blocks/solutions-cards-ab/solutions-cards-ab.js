@@ -5,7 +5,7 @@ let adobeDataLayerArray = [];
 export default async function decorate(block, options) {
   const {
     // eslint-disable-next-line no-unused-vars
-    pid, offtext,
+    pid, offtext, firstyear,
   } = options ? options.metadata : block.closest('.section').dataset;
 
   if (options) {
@@ -98,7 +98,7 @@ export default async function decorate(block, options) {
                 <span class="prod-save">${discountPercentage}% ${offtext}</span>
             </div>
             <div>
-              <span class="prod-newprice">${currencyLabel}${newPrice}</span>
+              <span class="prod-newprice">${currencyLabel}${newPrice}</span><span>/ ${firstyear}</span>
             </div>`;
       tabContent.appendChild(tab);
 
