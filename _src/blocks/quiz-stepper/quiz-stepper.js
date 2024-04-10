@@ -81,7 +81,8 @@ export default async function decorate(block) {
   }
 
   function addMetaPropertiesInHead(resultTitle, resultImageSrc) {
-    document.head.prepend(`
+    const container = document.createElement('div');
+    container.innerHTML = `
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content="${resultTitle}" />
 <!--      <meta name="twitter:description" content="A brief description of the quiz" />-->
@@ -94,7 +95,11 @@ export default async function decorate(block) {
       <meta property="og:title" content="${resultTitle}" />
 <!--      <meta property="og:description" content="A brief description of the quiz" />-->
       <meta property="og:url" content="${resultPageUrl}" />
-    `);
+    `;
+
+    Array.from(container.children).forEach(tag => {
+      document.head.prepend(tag);
+    });
   }
 
   function renderResults() {
