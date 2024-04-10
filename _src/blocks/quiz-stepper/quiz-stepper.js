@@ -4,7 +4,7 @@ export default async function decorate(block) {
     currentStep: 0,
   };
 
-  const resultPageUrl = 'https://main--www-websites--bitdefender.hlx.page/ro-ro/quiz/' || window.location.href;
+  const resultPageUrl = window.location.href;
 
   block.classList.add('default-content-wrapper');
 
