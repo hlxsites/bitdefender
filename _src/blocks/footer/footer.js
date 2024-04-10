@@ -43,11 +43,38 @@ function disableSelectedCountry(container) {
   });
 }
 
+function runDefaultFooterLogic(footer) {
+  const sectionHeaders = footer.querySelectorAll('div > div > p');
+  sectionHeaders[2].addEventListener('click', onFooterElementClick);
+  sectionHeaders[3].addEventListener('click', onFooterElementClick);
+
+  const sectionsData = footer.querySelectorAll('div > div > ul');
+  disableSelectedCountry(sectionsData[3]);
+}
+
+/**
+ * applies footer factory based on footer variation
+ * @param {String} footerMetadata The footer variation: landingpage' or none
+ * @param {Element} footer The footer element
+ */
+function applyFooterFactorySetup(footerMetadata, footer) {
+  switch (footerMetadata) {
+    case 'landingpage':
+      break;
+    default:
+      runDefaultFooterLogic(footer);
+      break;
+  }
+}
+
 /**
  * loads and decorates the footer
  * @param {Element} block The footer block element
  */
 export default async function decorate(block) {
+  const footerMetadata = getMetadata('footer-type');
+  block.parentNode.classList.add(footerMetadata || 'default');
+
   block.textContent = '';
 
   // fetch footer content
@@ -63,12 +90,8 @@ export default async function decorate(block) {
 
     wrapImgsInLinks(footer);
 
-    const sectionHeaders = footer.querySelectorAll('div > div > p');
-    sectionHeaders[2].addEventListener('click', onFooterElementClick);
-    sectionHeaders[3].addEventListener('click', onFooterElementClick);
+    applyFooterFactorySetup(footerMetadata, footer);
 
-    const sectionsData = footer.querySelectorAll('div > div > ul');
-    disableSelectedCountry(sectionsData[3]);
     decorateIcons(footer);
     block.append(footer);
 

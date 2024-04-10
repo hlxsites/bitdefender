@@ -362,14 +362,8 @@ function renderMobileHeader(nav) {
   headerBlock.appendChild(optionsWrapper);
 }
 
-export default async function decorate(block) {
+async function runDefaultHeaderLogic(block) {
   const hero = document.querySelector('.hero');
-
-  // commented out because it's not being used, might be used in the future
-  // const isErrorPage = window.isErrorPage || false;
-
-  // Check if the page isn't an error page and if the hero doesn't exist
-  // if (!hero && !isErrorPage) return;
 
   if (hero && hero.classList.contains('black-background')) {
     const header = document.querySelector('header');
@@ -410,7 +404,6 @@ export default async function decorate(block) {
       if (shadowRootScriptTag) {
         shadowRootScriptTag.replaceWith(newScriptFile);
       }
-      // shadowRoot.appendChild(newScriptFile);
 
       const navHeader = shadowRoot.querySelector('header');
       if (navHeader) {
@@ -489,4 +482,33 @@ export default async function decorate(block) {
       }
     }
   });
+}
+
+async function runLandingPageHeaderLogic(block) {
+  block.innerHTML = `
+    <div>Custom header</div>
+  `;
+}
+
+/**
+ * applies header factory based on header variation
+ * @param {String} headerMetadata The header variation: landingpage' or none
+ * @param {Element} header The header element
+ */
+function applyHeaderFactorySetup(headerMetadata, header) {
+  switch (headerMetadata) {
+    case 'landingpage':
+      runLandingPageHeaderLogic(header);
+      break;
+    default:
+      runDefaultHeaderLogic(header);
+      break;
+  }
+}
+
+export default async function decorate(block) {
+  const headerMetadata = getMetadata('header-type');
+  block.parentNode.classList.add(headerMetadata || 'default');
+
+  applyHeaderFactorySetup(headerMetadata, block);
 }
