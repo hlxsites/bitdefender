@@ -8,7 +8,7 @@
 }
 
 .quiz-hero-container h1 {
-    font: normal normal normal 32px/40px IBM Plex Sans;
+    font: normal normal normal 32px/40px "IBM Plex Sans";
 }
 
 .quiz-hero-container h2,
@@ -50,7 +50,7 @@
 
 @media (min-width: 992px) {
     .quiz-hero-container h1 {
-        font: normal normal normal 60px/66px IBM Plex Sans;
+        font: normal normal normal 60px/66px "IBM Plex Sans";
     }
 
     .quiz-hero-container h2,

@@ -52,7 +52,7 @@ function runDefaultFooterLogic(footer) {
   disableSelectedCountry(sectionsData[3]);
 }
 
-function runLandingpageLogic(footer){
+function runLandingpageLogic(footer) {
   footer.children[0].classList.add('default-content-wrapper');
 }
 

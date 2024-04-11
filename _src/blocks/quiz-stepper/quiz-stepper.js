@@ -82,32 +82,11 @@ export default async function decorate(block) {
     slideWrapper.style.transform = transformValue;
   }
 
-  //   function addMetaPropertiesInHead(resultTitle, resultImageSrc) {
-  //     const container = document.createElement('div');
-  //     container.innerHTML = `
-  //       <meta name="twitter:card" content="summary_large_image" />
-  //       <meta name="twitter:title" content="${resultTitle}" />
-  // <!--      <meta name="twitter:description" content="A brief description of the quiz" />-->
-  //       <meta name="twitter:image" content="${resultImageSrc}" />
-  //
-  //
-  //       <meta property="og:image" content="${resultImageSrc}" />
-  // <!--      <meta property="og:image:width" content="1200" />  &lt;!&ndash; Optional: Specify image width &ndash;&gt;-->
-  // <!--      <meta property="og:image:height" content="630" />  &lt;!&ndash; Optional: Specify image height &ndash;&gt;-->
-  //       <meta property="og:title" content="${resultTitle}" />
-  // <!--      <meta property="og:description" content="A brief description of the quiz" />-->
-  //       <meta property="og:url" content="${resultPageUrl}" />
-  //     `;
-  //
-  //     Array.from(container.children).forEach((tag) => {
-  //       document.head.prepend(tag);
-  //     });
-  //   }
-
   function renderResults() {
     block.style.transform = null;
 
     // get score
+    /* eslint-disable-next-line */
     const score = [...block.querySelectorAll('input[type="radio"]:checked')].map((inputEl) => inputEl.value).reduce((sc, value) => sc += Number(value), 0);
 
     const legendScore = Object.keys(dataset)
