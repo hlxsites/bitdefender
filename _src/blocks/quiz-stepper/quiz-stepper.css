@@ -1,12 +1,27 @@
 .section.quiz-stepper-container {
-    padding-bottom: 200px;
 }
 
 .quiz-stepper-container {
     .block {
+        /*display: flex;*/
+        /*width: 100%;*/
+        /*transition: transform .250s ease-in-out;*/
+        overflow: hidden;
+        padding-bottom: 200px;
+    }
+
+    .slide-wrapper {
         display: flex;
+
         width: 100%;
         transition: transform .250s ease-in-out;
+        padding: 5px 0;
+    }
+
+    .form-wrapper {
+        width: 100%;
+        flex-shrink: 0;
+        margin-right: 60px;
     }
 
     .step {
@@ -16,7 +31,7 @@
         position: relative;
         width: 100%;
         flex-shrink: 0;
-        margin-right: 30px;
+        /*margin-right: 30px;*/
 
         fieldset {
             legend {
@@ -115,35 +130,37 @@
              }
         }
     }
+}
 
-    .results-wrapper {
-        h3 {
-            font: normal normal bold 24px/27px Arial;
-        }
+@media (min-width: 992px) {
+    .quiz-stepper-container {
+        .step {
+            width: calc(100% - 250px);
+            padding: 40px 40% 40px 40px;
+            /*margin-right: 50px;*/
 
-        h2 {
-            font: normal normal bold 32px/35px Arial;
-        }
-
-        p, div {
-            font: normal normal normal 16px/18px Arial;
-        }
-
-        .social-wrapper {
-            display: flex;
-            align-items: center;
-            font: normal normal bold 16px/18px Arial;
-            color: #006EFF;
-            margin: 30px 0;
-
-            a {
-                margin-left: 20px;
+            .img-container {
+                width: 500px;
+                height: 385px;
+                bottom: unset;
+                left: unset;
+                top: calc(50% - 385px / 2);
+                right: -250px;
             }
 
-            .icon {
-                width: 20px;
-                height: 20px;
-                margin: 0;
+            fieldset {
+                legend {
+                    margin-bottom: 30px;
+                }
+            }
+        }
+
+        .button-container.submit {
+            justify-content: flex-start;
+            margin-top: 30px;
+
+            .button {
+                width: 60%;
             }
         }
     }
