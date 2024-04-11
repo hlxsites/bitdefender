@@ -540,6 +540,40 @@ footer.default .footer > div > :nth-child(6) > ul li > a {
   }
 }
 
+footer.landingpage {
+  background: #006EFF;
+  color: white;
+  font-weight: 400;
+
+  a:any-link {
+    color: white;
+    text-decoration: none;
+  }
+
+  img {
+    width: 160px;
+    height: auto;
+    margin-bottom: 10px;
+  }
+}
+
+@media (min-width: 768px) {
+  footer.landingpage {
+    padding: 50px 0;
+
+    .default-content-wrapper {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    p strong {
+      font-size: 32px;
+      font-weight: bold;
+      color: white;
+    }
+  }
+}
+
 @media(min-width: 1600px) { /* large desktop */
     footer.default .footer > div {
     width: 100%;

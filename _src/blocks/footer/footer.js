@@ -52,6 +52,10 @@ function runDefaultFooterLogic(footer) {
   disableSelectedCountry(sectionsData[3]);
 }
 
+function runLandingpageLogic(footer){
+  footer.children[0].classList.add('default-content-wrapper');
+}
+
 /**
  * applies footer factory based on footer variation
  * @param {String} footerMetadata The footer variation: landingpage' or none
@@ -60,6 +64,7 @@ function runDefaultFooterLogic(footer) {
 function applyFooterFactorySetup(footerMetadata, footer) {
   switch (footerMetadata) {
     case 'landingpage':
+      runLandingpageLogic(footer);
       break;
     default:
       runDefaultFooterLogic(footer);

@@ -1,33 +1,30 @@
 .quiz-result-container {
-    .results-wrapper {
-        h3 {
-            font: normal normal bold 24px/27px Arial;
+    h3 {
+        font: normal normal bold 24px/27px Arial;
+    }
+
+    h2 {
+        font: normal normal bold 32px/35px Arial;
+    }
+
+    p, div {
+        font: normal normal normal 16px/18px Arial;
+    }
+    .social-wrapper {
+        display: flex;
+        align-items: center;
+        font: normal normal bold 16px/18px Arial;
+        color: #006EFF;
+        margin: 30px 0;
+
+        a {
+            margin-left: 20px;
         }
 
-        h2 {
-            font: normal normal bold 32px/35px Arial;
-        }
-
-        p, div {
-            font: normal normal normal 16px/18px Arial;
-        }
-
-        .social-wrapper {
-            display: flex;
-            align-items: center;
-            font: normal normal bold 16px/18px Arial;
-            color: #006EFF;
-            margin: 30px 0;
-
-            a {
-                margin-left: 20px;
-            }
-
-            .icon {
-                width: 20px;
-                height: 20px;
-                margin: 0;
-            }
+        .icon {
+            width: 20px;
+            height: 20px;
+            margin: 0;
         }
     }
 }
@@ -36,6 +33,18 @@
     .quiz-result-container {
         .block {
             position: relative;
+        }
+
+        h3 {
+            font: normal normal bold 24px/27px Arial;
+        }
+
+        h2 {
+            font: normal normal bold 42px/42px Arial;
+        }
+
+        p, div {
+            font: normal normal normal 18px/21px Arial;
         }
 
         .results-wrapper {

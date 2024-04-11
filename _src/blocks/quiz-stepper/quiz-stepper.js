@@ -1,4 +1,12 @@
+import { getDatasetFromSection } from '../../scripts/utils/utils.js';
+
 export default async function decorate(block) {
+  const dataset = getDatasetFromSection(block);
+
+  const {
+    questionLabel, nextButtonLabel, previousButtonLabel, seeResultsLabel, selectErrorLabel,
+  } = dataset;
+
   const state = {
     score: 0,
     currentStep: 0,
@@ -6,8 +14,7 @@ export default async function decorate(block) {
 
   block.classList.add('default-content-wrapper');
 
-  const children = [...block.children];
-  const steps = children;
+  const steps = [...block.children];
 
   function renderStep(step, index) {
     const stepTitle = step.children[0].children[0].textContent;
@@ -22,8 +29,8 @@ export default async function decorate(block) {
       <div class="form-wrapper">
         <form class="step">
            <div class="step__header">
-             <div class="step__index">Question ${index + 1}/${steps.length}:</div>
-             ${!isFirstStep ? '<a class="step__previous">previous question</a>' : ''}
+             <div class="step__index">${questionLabel} ${index + 1}/${steps.length}:</div>
+             ${!isFirstStep ? `<a class="step__previous">${previousButtonLabel}</a>` : ''}
            </div>
         
            
@@ -42,10 +49,11 @@ export default async function decorate(block) {
                 </div>  
                 `;
   }).join('')}
+                <div class="error-message">${selectErrorLabel}</div>
            </fieldset>
     
            <p class="button-container submit">
-            <a class="button modal" href="">${!isLastStep ? 'Next Question' : 'See Your Result'}</a>
+            <a class="button modal" href="">${!isLastStep ? nextButtonLabel : seeResultsLabel}</a>
            </p>
          
             <div class="img-container">
@@ -74,56 +82,43 @@ export default async function decorate(block) {
     slideWrapper.style.transform = transformValue;
   }
 
-//   function addMetaPropertiesInHead(resultTitle, resultImageSrc) {
-//     const container = document.createElement('div');
-//     container.innerHTML = `
-//       <meta name="twitter:card" content="summary_large_image" />
-//       <meta name="twitter:title" content="${resultTitle}" />
-// <!--      <meta name="twitter:description" content="A brief description of the quiz" />-->
-//       <meta name="twitter:image" content="${resultImageSrc}" />
-//
-//
-//       <meta property="og:image" content="${resultImageSrc}" />
-// <!--      <meta property="og:image:width" content="1200" />  &lt;!&ndash; Optional: Specify image width &ndash;&gt;-->
-// <!--      <meta property="og:image:height" content="630" />  &lt;!&ndash; Optional: Specify image height &ndash;&gt;-->
-//       <meta property="og:title" content="${resultTitle}" />
-// <!--      <meta property="og:description" content="A brief description of the quiz" />-->
-//       <meta property="og:url" content="${resultPageUrl}" />
-//     `;
-//
-//     Array.from(container.children).forEach((tag) => {
-//       document.head.prepend(tag);
-//     });
-//   }
+  //   function addMetaPropertiesInHead(resultTitle, resultImageSrc) {
+  //     const container = document.createElement('div');
+  //     container.innerHTML = `
+  //       <meta name="twitter:card" content="summary_large_image" />
+  //       <meta name="twitter:title" content="${resultTitle}" />
+  // <!--      <meta name="twitter:description" content="A brief description of the quiz" />-->
+  //       <meta name="twitter:image" content="${resultImageSrc}" />
+  //
+  //
+  //       <meta property="og:image" content="${resultImageSrc}" />
+  // <!--      <meta property="og:image:width" content="1200" />  &lt;!&ndash; Optional: Specify image width &ndash;&gt;-->
+  // <!--      <meta property="og:image:height" content="630" />  &lt;!&ndash; Optional: Specify image height &ndash;&gt;-->
+  //       <meta property="og:title" content="${resultTitle}" />
+  // <!--      <meta property="og:description" content="A brief description of the quiz" />-->
+  //       <meta property="og:url" content="${resultPageUrl}" />
+  //     `;
+  //
+  //     Array.from(container.children).forEach((tag) => {
+  //       document.head.prepend(tag);
+  //     });
+  //   }
 
   function renderResults() {
     block.style.transform = null;
 
     // get score
     const score = [...block.querySelectorAll('input[type="radio"]:checked')].map((inputEl) => inputEl.value).reduce((sc, value) => sc += Number(value), 0);
-    console.log('score', score); // 3
 
-    // todo replace with dynamic section metadata
-    const legendScore = [
-      {
-        template: 'master-of-defence',
-        interval: [7, 8],
-      },
-      {
-        template: 'strategic-thinker',
-        interval: [5, 6],
-      },
-      {
-        template: 'precision-driver',
-        interval: [3, 4],
-      },
-      {
-        template: 'racing-challenger',
-        interval: [0, 2],
-      },
-    ];
+    const legendScore = Object.keys(dataset)
+      .filter((item) => item.includes('result_'))
+      .map((item) => ({
+        template: item.split('result_')[1].split('_').join('-'),
+        interval: [...dataset[item].split('-')],
+      }));
 
-    const foundLegend = legendScore.find(({ interval: [min, max] }) => min <= score && score <= max);
+    /* eslint-disable max-len */
+    const foundLegend = legendScore.find(({ interval: [min, max] }) => Number(min) <= score && score <= Number(max));
 
     // redirect
     window.location.replace(`${window.location.href}${foundLegend.template}`);
@@ -132,17 +127,14 @@ export default async function decorate(block) {
   function validateForm(e) {
     e.preventDefault();
 
-    console.log('e', e);
     const formEl = e.target.closest('form');
     const selectedOption = formEl.querySelector('input[type="radio"]:checked');
     const isLastStep = state.currentStep === steps.length - 1;
 
     if (!selectedOption) {
-      // todo show error message
+      formEl.querySelector('fieldset').classList.add('invalid');
       return;
     }
-
-    console.log('valid');
 
     if (!isLastStep) {
       moveToNextStep();
@@ -156,6 +148,18 @@ export default async function decorate(block) {
     <div class="slide-wrapper">${steps.map((step, index) => renderStep(step, index)).join('')}</div>
   `;
 
-  block.querySelectorAll('.button-container.submit').forEach((buttonEl) => buttonEl.addEventListener('click', validateForm));
-  block.querySelectorAll('.step__previous').forEach((previousEl) => previousEl.addEventListener('click', moveToPreviousStep));
+  block.querySelectorAll('form').forEach((form) => {
+    const radios = form.querySelectorAll('input[type="radio"]');
+
+    radios.forEach((radio) => {
+      radio.addEventListener('change', (event) => {
+        if (event.target.checked) {
+          form.querySelector('fieldset').classList.remove('invalid');
+        }
+      });
+    });
+
+    form.querySelectorAll('.button-container.submit').forEach((buttonEl) => buttonEl.addEventListener('click', validateForm));
+    form.querySelectorAll('.step__previous').forEach((previousEl) => previousEl.addEventListener('click', moveToPreviousStep));
+  });
 }
