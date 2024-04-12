@@ -298,6 +298,11 @@
   height: fit-content;
 }
 
+.new-prod-boxes-container .new-prod-boxes.smallerbuttons .button.primary {
+  display: inline-block;
+  min-width: 144px;
+}
+
 .new-prod-boxes-container .button.primary.no-arrow::after {
   content: none;
 }
@@ -335,6 +340,11 @@
   height: fit-content;
 }
 
+.new-prod-boxes-container .new-prod-boxes.smallerbuttons p em a {
+  display: inline-block;
+  min-width: 144px;
+}
+
 .new-prod-boxes-container p em a:hover {
   color: white;
   background-color: #006DFF;
@@ -362,18 +372,17 @@
   font-weight: bold;
   display: inline-flex;
   justify-content: center;
-  align-items: center;
 }
 
-.new-prod-boxes-container .blue-pill::after {
-  background: url("https://bitdefender.com/icons/user-sharp-solid.svg") no-repeat center transparent;
-  filter: invert(1);
-  content: '';
-  width: 8px;
-  height: 9px;
-  background-size: 8px 9px;
+.new-prod-boxes-container .blue-pill .icon {
   position: relative;
-  display: inline-flex;
+  top: 1px;
+  margin-left: 1px;
+}
+
+.new-prod-boxes-container .blue-pill svg {
+  width: 9px;
+  height: 9px;
 }
 
 .switchBox {
@@ -421,17 +430,75 @@
   transition: color 0.4s;
 }
 
-.label.on {
-  right: 0;
+.label.right {
+  z-index: 10;
   color: black;
 }
 
-.switch input:checked + .slider .label.on {
-  color: white;
+.label.left {
+  z-index: 10;
 }
 
-.switch input:checked + .slider .label {
+.switch input:checked ~ .label.right {
+  transition: color 0.4s;
+  color: white !important;
+}
+
+.switch input:checked ~ .label.left {
+  transition: color 0.4s;
   color: black;
+}
+
+.prod-box.individual-box {
+  transition: all 0.4s;
+}
+
+.prod_box.family-box {
+  display: none;
+  transition: all 0.4s;
+}
+
+.plan-switcher {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  margin-bottom: 24px;
+  margin-top: 16px;
+}
+
+.plan-switcher input[type=radio] {
+  position: absolute;
+  opacity: 0;
+}
+
+.plan-switcher .radio-label {
+  margin-right: 8px;
+}
+
+.plan-switcher .radio-label::before {
+  content: "";
+  background: #f4f4f4;
+  color: #006DFF;
+  border-radius: 100%;
+  border: 2px solid #006DFF;
+  display: inline-block;
+  width: 1.2rem;
+  height: 1.2rem;
+  position: relative;
+  margin-right: 9px;
+  vertical-align: top;
+  cursor: pointer;
+  text-align: center;
+  transition: all 250ms ease;
+}
+
+.plan-switcher input[type=radio]:checked + .radio-label:before {
+  background-color: #3197EE;
+  box-shadow: inset 0 0 0 4px #f4f4f4;
+}
+.plan-switcher input[type=radio]:focus + .radio-label:before {
+  outline: none;
+  border-color: #3197EE;
 }
 
 @media (width >= 768px) {

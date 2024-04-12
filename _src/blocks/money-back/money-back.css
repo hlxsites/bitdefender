@@ -92,6 +92,10 @@
   border-radius: 20px;
 }
 
+.money-back.block.background-white {
+  background-color: white;
+}
+
 .money-back-container h3 {
     font: normal normal bold 32px/37px var(--body-font-family);
     text-align: center;
@@ -145,6 +149,9 @@
   .money-back > ul > li a {
     font: normal normal normal 14px/16px var(--body-font-family);
     margin-bottom: 0;
+    margin-top: 5px;
+    text-decoration: none;
+    color: #006EFF;
   }
 
   .money-back > ul > li strong {
@@ -196,6 +203,7 @@
     height: 32px;
     margin-bottom: 9px;
     fill: #006EFF;
+    display: flex;
   }
 
   .money-back img {

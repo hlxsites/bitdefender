@@ -115,7 +115,7 @@
     margin: 0;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap: 24px;
   }
   
