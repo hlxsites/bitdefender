@@ -45,12 +45,12 @@ function waitForOneTrustAndInitialize() {
 
 export default function loadOneTrust(domainID) {
   // eslint-disable-next-line no-console
-  console.log(`Loading OneTrust with ID: ${domainID}`);
+  console.debug(`Loading OneTrust with ID: ${domainID}`);
   const attrs = {
     'data-domain-script': `${domainID}`,
     'data-layer-name': 'adobeDataLayer',
   };
-  loadScript('/solutions/vendor/onetrust/consent/2e112ba7-dfdc-491a-8b9a-c862b3140402/otSDKStub.js', {
+  loadScript(`/solutions/vendor/onetrust/consent/${domainID}/otSDKStub.js`, {
     type: 'text/javascript',
     charset: 'UTF-8',
     ...attrs,
