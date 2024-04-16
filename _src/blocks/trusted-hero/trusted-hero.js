@@ -1,4 +1,4 @@
-import { adobeMcAppendVisitorId, getDatasetFromSection } from '../../scripts/utils/utils.js';
+import { getDatasetFromSection } from '../../scripts/utils/utils.js';
 
 export default async function decorate(block) {
   const [rte, videoUrlEl] = [...block.children];
