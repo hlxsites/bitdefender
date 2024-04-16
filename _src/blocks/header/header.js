@@ -2,6 +2,8 @@ import {
   getMetadata, decorateIcons, decorateButtons, decorateTags,
 } from '../../scripts/lib-franklin.js';
 
+import { adobeMcAppendVisitorId } from '../../scripts/utils/utils.js';
+
 import { decorateBlockWithRegionId, decorateLinkWithLinkTrackingId, getDomain } from '../../scripts/scripts.js';
 
 function createLoginModal() {
@@ -435,6 +437,7 @@ export default async function decorate(block) {
       }
 
       document.querySelector('body').prepend(nav);
+      adobeMcAppendVisitorId(shadowRoot);
       return;
     }
 
