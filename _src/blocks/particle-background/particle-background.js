@@ -1,5 +1,6 @@
 /* eslint-disable prefer-const */
 /* eslint-disable camelcase */
+import { } from '../../../node_modules/tsparticles/tsparticles.bundle.min.js';
 
 // eslint-disable-next-line no-unused-vars
 function debounce(func, wait) {
@@ -19,14 +20,13 @@ function isView(viewport) {
   return !!(element && getComputedStyle(element).display !== 'none');
 }
 
-let tsParticles;
-let loadAll;
+// let tsParticles;
+// let loadAll;
 
 async function init(block, aemOptions) {
   // eslint-disable-next-line import/no-unresolved
-  tsParticles = (await import('../../scripts/vendor/ts-particles/tsParticles.js')).tsParticles;
   // eslint-disable-next-line import/no-unresolved
-  loadAll = (await import('../../scripts/vendor/ts-particles/load-all.js')).loadAll;
+  // loadAll = (await import('../../scripts/vendor/ts-particles/load-all.js')).loadAll;
 
   const particleIdSelector = 'ts-particles';
 
@@ -46,7 +46,7 @@ async function init(block, aemOptions) {
   particleBackground.prepend(particleDiv);
 
   async function loadParticles(options) {
-    await loadAll(tsParticles);
+    // await loadAll(tsParticles);
 
     await tsParticles.load({ id: particleIdSelector, options });
   }
