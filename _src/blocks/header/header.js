@@ -394,6 +394,9 @@ export default async function decorate(block) {
         domain = domain.split('-').join('_');
       }
       const aemHeaderFetch = await fetch(`https://www.bitdefender.com/content/experience-fragments/bitdefender/language_master/${domain}/header-navigation/mega-menu/master/jcr:content/root/mega_menu.styled.html`);
+      if (!aemHeaderFetch.ok) {
+        return;
+      }
       const aemHeaderHtml = await aemHeaderFetch.text();
 
       const nav = document.createElement('div');
