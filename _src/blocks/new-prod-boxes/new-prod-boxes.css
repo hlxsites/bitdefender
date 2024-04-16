@@ -444,9 +444,32 @@
   color: white !important;
 }
 
+.switch input ~ .label .icon {
+  position: relative;
+  margin-right: 10px;
+  top: 2px;
+}
+
+.switch input ~ .label .icon svg {
+  width: 14px;
+  height: 16px;
+}
+
+.switch input ~ .label.right .icon svg {
+  fill: black;
+}
+
+.switch input:checked ~ .label.right .icon svg {
+  fill: white;
+}
+
 .switch input:checked ~ .label.left {
   transition: color 0.4s;
   color: black;
+}
+
+.switch input:checked ~ .label.left .icon svg {
+  fill: black;
 }
 
 .prod-box.individual-box {

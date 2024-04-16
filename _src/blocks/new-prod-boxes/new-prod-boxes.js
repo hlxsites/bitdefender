@@ -58,46 +58,66 @@ export default async function decorate(block, options) {
     blockParent.classList.add('we-container');
   }
 
+  let defaultContentWrapperElements = block.closest('.section').querySelector('.default-content-wrapper')?.children;
+  let individualSwitchText;
+  let familySwitchText;
+  if (defaultContentWrapperElements) {
+    [...defaultContentWrapperElements].forEach((element) => {
+      if (element.innerHTML.includes('&lt;slider-1 ')) {
+        element.innerHTML = element.innerHTML.replace('&lt;slider-1 ', '');
+        individualSwitchText = element.innerHTML;
+        element.remove();
+      }
+      if (element.innerHTML.includes('&lt;slider-2 ')) {
+        element.innerHTML = element.innerHTML.replace('&lt;slider-2 ', '');
+        familySwitchText = element.innerHTML;
+        element.remove();
+      }
+    });
+  }
+
   let switchBox = document.createElement('div');
-  switchBox.classList.add('switchBox');
-  switchBox.innerHTML = `
-    <label class="switch">
-      <input type="checkbox" id="switchCheckbox">
-      <span class="slider round">
+  if (individualSwitchText && familySwitchText) {
+    switchBox.classList.add('switchBox');
+    switchBox.innerHTML = `
+      <label class="switch">
+        <input type="checkbox" id="switchCheckbox">
+        <span class="slider round">
 
-      </span>
-      <span class="label right">Individual</span>
-      <span class="label left">Family</span>
-    </label>
-  `;
+        </span>
+        <span class="label right">${individualSwitchText}</span>
+        <span class="label left">${familySwitchText}</span>
+      </label>
+    `;
 
-  // Get the checkbox inside the switchBox
-  let switchCheckbox = switchBox.querySelector('#switchCheckbox');
+    // Get the checkbox inside the switchBox
+    let switchCheckbox = switchBox.querySelector('#switchCheckbox');
 
-  // Add an event listener to the checkbox
-  switchCheckbox.addEventListener('change', function () {
-    if (this.checked) {
-      let familyBoxes = block.querySelectorAll('.family-box');
-      familyBoxes.forEach((box) => {
-        box.style.display = 'block';
-      });
+    // Add an event listener to the checkbox
+    switchCheckbox.addEventListener('change', function () {
+      if (this.checked) {
+        let familyBoxes = block.querySelectorAll('.family-box');
+        familyBoxes.forEach((box) => {
+          box.style.display = 'block';
+        });
 
-      let individualBoxes = block.querySelectorAll('.individual-box');
-      individualBoxes.forEach((box) => {
-        box.style.display = 'none';
-      });
-    } else {
-      let familyBoxes = block.querySelectorAll('.family-box');
-      familyBoxes.forEach((box) => {
-        box.style.display = 'none';
-      });
+        let individualBoxes = block.querySelectorAll('.individual-box');
+        individualBoxes.forEach((box) => {
+          box.style.display = 'none';
+        });
+      } else {
+        let familyBoxes = block.querySelectorAll('.family-box');
+        familyBoxes.forEach((box) => {
+          box.style.display = 'none';
+        });
 
-      let individualBoxes = block.querySelectorAll('.individual-box');
-      individualBoxes.forEach((box) => {
-        box.style.display = 'block';
-      });
-    }
-  });
+        let individualBoxes = block.querySelectorAll('.individual-box');
+        individualBoxes.forEach((box) => {
+          box.style.display = 'block';
+        });
+      }
+    });
+  }
 
   const productsAsList = products && products.split(',');
   const familyProductsAsList = familyProducts && familyProducts.split(',');
@@ -108,7 +128,7 @@ export default async function decorate(block, options) {
   if (combinedProducts.length) {
     await Promise.all([...block.children].map(async (prod, key) => {
       // eslint-disable-next-line no-unused-vars
-      const [greenTag, title, blueTag, subtitle, saveOldPrice, price, billed, buyLink, undeBuyLink, benefitsLists] = [...prod.querySelectorAll('tr')];
+      const [greenTag, title, blueTag, subtitle, radioButtons, price, billed, buyLink, undeBuyLink, benefitsLists] = [...prod.querySelectorAll('tr')];
       // const [prodName, prodUsers, prodYears] = productsAsList[key].split('/');
       const onSelectorClass = 'tsmd-10-1';
       const [prodName, prodUsers, prodYears] = combinedProducts[key].split('/');
@@ -182,12 +202,16 @@ export default async function decorate(block, options) {
       }
 
       let planSwitcher = document.createElement('div');
-      planSwitcher.classList.add('plan-switcher');
-      planSwitcher.innerHTML = `
+      if (radioButtons) {
+        let leftRadio = radioButtons.querySelector('td:first-child')?.textContent;
+        let rightRadio = radioButtons.querySelector('td:last-child')?.textContent;
+        planSwitcher.classList.add('plan-switcher');
+        planSwitcher.innerHTML = `
         <input type="radio" id="yearly-${prodName.trim()}" name="${key}-plan" value="${key}-yearly-${prodName.trim()}" checked>
-        <label for="yearly-${prodName.trim()}" class="radio-label">Yearly</label><br>
+        <label for="yearly-${prodName.trim()}" class="radio-label">${leftRadio}</label><br>
         <input type="radio" id="monthly-${prodMonthlyName.trim()}" name="${key}-plan" value="${key}-monthly-${prodMonthlyName.trim()}">
-        <label for="monthly-${prodMonthlyName.trim()}" class='radio-label'>Monthly</label>`;
+        <label for="monthly-${prodMonthlyName.trim()}" class='radio-label'>${rightRadio}</label>`;
+      }
 
       // create the prices element based on where the component is being called from, aem of www-websites
       if (options) {
@@ -203,7 +227,7 @@ export default async function decorate(block, options) {
                   ${blueTag.innerText.trim() ? `<div class="blueTag"><div>${blueTag.innerHTML.trim()}</div></div>` : ''}
                   ${subtitle.innerText.trim() ? `<p class="subtitle${subtitle.innerText.trim().split(/\s+/).length > 5 ? ' fixed_height' : ''}">${subtitle.innerText.trim()}</p>` : ''}
                   <hr />
-                  ${planSwitcher.outerHTML}
+                  ${radioButtons ? planSwitcher.outerHTML : ''}
                   
                   ${pricesBox.outerHTML}
 
@@ -279,17 +303,12 @@ export default async function decorate(block, options) {
     </div>`;
   }
 
-  [...block.children].forEach((prod, key) => {
-    // console.log('prod:', prod);
+  [...block.children].forEach((prod) => {
     let planSwitcher = prod.querySelector('.plan-switcher');
-    // console.log('planSwitcher:', planSwitcher.querySelectorAll('input[type="radio"]'));
     planSwitcher.querySelectorAll('input[type="radio"]').forEach((radio) => {
-      // console.log('radio:', radio);
       radio.addEventListener('input', (event) => {
         let planType = event.target.value.split('-')[1];
         let priceBox = prod.querySelector('.hero-aem__prices');
-        console.log('priceBox:', priceBox);
-        console.log('event.target.value:', event.target.value);
         if (planType === 'monthly') {
           priceBox.innerHTML = '';
           priceBox.appendChild(monthlyPriceBoxes[event.target.value]);
@@ -300,7 +319,10 @@ export default async function decorate(block, options) {
       });
     });
   });
-  block.parentNode.insertBefore(switchBox, block);
+
+  if (individualSwitchText && familySwitchText) {
+    block.parentNode.insertBefore(switchBox, block);
+  }
 
   window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
     bubbles: true,
