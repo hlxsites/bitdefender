@@ -302,7 +302,14 @@ export function appendAdobeMcLinks(selector) {
       marketingCloudServer: 'sstats.bitdefender.com',
       marketingCloudServerSecure: 'sstats.bitdefender.com',
     });
-    const wrapperSelector = document.querySelector(selector);
+
+    let wrapperSelector;
+    if (typeof selector === 'string') {
+      wrapperSelector = document.querySelector(selector);
+    } else {
+      wrapperSelector = selector;
+    }
+
     const hrefSelector = '[href*=".bitdefender."]';
     wrapperSelector.querySelectorAll(hrefSelector).forEach((link) => {
       const destinationURLWithVisitorIDs = visitor.appendVisitorIDsTo(link.href);

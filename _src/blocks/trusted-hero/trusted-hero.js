@@ -62,5 +62,5 @@ export default async function decorate(block) {
     anchorEl.rel = 'noopener noreferrer';
   });
 
-  adobeMcAppendVisitorId('header');
+  // adobeMcAppendVisitorId('header');
 }
