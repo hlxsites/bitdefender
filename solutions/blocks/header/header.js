@@ -1,9 +1,9 @@
 import {
   getMetadata, decorateIcons, decorateButtons, decorateTags,
-} from '../../scripts/lib-franklin.js';
+} from '../../scripts/aem.js';
 
 import { decorateBlockWithRegionId, decorateLinkWithLinkTrackingId } from '../../scripts/scripts.js';
-import { adobeMcAppendVisitorId } from '../../scripts/utils/utils.js';
+import { adobeMcAppendVisitorId } from '../../scripts/utils.js';
 
 function createLoginModal() {
   const loginModal = document.querySelector('nav > div:nth-child(4)');
