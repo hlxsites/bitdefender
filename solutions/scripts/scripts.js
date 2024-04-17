@@ -12,11 +12,16 @@ import {
   loadBlocks,
   loadCSS,
   getMetadata,
-} from './lib-franklin.js';
+} from './aem.js';
 
 import {
+  adobeMcAppendVisitorId,
   createTag,
-} from './utils/utils.js';
+} from './utils.js';
+
+import { loadAnalytics } from './analytics.js';
+
+import loadOneTrust from './onetrust.js';
 
 const LCP_BLOCKS = ['hero']; // add your LCP blocks to the list
 const TRACKED_PRODUCTS = [];
@@ -27,7 +32,30 @@ export const DEFAULT_LANGUAGE = 'en';
 export const SUPPORTED_COUNTRIES = ['au'];
 export const DEFAULT_COUNTRY = 'au';
 
-export const METADATA_ANAYTICS_TAGS = 'analytics-tags';
+export const METADATA_ANALYTICS_TAGS = 'analytics-tags';
+
+const ONE_TRUST_ID = '2e112ba7-dfdc-491a-8b9a-c862b3140402';
+
+const HREFLANG_MAP = [
+  ['en-ro', { baseUrl: 'https://www.bitdefender.ro', pageType: '.html' }],
+  ['de', { baseUrl: 'https://www.bitdefender.de', pageType: '.html' }],
+  ['sv', { baseUrl: 'https://www.bitdefender.se', pageType: '.html' }],
+  ['pt', { baseUrl: 'https://www.bitdefender.pt', pageType: '.html' }],
+  ['en-sv', { baseUrl: 'https://www.bitdefender.se', pageType: '.html' }],
+  ['pt-BR', { baseUrl: 'https://www.bitdefender.com.br', pageType: '.html' }],
+  ['en', { baseUrl: 'https://www.bitdefender.com', pageType: '.html' }],
+  ['it', { baseUrl: 'https://www.bitdefender.it', pageType: '.html' }],
+  ['fr', { baseUrl: 'https://www.bitdefender.fr', pageType: '.html' }],
+  ['nl-BE', { baseUrl: 'https://www.bitdefender.be', pageType: '.html' }],
+  ['es', { baseUrl: 'https://www.bitdefender.es', pageType: '.html' }],
+  ['en-AU', { baseUrl: 'https://www.bitdefender.com.au', pageType: '' }],
+  ['ro', { baseUrl: 'https://www.bitdefender.ro', pageType: '.html' }],
+  ['nl', { baseUrl: 'https://www.bitdefender.nl', pageType: '.html' }],
+  ['en-GB', { baseUrl: 'https://www.bitdefender.co.uk', pageType: '.html' }],
+  ['zh-hk', { baseUrl: 'https://www.bitdefender.com/zh-hk', pageType: '' }],
+  ['zh-tw', { baseUrl: 'https://www.bitdefender.com/zh-tw', pageType: '' }],
+  ['x-default', { baseUrl: 'https://www.bitdefender.com', pageType: '.html' }],
+];
 
 const targetPromise = (async () => {
   const targetLocation = getMetadata('target-location');
@@ -75,6 +103,8 @@ window.hlx.plugins.add('experimentation', {
   },
   url: '../plugins/experimentation/src/index.js',
 });
+
+window.ADOBE_MC_EVENT_LOADED = false;
 
 /**
  * Creates a meta tag with the given name and value and appends it to the head.
@@ -232,7 +262,7 @@ export function getTags(tags) {
 export function trackProduct(product) {
   // eslint-disable-next-line max-len
   const isDuplicate = TRACKED_PRODUCTS.find((p) => p.platformProductId === product.platformProductId && p.variantId === product.variantId);
-  const tags = getTags(getMetadata(METADATA_ANAYTICS_TAGS));
+  const tags = getTags(getMetadata(METADATA_ANALYTICS_TAGS));
   const isTrackedPage = tags.includes('product') || tags.includes('service');
   if (isTrackedPage && !isDuplicate) TRACKED_PRODUCTS.push(product);
 }
@@ -318,6 +348,23 @@ export default function decorateLinkedPictures(main) {
   });
 }
 
+function addHreflangTags() {
+  if (document.querySelectorAll('head link[hreflang]').length > 0) return;
+
+  const path = window.location.pathname;
+  const pathCount = path.split('/').filter(String).length;
+
+  Object.keys(HREFLANG_MAP).forEach((key) => {
+    const hreflang = HREFLANG_MAP[key][0];
+    const href = `${HREFLANG_MAP[key][1].baseUrl}${path}${pathCount > 1 ? HREFLANG_MAP[key][1].pageType : ''}`;
+    const ln = document.createElement('link');
+    ln.setAttribute('rel', 'alternate');
+    ln.setAttribute('hreflang', hreflang);
+    ln.setAttribute('href', href);
+    document.querySelector('head').appendChild(ln);
+  });
+}
+
 /**
  * Decorates the main element.
  * @param {Element} main The main element
@@ -331,6 +378,7 @@ export function decorateMain(main) {
   decorateLinkedPictures(main);
   decorateSections(main);
   decorateBlocks(main);
+  addHreflangTags();
 }
 
 /**
@@ -457,7 +505,7 @@ function pushPageLoadToDataLayer() {
   const { domain, domainPartsCount } = getDomainInfo(hostname);
   const languageCountry = getLanguageCountryFromPath(window.location.pathname);
   const environment = getEnvironment(hostname, languageCountry.country);
-  const tags = getTags(getMetadata(METADATA_ANAYTICS_TAGS));
+  const tags = getTags(getMetadata(METADATA_ANALYTICS_TAGS));
 
   const experimentDetails = getExperimentDetails();
 
@@ -562,7 +610,17 @@ async function loadPage() {
   await loadEager(document);
   await window.hlx.plugins.load('lazy');
   await loadLazy(document);
+
+  const setupAnalytics = loadAnalytics(document, {
+    edgeConfigId: '7275417f-3870-465c-af3e-84f8f4670b3c',
+    orgId: '0E920C0F53DA9E9B0A490D45@AdobeOrg',
+  });
+
+  loadOneTrust(ONE_TRUST_ID);
+  adobeMcAppendVisitorId('main');
+
   loadDelayed();
+  await setupAnalytics;
 }
 
 loadPage();
