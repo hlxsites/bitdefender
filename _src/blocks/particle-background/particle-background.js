@@ -2,9 +2,9 @@
 /* eslint-disable camelcase */
 // import * as all from '../../scripts/vendor/tsparticles/tsparticles.bundle.min.js';
 // eslint-disable-next-line no-unused-vars
-import {
-  loadScript,
-} from '../../scripts/lib-franklin.js';
+// import {
+//   loadScript,
+// } from '../../scripts/lib-franklin.js';
 
 function debounce(func, wait) {
   let timeout;
