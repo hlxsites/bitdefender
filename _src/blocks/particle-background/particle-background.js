@@ -48,9 +48,9 @@ async function init(block, aemOptions) {
   particleBackground.prepend(particleDiv);
 
   async function loadParticles(options) {
-    await tsParticles.loadAll(tsParticles);
+    await loadAll(tsParticles);
 
-    await tsParticles.tsParticles({ id: particleIdSelector, options });
+    await tsParticles({ id: particleIdSelector, options });
     // await loadScript('../../../_src/scripts/vendor/tsparticles/tsparticles.bundle.min.js');
     // await window.tsParticles.load({ id: particleIdSelector, options });
     // let script = document.createElement('script');
