@@ -23,16 +23,13 @@ function isView(viewport) {
   return !!(element && getComputedStyle(element).display !== 'none');
 }
 
-// let tsParticles;
+let tsParticles;
 let loadAll;
 
 async function init(block, aemOptions) {
-  // tsParticles = await import('https://cdn.jsdelivr.net/npm/tsparticles@3.3/tsparticles.bundle.min.js');
-  // tsParticles = await import('../../scripts/vendor/ts-particles/tsparticles.bundle.min.js');
-  // console.log('tsParticles', tsParticles);
-  // tsParticles = (await import('../../scripts/vendor/ts-particles/tsparticles.bundle.min.js'));
-  // eslint-disable-next-line import/no-unresolved
-  // loadAll = (await import('../../scripts/vendor/ts-particles/load-all.js')).loadAll;
+  // tsParticles = (await import('https://cdn.jsdelivr.net/npm/@tsparticles/engine@3.1.0/+esm')).tsParticles;
+  // // eslint-disable-next-line import/no-unresolved
+  // loadAll = (await import('https://cdn.jsdelivr.net/npm/@tsparticles/all@3.1.0/+esm')).loadAll;
   const particleIdSelector = 'ts-particles';
 
   const particleDiv = document.createElement('div');
@@ -61,14 +58,14 @@ async function init(block, aemOptions) {
     // script.src = 'https://dlp-fixes--www-websites--bitdefender.hlx.page/_src/scripts/vendor/tsparticles/tsparticles.bundle.min.js';
     // script.src = '../../../_src/scripts/vendor/tsparticles/tsparticles.bundle.min.js';
     block.appendChild(script);
-    script.onload = () => {
-      console.log('tsParticles loaded');
-      // console.log('tsParticles', tsParticles);
-      (async () => {
-        // await loadFull(tsParticles); // not needed if using the bundle script, required for any other installation
-        await window.tsParticles.load({ id: particleIdSelector, options });
-      })();
-    };
+    // script.onload = () => {
+    //   console.log('tsParticles loaded');
+    //   // console.log('tsParticles', tsParticles);
+    //   (async () => {
+    //     // await loadFull(tsParticles); // not needed if using the bundle script, required for any other installation
+    //     await window.tsParticles.load({ id: particleIdSelector, options });
+    //   })();
+    // };
   }
   const options = {
     particles: {
