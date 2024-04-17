@@ -33,6 +33,7 @@
     "stylelint-config-standard": "30.0.1"
   },
   "dependencies": {
+    "@tsparticles/basic": "^3.3.0",
     "@tsparticles/engine": "^3.2.2",
     "tsparticles": "^3.3.0",
     "tsparticles-engine": "^2.12.0"
