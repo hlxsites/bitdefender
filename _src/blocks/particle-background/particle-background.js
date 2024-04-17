@@ -23,13 +23,13 @@ function isView(viewport) {
   return !!(element && getComputedStyle(element).display !== 'none');
 }
 
-// let tsParticles;
+let tsParticles;
 let loadAll;
 
 async function init(block, aemOptions) {
-  // tsParticles = (await import('https://cdn.jsdelivr.net/npm/@tsparticles/engine@3.1.0/+esm')).tsParticles;
-  // // eslint-disable-next-line import/no-unresolved
-  // loadAll = (await import('https://cdn.jsdelivr.net/npm/@tsparticles/all@3.1.0/+esm')).loadAll;
+  tsParticles = (await import('https://cdn.jsdelivr.net/npm/@tsparticles/engine@3.1.0/+esm')).tsParticles;
+  // eslint-disable-next-line import/no-unresolved
+  loadAll = (await import('https://cdn.jsdelivr.net/npm/@tsparticles/all@3.1.0/+esm')).loadAll;
   const particleIdSelector = 'ts-particles';
 
   const particleDiv = document.createElement('div');
@@ -48,24 +48,24 @@ async function init(block, aemOptions) {
   particleBackground.prepend(particleDiv);
 
   async function loadParticles(options) {
-    // await loadAll(tsParticles);
+    await loadAll(tsParticles);
 
-    // await tsParticles.load({ id: particleIdSelector, options });
+    await tsParticles.load({ id: particleIdSelector, options });
     // await loadScript('../../../_src/scripts/vendor/tsparticles/tsparticles.bundle.min.js');
     // await window.tsParticles.load({ id: particleIdSelector, options });
-    let script = document.createElement('script');
+    // let script = document.createElement('script');
     // script.src = 'https://cdn.jsdelivr.net/npm/tsparticles@3.3.0/tsparticles.bundle.min.js';
-    script.src = 'https://dlp-fixes--www-websites--bitdefender.hlx.page/_src/scripts/vendor/tsparticles/tsparticles.bundle.min.js';
+    // script.src = 'https://dlp-fixes--www-websites--bitdefender.hlx.page/_src/scripts/vendor/tsparticles/tsparticles.bundle.min.js';
     // script.src = '../../../_src/scripts/vendor/tsparticles/tsparticles.bundle.min.js';
-    block.appendChild(script);
-    script.onload = () => {
-      console.log('tsParticles loaded');
-      // console.log('tsParticles', tsParticles);
-      (async () => {
-        // await loadFull(tsParticles); // not needed if using the bundle script, required for any other installation
-        await window.tsParticles.load({ id: particleIdSelector, options });
-      })();
-    };
+    // block.appendChild(script);
+    // script.onload = () => {
+    //   console.log('tsParticles loaded');
+    //   // console.log('tsParticles', tsParticles);
+    //   (async () => {
+    //     // await loadFull(tsParticles); // not needed if using the bundle script, required for any other installation
+    //     await window.tsParticles.load({ id: particleIdSelector, options });
+    //   })();
+    // };
   }
   const options = {
     particles: {
