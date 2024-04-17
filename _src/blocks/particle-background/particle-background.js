@@ -50,7 +50,7 @@ async function init(block, aemOptions) {
   async function loadParticles(options) {
     await loadAll(tsParticles);
 
-    await tsParticles({ id: particleIdSelector, options });
+    await tsParticles.load({ id: particleIdSelector, options });
     // await loadScript('../../../_src/scripts/vendor/tsparticles/tsparticles.bundle.min.js');
     // await window.tsParticles.load({ id: particleIdSelector, options });
     // let script = document.createElement('script');
