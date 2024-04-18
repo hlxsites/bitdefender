@@ -1,4 +1,4 @@
-import { createOptimizedPicture } from '../../scripts/aem.js';
+import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
 
 let awardsData = [];
 let filteredAwards = [];

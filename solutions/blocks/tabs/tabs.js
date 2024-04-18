@@ -7,7 +7,7 @@
 
 import {
   readBlockConfig,
-} from '../../scripts/aem.js';
+} from '../../scripts/lib-franklin.js';
 
 function isMobileScreenSize() {
   const isDesktop = window.matchMedia('(min-width: 900px)');
