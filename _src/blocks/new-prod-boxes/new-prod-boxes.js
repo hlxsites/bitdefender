@@ -132,7 +132,7 @@ export default async function decorate(block, options) {
       // const [prodName, prodUsers, prodYears] = productsAsList[key].split('/');
       const onSelectorClass = 'tsmd-10-1';
       const [prodName, prodUsers, prodYears] = combinedProducts[key].split('/');
-      const [prodMonthlyName, prodMonthlyUsers, prodMonthlyYears] = monthlyPricesAsList[key].split('/');
+      const [prodMonthlyName, prodMonthlyUsers, prodMonthlyYears] = monthlyPricesAsList ? monthlyPricesAsList[key].split('/') : [];
       const featuresSet = benefitsLists.querySelectorAll('table');
       const featureList = Array.from(featuresSet).map((table) => {
         const trList = Array.from(table.querySelectorAll('tr'));
@@ -202,7 +202,7 @@ export default async function decorate(block, options) {
       }
 
       let planSwitcher = document.createElement('div');
-      if (radioButtons) {
+      if (radioButtons && monthlyProducts) {
         let leftRadio = radioButtons.querySelector('td:first-child')?.textContent;
         let rightRadio = radioButtons.querySelector('td:last-child')?.textContent;
         planSwitcher.classList.add('plan-switcher');
@@ -303,22 +303,24 @@ export default async function decorate(block, options) {
     </div>`;
   }
 
-  [...block.children].forEach((prod) => {
-    let planSwitcher = prod.querySelector('.plan-switcher');
-    planSwitcher.querySelectorAll('input[type="radio"]').forEach((radio) => {
-      radio.addEventListener('input', (event) => {
-        let planType = event.target.value.split('-')[1];
-        let priceBox = prod.querySelector('.hero-aem__prices');
-        if (planType === 'monthly') {
-          priceBox.innerHTML = '';
-          priceBox.appendChild(monthlyPriceBoxes[event.target.value]);
-        } else {
-          priceBox.innerHTML = '';
-          priceBox.appendChild(yearlyPricesBoxes[event.target.value]);
-        }
+  if (monthlyProducts) {
+    [...block.children].forEach((prod) => {
+      let planSwitcher = prod.querySelector('.plan-switcher');
+      planSwitcher.querySelectorAll('input[type="radio"]').forEach((radio) => {
+        radio.addEventListener('input', (event) => {
+          let planType = event.target.value.split('-')[1];
+          let priceBox = prod.querySelector('.hero-aem__prices');
+          if (planType === 'monthly') {
+            priceBox.innerHTML = '';
+            priceBox.appendChild(monthlyPriceBoxes[event.target.value]);
+          } else {
+            priceBox.innerHTML = '';
+            priceBox.appendChild(yearlyPricesBoxes[event.target.value]);
+          }
+        });
       });
     });
-  });
+  }
 
   if (individualSwitchText && familySwitchText) {
     block.parentNode.insertBefore(switchBox, block);
