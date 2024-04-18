@@ -22,7 +22,8 @@ sampleRUM('cwv');
 
 const LANGUAGE_COUNTRY = getLanguageCountryFromPath(window.location.pathname);
 const LAUNCH_URL = 'https://assets.adobedtm.com';
-const ENVIRONMENT = getEnvironment(window.location.hostname, LANGUAGE_COUNTRY.country);
+//const ENVIRONMENT = getEnvironment(window.location.hostname, LANGUAGE_COUNTRY.country);
+const ENVIRONMENT = 'prod';
 console.debug(`Env: ${ENVIRONMENT}`);
 
 // Load Adobe Experience platform data collection (Launch) script
