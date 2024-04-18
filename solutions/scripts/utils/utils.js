@@ -1,5 +1,3 @@
-import { getMetadata } from './aem.js';
-
 const cacheResponse = new Map();
 const FETCH_URL = 'https://www.bitdefender.com.au/site/Store/ajax';
 
@@ -52,16 +50,11 @@ async function findProductVariant(cachedResponse, variant) {
  */
 export async function fetchProduct(code = 'av', variant = '1u-1y', pid = null) {
   const data = new FormData();
-  let pidFromUrl;
-  let pidFromMetadata;
   // extract pid from url
   if (!pid) {
     const url = new URL(window.location.href);
-    pidFromUrl = url.searchParams.get('pid');
-  }
-
-  if (!pidFromUrl) {
-    pidFromMetadata = getMetadata('pid');
+    // eslint-disable-next-line no-param-reassign
+    pid = url.searchParams.get('pid');
   }
 
   data.append('data', JSON.stringify({
@@ -69,7 +62,7 @@ export async function fetchProduct(code = 'av', variant = '1u-1y', pid = null) {
     product_id: code,
     config: {
       extra_params: {
-        pid: pidFromUrl || pidFromMetadata,
+        pid,
       },
     },
   }));
