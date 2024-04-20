@@ -4,7 +4,7 @@ import {
   createNanoBlock,
   renderNanoBlocks,
   fetchProduct,
-} from '../../scripts/utils.js';
+} from '../../scripts/utils/utils.js';
 
 /**
  * Builds hero block and prepends to main in a new section.

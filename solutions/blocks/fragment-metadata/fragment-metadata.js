@@ -1,4 +1,4 @@
-import { readBlockConfig } from '../../scripts/aem.js';
+import { readBlockConfig } from '../../scripts/lib-franklin.js';
 import { openUrlForOs } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
