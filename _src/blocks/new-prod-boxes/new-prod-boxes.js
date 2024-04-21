@@ -239,8 +239,10 @@ export default async function decorate(block, options) {
                 </div>
             </div>`;
           });
-        const montlyPriceBox = await createPricesElement(options.store, '', 'Save', prodMonthlyName, prodMonthlyUsers, prodMonthlyYears, buyLinkSelector, billed);
-        monthlyPriceBoxes[`${key}-monthly-${prodMonthlyName.trim()}`] = montlyPriceBox;
+        if (monthlyProducts) {
+          const montlyPriceBox = await createPricesElement(options.store, '', 'Save', prodMonthlyName, prodMonthlyUsers, prodMonthlyYears, buyLinkSelector, billed);
+          monthlyPriceBoxes[`${key}-monthly-${prodMonthlyName.trim()}`] = montlyPriceBox;
+        }
       } else {
         const { fetchProduct } = await import('../../scripts/utils/utils.js');
         let oldPrice;
