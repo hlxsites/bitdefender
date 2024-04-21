@@ -52,9 +52,10 @@ const HREFLANG_MAP = [
 ];
 
 const targetPromise = (async () => {
-  const targetLocation = getMetadata('target-location');
+  const targetLocation = getMetadata('experiment-target-location');
+  console.log(`Resolving target audience for location: ${targetLocation}`);
   const randomString = Math.random().toString(36).substring(7);
-  const resp = await fetch(`/rest/v1/delivery?client=sitesinternal&sessionId=${randomString}`, {
+  const resp = await fetch(`https://sitesinternal.tt.omtrdc.net/rest/v1/delivery?client=sitesinternal&sessionId=${randomString}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -75,14 +76,25 @@ const targetPromise = (async () => {
     }),
   });
   const payload = await resp.json();
+  console.log(`Received payload: ${JSON.stringify(payload)}`);
   const mbox = payload.execute.mboxes.find((mbox) => mbox.name === targetLocation);
-  const { audience } = mbox?.options[0].content ?? { audience: 'default' };
-  console.log(`Resolved target audience: ${audience}`);
-  return audience;
+  console.log(`Received target offer: ${mbox?.options[0].content}`);
+  const { url } = mbox?.options[0].content ?? { url: null };
+  console.log(`Resolved challenger url: ${url}`);
+
+  if (url) {
+    // Add the current audience to the page
+    const link = document.createElement('meta');
+    link.setAttribute('property', 'audience:current');
+    link.content = url;
+    document.getElementsByTagName('head')[0].appendChild(link);
+  }
+
+  return !!url;
 })();
 
 const AUDIENCES = {
-  challenger1: () => targetPromise.then((audience) => audience === 'challenger1'),
+  current: () => targetPromise.then(() => true),
 };
 
 window.hlx.plugins.add('rum-conversion', {
