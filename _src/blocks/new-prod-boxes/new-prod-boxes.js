@@ -212,7 +212,7 @@ export default async function decorate(block, options) {
         <input type="radio" id="monthly-${prodMonthlyName.trim()}" name="${key}-plan" value="${key}-monthly-${prodMonthlyName.trim()}">
         <label for="monthly-${prodMonthlyName.trim()}" class='radio-label'>${rightRadio}</label>`;
       }
-
+      console.log(subtitle.innerText);
       // create the prices element based on where the component is being called from, aem of www-websites
       if (options) {
         await createPricesElement(options.store, '', 'Save', prodName, prodUsers, prodYears, buyLinkSelector, billed)
