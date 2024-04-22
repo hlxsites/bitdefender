@@ -1,6 +1,6 @@
 import {
   getMetadata, decorateIcons, decorateButtons, decorateTags,
-} from '../../scripts/aem.js';
+} from '../../scripts/lib-franklin.js';
 
 import { decorateBlockWithRegionId, decorateLinkWithLinkTrackingId } from '../../scripts/scripts.js';
 import { adobeMcAppendVisitorId } from '../../scripts/utils.js';

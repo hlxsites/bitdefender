@@ -1,4 +1,4 @@
-import { decorateIcons, getMetadata } from '../../scripts/aem.js';
+import { decorateIcons, getMetadata } from '../../scripts/lib-franklin.js';
 import { adobeMcAppendVisitorId } from '../../scripts/utils.js';
 
 function wrapImgsInLinks(container) {

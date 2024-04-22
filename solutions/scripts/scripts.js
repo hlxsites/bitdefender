@@ -12,7 +12,7 @@ import {
   loadBlocks,
   loadCSS,
   getMetadata,
-} from './aem.js';
+} from './lib-franklin.js';
 
 import {
   adobeMcAppendVisitorId,

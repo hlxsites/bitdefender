@@ -4,7 +4,7 @@ import {
   sampleRUM,
   fetchPlaceholders,
   getMetadata,
-} from './aem.js';
+} from './lib-franklin.js';
 
 // eslint-disable-next-line import/no-cycle
 import {

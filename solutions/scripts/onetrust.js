@@ -1,4 +1,4 @@
-import { loadScript } from './aem.js';
+import { loadScript } from './lib-franklin.js';
 import { updateUserConsentStatus } from './analytics.js';
 
 const CHECK_INTERVAL = 100;
