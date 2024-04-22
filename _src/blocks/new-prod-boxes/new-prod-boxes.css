@@ -457,7 +457,7 @@
 }
 
 .switch input ~ .label.right .icon svg {
-  fill: black;
+  fill: #026DFF;
 }
 
 .switch input:checked ~ .label.right .icon svg {
@@ -470,7 +470,7 @@
 }
 
 .switch input:checked ~ .label.left .icon svg {
-  fill: black;
+  fill: #026DFF;
 }
 
 .prod-box.individual-box {
