@@ -6,6 +6,7 @@
 //   loadScript,
 // } from '../../scripts/lib-franklin.js';
 
+// eslint-disable-next-line no-unused-vars
 function debounce(func, wait) {
   let timeout;
   return function executedFunction(...args) {
@@ -27,6 +28,7 @@ let tsParticles;
 let loadAll;
 
 async function init(block, aemOptions) {
+  // eslint-disable-next-line import/no-unresolved
   tsParticles = (await import('https://cdn.jsdelivr.net/npm/@tsparticles/engine@3.1.0/+esm')).tsParticles;
   // eslint-disable-next-line import/no-unresolved
   loadAll = (await import('https://cdn.jsdelivr.net/npm/@tsparticles/all@3.1.0/+esm')).loadAll;
@@ -62,7 +64,7 @@ async function init(block, aemOptions) {
     //   console.log('tsParticles loaded');
     //   // console.log('tsParticles', tsParticles);
     //   (async () => {
-    //     // await loadFull(tsParticles); // not needed if using the bundle script, required for any other installation
+    //     // await loadFull(tsParticles);
     //     await window.tsParticles.load({ id: particleIdSelector, options });
     //   })();
     // };
