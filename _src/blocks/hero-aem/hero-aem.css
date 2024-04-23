@@ -1,5 +1,9 @@
 /* stylelint-disable */
-.hero-aem-container .hero-aem p:first-of-type {
+.hero-aem-container .hero-aem p:first-of-type::not(::has(a))  {
+    margin: 0;
+    margin-bottom: 20px;
+}
+  .hero-aem-container .hero-aem p:first-of-type a  {
     margin: 0;
     margin-bottom: 20px;
   }
