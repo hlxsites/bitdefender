@@ -346,7 +346,7 @@
       align-items: center;
     }
     .hero-aem-container .hero-aem .hero-aem__card__desktop > div {
-      padding: 4%;
+      padding: 24px 0px 24px 56px;
     }
     .hero-aem-container .hero-aem p.button-container {
       text-align: left;
