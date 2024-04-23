@@ -98,11 +98,6 @@
   margin-right: auto;
 }
 
-/* a/b test styles, should be deleted after */
-.four-cards-container.we-container .default-content-wrapper {
- text-align: center;
-}
-
 .four-cards-container .icon svg {
   width: 48px;
   height: 48px;
@@ -130,6 +125,11 @@
   }
 
   .four-cards .default-content-wrapper {
+    text-align: center;
+  }
+
+  /* a/b test styles, should be deleted after */
+  .four-cards-container.we-container .default-content-wrapper {
     text-align: center;
   }
 
