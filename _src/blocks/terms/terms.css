@@ -64,6 +64,7 @@
     --section-desktop-padding-vertical: 48px;
     --section-mobile-padding-vertical: 32px;
     --cta-background-light-blue: var(--background-light-blue);
+    background-color: #f2f2f2;
 }  
 
 @media (min-width: 992px) { /* desktop */
@@ -72,10 +73,6 @@
         padding: 15px var(--section-desktop-padding);
         margin: 0 auto;
     }
-}
-
-.terms-container {
-    background-color: #f2f2f2;
 }
 
 .terms-container h6 {

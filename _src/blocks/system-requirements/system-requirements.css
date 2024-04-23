@@ -64,6 +64,7 @@
     --section-desktop-padding-vertical: 48px;
     --section-mobile-padding-vertical: 32px;
     --cta-background-light-blue: var(--background-light-blue);
+    background-color: #f2f2f2;
 }  
 
 .system-requirements-wrapper {
@@ -81,11 +82,7 @@
 .system-requirements-container h6 {
     text-align: left;
     font: normal normal bold 16px/18px var(--body-font-family);
-    margin: 0 0;
-}
-
-.system-requirements-container {
-    background-color: #f2f2f2;
+    margin: 0;
 }
 
 .system-requirements-container-userguides {
