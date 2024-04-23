@@ -1,5 +1,5 @@
 /* stylelint-disable */
-.hero-aem-container .hero-aem p:has(a) {
+.hero-aem-container .hero-aem p:first-of-type:has(a) {
   margin: 0;
 }
 .hero-aem-container .hero-aem p:first-of-type  {
