@@ -58,7 +58,7 @@ export default function decorate(block, options) {
     const buttonIndex = Array.from(buttons).indexOf(selectedButton);
     const nextIndex = (buttonIndex + 1) % buttons.length;
     buttons[nextIndex].click();
-  }, 5000);
+  }, 6000);
 
   // Add classes to each card-container and hide all but the first one
   sections.forEach((element, index) => {
