@@ -532,6 +532,10 @@
     padding: 60px 0;
     align-items: initial;
   }
+
+  .new-prod-boxes-container .new-prod-boxes .prod_box.hasGreenTag {
+    margin-top: initial;
+  }
 }
 
 @media (width >= 992px) {
