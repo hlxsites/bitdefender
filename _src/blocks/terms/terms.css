@@ -59,10 +59,8 @@
     --nav-height-desktop: 40px;
     --body-max-width: 1920px;
     --body-padding: 20px;
-    --section-desktop-max-width: 1300px;
+    --section-desktop-max-width: 1290px;
     --section-desktop-padding: 20px;
-    --section-large-desktop-max-width: 1332px;
-    --section-large-desktop-padding: 50px;
     --section-desktop-padding-vertical: 48px;
     --section-mobile-padding-vertical: 32px;
     --cta-background-light-blue: var(--background-light-blue);
@@ -73,13 +71,6 @@
         max-width: var(--section-desktop-max-width);
         padding: 15px var(--section-desktop-padding);
         margin: 0 auto;
-    }
-}
-
-@media (min-width: 1600px) { /* large desktop */
-    .terms-wrapper {
-        max-width: var(--section-large-desktop-max-width);
-        padding: 15px var(--section-large-desktop-padding);
     }
 }
 
