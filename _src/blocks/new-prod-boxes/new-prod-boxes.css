@@ -30,13 +30,13 @@
   padding: 60px 15px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 .new-prod-boxes-container .new-prod-boxes .prod_box {
   flex: 1;
   max-width: 410px;
-  margin: 8px 14px;
+  margin: 8px;
 }
 .new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box {
   position: relative;
@@ -533,7 +533,7 @@
   }
 
   .new-prod-boxes-container .new-prod-boxes .prod_box.hasGreenTag {
-    margin: 8px 14px;
+    margin: 8px;
   }
 }
 
