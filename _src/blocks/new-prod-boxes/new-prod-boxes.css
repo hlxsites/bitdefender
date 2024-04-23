@@ -534,7 +534,7 @@
   }
 
   .new-prod-boxes-container .new-prod-boxes .prod_box.hasGreenTag {
-    margin-top: initial;
+    margin-top: 8px 14px;
   }
 }
 
