@@ -408,14 +408,7 @@
     }
 
     .hero-aem-container.we-container {
-      max-width: 1332px;
-      padding-left: 20px;
-      padding-right: 20px;
-    }
-  }
-  @media (width >= 1600px) {
-    .hero-aem-container.we-container {
-      max-width: 1332px;
+      max-width: 1350px;
       padding-left: 20px;
       padding-right: 20px;
     }
