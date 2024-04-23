@@ -50,10 +50,9 @@
 .tabs-component-container .tabs-container {
   display: flex;
   justify-content: center;
-  gap: 12%;
-  width: 100%;
   margin-bottom: 40px;
   flex-wrap: wrap;
+  border-bottom: 1px solid #E4F2FF;
 }
 
 .tabs-component-container .card-container {
@@ -73,10 +72,10 @@
   border: 0;
   font: normal normal bold 18px/21px Arial, sans-serif;
   padding: 9px;
-  margin-bottom: 10px;
   display: flex;
   gap: 10px;
   align-items: center;
+  position: relative;
 }
 
 .tabs-component-container a {
@@ -129,8 +128,21 @@
   transform: translateX(5px);
 }
 
-.tabs-component-container .tabs-container button.selected {
-  border-bottom: #006dff solid 4px;
+.tabs-component-container .tabs-container button::after {
+  background: #006eff;
+  border-radius: 0;
+  content: "";
+  height: 4px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  z-index: 1;
+}
+
+.tabs-component-container .tabs-container button.selected::after {
+  transition: all 1s ease;
+  width: 100%;
 }
 
 .tabs-component-container .left {
@@ -207,10 +219,6 @@
 
   .tabs-component-container .right {
     width: 50%;
-  }
-
-  .tabs-component-container .tabs-container {
-    gap: 5%;
   }
 
   .tabs-component-container.we-container {
