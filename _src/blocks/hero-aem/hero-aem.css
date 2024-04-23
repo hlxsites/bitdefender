@@ -1,8 +1,8 @@
 /* stylelint-disable */
 .hero-aem-container .hero-aem p:first-of-type  {
-    margin: 0;
-    margin-bottom: 20px;
-  }
+  margin: 0;
+  margin-bottom: 20px;
+}
   .hero-aem-container .hero-aem p:has(a) {
     margin: 0;
   }
