@@ -71,7 +71,7 @@
 @media (min-width: 992px) { /* desktop */
     .terms-wrapper {
         max-width: var(--section-desktop-max-width);
-        padding: 15px var(--section-desktop-padding);
+        padding: 15px var(--section-desktop-padding) 40px var(--section-desktop-padding);
         margin: 0 auto;
     }
 }
