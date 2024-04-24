@@ -88,7 +88,7 @@
 
 
 /* remove padding from userguide wrapper */
-.system-requirements-container:last-child {
+.system-requirements-container :last-child {
     padding-bottom: 0;
 }
 
