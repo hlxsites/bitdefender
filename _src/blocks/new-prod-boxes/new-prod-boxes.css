@@ -184,7 +184,7 @@
   list-style-type: none;
   font-weight: bold;
   font-family: Arial, sans-serif;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
 }
 .new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .benefitsLists ul li:first-of-type.has_arrow::before {
   content: "";
