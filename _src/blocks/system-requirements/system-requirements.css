@@ -89,7 +89,7 @@
 
 /* remove padding from userguide wrapper */
 .system-requirements-container :last-child {
-    padding-bottom: 0;
+    padding-bottom: 1px;
 }
 
 .system-requirements-container-userguides {
