@@ -231,16 +231,20 @@
   font: normal normal normal 16px/18px var(--body-font-family);
 }
 
-.bitdefender-central.block a.video-placeholder img {
-  object-fit: cover;
-  height: 100%;
-  border-radius: 20px;
-}
-
 .bitdefender-central.block img {
   max-width: 100%;
   width: auto;
   height: auto;
+}
+
+.modal-container .columns-wrapper img {
+  height: 225px;
+}
+
+.bitdefender-central.block a.video-placeholder img {
+  object-fit: cover;
+  height: 100%;
+  border-radius: 20px;
 }
 
 .bitdefender-central.block > div > div:first-of-type ul li::before {
@@ -394,10 +398,6 @@ a.video-placeholder {
   background: #000;
   transform: rotate(133deg);
   transition: all .3s ease-in-out;
-}
-
-.modal-container .columns-wrapper img {
-  height: 225px;
 }
 
 .modal-container.video-modal .modal-content {
