@@ -39,6 +39,10 @@
     max-width: 500px;
 }
 
+.particle-background p {
+  font-size: 18px;
+}
+
 .particle-background div {
     z-index: 1;
     padding: 24px;
