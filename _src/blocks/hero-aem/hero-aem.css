@@ -1,6 +1,7 @@
 /* stylelint-disable */
 .hero-aem-container .hero-aem p:first-of-type:has(a) {
   margin: 0;
+  font-size: 16px;
 }
 .hero-aem-container .hero-aem >p:first-of-type  {
   margin: 0;
@@ -16,6 +17,7 @@
     font-weight: normal;
     margin-top: 10px;
     line-height: 1.1;
+    margin-bottom: 20px;
   }
   .hero-aem-container .hero-aem h2 {
     margin-top: 0;
@@ -156,7 +158,7 @@
 
   .hero-aem-container .button.free-download {
     color: #005ed9;
-    font-weight: 500;
+    font-weight: bold;
     background-color: transparent;
     border: none;
     margin: 0;
