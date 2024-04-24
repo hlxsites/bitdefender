@@ -2,7 +2,7 @@
 .hero-aem-container .hero-aem p:first-of-type:has(a) {
   margin: 0;
 }
-.hero-aem-container .hero-aem p:first-of-type  {
+.hero-aem-container .hero-aem >p:first-of-type  {
   margin: 0;
   margin-bottom: 20px;
 }
@@ -36,6 +36,7 @@
   }
   .hero-aem-container .hero-aem .hero-aem__card-text {
     padding: 27px;
+    font-size: 20px;
     background-color: #F7F7F7;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
@@ -79,6 +80,8 @@
   .hero-aem-container .hero-aem .prod-save {
     color: #1C7928;
     font-weight: bold;
+    font-size: 16px;
+    margin-left: 8px;
   }
   .hero-aem-container .hero-aem .prod-newprice {
     font-size: 40px;
@@ -235,6 +238,7 @@
     padding: 5px 13px;
     display: inline-block;
     margin-right: 10px;
+    margin-top: 0px;
   }
 
   .hero-aem__underPriceText {
@@ -421,6 +425,6 @@
     }
 
     .hero-aem-container .hero-aem .hero-aem__desktop-image img {
-      max-width: 600px;
+      max-height: 600px;
     }
   }
