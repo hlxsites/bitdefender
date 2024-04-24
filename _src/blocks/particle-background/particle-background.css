@@ -53,15 +53,7 @@
 
 @media (width >= 1200px) {
   .particle-background-container.we-container {
-    max-width: 1332px;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-}
-
-@media (width >= 1600px) {
-  .particle-background-container.we-container {
-    max-width: 1332px;
+    max-width: 1290px;
     padding-left: 20px;
     padding-right: 20px;
   }
