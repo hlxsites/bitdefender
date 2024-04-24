@@ -92,10 +92,9 @@ export default async function decorate(block, options) {
 
     // Get the checkbox inside the switchBox
     let switchCheckbox = switchBox.querySelector('#switchCheckbox');
-
     // Add an event listener to the checkbox
     switchCheckbox.addEventListener('change', () => {
-      if (this.checked) {
+      if (switchCheckbox.checked) {
         let familyBoxes = block.querySelectorAll('.family-box');
         familyBoxes.forEach((box) => {
           box.style.display = 'block';
