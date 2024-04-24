@@ -28,7 +28,7 @@
 }
 .new-prod-boxes-container .new-prod-boxes {
   margin: 0 auto;
-  padding: 60px 15px;
+  /* padding: 60px 15px; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -530,7 +530,7 @@
 @media (width >= 768px) {
   .new-prod-boxes-container .new-prod-boxes {
     flex-direction: row;
-    padding: 60px 0;
+    /* padding: 60px 0; */
     align-items: initial;
   }
 
