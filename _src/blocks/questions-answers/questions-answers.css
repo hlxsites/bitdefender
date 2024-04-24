@@ -153,6 +153,10 @@
     font: normal normal normal 14px/16px var(--body-font-family);
 }
 
+.questions-answers-item .answer p a {
+    color: #006EFF;
+}
+
 .questions-answers-item.expanded .answer {
     opacity: 1;
     height: auto;
