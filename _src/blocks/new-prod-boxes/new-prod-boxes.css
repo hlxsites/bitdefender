@@ -109,6 +109,11 @@
   border: 1px solid #D1D1D1;
   margin: 10px 0;
 }
+
+.new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box hr:first-of-type {
+  margin-bottom: 0;
+}
+
 .new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .save_price_box {
   display: flex;
   justify-content: left;
@@ -484,6 +489,10 @@
 .prod_box.family-box {
   display: none;
   transition: all 0.4s;
+}
+
+.hero-aem-prices {
+  margin-top: 20px;
 }
 
 .plan-switcher {
