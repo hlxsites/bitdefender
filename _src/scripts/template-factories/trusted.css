@@ -644,10 +644,11 @@ main .section.link-right a {
 
     .trusted .section.static-awards .default-content-wrapper > *:not(:first-child) {
         width: 100%;
+        padding: 20px;
     }
 
     .trusted .section.static-awards .default-content-wrapper > * picture {
-        width: 100%;
+        width: 100% !important;
     }
 }
 
@@ -753,7 +754,10 @@ main .section.link-right a {
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 20px;
+    }
+
+    .trusted .section.static-awards .default-content-wrapper > * picture {
+        width: 60%;
     }
 }
 
@@ -769,9 +773,5 @@ main .section.link-right a {
     .trusted main .hero .hero-content .breadcrumb {
         padding: 14px 0;
         margin-bottom: 0;
-    }
-
-    .trusted .section.static-awards .default-content-wrapper > * picture {
-        width: 60%;
     }
 }
