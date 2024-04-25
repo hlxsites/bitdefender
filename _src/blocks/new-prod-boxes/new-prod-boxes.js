@@ -186,7 +186,7 @@ export default async function decorate(block, options) {
           const liContent = `<li class="${liClass}">${firstTdContent}${secondTdContent}</li>`;
 
           return liContent;
-        }).join('');
+        }).join(' ');
 
         return `<ul>${liString}</ul>`;
       });
