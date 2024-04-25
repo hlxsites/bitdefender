@@ -28,8 +28,6 @@
 }
 .new-prod-boxes-container .new-prod-boxes {
   margin: 0 auto;
-  /* padding: 60px 15px; */
-  padding-bottom: 60px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -545,7 +543,7 @@
 @media (width >= 768px) {
   .new-prod-boxes-container .new-prod-boxes {
     flex-direction: row;
-    /* padding: 60px 0; */
+    padding-bottom: 60px;
     align-items: initial;
   }
 
