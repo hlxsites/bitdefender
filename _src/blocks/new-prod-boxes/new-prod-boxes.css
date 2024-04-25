@@ -60,6 +60,7 @@
   position: absolute;
   top: -39px;
   left: 7%;
+  box-sizing: content-box;
 }
 .new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box h2 {
   font-weight: bold;
