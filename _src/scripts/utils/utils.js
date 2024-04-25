@@ -1,6 +1,7 @@
 /* eslint-disable no-use-before-define */
-export const localisationList = ['zh-hk', 'zh-tw', 'en-us'];
+export const localisationList = ['zh-hk', 'zh-tw', 'en-us', 'de-de', 'nl-nl', 'fr-fr', 'it-it', 'ro-ro'];
 export function getDefaultLanguage() {
+  // TODO: refactor. It's not working as should for en locales.
   const currentPathUrl = window.location.pathname;
   const foundLanguage = localisationList.find((item) => currentPathUrl.indexOf(`/${item}/`) !== -1);
   return foundLanguage?.replace('zh-', '').replace('en-', '') || 'site';
