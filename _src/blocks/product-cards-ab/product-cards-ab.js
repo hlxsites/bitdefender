@@ -9,7 +9,7 @@
 let adobeDataLayerArray = [];
 export default async function decorate(block, options) {
   const {
-    pid, offtext, yearly, monthly,
+    pid, offtext, yearly, monthly, firstyear,
   } = options ? options.metadata : block.closest('.section').dataset;
   if (options) {
     // eslint-disable-next-line no-param-reassign
@@ -109,7 +109,7 @@ export default async function decorate(block, options) {
               <span class="prod-save">${discountPercentage}% ${offtext}</span>
           </div>
           <div>
-            <span class="prod-newprice">${currencyLabel}${newPrice}</span>
+            <span class="prod-newprice">${currencyLabel}${newPrice}</span><span>/ ${firstyear}</span>
           </div>`;
         tabContent.appendChild(tab);
         // add discount value to component title, only if it's not a monthly subscription
