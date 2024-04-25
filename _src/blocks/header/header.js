@@ -2,7 +2,9 @@ import {
   getMetadata, decorateIcons, decorateButtons, decorateTags,
 } from '../../scripts/lib-franklin.js';
 
-import { decorateBlockWithRegionId, decorateLinkWithLinkTrackingId } from '../../scripts/scripts.js';
+import { adobeMcAppendVisitorId } from '../../scripts/utils/utils.js';
+
+import { decorateBlockWithRegionId, decorateLinkWithLinkTrackingId, getDomain } from '../../scripts/scripts.js';
 
 function createLoginModal() {
   const loginModal = document.querySelector('nav > div:nth-child(4)');
@@ -381,7 +383,16 @@ async function runDefaultHeaderLogic(block) {
     const html = await resp.text();
 
     if (html.includes('aem-banner')) {
-      const aemHeaderFetch = await fetch('https://www.bitdefender.com/content/experience-fragments/bitdefender/language_master/en/header-navigation/mega-menu/master/jcr:content/root/mega_menu.styled.html');
+      let domain = getDomain();
+      if (domain === 'en-us') {
+        domain = 'en';
+      } else {
+        domain = domain.split('-').join('_');
+      }
+      const aemHeaderFetch = await fetch(`https://www.bitdefender.com/content/experience-fragments/bitdefender/language_master/${domain}/header-navigation/mega-menu/master/jcr:content/root/mega_menu.styled.html`);
+      if (!aemHeaderFetch.ok) {
+        return;
+      }
       const aemHeaderHtml = await aemHeaderFetch.text();
 
       const nav = document.createElement('div');
@@ -419,6 +430,7 @@ async function runDefaultHeaderLogic(block) {
       }
 
       document.querySelector('body').prepend(nav);
+      adobeMcAppendVisitorId(shadowRoot);
       return;
     }
 

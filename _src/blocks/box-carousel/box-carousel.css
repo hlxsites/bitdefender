@@ -48,8 +48,10 @@
 }
 
 .box-carousel-container .carousel-item {
+    display: flex;
+    flex-direction: column;
     width: 220px;
-    height: 220px;
+    min-height: 220px;
     margin: 10px;
     box-sizing: border-box;
     padding: 20px;
@@ -77,13 +79,9 @@
 }
 
 .box-carousel-container .carousel-item .title {
-    font: normal normal bold 32px/82px "IBM Plex Sans", sans-serif;
+    font: normal normal bold 22px/28px "IBM Plex Sans", sans-serif;
     letter-spacing: 0;
     overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    line-clamp: 1;
-    -webkit-box-orient: vertical;
     margin: 8px 0;
 }
 
@@ -109,10 +107,7 @@
     font: normal normal normal 12px/15px "IBM Plex Sans", sans-serif;
     letter-spacing: 0;
     overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
-    -webkit-box-orient: vertical;
+    margin-top: auto;
 }
 
 .box-carousel-container.testimonials .carousel-item .subtitle-secondary {
@@ -129,6 +124,10 @@
     height: 1px;
     background: black;
     top: -5px;
+}
+
+.box-carousel-container.testimonials .carousel-item .subtitle {
+    margin-top: unset;
 }
 
 .box-carousel-container .left-arrow svg {
@@ -153,8 +152,8 @@
 }
 
 .box-carousel-container .carousel-item .icon {
-    width: 45px;
-    height: 45px;
+    width: 35px;
+    height: 35px;
     margin: 0;
 }
 
@@ -184,11 +183,11 @@
 
     .box-carousel-container .carousel-item {
         width: 290px;
-        height: 290px;
+        min-height: 290px;
     }
 
     .box-carousel-container .carousel-item .title {
-        font: normal normal bold 64px/82px "IBM Plex Sans", sans-serif;
+        font: normal normal bold 25px/34px "IBM Plex Sans", sans-serif;
     }
 
     .box-carousel-container .carousel-item .subtitle {
