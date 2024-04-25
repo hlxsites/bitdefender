@@ -65,6 +65,10 @@
   margin-top: 0;
 }
 
+.testimonials-component-container .review p:last-child {
+  font-style: normal;
+}
+
 .testimonials-component-container.grey-bck .review p {
   font-size: 14px;
   font-style: normal;
