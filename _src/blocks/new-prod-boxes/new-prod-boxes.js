@@ -223,7 +223,7 @@ export default async function decorate(block, options) {
                   ${greenTag.innerText.trim() ? `<div class="greenTag2">${greenTag.innerText.trim()}</div>` : ''}
                   ${title.innerText.trim() ? `<h2>${title.innerHTML}</h2>` : ''}
                   ${blueTag.innerText.trim() ? `<div class="blueTag"><div>${blueTag.innerHTML.trim()}</div></div>` : ''}
-                  ${subtitle.innerText.trim() ? `<p class="subtitle${subtitle.innerText.trim().split(/\s+/).length > 5 ? ' fixed_height' : ''}">${subtitle.querySelector('td').innerHTML.trim()}</p>` : ''}
+                  ${subtitle.innerText.trim() ? `<p class="subtitle">${subtitle.querySelector('td').innerHTML.trim()}</p>` : ''}
                   <hr />
                   ${radioButtons ? planSwitcher.outerHTML : ''}
                   
