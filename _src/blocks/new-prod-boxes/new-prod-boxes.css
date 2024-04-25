@@ -114,6 +114,10 @@
   margin-bottom: 0;
 }
 
+.new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box hr:last-of-type {
+  margin-bottom: 10px;
+}
+
 .new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .save_price_box {
   display: flex;
   justify-content: left;
