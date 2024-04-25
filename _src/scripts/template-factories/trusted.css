@@ -649,10 +649,6 @@ main .section.link-right a {
     .trusted .section.static-awards .default-content-wrapper > * picture {
         width: 100%;
     }
-
-    /*.trusted .default-content-wrapper {*/
-    /*    height: 120px;*/
-    /*}*/
 }
 
 @media (width >= 768px) {
