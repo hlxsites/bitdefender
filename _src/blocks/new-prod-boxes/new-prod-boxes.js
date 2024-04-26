@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 
 /* eslint-disable max-len */
-async function createPricesElement(storeOBJ, conditionText, saveText, prodName, prodUsers, prodYears, buylink) {
+async function createPricesElement(storeOBJ, conditionText, saveText, prodName, prodUsers, prodYears, buylink, billed) {
   const storeProduct = await storeOBJ.getProducts([new ProductInfo(prodName, 'consumer')]);
   const storeOption = storeProduct[prodName].getOption(prodUsers, prodYears);
   const price = storeOption.getPrice();
@@ -38,51 +38,100 @@ async function createPricesElement(storeOBJ, conditionText, saveText, prodName, 
         <span class="prod-newprice">${discountedPrice}</span>
         <sup>${conditionText || ''}</sup>
       </div>
-    </div>`;
-  buylink.href = buyLink;
+    </div>
+    ${billed ? `<div class="billed">${billed.innerHTML}</div>` : ''}
+    <a href="${buyLink}" class="button primary">${buylink.text}</a>`;
+  buylink.remove();
   return priceElement;
 }
 
-export default function decorate(block, options) {
+export default async function decorate(block, options) {
   const {
     // eslint-disable-next-line no-unused-vars
-    products, priceType, pid,
+    products, familyProducts, monthlyProducts, priceType, pid,
   } = options ? options.metadata : block.closest('.section').dataset;
-
-  let underShadow = block;
   // if options exists, this means the component is being called from aem
   if (options) {
-    const aemContainer = block.children[1];
-    aemContainer.classList.add('new-prod-boxes-container');
-    aemContainer.classList.add('we-container');
-    // eslint-disable-next-line prefer-destructuring
-    underShadow = aemContainer.children[1];
-    underShadow.classList.add('block');
+    // eslint-disable-next-line no-param-reassign
+    block = block.querySelector('.block');
+  }
+  const blockParent = block.closest('.section');
+  blockParent.classList.add('we-container');
+
+  let defaultContentWrapperElements = block.closest('.section').querySelector('.default-content-wrapper')?.children;
+  let individualSwitchText;
+  let familySwitchText;
+  if (defaultContentWrapperElements) {
+    [...defaultContentWrapperElements].forEach((element) => {
+      if (element.innerHTML.includes('&lt;slider-1 ')) {
+        element.innerHTML = element.innerHTML.replace('&lt;slider-1 ', '');
+        individualSwitchText = element.innerHTML;
+        element.remove();
+      }
+      if (element.innerHTML.includes('&lt;slider-2 ')) {
+        element.innerHTML = element.innerHTML.replace('&lt;slider-2 ', '');
+        familySwitchText = element.innerHTML;
+        element.remove();
+      }
+    });
   }
 
-  //   let switchBox = document.createElement('div');
-  //   switchBox.classList.add('switchBox');
-  //   switchBox.innerHTML = `
-  //   <label class="switch">
-  //     <input type="checkbox">
-  //     <span class="slider round">
+  let switchBox = document.createElement('div');
+  if (individualSwitchText && familySwitchText) {
+    switchBox.classList.add('switchBox');
+    switchBox.innerHTML = `
+      <label class="switch">
+        <input type="checkbox" id="switchCheckbox">
+        <span class="slider round">
 
-  //     </span>
-  //     <span class="label on">Individual</span>
-  //     <span class="label off">Family</span>
-  //   </label>
-  // `;
+        </span>
+        <span class="label right">${individualSwitchText}</span>
+        <span class="label left">${familySwitchText}</span>
+      </label>
+    `;
+
+    // Get the checkbox inside the switchBox
+    let switchCheckbox = switchBox.querySelector('#switchCheckbox');
+    // Add an event listener to the checkbox
+    switchCheckbox.addEventListener('change', () => {
+      if (switchCheckbox.checked) {
+        let familyBoxes = block.querySelectorAll('.family-box');
+        familyBoxes.forEach((box) => {
+          box.style.display = 'block';
+        });
+
+        let individualBoxes = block.querySelectorAll('.individual-box');
+        individualBoxes.forEach((box) => {
+          box.style.display = 'none';
+        });
+      } else {
+        let familyBoxes = block.querySelectorAll('.family-box');
+        familyBoxes.forEach((box) => {
+          box.style.display = 'none';
+        });
+
+        let individualBoxes = block.querySelectorAll('.individual-box');
+        individualBoxes.forEach((box) => {
+          box.style.display = 'block';
+        });
+      }
+    });
+  }
 
   const productsAsList = products && products.split(',');
-  if (productsAsList.length) {
-    // productsAsList.forEach((prod) => updateProductsList(prod));
-
-    [...underShadow.children].forEach(async (prod, key) => {
+  const familyProductsAsList = familyProducts && familyProducts.split(',');
+  const combinedProducts = productsAsList.concat(familyProductsAsList);
+  const monthlyPricesAsList = monthlyProducts && monthlyProducts.split(',');
+  let monthlyPriceBoxes = {};
+  let yearlyPricesBoxes = {};
+  if (combinedProducts.length) {
+    await Promise.all([...block.children].map(async (prod, key) => {
       // eslint-disable-next-line no-unused-vars
-      const [greenTag, title, blueTag, subtitle, saveOldPrice, price, billed, buyLink, undeBuyLink, benefitsLists] = [...prod.querySelectorAll('tr')];
+      const [greenTag, title, blueTag, subtitle, radioButtons, price, billed, buyLink, undeBuyLink, benefitsLists] = [...prod.querySelectorAll('tr')];
       // const [prodName, prodUsers, prodYears] = productsAsList[key].split('/');
       const onSelectorClass = 'tsmd-10-1';
-      const [prodName, prodUsers, prodYears] = productsAsList[key].split('/');
+      const [prodName, prodUsers, prodYears] = combinedProducts[key].split('/');
+      const [prodMonthlyName, prodMonthlyUsers, prodMonthlyYears] = monthlyPricesAsList ? monthlyPricesAsList[key].split('/') : [];
       const featuresSet = benefitsLists.querySelectorAll('table');
       const featureList = Array.from(featuresSet).map((table) => {
         const trList = Array.from(table.querySelectorAll('tr'));
@@ -92,7 +141,6 @@ export default function decorate(block, options) {
           let firstTdContent = tdList.length > 0 && tdList[0].textContent.trim() !== '' ? `${tdList[0].innerHTML}` : '';
           // Extract the content of the second <td> (if present) inside a <span>
           const secondTdContent = tdList.length > 1 && tdList[1].textContent.trim() !== '' ? `<span>${tdList[1].innerHTML}</span>` : '';
-
           // Create the <li> combining the first and second td content
           let liClass = '';
           if (firstTdContent === '') {
@@ -101,11 +149,20 @@ export default function decorate(block, options) {
 
           if (firstTdContent.indexOf('?pill') !== -1) {
             let pillText = firstTdContent.match(/\?pill (\w+)/);
+            let iconElement = firstTdContent.match(/<span class="[^"]*">(.*?)<\/span>/);
             if (pillText) {
+              let icon = tdList[0].querySelector('span');
               const pillElement = document.createElement('span');
               pillElement.classList.add('blue-pill');
-              pillElement.innerHTML = `${pillText[1]}`;
-              firstTdContent = firstTdContent.replace(pillText[0], pillElement.outerHTML);
+              pillElement.innerHTML = `${pillText[1]}${iconElement ? iconElement[0] : ''}`;
+              firstTdContent = firstTdContent.replace(pillText[0], `${pillElement.outerHTML}`);
+              if (icon) {
+                let count = 0;
+                firstTdContent = firstTdContent.replace(new RegExp(icon.outerHTML, 'g'), (match) => {
+                  count += 1;
+                  return (count === 2) ? '' : match;
+                });
+              }
             }
           }
           // &lt reffers to '<' character
@@ -129,7 +186,7 @@ export default function decorate(block, options) {
           const liContent = `<li class="${liClass}">${firstTdContent}${secondTdContent}</li>`;
 
           return liContent;
-        }).join('');
+        }).join(' ');
 
         return `<ul>${liString}</ul>`;
       });
@@ -143,23 +200,34 @@ export default function decorate(block, options) {
         buyLinkSelector.classList.add('button', 'primary');
       }
 
+      let planSwitcher = document.createElement('div');
+      if (radioButtons && monthlyProducts) {
+        let leftRadio = radioButtons.querySelector('td:first-child')?.textContent;
+        let rightRadio = radioButtons.querySelector('td:last-child')?.textContent;
+        planSwitcher.classList.add('plan-switcher');
+        planSwitcher.innerHTML = `
+        <input type="radio" id="yearly-${prodName.trim()}" name="${key}-plan" value="${key}-yearly-${prodName.trim()}" checked>
+        <label for="yearly-${prodName.trim()}" class="radio-label">${leftRadio}</label><br>
+        <input type="radio" id="monthly-${prodMonthlyName.trim()}" name="${key}-plan" value="${key}-monthly-${prodMonthlyName.trim()}">
+        <label for="monthly-${prodMonthlyName.trim()}" class='radio-label'>${rightRadio}</label>`;
+      }
       // create the prices element based on where the component is being called from, aem of www-websites
       if (options) {
-        await createPricesElement(options.store, '', 'Save', prodName, prodUsers, prodYears, buyLinkSelector)
+        await createPricesElement(options.store, '', 'Save', prodName, prodUsers, prodYears, buyLinkSelector, billed)
           .then((pricesBox) => {
+            yearlyPricesBoxes[`${key}-yearly-${prodName.trim()}`] = pricesBox;
             // buyLink.parentNode.parentNode.insertBefore(pricesBox, buyLink.parentNode);
             prod.outerHTML = `
-              <div class="prod_box${greenTag.innerText.trim() && ' hasGreenTag'}">
+              <div class="prod_box${greenTag.innerText.trim() && ' hasGreenTag'} ${key < productsAsList.length ? 'individual-box' : 'family-box'}">
                 <div class="inner_prod_box">
                   ${greenTag.innerText.trim() ? `<div class="greenTag2">${greenTag.innerText.trim()}</div>` : ''}
                   ${title.innerText.trim() ? `<h2>${title.innerHTML}</h2>` : ''}
                   ${blueTag.innerText.trim() ? `<div class="blueTag"><div>${blueTag.innerHTML.trim()}</div></div>` : ''}
-                  ${subtitle.innerText.trim() ? `<p class="subtitle${subtitle.innerText.trim().split(/\s+/).length > 5 ? ' fixed_height' : ''}">${subtitle.innerText.trim()}</p>` : ''}
-                  <hr />
+                  ${subtitle.innerText.trim() ? `<p class="subtitle">${subtitle.querySelector('td').innerHTML.trim()}</p>` : ''}
 
+                  ${radioButtons ? planSwitcher.outerHTML : ''}
+                  
                   ${pricesBox.outerHTML}
-
-                  ${billed ? `<div class="billed">${billed.innerHTML.replace('0', `<span class="newprice-${onSelectorClass}"></span>`)}</div>` : ''}
 
                   ${buyLink.outerHTML}
 
@@ -167,8 +235,12 @@ export default function decorate(block, options) {
                   <hr />
                   ${benefitsLists.innerText.trim() ? `<div class="benefitsLists">${featureList}</div>` : ''}
                 </div>
-              </div>`;
+            </div>`;
           });
+        if (monthlyProducts) {
+          const montlyPriceBox = await createPricesElement(options.store, '', 'Save', prodMonthlyName, prodMonthlyUsers, prodMonthlyYears, buyLinkSelector, billed);
+          monthlyPriceBoxes[`${key}-monthly-${prodMonthlyName.trim()}`] = montlyPriceBox;
+        }
       } else {
         const { fetchProduct } = await import('../../scripts/utils/utils.js');
         let oldPrice;
@@ -177,7 +249,7 @@ export default function decorate(block, options) {
         let priceElement = document.createElement('div');
         buyLink.querySelector('a').classList.add('button', 'primary', 'no-arrow');
 
-        underShadow.children[key].outerHTML = `
+        block.children[key].outerHTML = `
           <div class="prod_box${greenTag.innerText.trim() && ' hasGreenTag'}">
             <div class="inner_prod_box">
               ${greenTag.innerText.trim() ? `<div class="greenTag2">${greenTag.innerText.trim()}</div>` : ''}
@@ -216,22 +288,43 @@ export default function decorate(block, options) {
                   
                 </div>
               </div>`;
-            underShadow.children[key].querySelector('.price_box').appendChild(priceElement);
+            block.children[key].querySelector('.price_box').appendChild(priceElement);
           })
           .catch((err) => {
             // eslint-disable-next-line no-console
             console.error(err);
           });
       }
-    });
+    }));
   } else {
-    underShadow.innerHTML = `
+    block.innerHTML = `
     <div class="container-fluid">
       add some products
     </div>`;
   }
 
-  // underShadow.parentNode.insertBefore(switchBox, underShadow);
+  if (monthlyProducts) {
+    [...block.children].forEach((prod) => {
+      let planSwitcher = prod.querySelector('.plan-switcher');
+      planSwitcher.querySelectorAll('input[type="radio"]').forEach((radio) => {
+        radio.addEventListener('input', (event) => {
+          let planType = event.target.value.split('-')[1];
+          let priceBox = prod.querySelector('.hero-aem__prices');
+          if (planType === 'monthly') {
+            priceBox.innerHTML = '';
+            priceBox.appendChild(monthlyPriceBoxes[event.target.value]);
+          } else {
+            priceBox.innerHTML = '';
+            priceBox.appendChild(yearlyPricesBoxes[event.target.value]);
+          }
+        });
+      });
+    });
+  }
+
+  if (individualSwitchText && familySwitchText) {
+    block.parentNode.insertBefore(switchBox, block);
+  }
 
   window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
     bubbles: true,
