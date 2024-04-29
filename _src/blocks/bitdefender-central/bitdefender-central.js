@@ -19,6 +19,7 @@ function embedYoutube(url, autoplay) {
   close.addEventListener('click', closeModal);
   modalContent.append(close);
 
+
   const iframe = document.createElement('iframe');
   iframe.width = 783;
   iframe.height = 440;
@@ -29,6 +30,9 @@ function embedYoutube(url, autoplay) {
   iframe.allowFullscreen = true;
   iframe.loading = 'lazy';
   modalContent.appendChild(iframe);
+  close.addEventListener('click', () => {
+    iframe.contentWindow.postMessage('{"event":"command","func":"stopVideo","args":""}', '*');
+  });
   return modalContainer;
   // `<div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;">
   //     <iframe src="https://www.youtube.com${vid ? `/embed/${vid}?rel=0&v=${vid}${suffix}` : embed}" style="border: 0; top: 0; left: 0; width: 100%; height: 100%; position: absolute;"
