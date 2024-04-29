@@ -178,7 +178,10 @@ export async function loadComponent(offer, block, options, selector)  {
     shadowRoot.querySelectorAll('a[href^="#"]').forEach(link => {
       link.addEventListener('click', (event) => {
         event.preventDefault();
-        const target = document.querySelector(link.getAttribute('href'));
+
+        let linkAnchor = link.getAttribute('href');
+        linkAnchor = '#' + linkAnchor.split('#')[1];
+        const target = document.querySelector(linkAnchor);
         target.scrollIntoView({ behavior: 'smooth' });
       });
     });
