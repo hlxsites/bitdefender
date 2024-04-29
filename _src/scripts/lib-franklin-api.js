@@ -175,7 +175,7 @@ export async function loadComponent(offer, block, options, selector)  {
     await js.default(shadowRoot.querySelector('.section'), {...options, metadata: parseMetadata(shadowRoot)});
     decorateIcons(shadowRoot);
     // get all the links that pointing within the page with a hash
-    shadowRoot.querySelectorAll('a[href^="#"]').forEach(link => {
+    shadowRoot.querySelectorAll('a[href*="#"]').forEach(link => {
       link.addEventListener('click', (event) => {
         event.preventDefault();
 
