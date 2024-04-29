@@ -16,9 +16,7 @@ function embedYoutube(url, autoplay) {
   const closeModal = () => modalContainer.close();
   const close = document.createElement('div');
   close.classList.add('modal-close');
-  close.addEventListener('click', closeModal);
   modalContent.append(close);
-
 
   const iframe = document.createElement('iframe');
   iframe.width = 783;
@@ -31,6 +29,8 @@ function embedYoutube(url, autoplay) {
   iframe.loading = 'lazy';
   modalContent.appendChild(iframe);
   close.addEventListener('click', () => {
+    console.log('i get here');
+    closeModal();
     iframe.contentWindow.postMessage('{"event":"command","func":"stopVideo","args":""}', '*');
   });
   return modalContainer;
