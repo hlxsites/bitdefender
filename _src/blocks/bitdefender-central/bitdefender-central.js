@@ -1,6 +1,6 @@
 function embedYoutube(url, autoplay) {
   const usp = new URLSearchParams(url.search);
-  const suffix = autoplay ? '&muted=1&autoplay=1' : '';
+  const suffix = autoplay ? '&muted=1&autoplay=0&enablejsapi=1' : '';
   let vid = usp.get('v') ? encodeURIComponent(usp.get('v')) : '';
   const embed = url.pathname;
   if (url.origin.includes('youtu.be')) {
@@ -16,7 +16,6 @@ function embedYoutube(url, autoplay) {
   const closeModal = () => modalContainer.close();
   const close = document.createElement('div');
   close.classList.add('modal-close');
-  close.addEventListener('click', closeModal);
   modalContent.append(close);
 
   const iframe = document.createElement('iframe');
@@ -29,6 +28,10 @@ function embedYoutube(url, autoplay) {
   iframe.allowFullscreen = true;
   iframe.loading = 'lazy';
   modalContent.appendChild(iframe);
+  close.addEventListener('click', () => {
+    iframe.contentWindow.postMessage('{"event":"command","func":"stopVideo","args":""}', '*');
+    closeModal();
+  });
   return modalContainer;
   // `<div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;">
   //     <iframe src="https://www.youtube.com${vid ? `/embed/${vid}?rel=0&v=${vid}${suffix}` : embed}" style="border: 0; top: 0; left: 0; width: 100%; height: 100%; position: absolute;"
