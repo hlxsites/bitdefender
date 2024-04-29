@@ -29,7 +29,6 @@ function embedYoutube(url, autoplay) {
   iframe.loading = 'lazy';
   modalContent.appendChild(iframe);
   close.addEventListener('click', () => {
-    console.log(iframe);
     iframe.contentWindow.postMessage('{"event":"command","func":"stopVideo","args":""}', '*');
     closeModal();
   });
