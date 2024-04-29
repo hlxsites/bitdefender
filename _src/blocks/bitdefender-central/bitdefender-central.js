@@ -1,6 +1,6 @@
 function embedYoutube(url, autoplay) {
   const usp = new URLSearchParams(url.search);
-  const suffix = autoplay ? '&muted=1&autoplay=1' : '';
+  const suffix = autoplay ? '&muted=1&autoplay=1&enablejsapi=1' : '';
   let vid = usp.get('v') ? encodeURIComponent(usp.get('v')) : '';
   const embed = url.pathname;
   if (url.origin.includes('youtu.be')) {
