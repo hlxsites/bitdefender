@@ -404,9 +404,8 @@ export default async function decorate(block) {
       const nav = document.createElement('div');
       const shadowRoot = nav.attachShadow({ mode: 'open' });
 
-      nav.style.display = 'none';
-
       const contentDiv = document.createElement('div');
+      contentDiv.style.display = 'none';
       contentDiv.classList.add('mega-menu');
       contentDiv.innerHTML = aemHeaderHtml;
       shadowRoot.appendChild(contentDiv);
@@ -440,7 +439,7 @@ export default async function decorate(block) {
 
       document.querySelector('body').prepend(nav);
 
-      nav.style.display = 'block';
+      contentDiv.style.display = 'block';
 
       adobeMcAppendVisitorId(shadowRoot);
       return;

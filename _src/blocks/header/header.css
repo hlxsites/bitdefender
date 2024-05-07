@@ -529,9 +529,8 @@ header.header-wrapper #icons-sprite-bitdefender-logo path {
 
 @media(min-width: 992px) {
   header.header-wrapper::after {
-    content: "";
     position: absolute;
-    top: 39px;
+    top: 64px;
     left: 0;
     right: 0;
     width: 100%;
@@ -550,7 +549,7 @@ header.header-wrapper #icons-sprite-bitdefender-logo path {
   }
 
   header.header-wrapper {
-    height: var(--nav-height-desktop);
+    height: 64px;
     position: fixed;
     z-index: 999;
     margin: auto;

@@ -18,6 +18,10 @@
   text-align: center;
 }
 
+.new-prod-boxes-container .price_box {
+  min-height: 64px;
+}
+
 .new-prod-boxes-container .default-content-wrapper h2 {
   text-align: center;
   font-size: 32px;
