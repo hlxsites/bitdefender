@@ -1,5 +1,5 @@
 import {
-  getMetadata, decorateIcons, decorateButtons, decorateTags,
+  getMetadata, decorateIcons, decorateButtons, decorateTags, loadCSS,
 } from '../../scripts/lib-franklin.js';
 
 import { adobeMcAppendVisitorId } from '../../scripts/utils/utils.js';
@@ -409,10 +409,10 @@ export default async function decorate(block) {
       contentDiv.classList.add('mega-menu');
       contentDiv.innerHTML = aemHeaderHtml;
       shadowRoot.appendChild(contentDiv);
-
       const cssFile = shadowRoot.querySelector('link[rel="stylesheet"]');
       if (cssFile) {
         cssFile.href = '/_src/scripts/vendor/mega-menu/mega-menu.css';
+        cssFile.as = 'style';
       }
 
       const newScriptFile = document.createElement('script');
@@ -424,13 +424,13 @@ export default async function decorate(block) {
       }
       // shadowRoot.appendChild(newScriptFile);
 
-      const navHeader = shadowRoot.querySelector('header');
-      if (navHeader) {
-        navHeader.style.height = 'auto';
-      }
+      // const navHeader = shadowRoot.querySelector('header');
+      // if (navHeader) {
+      //   navHeader.style.height = 'auto';
+      // }
 
-      const body = document.querySelector('body');
-      body.style.maxWidth = 'initial';
+      // const body = document.querySelector('body');
+      // body.style.maxWidth = 'initial';
 
       const header = document.querySelector('header');
       if (header) {
@@ -439,7 +439,9 @@ export default async function decorate(block) {
 
       document.querySelector('body').prepend(nav);
 
+      // setTimeout(() => {
       contentDiv.style.display = 'block';
+      // }, 500);
 
       adobeMcAppendVisitorId(shadowRoot);
       return;
