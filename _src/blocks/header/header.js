@@ -408,11 +408,17 @@ export default async function decorate(block) {
       contentDiv.style.display = 'none';
       contentDiv.classList.add('mega-menu');
       contentDiv.innerHTML = aemHeaderHtml;
-      shadowRoot.appendChild(contentDiv);
-      const cssFile = shadowRoot.querySelector('link[rel="stylesheet"]');
+      const cssFile = contentDiv.querySelector('link[rel="stylesheet"]');
       if (cssFile) {
         cssFile.href = '/_src/scripts/vendor/mega-menu/mega-menu.css';
         cssFile.as = 'style';
+
+        // wait for the css to load before displaying the content
+        // this is to avoid the content being displayed without the styles
+        cssFile.onload = () => {
+          contentDiv.style.display = 'block';
+        };
+        shadowRoot.appendChild(contentDiv);
       }
 
       const newScriptFile = document.createElement('script');
@@ -438,10 +444,6 @@ export default async function decorate(block) {
       }
 
       document.querySelector('body').prepend(nav);
-
-      // setTimeout(() => {
-      contentDiv.style.display = 'block';
-      // }, 500);
 
       adobeMcAppendVisitorId(shadowRoot);
       return;
