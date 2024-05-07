@@ -430,13 +430,13 @@ export default async function decorate(block) {
       }
       // shadowRoot.appendChild(newScriptFile);
 
-      // const navHeader = shadowRoot.querySelector('header');
-      // if (navHeader) {
-      //   navHeader.style.height = 'auto';
-      // }
+      const navHeader = shadowRoot.querySelector('header');
+      if (navHeader) {
+        navHeader.style.height = 'auto';
+      }
 
-      // const body = document.querySelector('body');
-      // body.style.maxWidth = 'initial';
+      const body = document.querySelector('body');
+      body.style.maxWidth = 'initial';
 
       const header = document.querySelector('header');
       if (header) {
