@@ -21,8 +21,6 @@ import {
 
 import { loadAnalytics } from './analytics.js';
 
-import loadOneTrust from './onetrust.js';
-
 const LCP_BLOCKS = ['hero']; // add your LCP blocks to the list
 const TRACKED_PRODUCTS = [];
 
@@ -33,8 +31,6 @@ export const SUPPORTED_COUNTRIES = ['au'];
 export const DEFAULT_COUNTRY = 'au';
 
 export const METADATA_ANALYTICS_TAGS = 'analytics-tags';
-
-const ONE_TRUST_ID = '2e112ba7-dfdc-491a-8b9a-c862b3140402';
 
 const HREFLANG_MAP = [
   ['en-ro', { baseUrl: 'https://www.bitdefender.ro', pageType: '.html' }],
@@ -582,7 +578,6 @@ async function loadPage() {
     orgId: '0E920C0F53DA9E9B0A490D45@AdobeOrg',
   });
 
-  loadOneTrust(ONE_TRUST_ID);
   adobeMcAppendVisitorId('main');
 
   loadDelayed();
