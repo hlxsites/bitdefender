@@ -93,8 +93,6 @@ export async function loadAnalytics(targetDocument, datastreamConfig) {
 
   window.adobeDataLayer.push((dataLayer) => {
     dataLayer.addEventListener('adobeDataLayer:event', (event) => {
-      // eslint-disable-next-line no-console
-      console.debug('Event tracked:', JSON.stringify(event));
       trackAnalyticsEvent(event.eventInfo);
     });
   });
