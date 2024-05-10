@@ -15,7 +15,7 @@ import {
   openUrlForOs,
 } from './scripts.js';
 import { loadBreadcrumbs } from './breadcrumbs.js';
-import { onAdobeMcLoaded } from './utils.js';
+import { onAdobeMcLoaded } from './utils/utils.js';
 
 // Core Web Vitals RUM collection
 sampleRUM('cwv');
