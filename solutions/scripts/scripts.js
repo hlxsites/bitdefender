@@ -17,7 +17,9 @@ import {
 import {
   adobeMcAppendVisitorId,
   createTag,
-} from './utils/utils.js';
+} from './utils.js';
+
+import { loadAnalytics } from './analytics.js';
 
 const LCP_BLOCKS = ['hero']; // add your LCP blocks to the list
 const TRACKED_PRODUCTS = [];
@@ -28,7 +30,7 @@ export const DEFAULT_LANGUAGE = 'en';
 export const SUPPORTED_COUNTRIES = ['au'];
 export const DEFAULT_COUNTRY = 'au';
 
-export const METADATA_ANAYTICS_TAGS = 'analytics-tags';
+export const METADATA_ANALYTICS_TAGS = 'analytics-tags';
 
 const HREFLANG_MAP = [
   ['en-ro', { baseUrl: 'https://www.bitdefender.ro', pageType: '.html' }],
@@ -222,7 +224,7 @@ export function getTags(tags) {
 export function trackProduct(product) {
   // eslint-disable-next-line max-len
   const isDuplicate = TRACKED_PRODUCTS.find((p) => p.platformProductId === product.platformProductId && p.variantId === product.variantId);
-  const tags = getTags(getMetadata(METADATA_ANAYTICS_TAGS));
+  const tags = getTags(getMetadata(METADATA_ANALYTICS_TAGS));
   const isTrackedPage = tags.includes('product') || tags.includes('service');
   if (isTrackedPage && !isDuplicate) TRACKED_PRODUCTS.push(product);
 }
@@ -465,7 +467,7 @@ function pushPageLoadToDataLayer() {
   const { domain, domainPartsCount } = getDomainInfo(hostname);
   const languageCountry = getLanguageCountryFromPath(window.location.pathname);
   const environment = getEnvironment(hostname, languageCountry.country);
-  const tags = getTags(getMetadata(METADATA_ANAYTICS_TAGS));
+  const tags = getTags(getMetadata(METADATA_ANALYTICS_TAGS));
 
   const experimentDetails = getExperimentDetails();
 
@@ -570,8 +572,16 @@ async function loadPage() {
   await loadEager(document);
   await window.hlx.plugins.load('lazy');
   await loadLazy(document);
+
+  const setupAnalytics = loadAnalytics(document, {
+    edgeConfigId: '7275417f-3870-465c-af3e-84f8f4670b3c',
+    orgId: '0E920C0F53DA9E9B0A490D45@AdobeOrg',
+  });
+
   adobeMcAppendVisitorId('main');
+
   loadDelayed();
+  await setupAnalytics;
 }
 
 loadPage();
