@@ -116,6 +116,10 @@
 }
 
 @media (min-width: 992px) {
+    .spurs .section-two .default-content-wrapper {
+        gap: 20px;
+    }
+
     .spurs .section-two h2,
     .spurs .section-two h3,
     .spurs .section-two h4 {
