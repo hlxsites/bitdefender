@@ -93,7 +93,7 @@ export async function loadAnalytics(targetDocument, datastreamConfig) {
 
   window.adobeDataLayer.push((dataLayer) => {
     dataLayer.addEventListener('adobeDataLayer:event', (event) => {
-      trackAnalyticsEvent(event.eventInfo);
+      trackAnalyticsEvent(event);
     });
   });
 }
