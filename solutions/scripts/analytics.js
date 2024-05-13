@@ -52,7 +52,7 @@ function generateAlloyConfigObject(targetDocument, datastreamConfig) {
   return {
     debugEnabled: hostname.startsWith('localhost') || hostname.includes('--'),
     clickCollectionEnabled: true,
-    defaultConsent: 'pending',
+    defaultConsent: 'in',
     ...datastreamConfig,
   };
 }
