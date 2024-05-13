@@ -33,6 +33,7 @@
 
 .spurs .section-testimonials .default-content-wrapper > p {
     height: 350px;
+    margin: 0;
 }
 
 .spurs .section-testimonials p:first-child {
@@ -80,6 +81,16 @@
     .spurs .section-testimonials .default-content-wrapper {
         display: flex;
         column-gap: 30px;
+    }
+
+    .spurs .section-testimonials .default-content-wrapper > p {
+        height: 600px;
+    }
+
+    .spurs .section-testimonials .default-content-wrapper > p:first-child {
+        font-size: 25px;
+        line-height: 1.33;
+        font-weight: 300;
     }
 
     .spurs .section-testimonials .default-content-wrapper > * {
