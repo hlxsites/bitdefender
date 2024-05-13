@@ -155,7 +155,7 @@ export default function decorate(block, options) {
   if (product) {
     const [prodName, prodUsers, prodYears] = product.split('/');
 
-    const buyLink = block.querySelector('a[href*="#buylink"]');
+    const buyLink = block.querySelector('a[href*="buylink"]');
     buyLink.classList.add('button', 'primary');
 
     createPricesElement(options.store, conditionText, saveText, prodName, prodUsers, prodYears, buyLink)

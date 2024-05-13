@@ -52,13 +52,13 @@ export default function decorate(block, options) {
   }
 
   // click on the next element every 5 seconds
-  setInterval(() => {
-    const buttons = block.querySelectorAll('.tabs-container button');
-    const selectedButton = block.querySelector('.tabs-container button.selected');
-    const buttonIndex = Array.from(buttons).indexOf(selectedButton);
-    const nextIndex = (buttonIndex + 1) % buttons.length;
-    buttons[nextIndex].click();
-  }, 6000);
+  // setInterval(() => {
+  //   const buttons = block.querySelectorAll('.tabs-container button');
+  //   const selectedButton = block.querySelector('.tabs-container button.selected');
+  //   const buttonIndex = Array.from(buttons).indexOf(selectedButton);
+  //   const nextIndex = (buttonIndex + 1) % buttons.length;
+  //   buttons[nextIndex].click();
+  // }, 6000);
 
   // Add classes to each card-container and hide all but the first one
   sections.forEach((element, index) => {
