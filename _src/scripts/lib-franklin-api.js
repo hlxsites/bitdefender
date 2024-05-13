@@ -4,7 +4,9 @@
 const parseMetadata = (shadowRoot) => {
   const metadata = {};
   const sectionMetadata = shadowRoot.querySelector(".section-metadata");
-
+  if (sectionMetadata === null) {
+    return metadata;
+  }
   for (const child of sectionMetadata.children) {
     const [keyChild, valueChild] = child.children;
     metadata[keyChild.textContent] = valueChild.textContent;
@@ -153,6 +155,8 @@ export async function loadComponent(offer, block, options, selector)  {
     const newDiv = document.createElement('div');
     newDiv.style.display = "none";
     newDiv.innerHTML += html;
+    decorateSections(newDiv);
+    decorateBlock(newDiv.querySelector(`.${block}`));
     updateLinkSources(newDiv, `${origin}${offerFolder}/`);
     document.body.appendChild(newDiv);
     await js.default(newDiv, {...options, metadata: parseMetadata(newDiv)});
@@ -170,6 +174,17 @@ export async function loadComponent(offer, block, options, selector)  {
     updateLinkSources(shadowRoot, `${origin}${offerFolder}/`);
     await js.default(shadowRoot.querySelector('.section'), {...options, metadata: parseMetadata(shadowRoot)});
     decorateIcons(shadowRoot);
+    // get all the links that pointing within the page with a hash
+    shadowRoot.querySelectorAll('a[href*="#"]').forEach(link => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+
+        let linkAnchor = link.getAttribute('href');
+        linkAnchor = '#' + linkAnchor.split('#')[1];
+        const target = document.querySelector(linkAnchor);
+        target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
   }
 
   return container;

@@ -1,7 +1,15 @@
 /* stylelint-disable */
-.hero-aem-container .hero-aem p:first-of-type {
+.hero-aem-container .hero-aem p:first-of-type:has(a) {
+  margin: 0;
+  font-size: 16px;
+}
+.hero-aem-container .hero-aem >p:first-of-type  {
+  margin: 0;
+  margin-bottom: 20px;
+}
+  .hero-aem-container .hero-aem p:first-of-type a  {
     margin: 0;
-    margin-bottom: 5px;
+    margin-bottom: 20px;
   }
   .hero-aem-container .hero-aem h1 {
     color: #006DFF;
@@ -9,6 +17,7 @@
     font-weight: normal;
     margin-top: 10px;
     line-height: 1.1;
+    margin-bottom: 20px;
   }
   .hero-aem-container .hero-aem h2 {
     margin-top: 0;
@@ -29,6 +38,7 @@
   }
   .hero-aem-container .hero-aem .hero-aem__card-text {
     padding: 27px;
+    font-size: 20px;
     background-color: #F7F7F7;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
@@ -72,6 +82,8 @@
   .hero-aem-container .hero-aem .prod-save {
     color: #1C7928;
     font-weight: bold;
+    font-size: 16px;
+    margin-left: 8px;
   }
   .hero-aem-container .hero-aem .prod-newprice {
     font-size: 40px;
@@ -146,7 +158,7 @@
 
   .hero-aem-container .button.free-download {
     color: #005ed9;
-    font-weight: 500;
+    font-weight: bold;
     background-color: transparent;
     border: none;
     margin: 0;
@@ -228,6 +240,7 @@
     padding: 5px 13px;
     display: inline-block;
     margin-right: 10px;
+    margin-top: 0px;
   }
 
   .hero-aem__underPriceText {
@@ -319,6 +332,7 @@
 
     .hero-aem-container .hero-aem .hero-aem__desktop-image img {
       height: 100%;
+      max-width: 800px;
       width: 100%;
       object-fit: cover;
       border-top-right-radius: 20px;
@@ -346,7 +360,7 @@
       align-items: center;
     }
     .hero-aem-container .hero-aem .hero-aem__card__desktop > div {
-      padding: 4%;
+      padding: 24px 0px 24px 56px;
     }
     .hero-aem-container .hero-aem p.button-container {
       text-align: left;
@@ -407,15 +421,12 @@
     }
 
     .hero-aem-container.we-container {
-      max-width: 1332px;
+      max-width: 1350px;
       padding-left: 20px;
       padding-right: 20px;
     }
-  }
-  @media (width >= 1600px) {
-    .hero-aem-container.we-container {
-      max-width: 1332px;
-      padding-left: 20px;
-      padding-right: 20px;
+
+    .hero-aem-container .hero-aem .hero-aem__desktop-image img {
+      max-height: 600px;
     }
   }

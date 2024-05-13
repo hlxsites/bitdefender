@@ -1,5 +1,10 @@
 /* eslint-disable prefer-const */
 /* eslint-disable camelcase */
+// import * as all from '../../scripts/vendor/tsparticles/tsparticles.bundle.min.js';
+// eslint-disable-next-line no-unused-vars
+// import {
+//   loadScript,
+// } from '../../scripts/lib-franklin.js';
 
 // eslint-disable-next-line no-unused-vars
 function debounce(func, wait) {
@@ -22,18 +27,25 @@ function isView(viewport) {
 let tsParticles;
 let loadAll;
 
-async function init(block) {
+async function init(block, aemOptions) {
   // eslint-disable-next-line import/no-unresolved
   tsParticles = (await import('https://cdn.jsdelivr.net/npm/@tsparticles/engine@3.1.0/+esm')).tsParticles;
   // eslint-disable-next-line import/no-unresolved
   loadAll = (await import('https://cdn.jsdelivr.net/npm/@tsparticles/all@3.1.0/+esm')).loadAll;
-
   const particleIdSelector = 'ts-particles';
 
   const particleDiv = document.createElement('div');
   particleDiv.setAttribute('id', particleIdSelector);
 
-  block.parentElement.classList.add('we-container');
+  if (aemOptions) {
+    // eslint-disable-next-line no-param-reassign
+    block = block.querySelector('.block');
+    const blockParent = block.closest('.section');
+    blockParent.classList.add('we-container');
+  } else {
+    block.parentElement.classList.add('we-container');
+  }
+
   const particleBackground = block.parentElement.querySelector('.particle-background');
   particleBackground.prepend(particleDiv);
 
@@ -41,9 +53,23 @@ async function init(block) {
     await loadAll(tsParticles);
 
     await tsParticles.load({ id: particleIdSelector, options });
+    // await loadScript('../../../_src/scripts/vendor/tsparticles/tsparticles.bundle.min.js');
+    // await window.tsParticles.load({ id: particleIdSelector, options });
+    // let script = document.createElement('script');
+    // script.src = 'https://cdn.jsdelivr.net/npm/tsparticles@3.3.0/tsparticles.bundle.min.js';
+    // script.src = 'https://dlp-fixes--www-websites--bitdefender.hlx.page/_src/scripts/vendor/tsparticles/tsparticles.bundle.min.js';
+    // script.src = '../../../_src/scripts/vendor/tsparticles/tsparticles.bundle.min.js';
+    // block.appendChild(script);
+    // script.onload = () => {
+    //   console.log('tsParticles loaded');
+    //   // console.log('tsParticles', tsParticles);
+    //   (async () => {
+    //     // await loadFull(tsParticles);
+    //     await window.tsParticles.load({ id: particleIdSelector, options });
+    //   })();
+    // };
   }
-
-  const configs = {
+  const options = {
     particles: {
       number: {
         value: 20,
@@ -81,7 +107,7 @@ async function init(block) {
     fullScreen: { enable: false },
   };
 
-  await loadParticles(configs);
+  await loadParticles(options);
 }
 
 // eslint-disable-next-line no-unused-vars
@@ -106,8 +132,8 @@ async function checkForMobile() {
   particles.play();
 }
 
-export default async function decorate(block) {
-  await init(block);
+export default async function decorate(block, options) {
+  await init(block, options);
 
   // uncomment this line if you want the bubbles to stop moving on mobile
   // window.addEventListener('resize', debounce(checkForMobile, 250));
