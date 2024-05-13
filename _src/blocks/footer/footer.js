@@ -1,5 +1,6 @@
-import { decorateIcons, getMetadata } from '../../scripts/lib-franklin.js';
+import { decorateIcons, getMetadata, loadBlocks } from '../../scripts/lib-franklin.js';
 import { adobeMcAppendVisitorId } from '../../scripts/utils/utils.js';
+import { decorateMain } from '../../scripts/scripts.js';
 
 function wrapImgsInLinks(container) {
   const pictures = container.querySelectorAll('picture');
@@ -43,17 +44,70 @@ function disableSelectedCountry(container) {
   });
 }
 
-function runDefaultFooterLogic(footer) {
-  const sectionHeaders = footer.querySelectorAll('div > div > p');
-  sectionHeaders[2].addEventListener('click', onFooterElementClick);
-  sectionHeaders[3].addEventListener('click', onFooterElementClick);
+async function runDefaultFooterLogic(block) {
+  // fetch footer content
+  const footerPath = getMetadata('footer') || '/footer';
+  const resp = await fetch(`${footerPath}.plain.html`, window.location.pathname.endsWith('/footer') ? { cache: 'reload' } : {});
 
-  const sectionsData = footer.querySelectorAll('div > div > ul');
-  disableSelectedCountry(sectionsData[3]);
+  if (resp.ok) {
+    const html = await resp.text();
+
+    // decorate footer DOM
+    const footer = document.createElement('div');
+    footer.innerHTML = html;
+
+    wrapImgsInLinks(footer);
+
+    const sectionHeaders = footer.querySelectorAll('div > div > p');
+    sectionHeaders[2].addEventListener('click', onFooterElementClick);
+    sectionHeaders[3].addEventListener('click', onFooterElementClick);
+
+    const sectionsData = footer.querySelectorAll('div > div > ul');
+    disableSelectedCountry(sectionsData[3]);
+
+    decorateIcons(footer);
+    block.append(footer);
+
+    adobeMcAppendVisitorId('footer');
+  }
 }
 
-function runLandingpageLogic(footer) {
-  footer.children[0].classList.add('default-content-wrapper');
+async function runLandingpageLogic(block) {
+  const footerPath = getMetadata('footer') || '/footer';
+  const resp = await fetch(`${footerPath}.plain.html`);
+
+  const fragment = document.createElement('main');
+  if (resp.ok) {
+    fragment.innerHTML = await resp.text();
+    decorateMain(fragment);
+    await loadBlocks(fragment);
+  }
+  const footer = block.closest('.footer-wrapper');
+
+  if (window.location.href.indexOf('scuderiaferrari') !== -1 || window.location.href.indexOf('spurs') !== -1) {
+    block.closest('.footer-wrapper').id = 'footer-ferrari';
+  }
+
+  if (fragment) {
+    const fragmentSections = fragment.querySelectorAll(':scope .section');
+    if (fragmentSections) {
+      footer.replaceChildren(...fragmentSections);
+    }
+  }
+
+  const replacements = [
+    [/\[year\]/g, new Date().getFullYear()],
+    [/>Twitter Bitdefender</, '><img alt="x" src="/_src/icons/twitter.svg" /><'],
+    [/>Linkedin Bitdefender</, '><img alt="linkedin" src="/_src/icons/linkedin.svg" /><'],
+    [/>Facebook Bitdefender</, '><img alt="facebook" src="/_src/icons/facebook.svg" /><'],
+    [/>Youtube Bitdefender</, '><img alt="youtube" src="/_src/icons/youtube.svg" /><'],
+  ];
+
+  replacements.forEach(([pattern, replacement]) => {
+    footer.innerHTML = footer.innerHTML.replace(pattern, replacement);
+  });
+
+  adobeMcAppendVisitorId('footer');
 }
 
 /**
@@ -61,13 +115,13 @@ function runLandingpageLogic(footer) {
  * @param {String} footerMetadata The footer variation: landingpage' or none
  * @param {Element} footer The footer element
  */
-function applyFooterFactorySetup(footerMetadata, footer) {
+function applyFooterFactorySetup(footerMetadata, block) {
   switch (footerMetadata) {
     case 'landingpage':
-      runLandingpageLogic(footer);
+      runLandingpageLogic(block);
       break;
     default:
-      runDefaultFooterLogic(footer);
+      runDefaultFooterLogic(block);
       break;
   }
 }
@@ -82,24 +136,5 @@ export default async function decorate(block) {
 
   block.textContent = '';
 
-  // fetch footer content
-  const footerPath = getMetadata('footer') || '/footer';
-  const resp = await fetch(`${footerPath}.plain.html`, window.location.pathname.endsWith('/footer') ? { cache: 'reload' } : {});
-
-  if (resp.ok) {
-    const html = await resp.text();
-
-    // decorate footer DOM
-    const footer = document.createElement('div');
-    footer.innerHTML = html;
-
-    wrapImgsInLinks(footer);
-
-    applyFooterFactorySetup(footerMetadata, footer);
-
-    decorateIcons(footer);
-    block.append(footer);
-
-    adobeMcAppendVisitorId('footer');
-  }
+  applyFooterFactorySetup(footerMetadata, block);
 }
