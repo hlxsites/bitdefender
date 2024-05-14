@@ -364,14 +364,8 @@ function renderMobileHeader(nav) {
   headerBlock.appendChild(optionsWrapper);
 }
 
-export default async function decorate(block) {
+async function runDefaultHeaderLogic(block) {
   const hero = document.querySelector('.hero');
-
-  // commented out because it's not being used, might be used in the future
-  // const isErrorPage = window.isErrorPage || false;
-
-  // Check if the page isn't an error page and if the hero doesn't exist
-  // if (!hero && !isErrorPage) return;
 
   if (hero && hero.classList.contains('black-background')) {
     const header = document.querySelector('header');
@@ -421,7 +415,6 @@ export default async function decorate(block) {
       if (shadowRootScriptTag) {
         shadowRootScriptTag.replaceWith(newScriptFile);
       }
-      // shadowRoot.appendChild(newScriptFile);
 
       const navHeader = shadowRoot.querySelector('header');
       if (navHeader) {
@@ -501,4 +494,46 @@ export default async function decorate(block) {
       }
     }
   });
+}
+
+async function runLandingPageHeaderLogic(block) {
+  // fetch nav content
+  const navPath = getMetadata('nav') || '/nav';
+  const resp = await fetch(`${navPath}.plain.html`);
+  const html = await resp.text();
+
+  block.classList.add('lp-header', 'py-3', 'default-content-wrapper');
+  const headerWrapper = block.closest('header');
+
+  headerWrapper.id = 'header-ferrari';
+  headerWrapper.classList.add('header-spurs', 'dark');
+  block.innerHTML = html;
+
+  const lpHeader = block.closest('.lp-header');
+  lpHeader.addEventListener('click', () => {
+    lpHeader.classList.toggle('active', !lpHeader.classList.contains('active'));
+  });
+}
+
+/**
+ * applies header factory based on header variation
+ * @param {String} headerMetadata The header variation: landingpage' or none
+ * @param {Element} header The header element
+ */
+function applyHeaderFactorySetup(headerMetadata, header) {
+  switch (headerMetadata) {
+    case 'landingpage':
+      runLandingPageHeaderLogic(header);
+      break;
+    default:
+      runDefaultHeaderLogic(header);
+      break;
+  }
+}
+
+export default async function decorate(block) {
+  const headerMetadata = getMetadata('header-type');
+  block.parentNode.classList.add(headerMetadata || 'default');
+
+  applyHeaderFactorySetup(headerMetadata, block);
 }

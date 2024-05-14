@@ -520,6 +520,102 @@ header.header-wrapper #icons-sprite-bitdefender-logo path {
   fill: currentcolor
 }
 
+#header-ferrari {
+  border-bottom: 2px solid #3C3C3C;
+  height: 40px;
+  box-shadow: 0 32px 73px #000;
+  background-color: black;
+}
+
+#header-ferrari div div {
+  margin-top: -10px;
+}
+
+#header-ferrari ul {
+  padding: 0;
+  margin: 0;
+  width: 50%;
+  float: left;
+}
+
+#header-ferrari ul:nth-of-type(2) {
+  text-align: right;
+}
+
+#header-ferrari ul:nth-of-type(3) {
+  width: 100%;
+  margin-top: -5px;
+}
+
+#header-ferrari ul li {
+  color: white;
+  font-size: 12px;
+  list-style-type: none;
+  display: inline-block;
+  padding: 0 10px;
+  font-weight: 600;
+}
+
+#header-ferrari ul:nth-of-type(2) li {
+  border-left: 1px solid #616161;
+}
+
+#header-ferrari ul:nth-of-type(3) li {
+  padding: 0 25px 0 0;
+}
+
+#header-ferrari ul:nth-of-type(1) li:nth-of-type(1) {
+  padding-left: 0;
+}
+
+#header-ferrari ul li a {
+  color: #DEDEDE;
+  font-size: 12px;
+  padding-bottom: 10px;
+  position: relative;
+  font-weight: 600;
+}
+
+#header-ferrari ul li a::before {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  height: 4px;
+  background: #006EFF;
+  transition: all 0.3s ease;
+  transition-property: transform;
+  width: 100%;
+  transform: scaleX(0);
+  will-change: transform;
+  transform-origin: right;
+}
+
+#header-ferrari ul li a:hover {
+  text-decoration: none;
+}
+
+#header-ferrari ul li a:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+#header-ferrari ul:nth-of-type(3) li a {
+  color: #FFF;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+#header-ferrari ul:nth-of-type(3) li a span.icon-logo-white {
+  display: inline-block;
+  background: url("/_src/images/sigla_bd_white.svg") 0 0 no-repeat;
+  width: 165px;
+  height: 25px;
+}
+
+#header-ferrari ul:nth-of-type(3) :nth-of-type(3) a {
+  font-weight: bold;
+}
+
 @media(min-width: 767px) { /* tablet */
   header.header-wrapper .logo-container .icon {
     width: 180px;
@@ -1002,5 +1098,145 @@ header.header-wrapper #icons-sprite-bitdefender-logo path {
 
   header.header-wrapper .home-solutions-link-default {
     padding-left: 20px;
+  }
+}
+
+/* import header spurs lp */
+@media screen and (width <= 989px) {
+  #header-ferrari.header-spurs {
+    background-color: white;
+    border-bottom: 0 none;
+    height: 40px;
+    position: static;
+  }
+
+  #header-ferrari.header-spurs::before {
+    content: '';
+    background: url('/_src/images/black_company_logo.svg') no-repeat 0 0 transparent;
+    width: 100px;
+    height: 20px;
+    display: block;
+    background-size: 100%;
+    margin: 10px;
+    position: relative;
+    top: 7px;
+  }
+
+  #header-ferrari.header-spurs .lp-header {
+    padding: 0!important;
+  }
+
+  #header-ferrari.header-spurs .lp-header::before {
+    content: '';
+    background: url('/_src/icons/burger_menu.JPG') no-repeat 0 0 transparent;
+    width: 29px;
+    height: 29px;
+    display: block;
+    background-size: 100%;
+    position: absolute;
+    right: 7px;
+    top: -26px;
+    cursor: pointer;
+  }
+
+  #header-ferrari.header-spurs .lp-header > div {
+    position: absolute;
+    z-index: 5;
+    background-color: white;
+    width: 100%;
+    visibility: hidden;
+  }
+
+  #header-ferrari.header-spurs .lp-header.active > div {
+    visibility: visible;
+  }
+
+  #header-ferrari.header-spurs .lp-header > div ul li {
+    border-bottom: 1px solid #0003;
+    padding-left: 15px;
+  }
+
+  .btn-white .button-container a, .btn-white.button-container a:hover {
+    font-size: 14px;
+    line-height: 17px;
+    padding: 10px 1em;
+  }
+
+  #header-ferrari.header-spurs .lp-header > div ul li, #header-ferrari.header-spurs .lp-header > div ul li a {
+    width: 100%;
+    display: block;
+    padding-bottom: 0;
+    color: black;
+    font-size: 15px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    text-transform: uppercase;
+  }
+
+  #header-ferrari.header-spurs .lp-header > div ul li a::before {
+    display: none;
+  }
+
+  #header-ferrari.header-spurs ul:last-of-type li:first-of-type {
+    display: none;
+  }
+
+
+  #header-ferrari {
+    box-shadow: none;
+    position: static;
+    height: auto;
+  }
+
+  #header-ferrari div div {
+    margin-top: 0;
+    flex-direction: column;
+    display: flex;
+  }
+
+  #header-ferrari ul {
+    width: 100%;
+    float: none;
+  }
+
+  #header-ferrari ul:nth-of-type(1) {
+    order: 2;
+  }
+
+  #header-ferrari ul:nth-of-type(2) {
+    text-align: left;
+    order: 3;
+  }
+
+  #header-ferrari ul li {
+    padding: 0 10px 0 0;
+    font-size: 12px;
+  }
+
+  #flipdown .flip-clock-wrapper ul li {
+    line-height: 48px;
+  }
+
+  #header-ferrari ul:nth-of-type(2) li {
+    border-left: 0 none;
+  }
+
+  #header-ferrari ul:nth-of-type(3) {
+    margin-top: 0;
+    padding-bottom: 0;
+    order: 1;
+  }
+
+  #header-ferrari ul:nth-of-type(3) li a span.icon-logo-white {
+    width: 100px;
+    height: 17px;
+    background-size: 100%;
+  }
+
+  #header-ferrari ul:nth-of-type(3) li {
+    padding: 0 3px 0 0;
+  }
+
+  #header-ferrari ul:nth-of-type(3) li a {
+    font-size: 12px;
   }
 }

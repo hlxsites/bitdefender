@@ -58,7 +58,7 @@ window.hlx.plugins.add('rum-conversion', {
 function initMobileDetector(viewport) {
   const mobileDetectorDiv = document.createElement('div');
   mobileDetectorDiv.setAttribute(`data-${viewport}-detector`, '');
-  document.body.prepend(mobileDetectorDiv);
+  document.body.append(mobileDetectorDiv);
 }
 
 export function isView(viewport) {
