@@ -198,7 +198,7 @@
   }
 }
 
-@media (width >= 1600px) {
+@media (min-width: 1600px) {
   .awards-containe.we-container {
     max-width: 1332px;
     padding-left: 20px;

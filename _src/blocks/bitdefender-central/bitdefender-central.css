@@ -431,7 +431,7 @@ a.video-placeholder {
   transform: rotate(-45deg);
 }
 
-@media (width >= 992px) {
+@media (min-width: 992px) {
   .bitdefender-central-container.we-container {
     max-width: 1300px;
     padding-left: 50px;
@@ -467,7 +467,7 @@ a.video-placeholder {
   }
 }
 
-@media (width >= 1200px) {
+@media (min-width: 1200px) {
   .bitdefender-central-container.we-container {
     max-width: 1290px;
     padding-left: 20px;

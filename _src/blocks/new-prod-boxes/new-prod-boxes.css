@@ -541,7 +541,7 @@
   border-color: #3197EE;
 }
 
-@media (width >= 768px) {
+@media (min-width: 768px) {
   .new-prod-boxes-container .new-prod-boxes {
     flex-direction: row;
     padding-bottom: 60px;
@@ -553,7 +553,7 @@
   }
 }
 
-@media (width >= 992px) {
+@media (min-width: 992px) {
   .new-prod-boxes-container.we-container {
     max-width: 1300px;
     padding-left: 50px;
@@ -561,7 +561,7 @@
   }
 }
 
-@media (width >= 1200px) {
+@media (min-width: 1200px) {
   .new-prod-boxes-container.we-container {
     max-width: 1290px;
     padding-left: 20px;

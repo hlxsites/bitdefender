@@ -111,19 +111,19 @@ body [data-desktop-detector] {
     display: none;
 }
 
-@media (width >= 768px) {
+@media (min-width: 768px) {
     body [data-mobile-detector] {
         display: none;
     }
 }
 
-@media (width >= 768px) {
+@media (min-width: 768px) {
     body [data-tablet-detector] {
         display: block;
     }
 }
 
-@media (width >= 992px) {
+@media (min-width: 992px) {
     body [data-desktop-detector] {
         display: block;
     }
