@@ -1102,7 +1102,7 @@ header.header-wrapper #icons-sprite-bitdefender-logo path {
 }
 
 /* import header spurs lp */
-@media screen and (width <= 989px) {
+@media screen and (max-width: 989px) {
   #header-ferrari.header-spurs {
     background-color: white;
     border-bottom: 0 none;

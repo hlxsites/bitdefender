@@ -652,7 +652,7 @@ main .section.link-right a {
     }
 }
 
-@media (width >= 768px) {
+@media (min-width: 768px) {
     .trusted h1, .trusted main .hero h1 {
         font: normal normal bold 96px/82px var(--font-ibm);
     }
@@ -761,7 +761,7 @@ main .section.link-right a {
     }
 }
 
-@media (width <= 768px) {
+@media (max-width: 768px) {
     .trusted .default-content-wrapper {
         padding: 1em!important;
     }

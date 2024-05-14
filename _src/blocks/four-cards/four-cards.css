@@ -113,7 +113,7 @@
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap: 24px;
   }
-  
+
   .four-cards > ul > li {
     display: inline-block;
     background-color: #f6f6f6;
@@ -206,7 +206,7 @@
     }
 }
 
-@media (width >= 1200px) {
+@media (min-width: 1200px) {
   .four-cards-container.we-container {
     max-width: 1290px;
     padding-left: 20px;
