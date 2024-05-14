@@ -13,16 +13,6 @@
     line-height: 1.25;
 }
 
-/* .spurs-hero-container h2, */
-
-/* .spurs-hero-container h3, */
-
-/* .spurs-hero-container h4 { */
-
-/*    font: normal normal normal 20px/23px Arial; */
-
-/* } */
-
 .spurs-hero-container p,
 .spurs-hero-container div {
     font-size: 16px;
@@ -57,19 +47,26 @@
     margin-top: 15px;
 }
 
-.spurs-hero-container .default-content-wrapper p:last-child {
+.spurs-hero-container .default-content-wrapper p.button-container a {
+    border: solid white 2px !important;
+    background-color: transparent;
+    color: white;
+    margin-top: 15px;
+}
+
+.spurs-hero-container .default-content-wrapper p:not(.button-container):nth-last-child(2) {
     position: relative;
     margin-top: 80px;
 }
 
-.spurs-hero-container .default-content-wrapper p:last-child img {
+.spurs-hero-container .default-content-wrapper p:not(.button-container) img {
     width: 90px;
     position: absolute;
     top: -45px;
     left: 5px;
 }
 
-.spurs-hero-container .default-content-wrapper p:last-child a {
+.spurs-hero-container .default-content-wrapper p:not(.button-container) a {
     background: white;
     padding: 10px 16px 10px 100px;
     font-size: 14px;
