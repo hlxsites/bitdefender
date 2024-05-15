@@ -10,7 +10,7 @@ export function getDefaultLanguage() {
     if (foundLanguage.startsWith('zh-') || foundLanguage.startsWith('en-')) {
       lang = foundLanguage.replace('zh-', '').replace('en-', '') || 'site';
     } else {
-      lang = foundLanguage.split('-')[1];
+      [, lang] = foundLanguage.split('-');
     }
   }
 
