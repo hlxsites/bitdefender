@@ -4,7 +4,17 @@ export function getDefaultLanguage() {
   // TODO: refactor. It's not working as should for en locales.
   const currentPathUrl = window.location.pathname;
   const foundLanguage = localisationList.find((item) => currentPathUrl.indexOf(`/${item}/`) !== -1);
-  return foundLanguage?.replace('zh-', '').replace('en-', '') || 'site';
+  let lang = 'site';
+
+  if (foundLanguage) {
+    if (foundLanguage.startsWith('zh-') || foundLanguage.startsWith('en-')) {
+      lang = foundLanguage.replace('zh-', '').replace('en-', '') || 'site';
+    } else {
+      [, lang] = foundLanguage.split('-');
+    }
+  }
+
+  return lang;
 }
 
 const cacheResponse = new Map();
