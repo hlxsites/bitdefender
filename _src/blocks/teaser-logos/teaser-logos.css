@@ -1,6 +1,7 @@
 /* stylelint-disable custom-property-pattern */
 .teaser-logos-container.section {
     padding: 0;
+    display: none;
 }
 
 .teaser-logos-container .main-wrapper {

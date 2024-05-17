@@ -3,15 +3,25 @@
 }
 
 .big-teaser-section-container {
-    background: #EFF6FF 0 0 no-repeat padding-box;
+    background: white;
     color: black;
+}
+
+.big-teaser-section-container .default-content-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.big-teaser-section-container .rte {
+    order: 1;
+    margin-top: 15px;
 }
 
 .big-teaser-section-container .imgs-wrapper {
     position: relative;
     height: 200px;
-    width: calc(100% + 2em);
-    margin-left: -1em;
+    border-radius: 15px;
+    overflow: hidden;
 }
 
 .big-teaser-section-container .main-img {
