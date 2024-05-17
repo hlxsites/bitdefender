@@ -15,6 +15,8 @@
 .trusted-main-carousel-container .navigation-wrapper .first-nav {
     display: flex;
     cursor: pointer;
+    border-radius: 8px;
+    background: #EFF6FF;
 }
 
 .trusted-main-carousel-container .navigation-wrapper .second-nav {
@@ -22,11 +24,9 @@
 }
 
 .trusted-main-carousel-container .navigation-wrapper .nav-item {
-    background: #EFF6FF;
     color: #006EFF;
     flex-shrink: 0;
     padding: 15px;
-    border-radius: 8px;
 }
 
 .trusted-main-carousel-container .default-content-wrapper {
@@ -35,6 +35,7 @@
 
 .trusted-main-carousel-container .navigation-wrapper .nav-item.active {
     background: #006EFF;
+    border-radius: 8px;
     color: white;
     transition: all .25s linear;
     position: relative;
@@ -98,6 +99,10 @@
 }
 
 @media (min-width: 768px) {
+    .trusted-main-carousel-container h2, h3 {
+        font-size: 44px;
+        line-height: 1.2;
+    }
     .trusted-main-carousel-container .navigation-wrapper .second-nav {
         display: flex;
         margin-left: auto;
@@ -128,6 +133,14 @@
     .trusted-main-carousel-container .left-arrow {
         margin-left: auto;
     }
+
+    .trusted-main-carousel-container .content-wrapper .slide >:first-child p.button-container {
+        position: unset;
+    }
+
+    .trusted-main-carousel-container .content-wrapper .slide >:last-child {
+        height: 400px;
+    }
 }
 
 @media (min-width: 992px) {
@@ -138,17 +151,13 @@
     }
 
     .trusted-main-carousel-container .content-wrapper .slide >:last-child {
-        width: calc(50% - 25px);
+        width: calc((100% - 50px) / 2);
         margin-left: unset;
         height: auto;
     }
 
-    .trusted-main-carousel-container .content-wrapper .slide >:first-child p.button-container {
-        position: unset;
-    }
-
     .trusted-main-carousel-container .content-wrapper .slide > div {
-        width: calc(50% - 25px);
+        width: calc((100% - 50px) / 2);
         flex-shrink: 0;
     }
 }

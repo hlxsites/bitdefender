@@ -168,6 +168,10 @@ main .section.link-right a {
     font: normal normal normal 14px/18px IBM Plex Sans;
 }
 
+.trusted .apartnership_box .default-content-wrapper > * {
+    text-align: center;
+}
+
 .trusted .apartnership_box .d-flex > div:nth-of-type(2) {
     flex: 0;
     margin-left: 0;

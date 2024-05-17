@@ -87,7 +87,7 @@
 }
 
 .box-carousel-container.testimonials .carousel-item .title {
-    font: italic normal normal 14px/21px "IBM Plex Sans", sans-serif;
+    font: normal normal normal 14px/21px "IBM Plex Sans", sans-serif;
     -webkit-line-clamp: 6;
     line-clamp: 6;
 }
@@ -147,7 +147,7 @@
 }
 
 .box-carousel-container svg path {
-    fill: var(--blue) !important;
+    fill: black !important;
 }
 
 .box-carousel-container.testimonials .img-container {
@@ -163,12 +163,8 @@
 
 @media screen and (min-width: 768px) {
     .box-carousel-container .carousel-header {
-        justify-content: flex-start;
+        justify-content: center;
         margin-bottom: 20px;
-    }
-
-    .box-carousel-container .carousel-header .left-arrow {
-        margin-left: auto;
     }
 
     .box-carousel-container .carousel-item {
@@ -191,11 +187,20 @@
     .box-carousel-container .carousel-header .title h2,
     .box-carousel-container .carousel-header .title h3,
     .box-carousel-container .carousel-header .title h4 {
-        font: normal normal 600 40px/48px "IBM Plex Sans", sans-serif;
+        font: normal normal 400 40px/48px "IBM Plex Sans", sans-serif;
     }
 }
 
 @media screen and (min-width: 992px) {
+    .box-carousel-container .default-content-wrapper {
+        overflow: hidden;
+    }
+
+    .box-carousel-container.testimonials .carousel-item {
+        width: calc((100% - 25px) / 3);
+        min-height: 390px;
+    }
+
     .box-carousel-container:not(.testimonials) .carousel-item:hover {
         color: white;
         background: #006dff;
@@ -206,3 +211,10 @@
         fill: white !important;
     }
 }
+
+@media (min-width: 1600px) {
+    .box-carousel-container.testimonials .carousel-item {
+        width: calc(100% / 3);
+    }
+}
+

@@ -151,13 +151,13 @@
     }
 
     .trusted-hero-container h1 {
-        font: normal normal bold 96px/82px "IBM Plex Sans", sans-serif;
+        font: normal normal 400 40px/52px "IBM Plex Sans", sans-serif;
     }
 
     .trusted-hero-container h2,
     .trusted-hero-container h3,
     .trusted-hero-container h4 {
-        font: normal normal bold 40px/52px "IBM Plex Sans", sans-serif;
+        font: normal normal 500 47px/48px "IBM Plex Sans", sans-serif;
     }
 
     .trusted-hero-container p,
