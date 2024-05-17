@@ -929,7 +929,7 @@ main a.video-placeholder {
 main .video-placeholder .video-placeholder-play {
   box-sizing: border-box;
   position: absolute;
-  top: 50%;
+  top: calc(50% - 1.1375rem);
   left: 50%;
   display: block;
   transform: scale(3);

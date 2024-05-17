@@ -3,6 +3,10 @@ import { getDatasetFromSection } from '../../scripts/utils/utils.js';
 export default async function decorate(block) {
   const [rte, videoUrlEl] = [...block.children];
 
+  const state = {
+    isVideoPlaying: false,
+  };
+
   const videoUrl = videoUrlEl.textContent.trim();
   const videoFormat = videoUrl.split('.').pop();
 
@@ -43,19 +47,42 @@ export default async function decorate(block) {
     .join(' ');
 
   block.innerHTML = `
-    <div class="rte-wrapper"></div>
-    <div class="video-wrapper">
-        <div class="gradient-1"></div>
-        <div class="gradient-2"></div>
-        <div class="gradient-3"></div>
-        <video ${formattedVideoSettings} poster="${videoPlayerPoster}">
-          <source src="${videoUrl}" type="video/${videoFormat}">
-        </video>
-    </div>
     <div class="default-content-wrapper">
-        ${rte.innerHTML}
+        <div class="rte-wrapper">${rte.innerHTML}</div>
+        <div class="video-wrapper">
+            <a class="video-placeholder">
+                <span class="video-placeholder-play"></span>
+<!--                <span class="video-placeholder-pause"></span>-->
+            </a>
+            <video ${formattedVideoSettings} poster="${videoPlayerPoster}">
+              <source src="${videoUrl}" type="video/${videoFormat}">
+            </video>
+        </div>
+<!--        <div class="scroll-down">Scroll down</div>-->
     </div>
   `;
+
+  const playAnchor = block.querySelector('.video-placeholder');
+  const videoElement = block.querySelector('video');
+
+  playAnchor.addEventListener('click', (event) => {
+    event.preventDefault();
+    playAnchor.classList.toggle('play');
+    state.isVideoPlaying = !state.isVideoPlaying;
+
+    // eslint-disable-next-line no-unused-expressions
+    if (state.isVideoPlaying) {
+      videoElement.play();
+      setTimeout(() => {
+        playAnchor.classList.add('playing');
+      }, 250);
+    } else {
+      videoElement.pause();
+      setTimeout(() => {
+        playAnchor.classList.remove('playing');
+      }, 250);
+    }
+  });
 
   block.querySelectorAll('.button-container > a').forEach((anchorEl) => {
     anchorEl.target = '_blank';

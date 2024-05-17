@@ -1,0 +1,109 @@
+.trusted-teaser-impact-container {
+    background: #EFF6FF;
+}
+
+.trusted-teaser-impact-container .carousel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.trusted-teaser-impact .carousel-header .title {
+    color: black;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.trusted-teaser-impact .carousel-header .title >:first-child {
+    margin: 0;
+}
+
+.trusted-teaser-impact .carousel-header .title h2,
+.trusted-teaser-impact .carousel-header .title h3 {
+    font-size: 20px;
+    font-weight: normal;
+}
+
+.trusted-teaser-impact .box-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.trusted-teaser-impact .box-wrapper .box-item {
+    width: calc(50% - 10px);
+    flex-shrink: 0;
+    color: black;
+    position: relative;
+}
+
+.trusted-teaser-impact .box-wrapper .box-item::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 80%;
+    position: absolute;
+    top: 10%;
+    right: -3px;
+    background: #006EFF;
+    opacity: 0.25;
+    visibility: hidden;
+}
+
+.trusted-teaser-impact .box-wrapper .box-item:nth-child(1)::after,
+.trusted-teaser-impact .box-wrapper .box-item:nth-child(3)::after {
+    visibility: visible;
+}
+
+.trusted-teaser-impact .box-wrapper .box-item .icon {
+    width: 35px;
+    height: 35px;
+    margin: 0;
+}
+
+.trusted-teaser-impact .box-wrapper .box-item .icon .cls-1 {
+    fill: #006EFF;
+}
+
+.trusted-teaser-impact .box-wrapper .box-item .title {
+    font-size: 35px;
+    font-weight: bold;
+}
+
+@media (min-width: 768px) {
+    .trusted-teaser-impact .carousel-header .title h2,
+    .trusted-teaser-impact .carousel-header .title h3 {
+        margin-top: -15px;
+        font-size: 30px;
+    }
+
+    .trusted-teaser-impact .box-wrapper .box-item .icon {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+@media (min-width: 992px) {
+    .trusted-teaser-impact .box-wrapper .box-item {
+        width: calc(25% - 15px);
+    }
+
+    .trusted-teaser-impact .box-wrapper .box-item .icon {
+        width: 70px;
+        height: 70px;
+    }
+
+    .trusted-teaser-impact .carousel-header .title h2,
+    .trusted-teaser-impact .carousel-header .title h3 {
+        font-size: 30px;
+        font-weight: 500;
+    }
+
+    .trusted-teaser-impact .box-wrapper .box-item:nth-child(2)::after {
+        visibility: visible;
+    }
+}
+

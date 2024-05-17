@@ -1,35 +1,30 @@
 /* stylelint-disable custom-property-pattern */
 .teaser-logos-container.section {
     padding: 0;
+    background: #EFF6FF;
 }
 
 .teaser-logos-container .main-wrapper {
     display: flex;
-    height: 360px;
+    height: 160px;
 }
 
 .teaser-logos-container .default-content-wrapper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
     display: flex;
-    z-index: 3;
     padding-top: 0 !important;
+    height: 200px;
 }
 
 .teaser-logos-container .main-wrapper .col,
 .teaser-logos-container .default-content-wrapper .col {
-    width: 100%;
     display: flex;
     justify-content: center;
     position: relative;
+    width: 50%;
 }
 
 .teaser-logos-container .main-wrapper .col {
-    --backgroundColor: var(--red);
-
-    background: var(--backgroundColor);
+    background: #EFF6FF;
 }
 
 .teaser-logos-container .main-wrapper .col:first-child::before {
@@ -63,10 +58,15 @@
 }
 
 .teaser-logos-container .default-content-wrapper .col .img-wrapper {
-    width: 100px;
     padding-top: 30px;
     position: relative;
     z-index: 3;
+    width: 100%;
+}
+
+.teaser-logos-container .default-content-wrapper .col .img-wrapper img {
+    object-fit: cover;
+    width: 100%;
 }
 
 @media screen and (min-width: 768px) {

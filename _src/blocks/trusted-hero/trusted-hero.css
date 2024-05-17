@@ -8,7 +8,7 @@
 }
 
 .trusted-hero-container h1 {
-    font: normal normal bold 48px/42px "IBM Plex Sans", sans-serif;
+    font: normal normal bold 44px/42px "IBM Plex Sans", sans-serif;
 }
 
 .trusted-hero-container h2,
@@ -28,7 +28,7 @@
 }
 
 .trusted-hero-container .video-wrapper {
-    height: 300px;
+    height: 200px;
     position: relative;
 }
 
@@ -36,6 +36,70 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    position: absolute;
+    z-index: -1;
+    left: 0;
+}
+
+.trusted-hero-container .video-wrapper .video-placeholder {
+    width: 100%;
+    height: 100%;
+}
+
+.trusted-hero-container .video-wrapper .video-placeholder .video-placeholder-play {
+    background-color: red;
+    border-color: red;
+    opacity: 1;
+    display: block;
+}
+
+.trusted-hero-container .video-wrapper .video-placeholder.playing .video-placeholder-play {
+    display: none;
+}
+
+.trusted-hero-container .video-wrapper .video-placeholder .video-placeholder-pause {
+    box-sizing: border-box;
+    position: absolute;
+    top: calc(50% - 1.1375rem);
+    left: 50%;
+    transform: scale(3);
+    width: 1.375rem;
+    height: 1.375rem;
+    border: 0.125rem solid;
+    border-radius: 1.25rem;
+    padding: 0;
+    transition: opacity .3s ease-in-out;
+    background-color: blue;
+    border-color: blue;
+    opacity: 1;
+}
+
+.trusted-hero-container .video-wrapper .video-placeholder.playing .video-placeholder-pause {
+    display: none;
+}
+
+.trusted-hero-container .video-wrapper .video-placeholder .video-placeholder-pause::before {
+    content: '';
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 0;
+    height: 0.625rem;
+    border-left: 0.175rem solid;
+    top: 0.25rem;
+    left: 5px;
+}
+
+.trusted-hero-container .video-wrapper .video-placeholder .video-placeholder-pause::after {
+    content: '';
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 0;
+    height: 0.625rem;
+    border-left: 0.175rem solid;
+    top: 0.25rem;
+    left: 11px;
 }
 
 .trusted-hero-container .video-wrapper .gradient-1,
@@ -45,23 +109,6 @@
     border-width: 90px 230vw 0 0;
     position: absolute;
     top: -50px;
-}
-
-.trusted-hero-container .video-wrapper .gradient-1 {
-    border-color: #006dff transparent transparent;
-    z-index: 3;
-}
-
-.trusted-hero-container .video-wrapper .gradient-2 {
-    border-color: #006dffa6 transparent transparent;
-    z-index: 2;
-    zoom: 1.5;
-}
-
-.trusted-hero-container .video-wrapper .gradient-3 {
-    border-color: #006dff78 transparent transparent;
-    zoom: 2;
-    z-index: 1;
 }
 
 .trusted-hero-container .default-content-wrapper {
@@ -76,6 +123,12 @@
     justify-content: center;
 }
 
+.trusted-hero-container .scroll-down {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
 @media (min-width: 768px) {
     .trusted-hero-container a.button:any-link:not(.modal, .primary) {
         width: unset;
@@ -86,23 +139,25 @@
 }
 
 @media (min-width: 992px) {
+    .trusted-hero-container {
+        background: #EFF6FF;
+        color: black;
+        height: 670px;
+    }
+
     .trusted-hero-container h1 {
-        font: normal normal bold 96px/82px "IBM Plex Sans", sans-serif;
+        font: normal normal 400 40px/52px "IBM Plex Sans", sans-serif;
     }
 
     .trusted-hero-container h2,
     .trusted-hero-container h3,
     .trusted-hero-container h4 {
-        font: normal normal bold 40px/52px "IBM Plex Sans", sans-serif;
+        font: normal normal 500 47px/48px "IBM Plex Sans", sans-serif;
     }
 
     .trusted-hero-container p,
     .trusted-hero-container div {
         font: normal normal normal 18px/23px "IBM Plex Sans", sans-serif;
-    }
-
-    .trusted-hero-container {
-        height: 670px;
     }
 
     .trusted-hero-container .trusted-hero-wrapper {
@@ -124,14 +179,6 @@
         height: 100%;
     }
 
-    .trusted-hero-container .video-wrapper .gradient-1,
-    .trusted-hero-container .video-wrapper .gradient-2,
-    .trusted-hero-container .video-wrapper .gradient-3 {
-        top: unset;
-        left: -1px;
-        border-width: 670px 100px 0 0;
-    }
-
     .trusted-hero-container .default-content-wrapper {
         padding-top: 0 !important;
         order: unset;
@@ -141,10 +188,20 @@
         height: 100%;
         display: flex;
         align-items: center;
+        gap: 30px;
     }
 
-    .trusted-hero-container .default-content-wrapper > div {
-        width: 50%;
+    .trusted-hero-container .default-content-wrapper > .rte-wrapper {
+        width: 45%;
+    }
+
+    .trusted-hero-container .default-content-wrapper > .video-wrapper {
+        width: 55%;
+        height: 350px;
+    }
+
+    .trusted-hero-container .default-content-wrapper p.button-container {
+        display: inline-block;
     }
 }
 
