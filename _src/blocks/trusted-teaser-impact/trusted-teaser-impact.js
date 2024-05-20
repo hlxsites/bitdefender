@@ -21,9 +21,9 @@ export default async function decorate(block) {
                     ${box.children[0].children[1].textContent}
                 </div>
                 
-                <div class="subtitle">
+                <p>
                     ${box.children[0].children[2].innerHTML}
-                 </div>
+                 </p>
             </div>
           `).join('')}
     </div>

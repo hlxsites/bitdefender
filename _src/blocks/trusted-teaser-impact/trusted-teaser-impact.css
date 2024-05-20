@@ -1,5 +1,5 @@
 .trusted-teaser-impact-container {
-    background: #EFF6FF;
+    background: white;
 }
 
 .trusted-teaser-impact-container .carousel-header {
@@ -21,12 +21,6 @@
     margin: 0;
 }
 
-.trusted-teaser-impact .carousel-header .title h2,
-.trusted-teaser-impact .carousel-header .title h3 {
-    font-size: 20px;
-    font-weight: normal;
-}
-
 .trusted-teaser-impact .box-wrapper {
     display: flex;
     flex-wrap: wrap;
@@ -38,6 +32,7 @@
     flex-shrink: 0;
     color: black;
     position: relative;
+    padding-right: 10px;
 }
 
 .trusted-teaser-impact .box-wrapper .box-item::after {
@@ -74,16 +69,16 @@
 }
 
 @media (min-width: 768px) {
-    .trusted-teaser-impact .carousel-header .title h2,
-    .trusted-teaser-impact .carousel-header .title h3 {
-        margin-top: -15px;
-        font-size: 30px;
-    }
-
     .trusted-teaser-impact .box-wrapper .box-item .icon {
         width: 50px;
         height: 50px;
     }
+
+    .trusted-teaser-impact .box-wrapper .box-item:nth-child(2),
+    .trusted-teaser-impact .box-wrapper .box-item:nth-child(4) {
+        padding-left: 20px;
+    }
+
 }
 
 @media (min-width: 992px) {
@@ -96,10 +91,8 @@
         height: 70px;
     }
 
-    .trusted-teaser-impact .carousel-header .title h2,
-    .trusted-teaser-impact .carousel-header .title h3 {
-        font-size: 30px;
-        font-weight: 500;
+    .trusted-teaser-impact .box-wrapper .box-item:nth-child(3) {
+        padding-left: 20px;
     }
 
     .trusted-teaser-impact .box-wrapper .box-item:nth-child(2)::after {

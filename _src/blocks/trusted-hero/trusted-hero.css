@@ -11,17 +11,6 @@
     font: normal normal bold 44px/42px "IBM Plex Sans", sans-serif;
 }
 
-.trusted-hero-container h2,
-.trusted-hero-container h3,
-.trusted-hero-container h4 {
-    font: normal normal bold 20px/24px "IBM Plex Sans", sans-serif;
-}
-
-.trusted-hero-container p,
-.trusted-hero-container div {
-    font: normal normal normal 14px/18px "IBM Plex Sans", sans-serif;
-}
-
 .trusted-hero-container .rte-wrapper {
     position: relative;
     z-index: 4;
@@ -147,17 +136,6 @@
 
     .trusted-hero-container h1 {
         font: normal normal 400 40px/52px "IBM Plex Sans", sans-serif;
-    }
-
-    .trusted-hero-container h2,
-    .trusted-hero-container h3,
-    .trusted-hero-container h4 {
-        font: normal normal 500 47px/48px "IBM Plex Sans", sans-serif;
-    }
-
-    .trusted-hero-container p,
-    .trusted-hero-container div {
-        font: normal normal normal 18px/23px "IBM Plex Sans", sans-serif;
     }
 
     .trusted-hero-container .trusted-hero-wrapper {
