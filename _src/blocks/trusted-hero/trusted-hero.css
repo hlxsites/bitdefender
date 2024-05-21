@@ -23,83 +23,12 @@
     position: relative;
 }
 
-.trusted-hero-container .video-wrapper video {
+.trusted-hero-container .video-wrapper iframe {
     width: 100%;
     height: 100%;
     object-fit: cover;
     position: absolute;
-    z-index: -1;
     left: 0;
-}
-
-.trusted-hero-container .video-wrapper .video-placeholder {
-    width: 100%;
-    height: 100%;
-}
-
-.trusted-hero-container .video-wrapper .video-placeholder .video-placeholder-play {
-    background-color: red;
-    border-color: red;
-    opacity: 1;
-    display: block;
-}
-
-.trusted-hero-container .video-wrapper .video-placeholder.playing .video-placeholder-play {
-    display: none;
-}
-
-.trusted-hero-container .video-wrapper .video-placeholder .video-placeholder-pause {
-    box-sizing: border-box;
-    position: absolute;
-    top: calc(50% - 1.1375rem);
-    left: 50%;
-    transform: scale(3);
-    width: 1.375rem;
-    height: 1.375rem;
-    border: 0.125rem solid;
-    border-radius: 1.25rem;
-    padding: 0;
-    transition: opacity .3s ease-in-out;
-    background-color: blue;
-    border-color: blue;
-    opacity: 1;
-}
-
-.trusted-hero-container .video-wrapper .video-placeholder.playing .video-placeholder-pause {
-    display: none;
-}
-
-.trusted-hero-container .video-wrapper .video-placeholder .video-placeholder-pause::before {
-    content: '';
-    display: block;
-    box-sizing: border-box;
-    position: absolute;
-    width: 0;
-    height: 0.625rem;
-    border-left: 0.175rem solid;
-    top: 0.25rem;
-    left: 5px;
-}
-
-.trusted-hero-container .video-wrapper .video-placeholder .video-placeholder-pause::after {
-    content: '';
-    display: block;
-    box-sizing: border-box;
-    position: absolute;
-    width: 0;
-    height: 0.625rem;
-    border-left: 0.175rem solid;
-    top: 0.25rem;
-    left: 11px;
-}
-
-.trusted-hero-container .video-wrapper .gradient-1,
-.trusted-hero-container .video-wrapper .gradient-2,
-.trusted-hero-container .video-wrapper .gradient-3 {
-    border-style: solid;
-    border-width: 90px 230vw 0 0;
-    position: absolute;
-    top: -50px;
 }
 
 .trusted-hero-container .default-content-wrapper {
@@ -108,12 +37,6 @@
     z-index: 4;
     order: -1;
     padding-bottom: 140px;
-}
-
-.trusted-hero-container .scroll-down {
-    width: 100%;
-    display: flex;
-    justify-content: center;
 }
 
 .trusted-hero-container p.button-container:nth-last-child(1) {
@@ -167,7 +90,7 @@
     }
 
     .trusted-hero-container h1 {
-        font: normal normal 400 40px/52px "IBM Plex Sans", sans-serif;
+        font: normal normal 400 40px/52px var(--font-ibm);
     }
 
     .trusted-hero-container .trusted-hero-wrapper {
