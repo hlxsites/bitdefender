@@ -1,5 +1,7 @@
 .trusted-hero-container.section {
     padding: 0;
+    background: #EFF6FF;
+    color: black;
 }
 
 .trusted-hero-container .trusted-hero-wrapper .block {
@@ -7,13 +9,13 @@
     flex-direction: column;
 }
 
-.trusted-hero-container h1 {
-    font: normal normal bold 44px/42px "IBM Plex Sans", sans-serif;
+.trusted-hero-container h1,
+.trusted-hero-container h2 {
+    font: normal normal normal 28px/32px var(--font-ibm);
 }
 
-.trusted-hero-container .rte-wrapper {
-    position: relative;
-    z-index: 4;
+.trusted-hero-container h2 {
+    font-weight: 500;
 }
 
 .trusted-hero-container .video-wrapper {
@@ -101,15 +103,11 @@
 }
 
 .trusted-hero-container .default-content-wrapper {
+    position: relative;
     padding-top: 20px !important;
     z-index: 4;
     order: -1;
-}
-
-.trusted-hero-container a.button:any-link:not(.modal, .primary) {
-    border: solid white 2px !important;
-    width: 100%;
-    justify-content: center;
+    padding-bottom: 140px;
 }
 
 .trusted-hero-container .scroll-down {
@@ -118,12 +116,46 @@
     justify-content: center;
 }
 
+.trusted-hero-container p.button-container:nth-last-child(1) {
+    position: absolute;
+    bottom: 0;
+    left: 1em;
+    right: 1em;
+}
+
+.trusted-hero-container p.button-container:nth-last-child(2) {
+    position: absolute;
+    bottom: 60px;
+    left: 1em;
+    right: 1em;
+}
+
+.trusted-hero-container p.button-container:nth-last-child(2) a {
+    width: 100%;
+    justify-content: center;
+    font-weight: 400;
+    border: 1px solid var(--blue);
+}
+
+.trusted-hero-container p.button-container:nth-last-child(1) a {
+    background-color: transparent !important;
+    border: solid black 1px !important;
+    color: black;
+    width: 100%;
+    justify-content: center;
+    font-weight: 400;
+}
+
 @media (min-width: 768px) {
-    .trusted-hero-container a.button:any-link:not(.modal, .primary) {
-        width: unset;
-        justify-content: unset;
-        display: inline-flex;
-        margin-right: 15px;
+    /*.trusted-hero-container a.button:any-link:not(.modal, .primary) {*/
+    /*    width: unset;*/
+    /*    justify-content: unset;*/
+    /*    display: inline-flex;*/
+    /*    margin-right: 15px;*/
+    /*}*/
+    .trusted-hero-container h1,
+    .trusted-hero-container h2 {
+        font: normal normal 500 47px / 48px var(--font-ibm);
     }
 }
 
@@ -167,6 +199,7 @@
         display: flex;
         align-items: center;
         gap: 30px;
+        padding-bottom: unset;
     }
 
     .trusted-hero-container .default-content-wrapper > .rte-wrapper {
@@ -179,7 +212,15 @@
     }
 
     .trusted-hero-container .default-content-wrapper p.button-container {
+        position: unset;
         display: inline-block;
+    }
+
+    .trusted-hero-container a.button:any-link:not(.modal, .primary) {
+        width: unset;
+        justify-content: unset;
+        display: inline-flex;
+        margin-right: 15px;
     }
 }
 

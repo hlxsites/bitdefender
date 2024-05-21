@@ -753,7 +753,7 @@ main .section.link-right a {
 
 @media (max-width: 768px) {
     .trusted .default-content-wrapper {
-        padding: 1em!important;
+        padding: 1em;
     }
 
     .trusted main .hero em {

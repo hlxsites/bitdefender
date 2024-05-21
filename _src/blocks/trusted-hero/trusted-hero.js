@@ -52,13 +52,11 @@ export default async function decorate(block) {
         <div class="video-wrapper">
             <a class="video-placeholder">
                 <span class="video-placeholder-play"></span>
-<!--                <span class="video-placeholder-pause"></span>-->
             </a>
             <video ${formattedVideoSettings} poster="${videoPlayerPoster}">
               <source src="${videoUrl}" type="video/${videoFormat}">
             </video>
         </div>
-<!--        <div class="scroll-down">Scroll down</div>-->
     </div>
   `;
 

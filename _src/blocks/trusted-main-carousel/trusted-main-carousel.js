@@ -102,7 +102,7 @@ export default async function decorate(block) {
   function beginAutomaticSliding() {
     endAutomaticSliding();
 
-    if (state.carouselIsFocused) {
+    if (state.carouselIsFocused || !isView(AUTOMATIC_SLIDING.viewport)) {
       return;
     }
 
@@ -111,9 +111,7 @@ export default async function decorate(block) {
       const nextStepToSelect = isLastStep ? 0 : (state.currentStep + 1);
       selectStep(nextStepToSelect);
 
-      const isViewport = isView(AUTOMATIC_SLIDING.viewport);
-
-      if (!isViewport || state.carouselIsFocused) {
+      if (!isView(AUTOMATIC_SLIDING.viewport) || state.carouselIsFocused) {
         endAutomaticSliding(interval);
       }
     }, AUTOMATIC_SLIDING.slideDelay);
