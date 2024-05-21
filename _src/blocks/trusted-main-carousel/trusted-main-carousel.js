@@ -95,8 +95,12 @@ export default async function decorate(block) {
     slideToSection(itemPosition);
   }
 
+  function endAutomaticSliding(interval) {
+    clearInterval(interval || state.currentInterval);
+  }
+
   function beginAutomaticSliding() {
-    clearInterval(state.currentInterval);
+    endAutomaticSliding();
 
     if (state.carouselIsFocused) {
       return;
@@ -110,7 +114,7 @@ export default async function decorate(block) {
       const isViewport = isView(AUTOMATIC_SLIDING.viewport);
 
       if (!isViewport || state.carouselIsFocused) {
-        clearInterval(interval);
+        endAutomaticSliding(interval);
       }
     }, AUTOMATIC_SLIDING.slideDelay);
 
@@ -120,7 +124,7 @@ export default async function decorate(block) {
   function addEventListeners() {
     block.addEventListener('mouseenter', () => {
       state.carouselIsFocused = true;
-      clearInterval(state.currentInterval);
+      endAutomaticSliding();
     });
 
     block.addEventListener('mouseleave', () => {
