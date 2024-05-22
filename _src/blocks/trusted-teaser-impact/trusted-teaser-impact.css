@@ -86,6 +86,15 @@
         width: calc(25% - 15px);
     }
 
+    .trusted-teaser-impact .box-wrapper .box-item .title {
+        font-size: 50px;
+        color: #35383C;
+    }
+
+    .trusted-teaser-impact .box-wrapper .box-item .subtitle {
+        margin-top: 0;
+    }
+
     .trusted-teaser-impact .box-wrapper .box-item .icon {
         width: 70px;
         height: 70px;

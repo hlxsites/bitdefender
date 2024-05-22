@@ -21,7 +21,7 @@ export default async function decorate(block) {
                     ${box.children[0].children[1].textContent}
                 </div>
                 
-                <p>
+                <p class="subtitle">
                     ${box.children[0].children[2].innerHTML}
                  </p>
             </div>

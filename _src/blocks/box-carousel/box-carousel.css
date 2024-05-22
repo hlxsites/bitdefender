@@ -87,6 +87,7 @@
     letter-spacing: 0;
     overflow: hidden;
     margin-top: auto;
+    color: #242424;
 }
 
 .box-carousel-container.testimonials .carousel-item .subtitle-secondary {
@@ -107,6 +108,7 @@
 
 .box-carousel-container.testimonials .carousel-item .subtitle {
     margin-top: unset;
+    color: #242424;
 }
 
 .box-carousel-container .left-arrow svg {
@@ -158,6 +160,10 @@
         margin-bottom: 20px;
     }
 
+    .box-carousel-container.testimonials .img-container {
+        width: 60%;
+    }
+
     .box-carousel-container.testimonials .carousel-item {
         width: calc((100% - 25px) / 2);
         min-height: 390px;
@@ -180,6 +186,20 @@
     .box-carousel-container.testimonials .carousel-item {
         width: calc((100% - 25px) / 3);
         min-height: 390px;
+    }
+
+    .box-carousel-container .carousel-item .title {
+        font-size: 22px;
+        color: #242424;
+        font-weight: 500;
+    }
+
+    .box-carousel-container.testimonials .carousel-item .subtitle {
+        font-size: 17px;
+    }
+
+    .box-carousel-container.testimonials .carousel-item .subtitle-secondary {
+        font-size: 18px;
     }
 
     .box-carousel-container:not(.testimonials) .carousel-item:hover {
