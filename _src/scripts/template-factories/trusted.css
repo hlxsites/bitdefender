@@ -34,16 +34,13 @@
 
 .trusted h1, .trusted main .hero h1 {
     font: normal normal bold 48px/42px var(--font-ibm);
+    color: #252525;
     text-align: left;
 }
 
-.trusted main .hero h2 {
-    font: normal normal bold 20px/24px var(--font-ibm);
-}
-
 .trusted h2 {
-    /*font: normal normal bold 32px/37px var(--font-ibm);*/
     font: normal normal bold 20px/24px "IBM Plex Sans", sans-serif;
+    color: #252525;
     text-align: left;
 }
 
@@ -539,124 +536,13 @@ main .section.link-right a {
     }
 }
 
-@media (min-width: 992px) {
-    /* awards band */
-    .trusted .section.static-awards .default-content-wrapper {
-        flex-wrap: unset;
-    }
-    .trusted .section.static-awards .default-content-wrapper > * {
-        width: calc(100% - 66px);
-        height: calc(100% - 30px);
-    }
-    /* end awards band */
-
-    /* columns bg-1 override */
-    .trusted .section.columns-container.trusted-bg-1 {
-        min-height: 500px;
-    }
-
-    /*.trusted .section.columns-container.trusted-bg-1 h2,*/
-    /*.trusted .section.columns-container.trusted-bg-1 h3,*/
-    /*.trusted .section.columns-container.trusted-bg-1 h4 {*/
-    /*    font: normal normal 600 40px/48px IBM Plex Sans;*/
-    /*}*/
-
-    .trusted .section.columns-container.trusted-bg-1 p,
-    .trusted .section.columns-container.trusted-bg-1 div{
-        font: normal normal normal 18px/27px IBM Plex Sans;
-    }
-
-    .trusted .section.columns-container.trusted-bg-1 .columns > div  {
-        align-items: flex-start;
-    }
-
-    .trusted .section.columns-container.trusted-bg-1 .columns > div > div:nth-child(2) {
-        padding: 46px 0 30px;
-    }
-    /* end columns bg-1 override */
-
-    /* columns with logos */
-    .trusted .section.columns-container {
-        padding: 0;
-    }
-    .trusted .section.columns-container .columns-img-col {
-        display: block;
-    }
-
-    .trusted .section.columns-container .columns > div > div:not(.columns-img-col) p:last-child {
-        order: initial;
-    }
-
-    /*.trusted .section.columns-container h2,*/
-    /*.trusted .section.columns-container h3,*/
-    /*.trusted .section.columns-container h4 {*/
-    /*    font: normal normal 600 40px/48px IBM Plex Sans;*/
-    /*}*/
-
-    .trusted .section.columns-container p,
-    .trusted .section.columns-container div {
-        font: normal normal normal 18px/27px IBM Plex Sans;
-    }
-    /* end columns with logos */
-
-    .trusted .section.apartnership_box .default-content-wrapper {
-        width: 50%;
-    }
-
-    .trusted .section.apartnership_box .default-content-wrapper > * {
-       text-align: center;
-    }
-
-    /* particle band section */
-    .trusted .section.particle-band {
-        display: block;
-        padding: 0;
-        background: url("/_src/icons/particle-band.svg") no-repeat #EFF6FF;
-        height: 50px;
-    }
-
-    .trusted .section.particle-band .default-content-wrapper {
-        width: 100%;
-        max-width: 100%;
-        padding: 0;
-    }
-
-    .trusted .section.particle-band .default-content-wrapper p {
-        margin: 0
-    }
-    /* end particle band section */
-
-    .trusted .section.small-text p {
-        font: normal normal var(--font-weight-bold) 13px/1 IBM Plex Sans;
-    }
-
-    .trusted main .hero .hero-picture picture img {
-        display: block;
-        padding-left: 0;
-    }
-
-    .trusted .section.static-awards .default-content-wrapper > *:not(:first-child) {
-        width: 100%;
-        padding: 20px;
-    }
-
-    .trusted .section.static-awards .default-content-wrapper > * picture {
-        width: 100% !important;
-    }
-}
-
 @media (min-width: 768px) {
     .trusted h1, .trusted main .hero h1 {
         font: normal normal bold 96px/82px var(--font-ibm);
     }
 
     .trusted h2 {
-        /*font: normal normal bold 64px/61px var(--font-ibm);*/
-        font: normal normal 500 47px/48px var(--font-ibm);
-    }
-
-    .trusted main .hero h2 {
-        font: normal normal bold 40px/45px var(--font-ibm);
+        font: normal normal bold 41px/48px var(--font-ibm);
     }
 
     .trusted h3 {
@@ -753,6 +639,100 @@ main .section.link-right a {
 
     .trusted .section.static-awards .default-content-wrapper > * picture {
         width: 60%;
+    }
+}
+
+@media (min-width: 992px) {
+    /* awards band */
+    .trusted .section.static-awards .default-content-wrapper {
+        flex-wrap: unset;
+    }
+    .trusted .section.static-awards .default-content-wrapper > * {
+        width: calc(100% - 66px);
+        height: calc(100% - 30px);
+    }
+    /* end awards band */
+
+    /* columns bg-1 override */
+    .trusted .section.columns-container.trusted-bg-1 {
+        min-height: 500px;
+    }
+
+    .trusted .section.columns-container.trusted-bg-1 p,
+    .trusted .section.columns-container.trusted-bg-1 div{
+        font: normal normal normal 18px/27px IBM Plex Sans;
+    }
+
+    .trusted .section.columns-container.trusted-bg-1 .columns > div  {
+        align-items: flex-start;
+    }
+
+    .trusted .section.columns-container.trusted-bg-1 .columns > div > div:nth-child(2) {
+        padding: 46px 0 30px;
+    }
+    /* end columns bg-1 override */
+
+    /* columns with logos */
+    .trusted .section.columns-container {
+        padding: 0;
+    }
+    .trusted .section.columns-container .columns-img-col {
+        display: block;
+    }
+
+    .trusted .section.columns-container .columns > div > div:not(.columns-img-col) p:last-child {
+        order: initial;
+    }
+
+    .trusted .section.columns-container p,
+    .trusted .section.columns-container div {
+        font: normal normal normal 18px/27px IBM Plex Sans;
+    }
+    /* end columns with logos */
+
+    .trusted .section.apartnership_box .default-content-wrapper {
+        width: 50%;
+    }
+
+    .trusted .section.apartnership_box .default-content-wrapper > * {
+        text-align: center;
+    }
+
+    /* particle band section */
+    .trusted .section.particle-band {
+        display: block;
+        padding: 0;
+        background: url("/_src/icons/particle-band.svg") no-repeat #EFF6FF;
+        height: 50px;
+    }
+
+    .trusted .section.particle-band .default-content-wrapper {
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .trusted .section.particle-band .default-content-wrapper p {
+        margin: 0
+    }
+    /* end particle band section */
+
+    .trusted .section.small-text p {
+        font: normal normal var(--font-weight-bold) 13px/1 IBM Plex Sans;
+    }
+
+    .trusted main .hero .hero-picture picture img {
+        display: block;
+        padding-left: 0;
+    }
+
+    .trusted .section.static-awards .default-content-wrapper > *:not(:first-child) {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .trusted .section.static-awards .default-content-wrapper > * picture {
+        width: 100% !important;
     }
 }
 
