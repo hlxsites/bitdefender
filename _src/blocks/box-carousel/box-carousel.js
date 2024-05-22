@@ -122,9 +122,9 @@ export default async function decorate(block) {
                   </div>
                 ` : slide.children[0].children[0].innerHTML}
                 
-                <div class="title">
+                <p class="title">
                     ${slide.children[0].children[1].textContent}
-                </div>
+                </p>
                 
                 ${isTestimonials ? `
                   <div class="subtitle-secondary">

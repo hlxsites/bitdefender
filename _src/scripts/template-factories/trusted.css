@@ -42,7 +42,8 @@
 }
 
 .trusted h2 {
-    font: normal normal bold 32px/37px var(--font-ibm);
+    /*font: normal normal bold 32px/37px var(--font-ibm);*/
+    font: normal normal bold 20px/24px "IBM Plex Sans", sans-serif;
     text-align: left;
 }
 
@@ -157,16 +158,10 @@ main .section.link-right a {
     color: black;
 }
 
-.trusted .section.apartnership_box h2,
-.trusted .section.apartnership_box h3,
-.trusted .section.apartnership_box h4 {
-    font: normal normal 600 20px/24px IBM Plex Sans;
+.trusted .section.apartnership_box p.button-container {
+    margin-top: 30px;
 }
 
-.trusted .section.apartnership_box p,
-.trusted .section.apartnership_box div {
-    font: normal normal normal 14px/18px IBM Plex Sans;
-}
 
 .trusted .apartnership_box .default-content-wrapper > * {
     text-align: center;
@@ -402,11 +397,11 @@ main .section.link-right a {
     color: black;
 }
 
-.trusted .section.columns-container.trusted-bg-1 h2,
-.trusted .section.columns-container.trusted-bg-1 h3,
-.trusted .section.columns-container.trusted-bg-1 h4 {
-    font: normal normal 600 20px/24px IBM Plex Sans;
-}
+/*.trusted .section.columns-container.trusted-bg-1 h2,*/
+/*.trusted .section.columns-container.trusted-bg-1 h3,*/
+/*.trusted .section.columns-container.trusted-bg-1 h4 {*/
+/*    font: normal normal 600 20px/24px IBM Plex Sans;*/
+/*}*/
 
 .trusted .section.columns-container.trusted-bg-1 p,
 .trusted .section.columns-container.trusted-bg-1 div {
@@ -433,11 +428,11 @@ main .section.link-right a {
     width: 160px;
 }
 
-.trusted .section.columns-container h2,
-.trusted .section.columns-container h3,
-.trusted .section.columns-container h4 {
-    font: normal normal 600 20px/24px IBM Plex Sans;
-}
+/*.trusted .section.columns-container h2,*/
+/*.trusted .section.columns-container h3,*/
+/*.trusted .section.columns-container h4 {*/
+/*    font: normal normal 600 20px/24px IBM Plex Sans;*/
+/*}*/
 
 .trusted .section.columns-container p,
 .trusted .section.columns-container div {
@@ -560,11 +555,11 @@ main .section.link-right a {
         min-height: 500px;
     }
 
-    .trusted .section.columns-container.trusted-bg-1 h2,
-    .trusted .section.columns-container.trusted-bg-1 h3,
-    .trusted .section.columns-container.trusted-bg-1 h4 {
-        font: normal normal 600 40px/48px IBM Plex Sans;
-    }
+    /*.trusted .section.columns-container.trusted-bg-1 h2,*/
+    /*.trusted .section.columns-container.trusted-bg-1 h3,*/
+    /*.trusted .section.columns-container.trusted-bg-1 h4 {*/
+    /*    font: normal normal 600 40px/48px IBM Plex Sans;*/
+    /*}*/
 
     .trusted .section.columns-container.trusted-bg-1 p,
     .trusted .section.columns-container.trusted-bg-1 div{
@@ -592,11 +587,11 @@ main .section.link-right a {
         order: initial;
     }
 
-    .trusted .section.columns-container h2,
-    .trusted .section.columns-container h3,
-    .trusted .section.columns-container h4 {
-        font: normal normal 600 40px/48px IBM Plex Sans;
-    }
+    /*.trusted .section.columns-container h2,*/
+    /*.trusted .section.columns-container h3,*/
+    /*.trusted .section.columns-container h4 {*/
+    /*    font: normal normal 600 40px/48px IBM Plex Sans;*/
+    /*}*/
 
     .trusted .section.columns-container p,
     .trusted .section.columns-container div {
@@ -610,17 +605,6 @@ main .section.link-right a {
 
     .trusted .section.apartnership_box .default-content-wrapper > * {
        text-align: center;
-    }
-
-    .trusted .section.apartnership_box h2,
-    .trusted .section.apartnership_box h3,
-    .trusted .section.apartnership_box h4 {
-        font: normal normal 600 40px/52px IBM Plex Sans;
-    }
-
-    .trusted .section.apartnership_box p,
-    .trusted .section.apartnership_box div {
-        font: normal normal normal 24px/32px IBM Plex Sans;
     }
 
     /* particle band section */
@@ -667,7 +651,8 @@ main .section.link-right a {
     }
 
     .trusted h2 {
-        font: normal normal bold 64px/61px var(--font-ibm);
+        /*font: normal normal bold 64px/61px var(--font-ibm);*/
+        font: normal normal 500 47px/48px var(--font-ibm);
     }
 
     .trusted main .hero h2 {
@@ -682,8 +667,8 @@ main .section.link-right a {
         font: normal normal normal 35px/38px var(--font-ibm);
     }
 
-    .trusted p, .trusted main .hero p {
-        font: normal normal normal 24px/32px var(--font-ibm);
+    .trusted p {
+        font: normal normal normal 18px/32px var(--font-ibm);
     }
 
     .trusted main .hero .hero-content .breadcrumb {
@@ -773,7 +758,7 @@ main .section.link-right a {
 
 @media (max-width: 768px) {
     .trusted .default-content-wrapper {
-        padding: 1em!important;
+        padding: 1em;
     }
 
     .trusted main .hero em {

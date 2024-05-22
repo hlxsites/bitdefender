@@ -1,12 +1,21 @@
+import { isView } from '../../scripts/scripts.js';
+import { debounce } from '../../scripts/utils/utils.js';
+
 export default async function decorate(block) {
   const slides = [...block.children];
-  console.log('slides', slides);
+  const AUTOMATIC_SLIDING = {
+    enabled: true,
+    viewport: 'desktop',
+    slideDelay: 3 * 1000,
+  };
+
   const state = {
     currentStep: 0,
+    carouselIsFocused: false,
+    currentInterval: null,
   };
 
   const navItemsNames = slides.map((slideEl) => slideEl.children[0].firstElementChild.textContent);
-  console.log('navItemsNames', navItemsNames);
 
   block.classList.add('default-content-wrapper');
   block.innerHTML = `
@@ -47,27 +56,6 @@ export default async function decorate(block) {
         ${slides.map((slide, index) => `
         <div class="slide ${index === 0 ? 'active' : ''}">
             ${slide.innerHTML}
-<!--            <div>-->
-<!--              <p>-->
-<!--                <picture>-->
-<!--                  <source type="image/webp" srcset="./media_1d3956f33b36eabaf61b2c5d1dac9ee55f05d9add.png?width=2000&#x26;format=webply&#x26;optimize=medium" media="(min-width: 600px)">-->
-<!--                  <source type="image/webp" srcset="./media_1d3956f33b36eabaf61b2c5d1dac9ee55f05d9add.png?width=750&#x26;format=webply&#x26;optimize=medium">-->
-<!--                  <source type="image/png" srcset="./media_1d3956f33b36eabaf61b2c5d1dac9ee55f05d9add.png?width=2000&#x26;format=png&#x26;optimize=medium" media="(min-width: 600px)">-->
-<!--                  <img loading="lazy" alt="" src="./media_1d3956f33b36eabaf61b2c5d1dac9ee55f05d9add.png?width=750&#x26;format=png&#x26;optimize=medium" width="350" height="56">-->
-<!--                </picture>-->
-<!--              </p>-->
-<!--              <h2 id="bitdefender-named-a-leader-in-the-forrester-wave-endpoint-security-q4-2023">1 Bitdefender named a Leader in The Forrester Wave™: Endpoint Security, Q4 2023.</h2>-->
-<!--              <p>According to the Forrester report, Bitdefender “differentiates with its aggressive prevention-first mindset” and has received the highest possible scores in 10 criteria, including Malware Prevention, Network Threat Detection, Patching Remediation, Innovation, and Pricing Flexibility and Transparency.</p>-->
-<!--              <p><a href="https://businessresources.bitdefender.com/forrester-wave-endpoint-security-q4-2023">Read more</a></p>-->
-<!--            </div>-->
-<!--            <div>-->
-<!--              <picture>-->
-<!--                <source type="image/webp" srcset="./media_1b35b2f17dd35d6cf3992df17fbc684ac3a3abf6a.jpeg?width=2000&#x26;format=webply&#x26;optimize=medium" media="(min-width: 600px)">-->
-<!--                <source type="image/webp" srcset="./media_1b35b2f17dd35d6cf3992df17fbc684ac3a3abf6a.jpeg?width=750&#x26;format=webply&#x26;optimize=medium">-->
-<!--                <source type="image/jpeg" srcset="./media_1b35b2f17dd35d6cf3992df17fbc684ac3a3abf6a.jpeg?width=2000&#x26;format=jpeg&#x26;optimize=medium" media="(min-width: 600px)">-->
-<!--                <img loading="lazy" alt="" src="./media_1b35b2f17dd35d6cf3992df17fbc684ac3a3abf6a.jpeg?width=750&#x26;format=jpeg&#x26;optimize=medium" width="160" height="160">-->
-<!--              </picture>-->
-<!--            </div>-->
         </div>
         `).join('')}
     </div>
@@ -101,14 +89,49 @@ export default async function decorate(block) {
   }
 
   function selectStep(itemPosition) {
-    console.log('state.currentStep', state.currentStep);
     state.currentStep = itemPosition;
     selectNavItem(itemPosition);
     selectSlideItem(itemPosition);
     slideToSection(itemPosition);
   }
 
+  function endAutomaticSliding(interval) {
+    clearInterval(interval || state.currentInterval);
+  }
+
+  function beginAutomaticSliding() {
+    if (!AUTOMATIC_SLIDING.enabled) return;
+
+    endAutomaticSliding();
+
+    if (state.carouselIsFocused || !isView(AUTOMATIC_SLIDING.viewport)) {
+      return;
+    }
+
+    const interval = setInterval(() => {
+      const isLastStep = state.currentStep === navItems.length - 1;
+      const nextStepToSelect = isLastStep ? 0 : (state.currentStep + 1);
+      selectStep(nextStepToSelect);
+
+      if (!isView(AUTOMATIC_SLIDING.viewport) || state.carouselIsFocused) {
+        endAutomaticSliding(interval);
+      }
+    }, AUTOMATIC_SLIDING.slideDelay);
+
+    state.currentInterval = interval;
+  }
+
   function addEventListeners() {
+    block.addEventListener('mouseenter', () => {
+      state.carouselIsFocused = true;
+      endAutomaticSliding();
+    });
+
+    block.addEventListener('mouseleave', () => {
+      state.carouselIsFocused = false;
+      beginAutomaticSliding();
+    });
+
     navItems.forEach((navEl, itemPosition) => {
       navEl.addEventListener('click', () => {
         selectStep(itemPosition);
@@ -117,8 +140,9 @@ export default async function decorate(block) {
 
     leftArrow.addEventListener('click', (e) => {
       e.preventDefault();
-      const isFirstItem = state.currentStep === 0;
-      if (isFirstItem) {
+
+      const isFirstStep = state.currentStep === 0;
+      if (isFirstStep) {
         return;
       }
 
@@ -127,8 +151,9 @@ export default async function decorate(block) {
 
     rightArrow.addEventListener('click', (e) => {
       e.preventDefault();
-      const isLastItem = state.currentStep === navItems.length - 1;
-      if (isLastItem) {
+
+      const isLastStep = state.currentStep === navItems.length - 1;
+      if (isLastStep) {
         return;
       }
 
@@ -137,4 +162,7 @@ export default async function decorate(block) {
   }
 
   addEventListeners();
+
+  beginAutomaticSliding();
+  window.addEventListener('resize', debounce(beginAutomaticSliding, 250));
 }
