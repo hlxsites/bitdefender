@@ -164,6 +164,14 @@
         height: auto;
     }
 
+    .trusted-main-carousel-container .content-wrapper .slide >:first-child p.button-container {
+        justify-content: unset;
+    }
+
+    .trusted-main-carousel-container .content-wrapper .slide >:first-child > *:not(h2) {
+        margin: 40px 0;
+    }
+
     .trusted-main-carousel-container .content-wrapper .slide >:last-child img {
         object-fit: contain;
     }

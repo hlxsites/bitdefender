@@ -4,7 +4,7 @@ import { debounce } from '../../scripts/utils/utils.js';
 export default async function decorate(block) {
   const slides = [...block.children];
   const AUTOMATIC_SLIDING = {
-    enabled: true,
+    enabled: false,
     viewport: 'desktop',
     slideDelay: 3 * 1000,
   };
@@ -100,6 +100,8 @@ export default async function decorate(block) {
   }
 
   function beginAutomaticSliding() {
+    if (!AUTOMATIC_SLIDING.enabled) return;
+
     endAutomaticSliding();
 
     if (state.carouselIsFocused || !isView(AUTOMATIC_SLIDING.viewport)) {
@@ -161,8 +163,6 @@ export default async function decorate(block) {
 
   addEventListeners();
 
-  if (AUTOMATIC_SLIDING.enabled) {
-    beginAutomaticSliding();
-    window.addEventListener('resize', debounce(beginAutomaticSliding, 250));
-  }
+  beginAutomaticSliding();
+  window.addEventListener('resize', debounce(beginAutomaticSliding, 250));
 }
