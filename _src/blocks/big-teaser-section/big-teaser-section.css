@@ -66,12 +66,6 @@
 }
 
 @media screen and (min-width: 992px) {
-    .big-teaser-section-container h2 {
-        font-size: 41px;
-        color: #252525;
-        font-weight: bold;
-    }
-
     .big-teaser-section-container p {
         line-height: 1.3;
     }

@@ -61,7 +61,7 @@
 .dual-teaser-container .col-container .box h3,
 .dual-teaser-container .col-container .box h4,
 .dual-teaser-container .col-container .box h5 {
-    font: normal normal normal 20px/27px "IBM Plex Sans", sans-serif;
+    color: white;
     letter-spacing: 0;
 }
 
@@ -134,7 +134,6 @@
     .dual-teaser-container .col-container .box h3,
     .dual-teaser-container .col-container .box h4,
     .dual-teaser-container .col-container .box h5 {
-        font: normal normal normal 40px/52px "IBM Plex Sans", sans-serif;
         margin-bottom: 16px;
     }
 
