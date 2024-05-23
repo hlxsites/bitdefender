@@ -498,7 +498,6 @@ function pushPageLoadToDataLayer() {
  * @param {Element} doc The container element
  */
 async function loadEager(doc) {
-  console.log('body', doc.body);
   setPageLanguage(getLanguageCountryFromPath(window.location.pathname));
   decorateTemplateAndTheme();
   const templateMetadata = getMetadata('template');

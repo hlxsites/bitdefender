@@ -1,12 +1,10 @@
 export default async function decorate(block) {
   const slides = [...block.children];
-  console.log('slides', slides);
   const state = {
     currentStep: 0,
   };
 
   const navItemsNames = slides.map((slideEl) => slideEl.children[0].firstElementChild.textContent);
-  console.log('navItemsNames', navItemsNames);
 
   block.classList.add('default-content-wrapper');
   block.innerHTML = `
@@ -101,7 +99,6 @@ export default async function decorate(block) {
   }
 
   function selectStep(itemPosition) {
-    console.log('state.currentStep', state.currentStep);
     state.currentStep = itemPosition;
     selectNavItem(itemPosition);
     selectSlideItem(itemPosition);

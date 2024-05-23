@@ -28,9 +28,9 @@ export default async function decorate(block) {
     return `
       <div class="form-wrapper">
         <form class="step">
-           <div class="step__header">
-             <div class="step__index">${questionLabel} ${index + 1}/${steps.length}:</div>
-             ${!isFirstStep ? `<a class="step__previous">${previousButtonLabel}</a>` : ''}
+           <div class="step-header">
+             <div class="step-index">${questionLabel} ${index + 1}/${steps.length}:</div>
+             ${!isFirstStep ? `<a class="step-previous">${previousButtonLabel}</a>` : ''}
            </div>
         
            
@@ -43,7 +43,7 @@ export default async function decorate(block) {
     const forLabel = `${fieldId}-${idx}`;
 
     return `
-                <div class="step__radio-wrapper">
+                <div class="step-radio-wrapper">
                   <input type="radio" id="${forLabel}" name="${fieldId}" value="${value}" required aria-required="true"/>
                   <label for="${forLabel}">${option.textContent}</label>
                 </div>  
