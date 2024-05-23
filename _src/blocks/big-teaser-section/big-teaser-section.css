@@ -1,7 +1,3 @@
-.big-teaser-section-container.section {
-    padding-bottom: 0;
-}
-
 .big-teaser-section-container {
     background: white;
     color: black;
@@ -37,22 +33,7 @@
     height: 100%;
 }
 
-.big-teaser-section-container h2,
-.big-teaser-section-container h3,
-.big-teaser-section-container h4 {
-    font: normal normal 600 20px/24px "IBM Plex Sans", sans-serif;
-}
-
-.big-teaser-section-container p,
-.big-teaser-section-container div {
-    font: normal normal normal 14px/21px "IBM Plex Sans", sans-serif;
-}
-
 @media screen and (min-width: 768px) {
-    .big-teaser-section-container.section {
-        padding-top: 0;
-    }
-
     .big-teaser-section.block {
         position: relative;
     }
@@ -60,17 +41,6 @@
     .big-teaser-section-container .rte {
         position: relative;
         z-index: 1;
-    }
-
-    .big-teaser-section-container h2,
-    .big-teaser-section-container h3,
-    .big-teaser-section-container h4 {
-        font: normal normal 600 40px/48px "IBM Plex Sans", sans-serif;
-    }
-
-    .big-teaser-section-container p,
-    .big-teaser-section-container div {
-        font: normal normal normal 18px/27px "IBM Plex Sans", sans-serif;
     }
 
     .big-teaser-section-container .wrapper {
@@ -96,6 +66,10 @@
 }
 
 @media screen and (min-width: 992px) {
+    .big-teaser-section-container p {
+        line-height: 1.3;
+    }
+
     .big-teaser-section-container .default-content-wrapper {
         flex-direction: row;
         align-items: unset;
@@ -118,5 +92,6 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+        margin-top: unset;
     }
 }

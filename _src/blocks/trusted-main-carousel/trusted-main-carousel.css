@@ -24,7 +24,9 @@
 }
 
 .trusted-main-carousel-container .navigation-wrapper .nav-item {
-    color: #006EFF;
+    color: black;
+    font-weight: 500;
+    font-size: 9px;
     flex-shrink: 0;
     padding: 15px;
 }
@@ -69,16 +71,16 @@
 }
 
 .trusted-main-carousel-container .content-wrapper .slide >:first-child p.button-container {
-    position: absolute;
-    bottom: -75px;
-    z-index: 1;
-    left: 25%;
+    display: flex;
+    justify-content: center;
 }
 
 .trusted-main-carousel-container .content-wrapper .slide >:last-child {
     width: calc(100% + 2em);
     margin-left: -1em;
     height: 200px;
+    top: -15px;
+    z-index: -1;
 }
 
 .trusted-main-carousel-container .content-wrapper .slide >:last-child img {
@@ -92,6 +94,8 @@
     color: black;
     font-weight: normal;
     border: 1px solid black;
+    width: 250px;
+    justify-content: center;
 }
 
 .trusted-main-carousel-container .content-wrapper .slide >:first-child img {
@@ -99,9 +103,8 @@
 }
 
 @media (min-width: 768px) {
-    .trusted-main-carousel-container h2, h3 {
-        font-size: 44px;
-        line-height: 1.2;
+    .trusted-main-carousel-container .navigation-wrapper .nav-item {
+        font-size: 100%;
     }
 
     .trusted-main-carousel-container .navigation-wrapper .second-nav {
@@ -151,14 +154,30 @@
         margin-top: 30px;
     }
 
+    .trusted-main-carousel-container .navigation-wrapper .nav-item {
+        padding: 15px 30px;
+    }
+
     .trusted-main-carousel-container .content-wrapper .slide >:last-child {
-        width: calc((100% - 50px) / 2);
+        width: calc(60% - 50px);
         margin-left: unset;
         height: auto;
     }
 
+    .trusted-main-carousel-container .content-wrapper .slide >:first-child p.button-container {
+        justify-content: unset;
+    }
+
+    .trusted-main-carousel-container .content-wrapper .slide >:first-child > *:not(h2) {
+        margin: 40px 0;
+    }
+
+    .trusted-main-carousel-container .content-wrapper .slide >:last-child img {
+        object-fit: contain;
+    }
+
     .trusted-main-carousel-container .content-wrapper .slide > div {
-        width: calc((100% - 50px) / 2);
+        width: calc(40% - 50px);
         flex-shrink: 0;
     }
 }

@@ -1,93 +1,34 @@
-import { getDatasetFromSection } from '../../scripts/utils/utils.js';
-
 export default async function decorate(block) {
-  const [rte, videoUrlEl] = [...block.children];
+  const [rte, videoUrl] = [...block.children];
 
-  const state = {
-    isVideoPlaying: false,
-  };
+  const autoplay = false;
+  const url = new URL(videoUrl.textContent.trim());
+  const usp = new URLSearchParams(url.search);
+  const suffix = autoplay ? '&muted=1&autoplay=1' : '';
+  let vid = usp.get('v') ? encodeURIComponent(usp.get('v')) : '';
+  const embed = url.pathname;
 
-  const videoUrl = videoUrlEl.textContent.trim();
-  const videoFormat = videoUrl.split('.').pop();
-
-  const blockDataset = getDatasetFromSection(block);
-  const { videoPlayerSettings, videoPlayerPoster } = blockDataset;
-
-  function appendPreloadedVideo() {
-    const linkVideoEl = document.createElement('link');
-    const linkVideoPosterEl = document.createElement('link');
-    linkVideoEl.rel = 'preload';
-    linkVideoEl.as = 'video';
-    linkVideoEl.href = videoUrl;
-    linkVideoEl.type = `video/${videoFormat}`;
-
-    linkVideoPosterEl.rel = 'preload';
-    linkVideoPosterEl.as = 'image';
-    linkVideoPosterEl.href = videoPlayerPoster;
-
-    document.head.prepend(linkVideoPosterEl);
-    document.head.prepend(linkVideoEl);
+  if (url.origin.includes('youtu.be')) {
+    [, vid] = url.pathname.split('/');
   }
-
-  appendPreloadedVideo();
-
-  const formattedVideoSettings = videoPlayerSettings
-    .split(',')
-    .map((item) => {
-      let newStr = item;
-      if (newStr.includes('=')) {
-        newStr = item.replace('=', '="');
-        newStr = `${newStr}"`;
-
-        return newStr;
-      }
-
-      return newStr.trim();
-    })
-    .join(' ');
 
   block.innerHTML = `
     <div class="default-content-wrapper">
         <div class="rte-wrapper">${rte.innerHTML}</div>
         <div class="video-wrapper">
-            <a class="video-placeholder">
-                <span class="video-placeholder-play"></span>
-<!--                <span class="video-placeholder-pause"></span>-->
-            </a>
-            <video ${formattedVideoSettings} poster="${videoPlayerPoster}">
-              <source src="${videoUrl}" type="video/${videoFormat}">
-            </video>
+            <iframe 
+              src="https://www.youtube.com${vid ? `/embed/${vid}?rel=0&v=${vid}${suffix}` : embed}"
+              allow="autoplay; fullscreen; picture-in-picture; encrypted-media; accelerometer; gyroscope; picture-in-picture"
+              allowfullscreen="" 
+              scrolling="no"
+              title="Content from Youtube"
+              loading="lazy"></iframe>
         </div>
-<!--        <div class="scroll-down">Scroll down</div>-->
     </div>
   `;
-
-  const playAnchor = block.querySelector('.video-placeholder');
-  const videoElement = block.querySelector('video');
-
-  playAnchor.addEventListener('click', (event) => {
-    event.preventDefault();
-    playAnchor.classList.toggle('play');
-    state.isVideoPlaying = !state.isVideoPlaying;
-
-    // eslint-disable-next-line no-unused-expressions
-    if (state.isVideoPlaying) {
-      videoElement.play();
-      setTimeout(() => {
-        playAnchor.classList.add('playing');
-      }, 250);
-    } else {
-      videoElement.pause();
-      setTimeout(() => {
-        playAnchor.classList.remove('playing');
-      }, 250);
-    }
-  });
 
   block.querySelectorAll('.button-container > a').forEach((anchorEl) => {
     anchorEl.target = '_blank';
     anchorEl.rel = 'noopener noreferrer';
   });
-
-  // adobeMcAppendVisitorId('header');
 }
