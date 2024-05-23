@@ -33,7 +33,15 @@
 @media (min-width: 992px) {
     .quiz-result-container {
         .block {
+            background: url('/_src/images/quiz-results-bg.jpg') no-repeat;
             position: relative;
+            box-shadow: 0 4px 13px 4px #0000003b;
+            border-radius: 20px;
+        }
+
+        .block > :first-child {
+            display: flex;
+            justify-content: center;
         }
 
         h3 {
@@ -53,15 +61,8 @@
             min-height: 600px;
             display: flex;
             justify-content: center;
+            align-items: center;
             flex-direction: column;
-        }
-
-        .img-container {
-            width: 400px;
-            height: 600px;
-            position: absolute;
-            right: 0;
-            top: 0;
         }
     }
 }
