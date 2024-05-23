@@ -8,7 +8,7 @@ export default async function decorate(block) {
   block.classList.add('default-content-wrapper');
   block.children[0].children[0].classList.add('results-wrapper');
   block.children[0].children[0].lastElementChild.classList.add('social-wrapper');
-  block.querySelector('picture').closest('p').classList.add('img-container');
+  block.querySelector('picture').closest('div').classList.add('img-container');
 
   const resultPageUrl = window.location.href;
 
