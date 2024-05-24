@@ -210,7 +210,7 @@ export default async function decorate(block, options) {
       }
       // create the prices element based on where the component is being called from, aem of www-websites
       if (options) {
-        await createPricesElement(options.store, '', 'Save', prodName, prodUsers, prodYears, buyLinkSelector, billed, mainProduct)
+        await createPricesElement(options.store, '', 'Save', prodName, prodUsers, prodYears, buyLinkSelector, billed)
           .then((pricesBox) => {
             yearlyPricesBoxes[`${key}-yearly-${prodName.trim()}`] = pricesBox;
             // buyLink.parentNode.parentNode.insertBefore(pricesBox, buyLink.parentNode);
