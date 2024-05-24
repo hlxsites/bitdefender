@@ -1,7 +1,7 @@
 /* eslint-disable prefer-const */
 /* eslint-disable no-undef */
 /* eslint-disable max-len */
-let products = [];
+let dataLayerProducts = [];
 async function createPricesElement(storeOBJ, conditionText, saveText, prodName, prodUsers, prodYears, buylink, billed) {
   const storeProduct = await storeOBJ.getProducts([new ProductInfo(prodName, 'consumer')]);
   const storeOption = storeProduct[prodName].getOption(prodUsers, prodYears);
@@ -22,7 +22,7 @@ async function createPricesElement(storeOBJ, conditionText, saveText, prodName, 
     currency: storeOption.getCurrency(),
     priceWithTax: storeOption.getDiscountedPrice('value') || storeOption.getPrice('value'),
   };
-  products.push(product);
+  dataLayerProducts.push(product);
   const priceElement = document.createElement('div');
   priceElement.classList.add('hero-aem__prices');
   priceElement.innerHTML = `
@@ -328,7 +328,7 @@ export default async function decorate(block, options) {
     window.adobeDataLayer.push({
       event: 'product loaded',
       product: {
-        [mainProduct === 'false' ? 'all' : 'info']: products,
+        [mainProduct === 'false' ? 'all' : 'info']: dataLayerProducts,
       },
     });
   }
