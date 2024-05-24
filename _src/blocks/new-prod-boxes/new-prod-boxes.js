@@ -1,7 +1,7 @@
 /* eslint-disable prefer-const */
 /* eslint-disable no-undef */
-
 /* eslint-disable max-len */
+let dataLayerProducts = [];
 async function createPricesElement(storeOBJ, conditionText, saveText, prodName, prodUsers, prodYears, buylink, billed) {
   const storeProduct = await storeOBJ.getProducts([new ProductInfo(prodName, 'consumer')]);
   const storeOption = storeProduct[prodName].getOption(prodUsers, prodYears);
@@ -9,23 +9,20 @@ async function createPricesElement(storeOBJ, conditionText, saveText, prodName, 
   const discountedPrice = storeOption.getDiscountedPrice();
   const discount = storeOption.getDiscount('valueWithCurrency');
   const buyLink = await storeOption.getStoreUrl();
-  window.adobeDataLayer.push({
-    event: 'product loaded',
-    product: [{
-      info: {
-        ID: storeOption.getAvangateId(),
-        name: storeOption.getName(),
-        devices: storeOption.getDevices(),
-        subscription: storeOption.getSubscription('months'),
-        version: storeOption.getSubscription('months') === 1 ? 'monthly' : 'yearly',
-        basePrice: storeOption.getPrice('value'),
-        discountValue: storeOption.getDiscount('value'),
-        discountRate: storeOption.getDiscount('percentage'),
-        currency: storeOption.getCurrency(),
-        priceWithTax: storeOption.getDiscountedPrice('value') || storeOption.getPrice('value'),
-      },
-    }],
-  });
+
+  let product = {
+    ID: storeOption.getAvangateId(),
+    name: storeOption.getName(),
+    devices: storeOption.getDevices(),
+    subscription: storeOption.getSubscription('months'),
+    version: storeOption.getSubscription('months') === 1 ? 'monthly' : 'yearly',
+    basePrice: storeOption.getPrice('value'),
+    discountValue: storeOption.getDiscount('value'),
+    discountRate: storeOption.getDiscount('percentage'),
+    currency: storeOption.getCurrency(),
+    priceWithTax: storeOption.getDiscountedPrice('value') || storeOption.getPrice('value'),
+  };
+  dataLayerProducts.push(product);
   const priceElement = document.createElement('div');
   priceElement.classList.add('hero-aem__prices');
   priceElement.innerHTML = `
@@ -48,7 +45,7 @@ async function createPricesElement(storeOBJ, conditionText, saveText, prodName, 
 export default async function decorate(block, options) {
   const {
     // eslint-disable-next-line no-unused-vars
-    products, familyProducts, monthlyProducts, priceType, pid,
+    products, familyProducts, monthlyProducts, priceType, pid, mainProduct,
   } = options ? options.metadata : block.closest('.section').dataset;
   // if options exists, this means the component is being called from aem
   if (options) {
@@ -324,6 +321,16 @@ export default async function decorate(block, options) {
 
   if (individualSwitchText && familySwitchText) {
     block.parentNode.insertBefore(switchBox, block);
+  }
+
+  // dataLayer push with all the products
+  if (options) {
+    window.adobeDataLayer.push({
+      event: 'product loaded',
+      product: {
+        [mainProduct === 'false' ? 'all' : 'info']: dataLayerProducts,
+      },
+    });
   }
 
   window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
