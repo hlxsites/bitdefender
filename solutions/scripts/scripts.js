@@ -471,6 +471,8 @@ function pushPageLoadToDataLayer() {
   const tags = getTags(getMetadata(METADATA_ANALYTICS_TAGS));
 
   const experimentDetails = getExperimentDetails();
+  // eslint-disable-next-line no-console
+  console.debug(`Experiment details: ${JSON.stringify(experimentDetails)}`);
 
   pushToDataLayer('page load started', {
     pageInstanceID: environment,
