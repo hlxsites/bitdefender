@@ -322,7 +322,7 @@ export default async function decorate(block, options) {
   if (individualSwitchText && familySwitchText) {
     block.parentNode.insertBefore(switchBox, block);
   }
-  console.log(mainProduct);
+
   // dataLayer push with all the products
   if (options) {
     window.adobeDataLayer.push({
