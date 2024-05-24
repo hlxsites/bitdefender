@@ -20,6 +20,7 @@ import {
 } from './utils.js';
 
 import { loadAnalytics } from './analytics.js';
+import getTargetAudiences from './target.js';
 
 const LCP_BLOCKS = ['hero']; // add your LCP blocks to the list
 const TRACKED_PRODUCTS = [];
@@ -53,52 +54,6 @@ const HREFLANG_MAP = [
   ['x-default', { baseUrl: 'https://www.bitdefender.com', pageType: '.html' }],
 ];
 
-const targetPromise = (async () => {
-  const targetLocation = getMetadata('experiment-target-location');
-  console.log(`Resolving target audience for location: ${targetLocation}`);
-  const randomString = Math.random().toString(36).substring(7);
-  const resp = await fetch(`https://sitesinternal.tt.omtrdc.net/rest/v1/delivery?client=sitesinternal&sessionId=${randomString}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      context: {
-        channel: 'web',
-      },
-      execute: {
-        pageLoad: {},
-        mboxes: [
-          {
-            name: targetLocation,
-            index: 0,
-          },
-        ],
-      },
-    }),
-  });
-  const payload = await resp.json();
-  console.log(`Received payload: ${JSON.stringify(payload)}`);
-  const mbox = payload.execute.mboxes.find((mbox) => mbox.name === targetLocation);
-  console.log(`Received target offer: ${mbox?.options[0].content}`);
-  const { url } = mbox?.options[0].content ?? { url: null };
-  console.log(`Resolved challenger url: ${url}`);
-
-  if (url) {
-    // Add the current audience to the page
-    const link = document.createElement('meta');
-    link.setAttribute('property', 'audience:current');
-    link.content = url;
-    document.getElementsByTagName('head')[0].appendChild(link);
-  }
-
-  return !!url;
-})();
-
-const AUDIENCES = {
-  current: () => targetPromise.then(() => true),
-};
-
 window.hlx.plugins.add('rum-conversion', {
   load: 'lazy',
   url: '../plugins/rum-conversion/src/index.js',
@@ -107,7 +62,7 @@ window.hlx.plugins.add('rum-conversion', {
 window.hlx.plugins.add('experimentation', {
   options: {
     prodHost: 'www.bitdefender.com.au',
-    audiences: AUDIENCES,
+    audiences: getTargetAudiences(),
   },
   url: '../plugins/experimentation/src/index.js',
 });
