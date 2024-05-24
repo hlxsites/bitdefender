@@ -5,27 +5,33 @@ const TARGET_SESSION_ID_PARAM = 'adobeTargetSessionId';
 const DEFAULT_AUDIENCE = 'current';
 
 /**
+ * Generate a random session id.
+ * @param length
+ * @returns {string}
+ */
+function generateSessionID(length = 16) {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let sessionID = '';
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    sessionID += characters.charAt(randomIndex);
+  }
+  return sessionID;
+}
+
+/**
  * Get or create a session id for the current user.
  * @returns {string}
  */
 function getOrCreateSessionId() {
-  let sessionId = localStorage.getItem(TARGET_SESSION_ID_PARAM);
+  let sessionId = sessionStorage.getItem(TARGET_SESSION_ID_PARAM);
+  console.debug(`Session id: ${sessionId}`);
   if (!sessionId) {
-    sessionId = Math.random().toString(36).substring(7);
-    localStorage.setItem(TARGET_SESSION_ID_PARAM, sessionId);
+    sessionId = generateSessionID();
+    console.debug(`Generated new session id: ${sessionId}`);
+    sessionStorage.setItem(TARGET_SESSION_ID_PARAM, sessionId);
   }
   return sessionId;
-}
-
-/**
- * Create a meta tag with the current url as the audience.
- * @param url
- */
-function createAudienceMetadata(url) {
-  const link = document.createElement('meta');
-  link.setAttribute('property', `audience:${DEFAULT_AUDIENCE}`);
-  link.content = url;
-  document.getElementsByTagName('head')[0].appendChild(link);
 }
 
 /**
@@ -33,6 +39,7 @@ function createAudienceMetadata(url) {
  * @returns {Promise<boolean>}
  */
 async function fetchJsonOffers(tenant, targetLocation) {
+  console.debug(`Fetching target offers for location: ${targetLocation}`);
   const res = await fetch(`https://${tenant}.tt.omtrdc.net/rest/v1/delivery?client=${tenant}&sessionId=${getOrCreateSessionId()}`, {
     method: 'POST',
     headers: {
@@ -61,21 +68,28 @@ async function fetchJsonOffers(tenant, targetLocation) {
   // eslint-disable-next-line no-console
   console.debug(`Resolved challenger url: ${url}`);
 
-  if (url) {
-    createAudienceMetadata(url);
-  }
-
-  return !!url;
+  return url;
 }
 
-export default function getTargetAudiences(tenant) {
+export default function getTargetConfig(tenant) {
   const targetLocation = getMetadata('experiment-target-location');
   if (!targetLocation) {
     return {};
   }
   // eslint-disable-next-line no-console
   console.debug(`Setting up target audiences for location: ${targetLocation}`);
+  async function audienceResolver() {
+    return fetchJsonOffers(tenant, targetLocation);
+  }
   return {
-    [DEFAULT_AUDIENCE]: () => fetchJsonOffers(tenant, targetLocation),
+    audiences: {
+      // eslint-disable-next-line max-len
+      [DEFAULT_AUDIENCE]: () => audienceResolver().then((url) => !!url).catch(() => false),
+    },
+    configuredAudiences: audienceResolver().then((url) => {
+      return {
+        [DEFAULT_AUDIENCE]: url,
+      };
+    }),
   };
 }

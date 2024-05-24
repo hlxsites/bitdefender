@@ -20,7 +20,7 @@ import {
 } from './utils.js';
 
 import { loadAnalytics } from './analytics.js';
-import getTargetAudiences from './target.js';
+import getTargetConfig from './target.js';
 
 const LCP_BLOCKS = ['hero']; // add your LCP blocks to the list
 const TRACKED_PRODUCTS = [];
@@ -64,7 +64,7 @@ window.hlx.plugins.add('rum-conversion', {
 window.hlx.plugins.add('experimentation', {
   options: {
     prodHost: 'www.bitdefender.com.au',
-    audiences: getTargetAudiences(TARGET_TENANT),
+    ...getTargetConfig(TARGET_TENANT),
   },
   url: '../plugins/experimentation/src/index.js',
 });
