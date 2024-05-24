@@ -91,12 +91,6 @@ main .hero-container .hero-wrapper {
   padding: 0;
 }
 
-.two .hero-awards{
-  border: red 10px solid;
-  display: flex;
-  flex-direction: column;
-}
-
 main .hero {
   position: relative;
   padding: 0;
