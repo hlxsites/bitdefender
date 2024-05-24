@@ -32,14 +32,8 @@ function createAudienceMetadata(url) {
  * Fetch the target offers for the current location.
  * @returns {Promise<boolean>}
  */
-async function fetchJsonOffers() {
-  const targetLocation = getMetadata('experiment-target-location');
-  // eslint-disable-next-line no-console
-  console.debug(`Resolving target offers for location: ${targetLocation}`);
-
-  const sessionId = getOrCreateSessionId();
-
-  const res = await fetch(`https://sitesinternal.tt.omtrdc.net/rest/v1/delivery?client=sitesinternal&sessionId=${sessionId}`, {
+async function fetchJsonOffers(tenant, targetLocation) {
+  const res = await fetch(`https://${tenant}.tt.omtrdc.net/rest/v1/delivery?client=${tenant}&sessionId=${getOrCreateSessionId()}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -74,8 +68,14 @@ async function fetchJsonOffers() {
   return !!url;
 }
 
-export default function getTargetAudiences() {
+export default function getTargetAudiences(tenant) {
+  const targetLocation = getMetadata('experiment-target-location');
+  if (!targetLocation) {
+    return {};
+  }
+  // eslint-disable-next-line no-console
+  console.debug(`Setting up target audiences for location: ${targetLocation}`);
   return {
-    [DEFAULT_AUDIENCE]: () => fetchJsonOffers.then(() => true),
+    [DEFAULT_AUDIENCE]: () => fetchJsonOffers(tenant, targetLocation),
   };
 }

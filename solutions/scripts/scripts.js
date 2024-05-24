@@ -33,6 +33,8 @@ export const DEFAULT_COUNTRY = 'au';
 
 export const METADATA_ANALYTICS_TAGS = 'analytics-tags';
 
+const TARGET_TENANT = 'sitesinternal';
+
 const HREFLANG_MAP = [
   ['en-ro', { baseUrl: 'https://www.bitdefender.ro', pageType: '.html' }],
   ['de', { baseUrl: 'https://www.bitdefender.de', pageType: '.html' }],
@@ -62,7 +64,7 @@ window.hlx.plugins.add('rum-conversion', {
 window.hlx.plugins.add('experimentation', {
   options: {
     prodHost: 'www.bitdefender.com.au',
-    audiences: getTargetAudiences(),
+    audiences: getTargetAudiences(TARGET_TENANT),
   },
   url: '../plugins/experimentation/src/index.js',
 });
