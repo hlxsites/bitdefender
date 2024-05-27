@@ -1,7 +1,7 @@
 footer.landingpage {
   background: #006EFF;
   color: white;
-  font-weight: 300;
+  font-weight: 400;
 
 a:any-link {
   color: white;
@@ -9,7 +9,7 @@ a:any-link {
 }
 
 img {
-  width: 160px;
+  width: 300px;
   height: auto;
   margin-bottom: 10px;
 }
