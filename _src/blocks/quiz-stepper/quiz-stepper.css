@@ -76,6 +76,7 @@
         position: relative;
         display: flex;
         align-items: center;
+        cursor: pointer;
 
         &::before {
             content: '';
@@ -92,6 +93,7 @@
         display: flex;
         align-items: flex-start;
         margin-bottom: 13px;
+        cursor: pointer;
 
         input[type="radio"] {
             display: block;
@@ -107,6 +109,7 @@
         label {
             font: normal normal normal 16px/18px Arial, sans-serif;
             margin-left: 10px;
+            cursor: pointer;
         }
 
         &.selected {

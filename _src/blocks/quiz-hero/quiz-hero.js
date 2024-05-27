@@ -11,10 +11,5 @@ export default async function decorate(block) {
     </div>
   `;
 
-  block.querySelectorAll('.button-container > a').forEach((anchorEl) => {
-    anchorEl.target = '_blank';
-    anchorEl.rel = 'noopener noreferrer';
-  });
-
   adobeMcAppendVisitorId('header');
 }

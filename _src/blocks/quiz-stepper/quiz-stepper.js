@@ -139,6 +139,6 @@ export default async function decorate(block) {
     });
 
     form.querySelectorAll('.button-container.submit').forEach((buttonEl) => buttonEl.addEventListener('click', validateForm));
-    form.querySelectorAll('.step__previous').forEach((previousEl) => previousEl.addEventListener('click', moveToPreviousStep));
+    form.querySelectorAll('.step-previous').forEach((previousEl) => previousEl.addEventListener('click', moveToPreviousStep));
   });
 }
