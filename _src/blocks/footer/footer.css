@@ -1,7 +1,7 @@
 footer.landingpage {
   background: #006EFF;
   color: white;
-  font-weight: 400;
+  font-weight: 300;
 
 a:any-link {
   color: white;
@@ -335,6 +335,10 @@ footer.default .footer > div > :nth-child(6) > ul li > a {
 
   footer.default .footer > div > :nth-child(6) > p {
     font: normal normal normal 9pt/13px var(--body-font-family);
+  }
+
+  footer.landingpage img {
+    width: 400px;
   }
 }
 
