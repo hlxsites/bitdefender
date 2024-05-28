@@ -481,11 +481,11 @@ main .hero .hero-awards li::after {
 
 }
 
-@media (min-width: 1300px) {
-  main .hero .hero-picture picture img {
-    padding-left: 20%;
-  }
-}
+/*@media (min-width: 1300px) {*/
+/*  main .hero .hero-picture picture img {*/
+/*    padding-left: 20%;*/
+/*  }*/
+/*}*/
 
 @media (min-width: 1600px) { /* large desktop */
 
@@ -503,10 +503,10 @@ main .hero .hero-awards li::after {
     font-size: 56px;
   }
 
-  main .hero .hero-picture picture img {
-    display: block;
-    padding-left: 25%;
-  }
+  /*main .hero .hero-picture picture img {*/
+  /*  display: block;*/
+  /*  padding-left: 25%;*/
+  /*}*/
 
   main .hero .discount-bubble {
     width: 83px;
