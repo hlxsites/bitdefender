@@ -24,7 +24,7 @@ function toRelativeUrl(url) {
 function generateSessionID(length = 16) {
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let sessionID = '';
-  for (let i = 0; i < length; i++) {
+  for (let i = 0; i < length; i += 1) {
     const randomIndex = Math.floor(Math.random() * characters.length);
     sessionID += characters.charAt(randomIndex);
   }
@@ -37,9 +37,11 @@ function generateSessionID(length = 16) {
  */
 function getOrCreateSessionId() {
   let sessionId = sessionStorage.getItem(ADOBE_TARGET_SESSION_ID_PARAM);
+  // eslint-disable-next-line no-console
   console.debug(`Session id: ${sessionId}`);
   if (!sessionId) {
     sessionId = generateSessionID();
+    // eslint-disable-next-line no-console
     console.debug(`Generated new session id: ${sessionId}`);
     sessionStorage.setItem(ADOBE_TARGET_SESSION_ID_PARAM, sessionId);
   }
@@ -51,6 +53,7 @@ function getOrCreateSessionId() {
  * @returns {Promise<boolean>}
  */
 async function fetchChallengerPageUrl(tenant, targetLocation) {
+  // eslint-disable-next-line no-console
   console.debug(`Fetching target offers for location: ${targetLocation}`);
   const res = await fetch(`https://${tenant}.tt.omtrdc.net/rest/v1/delivery?client=${tenant}&sessionId=${getOrCreateSessionId()}`, {
     method: 'POST',
