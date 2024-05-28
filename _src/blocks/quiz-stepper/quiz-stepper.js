@@ -27,7 +27,7 @@ export default async function decorate(block) {
 
     return `
       <div class="form-wrapper">
-        <form class="step">
+        <form class="step" id="quiz-form">
            <div class="step-header">
              <div class="step-index">${questionLabel} ${index + 1}/${steps.length}:</div>
              ${!isFirstStep ? `<a class="step-previous">${previousButtonLabel}</a>` : ''}
