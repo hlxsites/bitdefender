@@ -18,6 +18,11 @@
   text-align: center;
 }
 
+.new-prod-boxes-container .price_box {
+  min-height: 64px;
+  margin-top: 20px;
+}
+
 .new-prod-boxes-container .default-content-wrapper h2 {
   text-align: center;
   font-size: 32px;
@@ -492,10 +497,6 @@
 .prod_box.family-box {
   display: none;
   transition: all 0.4s;
-}
-
-.hero-aem__prices {
-  margin-top: 20px;
 }
 
 .plan-switcher {
