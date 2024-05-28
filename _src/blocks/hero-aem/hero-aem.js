@@ -135,21 +135,19 @@ export default function decorate(block, options) {
   const desktopImage = block.querySelector('.hero-aem > div > div > picture');
   desktopImage.classList.add('hero-aem__desktop-image');
 
-  if (product) {
+  if (product && options?.store) {
     const [prodName, prodUsers, prodYears] = product.split('/');
 
     const buyLink = block.querySelector('a[href*="buylink"]');
     buyLink.classList.add('button', 'primary');
-    if (options?.store) {
-      createPricesElement(options.store, conditionText, saveText, prodName, prodUsers, prodYears, buyLink)
-        .then((pricesBox) => {
-          buyLink.parentNode.parentNode.insertBefore(pricesBox, buyLink.parentNode);
-          window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
-            bubbles: true,
-            composed: true, // This allows the event to cross the shadow DOM boundary
-          });
+    createPricesElement(options.store, conditionText, saveText, prodName, prodUsers, prodYears, buyLink)
+      .then((pricesBox) => {
+        buyLink.parentNode.parentNode.insertBefore(pricesBox, buyLink.parentNode);
+        window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
+          bubbles: true,
+          composed: true, // This allows the event to cross the shadow DOM boundary
         });
-    }
+      });
   } else {
     // If there is no product, just add the button class and dispatch the event
     const simpleLink = block.querySelector('.hero-aem__card-text a');
