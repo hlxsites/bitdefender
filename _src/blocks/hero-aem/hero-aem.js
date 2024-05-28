@@ -101,6 +101,15 @@ function openUrlForOs(urlMacos, urlWindows, urlAndroid, urlIos, selector) {
   }
 }
 
+// Function to dispatch 'shadowDomLoaded' event
+function dispatchShadowDomLoadedEvent() {
+  const event = new CustomEvent('shadowDomLoaded', {
+    bubbles: true,
+    composed: true, // This allows the event to cross the shadow DOM boundary
+  });
+  window.dispatchEvent(event);
+}
+
 export default function decorate(block, options) {
   const {
     product, conditionText, saveText, MacOS, Windows, Android, IOS,
@@ -143,19 +152,21 @@ export default function decorate(block, options) {
     const buyLink = block.querySelector('a[href*="buylink"]');
     createPricesElement(options.store, conditionText, saveText, prodName, prodUsers, prodYears, buyLink)
       .then((pricesBox) => {
+        // If buyLink exists, apply styles and insert pricesBox
         if (buyLink) {
           buyLink.classList.add('button', 'primary');
           buyLink.parentNode.parentNode.insertBefore(pricesBox, buyLink.parentNode);
-        } else {
-          const simpleLink = block.querySelector('.hero-aem__card-text a');
-          if (simpleLink) {
-            simpleLink.classList.add('button', 'primary');
-          }
+          dispatchShadowDomLoadedEvent();
+          return;
         }
-        window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
-          bubbles: true,
-          composed: true, // This allows the event to cross the shadow DOM boundary
-        });
+
+        // If buyLink does not exist, apply styles to simpleLink
+        const simpleLink = block.querySelector('.hero-aem__card-text a');
+        if (simpleLink) {
+          simpleLink.classList.add('button', 'primary');
+        }
+
+        dispatchShadowDomLoadedEvent();
       });
   } else {
     // If there is no product, just add the button class and dispatch the event
