@@ -23,7 +23,9 @@ async function createPricesElement(storeOBJ, conditionText, saveText, prodName, 
       </div>
     </div>
     <p class="hero-aem__underPriceText">Protection for 5 PCs, Macs, tablets, or smartphones.<br> Windows® | macOS® | Android™ | iOS®</p>`;
-  buylink.href = buyLink;
+  if (buylink) {
+    buylink.href = buyLink;
+  }
   return priceElement;
 }
 
