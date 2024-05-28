@@ -103,7 +103,7 @@ export default function decorate(block, options) {
   const {
     product, conditionText, saveText, MacOS, Windows, Android, IOS,
     alignContent,
-  } = options.metadata;
+  } = options ? options.metadata : block.closest('.section').dataset;
 
   if (options) {
     // eslint-disable-next-line no-param-reassign
@@ -140,15 +140,16 @@ export default function decorate(block, options) {
 
     const buyLink = block.querySelector('a[href*="buylink"]');
     buyLink.classList.add('button', 'primary');
-
-    createPricesElement(options.store, conditionText, saveText, prodName, prodUsers, prodYears, buyLink)
-      .then((pricesBox) => {
-        buyLink.parentNode.parentNode.insertBefore(pricesBox, buyLink.parentNode);
-        window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
-          bubbles: true,
-          composed: true, // This allows the event to cross the shadow DOM boundary
+    if (options?.store) {
+      createPricesElement(options.store, conditionText, saveText, prodName, prodUsers, prodYears, buyLink)
+        .then((pricesBox) => {
+          buyLink.parentNode.parentNode.insertBefore(pricesBox, buyLink.parentNode);
+          window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
+            bubbles: true,
+            composed: true, // This allows the event to cross the shadow DOM boundary
+          });
         });
-      });
+    }
   } else {
     // If there is no product, just add the button class and dispatch the event
     const simpleLink = block.querySelector('.hero-aem__card-text a');
@@ -192,7 +193,7 @@ export default function decorate(block, options) {
         </div>`).join('')}
     </div>
   `;
-    aemContainer.appendChild(cardElement);
+    block.appendChild(cardElement);
     richTextCard.innerHTML = '';
     columnsCard.forEach((col) => col.remove());
   }
