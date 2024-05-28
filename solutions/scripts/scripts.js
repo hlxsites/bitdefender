@@ -20,7 +20,7 @@ import {
 } from './utils.js';
 
 import { loadAnalytics } from './analytics.js';
-import getTargetConfig from './target.js';
+import runTargetExperiment from './target.js';
 
 const LCP_BLOCKS = ['hero']; // add your LCP blocks to the list
 const TRACKED_PRODUCTS = [];
@@ -62,9 +62,9 @@ window.hlx.plugins.add('rum-conversion', {
 });
 
 window.hlx.plugins.add('experimentation', {
+  condition: () => getMetadata('experiment'),
   options: {
     prodHost: 'www.bitdefender.com.au',
-    ...getTargetConfig(TARGET_TENANT),
   },
   url: '../plugins/experimentation/src/index.js',
 });
@@ -462,7 +462,7 @@ function getExperimentDetails() {
   return { experimentId, experimentVariant };
 }
 
-function pushPageLoadToDataLayer() {
+function pushPageLoadToDataLayer(targetExperimentDetails) {
   const { hostname } = window.location;
   if (!hostname) {
     return;
@@ -472,7 +472,7 @@ function pushPageLoadToDataLayer() {
   const environment = getEnvironment(hostname, languageCountry.country);
   const tags = getTags(getMetadata(METADATA_ANALYTICS_TAGS));
 
-  const experimentDetails = getExperimentDetails();
+  const experimentDetails = targetExperimentDetails ?? getExperimentDetails();
   // eslint-disable-next-line no-console
   console.debug(`Experiment details: ${JSON.stringify(experimentDetails)}`);
 
@@ -516,7 +516,9 @@ async function loadEager(doc) {
 
   await window.hlx.plugins.run('loadEager');
 
-  pushPageLoadToDataLayer();
+  const targetExperimentDetails = await runTargetExperiment(TARGET_TENANT);
+
+  pushPageLoadToDataLayer(targetExperimentDetails);
 
   if (getMetadata('template') !== '') {
     loadCSS(`${window.hlx.codeBasePath}/styles/${getMetadata('template')}.css`);

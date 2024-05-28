@@ -529,10 +529,7 @@ export async function serveAudience(document, options, context) {
   }
 
   const pluginOptions = { ...DEFAULT_OPTIONS, ...(options || {}) };
-
-  const configuredAudiences = pluginOptions.configuredAudiences
-    ? await pluginOptions.configuredAudiences
-    : context.getAllMetadata(pluginOptions.audiencesMetaTagPrefix);
+  const configuredAudiences = context.getAllMetadata(pluginOptions.audiencesMetaTagPrefix);
   if (!Object.keys(configuredAudiences).length) {
     return false;
   }

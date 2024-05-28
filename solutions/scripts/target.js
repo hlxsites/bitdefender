@@ -1,8 +1,20 @@
-import { getMetadata } from './lib-franklin.js';
+import { getMetadata, sampleRUM } from './lib-franklin.js';
 
-const TARGET_SESSION_ID_PARAM = 'adobeTargetSessionId';
+const ADOBE_TARGET_SESSION_ID_PARAM = 'adobeTargetSessionId';
 
-const DEFAULT_AUDIENCE = 'current';
+/**
+ * Convert a URL to a relative URL.
+ * @param url
+ * @returns {*|string}
+ */
+function toRelativeUrl(url) {
+  try {
+    const parsedUrl = new URL(url);
+    return parsedUrl.pathname + parsedUrl.search + parsedUrl.hash;
+  } catch (e) {
+    return url;
+  }
+}
 
 /**
  * Generate a random session id.
@@ -24,12 +36,12 @@ function generateSessionID(length = 16) {
  * @returns {string}
  */
 function getOrCreateSessionId() {
-  let sessionId = sessionStorage.getItem(TARGET_SESSION_ID_PARAM);
+  let sessionId = sessionStorage.getItem(ADOBE_TARGET_SESSION_ID_PARAM);
   console.debug(`Session id: ${sessionId}`);
   if (!sessionId) {
     sessionId = generateSessionID();
     console.debug(`Generated new session id: ${sessionId}`);
-    sessionStorage.setItem(TARGET_SESSION_ID_PARAM, sessionId);
+    sessionStorage.setItem(ADOBE_TARGET_SESSION_ID_PARAM, sessionId);
   }
   return sessionId;
 }
@@ -38,7 +50,7 @@ function getOrCreateSessionId() {
  * Fetch the target offers for the current location.
  * @returns {Promise<boolean>}
  */
-async function fetchJsonOffers(tenant, targetLocation) {
+async function fetchChallengerPageUrl(tenant, targetLocation) {
   console.debug(`Fetching target offers for location: ${targetLocation}`);
   const res = await fetch(`https://${tenant}.tt.omtrdc.net/rest/v1/delivery?client=${tenant}&sessionId=${getOrCreateSessionId()}`, {
     method: 'POST',
@@ -64,32 +76,67 @@ async function fetchJsonOffers(tenant, targetLocation) {
   const payload = await res.json();
   const mbox = payload.execute.mboxes.find((m) => m.name === targetLocation);
   const { url } = mbox?.options[0].content ?? { url: null };
+  if (!url) {
+    // eslint-disable-next-line no-console
+    console.error('No challenger url found');
+    throw new Error('No challenger url found');
+  }
 
   // eslint-disable-next-line no-console
   console.debug(`Resolved challenger url: ${url}`);
-
   return url;
 }
 
-export default function getTargetConfig(tenant) {
-  const targetLocation = getMetadata('experiment-target-location');
-  if (!targetLocation) {
-    return {};
+/**
+ * Replace the current page with the challenger page.
+ * @param url The challenger page url.
+ * @returns {Promise<boolean>}
+ */
+async function switchToChallengerPage(url) {
+  const relativePath = toRelativeUrl(url);
+  const plainPath = relativePath.endsWith('/') ? `${relativePath}index.plain.html` : `${relativePath}.plain.html`;
+  const resp = await fetch(plainPath);
+  if (!resp.ok) {
+    throw new Error(`Failed to fetch challenger page: ${resp.status}`);
   }
-  // eslint-disable-next-line no-console
-  console.debug(`Setting up target audiences for location: ${targetLocation}`);
-  async function audienceResolver() {
-    return fetchJsonOffers(tenant, targetLocation);
+  const mainElement = document.querySelector('main');
+  if (!mainElement) {
+    throw new Error('Main element not found');
   }
-  return {
-    audiences: {
-      // eslint-disable-next-line max-len
-      [DEFAULT_AUDIENCE]: () => audienceResolver().then((url) => !!url).catch(() => false),
-    },
-    configuredAudiences: audienceResolver().then((url) => {
-      return {
-        [DEFAULT_AUDIENCE]: url,
-      };
-    }),
-  };
+  mainElement.innerHTML = await resp.text();
+}
+
+export default async function runTargetExperiment(clientId) {
+  try {
+    const experimentId = getMetadata('target-experiment');
+    const targetLocation = getMetadata('target-experiment-location');
+    if (!experimentId || !targetLocation) {
+      // eslint-disable-next-line no-console
+      console.log('Experiment id or target location not found');
+      return null;
+    }
+
+    // eslint-disable-next-line no-console
+    console.debug(`Running Target experiment ${experimentId} at location ${targetLocation}`);
+
+    const pageUrl = await fetchChallengerPageUrl(clientId, targetLocation);
+    // eslint-disable-next-line no-console
+    console.debug(`Challenger page url: ${pageUrl}`);
+
+    await switchToChallengerPage(pageUrl);
+
+    sampleRUM('target-experiment', {
+      source: `target:${experimentId}`,
+      target: pageUrl,
+    });
+
+    return {
+      experimentId,
+      experimentVariant: pageUrl,
+    };
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error('Error running target experiment:', e);
+    return null;
+  }
 }
