@@ -135,7 +135,7 @@ export default function decorate(block, options) {
   const desktopImage = block.querySelector('.hero-aem > div > div > picture');
   desktopImage.classList.add('hero-aem__desktop-image');
 
-  if (product && options?.store) {
+  if (product && options?.store && block.querySelector('a[href*="buylink"]')) {
     const [prodName, prodUsers, prodYears] = product.split('/');
 
     const buyLink = block.querySelector('a[href*="buylink"]');
