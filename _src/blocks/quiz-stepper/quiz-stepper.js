@@ -13,6 +13,7 @@ export default async function decorate(block) {
   };
 
   block.classList.add('default-content-wrapper');
+  block.closest('.section').id = 'quiz-form';
 
   const steps = [...block.children];
 
