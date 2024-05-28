@@ -13,6 +13,7 @@ export default async function decorate(block) {
   };
 
   block.classList.add('default-content-wrapper');
+  block.closest('.section').id = 'quiz-form';
 
   const steps = [...block.children];
 
@@ -27,7 +28,7 @@ export default async function decorate(block) {
 
     return `
       <div class="form-wrapper">
-        <form class="step" id="quiz-form">
+        <form class="step">
            <div class="step-header">
              <div class="step-index">${questionLabel} ${index + 1}/${steps.length}:</div>
              ${!isFirstStep ? `<a class="step-previous">${previousButtonLabel}</a>` : ''}
