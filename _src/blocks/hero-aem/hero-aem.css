@@ -234,6 +234,11 @@
     background-color: #0D499B;
   }
 
+  .hero-aem-container .hero-aem p strong em a {
+    color: black;
+    text-decoration: underline;
+  }
+
   .hero-aem__pill {
     font-size: 14px;
     font-weight: 500;
