@@ -104,7 +104,7 @@ export default function decorate(block, options) {
     product, conditionText, saveText, MacOS, Windows, Android, IOS,
     alignContent,
   } = options ? options.metadata : block.closest('.section').dataset;
-
+  console.log('block', block)
   if (options) {
     // eslint-disable-next-line no-param-reassign
     block = block.querySelector('.block');
@@ -177,24 +177,31 @@ export default function decorate(block, options) {
   }
 
   if (columnsCard) {
-    columnsCard = [...columnsCard.children];
+    const columnsCardChildren = Array.from(columnsCard.children);
     const cardElement = document.createElement('div');
     cardElement.classList.add('aem-two-cards');
+    // Determine the appropriate column width class based on the number of cards
+    const columnWidthMdClass = columnsCardChildren.length === 2 ? 'col-md-6' : 'col-md-4';
+    const columnWidthLgClass = columnsCardChildren.length === 2 ? 'col-lg-3' : 'col-lg-3';
+
+    const columnCardsHtml = columnsCardChildren.map((col) => `
+      <div class="col-12 ${columnWidthMdClass} ${columnWidthLgClass}">
+        <div class="aem-two-cards_card">
+          ${col.innerHTML}
+        </div>
+      </div>`).join('');
+
     cardElement.innerHTML = `
-    <div class="row justify-space-between">
-      <div class="col-lg-6">
-        ${richTextCard.innerHTML}
+      <div class="row justify-space-between">
+        <div class="col-lg-3">
+          ${richTextCard.innerHTML}
+        </div>
+        ${columnCardsHtml}
       </div>
-      ${columnsCard.map((col) => `
-        <div class="col-12 col-md-6 col-lg-3">
-          <div class="aem-two-cards_card">
-            ${col.innerHTML}
-          </div>
-        </div>`).join('')}
-    </div>
-  `;
+    `;
+
     block.appendChild(cardElement);
     richTextCard.innerHTML = '';
-    columnsCard.forEach((col) => col.remove());
+    columnsCardChildren.forEach((col) => col.remove());
   }
 }
