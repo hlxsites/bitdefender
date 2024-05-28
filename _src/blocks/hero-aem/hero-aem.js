@@ -164,6 +164,7 @@ export default function decorate(block, options) {
         const simpleLink = block.querySelector('.hero-aem__card-text a');
         if (simpleLink) {
           simpleLink.classList.add('button', 'primary');
+          simpleLink.parentNode.parentNode.insertBefore(pricesBox, simpleLink.parentNode);
         }
 
         dispatchShadowDomLoadedEvent();
