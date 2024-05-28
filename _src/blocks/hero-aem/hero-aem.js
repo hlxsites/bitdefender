@@ -106,7 +106,7 @@ export default function decorate(block, options) {
     product, conditionText, saveText, MacOS, Windows, Android, IOS,
     alignContent,
   } = options ? options.metadata : block.closest('.section').dataset;
-  console.log('block', block)
+
   if (options) {
     // eslint-disable-next-line no-param-reassign
     block = block.querySelector('.block');
@@ -146,6 +146,11 @@ export default function decorate(block, options) {
         if (buyLink) {
           buyLink.classList.add('button', 'primary');
           buyLink.parentNode.parentNode.insertBefore(pricesBox, buyLink.parentNode);
+        } else {
+          const simpleLink = block.querySelector('.hero-aem__card-text a');
+          if (simpleLink) {
+            simpleLink.classList.add('button', 'primary');
+          }
         }
         window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
           bubbles: true,
@@ -154,10 +159,7 @@ export default function decorate(block, options) {
       });
   } else {
     // If there is no product, just add the button class and dispatch the event
-    const simpleLink = block.querySelector('.hero-aem__card-text a');
-    if (simpleLink) {
-      simpleLink.classList.add('button', 'primary');
-    }
+    c
     window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
       bubbles: true,
       composed: true, // This allows the event to cross the shadow DOM boundary
