@@ -135,14 +135,16 @@ export default function decorate(block, options) {
   const desktopImage = block.querySelector('.hero-aem > div > div > picture');
   desktopImage.classList.add('hero-aem__desktop-image');
 
-  if (product && options?.store && block.querySelector('a[href*="buylink"]')) {
+  if (product && options?.store) {
     const [prodName, prodUsers, prodYears] = product.split('/');
 
     const buyLink = block.querySelector('a[href*="buylink"]');
-    buyLink.classList.add('button', 'primary');
     createPricesElement(options.store, conditionText, saveText, prodName, prodUsers, prodYears, buyLink)
       .then((pricesBox) => {
-        buyLink.parentNode.parentNode.insertBefore(pricesBox, buyLink.parentNode);
+        if (buyLink) {
+          buyLink.classList.add('button', 'primary');
+          buyLink.parentNode.parentNode.insertBefore(pricesBox, buyLink.parentNode);
+        }
         window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
           bubbles: true,
           composed: true, // This allows the event to cross the shadow DOM boundary
