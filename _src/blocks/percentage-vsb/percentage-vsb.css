@@ -94,9 +94,12 @@
 }
 .percentage-vsb-wrapper .title-class h2{
   font-size:48px;
+  line-height: 55px;
 }
 .percentage-vsb-wrapper .columns-container h4{
-  font-size: 48px;}
+  font-size: 48px;
+  line-height: 55px;
+}
 }
 @media (min-width: 992px) {
   
