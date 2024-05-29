@@ -1,4 +1,4 @@
-import { debounce, getDatasetFromSection } from '../../scripts/utils/utils.js';
+import { debounce } from '../../scripts/utils/utils.js';
 
 function getItemsToShow() {
   if (window.innerWidth <= 676) {
@@ -170,7 +170,7 @@ export default function decorate(block, options) {
   if (options) {
     // eslint-disable-next-line no-param-reassign
     block = block.querySelector('.block');
-    let blockParent = block.closest('.section');
+    const blockParent = block.closest('.section');
     blockParent.classList.add('we-container');
   }
 
