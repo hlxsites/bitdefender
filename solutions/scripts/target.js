@@ -7,13 +7,10 @@ const ADOBE_TARGET_SESSION_ID_PARAM = 'adobeTargetSessionId';
  * @param url
  * @returns {*|string}
  */
-function toRelativeUrl(url) {
-  try {
-    const parsedUrl = new URL(url);
-    return parsedUrl.pathname + parsedUrl.search + parsedUrl.hash;
-  } catch (e) {
-    return url;
-  }
+function getPlainPageUrl(url) {
+  const { pathname, search, hash } = new URL(url, window.location.href);
+  const plainPagePathname = pathname.endsWith('/') ? `${pathname}index.plain.html` : `${pathname}.plain.html`;
+  return `${plainPagePathname}${search}${hash}`;
 }
 
 /**
@@ -95,21 +92,27 @@ async function fetchChallengerPageUrl(tenant, targetLocation) {
  * @param url The challenger page url.
  * @returns {Promise<boolean>}
  */
-async function switchToChallengerPage(url) {
-  const relativePath = toRelativeUrl(url);
-  const plainPath = relativePath.endsWith('/') ? `${relativePath}index.plain.html` : `${relativePath}.plain.html`;
+async function navigateToChallengerPage(url) {
+  const plainPath = getPlainPageUrl(url);
+
+  // eslint-disable-next-line no-console
+  console.debug(`Navigating to challenger page: ${plainPath}`);
+
   const resp = await fetch(plainPath);
   if (!resp.ok) {
     throw new Error(`Failed to fetch challenger page: ${resp.status}`);
   }
+
   const mainElement = document.querySelector('main');
   if (!mainElement) {
     throw new Error('Main element not found');
   }
+
   mainElement.innerHTML = await resp.text();
 }
 
-export default async function runTargetExperiment(clientId) {
+// eslint-disable-next-line import/prefer-default-export
+export async function runTargetExperiment(clientId) {
   try {
     const experimentId = getMetadata('target-experiment');
     const targetLocation = getMetadata('target-experiment-location');
@@ -126,7 +129,7 @@ export default async function runTargetExperiment(clientId) {
     // eslint-disable-next-line no-console
     console.debug(`Challenger page url: ${pageUrl}`);
 
-    await switchToChallengerPage(pageUrl);
+    await navigateToChallengerPage(pageUrl);
 
     sampleRUM('target-experiment', {
       source: `target:${experimentId}`,

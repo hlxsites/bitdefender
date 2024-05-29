@@ -20,7 +20,6 @@ import {
 } from './utils.js';
 
 import { loadAnalytics } from './analytics.js';
-import runTargetExperiment from './target.js';
 
 const LCP_BLOCKS = ['hero']; // add your LCP blocks to the list
 const TRACKED_PRODUCTS = [];
@@ -516,7 +515,11 @@ async function loadEager(doc) {
 
   await window.hlx.plugins.run('loadEager');
 
-  const targetExperimentDetails = await runTargetExperiment(TARGET_TENANT);
+  let targetExperimentDetails = null;
+  if (getMetadata('target-experiment') !== '') {
+    const { runTargetExperiment } = await import('./target.js');
+    targetExperimentDetails = await runTargetExperiment(TARGET_TENANT);
+  }
 
   pushPageLoadToDataLayer(targetExperimentDetails);
 
