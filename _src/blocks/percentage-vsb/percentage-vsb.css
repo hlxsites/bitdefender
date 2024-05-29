@@ -76,10 +76,6 @@
   justify-content: center;
 }
 
-@media (min-width: 580px) {
- 
-}
-
 @media (min-width: 768px) {
   .percentage-vsb-wrapper .columns-container{
     display:flex;
@@ -100,16 +96,4 @@
   font-size: 48px;
   line-height: 55px;
 }
-}
-@media (min-width: 992px) {
-  
-}
-
-@media (min-width: 1200px) {
-  
-  }
-
-
-@media (min-width: 1600px) {
-  
 }
