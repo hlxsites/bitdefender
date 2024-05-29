@@ -1,13 +1,20 @@
 import { getDatasetFromSection } from '../../scripts/utils/utils.js';
 
-export default async function decorate(block) {
+export default async function decorate(block, options) {
   const [rte, videoUrlEl] = [...block.children];
 
   const videoUrl = videoUrlEl.textContent.trim();
   const videoFormat = videoUrl.split('.').pop();
 
-  const blockDataset = getDatasetFromSection(block);
-  const { videoPlayerSettings, videoPlayerPoster } = blockDataset;
+  // const blockDataset = getDatasetFromSection(block);
+  const { videoPlayerSettings, videoPlayerPoster } = options.metadata;
+
+  if (options) {
+    // eslint-disable-next-line no-param-reassign
+    block = block.querySelector('.block');
+    const blockParent = block.closest('.section');
+    blockParent.classList.add('we-container');
+  }
 
   function appendPreloadedVideo() {
     const linkVideoEl = document.createElement('link');
@@ -60,5 +67,10 @@ export default async function decorate(block) {
   block.querySelectorAll('.button-container > a').forEach((anchorEl) => {
     anchorEl.target = '_blank';
     anchorEl.rel = 'noopener noreferrer';
+  });
+
+  window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
+    bubbles: true,
+    composed: true, // This allows the event to cross the shadow DOM boundary
   });
 }
