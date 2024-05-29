@@ -76,7 +76,7 @@
   box-sizing: border-box;
 }
 
-.columns.with-box-shadow > div > div{
+.columns.with-box-shadow > div > div {
   padding: 0 20px;
   border-right: none;
   border-bottom: 2px solid var(--overlay-background-color);
@@ -193,6 +193,12 @@
 }
 
 /* paragraph with image */
+.columns.new-v2 p {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+}
+
 .columns.awards > div > div > p {
   margin: 0;
   padding: 0 5px;
@@ -395,7 +401,7 @@
 }
 
 .columns.new-v2 h2 {
-  font-family: IBM Plex Sans;
+  font-family: "IBM Plex Sans";
   font-size: 25px;
   font-weight: 600;
   line-height: 32px;
@@ -404,18 +410,12 @@
 }
 
 .columns.new-v2 h3 {
-  font-family: IBM Plex Sans;
+  font-family: "IBM Plex Sans";
   font-size: 25px;
   font-weight: 700;
   line-height: 30px;
   text-align: left;
   color: #006EFF;
-}
-
-.columns.new-v2 p {
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 22px;
 }
 
 .columns.new-v2 > div > .columns-img-col {
