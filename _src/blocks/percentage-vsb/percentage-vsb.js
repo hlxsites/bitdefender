@@ -39,8 +39,7 @@ export default function decorate(block, options) {
   column3.appendChild(colText3);
   columnsContainer.appendChild(column3);
   column3.classList.add('col');
-  
-  block.appendChild(columnsContainer);  
+  block.appendChild(columnsContainer);
   button.classList.add('button-container');
   block.appendChild(button);
   window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
