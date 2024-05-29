@@ -1,6 +1,13 @@
 import { getDatasetFromSection } from '../../scripts/utils/utils.js';
 
 export default async function decorate(block, options) {
+  if (options) {
+    // eslint-disable-next-line no-param-reassign
+    block = block.querySelector('.block');
+    const blockParent = block.closest('.section');
+    blockParent.classList.add('we-container');
+  }
+
   const [rte, videoUrlEl] = [...block.children];
 
   const videoUrl = videoUrlEl.textContent.trim();
@@ -8,13 +15,6 @@ export default async function decorate(block, options) {
 
   // const blockDataset = getDatasetFromSection(block);
   const { videoPlayerSettings, videoPlayerPoster } = options.metadata;
-
-  if (options) {
-    // eslint-disable-next-line no-param-reassign
-    block = block.querySelector('.block');
-    const blockParent = block.closest('.section');
-    blockParent.classList.add('we-container');
-  }
 
   function appendPreloadedVideo() {
     const linkVideoEl = document.createElement('link');
