@@ -1,0 +1,78 @@
+/* stylelint-disable no-descending-specificity */
+.percentage-vsb-container {
+  display: flex;
+  justify-content: center;
+}
+
+.percentage-vsb-wrapper {
+  max-width: 630px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+ 
+}
+
+.percentage-vsb-wrapper .columns-container{
+  display:flex;
+  flex-direction: column;
+  gap:0px;
+}
+
+.percentage-vsb-wrapper .columns-container .col{
+  width: 100%;
+  padding: 5px;
+}
+
+.percentage-vsb-wrapper .title-class h2{
+  font-size:38px;
+  margin-top:10px;
+}
+
+.percentage-vsb-wrapper .subtitle-class{
+  font-size:18px;
+}
+
+.percentage-vsb-wrapper .columns-container h4{
+  font-size: 38px;
+  color: #F00F0F;
+}
+
+.percentage-vsb-wrapper .button-container{
+  display: flex;
+  justify-content: center;
+}
+
+@media (min-width: 580px) {
+ 
+}
+
+@media (min-width: 768px) {
+  .percentage-vsb-wrapper .columns-container{
+    display:flex;
+    flex-direction: row;
+    margin-top:35px;
+    margin-bottom: 42px;
+    gap:20px;
+  }
+
+.percentage-vsb-wrapper .columns-container .col{
+  width: 33.33%;
+}
+.percentage-vsb-wrapper .title-class h2{
+  font-size:48px;
+}
+.percentage-vsb-wrapper .columns-container h4{
+  font-size: 48px;}
+}
+@media (min-width: 992px) {
+  
+}
+
+@media (min-width: 1200px) {
+  
+  }
+
+
+@media (min-width: 1600px) {
+  
+}
