@@ -1,4 +1,4 @@
-export default function decorate(block,options) {
+export default function decorate(block, options) {
   if (options) {
     // eslint-disable-next-line no-param-reassign
     block = block.querySelector('.block');
@@ -6,13 +6,11 @@ export default function decorate(block,options) {
     blockParent.classList.add('we-container');
   }
 
-    const parentSelector = block.closest('.section');
-    const [title, subtitle, button, colTitle1, colText1, colTitle2, colText2, colTitle3, colText3 ] = block.children;
-    //create the structure
+    const [title, subtitle, button, colTitle1, colText1, colTitle2, colText2, colTitle3, colText3] = block.children;
     title.classList.add('title-class');
     subtitle.classList.add('subtitle-class');
     const columnsContainer = document.createElement('div');
-    columnsContainer.classList.add("columns-container");
+    columnsContainer.classList.add('columns-container');
     
     const column1 = document.createElement('div');
     column1.appendChild(colTitle1);
@@ -34,7 +32,7 @@ export default function decorate(block,options) {
 
     block.appendChild(columnsContainer);
 
-    button.classList.add("button-container")
+    button.classList.add('button-container')
     block.appendChild(button);
 
 

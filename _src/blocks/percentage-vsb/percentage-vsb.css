@@ -3,6 +3,10 @@
   display: flex;
   justify-content: center;
   font-family: 'IBM Plex Sans', sans-serif;
+  margin-top:30px;
+  margin-bottom:30px;
+  margin-right:5px;
+  margin-left:5px;
 }
 
 .percentage-vsb-container a{
