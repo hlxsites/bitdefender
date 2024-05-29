@@ -182,6 +182,21 @@ export default function decorate(block) {
           // picture is only content in column
           picWrapper.classList.add('columns-img-col');
         }
+      } else {
+        const children = [...row.children];
+
+        if (children.length === 1) {
+          col.closest('div').classList.add('columns-title-col');
+        } else {
+          const firstParentIndex = children.indexOf(col.closest('div'));
+
+          col.closest('div').classList.add('columns-text-col');
+          if (firstParentIndex) {
+            col.closest('div').classList.add('columns-right-col');
+          } else {
+            col.closest('div').classList.add('columns-left-col');
+          }
+        }
       }
     });
   });
