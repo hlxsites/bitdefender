@@ -2,6 +2,7 @@
 .percentage-vsb-container {
   display: flex;
   justify-content: center;
+  font-family: 'IBM Plex Sans', sans-serif;
 }
 
 .percentage-vsb-container a{
@@ -24,7 +25,11 @@
   text-overflow: ellipsis;
   border-radius: 8px;
   height: fit-content;
-  background-color: #000;
+}
+.percentage-vsb-container a:hover {
+  background-color: #d80000;
+  border: 2px solid #d80000;
+  cursor: pointer;
 }
 
 .percentage-vsb-wrapper {

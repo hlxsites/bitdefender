@@ -34,6 +34,7 @@ export default function decorate(block,options) {
 
     block.appendChild(columnsContainer);
 
+    button.classList.add("button-container")
     block.appendChild(button);
 
 
