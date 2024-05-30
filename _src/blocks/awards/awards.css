@@ -109,11 +109,8 @@
     width: 95% !important;
   }
 
-  .vsb.awards-component > div:nth-child(3) div {
-    flex-wrap: nowrap;
-  }
   .awards-container .vsb picture{
-    min-width: 65px;
+    min-width: 100px;
   }
 }
 
@@ -151,7 +148,11 @@
     padding-right: 50px;
   }
   .awards-container .vsb picture{
-    min-width: 75px;
+    min-width: 80px;
+  }
+  
+  .vsb.awards-component > div:nth-child(3) div {
+    flex-wrap: nowrap;
   }
 }
 
@@ -220,7 +221,7 @@
   }
 
   .awards-container .vsb picture{
-  min-width: 90px;
+  min-width: 100px;
 }
 }
 
