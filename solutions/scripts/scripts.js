@@ -32,6 +32,8 @@ export const DEFAULT_COUNTRY = 'au';
 
 export const METADATA_ANALYTICS_TAGS = 'analytics-tags';
 
+const TARGET_TENANT = 'bitdefender';
+
 const HREFLANG_MAP = [
   ['en-ro', { baseUrl: 'https://www.bitdefender.ro', pageType: '.html' }],
   ['de', { baseUrl: 'https://www.bitdefender.de', pageType: '.html' }],
@@ -459,7 +461,7 @@ function getExperimentDetails() {
   return { experimentId, experimentVariant };
 }
 
-function pushPageLoadToDataLayer() {
+function pushPageLoadToDataLayer(targetExperimentDetails) {
   const { hostname } = window.location;
   if (!hostname) {
     return;
@@ -469,7 +471,9 @@ function pushPageLoadToDataLayer() {
   const environment = getEnvironment(hostname, languageCountry.country);
   const tags = getTags(getMetadata(METADATA_ANALYTICS_TAGS));
 
-  const experimentDetails = getExperimentDetails();
+  const experimentDetails = targetExperimentDetails ?? getExperimentDetails();
+  // eslint-disable-next-line no-console
+  console.debug(`Experiment details: ${JSON.stringify(experimentDetails)}`);
 
   pushToDataLayer('page load started', {
     pageInstanceID: environment,
@@ -511,7 +515,13 @@ async function loadEager(doc) {
 
   await window.hlx.plugins.run('loadEager');
 
-  pushPageLoadToDataLayer();
+  let targetExperimentDetails = null;
+  if (getMetadata('target-experiment') !== '') {
+    const { runTargetExperiment } = await import('./target.js');
+    targetExperimentDetails = await runTargetExperiment(TARGET_TENANT);
+  }
+
+  pushPageLoadToDataLayer(targetExperimentDetails);
 
   if (getMetadata('template') !== '') {
     loadCSS(`${window.hlx.codeBasePath}/styles/${getMetadata('template')}.css`);
