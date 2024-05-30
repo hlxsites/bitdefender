@@ -1,5 +1,5 @@
 /* imports from global */
-a.button:any-link, input[type="submit"] {
+.banner-vsb-container a.button:any-link, input[type="submit"] {
     font-family: var(--body-font-family);
     font-size: var(--body-font-size-s);
     font-style: normal;
