@@ -48,7 +48,7 @@ export default async function decorate(block, options) {
     products, familyProducts, monthlyProducts, priceType, pid, mainProduct,
     hideProducts,
   } = options ? options.metadata : block.closest('.section').dataset;
-  console.log(block.closest('.section').dataset);
+  console.log(options.metadata);
   // if options exists, this means the component is being called from aem
   if (options) {
     // eslint-disable-next-line no-param-reassign
