@@ -246,7 +246,7 @@ export default async function decorate(block, options) {
                   ${subtitle.innerText.trim() ? `<p class="subtitle">${subtitle.querySelector('td').innerHTML.trim()}</p>` : ''}
 
                   ${radioButtons ? planSwitcher.outerHTML : ''}
-                  ${addRichTextZone === 'true' ? `${richTextZone ? `<hr /> <div class="richTextArea">${price.innerHTML}</div>` : ''}` : ''}
+                  ${addRichTextZone === 'true' ? `${richTextZone ? `<hr /> <div class="richTextArea">${richTextZone.innerHTML}</div>` : ''}` : ''}
                   ${hideProducts === 'true' ? '' : `
                     ${pricesBox.outerHTML}
 
