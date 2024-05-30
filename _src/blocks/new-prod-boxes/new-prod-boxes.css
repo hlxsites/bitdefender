@@ -97,6 +97,7 @@
   margin-top: 10px;
   margin-bottom: 4px;
   font-weight: normal;
+  max-width: 340px;
 }
 .new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .blueTag {
   font-size: var(--body-font-size-xs);

@@ -46,7 +46,7 @@ export default async function decorate(block, options) {
   const {
     // eslint-disable-next-line no-unused-vars
     products, familyProducts, monthlyProducts, priceType, pid, mainProduct,
-    hideProducts,
+    hideProducts, addRichTextZone,
   } = options ? options.metadata : block.closest('.section').dataset;
   // if options exists, this means the component is being called from aem
   if (options) {
@@ -125,7 +125,7 @@ export default async function decorate(block, options) {
   if (combinedProducts.length) {
     await Promise.all([...block.children].map(async (prod, key) => {
       // eslint-disable-next-line no-unused-vars
-      const [greenTag, title, blueTag, subtitle, radioButtons, price, billed, buyLink, undeBuyLink, benefitsLists, richText] = [...prod.querySelectorAll('div > div > table > tbody > tr')];
+      const [greenTag, title, blueTag, subtitle, radioButtons, richTextZone, billed, buyLink, undeBuyLink, benefitsLists, richText] = [...prod.querySelectorAll('div > div > table > tbody > tr')];
       const onSelectorClass = 'tsmd-10-1';
       const [prodName, prodUsers, prodYears] = combinedProducts[key].split('/');
       const [prodMonthlyName, prodMonthlyUsers, prodMonthlyYears] = monthlyPricesAsList ? monthlyPricesAsList[key].split('/') : [];
@@ -246,7 +246,7 @@ export default async function decorate(block, options) {
                   ${subtitle.innerText.trim() ? `<p class="subtitle">${subtitle.querySelector('td').innerHTML.trim()}</p>` : ''}
 
                   ${radioButtons ? planSwitcher.outerHTML : ''}
-                  ${price ? `<hr /> <div class="richTextArea">${price.innerHTML}</div>` : ''}
+                  ${addRichTextZone === 'true' ? `${richTextZone ? `<hr /> <div class="richTextArea">${price.innerHTML}</div>` : ''}` : ''}
                   ${hideProducts === 'true' ? '' : `
                     ${pricesBox.outerHTML}
 
@@ -255,7 +255,7 @@ export default async function decorate(block, options) {
                     ${undeBuyLink.innerText.trim() ? `<div class="undeBuyLink">${undeBuyLink.innerText.trim()}</div>` : ''}`}
                   <hr />
                   ${benefitsLists.innerText.trim() ? `<div class="benefitsLists">${featureList}</div>` : ''}
-                  ${richText ? `<hr /> <div class="richText">${richText.outerHTML}</div>` : ''}
+                  ${richText ? `<hr /> <div class="richTextArea">${richText.outerHTML}</div>` : ''}
                 </div>
             </div>`;
           });
@@ -278,7 +278,6 @@ export default async function decorate(block, options) {
               ${blueTag.innerText.trim() ? `<div class="blueTag"><div>${blueTag.innerHTML.trim()}</div></div>` : ''}
               ${subtitle.innerText.trim() ? `<p class="subtitle${subtitle.innerText.trim().split(/\s+/).length > 5 ? ' fixed_height' : ''}">${subtitle.innerText.trim()}</p>` : ''}
               <hr />
-              ${price ? `<div class="richTextArea">${price.innerHTML}</div>` : ''}
               ${hideProducts === 'true' ? '' : `
                 <div class="price_box"></div>
                 ${billed ? `<div class="billed">${billed.innerHTML.replace('0', `<span class="newprice-${onSelectorClass}"></span>`)}</div>` : ''}
