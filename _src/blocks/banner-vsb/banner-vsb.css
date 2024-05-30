@@ -1,3 +1,11 @@
+.banner-vsb-container.section {
+    --gray-bg: rgba(246, 246, 246, 1);
+    --button-background-color: #eb0000;
+    --button-link-color: #fff;
+    padding: 0;
+    background: var(--gray-bg);
+}
+
 /* imports from global */
 .banner-vsb-container a.button:any-link, input[type="submit"] {
     font-family: var(--body-font-family);
@@ -20,13 +28,6 @@
     text-overflow: ellipsis;
     border-radius: 8px;
     height: fit-content;
-}
-
-
-.banner-vsb-container.section {
-    --gray-bg: rgba(246, 246, 246, 1);
-    padding: 0;
-    background: var(--gray-bg);
 }
 
 .banner-vsb-container .banner-vsb-wrapper .block {
