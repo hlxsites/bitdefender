@@ -140,7 +140,7 @@
     justify-content: center;
 }
 
-.banner-vsb-container .we-container {
+.banner-vsb-container.we-container {
     margin: 0 auto;
     max-width: 1332px;
     padding: 0 20px;
@@ -149,25 +149,25 @@
 }
 
 @media(max-width: 1599px) {
-    .banner-vsb-container .we-container {
+    .banner-vsb-container.we-container {
         max-width:1300px;
         padding: 0 50px
     }
 }
 
 @media(max-width: 991px) {
-    .banner-vsb-container .we-container {
+    .banner-vsb-container.we-container {
         padding:0 20px
     }
 }
 
-.banner-vsb-container .we-container:after {
+.banner-vsb-container.we-container:after {
     clear: both;
     content: "";
     display: block
 }
 
-.banner-vsb-container .we-container-fluid {
+.banner-vsb-container.we-container-fluid {
     max-width: 100%
 }
 
