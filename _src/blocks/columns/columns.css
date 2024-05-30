@@ -2,6 +2,15 @@
   padding: 0 var(--body-padding);
 }
 
+.columns-container.we-container {
+  max-width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-top: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .columns > div {
   display: flex;
   flex-direction: column;
@@ -131,6 +140,11 @@
 }
 
 @media (min-width: 992px) { /* desktop */
+  .columns-container.we-container {
+    max-width: 1300px;
+    padding-left: 50px;
+    padding-right: 50px;
+  }
 
   .columns > div {
     align-items: center;
@@ -156,6 +170,14 @@
 
   .columns.highlight-text.black.imageleft {
     left: 10%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .columns-container.we-container {
+    max-width: 1350px;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 }
 
