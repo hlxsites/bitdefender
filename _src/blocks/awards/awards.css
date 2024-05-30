@@ -90,6 +90,14 @@
   max-width: 90px;
   min-width: 8%;
 }
+.awards-container .vsb h3{
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.awards-container .vsb p{
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
 
 @media (min-width: 580px) {
   .awards-component > div:nth-child(3) div {
