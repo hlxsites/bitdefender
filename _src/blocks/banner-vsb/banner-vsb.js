@@ -1,5 +1,3 @@
-import { getDatasetFromSection } from '../../scripts/utils/utils.js';
-
 export default async function decorate(block, options) {
   if (options) {
     // eslint-disable-next-line no-param-reassign
@@ -52,9 +50,6 @@ export default async function decorate(block, options) {
   block.innerHTML = `
     <div class="rte-wrapper"></div>
     <div class="video-wrapper">
-<!--        <div class="gradient-1"></div>-->
-<!--        <div class="gradient-2"></div>-->
-<!--        <div class="gradient-3"></div>-->
         <video ${formattedVideoSettings} poster="${videoPlayerPoster}">
           <source src="${videoUrl}" type="video/${videoFormat}">
         </video>
