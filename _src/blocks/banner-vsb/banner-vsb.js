@@ -1,3 +1,5 @@
+import {decorateButtons} from "../../scripts/lib-franklin";
+
 export default async function decorate(block, options) {
   if (options) {
     // eslint-disable-next-line no-param-reassign
@@ -63,6 +65,8 @@ export default async function decorate(block, options) {
     anchorEl.target = '_blank';
     anchorEl.rel = 'noopener noreferrer';
   });
+
+  decorateButtons(block);
 
   window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
     bubbles: true,
