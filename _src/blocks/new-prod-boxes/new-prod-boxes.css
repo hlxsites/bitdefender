@@ -122,7 +122,6 @@
   font-family: Arial, sans-serif;
   margin-bottom: 0;
   line-height: 1.25;
-  flex-grow: 1;
 }
 .new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .subtitle.fixed_height {
   min-height: 80px;
