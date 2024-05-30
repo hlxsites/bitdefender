@@ -2,6 +2,9 @@
     --gray-bg: rgba(246, 246, 246, 1);
     --button-background-color: #eb0000;
     --button-link-color: #fff;
+    --body-font-family: "Roboto", "roboto-normal-400-fallback", helvetica, ubuntu, roboto, noto, sans-serif;
+    --body-font-size-s: 16px;
+    --font-weight-bold: 500;
     padding: 0;
     background: var(--gray-bg);
 }
