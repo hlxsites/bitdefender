@@ -1,3 +1,7 @@
+.banner-vsb-container * {
+    box-sizing: border-box;
+}
+
 .banner-vsb-container.section {
     --gray-bg: rgba(246, 246, 246, 1);
     --button-background-color: #eb0000;
