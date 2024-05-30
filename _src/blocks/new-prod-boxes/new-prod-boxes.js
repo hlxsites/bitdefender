@@ -48,7 +48,6 @@ export default async function decorate(block, options) {
     products, familyProducts, monthlyProducts, priceType, pid, mainProduct,
     hideProducts,
   } = options ? options.metadata : block.closest('.section').dataset;
-  console.log(options.metadata);
   // if options exists, this means the component is being called from aem
   if (options) {
     // eslint-disable-next-line no-param-reassign
@@ -242,7 +241,7 @@ export default async function decorate(block, options) {
               <div class="prod_box${greenTag.innerText.trim() && ' hasGreenTag'} ${key < productsAsList.length ? 'individual-box' : 'family-box'}">
                 <div class="inner_prod_box">
                   ${greenTag.innerText.trim() ? `<div class="greenTag2">${greenTag.innerText.trim()}</div>` : ''}
-                  ${title.innerText.trim() ? `<h2>${title.innerHTML}</h2>` : ''}
+                  ${title.innerText.trim() ? `${title.tagName === 'h3' ? `<h3>${title.innerHTML}</h3>` : `<h2>${title.innerHTML}</h2>`}` : ''}
                   ${blueTag.innerText.trim() ? `<div class="blueTag"><div>${blueTag.innerHTML.trim()}</div></div>` : ''}
                   ${subtitle.innerText.trim() ? `<p class="subtitle">${subtitle.querySelector('td').innerHTML.trim()}</p>` : ''}
 

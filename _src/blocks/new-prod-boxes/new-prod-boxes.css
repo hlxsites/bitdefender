@@ -84,6 +84,14 @@
   text-decoration: none;
   transition: all 0.5s ease;
 }
+
+.new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box h3 {
+  font-size: 22px;
+  line-height: 25px;
+  font-family: "IBM Plex Sans", Arial, sans-serif;
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
 .new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .blueTag {
   font-size: var(--body-font-size-xs);
   font-family: Arial, sans-serif;
