@@ -440,6 +440,10 @@
   color: #006EFF;
 }
 
+.columns.new-v2 a {
+  color: #006EFF!important;
+}
+
 .columns.new-v2 > div > .columns-img-col {
   margin-bottom: 1em;
 }
