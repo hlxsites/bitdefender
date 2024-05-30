@@ -50,6 +50,8 @@
   border-radius: 20px;
   padding: 25px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 .new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .greenTag2 {
   height: 30px;
@@ -105,9 +107,18 @@
   font-family: Arial, sans-serif;
   margin-bottom: 0;
   line-height: 1.25;
+  flex-grow: 1;
 }
 .new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .subtitle.fixed_height {
   min-height: 80px;
+}
+.new-prod-boxes-container .new-prod-boxes.subtitle-bigger .prod_box .inner_prod_box .subtitle {
+  font-size: clamp(10px, 16px, 16px);
+}
+
+.new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .richTextArea {
+  line-height: 17px;
+  margin-top: 10px;
 }
 .new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box hr {
   border: 1px solid #D1D1D1;
@@ -178,6 +189,8 @@
 .new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .benefitsLists {
   font-family: Arial, sans-serif;
   color: transparent;
+  display: flex;
+  flex-grow: 1;
 }
 .new-prod-boxes-container .new-prod-boxes .prod_box .inner_prod_box .benefitsLists p {
   margin: 0;
