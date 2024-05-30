@@ -1,4 +1,4 @@
-import {decorateButtons} from "../../scripts/lib-franklin";
+import { decorateButtons } from '../../scripts/lib-franklin.js';
 
 export default async function decorate(block, options) {
   if (options) {
