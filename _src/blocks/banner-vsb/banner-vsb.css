@@ -1,3 +1,28 @@
+/* imports from global */
+a.button:any-link, input[type="submit"] {
+    font-family: var(--body-font-family);
+    font-size: var(--body-font-size-s);
+    font-style: normal;
+    font-weight: var(--font-weight-bold);
+    -webkit-font-smoothing: antialiased;
+    display: inline-flex;
+    align-items: center;
+    box-sizing: border-box;
+    text-decoration: none;
+    padding: 10px 26px 8px 28px;
+    text-align: center;
+    cursor: pointer;
+    color: var(--button-link-color);
+    background-color: var(--button-background-color);
+    border: 2px solid var(--button-background-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-radius: 8px;
+    height: fit-content;
+}
+
+
 .banner-vsb-container.section {
     --gray-bg: rgba(246, 246, 246, 1);
     padding: 0;
@@ -22,7 +47,7 @@
 
 .banner-vsb-container p,
 .banner-vsb-container div {
-    font: normal normal normal 14px/18px "IBM Plex Sans", sans-serif;
+    font: normal normal normal 20px/16px "IBM Plex Sans", sans-serif;
 }
 
 .banner-vsb-container .rte-wrapper {
@@ -121,11 +146,6 @@
     .banner-vsb-container h3,
     .banner-vsb-container h4 {
         font: normal normal bold 40px/52px "IBM Plex Sans", sans-serif;
-    }
-
-    .banner-vsb-container p,
-    .banner-vsb-container div {
-        font: normal normal normal 18px/23px "IBM Plex Sans", sans-serif;
     }
 
     .banner-vsb-container {
