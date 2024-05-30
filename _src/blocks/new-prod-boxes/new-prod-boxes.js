@@ -215,7 +215,6 @@ export default async function decorate(block, options) {
       if (buyLinkSelector) {
         buyLinkSelector.classList.add('button', 'primary');
       }
-      console.log(richText);
       if (richText) {
         richText.querySelectorAll('a').forEach((link) => {
           link.classList.add('button', 'primary');
@@ -248,14 +247,16 @@ export default async function decorate(block, options) {
                   ${subtitle.innerText.trim() ? `<p class="subtitle">${subtitle.querySelector('td').innerHTML.trim()}</p>` : ''}
 
                   ${radioButtons ? planSwitcher.outerHTML : ''}
-                  
-                  ${pricesBox.outerHTML}
+                  ${price ? `<hr /> <div class="richTextArea">${price.innerHTML}</div>` : ''}
+                  ${hideProducts === 'true' ? '' : `
+                    ${pricesBox.outerHTML}
 
-                  ${buyLink.outerHTML}
+                    ${buyLink.outerHTML}
 
-                  ${undeBuyLink.innerText.trim() ? `<div class="undeBuyLink">${undeBuyLink.innerText.trim()}</div>` : ''}
+                    ${undeBuyLink.innerText.trim() ? `<div class="undeBuyLink">${undeBuyLink.innerText.trim()}</div>` : ''}`}
                   <hr />
                   ${benefitsLists.innerText.trim() ? `<div class="benefitsLists">${featureList}</div>` : ''}
+                  ${richText ? `<hr /> <div class="richText">${richText.outerHTML}</div>` : ''}
                 </div>
             </div>`;
           });
