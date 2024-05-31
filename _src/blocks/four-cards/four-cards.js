@@ -3,14 +3,12 @@ export default function decorate(block, options) {
     // eslint-disable-next-line no-unused-vars
     margintop,
   } = options ? options.metadata : block.closest('.section').dataset;
-  console.log('testtetetetete 223232');
+
   if (options) {
     // eslint-disable-next-line no-param-reassign
     block = block.querySelector('.block');
     const blockParent = block.closest('.section');
     blockParent.classList.add('we-container');
-    console.log('testtetetetete');
-    console.log('options', options.metadata);
   }
 
   if (margintop) {
