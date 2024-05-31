@@ -182,6 +182,12 @@
         overflow: hidden;
     }
 
+    .banner-vsb-container .video-wrapper,
+    .banner-vsb-container .default-content-wrapper {
+        width: 50%;
+        flex-shrink: 0;
+    }
+
     .banner-vsb-container .video-wrapper::before {
         top: -1px;
     }
@@ -189,7 +195,6 @@
     .banner-vsb-container .default-content-wrapper {
         padding: 30px;
     }
-
 
     .banner-vsb-container a.button:any-link:not(.modal, .primary) {
         width: unset;
@@ -242,15 +247,8 @@
     .banner-vsb-container .default-content-wrapper {
         padding-top: 0 !important;
         order: unset;
-        position: absolute;
-        left: 0;
-        right: 0;
         height: 100%;
         display: flex;
         align-items: center;
-    }
-
-    .banner-vsb-container .default-content-wrapper > div {
-        width: 50%;
     }
 }
