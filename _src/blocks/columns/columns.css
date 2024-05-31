@@ -469,6 +469,9 @@
 
 .columns.new-v2 > div > .columns-img-col {
   margin-bottom: 1em;
+}
+
+.columns.new-v2 > div > .columns-img-col img {
   object-fit: contain;
 }
 
