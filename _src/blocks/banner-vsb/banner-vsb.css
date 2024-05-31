@@ -201,6 +201,10 @@
         overflow: hidden;
     }
 
+    .banner-vsb-container .banner-vsb-wrapper .block {
+        flex-direction: row;
+    }
+
     .banner-vsb-container a.button:any-link:not(.modal, .primary) {
         width: unset;
         justify-content: unset;
