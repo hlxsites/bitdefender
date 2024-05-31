@@ -190,12 +190,6 @@
         padding: var(--body-padding);
     }
 
-    .four-cards-container.we-container {
-      max-width: 1300px;
-      padding-left: 50px;
-      padding-right: 50px;
-    }
-
     .four-cards > ul {
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         grid-gap: 14px;
@@ -204,6 +198,14 @@
     .four-cards > ul > li {
         margin: 0;
     }
+}
+
+@media (min-width: 991px) {
+  .four-cards-container.we-container {
+    max-width: 1300px;
+    padding-left: 50px;
+    padding-right: 50px;
+  }
 }
 
 @media (min-width: 1200px) {
