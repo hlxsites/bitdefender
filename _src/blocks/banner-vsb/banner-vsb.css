@@ -196,6 +196,12 @@
         padding: 30px;
     }
 
+    .banner-vsb-container .banner-vsb-wrapper {
+        border-radius: 20px;
+        background: var(--gray-bg);
+        overflow: hidden;
+    }
+
     .banner-vsb-container a.button:any-link:not(.modal, .primary) {
         width: unset;
         justify-content: unset;
