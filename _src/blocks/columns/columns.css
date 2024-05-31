@@ -518,19 +518,19 @@
   }
 
   .columns.new-v2 div.columns-right-col {
-    margin-left: 6em;
-    margin-right: 6em;
+    margin-left: 5em;
+    margin-right: 5em;
   }
 
   .columns.new-v2 div.columns-left-col {
-    margin-left: 6em;
-    margin-right: 6em;
+    margin-left: 5em;
+    margin-right: 5em;
   }
 }
 
 @media (min-width: 1024px) {
   .columns.new-v2 div.columns-left-col {
-    margin-right: 12em;
+    margin-right: 10em;
     margin-left: 0em;
   }
 }
