@@ -12,7 +12,6 @@
     --font-weight-bold: 500;
     --button-hover-background-color: #d80000;
     padding: 0;
-    background: var(--gray-bg);
 }
 
 /* imports from global */
