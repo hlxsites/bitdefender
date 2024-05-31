@@ -46,7 +46,7 @@ export default async function decorate(block, options) {
   const {
     // eslint-disable-next-line no-unused-vars
     products, familyProducts, monthlyProducts, priceType, pid, mainProduct,
-    hideProducts, addRichTextZone,
+    hideProducts, addRichTextZone, margintop, 
   } = options ? options.metadata : block.closest('.section').dataset;
   // if options exists, this means the component is being called from aem
   if (options) {
@@ -55,6 +55,10 @@ export default async function decorate(block, options) {
   }
   const blockParent = block.closest('.section');
   blockParent.classList.add('we-container');
+
+  if (margintop) {
+    blockParent.style.marginTop = `${margintop}px`;
+  }
 
   let defaultContentWrapperElements = block.closest('.section').querySelector('.default-content-wrapper')?.children;
   let individualSwitchText;
