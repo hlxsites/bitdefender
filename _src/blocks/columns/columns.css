@@ -339,6 +339,10 @@
   align-items: center;
 }
 
+.columns.new-v2 > div > .columns-img-col img {
+  object-fit: contain;
+}
+
 .section.white.columns-container .columns.awards > div img {
   display: block;
   height: 120px;
@@ -431,49 +435,7 @@
   margin: 1em auto;
 }
 
-.columns.new-v2 h3 {
-  font-family: "IBM Plex Sans" ,sans-serif;
-  font-size: 25px;
-  font-weight: 700;
-  line-height: 30px;
-  text-align: left;
-  color: #006EFF;
-}
 
-.columns.new-v2 a {
-  color: #006EFF!important;
-  font-size: 18px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all .2s cubic-bezier(.4,0,.2,1);
-}
-
-.columns.new-v2 a:hover {
-  color: #0A53C5;
-  transform: translateX(10px);
-}
-
-.columns.new-v2 a::after {
-  content: '\2192';
-  width: 24px;
-  height: 24px;
-  display: inline-block;
-  transition: all .2s cubic-bezier(.4,0,.2,1);
-  transform: translateX(0);
-  margin-left: 2px;
-}
-
-.columns.new-v2 a:hover::after {
-  transform: translateX(5px);
-}
-
-.columns.new-v2 > div > .columns-img-col {
-  margin-bottom: 1em;
-}
-
-.columns.new-v2 > div > .columns-img-col img {
-  object-fit: contain;
-}
 
 @media (min-width: 768px) {
   .linear-gradient.columns-container[data-bg-image]{
@@ -531,7 +493,7 @@
 @media (min-width: 1024px) {
   .columns.new-v2 div.columns-left-col {
     margin-right: 10em;
-    margin-left: 0em;
+    margin-left: 0;
   }
 }
 
@@ -586,4 +548,44 @@ main .section.two-columns .right-col .products.plans a.button:any-link {
   content: url("/_src/icons/user-guide-white.svg");
   color: white;
   padding-right: 8px;
+}
+
+.columns.new-v2 a::after {
+  content: '\2192';
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  transition: all .2s cubic-bezier(.4,0,.2,1);
+  transform: translateX(0);
+  margin-left: 2px;
+}
+
+.columns.new-v2 a:hover::after {
+  transform: translateX(5px);
+}
+
+.columns.new-v2 > div > .columns-img-col {
+  margin-bottom: 1em;
+}
+
+.columns.new-v2 h3 {
+  font-family: "IBM Plex Sans" ,sans-serif;
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 30px;
+  text-align: left;
+  color: #006EFF;
+}
+
+.columns.new-v2 a {
+  color: #006EFF!important;
+  font-size: 18px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all .2s cubic-bezier(.4,0,.2,1);
+}
+
+.columns.new-v2 a:hover {
+  color: #0A53C5;
+  transform: translateX(10px);
 }
