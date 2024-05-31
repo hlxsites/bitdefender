@@ -188,7 +188,9 @@
     }
 
     .banner-vsb-container .video-wrapper::before {
-        top: -1px;
+        top: 0;
+        left: -1px;
+        background: linear-gradient(to right, var(--gray-bg), rgba(246, 246, 246, 0));
     }
 
     .banner-vsb-container .default-content-wrapper {
@@ -244,12 +246,6 @@
 
     .banner-vsb-container .video-wrapper {
         height: 100%;
-    }
-
-    .banner-vsb-container .video-wrapper::before {
-        top: 0;
-        left: -1px;
-        background: linear-gradient(to right, var(--gray-bg), rgba(246, 246, 246, 0));
     }
 
     .banner-vsb-container .default-content-wrapper {
