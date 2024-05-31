@@ -245,7 +245,6 @@
 
     .banner-vsb-container .default-content-wrapper {
         padding-top: 0 !important;
-        order: unset;
         height: 100%;
         display: flex;
         align-items: center;
