@@ -523,7 +523,8 @@
   }
 
   .columns.new-v2 div.columns-left-col {
-    margin-right: 12em;
+    margin-right: 6em;
+    margin-left: 6em;
   }
 }
 
