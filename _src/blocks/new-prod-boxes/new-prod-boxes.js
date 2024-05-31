@@ -52,6 +52,10 @@ export default async function decorate(block, options) {
   if (options) {
     // eslint-disable-next-line no-param-reassign
     block = block.querySelector('.block');
+    const fourCardsWrapper = block.closest('.four-cards-wrapper');
+    if (fourCardsWrapper) {
+      fourCardsWrapper.classList.remove('four-cards-wrapper');
+    }
   }
   const blockParent = block.closest('.section');
   blockParent.classList.add('we-container');
