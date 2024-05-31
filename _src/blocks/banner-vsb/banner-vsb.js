@@ -50,7 +50,6 @@ export default async function decorate(block, options) {
     .join(' ');
 
   block.innerHTML = `
-    <div class="rte-wrapper"></div>
     <div class="video-wrapper">
         <video ${formattedVideoSettings} poster="${videoPlayerPoster}">
           <source src="${videoUrl}" type="video/${videoFormat}">
