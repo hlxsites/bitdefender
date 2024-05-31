@@ -186,6 +186,10 @@
         top: -1px;
     }
 
+    .banner-vsb-container .default-content-wrapper {
+        padding: 30px;
+    }
+
 
     .banner-vsb-container a.button:any-link:not(.modal, .primary) {
         width: unset;
