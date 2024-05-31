@@ -110,80 +110,80 @@
     margin: 0;
     padding: 0;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
     grid-gap: 24px;
-  }
+}
 
-  .four-cards > ul > li {
-    display: inline-block;
-    background-color: #f6f6f6;
-    padding: 24px;
-    margin: 0;
-    border-radius: 20px;
-    text-align: left;
-    font: normal normal normal 16px/24px var(--body-font-family);
-  }
+.four-cards > ul > li {
+  display: inline-block;
+  background-color: #f6f6f6;
+  padding: 24px;
+  margin: 0;
+  border-radius: 20px;
+  text-align: left;
+  font: normal normal normal 16px/24px var(--body-font-family);
+}
 
-  .four-cards .default-content-wrapper {
-    text-align: center;
-  }
+.four-cards .default-content-wrapper {
+  text-align: center;
+}
 
-  /* a/b test styles, should be deleted after */
-  .four-cards-container.we-container .default-content-wrapper {
-    text-align: center;
-  }
+/* a/b test styles, should be deleted after */
+.four-cards-container.we-container .default-content-wrapper {
+  text-align: center;
+}
 
-  .four-cards-container a {
-    font: normal normal bold 16px/20px var(--body-font-family);
-    margin-top: 32px;
-    padding: 14px 28px;
-    color: #006EFF;
-    background: white;
-    border: 2px solid #006EFF;
-    border-radius: 10px;
-    display: inline-block;
-    position: relative;
-    min-width: 180px;
-  }
+.four-cards-container a {
+  font: normal normal bold 16px/20px var(--body-font-family);
+  margin-top: 32px;
+  padding: 14px 28px;
+  color: #006EFF;
+  background: white;
+  border: 2px solid #006EFF;
+  border-radius: 10px;
+  display: inline-block;
+  position: relative;
+  min-width: 180px;
+}
 
-  .four-cards-container p a {
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    -webkit-font-smoothing: antialiased;
-    display: inline-flex;
-    align-items: center;
-    box-sizing: border-box;
-    text-decoration: none;
-    padding: 10px 26px 8px 28px;
-    text-align: center;
-    justify-content: center;
-    cursor: pointer;
-    color: #006DFF;
-    background-color: transparent;
-    border: 2px solid #006DFF;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    border-radius: 8px;
-    height: fit-content;
-    transition: all .2s cubic-bezier(.4,0,.2,1);
-  }
+.four-cards-container p a {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  -webkit-font-smoothing: antialiased;
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  text-decoration: none;
+  padding: 10px 26px 8px 28px;
+  text-align: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #006DFF;
+  background-color: transparent;
+  border: 2px solid #006DFF;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-radius: 8px;
+  height: fit-content;
+  transition: all .2s cubic-bezier(.4,0,.2,1);
+}
 
-  .four-cards-container p a:hover {
-    color: white;
-    background-color: #006DFF;
-  }
+.four-cards-container p a:hover {
+  color: white;
+  background-color: #006DFF;
+}
 
-  .four-cards-container p a:active {
-    background-color: #0D499B;
-  }
+.four-cards-container p a:active {
+  background-color: #0D499B;
+}
 
-  .four-cards .icon {
-    width: 48px;
-    height: 48px;
-    margin-bottom: 16px;
-  }
+.four-cards .icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 16px;
+}
 
 @media (max-width: 991px) { /* mobile/tablet */
     .four-cards-wrapper {
@@ -193,6 +193,13 @@
     .four-cards > ul > li {
         margin: 0;
     }
+}
+
+@media (min-width: 768px) {
+  .four-cards > ul {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 14px;
+  }
 }
 
 @media (min-width: 991px) {
