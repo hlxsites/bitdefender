@@ -9,6 +9,10 @@ export default function decorate(block, options) {
     block = block.querySelector('.block');
     const blockParent = block.closest('.section');
     blockParent.classList.add('we-container');
+    const fourCardsWrapper = block.closest('.four-cards-wrapper');
+    if (fourCardsWrapper) {
+      fourCardsWrapper.classList.remove('four-cards-wrapper');
+    }
   }
 
   if (margintop) {

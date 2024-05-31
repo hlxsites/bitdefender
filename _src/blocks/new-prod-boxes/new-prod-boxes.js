@@ -46,16 +46,12 @@ export default async function decorate(block, options) {
   const {
     // eslint-disable-next-line no-unused-vars
     products, familyProducts, monthlyProducts, priceType, pid, mainProduct,
-    hideProducts, addRichTextZone, margintop, 
+    hideProducts, addRichTextZone, margintop,
   } = options ? options.metadata : block.closest('.section').dataset;
   // if options exists, this means the component is being called from aem
   if (options) {
     // eslint-disable-next-line no-param-reassign
     block = block.querySelector('.block');
-    const fourCardsWrapper = block.closest('.four-cards-wrapper');
-    if (fourCardsWrapper) {
-      fourCardsWrapper.classList.remove('four-cards-wrapper');
-    }
   }
   const blockParent = block.closest('.section');
   blockParent.classList.add('we-container');
