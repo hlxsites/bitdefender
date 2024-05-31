@@ -531,6 +531,7 @@
 @media (min-width: 1024px) {
   .columns.new-v2 div.columns-left-col {
     margin-right: 12em;
+    margin-left: 0em;
   }
 }
 
