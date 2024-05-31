@@ -521,10 +521,11 @@
     margin-left: 6em;
     margin-right: 6em;
   }
+}
 
+@media (min-width: 1024px) {
   .columns.new-v2 div.columns-left-col {
-    margin-right: 6em;
-    margin-left: 6em;
+    margin-right: 12em;
   }
 }
 
