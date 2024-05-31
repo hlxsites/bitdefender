@@ -71,7 +71,7 @@
 .awards-component > div:nth-child(3) div {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: center;
   width: 90%;
   align-items: center;
   gap: 4.5%;
@@ -155,7 +155,7 @@
     padding-right: 50px;
   }
   .awards-container .vsb picture{
-    min-width: 65px;
+    min-width: 75px;
   }
   
   .vsb.awards-component > div:nth-child(3) div {
