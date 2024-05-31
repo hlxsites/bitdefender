@@ -9,6 +9,7 @@ export default function decorate(block, options) {
     block = block.querySelector('.block');
     const blockParent = block.closest('.section');
     blockParent.classList.add('we-container');
+    console.log('options', options.metadata);
   }
 
   if (margintop) {
