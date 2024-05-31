@@ -190,11 +190,6 @@
         padding: var(--body-padding);
     }
 
-    .four-cards > ul {
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        grid-gap: 14px;
-    }
-
     .four-cards > ul > li {
         margin: 0;
     }
@@ -205,6 +200,11 @@
     max-width: 1300px;
     padding-left: 50px;
     padding-right: 50px;
+  }
+
+  .four-cards > ul {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 14px;
   }
 }
 
