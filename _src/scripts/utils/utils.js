@@ -116,11 +116,8 @@ export async function fetchProduct(code = 'av', variant = '1u-1y', pid = null) {
   if ((siteName === 'hk' || siteName === 'tw')) {
     // append force_region for hk and tw
     const newData = JSON.parse(data.get('data'));
-    if (code === 'psp' || code === 'pspm' || code === 'dip' || code === 'dipm') {
-      newData.config.force_region = '16';
-    } else {
-      newData.config.force_region = siteName === 'hk' ? '41' : '52';
-    }
+
+    newData.config.force_region = siteName === 'hk' ? '41' : '52';
 
     data.set('data', JSON.stringify(newData));
   }
