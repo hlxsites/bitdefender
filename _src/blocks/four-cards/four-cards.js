@@ -1,9 +1,19 @@
 export default function decorate(block, options) {
+  const {
+    // eslint-disable-next-line no-unused-vars
+    margintop,
+  } = options ? options.metadata : block.closest('.section').dataset;
+
   if (options) {
     // eslint-disable-next-line no-param-reassign
     block = block.querySelector('.block');
     const blockParent = block.closest('.section');
     blockParent.classList.add('we-container');
+  }
+
+  if (margintop) {
+    const blockParent = block.closest('.section');
+    blockParent.style.marginTop = `${margintop}px`;
   }
 
   const ul = document.createElement('ul');
