@@ -311,15 +311,14 @@ export function appendAdobeMcLinks(selector) {
       marketingCloudServerSecure: 'sstats.bitdefender.com',
     });
 
-    let wrapperSelector;
-    if (typeof selector === 'string') {
-      wrapperSelector = document.querySelector(selector);
-    } else {
-      wrapperSelector = selector;
-    }
+    const wrapperSelector = typeof selector === 'string' ? document.querySelector(selector) : selector;
 
     const hrefSelector = '[href*=".bitdefender."]';
     wrapperSelector.querySelectorAll(hrefSelector).forEach((link) => {
+      const isAdobeMcAlreadyAdded = link.href.includes('adobe_mc');
+      if (isAdobeMcAlreadyAdded) {
+        return;
+      }
       const destinationURLWithVisitorIDs = visitor.appendVisitorIDsTo(link.href);
       link.href = destinationURLWithVisitorIDs.replace(/MCAID%3D.*%7CMCORGID/, 'MCAID%3D%7CMCORGID');
     });
