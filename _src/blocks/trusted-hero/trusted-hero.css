@@ -60,13 +60,19 @@
     border: 1px solid var(--blue);
 }
 
-.trusted-hero-container p.button-container:nth-last-child(1) a {
+.trusted-hero-container p.button-container a {
     background-color: transparent !important;
     border: solid black 1px !important;
     color: black;
     width: 100%;
     justify-content: center;
-    font-weight: 400;
+    font-weight: 500 !important;
+}
+
+.trusted-hero-container p.button-container a:hover {
+    background-color: var(--blue) !important;
+    border: 1px solid var(--blue) !important;
+    color: white;
 }
 
 @media (min-width: 768px) {
@@ -131,7 +137,8 @@
     }
 
     .trusted-hero-container .default-content-wrapper > .rte-wrapper {
-        width: 45%;
+        width: 555px;
+        padding-right: 4em;
     }
 
     .trusted-hero-container .default-content-wrapper > .video-wrapper {

@@ -20,6 +20,10 @@
     background: var(--blue);
 }
 
+.trusted header .mega-menu__content {
+    padding: var(--body-padding);
+}
+
 .trusted div[data-align="right"] {
     text-align: right;
 }
@@ -334,6 +338,28 @@ main .section.link-right a {
     margin: 0;
 }
 
+.trusted .box-carousel-container .default-content-wrapper {
+    padding: 50px;
+}
+
+.trusted .box-carousel-container.testimonials .carousel-item {
+    width: calc(100% / 3 - 5px);
+    min-height: 470px;
+    padding: 50px 50px 45px;
+}
+
+.trusted .box-carousel-container.testimonials .carousel-item .subtitle-secondary {
+    margin-bottom: 10px;
+}
+
+.trusted .box-carousel-container.testimonials .carousel-item .subtitle-secondary::before {
+    display: none;
+}
+
+.trusted .box-carousel-container.testimonials .carousel-item .subtitle {
+    color: #6b6b6b;
+}
+
 /* ---- particles.js container ---- */
 .trusted #particles-js {
     position: absolute;
@@ -374,6 +400,7 @@ main .section.link-right a {
     left: 0;
     right: 0;
     text-indent: -9999px;
+    z-index: 999;
     overflow: hidden;
     white-space: nowrap;
 }
@@ -477,6 +504,16 @@ main .section.link-right a {
     background: black;
 }
 
+.trusted p.button-container a {
+    font-weight: 500;
+}
+
+.trusted p.button-container a:hover {
+    background-color: var(--blue) !important;
+    border: 1px solid var(--blue) !important;
+    color: white !important;
+}
+
 .trusted header,
 .trusted main,
 .trusted footer {
@@ -527,6 +564,10 @@ main .section.link-right a {
     .trusted main .hero .hero-picture picture img {
         display: block;
         padding-left: 10%;
+    }
+
+    .trusted header .mega-menu__content {
+        padding: 0 var(--section-large-desktop-padding);
     }
 }
 
@@ -643,9 +684,14 @@ main .section.link-right a {
 }
 
 @media (min-width: 992px) {
+    .trusted header .mega-menu__content {
+        padding: 0 var(--section-desktop-padding);
+    }
+
     /* awards band */
     .trusted .section.static-awards .default-content-wrapper {
         flex-wrap: unset;
+        padding: 0 7em;
     }
     .trusted .section.static-awards .default-content-wrapper > * {
         width: calc(100% - 66px);

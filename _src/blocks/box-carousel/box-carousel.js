@@ -111,7 +111,7 @@ export default async function decorate(block) {
       <div class="title">${titleEl.children[0].innerHTML}</div>
       ${renderArrows()}
     </div>
-    
+
     <div class="carousel-container">
         <div class="carousel">
           ${slides.map((slide) => `
@@ -121,16 +121,16 @@ export default async function decorate(block) {
                     ${slide.children[0].children[0].innerHTML}
                   </div>
                 ` : slide.children[0].children[0].innerHTML}
-                
+
                 <p class="title">
                     ${slide.children[0].children[1].textContent}
                 </p>
-                
+
                 ${isTestimonials ? `
                   <div class="subtitle-secondary">
                     ${slide.children[0].children[2].innerHTML}
                   </div>
-                  
+
                   <div class="subtitle">
                     ${slide.children[0].children[3].innerHTML}
                   </div>
