@@ -62,7 +62,6 @@
   flex: 1;
   line-height: 1.13;
   text-align: center;
-  margin: 0 10px;
 }
 
 /* video presentation */
@@ -145,7 +144,7 @@
     margin: 0 auto;
   }
 
-  .columns.highlight-text.black { 
+  .columns.highlight-text.black {
     right: 10%;
     top: 10%;
   }
@@ -233,7 +232,7 @@
   padding-top: 1px;
 }
 
-.columns.vpn-presentation .button-container, 
+.columns.vpn-presentation .button-container,
 .columns.vpn-presentation .info-button-container{
   display: inline-block;
   padding-right: 13px;
