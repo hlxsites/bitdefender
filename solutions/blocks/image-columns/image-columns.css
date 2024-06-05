@@ -1,5 +1,5 @@
-.image-columns-wrapper {
-  padding: 0;
+.image-columns-container ul {
+  padding-left: 0;
 }
 
 .image-columns {
@@ -40,7 +40,6 @@
 }
 
 .image-columns > div > .image-columns-img-col .img-container {
-  max-width: 645px;
   width: 100%;
   height: auto;
   margin: 0 auto;
@@ -57,7 +56,6 @@
   position: relative;
   font-size: var(--body-font-size-l);
   list-style: none;
-  transform: translateX(-35px);
 }
 
 .image-columns ul li::before {
@@ -107,6 +105,7 @@
   font-size: 16px;
   line-height: 1.5;
   margin: 0 0 20px;
+  padding-left: var(--body-padding);
 }
 
 @media (min-width: 1400px) {
@@ -130,17 +129,5 @@
   .image-columns > div > div {
     flex: 1;
     order: unset;
-  }
-
-  .image-columns-wrapper {
-    max-width: var(--section-desktop-max-width);
-    padding: 36px 0;
-    margin: 0 auto;
-  }
-}
-
-@media (min-width: 1600px) { /* large desktop */
-  .image-columns-wrapper {
-    max-width: var(--section-large-desktop-max-width);
   }
 }
