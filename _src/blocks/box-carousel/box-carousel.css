@@ -17,6 +17,11 @@
     margin: 0 0 16px;
 }
 
+.box-carousel-container .carousel-header .left-arrow.disabled,
+.box-carousel-container .carousel-header .right-arrow.disabled {
+    opacity: 0.3;
+}
+
 .box-carousel-container .carousel-header .left-arrow,
 .box-carousel-container .carousel-header .right-arrow {
     color: black;
@@ -26,6 +31,7 @@
     width: 100%;
     position: relative;
     display: flex;
+    overflow: hidden;
 }
 
 .box-carousel-container .carousel {
