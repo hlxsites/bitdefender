@@ -506,6 +506,7 @@ main .section.link-right a {
 
 .trusted p.button-container a {
     font-weight: 500;
+    border-width: 1px;
 }
 
 .trusted p.button-container a:hover {
