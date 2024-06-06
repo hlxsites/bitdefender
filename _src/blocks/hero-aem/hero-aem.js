@@ -121,7 +121,7 @@ export default function decorate(block, options) {
 
   if (height) {
     // eslint-disable-next-line array-callback-return
-    block.children.map((child) => {
+    Array.from(block.children).map((child) => {
       child.style.maxHeight = `${height}px`;
     });
   }
