@@ -102,7 +102,7 @@ function openUrlForOs(urlMacos, urlWindows, urlAndroid, urlIos, selector) {
 export default function decorate(block, options) {
   const {
     product, conditionText, saveText, MacOS, Windows, Android, IOS,
-    alignContent,
+    alignContent, height,
   } = options.metadata;
 
   if (options) {
@@ -117,6 +117,13 @@ export default function decorate(block, options) {
   richText.classList.add('hero-aem__card__desktop', 'col-md-6');
   if (alignContent === 'center') {
     richText.classList.add('hero-aem__card__desktop--center');
+  }
+
+  if (height) {
+    // eslint-disable-next-line array-callback-return
+    block.children.map((child) => {
+      child.style.maxHeight = `${height}px`;
+    });
   }
   mainDesktopImage.classList.add('col-md-6');
   mainDesktopImage.children[0].classList.add('h-100');
