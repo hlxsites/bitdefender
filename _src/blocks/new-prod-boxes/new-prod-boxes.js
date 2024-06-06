@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable max-len */
 let dataLayerProducts = [];
-async function createPricesElement(storeOBJ, conditionText, saveText, prodName, prodUsers, prodYears, buylink, billed) {
+async function createPricesElement(storeOBJ, conditionText, saveText, prodName, prodUsers, prodYears, buylink, billed, customLink) {
   const storeProduct = await storeOBJ.getProducts([new ProductInfo(prodName, 'consumer')]);
   const storeOption = storeProduct[prodName].getOption(prodUsers, prodYears);
   const price = storeOption.getPrice();
@@ -37,7 +37,7 @@ async function createPricesElement(storeOBJ, conditionText, saveText, prodName, 
       </div>
     </div>
     ${billed ? `<div class="billed">${billed.innerHTML}</div>` : ''}
-    <a href="${buyLink}" class="button primary">${buylink.text}</a>`;
+    <a href="${customLink === 1 ? buylink.href : buyLink}" class="button primary">${buylink.text}</a>`;
   buylink.remove();
   return priceElement;
 }
@@ -192,9 +192,13 @@ export default async function decorate(block, options) {
         title.innerHTML = `<a href="#" title="${title.innerText}" class="buylink-${onSelectorClass} await-loader prodload prodload-${onSelectorClass}">${title.querySelector('tr a').innerHTML}</a>`;
       }
 
-      const buyLinkSelector = prod.querySelector('a[href*="#buylink"]');
+      let buyLinkSelector = prod.querySelector('a[href*="#buylink"]');
+      let customLink = 0;
       if (buyLinkSelector) {
         buyLinkSelector.classList.add('button', 'primary');
+      } else {
+        buyLinkSelector = buyLink.querySelector('a');
+        customLink = 1;
       }
 
       let planSwitcher = document.createElement('div');
@@ -210,7 +214,7 @@ export default async function decorate(block, options) {
       }
       // create the prices element based on where the component is being called from, aem of www-websites
       if (options) {
-        await createPricesElement(options.store, '', 'Save', prodName, prodUsers, prodYears, buyLinkSelector, billed)
+        await createPricesElement(options.store, '', 'Save', prodName, prodUsers, prodYears, buyLinkSelector, billed, customLink)
           .then((pricesBox) => {
             yearlyPricesBoxes[`${key}-yearly-${prodName.trim()}`] = pricesBox;
             // buyLink.parentNode.parentNode.insertBefore(pricesBox, buyLink.parentNode);
