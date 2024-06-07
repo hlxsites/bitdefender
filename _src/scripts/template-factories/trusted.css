@@ -20,7 +20,7 @@
     background: var(--blue);
 }
 
-.trusted header .mega-menu__content {
+.trusted .mega-menu__content {
     padding: var(--body-padding);
 }
 
@@ -567,7 +567,7 @@ main .section.link-right a {
         padding-left: 10%;
     }
 
-    .trusted header .mega-menu__content {
+    .trusted .mega-menu__content {
         padding: 0 var(--section-large-desktop-padding);
     }
 }
@@ -685,7 +685,7 @@ main .section.link-right a {
 }
 
 @media (min-width: 992px) {
-    .trusted header .mega-menu__content {
+    .trusted .mega-menu__content {
         padding: 0 var(--section-desktop-padding);
     }
 
