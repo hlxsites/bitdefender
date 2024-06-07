@@ -157,6 +157,7 @@
         .block {
             padding-bottom: 0;
         }
+
         .step {
             height: unset;
             width: calc(100% - 250px);
