@@ -592,6 +592,6 @@ main .section.two-columns .right-col .products.plans a.button:any-link {
 
 @media (max-width: 768px) {
   .columns.new-v2 > div > .columns-img-col img {
-    height: auto;
+    height: auto!important;
   }
 }
