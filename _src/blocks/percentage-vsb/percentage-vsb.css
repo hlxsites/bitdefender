@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   font-family: 'IBM Plex Sans', sans-serif;
-} 
+}
 
 .percentage-vsb-container.we-container{
   max-width: 100%;
@@ -47,7 +47,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
- 
+
 }
 
 .percentage-vsb-wrapper .columns-container{
@@ -62,8 +62,9 @@
 }
 
 .percentage-vsb-wrapper .title-class h2{
-  font-size:38px;
-  margin-top:10px;
+  font-size: 38px;
+  line-height: 40px;
+  margin-top: 1em;
 }
 
 .percentage-vsb-wrapper .subtitle-class{
@@ -80,6 +81,7 @@
 .percentage-vsb-wrapper .button-container{
   display: flex;
   justify-content: center;
+  margin-top: 1em;
 }
 
 @media (min-width: 768px) {

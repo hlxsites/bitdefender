@@ -90,15 +90,13 @@
   max-width: 90px;
   min-width: 8%;
 }
-
 .awards-container .vsb h3{
-  margin-top: 0;
-  margin-bottom: 0;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
-
 .awards-container .vsb p{
-  margin-top: 0;
-  margin-bottom: 0;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 @media (min-width: 580px) {
@@ -108,7 +106,19 @@
   }
 
   .vsb.awards-component > div:nth-child(3) div {
+
     flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .awards-component > div:nth-child(3) div img {
+    min-height: auto;
+    margin: 5px 0;
+  }
+
+  .awards-container h3 {
+    line-height: 38px;
   }
 }
 
@@ -155,11 +165,10 @@
     padding-left: 50px;
     padding-right: 50px;
   }
-
   .awards-container .vsb picture{
     min-width: 75px;
   }
-  
+
   .vsb.awards-component > div:nth-child(3) div {
     flex-wrap: nowrap;
   }
