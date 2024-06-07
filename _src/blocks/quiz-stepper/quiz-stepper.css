@@ -139,9 +139,26 @@
     }
 }
 
-@media (min-width: 992px) {
+@media (min-width: 768px) {
     .quiz-stepper-container {
         .step {
+            height: 630px;
+
+            .img-container {
+                height: 400px;
+                bottom: calc(-400px / 2);
+            }
+        }
+    }
+}
+
+@media (min-width: 992px) {
+    .quiz-stepper-container {
+        .block {
+            padding-bottom: 0;
+        }
+        .step {
+            height: unset;
             width: calc(100% - 250px);
             padding: 40px 40% 40px 40px;
 
