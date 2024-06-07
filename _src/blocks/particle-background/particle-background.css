@@ -48,6 +48,12 @@
     padding: 24px;
 }
 
+@media (max-width: 768px) {
+  .particle-background h2 {
+    line-height: 30px;
+  }
+}
+
 @media (min-width: 991px) { /* mobile/tablet */
     .particle-background-container.we-container {
       max-width: 1300px;

@@ -106,8 +106,19 @@
   }
 
   .vsb.awards-component > div:nth-child(3) div {
-    
+
     flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .awards-component > div:nth-child(3) div img {
+    min-height: auto;
+    margin: 5px 0;
+  }
+
+  .awards-container h3 {
+    line-height: 38px;
   }
 }
 
@@ -157,7 +168,7 @@
   .awards-container .vsb picture{
     min-width: 75px;
   }
-  
+
   .vsb.awards-component > div:nth-child(3) div {
     flex-wrap: nowrap;
   }
