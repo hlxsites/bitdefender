@@ -112,7 +112,7 @@
 
     .quiz-hero-container .default-content-wrapper > div {
         width: 50%;
-        padding: 0 30px;
+        padding-right: 30px;
     }
 }
 
