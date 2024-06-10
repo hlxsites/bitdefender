@@ -331,6 +331,10 @@
     border-radius: 20px;
   }
 
+  .hero-aem-container.hero-vsb  .hero-aem p.button-container {
+    text-align: left;
+  }
+
   .hero-aem-container.hero-vsb .hero-aem p.button-container .button.primary {
     margin: 0;
     max-width: 290px;
