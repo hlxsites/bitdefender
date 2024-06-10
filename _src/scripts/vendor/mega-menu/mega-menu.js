@@ -1,4 +1,3 @@
-import getMetadata from "../../lib-franklin.js";
 /**  Throttle  */
 const throttle = (cb, delay = 250) => {
   let shouldWait = false;
@@ -376,8 +375,6 @@ function initMegaMenu (container) {
 
 const shadowRoot = document.querySelector('body > div:first-child').shadowRoot;
 const megamenuEl = shadowRoot.querySelector('.mega-menu__container');
-const template = getMetadata('template');
-console.log('template ', template)
 
 if (megamenuEl) {
   new initMegaMenu(megamenuEl);
