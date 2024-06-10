@@ -24,7 +24,7 @@
     line-height: 1.3!important;
 }
 
-.trusted header.header-wrapper {
+.trusted header .mega-menu__content {
     padding: var(--body-padding)!important;
 }
 
@@ -576,7 +576,7 @@ main .section.link-right a {
         padding-left: 10%;
     }
 
-    .trusted header.header-wrapper {
+    .trusted header .mega-menu__content {
         padding: 0 var(--section-large-desktop-padding)!important;
     }
 }
@@ -694,7 +694,7 @@ main .section.link-right a {
 }
 
 @media (min-width: 992px) {
-    .trusted header.header-wrapper {
+    .trusted header .mega-menu__content {
         padding: 0 var(--section-desktop-padding)!important;
     }
 
