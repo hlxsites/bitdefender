@@ -20,7 +20,7 @@ const isHoverableDevice = window.matchMedia(
 
 const Config = {
   selectors: {
-    container: '.mega-menu__containerrr .trusted-menu',
+    container: '.mega-menu__container',
     viewAllButtons: '.navigation__view-all',
     popupContainer: '.mega-menu__popup-container',
     popupLink: '.mega-menu__popup-container .mega-menu__right-link',
@@ -375,6 +375,8 @@ function initMegaMenu (container) {
 
 const shadowRoot = document.querySelector('body > div:first-child').shadowRoot;
 const megamenuEl = shadowRoot.querySelector('.mega-menu__container');
+const template = getMetadata('template');
+console.log('template ', template)
 
 if (megamenuEl) {
   new initMegaMenu(megamenuEl);
