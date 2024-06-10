@@ -14,7 +14,7 @@
     font: normal normal normal 28px/32px var(--font-ibm);
 }
 
-.trusted-hero-container h2 {
+.trusted-hero-container h1 {
     font-weight: 500;
 }
 
@@ -89,7 +89,12 @@
     /* } */
     .trusted-hero-container h1,
     .trusted-hero-container h2 {
-        font: normal normal 500 47px / 48px var(--font-ibm);
+        font: normal normal 500 29px / 33px var(--font-ibm);
+    }
+
+    .trusted-hero-container h2 {
+        margin: 50px 0;
+        color: black;
     }
 }
 
@@ -101,7 +106,7 @@
     }
 
     .trusted-hero-container h1 {
-        font: normal normal 400 40px/52px var(--font-ibm);
+        font: normal normal bold 40px/46px var(--font-ibm);
     }
 
     .trusted-hero-container .trusted-hero-wrapper {
@@ -142,8 +147,8 @@
     }
 
     .trusted-hero-container .default-content-wrapper > .video-wrapper {
-        width: 55%;
-        height: 350px;
+        width: 60%;
+        height: 385px;
     }
 
     .trusted-hero-container .default-content-wrapper p.button-container {

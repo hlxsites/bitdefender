@@ -109,7 +109,7 @@ export default async function decorate(block) {
     block.innerHTML = `
     <div class="carousel-header">
       <div class="title">${titleEl.children[0].innerHTML}</div>
-      ${renderArrows()}
+      <div class="arrows d-flex">${renderArrows()}</div>
     </div>
 
     <div class="carousel-container">
