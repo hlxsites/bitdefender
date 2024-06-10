@@ -24,6 +24,10 @@
     line-height: 1.3!important;
 }
 
+.trusted header {
+    background-color: red;
+}
+
 .trusted header > div {
     padding: var(--body-padding)!important;
 }

@@ -21,3 +21,7 @@
     font-weight: 500;
     font-display: swap;
 }
+
+.trusted header > div {
+    padding: var(--body-padding)!important;
+}
