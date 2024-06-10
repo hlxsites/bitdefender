@@ -102,7 +102,7 @@ function openUrlForOs(urlMacos, urlWindows, urlAndroid, urlIos, selector) {
 export default function decorate(block, options) {
   const {
     product, conditionText, saveText, MacOS, Windows, Android, IOS,
-    alignContent, height,
+    alignContent, height, type,
   } = options ? options.metadata : block.closest('.section').dataset;
 
   if (options) {
@@ -110,7 +110,9 @@ export default function decorate(block, options) {
     block = block.querySelector('.block');
     let blockParent = block.closest('.section');
     blockParent.classList.add('we-container');
+    if (type) blockParent.classList.add(type);
   }
+
   let [richText, mainDesktopImage, richTextCard, columnsCard] = block.children;
 
   // Configuration for new elements
