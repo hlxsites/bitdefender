@@ -24,11 +24,7 @@
     line-height: 1.3!important;
 }
 
-.trusted header {
-    background-color: red;
-}
-
-.trusted header > div {
+.trusted header.header-wrapper {
     padding: var(--body-padding)!important;
 }
 
@@ -580,7 +576,7 @@ main .section.link-right a {
         padding-left: 10%;
     }
 
-    .trusted header > div {
+    .trusted header.header-wrapper {
         padding: 0 var(--section-large-desktop-padding)!important;
     }
 }
@@ -698,7 +694,7 @@ main .section.link-right a {
 }
 
 @media (min-width: 992px) {
-    .trusted header > div {
+    .trusted header.header-wrapper {
         padding: 0 var(--section-desktop-padding)!important;
     }
 
