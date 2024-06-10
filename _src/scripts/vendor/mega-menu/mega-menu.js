@@ -1,3 +1,4 @@
+import { getMetadata } from "../../lib-franklin";
 /**  Throttle  */
 const throttle = (cb, delay = 250) => {
   let shouldWait = false;
