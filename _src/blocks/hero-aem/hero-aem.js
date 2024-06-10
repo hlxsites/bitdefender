@@ -35,7 +35,7 @@ function createCardElementContainer(elements, mobileImage) {
   cardElementText.classList.add('hero-aem__card-text');
 
   elements.forEach((sibling) => {
-    if (sibling.contains(mobileImage)) {
+    if (mobileImage && sibling.contains(mobileImage)) {
       cardElementContainer.appendChild(sibling);
     } else {
       cardElementText.appendChild(sibling);
@@ -128,8 +128,12 @@ export default function decorate(block, options) {
   mainDesktopImage.classList.add('col-md-6');
   mainDesktopImage.children[0].classList.add('h-100');
 
-  const mobileImage = block.querySelector('.hero-aem__card__desktop div > p > picture');
-  mobileImage.classList.add('hero-aem__mobile-image');
+  let mobileImage = block.querySelector('.hero-aem__card__desktop div > p > picture');
+  if (mobileImage) {
+    mobileImage.classList.add('hero-aem__mobile-image');
+  } else {
+    mobileImage = '';
+  }
 
   // Get all the siblings after h1
   const cardElements = Array.from(block.querySelectorAll('h1 ~ *'));
