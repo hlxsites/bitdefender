@@ -25,7 +25,7 @@
 }
 
 .trusted .mega-menu__content {
-    padding: var(--body-padding);
+    padding: var(--body-padding)!important;
 }
 
 .trusted a.button span.button-text {
@@ -577,7 +577,7 @@ main .section.link-right a {
     }
 
     .trusted .mega-menu__content {
-        padding: 0 var(--section-large-desktop-padding);
+        padding: 0 var(--section-large-desktop-padding)!important;
     }
 }
 
@@ -695,7 +695,7 @@ main .section.link-right a {
 
 @media (min-width: 992px) {
     .trusted .mega-menu__content {
-        padding: 0 var(--section-desktop-padding);
+        padding: 0 var(--section-desktop-padding)!important;
     }
 
     /* awards band */
