@@ -1,3 +1,5 @@
+import { getMetadata } from '../../scripts/lib-franklin.js';
+
 /**  Throttle  */
 const throttle = (cb, delay = 250) => {
   let shouldWait = false;

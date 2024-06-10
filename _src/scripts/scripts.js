@@ -507,7 +507,6 @@ async function loadEager(doc) {
     // loadScript(`${window.hlx.codeBasePath}/scripts/template-factories/${templateMetadata}.js`, {
     //   type: 'module',
     // });
-    doc.querySelector('header').classList.add(templateMetadata);
   }
   const main = doc.querySelector('main');
   if (main) {
