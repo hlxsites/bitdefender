@@ -20,7 +20,7 @@ const isHoverableDevice = window.matchMedia(
 
 const Config = {
   selectors: {
-    container: '.mega-menu__container .trusted-menu',
+    container: '.mega-menu__containerrr .trusted-menu',
     viewAllButtons: '.navigation__view-all',
     popupContainer: '.mega-menu__popup-container',
     popupLink: '.mega-menu__popup-container .mega-menu__right-link',
