@@ -24,7 +24,7 @@
     line-height: 1.3!important;
 }
 
-.trusted .mega-menu__content {
+.trusted header > div {
     padding: var(--body-padding)!important;
 }
 
@@ -576,7 +576,7 @@ main .section.link-right a {
         padding-left: 10%;
     }
 
-    .trusted .mega-menu__content {
+    .trusted header > div {
         padding: 0 var(--section-large-desktop-padding)!important;
     }
 }
@@ -694,7 +694,7 @@ main .section.link-right a {
 }
 
 @media (min-width: 992px) {
-    .trusted .mega-menu__content {
+    .trusted header > div {
         padding: 0 var(--section-desktop-padding)!important;
     }
 
