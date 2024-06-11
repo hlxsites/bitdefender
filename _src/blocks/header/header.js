@@ -401,6 +401,7 @@ async function runDefaultHeaderLogic(block) {
       const contentDiv = document.createElement('div');
       contentDiv.style.display = 'none';
       contentDiv.classList.add('mega-menu');
+      contentDiv.classList.add('default-content-wrapper');
       contentDiv.innerHTML = aemHeaderHtml;
       const cssFile = contentDiv.querySelector('link[rel="stylesheet"]');
       if (cssFile) {
