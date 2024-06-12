@@ -93,7 +93,7 @@
     }
 
     .trusted-hero-container h2 {
-        margin: 50px 0;
+        margin: 50px 0 0;
         color: black;
     }
 }
@@ -106,7 +106,7 @@
     }
 
     .trusted-hero-container h1 {
-        font: normal normal bold 40px/46px var(--font-ibm);
+        font: normal normal 500 47px / 48px var(--font-ibm);
     }
 
     .trusted-hero-container .trusted-hero-wrapper {

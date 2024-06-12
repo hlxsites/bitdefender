@@ -13,6 +13,11 @@
     margin-top: 15px;
 }
 
+.big-teaser-section-container .rte em {
+    color: #006EFF;
+    font-style: normal;
+}
+
 .big-teaser-section-container .imgs-wrapper {
     position: relative;
     height: 300px;
@@ -33,9 +38,26 @@
     height: 100%;
 }
 
+
 @media screen and (min-width: 768px) {
+    .big-teaser-section-container.pb-0 {
+        padding-bottom: 0;
+    }
+
+    .big-teaser-section-container.pt-1 {
+        padding-top: 1em;
+    }
+
     .big-teaser-section.block {
         position: relative;
+    }
+
+    .big-teaser-section.reverted .wrapper {
+        flex-direction: row-reverse;
+    }
+
+    .big-teaser-section.reverted .wrapper .rte {
+        margin-right: 60px;
     }
 
     .big-teaser-section-container .rte {
