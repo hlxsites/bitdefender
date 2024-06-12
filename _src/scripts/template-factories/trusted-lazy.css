@@ -21,19 +21,3 @@
     font-weight: 500;
     font-display: swap;
 }
-
-.trusted .mega-menu__content {
-    padding: var(--body-padding)!important;
-}
-
-@media (min-width: 1600px) {
-    .trusted .mega-menu__content {
-        padding: 0 var(--section-large-desktop-padding)!important;
-    }
-}
-
-@media (min-width: 992px) {
-    .trusted .mega-menu__content {
-        padding: 0 var(--section-desktop-padding)!important;
-    }
-}
