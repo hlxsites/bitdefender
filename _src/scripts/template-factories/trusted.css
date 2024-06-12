@@ -144,7 +144,7 @@
 
 .trusted main a.button:any-link:not(.modal):not(.primary) {
     background-color: var(--blue);
-    border: 2px solid var(--blue);
+    border: 1px solid var(--blue);
 }
 
 /* long button css todo: maybe we shouldn't have this long text button from the start from UX perspective */
