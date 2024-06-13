@@ -53,13 +53,6 @@
     right: 1em;
 }
 
-.trusted-hero-container p.button-container:nth-last-child(2) a {
-    width: 100%;
-    justify-content: center;
-    font-weight: 400;
-    border: 1px solid var(--blue);
-}
-
 .trusted-hero-container p.button-container a {
     background-color: transparent !important;
     border: solid black 1px !important;
@@ -67,6 +60,13 @@
     width: 100%;
     justify-content: center;
     font-weight: 500 !important;
+}
+
+.trusted-hero-container p.button-container:nth-last-child(2) a {
+    width: 100%;
+    justify-content: center;
+    font-weight: 400;
+    border: 1px solid var(--blue);
 }
 
 .trusted-hero-container p.button-container a:hover {

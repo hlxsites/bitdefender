@@ -52,12 +52,14 @@
         position: relative;
     }
 
-    .big-teaser-section.reverted .wrapper {
-        flex-direction: row-reverse;
+    .big-teaser-section-container .wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
     }
 
-    .big-teaser-section.reverted .wrapper .rte {
-        margin-right: 60px;
+    .big-teaser-section.reverted .wrapper {
+        flex-direction: row-reverse;
     }
 
     .big-teaser-section-container .rte {
@@ -65,10 +67,8 @@
         z-index: 1;
     }
 
-    .big-teaser-section-container .wrapper {
-        position: relative;
-        display: flex;
-        align-items: center;
+    .big-teaser-section.reverted .wrapper .rte {
+        margin-right: 60px;
     }
 
     .big-teaser-section-container .imgs-wrapper {
