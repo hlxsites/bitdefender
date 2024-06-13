@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable max-len */
 let dataLayerProducts = [];
-async function createPricesElement(storeOBJ, conditionText, saveText, prodName, prodUsers, prodYears, buylink, billed, customLink) {
+async function createPricesElement(storeOBJ, conditionText, saveText, prodName, prodUsers, prodYears, buylink, billed) {
   const storeProduct = await storeOBJ.getProducts([new ProductInfo(prodName, 'consumer')]);
   const storeOption = storeProduct[prodName].getOption(prodUsers, prodYears);
   const price = storeOption.getPrice();
@@ -37,7 +37,7 @@ async function createPricesElement(storeOBJ, conditionText, saveText, prodName, 
       </div>
     </div>
     ${billed ? `<div class="billed">${billed.innerHTML}</div>` : ''}
-    <a href="${customLink === 1 ? buylink.href : buyLink}" class="button primary">${buylink.text}</a>`;
+    <a href="${buyLink}" class="button primary">${buylink.text}</a>`;
   buylink.remove();
   return priceElement;
 }
@@ -46,6 +46,7 @@ export default async function decorate(block, options) {
   const {
     // eslint-disable-next-line no-unused-vars
     products, familyProducts, monthlyProducts, priceType, pid, mainProduct,
+    hideProducts, addRichTextZone, margintop,
   } = options ? options.metadata : block.closest('.section').dataset;
   // if options exists, this means the component is being called from aem
   if (options) {
@@ -54,6 +55,10 @@ export default async function decorate(block, options) {
   }
   const blockParent = block.closest('.section');
   blockParent.classList.add('we-container');
+
+  if (margintop) {
+    blockParent.style.marginTop = `${margintop}px`;
+  }
 
   let defaultContentWrapperElements = block.closest('.section').querySelector('.default-content-wrapper')?.children;
   let individualSwitchText;
@@ -124,8 +129,7 @@ export default async function decorate(block, options) {
   if (combinedProducts.length) {
     await Promise.all([...block.children].map(async (prod, key) => {
       // eslint-disable-next-line no-unused-vars
-      const [greenTag, title, blueTag, subtitle, radioButtons, price, billed, buyLink, undeBuyLink, benefitsLists] = [...prod.querySelectorAll('tr')];
-      // const [prodName, prodUsers, prodYears] = productsAsList[key].split('/');
+      const [greenTag, title, blueTag, subtitle, radioButtons, richTextZone, billed, buyLink, undeBuyLink, benefitsLists, richText] = [...prod.querySelectorAll('div > div > table > tbody > tr')];
       const onSelectorClass = 'tsmd-10-1';
       const [prodName, prodUsers, prodYears] = combinedProducts[key].split('/');
       const [prodMonthlyName, prodMonthlyUsers, prodMonthlyYears] = monthlyPricesAsList ? monthlyPricesAsList[key].split('/') : [];
@@ -152,6 +156,24 @@ export default async function decorate(block, options) {
               const pillElement = document.createElement('span');
               pillElement.classList.add('blue-pill');
               pillElement.innerHTML = `${pillText[1]}${iconElement ? iconElement[0] : ''}`;
+              firstTdContent = firstTdContent.replace(pillText[0], `${pillElement.outerHTML}`);
+              if (icon) {
+                let count = 0;
+                firstTdContent = firstTdContent.replace(new RegExp(icon.outerHTML, 'g'), (match) => {
+                  count += 1;
+                  return (count === 2) ? '' : match;
+                });
+              }
+            }
+          }
+          if (firstTdContent.indexOf('?info') !== -1) {
+            let pillText = firstTdContent.match(/\?info/);
+            let iconElement = firstTdContent.match(/<span class="[^"]*">(.*?)<\/span>/);
+            if (pillText) {
+              let icon = tdList[0].querySelector('span');
+              const pillElement = document.createElement('span');
+              pillElement.classList.add('info-pill');
+              pillElement.innerHTML = `${iconElement ? iconElement[0] : ''}`;
               firstTdContent = firstTdContent.replace(pillText[0], `${pillElement.outerHTML}`);
               if (icon) {
                 let count = 0;
@@ -192,13 +214,14 @@ export default async function decorate(block, options) {
         title.innerHTML = `<a href="#" title="${title.innerText}" class="buylink-${onSelectorClass} await-loader prodload prodload-${onSelectorClass}">${title.querySelector('tr a').innerHTML}</a>`;
       }
 
-      let buyLinkSelector = prod.querySelector('a[href*="#buylink"]');
-      let customLink = 0;
+      const buyLinkSelector = prod.querySelector('a[href*="#buylink"]');
       if (buyLinkSelector) {
         buyLinkSelector.classList.add('button', 'primary');
-      } else {
-        buyLinkSelector = buyLink.querySelector('a');
-        customLink = 1;
+      }
+      if (richText) {
+        richText.querySelectorAll('a').forEach((link) => {
+          link.classList.add('button', 'primary');
+        });
       }
 
       let planSwitcher = document.createElement('div');
@@ -214,7 +237,7 @@ export default async function decorate(block, options) {
       }
       // create the prices element based on where the component is being called from, aem of www-websites
       if (options) {
-        await createPricesElement(options.store, '', 'Save', prodName, prodUsers, prodYears, buyLinkSelector, billed, customLink)
+        await createPricesElement(options.store, '', 'Save', prodName, prodUsers, prodYears, buyLinkSelector, billed)
           .then((pricesBox) => {
             yearlyPricesBoxes[`${key}-yearly-${prodName.trim()}`] = pricesBox;
             // buyLink.parentNode.parentNode.insertBefore(pricesBox, buyLink.parentNode);
@@ -222,19 +245,21 @@ export default async function decorate(block, options) {
               <div class="prod_box${greenTag.innerText.trim() && ' hasGreenTag'} ${key < productsAsList.length ? 'individual-box' : 'family-box'}">
                 <div class="inner_prod_box">
                   ${greenTag.innerText.trim() ? `<div class="greenTag2">${greenTag.innerText.trim()}</div>` : ''}
-                  ${title.innerText.trim() ? `<h2>${title.innerHTML}</h2>` : ''}
+                  ${title.innerText.trim() ? `${title.tagName === 'h3' ? `${title.innerHTML}` : `<h2>${title.innerHTML}</h2>`}` : ''}
                   ${blueTag.innerText.trim() ? `<div class="blueTag"><div>${blueTag.innerHTML.trim()}</div></div>` : ''}
                   ${subtitle.innerText.trim() ? `<p class="subtitle">${subtitle.querySelector('td').innerHTML.trim()}</p>` : ''}
 
                   ${radioButtons ? planSwitcher.outerHTML : ''}
-                  
-                  ${pricesBox.outerHTML}
+                  ${addRichTextZone === 'true' ? `${richTextZone ? `<hr /> <div class="richTextArea">${richTextZone.innerHTML}</div>` : ''}` : ''}
+                  ${hideProducts === 'true' ? '' : `
+                    ${pricesBox.outerHTML}
 
-                  ${buyLink.outerHTML}
+                    ${buyLink.outerHTML}
 
-                  ${undeBuyLink.innerText.trim() ? `<div class="undeBuyLink">${undeBuyLink.innerText.trim()}</div>` : ''}
+                    ${undeBuyLink.innerText.trim() ? `<div class="undeBuyLink">${undeBuyLink.innerText.trim()}</div>` : ''}`}
                   <hr />
                   ${benefitsLists.innerText.trim() ? `<div class="benefitsLists">${featureList}</div>` : ''}
+                  ${richText ? `<hr /> <div class="richTextArea">${richText.outerHTML}</div>` : ''}
                 </div>
             </div>`;
           });
@@ -249,7 +274,6 @@ export default async function decorate(block, options) {
         let discountPercentage;
         let priceElement = document.createElement('div');
         buyLink.querySelector('a').classList.add('button', 'primary', 'no-arrow');
-
         block.children[key].outerHTML = `
           <div class="prod_box${greenTag.innerText.trim() && ' hasGreenTag'}">
             <div class="inner_prod_box">
@@ -258,27 +282,29 @@ export default async function decorate(block, options) {
               ${blueTag.innerText.trim() ? `<div class="blueTag"><div>${blueTag.innerHTML.trim()}</div></div>` : ''}
               ${subtitle.innerText.trim() ? `<p class="subtitle${subtitle.innerText.trim().split(/\s+/).length > 5 ? ' fixed_height' : ''}">${subtitle.innerText.trim()}</p>` : ''}
               <hr />
-      
-              <div class="price_box"></div>
-              ${billed ? `<div class="billed">${billed.innerHTML.replace('0', `<span class="newprice-${onSelectorClass}"></span>`)}</div>` : ''}
-      
-              ${buyLink.innerHTML}
-      
-              ${undeBuyLink.innerText.trim() ? `<div class="undeBuyLink">${undeBuyLink.innerText.trim()}</div>` : ''}
+              ${hideProducts === 'true' ? '' : `
+                <div class="price_box"></div>
+                ${billed ? `<div class="billed">${billed.innerHTML.replace('0', `<span class="newprice-${onSelectorClass}"></span>`)}</div>` : ''}
+        
+                ${buyLink.innerHTML}
+        
+                ${undeBuyLink.innerText.trim() ? `<div class="undeBuyLink">${undeBuyLink.innerText.trim()}</div>` : ''}`}
               <hr />
               ${benefitsLists.innerText.trim() ? `<div class="benefitsLists">${featureList}</div>` : ''}
+              ${richText ? `<hr /> <div class="richText">${richText.outerHTML}</div>` : ''}
             </div>
           </div>`;
-        fetchProduct(prodName, `${prodUsers}u-${prodYears}y`, pid)
-          .then((product) => {
-            discountPercentage = Math.round(
-              (1 - (product.discount.discounted_price) / product.price) * 100,
-            );
-            oldPrice = product.price;
-            newPrice = product.discount.discounted_price;
-            let currencyLabel = product.currency_label;
-            priceElement.classList.add('hero-aem__prices');
-            priceElement.innerHTML = `
+        if (hideProducts !== 'true') {
+          fetchProduct(prodName, `${prodUsers}u-${prodYears}y`, pid)
+            .then((product) => {
+              discountPercentage = Math.round(
+                (1 - (product.discount.discounted_price) / product.price) * 100,
+              );
+              oldPrice = product.price;
+              newPrice = product.discount.discounted_price;
+              let currencyLabel = product.currency_label;
+              priceElement.classList.add('hero-aem__prices');
+              priceElement.innerHTML = `
               <div class="hero-aem__price mt-3">
                 <div>
                     <span class="prod-oldprice">${oldPrice}${currencyLabel}</span>
@@ -289,12 +315,13 @@ export default async function decorate(block, options) {
                   
                 </div>
               </div>`;
-            block.children[key].querySelector('.price_box').appendChild(priceElement);
-          })
-          .catch((err) => {
+              block.children[key].querySelector('.price_box').appendChild(priceElement);
+            })
+            .catch((err) => {
             // eslint-disable-next-line no-console
-            console.error(err);
-          });
+              console.error(err);
+            });
+        }
       }
     }));
   } else {

@@ -616,6 +616,14 @@ header.header-wrapper #icons-sprite-bitdefender-logo path {
   font-weight: bold;
 }
 
+header.quiz {
+  background: black;
+
+  .icon {
+    width: 155px;
+  }
+}
+
 @media(min-width: 767px) { /* tablet */
   header.header-wrapper .logo-container .icon {
     width: 180px;
@@ -1050,6 +1058,13 @@ header.header-wrapper #icons-sprite-bitdefender-logo path {
     background-color: rgb(158 164 177 / 10%);
     padding: 8px 11px;
     margin-top: 20px;
+  }
+
+  header.quiz {
+    .icon {
+      width: 200px;
+      height: 64px;
+    }
   }
 }
 

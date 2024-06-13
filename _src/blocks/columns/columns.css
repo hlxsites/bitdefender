@@ -589,3 +589,9 @@ main .section.two-columns .right-col .products.plans a.button:any-link {
   color: #0A53C5;
   transform: translateX(10px);
 }
+
+@media (max-width: 768px) {
+  .columns img, .columns.new-v2 > div > .columns-img-col img {
+    height: auto!important;
+  }
+}

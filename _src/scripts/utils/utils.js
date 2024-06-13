@@ -116,11 +116,8 @@ export async function fetchProduct(code = 'av', variant = '1u-1y', pid = null) {
   if ((siteName === 'hk' || siteName === 'tw')) {
     // append force_region for hk and tw
     const newData = JSON.parse(data.get('data'));
-    if (code === 'psp' || code === 'pspm' || code === 'dip' || code === 'dipm') {
-      newData.config.force_region = '16';
-    } else {
-      newData.config.force_region = siteName === 'hk' ? '41' : '52';
-    }
+
+    newData.config.force_region = siteName === 'hk' ? '41' : '52';
 
     data.set('data', JSON.stringify(newData));
   }
@@ -314,15 +311,14 @@ export function appendAdobeMcLinks(selector) {
       marketingCloudServerSecure: 'sstats.bitdefender.com',
     });
 
-    let wrapperSelector;
-    if (typeof selector === 'string') {
-      wrapperSelector = document.querySelector(selector);
-    } else {
-      wrapperSelector = selector;
-    }
+    const wrapperSelector = typeof selector === 'string' ? document.querySelector(selector) : selector;
 
     const hrefSelector = '[href*=".bitdefender."]';
     wrapperSelector.querySelectorAll(hrefSelector).forEach((link) => {
+      const isAdobeMcAlreadyAdded = link.href.includes('adobe_mc');
+      if (isAdobeMcAlreadyAdded) {
+        return;
+      }
       const destinationURLWithVisitorIDs = visitor.appendVisitorIDsTo(link.href);
       link.href = destinationURLWithVisitorIDs.replace(/MCAID%3D.*%7CMCORGID/, 'MCAID%3D%7CMCORGID');
     });
