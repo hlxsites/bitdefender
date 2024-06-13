@@ -337,6 +337,8 @@ export default async function decorate(block, options) {
     });
   }
 
+  window.hj=window.hj||function(){(hj.q=hj.q||[]).push('new-prod-boxes');};
+
   window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
     bubbles: true,
     composed: true, // This allows the event to cross the shadow DOM boundary
