@@ -364,8 +364,8 @@ export default async function decorate(block, options) {
     });
   }
 
-  window.hj = window.hj || function() {
-    (hj.q = hj.q || []).push(arguments);
+  window.hj = window.hj || function initHotjar(...args) {
+    (hj.q = hj.q || []).push(...args);
   };
   hj('event', 'new-prod-boxes-vsb');
 
