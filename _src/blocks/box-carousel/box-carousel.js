@@ -17,7 +17,7 @@ export default async function decorate(block) {
   }
 
   function isLastIndex() {
-    return currentSlideIndex === slides.length;
+    return currentSlideIndex === slides.length - 3;
   }
 
   function scrollCarousel(offset, carousel) {
@@ -70,7 +70,7 @@ export default async function decorate(block) {
     block.classList.remove('scrollable');
 
     if (isView('desktop')) {
-      const cardsNotFullyVisible = window.innerWidth < slides.length * 290 + 100;
+      const cardsNotFullyVisible = window.innerWidth < (slides.length * 415) + (slides.length * 10);
       return cardsNotFullyVisible ? `
       <a href class="arrow disabled left-arrow">
         <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 752 752" preserveAspectRatio="xMidYMid meet">
@@ -109,9 +109,9 @@ export default async function decorate(block) {
     block.innerHTML = `
     <div class="carousel-header">
       <div class="title">${titleEl.children[0].innerHTML}</div>
-      ${renderArrows()}
+      <div class="arrows d-flex">${renderArrows()}</div>
     </div>
-    
+
     <div class="carousel-container">
         <div class="carousel">
           ${slides.map((slide) => `
@@ -121,16 +121,16 @@ export default async function decorate(block) {
                     ${slide.children[0].children[0].innerHTML}
                   </div>
                 ` : slide.children[0].children[0].innerHTML}
-                
+
                 <p class="title">
                     ${slide.children[0].children[1].textContent}
                 </p>
-                
+
                 ${isTestimonials ? `
                   <div class="subtitle-secondary">
                     ${slide.children[0].children[2].innerHTML}
                   </div>
-                  
+
                   <div class="subtitle">
                     ${slide.children[0].children[3].innerHTML}
                   </div>

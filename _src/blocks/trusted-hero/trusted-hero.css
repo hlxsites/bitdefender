@@ -14,7 +14,7 @@
     font: normal normal normal 28px/32px var(--font-ibm);
 }
 
-.trusted-hero-container h2 {
+.trusted-hero-container h1 {
     font-weight: 500;
 }
 
@@ -53,6 +53,15 @@
     right: 1em;
 }
 
+.trusted-hero-container p.button-container a {
+    background-color: transparent !important;
+    border: solid black 1px !important;
+    color: black;
+    width: 100%;
+    justify-content: center;
+    font-weight: 500 !important;
+}
+
 .trusted-hero-container p.button-container:nth-last-child(2) a {
     width: 100%;
     justify-content: center;
@@ -60,13 +69,10 @@
     border: 1px solid var(--blue);
 }
 
-.trusted-hero-container p.button-container:nth-last-child(1) a {
-    background-color: transparent !important;
-    border: solid black 1px !important;
-    color: black;
-    width: 100%;
-    justify-content: center;
-    font-weight: 400;
+.trusted-hero-container p.button-container a:hover {
+    background-color: var(--blue) !important;
+    border: 1px solid var(--blue) !important;
+    color: white;
 }
 
 @media (min-width: 768px) {
@@ -83,7 +89,12 @@
     /* } */
     .trusted-hero-container h1,
     .trusted-hero-container h2 {
-        font: normal normal 500 47px / 48px var(--font-ibm);
+        font: normal normal 500 29px / 33px var(--font-ibm);
+    }
+
+    .trusted-hero-container h2 {
+        margin: 50px 0 0;
+        color: black;
     }
 }
 
@@ -95,7 +106,7 @@
     }
 
     .trusted-hero-container h1 {
-        font: normal normal 400 40px/52px var(--font-ibm);
+        font: normal normal 500 47px / 48px var(--font-ibm);
     }
 
     .trusted-hero-container .trusted-hero-wrapper {
@@ -131,12 +142,13 @@
     }
 
     .trusted-hero-container .default-content-wrapper > .rte-wrapper {
-        width: 45%;
+        width: 555px;
+        padding-right: 4em;
     }
 
     .trusted-hero-container .default-content-wrapper > .video-wrapper {
-        width: 55%;
-        height: 350px;
+        width: 60%;
+        height: 385px;
     }
 
     .trusted-hero-container .default-content-wrapper p.button-container {
