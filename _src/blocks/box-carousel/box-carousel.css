@@ -6,7 +6,7 @@
 .box-carousel-container .carousel-header {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space;
 }
 
 .box-carousel-container .carousel-header .title {
@@ -15,6 +15,11 @@
 
 .box-carousel-container .carousel-header .title p {
     margin: 0 0 16px;
+}
+
+.box-carousel-container .carousel-header .left-arrow.disabled,
+.box-carousel-container .carousel-header .right-arrow.disabled {
+    opacity: 0.3;
 }
 
 .box-carousel-container .carousel-header .left-arrow,
@@ -26,6 +31,7 @@
     width: 100%;
     position: relative;
     display: flex;
+    overflow: hidden;
 }
 
 .box-carousel-container .carousel {
@@ -62,7 +68,7 @@
     height: 300px;
     display: flex;
     flex-direction: column;
-    border: solid 1px #d5d5d5;
+    border: solid 1px #ddd;
     background: white;
     position: relative;
 }
@@ -74,7 +80,7 @@
 .box-carousel-container .carousel-item .title {
     letter-spacing: 0;
     overflow: hidden;
-    margin: 15px 0;
+    margin: 12px 0;
 }
 
 .box-carousel-container.testimonials .carousel-item .title {
@@ -156,7 +162,7 @@
 
 @media screen and (min-width: 768px) {
     .box-carousel-container .carousel-header {
-        justify-content: center;
+        justify-content: space-between;
         margin-bottom: 20px;
     }
 

@@ -401,6 +401,7 @@ async function runDefaultHeaderLogic(block) {
       const contentDiv = document.createElement('div');
       contentDiv.style.display = 'none';
       contentDiv.classList.add('mega-menu');
+      contentDiv.classList.add('default-content-wrapper');
       contentDiv.innerHTML = aemHeaderHtml;
       const cssFile = contentDiv.querySelector('link[rel="stylesheet"]');
       if (cssFile) {
@@ -523,6 +524,21 @@ async function runLandingPageHeaderLogic(block) {
   });
 }
 
+async function runQuizPageHeaderLogic(block) {
+  // fetch nav content
+  const navPath = getMetadata('nav') || '/nav';
+  const resp = await fetch(`${navPath}.plain.html`);
+  const html = await resp.text();
+
+  block.classList.add('quiz', 'py-3', 'default-content-wrapper');
+  const headerWrapper = block.closest('header');
+
+  headerWrapper.classList.add('dark');
+  block.innerHTML = html;
+
+  decorateIcons(block);
+}
+
 /**
  * applies header factory based on header variation
  * @param {String} headerMetadata The header variation: landingpage' or none
@@ -532,6 +548,9 @@ function applyHeaderFactorySetup(headerMetadata, header) {
   switch (headerMetadata) {
     case 'landingpage':
       runLandingPageHeaderLogic(header);
+      break;
+    case 'quiz':
+      runQuizPageHeaderLogic(header);
       break;
     default:
       runDefaultHeaderLogic(header);

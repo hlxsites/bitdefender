@@ -23,12 +23,6 @@ export default async function decorate(block) {
       const fullTwitterUrl = twitterBaseUrl + twitterText + twitterUrl;
       anchor.href = fullTwitterUrl;
     }
-    if (anchor.href.includes('linkedin')) {
-      const linkedInBaseUrl = 'https://www.linkedin.com/sharing/share-offsite/?';
-      const linkedInUrl = `url=${encodeURIComponent(resultPageUrl)}`;
-      const fullLinkedInUrl = linkedInBaseUrl + linkedInUrl;
-      anchor.href = fullLinkedInUrl;
-    }
     if (anchor.href.includes('facebook')) {
       const facebookBaseUrl = 'https://www.facebook.com/sharer/sharer.php?';
       const facebookUrl = `u=${encodeURIComponent(resultPageUrl)}`;

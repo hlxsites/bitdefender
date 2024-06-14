@@ -13,6 +13,7 @@ export default async function decorate(block) {
   };
 
   block.classList.add('default-content-wrapper');
+  block.closest('.section').id = 'quiz-form';
 
   const steps = [...block.children];
 
@@ -99,8 +100,9 @@ export default async function decorate(block) {
     /* eslint-disable max-len */
     const foundLegend = legendScore.find(({ interval: [min, max] }) => Number(min) <= score && score <= Number(max));
 
+    const { origin, pathname } = window.location;
     // redirect
-    window.location.replace(`${window.location.href}${foundLegend.template}`);
+    window.location.replace(`${origin}${pathname}${foundLegend.template}`);
   }
 
   function validateForm(e) {

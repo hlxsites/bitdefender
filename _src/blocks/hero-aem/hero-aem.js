@@ -37,7 +37,7 @@ function createCardElementContainer(elements, mobileImage) {
   cardElementText.classList.add('hero-aem__card-text');
 
   elements.forEach((sibling) => {
-    if (sibling.contains(mobileImage)) {
+    if (mobileImage && sibling.contains(mobileImage)) {
       cardElementContainer.appendChild(sibling);
     } else {
       cardElementText.appendChild(sibling);
@@ -113,7 +113,7 @@ function dispatchShadowDomLoadedEvent() {
 export default function decorate(block, options) {
   const {
     product, conditionText, saveText, MacOS, Windows, Android, IOS,
-    alignContent,
+    alignContent, height, type,
   } = options ? options.metadata : block.closest('.section').dataset;
 
   if (options) {
@@ -121,7 +121,9 @@ export default function decorate(block, options) {
     block = block.querySelector('.block');
     let blockParent = block.closest('.section');
     blockParent.classList.add('we-container');
+    if (type) blockParent.classList.add(type);
   }
+
   let [richText, mainDesktopImage, richTextCard, columnsCard] = block.children;
 
   // Configuration for new elements
@@ -129,11 +131,22 @@ export default function decorate(block, options) {
   if (alignContent === 'center') {
     richText.classList.add('hero-aem__card__desktop--center');
   }
+
+  if (height) {
+    // eslint-disable-next-line array-callback-return
+    Array.from(block.children).map((child) => {
+      child.style.maxHeight = `${height}px`;
+    });
+  }
   mainDesktopImage.classList.add('col-md-6');
   mainDesktopImage.children[0].classList.add('h-100');
 
-  const mobileImage = block.querySelector('.hero-aem__card__desktop div > p > picture');
-  mobileImage.classList.add('hero-aem__mobile-image');
+  let mobileImage = block.querySelector('.hero-aem__card__desktop div > p > picture');
+  if (mobileImage) {
+    mobileImage.classList.add('hero-aem__mobile-image');
+  } else {
+    mobileImage = '';
+  }
 
   // Get all the siblings after h1
   const cardElements = Array.from(block.querySelectorAll('h1 ~ *'));

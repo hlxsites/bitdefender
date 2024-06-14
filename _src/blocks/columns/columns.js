@@ -1,4 +1,4 @@
-import { debounce, getDatasetFromSection } from '../../scripts/utils/utils.js';
+import { debounce } from '../../scripts/utils/utils.js';
 
 function getItemsToShow() {
   if (window.innerWidth <= 676) {
@@ -166,9 +166,15 @@ function setImageAsBackgroundImage() {
   });
 }
 
-export default function decorate(block) {
-  const blockDataset = getDatasetFromSection(block);
-  const { linksOpenInNewTab } = blockDataset;
+export default function decorate(block, options) {
+  if (options) {
+    // eslint-disable-next-line no-param-reassign
+    block = block.querySelector('.block');
+    const blockParent = block.closest('.section');
+    blockParent.classList.add('we-container');
+  }
+
+  const { linksOpenInNewTab } = options ? options.metadata : block.closest('.section').dataset;
   const cols = [...block.firstElementChild.children];
   block.classList.add(`columns-${cols.length}-cols`);
 
@@ -181,6 +187,21 @@ export default function decorate(block) {
         if (picWrapper && picWrapper.children.length === 1) {
           // picture is only content in column
           picWrapper.classList.add('columns-img-col');
+        }
+      } else {
+        const children = [...row.children];
+
+        if (children.length === 1) {
+          col.closest('div').classList.add('columns-title-col');
+        } else {
+          const firstParentIndex = children.indexOf(col.closest('div'));
+
+          col.closest('div').classList.add('columns-text-col');
+          if (firstParentIndex) {
+            col.closest('div').classList.add('columns-right-col');
+          } else {
+            col.closest('div').classList.add('columns-left-col');
+          }
         }
       }
     });
@@ -217,4 +238,10 @@ export default function decorate(block) {
       sectionDiv.style.setProperty('--bg-image-url', `url(${bgImageUrl})`);
     }
   }
+
+  // This allows the event to cross the shadow DOM boundary
+  window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
+    bubbles: true,
+    composed: true,
+  });
 }
