@@ -364,7 +364,9 @@ export default async function decorate(block, options) {
     });
   }
 
-  window.hj = window.hj || function() { (hj.q = hj.q || []).push(arguments); };
+  window.hj = window.hj || function() {
+    (hj.q = hj.q || []).push(arguments);
+  };
   hj('event', 'new-prod-boxes-vsb');
 
   window.dispatchEvent(new CustomEvent('shadowDomLoaded'), {
