@@ -181,6 +181,16 @@ export default function decorate(block, options) {
     const buyLink = block.querySelector('a[href*="buylink"]');
     createPricesElement(options.store, conditionText, saveText, prodName, prodUsers, prodYears, buyLink)
       .then((pricesBox) => {
+        // dataLayer push with all the products
+        if (options) {
+          window.adobeDataLayer.push({
+            event: 'product loaded',
+            product: {
+              [mainProduct === 'false' ? 'all' : 'info']: dataLayerProducts,
+            },
+          });
+        }
+
         // If buyLink exists, apply styles and insert pricesBox
         if (buyLink) {
           buyLink.classList.add('button', 'primary');
@@ -198,6 +208,8 @@ export default function decorate(block, options) {
 
         dispatchShadowDomLoadedEvent();
       });
+
+
   } else {
     // If there is no product, just add the button class and dispatch the event
     const simpleLink = block.querySelector('.hero-aem__card-text a');
@@ -251,15 +263,5 @@ export default function decorate(block, options) {
     block.appendChild(cardElement);
     richTextCard.innerHTML = '';
     columnsCardChildren.forEach((col) => col.remove());
-  }
-
-  // dataLayer push with all the products
-  if (options) {
-    window.adobeDataLayer.push({
-      event: 'product loaded',
-      product: {
-        [mainProduct === 'false' ? 'all' : 'info']: dataLayerProducts,
-      },
-    });
   }
 }
