@@ -208,8 +208,6 @@ export default function decorate(block, options) {
 
         dispatchShadowDomLoadedEvent();
       });
-
-
   } else {
     // If there is no product, just add the button class and dispatch the event
     const simpleLink = block.querySelector('.hero-aem__card-text a');
