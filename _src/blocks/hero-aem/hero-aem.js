@@ -1,6 +1,7 @@
 /* eslint-disable prefer-const */
 /* eslint-disable no-undef */
 /* eslint-disable max-len */
+let dataLayerProducts = [];
 async function createPricesElement(storeOBJ, conditionText, saveText, prodName, prodUsers, prodYears, buylink) {
   const storeProduct = await storeOBJ.getProducts([new ProductInfo(prodName, 'consumer')]);
   const storeOption = storeProduct[prodName].getOption(prodUsers, prodYears);
@@ -8,6 +9,21 @@ async function createPricesElement(storeOBJ, conditionText, saveText, prodName, 
   const discountedPrice = storeOption.getDiscountedPrice();
   const discount = storeOption.getDiscount('valueWithCurrency');
   const buyLink = await storeOption.getStoreUrl();
+
+  let product = {
+    ID: storeOption.getAvangateId(),
+    name: storeOption.getName(),
+    devices: storeOption.getDevices(),
+    subscription: storeOption.getSubscription('months'),
+    version: storeOption.getSubscription('months') === 1 ? 'monthly' : 'yearly',
+    basePrice: storeOption.getPrice('value'),
+    discountValue: storeOption.getDiscount('value'),
+    discountRate: storeOption.getDiscount('percentage'),
+    currency: storeOption.getCurrency(),
+    priceWithTax: storeOption.getDiscountedPrice('value') || storeOption.getPrice('value'),
+  };
+  dataLayerProducts.push(product);
+
   const priceElement = document.createElement('div');
   priceElement.classList.add('hero-aem__prices');
   priceElement.innerHTML = `
@@ -112,7 +128,7 @@ function dispatchShadowDomLoadedEvent() {
 
 export default function decorate(block, options) {
   const {
-    product, conditionText, saveText, MacOS, Windows, Android, IOS,
+    product, conditionText, saveText, MacOS, Windows, Android, IOS, mainProduct,
     alignContent, height, type,
   } = options ? options.metadata : block.closest('.section').dataset;
 
@@ -235,5 +251,15 @@ export default function decorate(block, options) {
     block.appendChild(cardElement);
     richTextCard.innerHTML = '';
     columnsCardChildren.forEach((col) => col.remove());
+  }
+
+  // dataLayer push with all the products
+  if (options) {
+    window.adobeDataLayer.push({
+      event: 'product loaded',
+      product: {
+        [mainProduct === 'false' ? 'all' : 'info']: dataLayerProducts,
+      },
+    });
   }
 }
