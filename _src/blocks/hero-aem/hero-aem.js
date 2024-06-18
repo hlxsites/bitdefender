@@ -129,7 +129,7 @@ function dispatchShadowDomLoadedEvent() {
 export default function decorate(block, options) {
   const {
     product, conditionText, saveText, MacOS, Windows, Android, IOS, mainProduct,
-    alignContent, height, type,
+    alignContent, height, type, send2datalayer,
   } = options ? options.metadata : block.closest('.section').dataset;
 
   if (options) {
@@ -182,7 +182,7 @@ export default function decorate(block, options) {
     createPricesElement(options.store, conditionText, saveText, prodName, prodUsers, prodYears, buyLink)
       .then((pricesBox) => {
         // dataLayer push with all the products
-        if (options) {
+        if (options && send2datalayer) {
           window.adobeDataLayer.push({
             event: 'product loaded',
             product: {
