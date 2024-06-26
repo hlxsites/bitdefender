@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-cycle
 import {
-  loadScript,
+  // loadScript,
   sampleRUM,
   fetchPlaceholders,
   getMetadata,
@@ -8,10 +8,10 @@ import {
 
 // eslint-disable-next-line import/no-cycle
 import {
-  getLanguageCountryFromPath,
+  // getLanguageCountryFromPath,
   pushProductsToDataLayer,
   pushToDataLayer,
-  getEnvironment,
+  // getEnvironment,
   openUrlForOs,
 } from './scripts.js';
 import { loadBreadcrumbs } from './breadcrumbs.js';
@@ -20,21 +20,21 @@ import { onAdobeMcLoaded } from './utils.js';
 // Core Web Vitals RUM collection
 sampleRUM('cwv');
 
-const LANGUAGE_COUNTRY = getLanguageCountryFromPath(window.location.pathname);
-const LAUNCH_URL = 'https://assets.adobedtm.com';
-const ENVIRONMENT = getEnvironment(window.location.hostname, LANGUAGE_COUNTRY.country);
+// const LANGUAGE_COUNTRY = getLanguageCountryFromPath(window.location.pathname);
+// const LAUNCH_URL = 'https://assets.adobedtm.com';
+// const ENVIRONMENT = getEnvironment(window.location.hostname, LANGUAGE_COUNTRY.country);
 
 // Load Adobe Experience platform data collection (Launch) script
-const { launchProdScript, launchStageScript, launchDevScript } = await fetchPlaceholders();
+// const { launchProdScript, launchStageScript, launchDevScript } = await fetchPlaceholders();
 
 (async () => {
-  const ADOBE_MC_URL_ENV_MAP = new Map([
-    ['prod', launchProdScript],
-    ['stage', launchStageScript],
-  ]);
+  // const ADOBE_MC_URL_ENV_MAP = new Map([
+  //   ['prod', launchProdScript],
+  //   ['stage', launchStageScript],
+  // ]);
 
-  const adobeMcScriptUrl = `${LAUNCH_URL}${ADOBE_MC_URL_ENV_MAP.get(ENVIRONMENT) || launchDevScript}`;
-  await loadScript(adobeMcScriptUrl);
+  // const adobeMcScriptUrl = `${LAUNCH_URL}${ADOBE_MC_URL_ENV_MAP.get(ENVIRONMENT) || launchDevScript}`;
+  // await loadScript(adobeMcScriptUrl);
 
   onAdobeMcLoaded();
 })();
