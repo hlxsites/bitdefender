@@ -2,10 +2,10 @@ version: 1
 indices:
   default:
     include:
-      - /solutions/**
+      - /**
     exclude:
-      - /solutions/fragments/**  
-    target: /solutions/query-index.json
+      - /**/consumer/**/fragmets/**
+    target: /query-index.json
     properties:
       title:
         select: head > meta[property="og:title"]
