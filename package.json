@@ -5,7 +5,7 @@
   "description": "Starter project for Adobe Helix",
   "scripts": {
     "lint:js": "eslint .",
-    "lint:css": "stylelint solutions/blocks/**/*.css solutions/styles/*.css",
+    "lint:css": "stylelint _src/blocks/**/*.css --fix",
     "lint": "npm run lint:js && npm run lint:css"
   },
   "repository": {
@@ -21,15 +21,20 @@
   "devDependencies": {
     "@babel/core": "7.21.0",
     "@babel/eslint-parser": "7.19.1",
+    "@esm-bundle/chai": "4.3.4-fix.0",
+    "@web/test-runner": "0.15.1",
+    "@web/test-runner-commands": "0.6.5",
+    "axios": "^1.7.7",
     "chai": "4.3.7",
     "eslint": "8.35.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-plugin-import": "2.27.5",
-    "@esm-bundle/chai": "4.3.4-fix.0",
-    "@web/test-runner": "0.15.1",
-    "@web/test-runner-commands": "0.6.5",
+    "jsdom": "^25.0.1",
     "sinon": "15.0.1",
     "stylelint": "15.2.0",
     "stylelint-config-standard": "30.0.1"
+  },
+  "dependencies": {
+    "@tsparticles/engine": "^3.2.2"
   }
 }
