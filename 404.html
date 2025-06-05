@@ -1,20 +1,29 @@
-<!DOCTYPE html>
-<html>
-
-<head>
+<!DOCTYPE html><html><head><script type="importmap">{
+  "imports": {
+    "@repobit/dex-data-layer": "https://esm.sh/@repobit/dex-data-layer@1.6.2",
+    "@repobit/dex-launch": "https://esm.sh/@repobit/dex-launch@2.0.1",
+    "@repobit/dex-target": "https://esm.sh/@repobit/dex-target@2.2.1",
+    "@repobit/dex-utils": "https://esm.sh/@repobit/dex-utils@1.3.0",
+    "@tsparticles/all": "https://esm.sh/@tsparticles/all@3.8.1",
+    "@tsparticles/engine": "https://esm.sh/@tsparticles/engine@3.8.1"
+  }
+}</script>
   <title>Page not found</title>
   <script type="text/javascript">
     window.isErrorPage = true;
     window.errorCode = '404';
   </script>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta property="og:title" content="Page not found">
-  <script src="/solutions/scripts/scripts.js" type="module" crossorigin="use-credentials"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta property="og:title" content="Page not found" />
+  <script src="/_src/scripts/scripts.js" type="module"></script>
   <script type="module">
-    import { decorateButtons, sampleRUM } from '/solutions/scripts/lib-franklin.js';
-  
+    import { decorateButtons, sampleRUM } from '/_src/scripts/lib-franklin.js';
+    import { getDomain } from '/_src/scripts/scripts.js';
+
+    const domain = getDomain();
+
     window.addEventListener('load', async () => {
-      const response = await fetch('/solutions/404.plain.html');
+      const response = await fetch(`/${domain}/consumer/404.plain.html`);
       if (response.ok) {
         const htmlContent = await response.text();
         const specialSection = document.querySelector('.link-section');
@@ -23,8 +32,8 @@
       }
       sampleRUM('404', { source: document.referrer, target: window.location.href });
     });
-  </script>  
-  <link rel="stylesheet" href="/solutions/styles/styles.css">
+  </script>
+  <link rel="stylesheet" href="/_src/styles/styles.css" />
   <style>
 
     :root {
@@ -67,7 +76,7 @@
       font-weight: var(--font-weight-bold);
     }
 
-   
+
 /* Default styles (mobile-first) */
 
 main .link-section {
@@ -91,10 +100,10 @@ main .link-section {
 
 .link-section > div:last-child {
   margin-top: 1rem;
-  column-count: 1; 
+  column-count: 1;
   width: 100%;
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   align-items: center;
 }
 
@@ -126,29 +135,30 @@ main .link-section {
 
   .link-section > div:last-child {
     column-count: 2;
-    display: block; 
+    display: block;
     align-items: initial;
   }
 }
 
   </style>
-  <link rel="stylesheet" href="/solutions/styles/lazy-styles.css">
+  <link rel="stylesheet" href="/_src/styles/lazy-styles.css" />
 </head>
 
 <body>
   <header></header>
   <main class="error">
     <div class="section">
-      <svg viewBox="1 0 38 18" class="error-number">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="1 0 38 18" class="error-number">
         <text x="0" y="17">404</text>
       </svg>
       <h2 class="error-message">Page Not Found</h2>
       <p>The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
     </div>
     <div class="link-section">
-    </div>  
+    </div>
   </main>
   <footer></footer>
-</body>
 
-</html>
+
+
+</body></html>
