@@ -9,3 +9,7 @@ helix-importer-ui
 
 .vscode/*
 tools/sitemap/node_modules/*
+
+.env
+
+.aider*

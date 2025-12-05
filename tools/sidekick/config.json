@@ -1,6 +1,6 @@
 {
   "project": "Bitdefender",
-  "host": "main--bitdefender--hlxsites.hlx.live",
+  "host": "www.bitdefender.com",
   "plugins": [
     {
       "id": "library",
@@ -8,6 +8,14 @@
       "environments": [ "edit" ],
       "url": "/tools/sidekick/library.html",
       "includePaths": [ "**.docx**" ]
+    },
+    {
+      "id": "generate-variations",
+      "title": "Generate Variations",
+      "url": "https://experience.adobe.com/aem/generate-variations",
+      "passConfig": true,
+      "environments": ["preview","live", "edit"],
+      "includePaths": ["**.docx**"]
     }
   ]
 }
